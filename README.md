@@ -28,7 +28,10 @@ New exact results in the note include:
 - nonexistence of an \(\operatorname{AGL}(5,2)\)-equivariant
   \(17\)-colouring; and
 - nonexistence of every fusion of the natural 32-colour XOR-syndrome
-  colouring down to seventeen colours.
+  colouring down to seventeen colours; and
+- a local power-sum obstruction excluding every single-maximal-minor
+  construction over \(\mathbb F_{17}\), more generally over
+  \(\mathbb F_p\) whenever \(p\equiv1\pmod4\).
 
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
@@ -49,6 +52,10 @@ routes, but not the asymmetric case.
   exact tests and proofs excluding further algebraic candidates, including
   pair-local additive rules, hyperoctahedral symmetry, and several
   projective-line formulas.
+- [`evidence/algebraic_construction_no_go.md`](evidence/algebraic_construction_no_go.md):
+  three exact ansatz exclusions, including the maximal-minor obstruction;
+  the accompanying verifier is
+  [`evidence/verify_algebraic_construction_no_go.py`](evidence/verify_algebraic_construction_no_go.py).
 - [`evidence/three_way_trade.md`](evidence/three_way_trade.md): the exact
   three-leg trade-flow criterion, with small-case stress tests and an
   explicit statement of the remaining gap.
@@ -89,6 +96,7 @@ python3 -m pip install -r requirements.txt
 python3 verify_k4.py
 python3 evidence/verify_constructive_no_go.py
 python3 evidence/verify_constructive_candidates.py
+python3 evidence/verify_algebraic_construction_no_go.py
 python3 evidence/verify_three_way_trade.py
 python3 evidence/modular_kernel/verify_modular_kernel.py
 python3 evidence/odd_graph_local_ball/construct_radius3.py \
