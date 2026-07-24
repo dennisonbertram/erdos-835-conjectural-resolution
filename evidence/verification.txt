@@ -1,7 +1,16 @@
-Verification date: 2026-07-23
+Verification date: 2026-07-24
 
 Command:
-  python3 -m py_compile verify_k4.py search_cyclic_ls_4_5_21.py
+  python3 -m py_compile verify_k4.py search_cyclic_ls_4_5_21.py \
+    search_ls_3_4_20.py search_ls_3_4_20_exact_cover.py \
+    search_cyclic_phase_ls_4_5_21.py \
+    evidence/verify_constructive_candidates.py \
+    evidence/verify_constructive_no_go.py \
+    evidence/verify_three_way_trade.py \
+    evidence/modular_kernel/verify_modular_kernel.py \
+    evidence/odd_graph_local_ball/search_local_cover.py \
+    evidence/odd_graph_local_ball/construct_radius3.py \
+    evidence/state_sdp_p17/verify_state_sdp_p17.py
 
 Result:
   exit code 0
@@ -17,6 +26,63 @@ Result:
   conclusion: no 5-colouring exists for k=4
 
 Command:
+  python3 evidence/verify_constructive_no_go.py
+
+Result:
+  constructive no-go evidence: all checks passed
+
+Command:
+  python3 evidence/verify_constructive_candidates.py
+
+Result:
+  constructive candidate tests: all checks passed
+
+Command:
+  python3 evidence/verify_three_way_trade.py
+
+Result:
+  r=3: b=7, moments pass, n_0(external/internal)=1/0
+  r=5: b=66, moments pass, n_0(external/internal)=1/0
+  r=15: b=17678835, moments pass, n_0(external/internal)=1/0
+  r=15 external distribution and oddness pass
+  r=3: 30 Fano planes, disjointness graph triangle-free
+  r=3 lambda=3 example: binary kernel [21,6], weights 0/8/12,
+    maximum two-word support=18
+  all three-way trade checks pass
+
+Command:
+  python3 evidence/modular_kernel/verify_modular_kernel.py
+
+Result:
+  p=3: N=6, dim(K)=2, dim(K*K)=3
+  p=5: N=70, dim(K)=14, dim(K*K)=35
+  p=7: N=924, dim(K)=132, dim(K*K)=462
+  p=7 tensor counterexample counts: [708, 72, 72, 0, 72, 0, 0]
+  p=17: predicted full-row-rank kernel dimension 35357670
+  modular-kernel evidence: all exact checks passed
+
+Command:
+  python3 evidence/odd_graph_local_ball/construct_radius3.py \
+    --seconds-per-column 60 --workers 8
+
+Result:
+  certificate_verified: true
+  radius: 3
+  status: FEASIBLE
+  vertices: 2057
+  all fifteen independently solved columns: OPTIMAL
+
+Command:
+  python3 evidence/state_sdp_p17/verify_state_sdp_p17.py
+
+Result:
+  state-SDP certificate: VERIFIED
+  q=17, m=15, N=155117520, n=570285
+  weight SHA-256: 5b062da27f827bf36d63d052c911c358de83e0fb2cda31139dda6d372694647b
+  all 16 distances and all 5 state-pair orbits are nonnegative
+  all aggregate orbit totals are even integers
+
+Command:
   python3 search_cyclic_ls_4_5_21.py --reflection --seconds 30
 
 Result:
@@ -25,7 +91,7 @@ Result:
   four-set exact-cover constraints: 5985
   reflection required: True
   status: INFEASIBLE
-  wall time: 0.030 seconds
+  wall time: 0.026 seconds
   branches: 0
   conflicts: 0
 
