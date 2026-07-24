@@ -128,11 +128,11 @@ distinct blocks of \(\operatorname{supp}(c)\) sharing a facet.  Then
 **Stress test (Verified, 2026-07-24).**  Both identities hold on 40/40
 random words of an \(r=5\) pair-trade code.
 
-**Consequence.**  Conjecture D below is equivalent to the purely
-combinatorial statement: *for \(r\equiv3\pmod4\), every even-degree
-block-set inside the complement of two disjoint legs spans an even
-number of facet-sharing pairs.*  This removes all coding-theoretic
-language from the target.
+**Consequence.**  A doubly-even pair-trade code would be equivalent to the
+purely combinatorial statement: *every even-degree block-set inside the
+complement of the two legs spans an even number of facet-sharing pairs.*
+The dimension theorem below proves that this statement cannot hold at
+\(r=15\).
 
 ## Data (Verified, 2026-07-24; scripts in session scratchpad)
 
@@ -150,35 +150,88 @@ language from the target.
   pair-complements, which are the objects relevant to the third-leg
   question.
 
-Observed dichotomy: at \(r=3\) the form is totally degenerate
+Observed small-case dichotomy: at \(r=3\) the form is totally degenerate
 (\(B\equiv0\), \(q\equiv0\)); at \(r=5\) it is nondegenerate.
 
-## Conjecture D (Conjectural; the decisive statement)
+## Theorem D (Proved, negative): the \(r=15\) code is not self-orthogonal
 
-For \(r\equiv3\pmod4\), the pair-trade code of any two block-disjoint
-\(S(r-1,r,2r+1)\) is doubly even.
+Conditionally on the existence of any two block-disjoint
+\(S(14,15,31)\), their pair-trade code \(C\) is not self-orthogonal and
+hence is not doubly even.  More precisely,
+\[
+ \dim C\ge119\,759\,850,
+ \qquad
+ \dim\operatorname{rad}(C)\le35\,357\,670. \tag{6}
+\]
+Consequently \(C\) contains words of weight \(2\bmod4\).
 
-Evidence: true in all 8 instances at \(r=3\); no counterexample is
-possible at \(r\equiv1\pmod4\) (different residue); no further test
-instances exist — the family requires \(r+2\) prime, and \(r=11\) is
-empty because \(S(10,11,23)\) would derive to the nonexistent
-\(S(4,5,17)\), while \(r=15\) instances require a first
-\(S(14,15,31)\), itself open.  If Conjecture D holds at \(r=15\), then
-by Theorems B–C, \(\chi(J(32,16))\ge18\): the first open case of
-Erdős #835 is resolved negatively.
+**Proof.**  Work over \(\mathbb F_2\).  Let \(W\) be the incidence matrix
+from 14-subsets to all 15-subsets of a 31-set.  Let \(N=W|_U\), and let
+\(R\) consist of the columns in the two deleted legs, so \(W=[N\ R]\).
+The standard boundary rank of the full simplex is
+\[
+ s=\operatorname{rank}W=\binom{30}{14}=145\,422\,675. \tag{7}
+\]
 
-## Remark (Proved, negative).  No abstract rank bound can substitute
+The row space of \(W\) is nondegenerate.  To see this directly, let \(V\)
+be the incidence matrix from 15-subsets to 16-subsets.  Comparing entries
+over \(\mathbb F_2\) gives
+\[
+ W^{\mathsf T}W+VV^{\mathsf T}=I,\qquad WV=0. \tag{8}
+\]
+On the diagonal, a 15-set has 15 facets and lies in 16 16-sets, whose
+sum is one modulo two.  Off the diagonal, the common
+Johnson-neighbour entry occurs once in each summand and cancels.  If
+\(z\in\operatorname{row}W\cap\ker W\), write \(z=W^{\mathsf T}y\).
+Equation (8) and \(V^{\mathsf T}W^{\mathsf T}=0\) give \(z=0\).
+Therefore
+\[
+ \operatorname{rank}(WW^{\mathsf T})=s. \tag{9}
+\]
 
-A configuration of fifteen vectors with \(q=1\) and pairwise \(B=1\)
-exists in nondegenerate quadratic \(\mathbb F_2\)-spaces of either Arf
-type once the dimension is moderately large (embed the span, whose Gram
-is \(J-I\) of rank 14, and extend \(q\) accordingly; both Arf classes of
-forms of dimension \(\ge16\) contain isometric copies).  Since
-\(\dim C\) at \(r=15\) is astronomically large, no bound on dimensions
-or ranks alone can exclude the 17-clique: the route **must** prove the
-degeneracy/doubly-evenness of Conjecture D, e.g. through a mod-4
-refinement of Wilson's diagonal form for inclusion matrices restricted
-to complements of two Steiner legs.  This is the proposed next step.
+The two removed legs contain \(2b\) columns, so
+\(\operatorname{rank}(RR^{\mathsf T})\le2b\).  From
+\[
+ NN^{\mathsf T}=WW^{\mathsf T}+RR^{\mathsf T}
+\]
+and (9),
+\[
+ \operatorname{rank}(NN^{\mathsf T})\ge s-2b. \tag{10}
+\]
+Since \(C^\perp=\operatorname{row}N\),
+\[
+\begin{aligned}
+ \dim\operatorname{rad}(C)
+ &=\dim(C\cap C^\perp)\\
+ &=\operatorname{rank}N-\operatorname{rank}(NN^{\mathsf T})\\
+ &\le s-(s-2b)=2b=35\,357\,670. \tag{11}
+\end{aligned}
+\]
+
+There are
+\[
+ |U|=\binom{31}{15}-2b=15b=265\,182\,525
+\]
+columns in \(N\).  Since \(\operatorname{rank}N\le s\),
+\[
+ \dim C=|U|-\operatorname{rank}N
+ \ge15b-s=119\,759\,850. \tag{12}
+\]
+If \(C\) were self-orthogonal, then \(C\subseteq C^\perp\), so
+\(\operatorname{rad}(C)=C\), contradicting (11)--(12).
+
+Finally \(C\) is even by Lemma 1.  On an even code the polar form of
+\(q(z)=\operatorname{wt}(z)/2\bmod2\) is the dot product.  Because the dot
+product is nonzero on \(C\), one of \(u,v,u+v\) has \(q=1\) for a suitable
+nonorthogonal pair \(u,v\).  Thus \(C\) contains a word of weight
+\(2\bmod4\). \(\square\)
+
+Theorem B remains a correct conditional obstruction for a particular
+candidate code or subcode.  Theorem D rules out the proposed universal
+claim that the whole \(r=15\) pair-trade kernel is doubly even.  Therefore
+the broad mod-four code route cannot resolve \(k=16\); a successful parity
+obstruction must use the exact facet-degree condition of Theorem A or
+other nonlinear large-set compatibility.
 
 ## Provenance
 
@@ -187,4 +240,5 @@ All computations 2026-07-24, session scratchpad scripts
 arithmetic throughout; Steiner constructions by exhaustive exact cover
 (Algorithm X), verified by direct recount.  Theorems A–C and Lemmas 1–2
 are proved above in full and were additionally machine-checked at
-\(r=3\), \(r=5\), and on the \(STS(9)\) positive control.
+\(r=3\), \(r=5\), and on the \(STS(9)\) positive control.  Theorem D is
+an exact dimension argument and uses no unrecorded computation.

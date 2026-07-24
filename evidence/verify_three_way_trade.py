@@ -248,6 +248,26 @@ def main():
     assert comb(31, 15) // 17 == 17678835
     print("r=15 external distribution and oddness pass")
 
+    block_count = comb(31, 15) // 17
+    full_boundary_rank = comb(30, 14)
+    pair_complement_size = 15 * block_count
+    pair_kernel_dimension_lower_bound = (
+        pair_complement_size - full_boundary_rank
+    )
+    pair_kernel_radical_upper_bound = 2 * block_count
+    assert pair_complement_size == 265182525
+    assert full_boundary_rank == 145422675
+    assert pair_kernel_dimension_lower_bound == 119759850
+    assert pair_kernel_radical_upper_bound == 35357670
+    assert pair_kernel_dimension_lower_bound > pair_kernel_radical_upper_bound
+    print(
+        "r=15 pair-trade dimension no-go: dim(C)>={} > "
+        "rad(C)<={}".format(
+            pair_kernel_dimension_lower_bound,
+            pair_kernel_radical_upper_bound,
+        )
+    )
+
     best_cover = check_fano_and_flow_obstruction()
     print("r=3: 30 Fano planes, disjointness graph triangle-free")
     print(

@@ -45,6 +45,8 @@ Result:
   r=5: b=66, moments pass, n_0(external/internal)=1/0
   r=15: b=17678835, moments pass, n_0(external/internal)=1/0
   r=15 external distribution and oddness pass
+  r=15 pair-trade dimension no-go: dim(C)>=119759850 >
+    rad(C)<=35357670
   r=3: 30 Fano planes, disjointness graph triangle-free
   r=3 lambda=3 example: binary kernel [21,6], weights 0/8/12,
     maximum two-word support=18

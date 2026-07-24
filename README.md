@@ -53,8 +53,10 @@ routes, but not the asymmetric case.
   three-leg trade-flow criterion, with small-case stress tests and an
   explicit statement of the remaining gap.
 - [`evidence/fable_trade_quadratic.md`](evidence/fable_trade_quadratic.md):
-  a proved mod-4 reduction for pair-trade codes and the sharply isolated,
-  still-conjectural doubly-evenness statement that would settle \(k=16\).
+  a proved mod-4 reduction for pair-trade codes, followed by the exact
+  dimension theorem showing that universal doubly-evenness cannot hold at
+  \(k=16\); any surviving parity obstruction must use the nonlinear
+  exact-degree slice.
 - [`evidence/modular_kernel/`](evidence/modular_kernel/): exact modular-kernel
   identities, a characteristic-17 module audit, and a tensor-ansatz
   obstruction.
