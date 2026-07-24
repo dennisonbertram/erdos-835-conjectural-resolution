@@ -1,0 +1,48 @@
+Verification date: 2026-07-23
+
+Command:
+  python3 -m py_compile verify_k4.py search_cyclic_ls_4_5_21.py
+
+Result:
+  exit code 0
+
+Command:
+  python3 verify_k4.py
+
+Result:
+  labelled S(3,4,8) systems: 30
+  blocks per system: 14
+  maximum pairwise disjoint systems: 2
+  partition into five systems: None
+  conclusion: no 5-colouring exists for k=4
+
+Command:
+  python3 search_cyclic_ls_4_5_21.py --reflection --seconds 30
+
+Result:
+  five-set orbits: 1197
+  five-set choices: 20349
+  four-set exact-cover constraints: 5985
+  reflection required: True
+  status: INFEASIBLE
+  wall time: 0.030 seconds
+  branches: 0
+  conflicts: 0
+
+Command:
+  python3 search_cyclic_ls_4_5_21.py --seconds 300
+
+Result:
+  five-set orbits: 1197
+  five-set choices: 20349
+  four-set exact-cover constraints: 5985
+  reflection required: False
+  status: UNKNOWN
+  wall time: 300.165 seconds
+  branches: 2952703
+  conflicts: 1800519
+
+Interpretation:
+  The reflection-restricted case is impossible, matching the independent
+  mathematical proof in the note. The unrestricted cyclic result is
+  inconclusive and must not be interpreted as a nonexistence proof.
