@@ -103,6 +103,11 @@ routes, but not the asymmetric case.
   dimension theorem showing that universal doubly-evenness cannot hold at
   \(k=16\); any surviving parity obstruction must use the nonlinear
   exact-degree slice.
+- [`evidence/block_local_sign_rowspace_no_go.md`](evidence/block_local_sign_rowspace_no_go.md):
+  an exact small-case audit showing that the most natural block-local sign
+  has reference-order-dependent rowspace membership and that the exterior
+  sign retains genuine quadratic crossing terms.  This closes that proposed
+  linearization route, not the parity conjecture or Problem #835.
 - [`evidence/modular_kernel/`](evidence/modular_kernel/): exact modular-kernel
   identities, a characteristic-17 module audit, and a tensor-ansatz
   obstruction.
@@ -148,6 +153,7 @@ python3 evidence/verify_full_color_block_hodge_audit.py
 python3 -B evidence/verify_transposition_flow_cocycle.py
 python3 -B evidence/verify_simultaneous_flow_integrability.py
 python3 evidence/verify_three_way_trade.py
+python3 -B evidence/verify_block_local_sign_rowspace_no_go.py
 python3 evidence/modular_kernel/verify_modular_kernel.py
 python3 evidence/odd_graph_local_ball/construct_radius3.py \
   --seconds-per-column 60 --workers 8
