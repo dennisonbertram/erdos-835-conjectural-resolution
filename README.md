@@ -31,7 +31,10 @@ New exact results in the note include:
   colouring down to seventeen colours; and
 - a local power-sum obstruction excluding every single-maximal-minor
   construction over \(\mathbb F_{17}\), more generally over
-  \(\mathbb F_p\) whenever \(p\equiv1\pmod4\).
+  \(\mathbb F_p\) whenever \(p\equiv1\pmod4\); and
+- an exact integrability theorem showing that the full simultaneous
+  transposition-flow system is equivalent to a single global colouring
+  potential, so this formulation introduces no hidden weaker solutions.
 
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
@@ -87,6 +90,11 @@ routes, but not the asymmetric case.
   with exact row-derangement, anti-complement, Frobenius, and triangle-cocycle
   identities.  The accompanying \(k=4\) control proves that one isolated flow
   is insufficient; simultaneous compatibility is the unresolved content.
+- [`evidence/simultaneous_flow_integrability.md`](evidence/simultaneous_flow_integrability.md):
+  a proof that reversal, same-star triangles, and all pair-kernel equations
+  integrate the complete simultaneous family to a unique global potential.
+  With full support at \(k=16\), this is exactly a tight \(17\)-colouring,
+  not a relaxation or a solution.
 - [`evidence/three_way_trade.md`](evidence/three_way_trade.md): the exact
   three-leg trade-flow criterion, with small-case stress tests and an
   explicit statement of the remaining gap.
@@ -133,6 +141,7 @@ python3 evidence/verify_four_point_terwilliger_exact_witness.py
 python3 -B evidence/verify_mersenne_spin_functional_audit.py
 python3 evidence/verify_full_color_block_hodge_audit.py
 python3 -B evidence/verify_transposition_flow_cocycle.py
+python3 -B evidence/verify_simultaneous_flow_integrability.py
 python3 evidence/verify_three_way_trade.py
 python3 evidence/modular_kernel/verify_modular_kernel.py
 python3 evidence/odd_graph_local_ball/construct_radius3.py \
