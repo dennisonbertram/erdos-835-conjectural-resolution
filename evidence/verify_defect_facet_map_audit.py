@@ -59,6 +59,65 @@ TWO: tuple[Matching, Matching, Matching] = (
 )
 TWO_UNMATCHED = (4, 1, 0)
 
+ZERO_COMPLETION: tuple[Matching, ...] = (
+    (
+        (0, 1), (2, 16), (3, 6), (4, 5), (7, 8),
+        (9, 10), (11, 14), (12, 13), (15, 17),
+    ),
+    (
+        (0, 4), (1, 2), (3, 10), (5, 12), (6, 8),
+        (7, 16), (9, 11), (13, 15), (14, 17),
+    ),
+    (
+        (0, 5), (1, 4), (2, 3), (6, 9), (7, 15),
+        (8, 13), (10, 11), (12, 14), (16, 17),
+    ),
+    (
+        (0, 6), (1, 8), (2, 13), (3, 5), (4, 7),
+        (9, 14), (10, 12), (11, 17), (15, 16),
+    ),
+    (
+        (0, 7), (1, 3), (2, 4), (5, 16), (6, 10),
+        (8, 17), (9, 12), (11, 13), (14, 15),
+    ),
+    (
+        (0, 8), (1, 10), (2, 6), (3, 11), (4, 12),
+        (5, 15), (7, 14), (9, 16), (13, 17),
+    ),
+    (
+        (0, 9), (1, 12), (2, 7), (3, 15), (4, 8),
+        (5, 11), (6, 13), (10, 17), (14, 16),
+    ),
+    (
+        (0, 10), (1, 7), (2, 15), (3, 9), (4, 13),
+        (5, 8), (6, 14), (11, 16), (12, 17),
+    ),
+    (
+        (0, 11), (1, 17), (2, 10), (3, 16), (4, 15),
+        (5, 9), (6, 12), (7, 13), (8, 14),
+    ),
+    (
+        (0, 12), (1, 13), (2, 8), (3, 7), (4, 16),
+        (5, 6), (9, 17), (10, 14), (11, 15),
+    ),
+    (
+        (0, 13), (1, 16), (2, 5), (3, 14), (4, 10),
+        (6, 17), (7, 12), (8, 11), (9, 15),
+    ),
+    (
+        (0, 15), (1, 5), (2, 14), (3, 17), (4, 6),
+        (7, 10), (8, 9), (11, 12), (13, 16),
+    ),
+    (
+        (0, 16), (1, 14), (2, 17), (3, 4), (5, 13),
+        (6, 11), (7, 9), (8, 12), (10, 15),
+    ),
+    (
+        (0, 17), (1, 9), (2, 11), (3, 12), (4, 14),
+        (5, 7), (6, 15), (8, 16), (10, 13),
+    ),
+)
+
 
 def normalize(edge: Edge) -> Edge:
     left, right = edge
@@ -132,6 +191,32 @@ def pairwise_disjoint(triangles: list[tuple[int, int, int]]) -> bool:
     return True
 
 
+def verify_zero_completion() -> None:
+    extended_given: list[Matching] = []
+    for matching, unmatched in zip(
+        (ZERO[1], ZERO[2], ZERO[3]), ZERO_UNMATCHED
+    ):
+        extended_given.append(matching + ((unmatched, 17),))
+
+    all_factors = tuple(extended_given) + ZERO_COMPLETION
+    assert len(all_factors) == 17
+    seen: set[Edge] = set()
+    universe = set(range(18))
+    for factor in all_factors:
+        assert len(factor) == 9
+        used: set[int] = set()
+        for raw_edge in factor:
+            edge = normalize(raw_edge)
+            left, right = edge
+            assert 0 <= left < 18 and 0 <= right < 18
+            assert left not in used and right not in used
+            assert edge not in seen
+            used.update(edge)
+            seen.add(edge)
+        assert used == universe
+    assert len(seen) == comb(18, 2) == 153
+
+
 def arithmetic() -> None:
     r = 15
     blocks = comb(2 * r + 1, r - 1) // r
@@ -154,6 +239,7 @@ def arithmetic() -> None:
 
 def main() -> None:
     arithmetic()
+    verify_zero_completion()
 
     zero_matchings = (ZERO[1], ZERO[2], ZERO[3])
     cases = (

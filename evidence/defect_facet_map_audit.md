@@ -165,6 +165,36 @@ imply that \(T\) is injective or surjective.  A proof of bijectivity would
 have to use compatibility between the matching triples belonging to
 different \(17\)-sets \(U\).
 
+The zero-triangle triple in (10) also passes the **entire local-link**
+condition forced by a hypothetical large set.  Pair its three unmatched
+vertices with a new point \(\infty=17\).  The resulting three perfect
+matchings extend to a full one-factorization of \(K_{18}\).  One exact
+completion (the first three factors are (10) with the new edges) has the
+remaining fourteen factors
+\[
+\begin{array}{rrrrrrrrr}
+01&2\,16&36&45&78&9\,10&11\,14&12\,13&15\,17\\
+04&12&3\,10&5\,12&68&7\,16&9\,11&13\,15&14\,17\\
+05&14&23&69&7\,15&8\,13&10\,11&12\,14&16\,17\\
+06&18&2\,13&35&47&9\,14&10\,12&11\,17&15\,16\\
+07&13&24&5\,16&6\,10&8\,17&9\,12&11\,13&14\,15\\
+08&1\,10&26&3\,11&4\,12&5\,15&7\,14&9\,16&13\,17\\
+09&1\,12&27&3\,15&48&5\,11&6\,13&10\,17&14\,16\\
+0\,10&17&2\,15&39&4\,13&58&6\,14&11\,16&12\,17\\
+0\,11&1\,17&2\,10&3\,16&4\,15&59&6\,12&7\,13&8\,14\\
+0\,12&1\,13&28&37&4\,16&56&9\,17&10\,14&11\,15\\
+0\,13&1\,16&25&3\,14&4\,10&6\,17&7\,12&8\,11&9\,15\\
+0\,15&15&2\,14&3\,17&46&7\,10&89&11\,12&13\,16\\
+0\,16&1\,14&2\,17&34&5\,13&6\,11&79&8\,12&10\,15\\
+0\,17&19&2\,11&3\,12&4\,14&57&6\,15&8\,16&10\,13.
+\end{array}                                             \tag{11}
+\]
+The verifier checks that these seventeen factors partition all \(153\)
+edges of \(K_{18}\).  Therefore even a complete local
+one-factorization does not imply that the selected colour triple has a
+rainbow triangle away from \(\infty\).  The missing input is genuinely
+cross-link compatibility, not an unrecorded condition inside one link.
+
 There is no genuine \(r=3\) or \(r=5\) three-system control: at both
 parameters at most two pairwise disjoint boundary systems exist.  Using
 three intersecting systems would invalidate (1), because their extension
@@ -212,7 +242,7 @@ If a full large set is present, the seventeen extended matching links form
 a one-factorization of \(K_{r+3}\).  For every fixed pair of factor colours
 \(\alpha,\beta\),
 \[
- \sum_{\gamma\ne\alpha,\beta}\tau_R(\alpha,\beta,\gamma)=r+3. \tag{11}
+ \sum_{\gamma\ne\alpha,\beta}\tau_R(\alpha,\beta,\gamma)=r+3. \tag{12}
 \]
 Indeed, at each vertex, the \(\alpha\)- and \(\beta\)-edges have two
 distinct other endpoints; the edge joining those endpoints has one unique
@@ -231,7 +261,7 @@ apparent defect exactly.
 \[
  \sum_R d_R=rb,\qquad
  \sum_R e_R=3b,\qquad
- \sum_R\tau_R=(r+3)b,                                  \tag{12}
+ \sum_R\tau_R=(r+3)b,                                  \tag{13}
 \]
 where \(b\) is the number of blocks in one system.
 
