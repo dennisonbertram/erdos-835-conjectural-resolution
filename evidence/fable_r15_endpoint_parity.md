@@ -396,12 +396,18 @@ configuration canonically determines the \((r+3)\)-set
 count of \(\mathcal C\)-configurations is NOT always even: at \(r=3\)
 every occupied \(Y'\) is odd (values 1 and 3); at \(r=5\) odd loci
 abound (14\,880 of 48\,588 occupied loci over 300 pairs) and all four
-per-\(Y'\) parity mixes \((E_3\bmod2,X_3\bmod2)\) occur — so no
-within-\(Y'\) pairing and no per-\(Y'\) cross-type compensation can
-prove the combined target.  Any successful involution or even-cycle
-action on \(\mathcal C\) must be trans-local across \((r+3)\)-sets,
-may exchange the two types (the weaker demand), and must be integral
-and coordinate-free (§2.10, §2.11).
+per-\(Y'\) parity mixes \((E_3\bmod2,X_3\bmod2)\) occur.
+
+**Superseded as a target (see the tautology correction in §2.9).**
+By the \(N^{\mathsf T}N\)-identity, \(|\mathcal C|=E_3+X_3\equiv t\)
+identically at \(r\equiv3\pmod4\): the combined parity statement IS
+Conjecture E, so no pairing on \(\mathcal C\) — local or trans-local —
+can be a reduction; a fixed-point-free involution on \(\mathcal C\)
+would directly prove E, but constructing one is exactly as hard as
+proving \(t\) even, and the localization data above shows it cannot be
+built \(Y'\)-locally.  The unified mutuality characterization of
+\(\mathcal C\) remains PROVED and may still be useful bookkeeping for
+a direct integral attack on \(t\).
 
 ## 3. Status ledger
 
