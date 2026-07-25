@@ -34,7 +34,16 @@ New exact results in the note include:
   \(\mathbb F_p\) whenever \(p\equiv1\pmod4\); and
 - an exact integrability theorem showing that the full simultaneous
   transposition-flow system is equivalent to a single global colouring
-  potential, so this formulation introduces no hidden weaker solutions.
+  potential, so this formulation introduces no hidden weaker solutions;
+- a precise audit of Teirlinck's ordered-design theorem: it gives a weighted
+  support design at \(k=16\), but not the required orbit-closed large set;
+- no-go theorems for every quadratic incidence-polynomial colouring, every
+  additive binary syndrome decoded by an arbitrary \(4\)-spread (including
+  Kerdock spreads), and the natural cyclic-\(17\) barycentre family; and
+- a no-go theorem for the exact Hamming-weight coincidence
+  \(A_{14}+A_{15}=17{,}678{,}835\): no choice of one-point extensions of
+  the weight-\(14\) supports can coexist with all natural weight-\(15\)
+  supports as an \(O_{16}\) perfect code.
 
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
@@ -139,6 +148,27 @@ routes, but not the asymmetric case.
 - [`evidence/literature_and_x_search_2026-07-24.md`](evidence/literature_and_x_search_2026-07-24.md):
   exact recent X queries, the one matching preliminary report, and the
   full-archive tier limitation.
+- [`evidence/large_set_literature_attack_2026-07-25.md`](evidence/large_set_literature_attack_2026-07-25.md):
+  a primary-literature audit of the exact
+  \(LS(15,16,32)\)/\(O_{16}\) frontier and the nearby theorems that do not
+  settle it.
+- [`evidence/ordered_design_symmetrization_audit.md`](evidence/ordered_design_symmetrization_audit.md):
+  the exact weighted-support gap between Teirlinck's
+  \(LOD(15,16,32)\) and the required large set.
+- [`evidence/kerdock_spread_additive_syndrome_no_go.md`](evidence/kerdock_spread_additive_syndrome_no_go.md)
+  and [`evidence/cyclic17_barycenter_kerdock_spread_no_go.md`](evidence/cyclic17_barycenter_kerdock_spread_no_go.md):
+  exact exclusions of the additive spread/Kerdock decoder and cyclic
+  barycentre construction families.
+- [`evidence/hamming_weight_bridge_no_go.md`](evidence/hamming_weight_bridge_no_go.md):
+  the exact obstruction to turning the binary Hamming weight-\(14\) and
+  weight-\(15\) enumerator coincidence into an \(O_{16}\) perfect code.
+- [`evidence/quadratic_coloring_ansatz_no_go.md`](evidence/quadratic_coloring_ansatz_no_go.md):
+  a symbolic no-go theorem for all degree-at-most-two incidence-polynomial
+  colourings over the candidate prime field.
+- [`evidence/triangle_monodromy_cycle_girth_audit.md`](evidence/triangle_monodromy_cycle_girth_audit.md)
+  and [`evidence/monodromy_character_factorisation_audit.md`](evidence/monodromy_character_factorisation_audit.md):
+  exact long-odd-cycle constraints and a countermodel showing why the
+  current one-fibre character factorisation cannot contradict them.
 - [`evidence/verification.txt`](evidence/verification.txt): recorded output
   from the reproducibility checks.
 
@@ -169,6 +199,13 @@ python3 search_cyclic_ls_4_5_21.py --seconds 300
 python3 -B search_s_4_5_21_extension.py \
   --second-link-cycles 8 --seconds 300
 python3 -B evidence/audit_s_4_5_21_cnf.py
+python3 -B evidence/verify_ordered_design_symmetrization.py
+python3 -B evidence/verify_quadratic_coloring_ansatz_no_go.py
+python3 -B evidence/verify_kerdock_spread_additive_syndrome_no_go.py
+python3 -B evidence/verify_cyclic17_barycenter_kerdock_spread_no_go.py
+python3 -B evidence/verify_hamming_weight_bridge_no_go.py
+python3 -B evidence/verify_triangle_monodromy_cycle_girth.py
+python3 -B evidence/verify_monodromy_character_factorisation.py
 python3 -B evidence/s_4_5_21_cnf.py \
   --cycles 8 \
   --cnf /tmp/s4521-cycle-8.cnf \
