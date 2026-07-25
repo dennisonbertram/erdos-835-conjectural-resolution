@@ -28,6 +28,29 @@ A, B = 17, 18
 ALL_POINTS = MOVING + (A, B)
 
 
+def translate(subset: tuple[int, ...], amount: int) -> tuple[int, ...]:
+    return tuple(sorted((x + amount) % 17 for x in subset))
+
+
+def triple_representatives() -> list[tuple[int, int, int]]:
+    representatives = []
+    unseen = set(combinations(MOVING, 3))
+    while unseen:
+        seed = min(unseen)
+        representative = min(translate(seed, shift) for shift in MOVING)
+        representatives.append(representative)
+        for shift in MOVING:
+            unseen.discard(translate(representative, shift))
+    assert len(representatives) == 40
+    return representatives
+
+
+def difference_class(edge: tuple[int, int]) -> int:
+    x, y = edge
+    difference = (y - x) % 17
+    return min(difference, 17 - difference)
+
+
 def boundary_for_pair(
     golf: list[list[list[int]]], i: int, j: int
 ) -> dict[tuple[int, int, int], int]:
@@ -122,6 +145,27 @@ def main() -> None:
                 rhs = (golf[i][x][y] + shift) % 17
                 assert lhs == rhs
 
+    # Audit the eight-class compact exact-cover reduction.  Translation does
+    # not change an edge difference, so these counts are phase-independent.
+    representatives = triple_representatives()
+    slot_differences = Counter(
+        difference_class(edge)
+        for triple in representatives
+        for edge in combinations(triple, 2)
+    )
+    assert slot_differences == Counter({difference: 15 for difference in range(1, 9)})
+    for i in SQUARES:
+        for colour in COLORS:
+            matching = [
+                edge
+                for edge in combinations(MOVING, 2)
+                if golf[i][edge[0]][edge[1]] == colour
+            ]
+            assert len(matching) == 8
+            assert {
+                difference_class(edge) for edge in matching
+            } == set(range(1, 9))
+
     reports = [audit_pair(golf, i, j) for i, j in combinations(SQUARES, 2)]
     assert len(reports) == 105
     summary = {
@@ -132,6 +176,8 @@ def main() -> None:
         "unknown_triples_per_pair": 680,
         "completion_blocks_per_colour": 40,
         "cyclic_covariance_checks": 15 * 136 * 17,
+        "triple_orbit_edge_slots_per_difference": 15,
+        "matching_edges_per_difference": 1,
         "scope": (
             "boundary incidence and cyclic quotient only; "
             "no LSTS completion and no shared N table claimed"

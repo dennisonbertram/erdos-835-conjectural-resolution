@@ -142,6 +142,32 @@ orbit for colour zero, and (7) is then a \(40\)-choice exact-cover
 problem.  Developing those representatives through all seventeen
 translations gives the whole prescribed-link \(LSTS(19)\).
 
+There is a still smaller exact form.  The moving edges have eight
+translation orbits, indexed by their undirected differences
+\(d=1,\ldots,8\).  Across the forty triple orbits, their \(120\) edge
+slots contain exactly fifteen slots of each difference.  This count
+does not depend on the selected translates.  Each zero-matching
+\(S_i^{-1}(0)\) contains exactly one edge of each difference, so the
+two prescribed links remove two of the seventeen positions in every
+difference class.  Exactly fifteen positions remain.
+
+It follows that (7) is equivalent to eight
+`AllDifferent(15)` constraints: in each difference class, the fifteen
+translated edge positions must be distinct and must avoid the two
+prescribed matching positions.  Every position is an affine
+translate of one of the forty phase variables.  The simultaneous
+cyclic radius-five model can therefore be written using only
+\[
+ 4{,}200\text{ phase variables},\qquad
+ 105\cdot8=840\text{ slice AllDifferent constraints},\qquad
+ 40\cdot15=600\text{ shared-}N\text{ AllDifferent constraints}.
+ \tag{8}
+\]
+The list domains of the phase variables encode avoidance of the two
+prescribed matchings.  The equivalence is exact: fifteen distinct
+allowed positions in a fifteen-position residual class cover it
+once, while an exact cover is necessarily distinct in each class.
+
 `search_cyclic17_r3_extension.py` implements this quotient and checks
 the resulting pair-star equations directly.  A SAT completion for a
 single pair is therefore a compact, exact radius-five **slice** in
@@ -154,7 +180,7 @@ completion for every one of the \(105\) pairs, is not yet a
 radius-five ball.  The traces
 \[
  N_{uv}(ij)=Q_{ij}(u,v,\infty)
- \tag{8}
+ \tag{9}
 \]
 must use the same \(N_{uv}\) table.  Explicitly, for every
 \(uv\in\binom V2\) and every index \(i\),
@@ -162,12 +188,12 @@ must use the same \(N_{uv}\) table.  Explicitly, for every
  \{Q_{ij}(u,v,\infty):j\ne i\}
  ={\cal C}\setminus
  \{M_i(uv),L_i(u),L_i(v)\}.
- \tag{9}
+ \tag{10}
 \]
-Equation (9) is the shared list-edge-colouring constraint on
+Equation (10) is the shared list-edge-colouring constraint on
 \(K_{15}\).  It couples the otherwise separate prescribed-link
 \(LSTS(19)\) completions.  A family of \(105\) phase lists must be
-checked against (9), not merely against the \(105\) individual
+checked against (10), not merely against the \(105\) individual
 triangle decompositions.
 
 Consequently:
@@ -176,7 +202,7 @@ Consequently:
   slice only;
 * \(105\) independent completions still do not prove radius-five
   feasibility;
-* \(105\) completions satisfying (9), followed by
+* \(105\) completions satisfying (10), followed by
   `verify_radius5_golf_joint.py`, would give a genuine certificate
   for the fixed cyclic-golf radius-five ball;
 * even that radius-five ball would not by itself be a global

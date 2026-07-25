@@ -5,7 +5,7 @@ rigorous reductions, exact structural theorems, and reproducible evidence.
 
 ## Status
 
-The full problem remains open as of 24 July 2026. This repository does
+The full problem remains open as of 25 July 2026. This repository does
 **not** claim a complete proof. It advances and precisely formulates the
 negative conjecture
 
@@ -70,7 +70,16 @@ New exact results in the note include:
   triple-polytabloid tensor and the first overlap-sensitive \(2\)-adic
   quotient, together with audited controls showing that the corresponding
   modular, quadratic, SOS, scalar-sign, and proposed Norton \(1/3\)-gap
-  reductions do not finish the degree-\(16\) case.
+  reductions do not finish the degree-\(16\) case;
+- exact cyclic prescribed-link completions for all \(105\) radius-five
+  slices, directly reconstructed as \(1{,}785\) Steiner triple systems;
+  their shared-\(N\) compatibility still fails in the checked seeds, so
+  they are not a radius-five witness; and
+- at the next candidate prime \(p=19\), an exact obstruction to the
+  maximal-minor construction and to every principal-Pfaffian construction
+  of rank at most \(18\), together with exhaustive no-go results for the
+  lifted normal-rational-curve and lifted circulant rank-four links.
+  Arbitrary rank-four links and higher-rank Pfaffian matrices remain open.
 
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
@@ -161,9 +170,12 @@ routes, but not the asymmetric case.
   remain open, so this local feasibility is not a global colouring.
 - [`evidence/odd_graph_local_ball/radius5_large_set_equivalence.md`](evidence/odd_graph_local_ball/radius5_large_set_equivalence.md):
   an exact equivalence between one minimal-trace radius-five slice and a
-  prescribed-link \(LS(2,3,19)\).  One slice has an exact cyclic
-  certificate, while the shared-\(N\) compatibility across all \(105\)
-  slices remains the decisive condition.
+  prescribed-link \(LS(2,3,19)\), plus an eight-`AllDifferent` cyclic
+  quotient.  All \(105\) slices now have independent exact completions,
+  while their shared-\(N\) compatibility remains the decisive condition.
+- [`evidence/cyclic17_all_105_exact_slices_status.md`](evidence/cyclic17_all_105_exact_slices_status.md):
+  the exact certificates, independent verifier, and carefully limited scope
+  for those \(105\) separately feasible prescribed-link slices.
 - [`evidence/cyclic17_equivariant_reduction.md`](evidence/cyclic17_equivariant_reduction.md):
   the exact layer recursion under a colour-transitive order-\(17\)
   symmetry, with a direct-verified 40-phase certificate for one
@@ -273,6 +285,12 @@ routes, but not the asymmetric case.
   an exact descent of the scalar one-factorization sign route.  It recovers
   the \(p=5\) contradiction but proves that the scalar signs close
   consistently at \(p=17\).
+- [`evidence/determinant_link_p19.md`](evidence/determinant_link_p19.md):
+  a proof that the ordered rank-two determinant link, and hence the
+  maximal-minor colouring ansatz, is impossible over \(\mathbb F_{19}\).
+- [`evidence/p19_principal_pfaffian_frontier.md`](evidence/p19_principal_pfaffian_frontier.md):
+  the rank-\(18\) Pfaffian reduction to that determinant obstruction and
+  exhaustive no-go theorems for two natural rank-four link families.
 - [`evidence/triangle_monodromy_cycle_girth_audit.md`](evidence/triangle_monodromy_cycle_girth_audit.md)
   and [`evidence/monodromy_character_factorisation_audit.md`](evidence/monodromy_character_factorisation_audit.md):
   exact long-odd-cycle constraints and a countermodel showing why the
@@ -304,6 +322,12 @@ python3 evidence/odd_graph_local_ball/construct_radius3.py \
   --seconds-per-column 60 --workers 8
 python3 -B evidence/global_latin_audit.py
 python3 -B evidence/odd_graph_local_ball/verify_radius5_large_set_boundary.py
+python3 -B \
+  evidence/odd_graph_local_ball/verify_radius5_golf_cyclic_exact_slice_seed.py \
+  evidence/cyclic17_all_105_exact_slices_certificate.json
+python3 -B \
+  evidence/odd_graph_local_ball/verify_radius5_golf_cyclic_exact_slice_seed.py \
+  evidence/cyclic17_all_105_exact_slices_cross_seed.json
 python3 -B evidence/search_cyclic17_r3_extension.py \
   --verify evidence/cyclic17_r3_pair_0_1_certificate.json \
   --only-fixed-pair 0,1
@@ -349,6 +373,13 @@ python3 -B evidence/verify_norton_one_third_gap_no_go.py
 python3 -B evidence/local_one_factorization_sign_verify.py
 python3 -B evidence/verify_triangle_monodromy_cycle_girth.py
 python3 -B evidence/verify_monodromy_character_factorisation.py
+python3 -B evidence/verify_determinant_link_p19.py
+python3 -B evidence/p19_rank18_pfaffian_factor_verify.py
+python3 -B evidence/p19_circulant_rank4_link_verify.py
+clang++ -std=c++20 -O3 -Wall -Wextra -pedantic \
+  evidence/p19_twisted_cubic_link_verify.cpp \
+  -o /tmp/p19_twisted_cubic_link_verify
+/tmp/p19_twisted_cubic_link_verify
 python3 -B evidence/s_4_5_21_cnf.py \
   --cycles 8 \
   --cnf /tmp/s4521-cycle-8.cnf \
