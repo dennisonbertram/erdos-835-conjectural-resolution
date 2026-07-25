@@ -56,6 +56,15 @@ routes, but not the asymmetric case.
   three exact ansatz exclusions, including the maximal-minor obstruction;
   the accompanying verifier is
   [`evidence/verify_algebraic_construction_no_go.py`](evidence/verify_algebraic_construction_no_go.py).
+- [`evidence/determinant_bridge_audit.md`](evidence/determinant_bridge_audit.md):
+  an independent line-by-line audit of the maximal-minor proof and an
+  explicit affine local countermodel showing why its power identities alone
+  cannot be transferred to an arbitrary colouring.
+- [`evidence/teichmuller_schur_no_go.md`](evidence/teichmuller_schur_no_go.md):
+  the exact Fourier/Teichmüller colour algebra together with a coherent
+  17-point Bose--Mesner quotient model; its verifier shows that this
+  quotient-level Schur closure is compatible and therefore cannot by itself
+  settle the problem.
 - [`evidence/three_way_trade.md`](evidence/three_way_trade.md): the exact
   three-leg trade-flow criterion, with small-case stress tests and an
   explicit statement of the remaining gap.
@@ -97,6 +106,7 @@ python3 verify_k4.py
 python3 evidence/verify_constructive_no_go.py
 python3 evidence/verify_constructive_candidates.py
 python3 evidence/verify_algebraic_construction_no_go.py
+python3 evidence/verify_teichmuller_schur_no_go.py
 python3 evidence/verify_three_way_trade.py
 python3 evidence/modular_kernel/verify_modular_kernel.py
 python3 evidence/odd_graph_local_ball/construct_radius3.py \
