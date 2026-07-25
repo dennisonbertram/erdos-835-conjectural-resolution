@@ -130,6 +130,12 @@ routes, but not the asymmetric case.
   unrestricted mode uses a lossless first-link normalization and splits a
   second link into seven exhaustive alternating-cycle types.  Restricted
   `INFEASIBLE` and bounded `UNKNOWN` results do not settle \(k=16\).
+- [`evidence/s_4_5_21_cnf.py`](evidence/s_4_5_21_cnf.py) and
+  [`evidence/audit_s_4_5_21_cnf.py`](evidence/audit_s_4_5_21_cnf.py):
+  a direct DIMACS exact-cover encoding of the same seven unrestricted cases
+  and an independent clause-by-clause comparison with the CP-SAT model.
+  A decoded SAT witness would be checked as a complete \(S(4,5,21)\);
+  an UNSAT claim still requires an independently checked proof certificate.
 - [`evidence/literature_and_x_search_2026-07-24.md`](evidence/literature_and_x_search_2026-07-24.md):
   exact recent X queries, the one matching preliminary report, and the
   full-archive tier limitation.
@@ -162,6 +168,11 @@ python3 search_cyclic_ls_4_5_21.py --reflection --seconds 30
 python3 search_cyclic_ls_4_5_21.py --seconds 300
 python3 -B search_s_4_5_21_extension.py \
   --second-link-cycles 8 --seconds 300
+python3 -B evidence/audit_s_4_5_21_cnf.py
+python3 -B evidence/s_4_5_21_cnf.py \
+  --cycles 8 \
+  --cnf /tmp/s4521-cycle-8.cnf \
+  --map /tmp/s4521-cycle-8.map.json
 ```
 
 Expected decisive outputs:
@@ -174,6 +185,9 @@ Expected decisive outputs:
 - Reflection-restricted \(k=16\) model: `INFEASIBLE`.
 - Unrestricted cyclic \(k=16\) model: currently `UNKNOWN` after the bounded
   five-minute search. This is neither an existence nor a nonexistence result.
+- The unrestricted DIMACS audit reports
+  `CNF/CP-SAT structural equivalence: PASS` for all seven lossless cases.
+  The current solver search has not supplied a checked SAT or UNSAT result.
 
 ## Primary references
 
