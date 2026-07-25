@@ -61,6 +61,10 @@ New exact results in the note include:
   moment-curve edge has a common offset \(e_4+a^4\), and the two resulting
   finite graphs both have exact clique number \(17\), so this template
   cannot be lifted to a \(K_{18}\) after retaining \(e_4\); and
+- an explicit actual-edge \(K_{18}\) in the full five-statistic quotient
+  \((e_1,e_2,e_3,e_4,e_8+e_1^8)\), witnessed by three concrete
+  \(15\)-sets and all \(153\) pairwise exchanges.  Thus the apparent
+  moment-curve escape does not extend to the full quotient; and
 - an exact matching-cube top-derivative frame and its projected
   zero-one cubic identity, including a complete support formula for its
   triple-polytabloid tensor and the first overlap-sensitive \(2\)-adic
@@ -105,6 +109,12 @@ routes, but not the asymmetric case.
   equations, all colour-reduced Terwilliger PSD blocks, and the complete
   one-edge four-point extension.  This rules out that relaxation as a route
   to contradiction; it is not a colouring.
+- [`evidence/five_point_star_gluing_status.md`](evidence/five_point_star_gluing_status.md):
+  an exact rational feasible certificate for the stronger free-\(F\),
+  full-position-reorder, re-based five-point necessary relaxation.  The
+  independent checker verifies \(441{,}905\) rational equalities and
+  \(5{,}118{,}391\) nonzero coefficients; feasibility closes this LP route
+  but is not a colouring.
 - [`evidence/mersenne_spin_functional_audit.md`](evidence/mersenne_spin_functional_audit.md):
   an exact audit of the Mersenne spin-functional route.  It proves that any
   hypothetical \(S(14,15,31)\) has full binary point-incidence rank, derives
@@ -149,6 +159,16 @@ routes, but not the asymmetric case.
   all \(14{,}657\) ball vertices and against every clause of an independently
   generated \(738{,}537\)-clause CNF.  Radius five and global extension
   remain open, so this local feasibility is not a global colouring.
+- [`evidence/odd_graph_local_ball/radius5_large_set_equivalence.md`](evidence/odd_graph_local_ball/radius5_large_set_equivalence.md):
+  an exact equivalence between one minimal-trace radius-five slice and a
+  prescribed-link \(LS(2,3,19)\).  One slice has an exact cyclic
+  certificate, while the shared-\(N\) compatibility across all \(105\)
+  slices remains the decisive condition.
+- [`evidence/cyclic17_equivariant_reduction.md`](evidence/cyclic17_equivariant_reduction.md):
+  the exact layer recursion under a colour-transitive order-\(17\)
+  symmetry, with a direct-verified 40-phase certificate for one
+  prescribed-link \(LS(2,3,19)\) slice.  The joint layer, later layers,
+  and asymmetric colourings remain open.
 - [`evidence/global_latin_compatibility.md`](evidence/global_latin_compatibility.md):
   the exact Latin-square transition, its golf-design form, a cyclic
   \(G(17)\), and the verified bridge through the complete radius-four ball.
@@ -218,6 +238,10 @@ routes, but not the asymmetric case.
   the exact \(e_4\) boundary of that moment-curve obstruction.  Every clique
   in the family lies in one of two offset graphs, and exhaustive
   meet-in-the-middle enumeration gives clique number \(17\) in both.
+- [`evidence/f32_five_statistic_k18_obstruction.md`](evidence/f32_five_statistic_k18_obstruction.md):
+  a three-mask static certificate for an actual-edge \(K_{18}\) in the
+  complete five-statistic quotient.  It rules out every arbitrary
+  postprocessing of those five statistics, not arbitrary colourings.
 - [`evidence/mate_cross_gram_determinant_audit.md`](evidence/mate_cross_gram_determinant_audit.md):
   a narrowed audit of direct fixed determinant, invertibility, and
   first-cofactor tests for two mates.
@@ -235,6 +259,11 @@ routes, but not the asymmetric case.
   the exact first overlap-sensitive \(2\)-adic lift.  At \(k=16\) the
   first 28 bits are forced identities; the normalized quotient detects
   overlap, but exact disjoint \(k=4\) controls realize both parities.
+- [`evidence/unprojected_fourth_moment_completion.md`](evidence/unprojected_fourth_moment_completion.md):
+  the sharp boundary beyond the projected cubic.  The missing fourth
+  moments form a positive-semidefinite \(K^\perp\)-residual Gram matrix;
+  attaining the model lower bound is exactly equivalent to recovering an
+  actual tight colouring, rather than a cheaper obstruction.
 - [`evidence/norton_one_third_gap_no_go.md`](evidence/norton_one_third_gap_no_go.md):
   an exact moment audit showing that the tempting Norton nonzero-spectrum
   gap at \(1/3\) would itself already be a nonexistence theorem.  Any
@@ -263,6 +292,7 @@ python3 evidence/verify_constructive_candidates.py
 python3 evidence/verify_algebraic_construction_no_go.py
 python3 evidence/verify_teichmuller_schur_no_go.py
 python3 evidence/verify_four_point_terwilliger_exact_witness.py
+python3 -B evidence/verify_five_point_full_reorder_exact.py
 python3 -B evidence/verify_mersenne_spin_functional_audit.py
 python3 evidence/verify_full_color_block_hodge_audit.py
 python3 -B evidence/verify_transposition_flow_cocycle.py
@@ -273,6 +303,12 @@ python3 evidence/modular_kernel/verify_modular_kernel.py
 python3 evidence/odd_graph_local_ball/construct_radius3.py \
   --seconds-per-column 60 --workers 8
 python3 -B evidence/global_latin_audit.py
+python3 -B evidence/odd_graph_local_ball/verify_radius5_large_set_boundary.py
+python3 -B evidence/search_cyclic17_r3_extension.py \
+  --verify evidence/cyclic17_r3_pair_0_1_certificate.json \
+  --only-fixed-pair 0,1
+python3 -B evidence/verify_cyclic17_r3_pair.py \
+  evidence/cyclic17_r3_pair_0_1_certificate.json --fixed-pair 0,1
 python3 -B evidence/odd_graph_local_ball/generate_radius4_generic_sinz_cnf.py \
   --cnf /tmp/o16-r4-generic.cnf \
   --map /tmp/o16-r4-generic.map.json \
@@ -302,11 +338,13 @@ python3 -B evidence/f32_prefix8_trace_classification_verifier.py
 python3 -B evidence/f32_two_statistic_k18_verifier.py
 python3 -B evidence/f32_four_statistic_k32_verifier.py
 python3 -B evidence/f32_five_statistic_moment_curve_clique_bound.py
+python3 -B evidence/f32_five_statistic_k18_verifier.py
 python3 -B evidence/verify_mate_cross_gram_audit.py
 python3 -B evidence/verify_top_degree_pairing_derivative.py
 python3 -B evidence/verify_top_degree_cross_matching_cubic.py
 python3 -B evidence/verify_triple_polytabloid_tensor_support.py
 python3 -B evidence/verify_triple_tensor_2adic_threshold.py
+python3 -B evidence/verify_unprojected_fourth_moment_completion.py
 python3 -B evidence/verify_norton_one_third_gap_no_go.py
 python3 -B evidence/local_one_factorization_sign_verify.py
 python3 -B evidence/verify_triangle_monodromy_cycle_girth.py
