@@ -65,6 +65,16 @@ routes, but not the asymmetric case.
   17-point Bose--Mesner quotient model; its verifier shows that this
   quotient-level Schur closure is compatible and therefore cannot by itself
   settle the problem.
+- [`evidence/four_point_terwilliger_exact_witness.md`](evidence/four_point_terwilliger_exact_witness.md):
+  an exact rational feasible witness for all colour-symmetrised triple-orbit
+  equations, all colour-reduced Terwilliger PSD blocks, and the complete
+  one-edge four-point extension.  This rules out that relaxation as a route
+  to contradiction; it is not a colouring.
+- [`evidence/mersenne_spin_functional_audit.md`](evidence/mersenne_spin_functional_audit.md):
+  an exact audit of the Mersenne spin-functional route.  It proves that any
+  hypothetical \(S(14,15,31)\) has full binary point-incidence rank, derives
+  the complete \(2\)-adic subset-star norm filtration, and isolates the
+  unresolved saturation and half-spin steps; it is not a nonexistence proof.
 - [`evidence/full_color_block_hodge_audit.md`](evidence/full_color_block_hodge_audit.md):
   an exact audit of the full \(17\times17\) signed colour-block operator.
   It proves the majority-block nullity bounds, identifies the canonical
@@ -113,6 +123,8 @@ python3 evidence/verify_constructive_no_go.py
 python3 evidence/verify_constructive_candidates.py
 python3 evidence/verify_algebraic_construction_no_go.py
 python3 evidence/verify_teichmuller_schur_no_go.py
+python3 evidence/verify_four_point_terwilliger_exact_witness.py
+python3 -B evidence/verify_mersenne_spin_functional_audit.py
 python3 evidence/verify_full_color_block_hodge_audit.py
 python3 evidence/verify_three_way_trade.py
 python3 evidence/modular_kernel/verify_modular_kernel.py
