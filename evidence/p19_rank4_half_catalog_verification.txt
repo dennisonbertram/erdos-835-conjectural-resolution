@@ -1,0 +1,47 @@
+Exact p=19 paired-half-link all-anchor verification
+Date: 2026-07-25
+
+Primary source:
+6eeab50ed32037e7f28646543343465d837d32e233b845c51f54c521c12e5e12  evidence/p19_unrestricted_rank4_half_catalog_search.cpp
+
+Decoded K10 one-factorization catalogue:
+226c5addbf5915c7a68023302c2eefc80cbe7cf243441f2fea68b8f263f7bc46  evidence/k10_one_factorizations_396.txt
+
+Command:
+/opt/homebrew/bin/python3 -B evidence/verify_p19_half_catalog_all_anchors.py
+
+Output:
+source_sha256=PASS
+catalogue_sha256=PASS
+completed_anchors=210
+total_exact_jobs=3353011200
+aggregate_anchor_wall_seconds=17723.344000
+minimum_anchor_wall_seconds=25.562600
+maximum_anchor_wall_seconds=252.773000
+ordered_log_manifest_sha256=4cdbab1c6ebcb48aa38f938045e4fe79e92890da9f1e192f7dc26eeb41f228da
+all_anchor_completion_accounting=PASS
+
+Planted positive control:
+planted_seed=3
+recovered_anchor_pattern=0
+recovered_outside_states=0,6,3,5,3,5
+recovered_rank=4
+schur_sign_enumeration_positive_control=PASS
+
+Independent compatibility-mask implementation:
+crosscheck_source_sha256=PASS
+catalogue_sha256=PASS
+completed_sample_anchors=4
+total_crosscheck_jobs=63866880
+compatibility_mask_crosscheck=PASS
+
+Production factoradic-unranking wrapper:
+normalized_first_magnitude=PASS
+distinct_tail_permutations=40320
+factoradic_unranking=PASS
+
+Scope:
+This excludes every 10-vertex p=19 half-link of rank at most four
+and therefore the associated 20-vertex paired Kronecker lift.  It does
+not exclude arbitrary rank-four 20-vertex ordered links and does not
+solve Erdős--Rosenfeld Problem #835.

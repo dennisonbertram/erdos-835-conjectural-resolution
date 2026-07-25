@@ -144,51 +144,89 @@ distinct_tail_permutations=40320
 factoradic_unranking=PASS
 ```
 
-## Completed checkpoint: anchor \(\{0,1,2,3\}\)
+## Complete all-anchor result
 
-For the labelled principal anchor \(\{0,1,2,3\}\), the search exhausted
+The primary search completed every one of the
+\(\binom{10}{4}=210\) possible principal anchors.  For each anchor it
+exhausted
 \[
- 396\cdot8!=15{,}966{,}720
+396\cdot8!=15{,}966{,}720
 \]
-jobs and found no witness:
+factorization/magnitude jobs, and every log ended with the exact terminal
+marker
 
 ```text
-catalogue_factorizations=396
-anchor_positions=210
-exact_anchor_index=0
-exact_anchor_vertices=[0,1,2,3]
-exact_jobs_total=15966720
-magnitude_assignments_sampled=15966720
-anchor_trials=15966720
-wall_seconds=76.869
 NO WITNESS FOR THIS ANCHOR (complete)
 ```
 
-Run:
+Thus the total exact job count was
+\[
+210\cdot396\cdot8!=3{,}353{,}011{,}200.
+\]
 
-```bash
-clang++ -std=c++20 -O3 -Wall -Wextra -pedantic -pthread \
-  evidence/p19_unrestricted_rank4_half_catalog_search.cpp \
-  -o /private/tmp/p19_half_catalog_search
-/private/tmp/p19_half_catalog_search \
-  evidence/k10_one_factorizations_396.txt 300 8 190841 0
+The source and catalogue remained pinned throughout:
+
+```text
+6eeab50ed32037e7f28646543343465d837d32e233b845c51f54c521c12e5e12  evidence/p19_unrestricted_rank4_half_catalog_search.cpp
+226c5addbf5915c7a68023302c2eefc80cbe7cf243441f2fea68b8f263f7bc46  evidence/k10_one_factorizations_396.txt
 ```
 
-At this checkpoint the source SHA-256 was
-`6eeab50ed32037e7f28646543343465d837d32e233b845c51f54c521c12e5e12`
-and the decoded catalogue SHA-256 was
-`226c5addbf5915c7a68023302c2eefc80cbe7cf243441f2fea68b8f263f7bc46`.
+The independent aggregate verifier checks those hashes; every anchor index
+and four-set; all three per-anchor job counters; every terminal marker; and
+an ordered hash of all 210 logs.  Its output was:
 
-This proves only:
+```text
+source_sha256=PASS
+catalogue_sha256=PASS
+completed_anchors=210
+total_exact_jobs=3353011200
+aggregate_anchor_wall_seconds=17723.344000
+minimum_anchor_wall_seconds=25.562600
+maximum_anchor_wall_seconds=252.773000
+ordered_log_manifest_sha256=4cdbab1c6ebcb48aa38f938045e4fe79e92890da9f1e192f7dc26eeb41f228da
+all_anchor_completion_accounting=PASS
+```
 
-> No half-link supported on one of the 396 labelled catalogue
-> representatives can have its principal block on
-> \(\{0,1,2,3\}\) nonsingular.
+The exact output of this verifier and all three controls is frozen in
+[`p19_rank4_half_catalog_verification.txt`](p19_rank4_half_catalog_verification.txt).
+The individual logs are under
+[`p19_half_catalog_anchor_logs`](p19_half_catalog_anchor_logs).
 
-It does not yet exclude a half-link whose nonsingular principal block is one
-of the other 209 four-sets.  The reproducible all-anchor driver
-[`run_p19_half_catalog_all_anchors.sh`](run_p19_half_catalog_all_anchors.sh)
-continues through those four-sets and stops immediately if it finds a
-verified witness.  Only completion of all 210 anchors with no witness would
-exclude the rank-four case; together with the determinant-link theorem it
-would exclude the entire paired half-link route.
+Reproduce the accounting with:
+
+```bash
+python3 -B evidence/verify_p19_half_catalog_all_anchors.py
+python3 -B evidence/verify_p19_half_schur_positive_control.py
+python3 -B evidence/verify_p19_half_catalog_compatibility_crosscheck.py
+clang++ -std=c++20 -O2 -Wall -Wextra -pedantic -pthread \
+  evidence/verify_p19_half_catalog_unranking.cpp \
+  -o /tmp/verify_p19_half_catalog_unranking
+/tmp/verify_p19_half_catalog_unranking
+```
+
+## Restricted theorem
+
+> **Theorem.** There is no \(10\times10\) alternating matrix \(A\) over
+> \(\mathbb F_{19}\), of rank at most four, for which every row sees each
+> nonzero sign class \(\{x,-x\}\) exactly once.
+
+Indeed, rank zero is incompatible with the row condition.  A rank-two
+matrix would give, through the paired lift \(A\otimes J\), a rank-two full
+ordered determinant link, excluded by
+[`determinant_link_p19.md`](determinant_link_p19.md).  Alternating rank is
+even, so only rank four remains.  Every rank-four alternating matrix has a
+nonsingular principal four-set.  The one-factorization classification,
+factor-label normalization, switching normalization, and Schur completion
+above reduce every such matrix to exactly one of the jobs covered across the
+210 anchors.  The verified exhaustion found none.
+
+Consequently there is no rank-at-most-four full twenty-vertex ordered link
+of the paired form
+\[
+A\otimes
+\begin{pmatrix}1&-1\\-1&1\end{pmatrix}.
+\]
+
+This is a complete theorem for the paired half-link route only.  It does
+**not** exclude an arbitrary rank-four twenty-vertex ordered link, and it
+does **not** solve Erdős--Rosenfeld Problem #835.

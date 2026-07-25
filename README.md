@@ -78,8 +78,10 @@ New exact results in the note include:
 - at the next candidate prime \(p=19\), an exact obstruction to the
   maximal-minor construction and to every principal-Pfaffian construction
   of rank at most \(18\), together with exhaustive no-go results for the
-  lifted normal-rational-curve and lifted circulant rank-four links.
-  Arbitrary rank-four links and higher-rank Pfaffian matrices remain open.
+  lifted normal-rational-curve and lifted circulant rank-four links, and a
+  \(3{,}353{,}011{,}200\)-job exact exclusion of every rank-at-most-four
+  paired half-link.  Arbitrary rank-four links and higher-rank Pfaffian
+  matrices remain open.
 
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
@@ -288,6 +290,10 @@ routes, but not the asymmetric case.
 - [`evidence/determinant_link_p19.md`](evidence/determinant_link_p19.md):
   a proof that the ordered rank-two determinant link, and hence the
   maximal-minor colouring ansatz, is impossible over \(\mathbb F_{19}\).
+- [`evidence/p19_rank4_half_catalog_schur_search.md`](evidence/p19_rank4_half_catalog_schur_search.md):
+  the complete 210-anchor Schur-complement exhaustion excluding every
+  rank-at-most-four paired half-link over \(\mathbb F_{19}\), with explicit
+  scope boundary and independent controls.
 - [`evidence/p19_principal_pfaffian_frontier.md`](evidence/p19_principal_pfaffian_frontier.md):
   the rank-\(18\) Pfaffian reduction to that determinant obstruction and
   exhaustive no-go theorems for two natural rank-four link families.
@@ -374,6 +380,9 @@ python3 -B evidence/local_one_factorization_sign_verify.py
 python3 -B evidence/verify_triangle_monodromy_cycle_girth.py
 python3 -B evidence/verify_monodromy_character_factorisation.py
 python3 -B evidence/verify_determinant_link_p19.py
+python3 -B evidence/verify_p19_half_catalog_all_anchors.py
+python3 -B evidence/verify_p19_half_schur_positive_control.py
+python3 -B evidence/verify_p19_half_catalog_compatibility_crosscheck.py
 python3 -B evidence/p19_rank18_pfaffian_factor_verify.py
 python3 -B evidence/p19_circulant_rank4_link_verify.py
 clang++ -std=c++20 -O3 -Wall -Wextra -pedantic \
