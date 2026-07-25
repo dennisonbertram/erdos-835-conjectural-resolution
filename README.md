@@ -43,7 +43,15 @@ New exact results in the note include:
 - a no-go theorem for the exact Hamming-weight coincidence
   \(A_{14}+A_{15}=17{,}678{,}835\): no choice of one-point extensions of
   the weight-\(14\) supports can coexist with all natural weight-\(15\)
-  supports as an \(O_{16}\) perfect code.
+  supports as an \(O_{16}\) perfect code;
+- a general degree theorem: every nonconstant zero-sum statistic of a
+  hypothetical tight prime colouring has maximum slice degree; and
+- a \(32\)-clique certificate excluding every arbitrary postprocessing of
+  the first seven \(\mathbb F_{32}\) half-set coefficients at \(k=16\);
+  and
+- an exact matching-cube top-derivative frame, together with a sharp local
+  covariance witness showing why one-matching second moments alone cannot
+  finish the degree-\(16\) case.
 
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
@@ -165,6 +173,21 @@ routes, but not the asymmetric case.
 - [`evidence/quadratic_coloring_ansatz_no_go.md`](evidence/quadratic_coloring_ansatz_no_go.md):
   a symbolic no-go theorem for all degree-at-most-two incidence-polynomial
   colourings over the candidate prime field.
+- [`evidence/full_slice_degree_necessity.md`](evidence/full_slice_degree_necessity.md):
+  the maximum-slice-degree necessity theorem for every surviving prime
+  parameter.
+- [`evidence/f32_halfset_prefix_no_go.md`](evidence/f32_halfset_prefix_no_go.md):
+  an exact \(32\)-clique obstruction to all first-seven-coefficient
+  half-set-polynomial colour rules.
+- [`evidence/f32_prefix8_affine_boundary.md`](evidence/f32_prefix8_affine_boundary.md):
+  the exact point where that affine clique template fails at coefficient
+  eight; this is a boundary result, not a general eight-prefix no-go.
+- [`evidence/mate_cross_gram_determinant_audit.md`](evidence/mate_cross_gram_determinant_audit.md):
+  a narrowed audit of direct fixed determinant, invertibility, and
+  first-cofactor tests for two mates.
+- [`evidence/top_degree_pairing_derivative_audit.md`](evidence/top_degree_pairing_derivative_audit.md):
+  the exact matching-cube derivative frame and the remaining
+  cross-matching/zero-one compatibility gap.
 - [`evidence/triangle_monodromy_cycle_girth_audit.md`](evidence/triangle_monodromy_cycle_girth_audit.md)
   and [`evidence/monodromy_character_factorisation_audit.md`](evidence/monodromy_character_factorisation_audit.md):
   exact long-odd-cycle constraints and a countermodel showing why the
@@ -204,6 +227,11 @@ python3 -B evidence/verify_quadratic_coloring_ansatz_no_go.py
 python3 -B evidence/verify_kerdock_spread_additive_syndrome_no_go.py
 python3 -B evidence/verify_cyclic17_barycenter_kerdock_spread_no_go.py
 python3 -B evidence/verify_hamming_weight_bridge_no_go.py
+python3 -B evidence/verify_full_slice_degree_necessity.py
+python3 -B evidence/verify_f32_halfset_prefix_no_go.py
+python3 -B evidence/f32_prefix8_affine_boundary_verifier.py
+python3 -B evidence/verify_mate_cross_gram_audit.py
+python3 -B evidence/verify_top_degree_pairing_derivative.py
 python3 -B evidence/verify_triangle_monodromy_cycle_girth.py
 python3 -B evidence/verify_monodromy_character_factorisation.py
 python3 -B evidence/s_4_5_21_cnf.py \
