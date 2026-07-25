@@ -42,6 +42,23 @@ small-case checks, not a resolution of the remaining prime cases.
 No recent post returned by these searches claimed a proof or construction
 for the open cases.
 
+### Post-connectivity refresh
+
+After network access was restored later in the same research run, three
+combined recent-window queries were repeated for:
+
+```text
+"Erdős–Rosenfeld" / "Erdos-Rosenfeld" / "Problem #835"
+"J(2k,k)" / "Johnson graph J(2k,k)" with colouring terms
+"LS(15,16,32)" / "LS(k-1,k,2k)" / "Erdos problem 835"
+```
+
+The latter two returned no posts.  The first returned only X post
+[`2080780379410342374`](https://x.com/i/status/2080780379410342374), whose
+text explicitly says that work begun from Problem #835 led to a **distinct**
+covering problem.  It is therefore not a claimed solution of #835.  This
+refresh likewise found no recent public claim resolving the open prime cases.
+
 ## Archive limitation
 
 A full-archive query for the combined Erdős-835 spellings was attempted.

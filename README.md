@@ -49,8 +49,14 @@ New exact results in the note include:
 - a \(32\)-clique certificate excluding every arbitrary postprocessing of
   the first seven \(\mathbb F_{32}\) half-set coefficients at \(k=16\);
   and
-- an exact matching-cube top-derivative frame, together with a sharp local
-  covariance witness showing why one-matching second moments alone cannot
+- an exact classification of the coefficient-eight boundary: every
+  \(15\)-set with \(e_1=\cdots=e_7=0\) is a trace hyperplane, and its lifted
+  coefficient-eight layer is \(K_{17}\sqcup15K_1\); and
+- an explicit actual-edge \(K_{18}\) excluding every colouring of the form
+  \(F(e_1,e_8+e_1^8)\), even with completely arbitrary postprocessing; and
+- an exact matching-cube top-derivative frame and its projected
+  zero-one cubic identity, together with audited controls showing that the
+  corresponding quadratic relaxation and scalar sign reduction do not
   finish the degree-\(16\) case.
 
 These results close several natural algebraic and symmetric construction
@@ -182,12 +188,26 @@ routes, but not the asymmetric case.
 - [`evidence/f32_prefix8_affine_boundary.md`](evidence/f32_prefix8_affine_boundary.md):
   the exact point where that affine clique template fails at coefficient
   eight; this is a boundary result, not a general eight-prefix no-go.
+- [`evidence/f32_prefix8_trace_hyperplanes.md`](evidence/f32_prefix8_trace_hyperplanes.md):
+  the exact trace-hyperplane classification at coefficient eight, including
+  the induced \(K_{17}\sqcup15K_1\) lifted-layer graph.
+- [`evidence/f32_two_statistic_k18_obstruction.md`](evidence/f32_two_statistic_k18_obstruction.md):
+  an explicit actual-edge \(K_{18}\) ruling out every
+  \(F(e_1,e_8+e_1^8)\) colour rule.  This excludes that full two-statistic
+  family, not arbitrary tight colourings.
 - [`evidence/mate_cross_gram_determinant_audit.md`](evidence/mate_cross_gram_determinant_audit.md):
   a narrowed audit of direct fixed determinant, invertibility, and
   first-cofactor tests for two mates.
 - [`evidence/top_degree_pairing_derivative_audit.md`](evidence/top_degree_pairing_derivative_audit.md):
   the exact matching-cube derivative frame and the remaining
   cross-matching/zero-one compatibility gap.
+- [`evidence/top_degree_cross_matching_cubic_audit.md`](evidence/top_degree_cross_matching_cubic_audit.md):
+  the exact projected-idempotence cubic coupling different matchings, with
+  true and false small-parameter controls.
+- [`evidence/local_one_factorization_sign_audit.md`](evidence/local_one_factorization_sign_audit.md):
+  an exact descent of the scalar one-factorization sign route.  It recovers
+  the \(p=5\) contradiction but proves that the scalar signs close
+  consistently at \(p=17\).
 - [`evidence/triangle_monodromy_cycle_girth_audit.md`](evidence/triangle_monodromy_cycle_girth_audit.md)
   and [`evidence/monodromy_character_factorisation_audit.md`](evidence/monodromy_character_factorisation_audit.md):
   exact long-odd-cycle constraints and a countermodel showing why the
@@ -230,8 +250,12 @@ python3 -B evidence/verify_hamming_weight_bridge_no_go.py
 python3 -B evidence/verify_full_slice_degree_necessity.py
 python3 -B evidence/verify_f32_halfset_prefix_no_go.py
 python3 -B evidence/f32_prefix8_affine_boundary_verifier.py
+python3 -B evidence/f32_prefix8_trace_classification_verifier.py
+python3 -B evidence/f32_two_statistic_k18_verifier.py
 python3 -B evidence/verify_mate_cross_gram_audit.py
 python3 -B evidence/verify_top_degree_pairing_derivative.py
+python3 -B evidence/verify_top_degree_cross_matching_cubic.py
+python3 -B evidence/local_one_factorization_sign_verify.py
 python3 -B evidence/verify_triangle_monodromy_cycle_girth.py
 python3 -B evidence/verify_monodromy_character_factorisation.py
 python3 -B evidence/s_4_5_21_cnf.py \
