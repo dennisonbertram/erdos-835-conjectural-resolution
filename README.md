@@ -65,6 +65,12 @@ routes, but not the asymmetric case.
   17-point Bose--Mesner quotient model; its verifier shows that this
   quotient-level Schur closure is compatible and therefore cannot by itself
   settle the problem.
+- [`evidence/full_color_block_hodge_audit.md`](evidence/full_color_block_hodge_audit.md):
+  an exact audit of the full \(17\times17\) signed colour-block operator.
+  It proves the majority-block nullity bounds, identifies the canonical
+  projections as a regular tight-fusion simplex, and gives an exact-size
+  voltage countermodel showing why block sparsity and two-step support counts
+  alone do not capture the global Hodge cubic.
 - [`evidence/three_way_trade.md`](evidence/three_way_trade.md): the exact
   three-leg trade-flow criterion, with small-case stress tests and an
   explicit statement of the remaining gap.
@@ -107,6 +113,7 @@ python3 evidence/verify_constructive_no_go.py
 python3 evidence/verify_constructive_candidates.py
 python3 evidence/verify_algebraic_construction_no_go.py
 python3 evidence/verify_teichmuller_schur_no_go.py
+python3 evidence/verify_full_color_block_hodge_audit.py
 python3 evidence/verify_three_way_trade.py
 python3 evidence/modular_kernel/verify_modular_kernel.py
 python3 evidence/odd_graph_local_ball/construct_radius3.py \
