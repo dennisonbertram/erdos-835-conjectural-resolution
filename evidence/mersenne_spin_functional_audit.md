@@ -347,8 +347,14 @@ Consequently
 In the Mersenne case their \(2\)-adic valuations are \(m+1\) and
 \(m-1\).  After division by \(2^{m-1}\), the Gram matrix reduces modulo
 two to \(J+I\), of rank \(2r\) with radical spanned by the all-ones
-point vector.  Thus the first point-star layer is exactly the natural
-\(2r\)-dimensional symplectic module underlying the Clifford model.
+point vector.  This is an associated graded form at \(2\)-adic depth
+\(m-1\), **not** the actual mod-two polar form on the point-functional
+image in \(U_A\): Proposition (5a) gives \(E_ra_x\in L\otimes\mathbb
+Z_2\), and the unscaled pairings are even (with norms divisible by
+four) for \(m\ge2\), so their classes in \(S\) span a totally singular
+subspace.  Thus \(J+I\) identifies a deeper natural symplectic layer,
+but gives neither a nondegenerate subspace of \(U_A\) nor its dimension,
+since some of these classes may lie in \(R\).
 
 This makes the remaining burden precise: one would have to show that
 appropriately divided higher subset-star combinations generate a
