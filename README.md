@@ -81,6 +81,12 @@ routes, but not the asymmetric case.
   projections as a regular tight-fusion simplex, and gives an exact-size
   voltage countermodel showing why block sparsity and two-step support counts
   alone do not capture the global Hodge cubic.
+- [`evidence/transposition_flow_cocycle.md`](evidence/transposition_flow_cocycle.md):
+  a universal necessary condition for \(k=16\).  Every hypothetical colouring
+  forces 496 compatible nowhere-zero \(\mathbb F_{17}\) top-Specht flows,
+  with exact row-derangement, anti-complement, Frobenius, and triangle-cocycle
+  identities.  The accompanying \(k=4\) control proves that one isolated flow
+  is insufficient; simultaneous compatibility is the unresolved content.
 - [`evidence/three_way_trade.md`](evidence/three_way_trade.md): the exact
   three-leg trade-flow criterion, with small-case stress tests and an
   explicit statement of the remaining gap.
@@ -126,6 +132,7 @@ python3 evidence/verify_teichmuller_schur_no_go.py
 python3 evidence/verify_four_point_terwilliger_exact_witness.py
 python3 -B evidence/verify_mersenne_spin_functional_audit.py
 python3 evidence/verify_full_color_block_hodge_audit.py
+python3 -B evidence/verify_transposition_flow_cocycle.py
 python3 evidence/verify_three_way_trade.py
 python3 evidence/modular_kernel/verify_modular_kernel.py
 python3 evidence/odd_graph_local_ball/construct_radius3.py \
