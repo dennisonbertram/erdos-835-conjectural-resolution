@@ -120,6 +120,11 @@ routes, but not the asymmetric case.
   [`search_ls_3_4_20_exact_cover.py`](search_ls_3_4_20_exact_cover.py):
   independent CP-SAT formulations of the derived \(LS(3,4,20)\) condition.
   Bounded `UNKNOWN` results are exploratory evidence only.
+- [`search_s_4_5_21_extension.py`](search_s_4_5_21_extension.py):
+  an exact-cover search for the necessary \(S(4,5,21)\) extension.  Its
+  unrestricted mode uses a lossless first-link normalization and splits a
+  second link into seven exhaustive alternating-cycle types.  Restricted
+  `INFEASIBLE` and bounded `UNKNOWN` results do not settle \(k=16\).
 - [`evidence/literature_and_x_search_2026-07-24.md`](evidence/literature_and_x_search_2026-07-24.md):
   exact recent X queries, the one matching preliminary report, and the
   full-archive tier limitation.
@@ -149,6 +154,8 @@ python3 evidence/odd_graph_local_ball/construct_radius3.py \
 python3 evidence/state_sdp_p17/verify_state_sdp_p17.py
 python3 search_cyclic_ls_4_5_21.py --reflection --seconds 30
 python3 search_cyclic_ls_4_5_21.py --seconds 300
+python3 -B search_s_4_5_21_extension.py \
+  --second-link-cycles 8 --seconds 300
 ```
 
 Expected decisive outputs:
