@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Validator: the second-moment M2 identity, its decomposition, and the
-reduction of Conjecture E to two evenness statements.
+"""Validator: the second-moment M2 identity, its decomposition, and its
+parity relation to Conjecture E.
 
 Definitions (pair of mates B, C of leg A; m = (r+1)/2, mu = (r+3)/2):
   M2 = #{ordered (P,Q), P != Q :
@@ -19,17 +19,21 @@ PROVED identities (checked exactly on every mate pair):
   (congruence, r = 3 mod 4; C(r,2) odd)
       t = E3 + X3 + mu^2 C(2r+1,r+3) + b C(r,2)   (mod 2)
 
-REDUCTION THEOREM (PROVED): at r = 15, all C(31,k) are odd (31 = 2^5-1,
-Lucas), so mu^2 N3 + b C(15,2) is even; hence
-      E3 even and X3 even  ==>  t even  ==>  Conjecture E
-      ==> no LS(14,15,31) ==> chi(J(32,16)) >= 18.
+TAUTOLOGY AUDIT (PROVED): at r = 15, Lucas gives
+      C(31,18) = 1 (mod 2), b = C(31,14)/15 = 1 (mod 2),
+and mu=9, C(15,2)=105 are odd.  Therefore
+      E3 + X3 = t (mod 2).
+So combined evenness is Conjecture E itself, not an independent
+reduction.  Separate evenness of E3 and X3 is a stronger optional
+conjecture.
 
 FINITE-VERIFIED: E3 and X3 are even in every instance at r=3
 (E3, X3) = (6, 0) and r=5 ((212,352), (220,320), (240,300));
 localization is REFUTED: per-point counts K_z and per-Y X3 counts take
 odd values freely — the evenness is global.
 
-CONJECTURAL: evenness of E3 and X3 at r=15.
+CONJECTURAL: Conjecture E at r=15; separately, the stronger individual
+evenness of E3 and X3.
 Run: python3 verify_M2_reduction.py
 """
 import sys

@@ -260,7 +260,7 @@ separates all species.  Scope note: the Layer-1/2 abstract
 countermodels do not define \((r+2)\)-sets, so I1–I4 are inapplicable
 there (they require N1c + N3).
 
-## 2.9 The second-moment reduction: E follows from two evenness laws
+## 2.9 The second-moment identities and their parity tautology
 
 Validator: `verify_M2_reduction.py` (all identities checked on every
 mate pair at \(r=3,5\)).
@@ -313,16 +313,16 @@ Hence at \(r\equiv3\pmod4\):
  t\equiv E_3+X_3+\mu^2\tbinom{2r+1}{r+3}+b\tbinom r2\pmod2 .
 \]
 
-**Reduction theorem (PROVED).**  At \(r=15\): \(31=2^5-1\), so every
-\(\binom{31}k\) is odd (Lucas); thus
-\(\mu^2\binom{31}{18}+b\binom{15}2\) is even, and
+**Non-reductive implication (PROVED).**  At \(r=15\), the displayed
+congruence formally gives
 \[
  E_3\ \text{even and}\ X_3\ \text{even}\ \Longrightarrow\ t\ \text{even}
  \ \Longrightarrow\ \text{Conjecture E}\ \Longrightarrow\
  \chi(J(32,16))\ge18 .
 \]
-The entire \(k=16\) problem is now reduced to two evenness statements
-about coincidence counts of the two tiling maps.
+The tautology audit below shows why this implication is not a
+reduction: at \(r=15\), \(E_3+X_3\equiv t\), so its hypothesis already
+contains the desired parity.
 
 **FINITE-VERIFIED.**  \(E_3\) and \(X_3\) are even in every existing
 instance: \((t,E_3,X_3)=(6,6,0)\) at \(r=3\) (note \(X_3\) vanishes
@@ -340,8 +340,9 @@ coarser invariant than \(\Sigma_\gamma\) (it merges two
 17, 19, 21, 25 occur), and per-\((r+3)\)-set \(X_3\)-counts of 1 and 3
 abound.  Both evenness laws are irreducibly global.
 
-**TAUTOLOGY CORRECTION (audited 2026-07-25, supersedes the paragraph
-below).**  Writing \(N\) for the \((r+3)\)-by-\((r+1)\)-set incidence
+**TAUTOLOGY CORRECTION (audited 2026-07-25; supersedes the earlier
+"reduction" wording).**  Writing \(N\) for the
+\((r+3)\)-by-\((r+1)\)-set incidence
 and \(A_2\) for the \(|H\cap K|=r-1\) relation, one has over \(\mathbb Z\)
 \(N^{\mathsf T}N=\binom r2I+(r-1)A_1+A_2\), so for odd \(r\),
 \(A_2\equiv N^{\mathsf T}N+\binom r2 I\pmod2\).  With
@@ -356,10 +357,17 @@ audited fact that the 1583 \(T_E\)- and \(T_X\)-kernel-pair violations
 at \(r=5\) coincide exactly and \(T_E+T_X\) is constant on the affine
 hull (0/8778).  The earlier claim that "the affine route is dead" is
 RETRACTED for the combined form at \(r\equiv1\pmod4\) — but the
-resulting statement is \(t\)-blind there.  At \(r\equiv3\pmod4\)
-(including \(r=15\)): \(\mu\), \(\binom r2\), \(\binom{2r+1}{r+3}\)
-and \(b\) are all odd, hence \(E_3+X_3\equiv t\pmod2\) IDENTICALLY.
-Therefore the combined parity target is a TAUTOLOGY at \(r=15\): it
+resulting statement is \(t\)-blind there.  At
+\(r\equiv3\pmod4\), only \(\mu\) and \(\binom r2\) are automatically
+odd, giving
+\[
+ E_3+X_3\equiv\binom{2r+1}{r+3}+b-t\pmod2.
+\]
+Specifically at \(r=15\), Lucas's theorem makes
+\(\binom{31}{18}\) odd, and
+\(b=\binom{31}{14}/15\) is odd, hence
+\(E_3+X_3\equiv t\pmod2\) IDENTICALLY.  Therefore the combined parity
+target is a TAUTOLOGY at \(r=15\): it
 is Conjecture E verbatim, not a reduction of it, and the
 \(M_2\)-reduction below carries no independent leverage — given the
 identity, \(\{E_3\text{ even}\wedge X_3\text{ even}\}\iff
@@ -399,9 +407,10 @@ abound (14\,880 of 48\,588 occupied loci over 300 pairs) and all four
 per-\(Y'\) parity mixes \((E_3\bmod2,X_3\bmod2)\) occur.
 
 **Superseded as a target (see the tautology correction in §2.9).**
-By the \(N^{\mathsf T}N\)-identity, \(|\mathcal C|=E_3+X_3\equiv t\)
-identically at \(r\equiv3\pmod4\): the combined parity statement IS
-Conjecture E, so no pairing on \(\mathcal C\) — local or trans-local —
+By the \(N^{\mathsf T}N\)-identity, at \(r=15\) one has
+\(|\mathcal C|=E_3+X_3\equiv t\): the combined parity statement IS
+Conjecture E at this parameter, so no pairing on \(\mathcal C\) —
+local or trans-local —
 can be a reduction; a fixed-point-free involution on \(\mathcal C\)
 would directly prove E, but constructing one is exactly as hard as
 proving \(t\) even, and the localization data above shows it cannot be
@@ -501,17 +510,20 @@ statements such as the parity of \(\binom{31}k\)).
 - PROVED: 1.1–1.5, Layer-1/Layer-2 countermodels (existence by
   explicit witness), the equivalences \(t\) even \(\iff\)
   \(\operatorname{wt}(u)\equiv0\ (4)\) \(\iff\) \(h\equiv b\ (2)\),
-  the spectator identities and first-moment t-blindness, and the
-  second-moment reduction of \(t\)-parity to \(E_3\) and \(X_3\).
+  the spectator identities and first-moment t-blindness, the
+  second-moment identities, and the tautological equivalence
+  \(E_3+X_3\equiv t\pmod2\) at \(r=15\).
 - FINITE-VERIFIED: E itself at \(r=3\) (all 28 pairs) and \(r=5\)
   (all 10\,296 pairs); the \(D_6\)-torsor mechanism at \(r=3\)
   (56/56) — which does not extend as-is (fibres have \(r-1=14\)
   elements at \(r=15\), and the Klein commuting mechanism is refuted
   0/56); all spectator and second-moment censuses at \(r=3,5\).
-- CONJECTURAL: evenness of \(E_3\) and \(X_3\), hence E, at \(r=15\).
-  No proof and no countermodel within the true Steiner axioms; the
-  countermodels above bound what a proof must use, they do not refute
-  E.
+- CONJECTURAL: Conjecture E itself at \(r=15\).  Separate evenness of
+  \(E_3\) and \(X_3\) is a strictly stronger optional conjecture; its
+  conjunction implies E only because it includes the equivalent
+  combined parity.  No proof and no countermodel within the true
+  Steiner axioms; the countermodels above bound what a proof must use,
+  they do not refute E.
 
 ## 4. Validators
 

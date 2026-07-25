@@ -23,14 +23,16 @@ Conclusions (PROVED by these witnesses):
   - T_E is not constant on the r=3 F2-affine hull; neither T_E nor T_X
     is constant on the r=5 hull.  Thus no parameter-uniform proof can
     merely assert separate constancy on these affine relaxations.
-  - The combined form needed by Conjecture E behaves differently:
-    it fails at r=3 but is constant on the full r=5 affine hull.
-    Consequently the combined affine route remains open at r=15.
+  - The combined form behaves differently: it fails at r=3 but is
+    constant on the full r=5 affine hull.  For true tilings this is
+    the r=1 (mod 4) coefficient cancellation; it supplies no lift to
+    r=15, where the combined parity is identically t.
   - At r=3, per-fibre exactly-one is sufficient to remove every
     countermodel.  At r=5 this checker does not isolate which of the
     omitted exact-cardinality constraints is decisive.
-  - No inference about the r=15 affine hull is made: a parameter-specific
-    identity there remains logically possible.
+  - No inference about the enormous r=15 affine hull is made.  A
+    parameter-specific identity there remains logically possible, but
+    the r=5 cancellation is not evidence for one.
 Run: python3 verify_linear_relaxation_nogo.py
 """
 import sys
