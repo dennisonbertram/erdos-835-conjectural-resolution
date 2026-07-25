@@ -52,12 +52,21 @@ New exact results in the note include:
 - an exact classification of the coefficient-eight boundary: every
   \(15\)-set with \(e_1=\cdots=e_7=0\) is a trace hyperplane, and its lifted
   coefficient-eight layer is \(K_{17}\sqcup15K_1\); and
-- an explicit actual-edge \(K_{18}\) excluding every colouring of the form
-  \(F(e_1,e_8+e_1^8)\), even with completely arbitrary postprocessing; and
+- an explicit actual-edge \(K_{18}\) excluding every colouring based only
+  on \((e_1,e_8+e_1^8)\), strengthened to an actual-edge \(K_{32}\) after
+  retaining the larger tuple
+  \((e_1,e_2,e_3,e_8+e_1^8)\), with completely arbitrary postprocessing;
+  and
+- an exhaustive coefficient-four boundary for that \(K_{32}\): every
+  moment-curve edge has a common offset \(e_4+a^4\), and the two resulting
+  finite graphs both have exact clique number \(17\), so this template
+  cannot be lifted to a \(K_{18}\) after retaining \(e_4\); and
 - an exact matching-cube top-derivative frame and its projected
-  zero-one cubic identity, together with audited controls showing that the
-  corresponding quadratic relaxation and scalar sign reduction do not
-  finish the degree-\(16\) case.
+  zero-one cubic identity, including a complete support formula for its
+  triple-polytabloid tensor and the first overlap-sensitive \(2\)-adic
+  quotient, together with audited controls showing that the corresponding
+  modular, quadratic, SOS, scalar-sign, and proposed Norton \(1/3\)-gap
+  reductions do not finish the degree-\(16\) case.
 
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
@@ -135,9 +144,14 @@ routes, but not the asymmetric case.
   identities, a characteristic-17 module audit, and a tensor-ansatz
   obstruction.
 - [`evidence/odd_graph_local_ball/`](evidence/odd_graph_local_ball/): an exact
-  radius-three local-cover certificate and the derived radius-four
-  one-factorization constraints. Local feasibility is not a global
-  colouring.
+  radius-three certificate, the full radius-four reduction, and an explicit
+  cyclic-golf radius-four colouring.  The latter was checked semantically on
+  all \(14{,}657\) ball vertices and against every clause of an independently
+  generated \(738{,}537\)-clause CNF.  Radius five and global extension
+  remain open, so this local feasibility is not a global colouring.
+- [`evidence/global_latin_compatibility.md`](evidence/global_latin_compatibility.md):
+  the exact Latin-square transition, its golf-design form, a cyclic
+  \(G(17)\), and the verified bridge through the complete radius-four ball.
 - [`evidence/odd_matching_cells.md`](evidence/odd_matching_cells.md): exact
   odd cell counts, triangle-monodromy parity, and a cofactor-orientation
   identity for a hypothetical \(O_{16}\to K_{17}\) cover.
@@ -195,6 +209,15 @@ routes, but not the asymmetric case.
   an explicit actual-edge \(K_{18}\) ruling out every
   \(F(e_1,e_8+e_1^8)\) colour rule.  This excludes that full two-statistic
   family, not arbitrary tight colourings.
+- [`evidence/f32_four_statistic_k32_obstruction.md`](evidence/f32_four_statistic_k32_obstruction.md):
+  a stronger actual-edge \(K_{32}\) which survives after retaining \(e_2\)
+  and \(e_3\) as well.  It proves that every colouring in this family needs
+  all 32 colours, while still leaving later coefficients and arbitrary
+  colourings open.
+- [`evidence/f32_five_statistic_moment_curve_clique_bound.md`](evidence/f32_five_statistic_moment_curve_clique_bound.md):
+  the exact \(e_4\) boundary of that moment-curve obstruction.  Every clique
+  in the family lies in one of two offset graphs, and exhaustive
+  meet-in-the-middle enumeration gives clique number \(17\) in both.
 - [`evidence/mate_cross_gram_determinant_audit.md`](evidence/mate_cross_gram_determinant_audit.md):
   a narrowed audit of direct fixed determinant, invertibility, and
   first-cofactor tests for two mates.
@@ -204,6 +227,19 @@ routes, but not the asymmetric case.
 - [`evidence/top_degree_cross_matching_cubic_audit.md`](evidence/top_degree_cross_matching_cubic_audit.md):
   the exact projected-idempotence cubic coupling different matchings, with
   true and false small-parameter controls.
+- [`evidence/triple_polytabloid_tensor_support_audit.md`](evidence/triple_polytabloid_tensor_support_audit.md):
+  a complete support-and-sign formula for the cubic tensor.  Its direct
+  mod-\(2\), mod-\(4\), mod-\(17\), and first Hilbert--Schmidt SOS tests
+  close consistently rather than contradicting the target.
+- [`evidence/triple_tensor_2adic_threshold_audit.md`](evidence/triple_tensor_2adic_threshold_audit.md):
+  the exact first overlap-sensitive \(2\)-adic lift.  At \(k=16\) the
+  first 28 bits are forced identities; the normalized quotient detects
+  overlap, but exact disjoint \(k=4\) controls realize both parities.
+- [`evidence/norton_one_third_gap_no_go.md`](evidence/norton_one_third_gap_no_go.md):
+  an exact moment audit showing that the tempting Norton nonzero-spectrum
+  gap at \(1/3\) would itself already be a nonexistence theorem.  Any
+  hypothetical target constituent is instead forced to have at least
+  \(12{,}723{,}868\) eigenvalues below \(1/3\).
 - [`evidence/local_one_factorization_sign_audit.md`](evidence/local_one_factorization_sign_audit.md):
   an exact descent of the scalar one-factorization sign route.  It recovers
   the \(p=5\) contradiction but proves that the scalar signs close
@@ -236,6 +272,18 @@ python3 -B evidence/verify_block_local_sign_rowspace_no_go.py
 python3 evidence/modular_kernel/verify_modular_kernel.py
 python3 evidence/odd_graph_local_ball/construct_radius3.py \
   --seconds-per-column 60 --workers 8
+python3 -B evidence/global_latin_audit.py
+python3 -B evidence/odd_graph_local_ball/generate_radius4_generic_sinz_cnf.py \
+  --cnf /tmp/o16-r4-generic.cnf \
+  --map /tmp/o16-r4-generic.map.json \
+  --manifest /tmp/o16-r4-generic.manifest.json
+python3 -B evidence/odd_graph_local_ball/emit_global_latin_radius4_generic_model.py \
+  --model /tmp/o16-r4.model \
+  --colouring /tmp/o16-r4.colouring.json \
+  --manifest /tmp/o16-r4.model-manifest.json
+python3 -B evidence/odd_graph_local_ball/verify_radius4_generic_sinz_assignment.py \
+  --model /tmp/o16-r4.model \
+  --cnf /tmp/o16-r4-generic.cnf
 python3 evidence/state_sdp_p17/verify_state_sdp_p17.py
 python3 search_cyclic_ls_4_5_21.py --reflection --seconds 30
 python3 search_cyclic_ls_4_5_21.py --seconds 300
@@ -252,9 +300,14 @@ python3 -B evidence/verify_f32_halfset_prefix_no_go.py
 python3 -B evidence/f32_prefix8_affine_boundary_verifier.py
 python3 -B evidence/f32_prefix8_trace_classification_verifier.py
 python3 -B evidence/f32_two_statistic_k18_verifier.py
+python3 -B evidence/f32_four_statistic_k32_verifier.py
+python3 -B evidence/f32_five_statistic_moment_curve_clique_bound.py
 python3 -B evidence/verify_mate_cross_gram_audit.py
 python3 -B evidence/verify_top_degree_pairing_derivative.py
 python3 -B evidence/verify_top_degree_cross_matching_cubic.py
+python3 -B evidence/verify_triple_polytabloid_tensor_support.py
+python3 -B evidence/verify_triple_tensor_2adic_threshold.py
+python3 -B evidence/verify_norton_one_third_gap_no_go.py
 python3 -B evidence/local_one_factorization_sign_verify.py
 python3 -B evidence/verify_triangle_monodromy_cycle_girth.py
 python3 -B evidence/verify_monodromy_character_factorisation.py
