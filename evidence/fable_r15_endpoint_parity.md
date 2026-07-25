@@ -340,12 +340,42 @@ coarser invariant than \(\Sigma_\gamma\) (it merges two
 17, 19, 21, 25 occur), and per-\((r+3)\)-set \(X_3\)-counts of 1 and 3
 abound.  Both evenness laws are irreducibly global.
 
-**CONJECTURAL — combined form (the actual target).**  The reduction
-theorem needs only \(E_3+X_3\equiv0\pmod2\) at \(r=15\); separate
-evenness of \(E_3\) and \(X_3\) is an optional STRONGER conjecture
-(true in all finite data, but not required).  Scope: finite \(r=5\) is
-not \(r=15\); the layer-3 SAT probe returned UNKNOWN at 1800 s
-(1\,894\,897 branches, single worker) and licenses nothing.
+**TAUTOLOGY CORRECTION (audited 2026-07-25, supersedes the paragraph
+below).**  Writing \(N\) for the \((r+3)\)-by-\((r+1)\)-set incidence
+and \(A_2\) for the \(|H\cap K|=r-1\) relation, one has over \(\mathbb Z\)
+\(N^{\mathsf T}N=\binom r2I+(r-1)A_1+A_2\), so for odd \(r\),
+\(A_2\equiv N^{\mathsf T}N+\binom r2 I\pmod2\).  With
+\(Nx=Ny=\mu\mathbf 1\) and \(x\cdot y=h=b-t\) for true mates, this gives
+\[
+ E_3+X_3\equiv M_2=x^{\mathsf T}A_2y
+ \equiv\mu^2\tbinom{2r+1}{r+3}+\tbinom r2(b-t)\pmod2 .
+\]
+At \(r\equiv1\pmod4\) both coefficients are even (\(\mu\) even,
+\(\binom r2\) even): \(E_3+X_3\equiv0\) is forced — explaining the
+audited fact that the 1583 \(T_E\)- and \(T_X\)-kernel-pair violations
+at \(r=5\) coincide exactly and \(T_E+T_X\) is constant on the affine
+hull (0/8778).  The earlier claim that "the affine route is dead" is
+RETRACTED for the combined form at \(r\equiv1\pmod4\) — but the
+resulting statement is \(t\)-blind there.  At \(r\equiv3\pmod4\)
+(including \(r=15\)): \(\mu\), \(\binom r2\), \(\binom{2r+1}{r+3}\)
+and \(b\) are all odd, hence \(E_3+X_3\equiv t\pmod2\) IDENTICALLY.
+Therefore the combined parity target is a TAUTOLOGY at \(r=15\): it
+is Conjecture E verbatim, not a reduction of it, and the
+\(M_2\)-reduction below carries no independent leverage — given the
+identity, \(\{E_3\text{ even}\wedge X_3\text{ even}\}\iff
+\{E_3\text{ even}\wedge t\text{ even}\}\): the hypothesis contains
+the conclusion.  (Form-level caveat: on arbitrary affine points
+\(x^{\mathsf T}A_2y=T_E+T_X+T_{\text{one-sided}}\); the displayed
+identity for \(T_E+T_X\) alone is proved for true mates, and the
+\(r=5\) hull-constancy is the audited finding, independently
+re-verified in the validator.)
+
+**Status after the correction.**  The only remaining target is
+Conjecture E itself — an integral pairing or counting proof of
+\(t\) even — with \(E_3\)-evenness surviving as a separate,
+independent conjecture that alone does NOT yield E.  Scope: finite
+\(r=5\) is not \(r=15\); the layer-3 SAT probe returned UNKNOWN at
+1800 s (1\,894\,897 branches, single worker) and licenses nothing.
 
 ## 2.12 The combined configuration set and its localization
 
