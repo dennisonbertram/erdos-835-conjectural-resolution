@@ -23,6 +23,8 @@ from search_cyclic_ls_4_5_21 import (
     canonical,
     orbit_representatives,
     verify_solution,
+    witness_payload,
+    write_json,
 )
 
 
@@ -76,6 +78,9 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--seconds", type=float, default=300.0)
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--randomized", action="store_true")
+    parser.add_argument("--output", help="write a verified witness as JSON")
     parser.add_argument("--log", action="store_true")
     args = parser.parse_args()
 
@@ -84,10 +89,14 @@ def main() -> None:
     solver.parameters.max_time_in_seconds = args.seconds
     solver.parameters.num_search_workers = args.workers
     solver.parameters.log_search_progress = args.log
+    solver.parameters.random_seed = args.seed
+    solver.parameters.randomize_search = args.randomized
 
     status = solver.solve(model)
     print(f"five-set phase variables: {len(representatives)}")
     print("four-set orbit constraints: 353")
+    print(f"seed: {args.seed}")
+    print(f"randomized search: {args.randomized}")
     print(f"status: {solver.status_name(status)}")
     print(f"wall time: {solver.wall_time:.3f} seconds")
     print(f"branches: {solver.num_branches}")
@@ -100,11 +109,9 @@ def main() -> None:
         }
         verify_solution(representatives, phase_values)
         print("verified: cyclic LS(4,5,21) found")
-        for representative in representatives:
-            print(
-                " ".join(map(str, representative)),
-                phase_values[representative],
-            )
+        if args.output:
+            write_json(args.output, witness_payload(representatives, phase_values))
+            print(f"verified witness written: {args.output}")
 
 
 if __name__ == "__main__":

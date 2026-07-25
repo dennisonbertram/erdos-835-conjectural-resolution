@@ -233,6 +233,246 @@ the broad mod-four code route cannot resolve \(k=16\); a successful parity
 obstruction must use the exact facet-degree condition of Theorem A or
 other nonlinear large-set compatibility.
 
+## The mate-intersection parity conjecture
+
+After Theorem D, the surviving narrow statement is:
+
+**Conjecture E (Conjectural; decisive at \(r=15\)).**  If \(B,C\) are
+legs block-disjoint from a common leg \(A\), then
+\(|B\cap C|\equiv b\pmod2\); equivalently
+\(\operatorname{wt}(x_B+x_C)\equiv0\pmod4\).
+
+If true at \(r=15\), where \(b\) is odd, two mates of a common leg can
+never be disjoint: no three pairwise disjoint \(S(14,15,31)\) exist,
+hence no \(LS(14,15,31)\) and \(\chi(J(32,16))\ge18\).
+
+**Lemma 5 (Proved).  Agreement reformulation.**  The unique-disjoint-mate
+map \(\nu(S)=\) (the \(A\)-block disjoint from \(S\)) restricts to a
+bijection from \(B\cap C\) onto
+\(\{D\in A:\ w_B(D)=w_C(D)\}\), where \(w_X(D)\) is the point missing
+from \(D\sqcup\mu_{AX}(D)\).  Hence
+\[
+ |B\cap C|=\#\{D\in A:\ w_B(D)=w_C(D)\},
+\]
+an agreement count of two \(b/v\)-uniform maps \(A\to\) points.
+*Proof.*  For \(S\in B\cap C\), \(\nu(S)\) is defined by the external
+identity \(n_0=1\) and \(\mu_{AB}(\nu(S))=S=\mu_{AC}(\nu(S))\) since mate
+maps are inverse bijections; conversely
+\(\mu_{AB}(D)=\mu_{AC}(D)\iff D^c\setminus\{w_B(D)\}
+=D^c\setminus\{w_C(D)\}\iff w_B(D)=w_C(D)\), and then the common block
+lies in \(B\cap C\). \(\square\)
+
+**Verified (2026-07-24).**
+- \(r=3\): all 28 mate pairs of a fixed Fano have \(|B\cap C|=1\equiv
+  b\pmod2\).
+- \(r=5\): all \(10\,296\) mate pairs of a fixed \(S(4,5,11)\) have
+  \(|B\cap C|\in\{6,18\}\) — every value even \(\equiv b=66\), and
+  moreover an **odd multiple of \(b/v\)** (\(6=b/11\), \(18=3b/11\);
+  at \(r=3\), \(1=b/7\)).  Since \(v\) is odd, the odd-multiple law
+  implies Conjecture E wherever it holds.  Co-mate degrees: each mate
+  has 88 co-mates at intersection \(6\) and 55 at \(18\).
+
+**Refuted refinements (Verified, 2026-07-24).**
+- *Per-point*: \(|w_B^{-1}(x)\cap w_C^{-1}(x)|\) is NOT
+  \(\equiv b/v\pmod2\) pointwise (values \(0,1,2,3\) all occur;
+  53\,856 of 113\,256 instances odd).  Only the sum over all \(v\)
+  points obeys the parity.
+- *Per-link local signs* (Proved no-go): there is no per-\((r-2)\)-set
+  cocycle \(g\) on perfect matchings with
+  \(|M\cap M'|\equiv g(M)+g(M')+\text{const}\): the link \(K_{18}\)
+  contains three pairwise disjoint perfect matchings, which would need
+  three pairwise distinct values in \(\mathbb F_2\).  Plain sign
+  products of matchings are identically \(+1\) (tautological).  Any
+  proof of Conjecture E must couple the links globally.
+
+## The transition matrix and the canonical permutation
+
+For mates \(B,C\) of \(A\) let
+\(m_{pq}=\#\{D\in A: w_B(D)=p,\ w_C(D)=q\}\).  All row and column sums
+equal \(b/v\) (uniformity theorem), so the off-diagonal part is an
+Eulerian directed multigraph and \(|B\cap C|=\operatorname{tr}m\).
+
+**Refuted (Verified, 2026-07-24).**  Neither \(m=m^{\mathsf T}\) nor the
+weaker "\(m_{pq}+m_{qp}\) even for every unordered pair" holds in ANY
+instance: 0/28 at \(r=3\), 0/10\,296 at \(r=5\).  Sample counterexample
+(\(r=3\), first mate pair): odd unordered entries at
+\((p,q)\in\{(0,1),(0,3),(1,3),(2,4),(2,5),(4,5)\}\).
+
+**Lemma 6 (Proved).  Two canonical matchings and a fixed-point-free
+permutation.**  On the trade bipartition \((B\setminus C)\sqcup
+(C\setminus B)\) (each side of size \(t=b-|B\cap C|\)):
+1. the graph with edges "share a facet" is simple and 15-regular; hence
+   \(t=0\) or \(t\ge15\);
+2. \(\varphi_1(S)=\mu_{AC}(\nu(S))\) (partner through the common
+   \(A\)-mate) is a perfect matching realized by edges
+   (\(|S\cap\varphi_1(S)|=r-1\));
+3. \(\varphi_2(S)=\nu_C(S)\) (the unique \(C\)-block disjoint from
+   \(S\), which lies in \(C\setminus B\) because intra-\(n_0=0\)) is a
+   second perfect matching, disjoint from the first in the strongest
+   sense: \(|S\cap\varphi_2(S)|=0\);
+4. therefore \(\sigma:=\varphi_2^{-1}\circ\varphi_1\) is a canonical
+   permutation of \(B\setminus C\), and it is fixed-point-free
+   (\(\varphi_1(S)=\varphi_2(S)\) would force \(r-1=0\)).
+Consequently \(t\equiv\#\{\text{odd cycles of }\sigma\}\pmod2\).
+\(\square\)
+
+**The even-cycle identity (Conjectural; Verified exhaustively,
+2026-07-24).**  In every existing instance, \(\sigma\) has **only even
+cycles** — equivalently, every \(\varphi_1/\varphi_2\)-alternating cycle
+has length \(\equiv0\pmod4\):
+- \(r=3\): all 28 mate pairs give the single cycle type \((6)\).
+- \(r=5\): all 10\,296 mate pairs realize exactly four cycle types:
+  \((2,2,2,2,18,22)\) for all 3960 pairs with \(|B\cap C|=18\), and
+  \((2,2,2,4,6,44)\times3960\), \((4,4,4,4,4,40)\times1584\),
+  \((2,2,2,2,2,10,20,20)\times792\) for the 6336 pairs with
+  \(|B\cap C|=6\).
+The even-cycle identity implies \(t\) even, i.e. Conjecture E, in every
+case; at \(r=15\) it would give
+\(\chi(J(32,16))\ge18\).  The extreme rigidity of the cycle-type census
+(four types across \(10\,296\) pairs) indicates a strong hidden
+invariant; the proposed proof target is a \(\mathbb Z_4\)-valued
+refinement along alternating cycles (a relative quadratic function on
+the two matchings) forcing length \(\equiv0\bmod4\).  A per-link or
+per-point localization of this invariant is already excluded by the
+no-go results above.
+
+## Blockwise structure of \(\sigma\) and the chain law
+
+**Lemma 7 (Proved).  Blockwise formulas.**  For \(S\in B\setminus C\)
+with \(A\)-mate \(D=S^c\setminus\{\alpha\}\):
+\(\varphi_1(S)=(S\setminus\beta)\cup\{\alpha\}\) for a unique
+\(\beta\in S\) (a single swap; \((\alpha,\beta)=(w_B,w_C)(D)\)), and
+\(\sigma(S)=(D\setminus\delta)\cup\{\beta\}\) for a unique
+\(\delta\in D\).  Hence \(|\sigma(S)\cap S|=\{\beta\}\), and the
+alternating cycle lifts to a closed walk
+\(S_0\,D_0\,T_0\,S_1\cdots\) of length \(3\ell\) in the odd graph
+\(O_{r+1}\), where \(D_i\) is the unique common neighbour of \(S_i\) and
+\(T_i\).  For odd \(\ell\) this re-derives (only) the girth bound
+\(3\ell\ge2r+1\).
+
+**Lemma 8 (Proved).  Chain law.**  Consecutive \(A\)-mates satisfy
+\(D_i\cap D_{i+1}=\{\delta_i\}\) exactly.  *Proof.*  Computing,
+\(D\cap D'=\{\delta\}\setminus\{\alpha'\}\); if \(\alpha'=\delta\) then
+\(D'=(S\setminus\beta)\cup\{\alpha\}=\varphi_1(S)\in C\), contradicting
+\(D'\in A\). \(\square\)  (Machine census: 336/336 steps at \(r=3\),
+33\,180/33\,180 at \(r=5\) have \(|D_i\cap D_{i+1}|=1\).)
+
+**Lemma 9 (Proved).  Transport to the disagreement set.**  \(\nu\)
+conjugates \(\sigma\) to a canonical permutation \(\sigma_\Delta\) of the
+disagreement set \(\Delta=\{D:w_B(D)\ne w_C(D)\}\subseteq A\), with
+\(|D\cap\sigma_\Delta(D)|=1\) and step labels
+\((\alpha,\beta)=(w_B,w_C)(D)\).  The even-cycle identity is thus a
+statement about closed 1-intersection chains inside the single Steiner
+system \(A\), decorated by the two \(w\)-maps.
+
+**Tautology screen (Proved).**  The candidate local bits
+\([\alpha=\gamma]\), \([\beta_{i+1}=\delta_i]\),
+\([\alpha_{i+1}=\beta_i]\) are identically zero (each equality would
+force a block into two disjoint legs or a point into a set excluding
+it); their empirical "success" in the cycle-sum test is exactly the
+even-cycle identity restated, not an invariant.  The telescoped
+position identity
+\(\sum_i(e_{\alpha_i}+e_{\beta_i}+e_{\delta_i})=\ell\cdot\mathbf 1\)
+over \(\mathbb F_2^v\) (every point covered with multiplicity
+\(\equiv\ell\)) is proved, and for odd \(\ell\) yields only the known
+girth bound — the identity lies strictly deeper.
+
+**No off-boundary control exists (Proved).**  For \(v>2r+1\)
+(e.g. \(STS(9)\)) the disjoint partner of an external block is neither
+unique nor of complement-minus-a-point shape, so
+\(\varphi_1,\varphi_2,\sigma\) are undefined: the canonical machinery is
+special to the boundary family \(v=2r+1\).
+
+Verification script: `sigma_battery.py` (session scratchpad).
+
+## The H-system counting identity and the mod-4 reduction
+
+**Theorem E1 (Proved; verifier `verify_H_identity.py`).**  For mates
+\(B,C\) of \(A\), with \(H_X(P)=P\cup\{w_X(P)\}\):
+1. every \((r+2)\)-set contains exactly one \(H_B(P)\) (existence via
+   \(P=\mu_{BA}(T_f)\) for the \(B\)-block \(T_f\) through the facet
+   \(f=Y^c\); uniqueness by Steiner uniqueness of \(T_f\));
+2. \(\binom{2r+1}{r+2}=b+(r-1)h+X(B,C)\), where \(h=|B\cap C|\) and
+   \(X\) counts ordered pairs \(P\ne Q\) in \(A\) with
+   \(|P\cap Q|=r-2\), \(w_B(P)\in Q\setminus P\),
+   \(w_C(Q)\in P\setminus Q\)  (diagonal \(r\)-vs-1 count plus the
+   \(|H\cap H|=r\) classification; \(H_B(P)=H_C(Q)\) impossible);
+3. \(X=\sum_R\#\mathrm{fix}(c_R\circ b_R)\) over \((r-2)\)-links, where
+   \(b_R,c_R\) are the fixed-point-free edge maps induced by
+   \(w_B,w_C\) on the link matching \(M_A(R)\) (using
+   \(P^c=\mathrm{link}\setminus e\)).
+
+Machine-verified on all 56 (\(r=3\)) and all 20\,592 (\(r=5\)) ordered
+mate pairs: \((h,X)=(1,12)\) and \((6,240),(18,192)\), matching
+\(X=14-2h\) and \(264-4h\).
+
+**Corollary (Proved).**  At \(r\equiv3\pmod4\):
+\(X\equiv\binom{2r+1}{r+2}-b-2h\pmod4\), and Conjecture E is equivalent
+to \(X\equiv\binom{2r+1}{r+2}-3b\pmod4\); at \(r=15\) both constants are
+\(1\bmod4\), so **Conjecture E \(\iff X\equiv0\pmod4\)**.  At
+\(r\equiv1\pmod4\) the \(h\)-term is \(4h\), so \(X\equiv0\pmod4\) is
+automatic and carries no information (tautology flagged; \(r=5\) can
+test only finer link structure).  The link matching has
+\(m=(r+3)/2\) edges — odd exactly at \(r\equiv3\pmod4\).
+
+**Census (Verified, 2026-07-24).**  \(r=3\): per-link
+\(\#\mathrm{fix}\in\{0,3\}\) only (all-or-nothing); \(b_R\) injective in
+392/392 links, and \(c_R\circ b_R\) is never a transposition — a
+sign-coherence law \(\operatorname{sgn}b_R=\operatorname{sgn}c_R\); the
+four endpoint-bit classes of \(X\)-configurations are EXACTLY
+equinumerous, globally (168 each) and per mate pair (3 each = X/4).
+\(r=5\): per-link \(\#\mathrm{fix}\in\{0,\dots,4\}\) spread, \(b_R\)
+non-injective in 2/3 of links, endpoint classes only approximately
+balanced — consistent with the mod-4 statement being substantive only
+at \(r\equiv3\pmod4\).  \(X\equiv0\pmod4\) in all 256 pairs tested.
+
+**Fibre lemma (Proved, 2026-07-25).**  For a disagreement base \(P\),
+the \((r+2)\)-sets containing \(H_B(P)\) are \(H_B(P)\cup\{z\}\) for the
+\(r\) outside points \(z\); the one with \(z=w_C(P)\) is diagonal, and
+each of the other \(r-1\) automatically yields an \(X\)-configuration
+\((P,Q_z)\) (the \(|H\cap H|=r\) classification admits no other case).
+Agreement bases carry none.  Hence
+\[
+ \boxed{X=(r-1)(b-h)\ \text{identically}},
+\]
+machine-checked on all \(56+20\,592\) ordered mate pairs
+(\(2\cdot6=12\); \(4\cdot60=240\), \(4\cdot48=192\)).
+
+**Scope corollary (Proved).**  The counting identity collapses to
+\(\binom{2r+1}{r+2}=rb\) (both sides count facets); \(X\) is an affine
+function of \(h\), so "evaluate \(X\bmod4\) independently" is the same
+statement as Conjecture E, not a separate route.  A canonical free
+group action of order \(\equiv0\pmod4\) on the configuration set would
+still prove it.
+
+**Klein-four mechanism (Refuted, exhaustive).**  The canonical fibre
+involutions \(\tau_B,\tau_C\) (swap within a size-2 fibre; canonical
+only at \(r=3\)) commute in 0/56 ordered mate pairs; witness recorded in
+`verify_H_identity.py` output.
+
+**D6-torsor theorem at \(r=3\) (Verified exhaustively, 56/56).**  The
+product \(\tau_B\tau_C\) always has cycle type \((6,6)\), and
+\(\langle\tau_B,\tau_C\rangle\) has order exactly 12 acting freely and
+transitively: the 12 configurations form a torsor for the dihedral
+group \(D_6\).  Since \(4\mid12\), this forces \(X\equiv0\pmod4\), i.e.
+\(t\) even — a group-action proof of Conjecture E at \(r=3\)
+(exhaustive over the isomorphism-complete mate census).  Equivalently,
+the bipartite fibration graph (configurations as edges between
+\(B\)-bases and \(C\)-bases, \((r-1)\)-regular) is a single 12-cycle in
+every instance.
+
+**Proof target (Conjectural, updated).**  At \(r\equiv3\pmod4\) the
+configuration set of any mate pair carries a canonical free action of a
+group of order \(\equiv0\pmod4\) (at \(r=3\): \(D_6\)); equivalently a
+parity-coherent structure on the \((r-1)\)-regular bipartite fibration
+graph on \(\Delta\sqcup\Delta\) forcing \(t\) even.  Note the fibration
+graph has the same shape (14-regular bipartite on \(t+t\) at \(r=15\))
+as the trade-graph remainder of Lemma 6 — possibly the same object
+under the canonical bijections; unchecked.  Secondary verified-only
+laws at \(r=3\): per-link all-or-nothing, sign coherence
+\(\operatorname{sgn}b_R=\operatorname{sgn}c_R\), fourfold endpoint
+balance.
+
 ## Provenance
 
 All computations 2026-07-24, session scratchpad scripts
@@ -241,4 +481,9 @@ arithmetic throughout; Steiner constructions by exhaustive exact cover
 (Algorithm X), verified by direct recount.  Theorems A–C and Lemmas 1–2
 are proved above in full and were additionally machine-checked at
 \(r=3\), \(r=5\), and on the \(STS(9)\) positive control.  Theorem D is
-an exact dimension argument and uses no unrecorded computation.
+an exact dimension argument and uses no unrecorded computation; its
+nondegeneracy identity (8) was additionally machine-checked at
+\(r=3,5\) (\(\operatorname{rank}_2 WW^{\mathsf T}
+=\operatorname{rank}_2W\): \(15\) and \(210\)).  Lemma 6 and the
+even-cycle census were machine-verified on all 28 (\(r=3\)) and all
+10\,296 (\(r=5\)) mate pairs of a fixed base leg.

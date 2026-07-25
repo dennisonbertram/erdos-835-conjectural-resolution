@@ -63,3 +63,32 @@ passed `verify_assignment`.  The committed certificate has SHA-256
 
 Thus radius 3 is rigorously consistent and cannot supply a finite local
 obstruction.
+
+`radius4_reduction.md` gives the exact one-factorization reduction for
+the next layer.  `search_radius4_design.py` searches a transparent
+finite-field ansatz for that reduction and, on success, reconstructs
+and checks the actual radius-4 ball.  Infeasibility of the ansatz would
+not by itself prove radius-4 infeasibility.
+
+`lmn_large_set.md` identifies the \(L/M\) layer exactly as a maximum
+family of fifteen off-diagonally disjoint symmetric idempotent Latin
+squares of order 17.
+
+`radius5_reduction.md` identifies the next exact extension as coupled
+triangle decompositions on 16 vertices and records its first forced
+mod-2 and mod-3 constraints.
+
+`search_radius4_sat.py` is an optional PySAT backend for the same
+finite-field radius-4 ansatz.  It is a witness finder only; every
+positive assignment is passed through the backend-independent
+verification and full-ball reconstruction.
+
+`radius4_search_log.md` records every bounded radius-4 search performed,
+including solver status and statistics.  No `UNKNOWN` run is treated as
+mathematical evidence for feasibility or infeasibility.
+
+`search_multiplicative_twist.py` tests a separate Claude-Fable-suggested
+construction: fifteen multiplicative twists of one symmetric
+idempotent Latin square on \(\operatorname{PG}(1,16)\).  The
+unrestricted construction remains unresolved; its Frobenius-equivariant
+subfamily is computationally infeasible in both included encodings.

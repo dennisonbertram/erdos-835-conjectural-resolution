@@ -280,6 +280,7 @@ def verify_joint_compatibility(certificate: dict[str, list[int]]) -> None:
 def solve_joint_sat(
     golf: list[list[list[int]]],
     solver_name: str,
+    phase_hint: dict[str, list[int]] | None = None,
 ) -> tuple[str, dict[str, list[int]] | None, dict[str, int]]:
     """Solve all 105 slices with their required shared-boundary constraints."""
     pair_index = {pair: index for index, pair in enumerate(FIXED_PAIRS)}
@@ -384,6 +385,24 @@ def solve_joint_sat(
         "clauses": len(clauses),
     }
     with Solver(name=solver_name, bootstrap_with=clauses) as solver:
+        if phase_hint is not None:
+            assert set(phase_hint) == {
+                f"{i},{j}" for i, j in FIXED_PAIRS
+            }
+            preferred: list[int] = []
+            for fixed_pair in FIXED_PAIRS:
+                phases = phase_hint[f"{fixed_pair[0]},{fixed_pair[1]}"]
+                assert len(phases) == orbit_count
+                for orbit_index, phase in enumerate(phases):
+                    assert isinstance(phase, int) and 0 <= phase < P
+                    selected_shift = (-phase) % P
+                    preferred.extend(
+                        variable(fixed_pair, orbit_index, shift)
+                        if shift == selected_shift
+                        else -variable(fixed_pair, orbit_index, shift)
+                        for shift in POINTS
+                    )
+            solver.set_phases(preferred)
         if not solver.solve():
             return "INFEASIBLE", None, stats
         positive = {literal for literal in solver.get_model() if literal > 0}
@@ -424,6 +443,11 @@ def main() -> None:
         action="store_true",
         help="solve all slices together with the required cross-slice constraints",
     )
+    parser.add_argument(
+        "--phase-hint",
+        type=Path,
+        help="joint-mode 4200-phase polarity hint; it does not constrain the model",
+    )
     parser.add_argument("--output", type=Path)
     parser.add_argument("--verify", type=Path)
     args = parser.parse_args()
@@ -446,7 +470,14 @@ def main() -> None:
     golf = construct_golf17()
     if args.joint:
         assert args.only_fixed_pair is None
-        status, certificate, stats = solve_joint_sat(golf, args.sat_solver)
+        phase_hint = (
+            json.loads(args.phase_hint.read_text())
+            if args.phase_hint is not None
+            else None
+        )
+        status, certificate, stats = solve_joint_sat(
+            golf, args.sat_solver, phase_hint
+        )
         print(f"joint model: {stats}")
         print(f"joint status: {status}", flush=True)
         if certificate is None:

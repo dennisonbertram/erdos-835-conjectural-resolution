@@ -1,0 +1,21 @@
+Verification command (2026-07-25):
+
+clang++ -std=c++20 -O3 -Wall -Wextra -pedantic \
+  evidence/p19_near_link_even_moment_filter.cpp \
+  -o /private/tmp/p19_near_link_even_moment_filter
+/private/tmp/p19_near_link_even_moment_filter
+
+Exit status: 0
+
+Output:
+
+p7_near_link_control=PASS
+all_slope_sets=92378
+affine_orbit_representatives=280
+pair_assignment_nodes=67231205
+even_moment_survivors=0
+
+SHA-256 at verification time:
+
+40eab38885cfbd771dbe28cd6271a97302cba9a923cf467f1e19e72373d46b26  evidence/p19_near_link_even_moment_filter.cpp
+28484eab9c12e90855f2957e1c2c48159080bdd4c17395a63322a0f1c469a3de  evidence/p19_rank2_near_link_no_go.md

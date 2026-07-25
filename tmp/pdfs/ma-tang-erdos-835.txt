@@ -1,0 +1,203 @@
+                      A NOTE ON ERDŐS PROBLEM #835
+
+                                 JIE MA AND QUANYU TANG
+
+
+
+
+                                     1. Introduction
+  In [2, p. 283], Erdős proposed the following problem (see also Problem #835 in [1]):
+Problem 1.1. Does there exist a k > 2 such that the k-sized subsets of {1, . . . , 2k} can be
+coloured with k + 1 colours such that for every A ⊂ {1, . . . , 2k} with |A| = k + 1 all k + 1
+colours appear among the k-sized subsets of A?
+  We recall the definition of Johnson graph.
+Definition 1.2. For n ∈ N write [n] = {1, . . . , n}. The Johnson graph J(n, k) has vertex set
+ [n]
+  k ; two k-sets are adjacent iff they intersect in exactly k − 1 elements.
+  It is easy to see that Problem 1.1 is equivalent to the following problem:
+Problem 1.3. Does there exists k > 2 such that the chromatic number of the Johnson graph
+J(2k, k) is k + 1?
+ For a graph G let α(G) denote its independence number and χ(G) its chromatic number.
+We remark that k + 1 ≤ χ(J(2k, k)) ≤ 2k is a known result.
+
+                                2. A necessary condition
+Proposition 2.1. Assume χ(J(2k, k)) = k + 1. Then for every integer t with 1 ≤ t ≤ k one
+must have                                    
+                                         k+t
+                                    t          .
+                                          t−1
+Proof. We may assume k ≥ 2, as the case k = 1 is trivial. Fix an integer t with 1 ≤ t ≤ k.
+The case t = 1 is also trivial since 1 | k+1
+                                          0  = 1. Hence, in what follows we assume 2 ≤ t ≤ k.
+               [2k]
+  Let F ⊂ k be any maximal independent set in J(2k, k). For a fixed (k − t)-subset
+λ ⊂ [2k], define
+                                    Fλ := { S ∈ F : λ ⊂ S }.
+Write U := [2k] \ λ; then |U | = k + t. Every S ∈ Fλ can be written uniquely as
+                                                           
+                                                           U
+                                 S =λ∪T        with T ∈       .
+                                                            t
+We will compare Fλ to a packing of complete hypergraphs inside the complete (t − 1)-uniform
+hypergraph on U .
+Claim 1. Let Tλ := { T ∈ Ut : λ ∪ T ∈ Fλ }. Then the family
+                            
+                                  (t−1)
+                                    Kt   [T ] : T ∈ Tλ
+                                                                                  (t−1)
+is an edge-disjoint packing of copies of the complete (t − 1)-uniform hypergraph Kt       inside
+                                            (t−1)
+the complete (t − 1)-uniform hypergraph Kk+t on vertex set U . In particular,
+                                    |Fλ | ≤ νt−1 (k + t),
+                                               1
+2                                         J. MA AND Q. TANG
+
+                                                                                                   (t−1)
+where νt−1 (n) denotes the maximum number of pairwise edge-disjoint copies of Kt                           in
+  (t−1)
+Kn      .
+                                                                                           (t−1)
+Proof of Claim 1. Take distinct T, T ′ ∈ Tλ . Suppose for contradiction that Kt [T ] and
+  (t−1) ′                     (t−1)                        ′
+Kt     [T ] share an edge in Kk+t ; equivalently, T and T share a common (t − 1)-subset
+R ⊂ U . Then for the corresponding k-sets S = λ ∪ T and S ′ = λ ∪ T ′ we have
+                      |S ∩ S ′ | = |λ| + |T ∩ T ′ | = (k − t) + (t − 1) = k − 1,
+so S and S ′ are adjacent in J(2k, k), contradicting the independence of F. Hence all the
+(t − 1)-edges used by these copies are pairwise disjoint, proving the claim.           □
+   We now double-count the
+                        k
+                           pairs
+                               k
+                                  (S, λ) with S ∈ F, λ ⊂ S and |λ| = k − t. From the S-side,
+each S ∈ F contains k−t = t choices of λ, hence
+                               X           X k              
+                                                              k
+                                  |Fλ | =             = |F |       .                      (2.1)
+                                                 t             t
+                                λ          S∈F
+                            2k
+                               
+From the λ-side, there are k−t possible λ, and by Claim 1 each contributes at most νt−1 (k+t),
+so                                                
+                               X               2k
+                                   |Fλ | ≤           νt−1 (k + t).                        (2.2)
+                                              k−t
+                                  λ
+Combining (2.1) and (2.2) gives
+                                             
+                                      k      2k
+                                 |F|     ≤        νt−1 (k + t).                                       (2.3)
+                                      t     k−t
+Claim 2. For all n ≥ t,                                
+                                                 1    n
+                                      νt−1 (n) ≤            .
+                                                 t t−1
+                                      (t−1)               n
+                                                                                    (t−1)
+Proof of Claim 2. The hypergraph Kn         has exactly t−1    edges. Each copy of Kt      uses
+  t
+    
+ t−1 = t distinct (t − 1)-edges. If these copies are edge-disjoint, M copies use at least tM
+                             n                 n
+edges in total, hence tM ≤ t−1    and M ≤ ⌊ t−1    /t⌋.                                      □
+
+    Assume now that χ(J(2k, k)) = k + 1. Since χ(G)α(G) ≥ |V (G)|, we know that
+                                                  
+                                              1   2k
+                                    |F| ≥            .                                                (2.4)
+                                            k+1 k
+Substituting (2.4) into (2.3) and rearranging yields
+                                                       2k            k
+                                                                     
+                                                       k              t
+                                   νt−1 (k + t) ≥               ·    2k
+                                                                        .                            (2.5)
+                                                       k+1          k−t
+Now we compute directly:
+           2k      k
+                                                                                      
+              k         t       (2k)!             k!       (k − t)! (k + t)!   1    k+t
+                  ·    2k
+                          =               ·             ·                   =             .
+            k+1              (k + 1) k! k!   t! (k − t)!        (2k)!          t     t−1
+                      k−t
+Thus we obtain the lower bound
+                                                            
+                                                       1 k+t
+                                      νt−1 (k + t) ≥          .
+                                                       t t−1
+                              A NOTE ON ERDŐS PROBLEM #835                                    3
+
+Together with the upper bound in Claim 2 (and the integrality of νt−1 (k + t)) this forces
+                                                                      
+                                1 k+t                              k+t
+                 νt−1 (k + t) =              and hence      t              .
+                                t t−1                              t−1
+Since t was an arbitrary integer with 2 ≤ t ≤ k, the stated divisibility holds for all t =
+2, 3, . . . , k. As noted at the start, the case t = 1 is trivial, which completes the proof. □
+
+  As a corollary of Proposition 2.1, we resolve Problem 1.3 for all integers k > 2 such that
+k + 1 is not prime.
+Theorem 2.2. If k > 2 and k + 1 is not prime, then χ(J(2k, k)) ≥ k + 2.
+Proof. Let p be a prime divisor of k+1. Since k+1 is composite, we may choose p ≤ (k+1)/2 ≤
+k, so the divisibility necessity in Proposition 2.1 with t = p gives
+                                                     
+                                                 k+p
+                                          p             .
+                                                 p−1
+Write k = pq + (p − 1) (because k ≡ −1 (mod p)). By Lucas’ theorem,
+                                             
+                         k+p        p−1     q+1
+                                ≡         ·         ≡ 1 (mod p),
+                          p−1       p−1       0
+a contradiction. Therefore χ(J(2k, k)) ̸= k + 1.                                             □
+
+  We now point out that, for even k > 2, the conditions in Proposition 2.1 alone
+                                                        
+                                                   k+t 
+                                 ∀ t ∈ [1, k], t |
+                                                     t−1
+cannot rule out the case k + 1 prime (equivalently, k = p − 1 with p odd prime), because by
+the following Lemma 2.3 all these divisibilities do hold.
+Lemma 2.3. Let k ≥ 2 and suppose k + 1 = p is prime. Then for every 1 ≤ t ≤ k,
+                                              
+                                         k+t
+                                   t             .
+                                          t−1
+Proof. Write k = p − 1 with p prime and fix t with 1 ≤ t ≤ k = p − 1. We use the standard
+identity
+                                                               
+                                   p−1+t            t p−1+t
+                                                  =                   ,              (2.6)
+                                     t−1            p       t
+It therefore suffices to prove that p | p−1+t
+                                               
+                                            t    . Note that
+                                
+                        p−1+t         (p − 1 + t)!     p(p + 1) · · · (p + t − 1)
+                                   =                =                             .
+                            t          t! (p − 1)!                 t!
+The numerator contains a factor p, whereas the denominator t! is not divisible by p because
+t ≤ p − 1. Hence p divides p−1+t
+                             t    . Combining this with (2.6) shows that t | p−1+t
+                                                                               t−1 , i.e.,
+                                                 
+                                             k+t
+                                       t           .
+                                             t−1
+This holds for every 1 ≤ t ≤ k, completing the proof.                                        □
+4                                          J. MA AND Q. TANG
+
+                                              References
+    [1] T. F. Bloom, Erdős Problem #835, https://www.erdosproblems.com/835, accessed 2025-10-26.
+    [2] P. Erdős, Unsolved Problems. (1974), 278–297.
+
+  School of Mathematical Sciences, University of Science and Technology of China, Hefei,
+Anhui 230026, and Yau Mathematical Sciences Center, Tsinghua University, Beijing 100084,
+China. Research supported by National Key Re-search and Development Program of China
+2023YFA1010201 and National Natural Science Foundation of China grant 12125106.
+  Email address: jiema@ustc.edu.cn
+
+     School of Mathematics and Statistics, Xi’an Jiaotong University, Xi’an 710049, P. R. China
+     Email address: tang_quanyu@163.com
+

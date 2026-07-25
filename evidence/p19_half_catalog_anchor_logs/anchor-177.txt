@@ -1,0 +1,9 @@
+catalogue_factorizations=396
+anchor_positions=210
+exact_anchor_index=177
+exact_anchor_vertices=[3,4,5,8]
+exact_jobs_total=15966720
+magnitude_assignments_sampled=15966720
+anchor_trials=15966720
+wall_seconds=92.9265
+NO WITNESS FOR THIS ANCHOR (complete)

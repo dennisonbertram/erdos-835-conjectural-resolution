@@ -21,12 +21,59 @@ from ortools.sat.python import cp_model
 POINTS = tuple(range(20))
 COLOURS = tuple(range(17))
 REFERENCE_TRIPLE = (0, 1, 2)
+PHELPS_BASE_BLOCKS = (
+    (19, 1, 0, 8),
+    (19, 2, 0, 5),
+    (19, 13, 0, 9),
+    (0, 1, 2, 4),
+    (0, 1, 6, 9),
+    (0, 1, 10, 17),
+    (0, 2, 6, 14),
+    (0, 2, 9, 15),
+    (0, 3, 4, 16),
+    (0, 3, 5, 10),
+    (0, 4, 5, 9),
+    (0, 4, 7, 15),
+    (0, 5, 6, 16),
+    (0, 6, 11, 18),
+    (0, 6, 8, 17),
+)
+
+
+def phelps_cyclic_sqs20() -> set[tuple[int, int, int, int]]:
+    """Return Phelps' cyclic SQS(20), relabelled so 0123 is a block."""
+
+    blocks = set()
+    for base in PHELPS_BASE_BLOCKS:
+        for shift in range(19):
+            developed = tuple(
+                sorted(
+                    (point + shift) % 19 if point < 19 else point
+                    for point in base
+                )
+            )
+            # The published base system has 0124.  Swap point labels 3 and
+            # 4 so its unique block through 012 agrees with our reference
+            # star's colour-zero extension.
+            relabelled = tuple(
+                sorted(
+                    4 if point == 3 else (3 if point == 4 else point)
+                    for point in developed
+                )
+            )
+            blocks.add(relabelled)
+    assert len(blocks) == 285
+    for triple in combinations(POINTS, 3):
+        assert sum(set(triple).issubset(block) for block in blocks) == 1
+    assert (0, 1, 2, 3) in blocks
+    return blocks
 
 
 def build_model(
     identity_second_star: bool = False,
     second_star_cycles: tuple[int, ...] | None = None,
     cyclic_pair_link: bool = False,
+    phelps_class_zero: bool = False,
 ) -> tuple[
     cp_model.CpModel,
     dict[tuple[int, int, int, int], cp_model.IntVar],
@@ -94,6 +141,10 @@ def build_model(
             factor = (left_label + right_label) * inverse_two % 17
             model.add(colour[(0, 1, left, right)] == factor)
 
+    if phelps_class_zero:
+        for block in phelps_cyclic_sqs20():
+            model.add(colour[block] == 0)
+
     return model, colour
 
 
@@ -133,6 +184,7 @@ def main() -> None:
         help="comma-separated derangement cycle lengths summing to 16",
     )
     parser.add_argument("--cyclic-pair-link", action="store_true")
+    parser.add_argument("--phelps-class-zero", action="store_true")
     args = parser.parse_args()
 
     second_star_cycles = (
@@ -144,6 +196,7 @@ def main() -> None:
         args.identity_second_star,
         second_star_cycles,
         args.cyclic_pair_link,
+        args.phelps_class_zero,
     )
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = args.seconds
@@ -158,6 +211,7 @@ def main() -> None:
     print(f"identity second star: {args.identity_second_star}")
     print(f"second-star cycle type: {second_star_cycles}")
     print(f"cyclic pair link: {args.cyclic_pair_link}")
+    print(f"Phelps cyclic class fixed as zero: {args.phelps_class_zero}")
     print(f"status: {solver.status_name(status)}")
     print(f"wall time: {solver.wall_time:.3f} seconds")
     print(f"branches: {solver.num_branches}")

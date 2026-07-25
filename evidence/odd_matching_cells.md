@@ -110,3 +110,67 @@ cells.  By itself it does not yet constrain the triangle permutation
 \(\tau_{abc}\): the block-orientation products on its left depend on the
 chosen large set.  Any successful sign obstruction must add a compatibility
 relation among these cofactor products for different colour pairs.
+
+## 3. The compatibility relation closes, but is identically even
+
+There is a canonical rank-15 connection along every matching edge.  If
+\(A\) has colour \(a\), \(B\) has colour \(b\), and \(A B\) is their
+matching edge, define
+\[
+ g_{AB}:A\longrightarrow B,\qquad
+ g_{AB}\bigl(\phi_B(d)\bigr)=\phi_A(d)
+ \quad(d\notin\{a,b\}). \tag{6}
+\]
+Both displayed lists contain 15 distinct points, so this is a bijection,
+and \(g_{BA}=g_{AB}^{-1}\).
+
+Let the sign of each \(\phi_A\) use the increasing orders fixed above.  If
+the label of \(AB\) is \(x\), the same two-cofactor calculation as in
+(5), now on one edge, gives
+\[
+ \operatorname{sgn}(g_{AB})
+ =
+ \operatorname{sgn}(\phi_A)\operatorname{sgn}(\phi_B)
+ (-1)^{a+b-1+x}. \tag{7}
+\]
+Here \(a+b-1\) is the sum of the positions of \(b\) and \(a\) in the two
+ordered 16-element colour sets.  The two positions of \(x\) in
+\(X\setminus A\) and \(X\setminus B\) sum to \(x\), because \(A,B\)
+partition \(X\setminus\{x\}\).
+
+Now take any closed walk
+\[
+ A_0A_1\cdots A_L=A_0
+\]
+in \(O_{16}\), with vertex colours \(a_i\) and edge labels \(x_i\).
+Multiplying (7) around the walk cancels all vertex-orientation signs and
+all colour terms in pairs.  The determinant of its connection holonomy is
+\[
+ \operatorname{sgn}
+ (g_{A_{L-1}A_L}\cdots g_{A_0A_1})
+ =(-1)^{L+\sum_i x_i}. \tag{8}
+\]
+The edge recurrence in binary point-vectors is
+\[
+ A_{i+1}=A_i+X+\{x_i\}.
+\]
+Closure therefore says that every point-label occurs an even number of
+times when \(L\) is even, and an odd number of times when \(L\) is odd.
+If \(L\) is even, both terms in the exponent of (8) are even.  If \(L\)
+is odd, then
+\[
+ \sum_i x_i\equiv\sum_{x=0}^{30}x=465\equiv1\pmod2,
+\]
+which again cancels \(L\).  Hence
+\[
+ \boxed{\text{the connection holonomy around every closed walk is even.}}
+ \tag{9}
+\]
+
+For a triangle monodromy orbit, (9) is exactly the missing compatibility
+relation obtained by multiplying (5) around the three colour pairs.  It
+holds separately on every orbit, not just after multiplying all sheets.
+Thus the determinant/sign refinement closes consistently and gives no
+contradiction: the holonomy group merely lands in \(A_{15}\).  Any further
+orientation attack must use more than the determinant, for example a
+genuine restriction on the full \(A_{15}\)-valued holonomy.
