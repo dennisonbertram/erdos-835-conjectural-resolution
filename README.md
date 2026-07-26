@@ -159,12 +159,27 @@ New exact results in the note include:
     \frac1{17}\delta_{14}+\frac{29}{85}\delta_{-3}
     +\frac4{15}\delta_2+\frac13\delta_{-1},
   \]
-  hence satisfies a quartic annihilator.  This forces the exact compressed
-  scalars \(449,1488,5148,3564\) for
+  hence satisfies a quartic annihilator.  In fact the corresponding fibre
+  relations preserve the module exactly, with scalars \(449,1488,5148,3564\)
+  for
   \(A_{13},A_2,A_{12},Q\), respectively.  All displayed Krein, trace, and
   multiplicity tests remain compatible, without constructing a joint
   \((R,Q)\) witness, so this is a stronger necessary condition rather than
   a contradiction; and
+- a degree-three continuation of the same unrestricted theorem.  Design
+  quadrature forces every zero-extended \(H_3\) vector onto exactly the five
+  global eigenspaces \(E_3,E_{12},E_{13},E_{14},E_{15}\).  All endpoint
+  freedom is one operator \(0\preceq Z\preceq3I/5\), and every fibre
+  intersection relation has the full right action
+  \(A_sP_3=(\alpha_sI+\beta_sR)P_3\).  Exact trace and leakage constraints give
+  \[
+    \frac{206336}{1125}\le\operatorname{tr}Z^2\le\frac{9548}{45},
+    \qquad \operatorname{rank}Z\ge3484.
+  \]
+  A compatible integral compressed-\(R\) spectrum at the upper endpoint
+  proves that support, rank, scalar moment, and elementary integrality tests
+  still do not contradict a hypothetical cover.  The first unforced joint
+  term is the orientation of the \(H_3\) leakage in \(Q\); and
 - a second unrestricted necessary theorem obtained by deleting one colour
   class \(D\).  Any tight prime colouring forces a
   \((p-2)\)-dimensional subspace \(U\le\ker M_D\) on which every Hadamard

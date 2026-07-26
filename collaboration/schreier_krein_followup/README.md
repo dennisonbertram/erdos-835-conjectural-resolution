@@ -233,12 +233,18 @@ Consequently
 \[
 \boxed{
 \begin{aligned}
-P_2A_{13}P_2&=449P_2,\\
-P_2A_2P_2&=1488P_2,\\
-P_2A_{12}P_2&=5148P_2.
+A_{13}P_2&=449P_2,\\
+A_2P_2&=1488P_2,\\
+A_{12}P_2&=5148P_2.
 \end{aligned}}
 \tag{13}
 \]
+
+These are full right-action identities, not merely compressions.  One
+direct derivation applies \(\iota^*\) to the annihilator (9) and its first
+two multiples by \(\mathcal A\); the restricted walk identities (12) then
+give the three displayed equations.  Symmetry gives the corresponding
+left identities.
 
 Combining the first line with \(RP_2=77P_2\) and
 
@@ -249,15 +255,18 @@ R^2=120I+5A_{13}+Q
 gives the further exact compression
 
 \[
-\boxed{P_2QP_2=3564P_2.}
+\boxed{QP_2=3564P_2.}
 \tag{14}
 \]
 
-All four scalars in (13)--(14) are compatible with the displayed scalar
-tests.  This does not construct a joint pair \((R,Q)\).  In particular,
-\(0\le Q_{BC}\le3(A_{12})_{BC}\) does not imply a Loewner-order
-inequality, and its valid nonnegative-vector consequences are compatible
-with (13)--(14).
+Thus every ordinary word in \(R,A_{13},A_2,A_{12},Q\) acts scalarly on
+\({\cal H}_2\); the corresponding block moment matrices have zero Schur
+complement.  This does not construct a joint pair \((R,Q)\).  In
+particular, \(0\le Q_{BC}\le3(A_{12})_{BC}\) does not imply a
+Loewner-order inequality.  The first entry-sensitive information is
+\(Q^{\circ2}\), or equivalently the four state matrices
+\(1_{\{Q_{BC}=a\}}\), \(0\le a\le3\), and it is not fixed by
+(13)--(14).
 
 ## 4. Exact harmonic trace budgets
 
@@ -299,14 +308,14 @@ The calculation closes the most direct unrestricted Schur/Krein route:
 
 * all \(H_1/H_2\) Schur products have the ordinary nonnegative Johnson
   Krein coefficients automatically;
-* the new quartic support and higher compressed moments are exact;
+* the new quartic support and full \(H_2\) relation actions are exact;
 * their displayed scalar, rank, trace, and multiplicity budgets are
   compatible; and
 * entrywise bounds on \(Q\) cannot be promoted to semidefinite order.
 
-A future contradiction would need genuinely joint information about the
-non-Johnson matrices \(Q\) and \(R\), not another scalar Krein
-nonnegativity check or a single compressed Odd moment.
+A future contradiction would need state-refined or higher-harmonic joint
+information about \(Q\) and \(R\), not another scalar Krein nonnegativity
+check or an ordinary \(H_2\) operator word.
 
 Run the standard-library audit with
 
