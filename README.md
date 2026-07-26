@@ -180,6 +180,12 @@ New exact results in the note include:
   two families — so at most two are pairwise disjoint.  This replaces the
   brute-force count with a mechanism and realizes the conjectured
   disjointness-parity sign at \(k=4\); and
+- an unrestricted small-ball census at \(k=2,4,6\): \(k=2\) passes,
+  \(k=4\) already fails at radius three, and all 1,680 labelled \(k=6\)
+  radius-three families fail at radius four for every root-colour choice.
+  All 45,360 infeasible \(k=6\) subproblems have the same forced-edge
+  collision mechanism. The self-contained exhaustive verifier also proves
+  why that mechanism does not transfer to \(k=16\); and
 - a lossless radius-five trace theorem: in every unrestricted local
   \(O_k\to K_{k+1}\) extension for even \(k\), parity forces the
   \(N\)-traces to be perfect or near-perfect matchings. At \(k=16\), the
@@ -187,6 +193,13 @@ New exact results in the note include:
   105 fixed-pair slices is necessarily a prescribed-link
   \(LS(2,3,19)\). This removes a previously stated “minimal-trace ansatz”
   without constructing the shared trace or solving #835; and
+- the radius-four dual fibering theorem: for every fixed \(uv\), each
+  colour class of \(N_{uv}\) is already forced to be a perfect matching on
+  its allowed index set. At \(k=16\) the three special colours match 14
+  indices and the other fourteen colours match 12 indices, giving
+  \(3\cdot7+14\cdot6=105\). The three generic holes are always distinct,
+  so the corresponding first-order parity test is automatically satisfied
+  and supplies no \(k=16\) obstruction; and
 - a complete unrestricted CNF for the necessary shadow \(LS(3,4,20)\):
   159,885 variables and 251,957 clauses, independently reconstructed
   byte-for-byte with canonical SHA-256
@@ -320,6 +333,14 @@ routes, but not the asymmetric case.
   all \(14{,}657\) ball vertices and against every clause of an independently
   generated \(738{,}537\)-clause CNF.  Radius five and global extension
   remain open, so this local feasibility is not a global colouring.
+- [`collaboration/opus5/radius5_followup/`](collaboration/opus5/radius5_followup/):
+  Opus 5's self-contained unrestricted radius-three census, exhaustive
+  \(k=6\) radius-four obstruction, and independent audit of the forced-trace
+  theorem, with both quick and full finite verifiers.
+- [`evidence/odd_graph_local_ball/radius4_dual_trace_forced.md`](evidence/odd_graph_local_ball/radius4_dual_trace_forced.md):
+  the ansatz-free per-\(uv\) matching decomposition forced at radius four,
+  plus the proof that its naive allowed-set parity is vacuous for every even
+  \(k\).
 - [`evidence/odd_graph_local_ball/radius5_large_set_equivalence.md`](evidence/odd_graph_local_ball/radius5_large_set_equivalence.md):
   an exact equivalence between a radius-five slice and a prescribed-link
   \(LS(2,3,19)\), plus an eight-`AllDifferent` cyclic quotient.

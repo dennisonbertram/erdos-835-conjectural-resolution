@@ -15,7 +15,7 @@ import json
 from collections import Counter
 from itertools import combinations
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, Optional
 
 
 N = 20
@@ -135,12 +135,81 @@ def parse_dimacs(path: Path) -> tuple[int, int, int, Counter[int], str]:
     return variables, declared_clauses, clauses, lengths, digest.hexdigest()
 
 
+def decode_solver_model(
+    path: Path, witness: Optional[Path]
+) -> dict[str, object]:
+    """Decode a standard SAT-competition model and check every triple star."""
+
+    status = None
+    positive: set[int] = set()
+    with path.open(encoding="ascii", errors="strict") as stream:
+        for line in stream:
+            if line.startswith("s "):
+                status = line[2:].strip()
+            elif line.startswith("v "):
+                for token in line[2:].split():
+                    literal = int(token)
+                    if literal > 0:
+                        positive.add(literal)
+    if status != "SATISFIABLE":
+        raise AssertionError(f"solver output status is {status!r}, not SATISFIABLE")
+
+    colours = []
+    for block in range(len(FOURS)):
+        selected = [
+            colour
+            for colour in range(Q)
+            if x(block, colour) in positive
+        ]
+        if len(selected) != 1:
+            raise AssertionError(
+                f"block {FOURS[block]} has primary colours {selected}"
+            )
+        colours.append(selected[0])
+
+    all_points = set(range(N))
+    for triple in THREES:
+        star = [
+            colours[FOUR_INDEX[tuple(sorted(triple + (point,)))]]
+            for point in sorted(all_points - set(triple))
+        ]
+        if sorted(star) != list(range(Q)):
+            raise AssertionError(f"non-rainbow triple star {triple}")
+    for block, colour in normalized_units():
+        if colours[block] != colour:
+            raise AssertionError("model violates the normalized root star")
+
+    if witness is not None:
+        witness.parent.mkdir(parents=True, exist_ok=True)
+        with witness.open("w", encoding="utf-8") as stream:
+            for block, colour in zip(FOURS, colours):
+                stream.write("{} {} {} {} {}\n".format(*block, colour))
+    return {
+        "model_status": "PASS",
+        "model_coloured_blocks": len(colours),
+        "model_rainbow_triple_stars": len(THREES),
+        "witness": str(witness) if witness is not None else None,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cnf", type=Path, required=True)
     parser.add_argument("--map", type=Path, required=True)
     parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument(
+        "--solver-output",
+        type=Path,
+        help="Optional SAT solver output to decode and verify",
+    )
+    parser.add_argument(
+        "--witness",
+        type=Path,
+        help="Optional 4,845-row witness output; requires --solver-output",
+    )
     args = parser.parse_args()
+    if args.witness is not None and args.solver_output is None:
+        parser.error("--witness requires --solver-output")
 
     stats = audited_counts()
     expected_stats = {
@@ -208,24 +277,21 @@ def main() -> None:
     if mapping.get("blocks") != [list(block) for block in FOURS]:
         raise AssertionError("canonical block order disagrees")
 
-    print(
-        json.dumps(
-            {
-                "status": "PASS",
-                "schema": SCHEMA,
-                "cnf_sha256": digest,
-                "map_sha256": hashlib.sha256(map_bytes).hexdigest(),
-                "counts": stats,
-                "clause_lengths": {
-                    str(length): count
-                    for length, count in sorted(lengths.items())
-                },
-                "symmetry_units": len(units),
-            },
-            indent=2,
-            sort_keys=True,
-        )
-    )
+    report: dict[str, object] = {
+        "status": "PASS",
+        "schema": SCHEMA,
+        "cnf_sha256": digest,
+        "map_sha256": hashlib.sha256(map_bytes).hexdigest(),
+        "counts": stats,
+        "clause_lengths": {
+            str(length): count
+            for length, count in sorted(lengths.items())
+        },
+        "symmetry_units": len(units),
+    }
+    if args.solver_output is not None:
+        report.update(decode_solver_model(args.solver_output, args.witness))
+    print(json.dumps(report, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":
