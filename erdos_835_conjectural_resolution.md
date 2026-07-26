@@ -624,6 +624,46 @@ The complete proofs, including the character sum and an exact verifier, are
 in `evidence/constructive_no_go.md`.  These theorems do not exclude a
 smaller-symmetry or genuinely higher-order construction.
 
+### 7.2 July 2026 addendum: two completed restricted routes
+
+Two later calculations sharpen the boundary without resolving the
+unrestricted problem.
+
+First, the single-maximal-minor proposal is now excluded at every possible
+prime parameter.  The earlier power-sum argument handles
+\(p\equiv1\pmod4\), and the ordered rank-two argument handles
+\(p\equiv3\pmod8\).  For \(p\equiv7\pmod8\), \(p\ge23\), the top two even
+moments force the squared projective scales to have the form
+\[
+ z_t=\frac{C}{R(t)},\qquad \deg R\le2.
+\]
+Constant and repeated-root \(R\) would produce a progression-free subset of
+\(\mathbb F_p\) of size \((p+1)/2\), which an elementary square-sum argument
+excludes.  An irreducible \(R\) has a fractional-linear involution pairing
+equal row values, contradicting the required rainbow row.  The exact proof
+and controls are in
+`collaboration/global_construction_attack/maximal_minor_p7mod8_closure.md`.
+This rules out one determinant ansatz, not arbitrary colourings.
+
+Second, the full shared-\(N\) sign calculation has been completed.  After a
+canonical no-hole augmentation, every colour layer has the exact value
+\[
+ H_\infty=P(\Psi^\infty),\qquad
+ H_x=(-1)^{x+1+(k-2)/2}
+      \operatorname{sgn}(\lambda_x)P(\Psi^x).
+\]
+The infinity value is not a function of \(k\): two exact \(k=16\) layers
+give opposite signs.  But the product over all colours satisfies
+\[
+ \prod_xP(\Psi^x)
+   =(-1)^{\binom{k}{2}}\prod_i\delta(S_i),
+\]
+so the resulting total identity is exactly the previously known flag
+formula \(F(L,M)\).  It therefore yields no new single-root obstruction.
+The proof and an independent rederivation are in
+`collaboration/global_h_parity/` and
+`collaboration/finite_total_identity/`.
+
 ## 8. Bottom line
 
 The requested colouring is not presently solved in the literature, and this

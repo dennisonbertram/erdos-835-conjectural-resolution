@@ -114,7 +114,13 @@ New exact results in the note include:
   lifted normal-rational-curve and lifted circulant rank-four links, and a
   \(3{,}353{,}011{,}200\)-job exact exclusion of every rank-at-most-four
   paired half-link.  Arbitrary rank-four links and higher-rank Pfaffian
-  matrices remain open.
+  matrices remain open; and
+- a uniform top-two-moment obstruction for every prime
+  \(p\equiv7\pmod8\), \(p\ge23\), completing the earlier
+  \(p\equiv1\pmod4\) and \(p\equiv3\pmod8\) arguments.  Consequently the
+  single-maximal-minor colouring proposal is impossible for every
+  \(k>2\).  This closes that one determinantal ansatz only; ratios or tuples
+  of several Plücker coordinates and arbitrary colourings remain open.
 
 - a reduction proving that the triangle-closure law for boundary Steiner
   systems is exactly a statement about the design derived at the pair
@@ -226,8 +232,20 @@ New exact results in the note include:
   admissible even-\(k\) chart, so any genuine extension must have partial
   fiber-sign product equal to the displayed right-hand side.  Exact
   one-sided controls show that separate prescribed \(ij\)-trace slices do
-  not determine the fiber signs.  No theorem coupling the full shared
-  \(N\)-table, and hence no \(k=16\) sign contradiction, is known; and
+  not determine the fiber signs.  A subsequent full two-sided calculation
+  canonically augments each colour layer to a no-hole matching tensor and
+  proves
+  \[
+    H_\infty=P(\Psi^\infty),\qquad
+    H_x=(-1)^{x+1+(k-2)/2}\operatorname{sgn}(\lambda_x)P(\Psi^x).
+  \]
+  The infinity value genuinely depends on its one-factorization: exact
+  \(k=16\) tensors realize both signs.  Nevertheless, the product of all
+  \(k+1\) layer equations simplifies identically to the displayed
+  radius-three flag formula for every admissible chart.  Thus the total
+  full-\(N\) sign route is now closed as a new obstruction; only individual
+  layer or cross-root refinements remain open, and no \(k=16\)
+  contradiction follows; and
 - a certificate-ready CNF for the complete unrestricted radius-four ball plus
   all 1,680 forced traces: 883,521 variables and 1,909,497 clauses, with
   canonical SHA-256
@@ -402,6 +420,20 @@ routes, but not the asymmetric case.
   the resulting exact required value of the full partial-fiber sign product,
   and finite one-sided controls proving that separate prescribed
   \(ij\)-trace slices cannot determine individual fiber signs.
+- [`collaboration/global_h_parity/README.md`](collaboration/global_h_parity/README.md):
+  the complete two-sided layer theorem, including the exact infinity and
+  finite-colour formulas, the Pfaffian proof that their total is identically
+  the previous flag formula, and exact \(k=6\) and \(k=16\) controls.
+  [`collaboration/finite_total_identity/README.md`](collaboration/finite_total_identity/README.md)
+  is an independent derivation and verifier; the supporting
+  [`finite augmentation`](collaboration/full_layer_augmentation/README.md)
+  and [`infinity-layer theorem`](collaboration/infinity_layer_theorem/README.md)
+  retain the layer-by-layer constructions.
+- [`collaboration/opus5/full_n_sign/`](collaboration/opus5/full_n_sign/)
+  and [`collaboration/fable_sign_head/`](collaboration/fable_sign_head/):
+  the requested external-model audit and falsification records, retained
+  with explicit notices where the later two-sided theorem supersedes their
+  interim open-status statements.
 - [`evidence/odd_graph_local_ball/small_k_balls/`](evidence/odd_graph_local_ball/small_k_balls/):
   deterministic small-\(k\) CNFs, independently checked DRAT certificates,
   semantic witnesses, hashes, and the repaired \(k=16\) positive-control
@@ -577,6 +609,10 @@ routes, but not the asymmetric case.
 - [`evidence/determinant_link_p19.md`](evidence/determinant_link_p19.md):
   a proof that the ordered rank-two determinant link, and hence the
   maximal-minor colouring ansatz, is impossible over \(\mathbb F_{19}\).
+- [`collaboration/global_construction_attack/maximal_minor_p7mod8_closure.md`](collaboration/global_construction_attack/maximal_minor_p7mod8_closure.md):
+  the top-two-moment and quadratic-character proof for all primes
+  \(p\equiv7\pmod8\), \(p\ge23\), completing the single-maximal-minor
+  no-go across every possible prime parameter.
 - [`evidence/p19_rank4_half_catalog_schur_search.md`](evidence/p19_rank4_half_catalog_schur_search.md):
   the complete 210-anchor Schur-complement exhaustion excluding every
   rank-at-most-four paired half-link over \(\mathbb F_{19}\), with explicit
@@ -714,6 +750,14 @@ python3 -B evidence/verify_triple_tensor_2adic_threshold.py
 python3 -B evidence/verify_unprojected_fourth_moment_completion.py
 python3 -B evidence/verify_norton_one_third_gap_no_go.py
 python3 -B evidence/local_one_factorization_sign_verify.py
+python3 -B collaboration/global_construction_attack/verify_maximal_minor_p7mod8_closure.py
+python3 -B collaboration/infinity_layer_theorem/verify_infinity_layer_theorem.py
+python3 -B collaboration/full_layer_augmentation/verify_full_layer_augmentation.py
+python3 -B collaboration/global_h_parity/verify_global_h_parity.py
+/opt/homebrew/bin/python3 -B \
+  collaboration/finite_total_identity/verify_finite_total_identity.py
+python3 -B collaboration/opus5/full_n_sign/verify_full_n_sign.py
+python3 -B collaboration/fable_sign_head/verify_sign_head.py
 python3 -B evidence/verify_triangle_monodromy_cycle_girth.py
 python3 -B evidence/verify_monodromy_character_factorisation.py
 python3 -B evidence/verify_determinant_link_p19.py
