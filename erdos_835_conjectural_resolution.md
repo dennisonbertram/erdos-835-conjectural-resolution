@@ -743,25 +743,125 @@ supported on \(C_a\), the first three global adjacency moments are
 \[
  0,\qquad k,\qquad 2\mu.
 \]
-The two nonnegative spectral polynomials
-\[
- (t+k-1)(t-2)(t+1),\qquad
- (k-2-t)(t+3)(t+1)
-\]
-therefore force every nonprincipal eigenvalue of \(R\) into
+The initial endpoint argument puts the nonprincipal spectrum in
 \[
  \frac{-k^2+4k-2}{2}\le\mu\le
  \frac{k^2-3k-6}{2}.
 \]
 The point-incidence difference space of the fibre's
-\(S(k-2,k-1,2k-1)\) design attains the lower endpoint with dimension
-\(2k-2\).  Hence at \(k=16\), a hypothetical \(R\) is \(120\)-regular on
-\(17{,}678{,}835\) vertices, has nonprincipal spectrum in
-\([-97,101]\), and has least eigenvalue exactly \(-97\) with multiplicity
-at least \(30\).  This is an exact unrestricted necessary condition, not a
-nonexistence proof: the Fano and Witt fibre controls attain the same lower
-bound at \(k=4,6\).  The proof and verifier are in
-`collaboration/triangle_monodromy_spectrum/`.
+\(S(k-2,k-1,2k-1)\) design attains the lower endpoint.
+
+A sharper module decomposition is available for even \(k\ge6\).  Besides
+the constants and the \((2k-2)\)-dimensional point-harmonic space, the
+pair-incidence harmonics give a forced \((2k-1)(k-2)\)-dimensional
+eigenspace.  Their three eigenvalues are
+\[
+ \binom{k}{2},\qquad
+ \frac{-k^2+4k-2}{2},\qquad
+ \frac{(k-2)(k-5)}2.
+\]
+The compressed global Odd-graph idempotents satisfy
+\[
+ \iota^*E_j\iota=\frac1{k+1}P_{\mathcal H_j}
+ \qquad(2j\le k-2).
+\]
+Removing the degree-one and degree-two global spectral components and using
+the nonnegative polynomials
+\[
+ (t+k-3)(t-2)(t+1),\qquad
+ (k-4-t)(t+3)(t+1)
+\]
+confines the remaining fibre spectrum to
+\[
+ \frac{-k^2+6k-6}{2}\le\mu\le
+ \frac{k^2-5k-12}{2}.
+\]
+Consequently, at \(k=16\),
+\[
+ \boxed{
+ \operatorname{Spec}(R)
+ =\{120^1,(-97)^{30},77^{434}\}\mathbin{\uplus}\Lambda,
+ \qquad \Lambda\subseteq[-83,82].}
+\]
+The displayed pair module is forced, although \(77\) may also occur in
+\(\Lambda\); in contrast, the global idempotent trace budget proves that
+\(-97\) has exactly multiplicity \(30\).
+
+The local one-factorisation also gives the exact two-step identity
+\[
+ R^2=120I+5A_{13}+Q,
+\]
+where \(A_{13}\) joins fibre blocks meeting in thirteen points, \(Q\) is
+supported on intersection twelve, \(Q_{BC}\in\{0,1,2,3\}\), and
+\(Q\mathbf1=10080\mathbf1\).  Every intersection-thirteen pair therefore
+has exactly five common \(R\)-neighbours.  A fourth compressed Odd moment
+places the nonprincipal spectrum of \(A_{13}\) in \([-60,776]\), so
+\(A_{13}\) is connected.
+
+These are exact unrestricted necessary conditions, not a nonexistence
+proof.  The \(k=6\) control recovers the full derived-Witt spectrum
+\(15^1,(-7)^{10},2^{44},(-3)^{11}\).  Moreover, the odd-girth lower bound
+used above is already implied by the fibre's set-intersection geometry, so
+it is not an additional cover-specific obstruction.  The initial theorem
+is in `collaboration/triangle_monodromy_spectrum/`; the strengthened proof
+and exact verifier are in `collaboration/schreier_spectrum_obstruction/`.
+
+Subtracting the three forced modules also fixes the first three residual
+moments.  At \(k=16\) they are
+\[
+ |\Lambda|=17{,}678{,}370,\quad
+ \sum\lambda=-30{,}628,\quad
+ \sum\lambda^2=2{,}118{,}590{,}344,\quad
+ \sum\lambda^3=-172{,}483{,}132.
+\]
+The row-sum and entry bounds on \(Q\) give a broad fourth-moment interval.
+Several elementary power-mean and support inequalities overlap this interval
+with large slack.  This does **not** construct an admissible residual spectrum
+or \(Q\), and it is not a consistency proof; it only shows that those coarse
+moment inequalities do not contradict the stronger theorem.  The exact audit
+is in `collaboration/opus5/post_spectrum_kernel_synthesis/`.
+
+The pair-harmonic module admits a substantially sharper exact conclusion.
+Let \(P_2\) project onto its \(434\)-dimensional fibre space and let
+\(\iota\) extend a fibre vector by zero to the Odd graph.  For every unit
+\(x\in\mathcal H_2\), the global Odd spectral measure of \(\iota x\) is
+\[
+ \boxed{
+ \frac1{17}\delta_{14}
+ +\frac{29}{85}\delta_{-3}
+ +\frac4{15}\delta_2
+ +\frac13\delta_{-1}.}
+\]
+Equivalently,
+\[
+ (\mathcal A-14I)(\mathcal A+3I)
+ (\mathcal A-2I)(\mathcal A+I)\,\iota\mathcal H_2=0.
+\]
+The proof uses a degree-four polynomial nonnegative on every remaining Odd
+eigenvalue.  Its expectation gives a lower bound on the fourth moment; the
+Johnson kernel makes the average attain that bound, so the positive
+residual operator has trace zero and vanishes identically.
+
+The fourth, fifth, and sixth Odd walk recurrences then force
+\[
+\boxed{
+\begin{aligned}
+P_2A_{13}P_2&=449P_2,&
+P_2A_2P_2&=1488P_2,\\
+P_2A_{12}P_2&=5148P_2,&
+P_2QP_2&=3564P_2.
+\end{aligned}}
+\]
+The ordinary low-degree projector-Schur closure yields no Krein obstruction:
+after restriction to the fibre, every Schur product involving only the
+degree-one and degree-two harmonics has exactly the ordinary positive
+Johnson Krein coefficients.  The complete harmonic trace budgets through
+degree seven are all nonnegative.  Thus these are strong new unrestricted
+necessary conditions, but their displayed scalar, rank, trace, and
+multiplicity tests are compatible; no joint \((R,Q)\) witness is
+constructed, and they do not contradict a \(k=16\) cover.  The proof, the
+distance-matrix derivation, and an exact audit are in
+`collaboration/schreier_krein_followup/`.
 
 ### 7.4 Unrestricted deleted-colour Hadamard-kernel theorem
 
@@ -798,12 +898,86 @@ is therefore one, below the required three.  At \(k=6\), all 144
 design-valued Witt-mate lines are pairwise incompatible, but the full
 quadratic cone is too large and is not claimed closed.
 
+That caveat is essential.  An exact \(5\!-\!(12,6,3)\) subdesign inside
+the complement of a Witt zero class gives a non-mate isotropic line: assign
+\(-1\) to its 396 blocks and \(+1\) to the other 396 nondeleted blocks.
+Every deleted star then has three values of each sign, so the vector lies in
+\(\ker M_D\) and its square has constant star sum.  Its \(3+3\) local
+profile proves it is not one of the \(5+1\) Steiner-mate lines.  Thus the
+\(k=4\) phenomenon “isotropy forces design-ness” already fails at \(k=6\);
+this still does not produce the required five-dimensional compatible space.
+
 At \(k=16\), the necessary space would have dimension \(15\) inside the
 kernel of a \(565{,}722{,}720\)-square matrix over \(\mathbb F_{17}\).
 A uniform capacity bound below \(15\), either for every possible zero system
 or already in a derived \(LS(4,5,21)\) layer, would settle this route.  No
-such bound is proved here.  The theorem, exact controls, and verifier are in
-`collaboration/hadamard_kernel_attack/`.
+such bound is proved here.
+
+There is an equivalent finite-field frame formulation.  Nondegeneracy of
+the scalar form identifies every deleted star with the zero-sum hyperplane
+in \(\mathbb F_p^{p-1}\); its \(p-1\) evaluation vectors have Gram matrix
+\(I+J\), sum to zero, and must glue coherently across the Johnson graph.
+Repeated derivation to \(LS(4,5,21)\) or \(LS(3,4,20)\) preserves the full
+dimension \(15\) and the nondegenerate pairing.  Wilson's theorem gives full
+row rank for the **complete** inclusion matrix in both derived layers; it
+does not determine the rank after deleting a design.  Independently, the
+deleted matrices are wide, so the elementary bound by their row counts gives
+linear nullities at least \(13167\) and \(3420\), respectively.  Linear rank
+alone therefore supplies no capacity bound.
+
+An independent exact \(k=6\) calculation gives
+\[
+ \operatorname{rank}_{\mathbb F_7}M_D=715,\qquad
+ \dim\ker M_D=77
+\]
+for the \(792\times792\) Witt deleted matrix.  This refutes the tempting
+guess \(\dim\ker M_D=|D|/2\), which would give \(66\), but it does not close
+the full quadratic cone.  The theorem and controls are in
+`collaboration/hadamard_kernel_attack/`; the independent Opus 5 and Fable
+audits are in `collaboration/opus5/hadamard_kernel_followup/` and
+`collaboration/fable_hadamard_kernel/`.
+
+As a boundary control, a standalone \(LS(2,3,9)\) exists and realizes the
+full \(p-2=5\) degree-two space over \(\mathbb F_7\).  Thus a uniform
+degree-two capacity bound cannot exclude that one derived large set; this
+says nothing about higher-degree or cross-layer compatibility.  The exact
+construction and verifier are also in
+`collaboration/opus5/post_spectrum_kernel_synthesis/`.
+
+Gluing all local simplexes gives one further exact global condition.  If
+\(v_S\in U\) is the evaluation vector of a nondeleted block, then
+\[
+ \sum_{S\notin D}v_Sv_S^*=\frac{\binom vt}{t+1}I,
+ \qquad
+ \sum_{S\notin D}v_S=0.
+\]
+Thus the vectors form an equal-norm tight frame over \(\mathbb F_{17}\).
+At the \(LS(4,5,21)\) layer it has \(19152\) vectors, norm \(2\), dimension
+\(15\), and frame constant \(7\); at \(LS(3,4,20)\) the corresponding
+parameters are \(4560,2,15,13\).  The induced residual Johnson graphs have
+degrees \(75\) and \(60\).  Their exact nonedge first and square moments
+show that, at every vector, the nonedge squared inner products cannot all
+be equal: the putative constants would be the quadratic nonresidues \(10\)
+and \(12\) modulo \(17\).
+
+This is a genuine global necessary condition but not a dimension
+obstruction.  A primary-source audit shows that the available Schur-product,
+modular-inclusion, finite-field Gerzon, and simplex-tree theorems either give
+only weak unconditional bounds here, or become useful only under global MDS,
+distance, controlled-stabilizer, small-deletion, or equiangular hypotheses
+not forced here.  The proofs, exact hypothesis checks, and sources are in
+`collaboration/schur_product_literature/`.
+
+Moreover, abstract linear hypergraphs with the same row sizes and degrees
+can be labelled by repeated finite-field simplexes so that all of these
+local frame identities, the global tight-frame operator identities, and
+every entry moment through degree \(p-1\) hold simultaneously at the true,
+false, and \(p=17\) target parameters.  These countermodels deliberately do
+not respect Johnson subset incidence.  They prove that the displayed frame
+moments alone cannot yield a contradiction; any successful continuation must
+use additional information such as the actual subset geometry.  The
+constructions and the non-mate \(k=6\) witness are in
+`collaboration/global_frame_moment_attack/`.
 
 ## 8. Bottom line
 
@@ -846,6 +1020,28 @@ derived large sets \(LS(4,5,21)\) and \(LS(3,4,20)\) as smaller shadows.
   [A new class of polynomials from the spectrum of a graph, and its
   application to bound the \(k\)-independence
   number](https://arxiv.org/abs/1907.08626).
+- D. Mirandola and G. Zémor,
+  [Critical pairs for the Product Singleton
+  Bound](https://arxiv.org/abs/1501.06419).
+- H. Randriambololona,
+  [On products and powers of linear codes under componentwise
+  multiplication](https://arxiv.org/abs/1312.0022), and
+  [The quadratic hull of a code and the geometric view on multiplication
+  algorithms](https://arxiv.org/abs/1912.06627).
+- R. M. Wilson,
+  [A diagonal form for the incidence matrices of \(t\)-subsets vs.
+  \(k\)-subsets](https://doi.org/10.1016/S0195-6698(13)80046-7).
+- R. Plaza and Q. Xiang,
+  [Resilience of ranks of higher inclusion
+  matrices](https://arxiv.org/abs/1612.08124).
+- G. R. W. Greaves, J. W. Iverson, J. Jasper, and D. G. Mixon,
+  [Frames over finite fields: Equiangular lines in orthogonal
+  geometry](https://arxiv.org/abs/2012.13642), and
+  [Frames over finite fields: Basic theory and equiangular lines in unitary
+  geometry](https://arxiv.org/abs/2012.12977).
+- T. Cheek et al.,
+  [Congruence Classes of Simplex Structures in Finite Field Vector
+  Spaces](https://arxiv.org/abs/2408.07912).
 - T. Etzion and J. Zhou,
   [Large Sets with Multiplicity](https://arxiv.org/abs/2007.09608).
 - S. F. Jørgensen,

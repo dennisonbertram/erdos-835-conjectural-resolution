@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 from itertools import combinations, product
+from math import comb
 from pathlib import Path
 import sys
 
@@ -226,6 +227,19 @@ def extend_boundary_system(
     return extended
 
 
+def check_k6_complement_profile() -> None:
+    """Verify the intersection equations forcing complement closure."""
+    lambdas = tuple(comb(12 - s, 5 - s) // (6 - s) for s in range(5))
+    assert lambdas == (132, 66, 30, 12, 4)
+
+    n4 = comb(6, 4) * (lambdas[4] - 1)
+    n3 = comb(6, 3) * (lambdas[3] - 1) - 4 * n4
+    n2 = comb(6, 2) * (lambdas[2] - 1) - 3 * n3 - 6 * n4
+    n1 = comb(6, 1) * (lambdas[1] - 1) - 2 * n2 - 3 * n3 - 4 * n4
+    n0 = lambdas[0] - 1 - n1 - n2 - n3 - n4
+    assert (n0, n1, n2, n3, n4) == (1, 0, 45, 40, 45)
+
+
 def check_k6_mate_sector() -> None:
     """Check the 144 design-valued lines at the false k=6 control.
 
@@ -234,6 +248,7 @@ def check_k6_mate_sector() -> None:
     (Steiner-mate) sector.
     """
     k, prime = 6, 7
+    check_k6_complement_profile()
     boundary_blocks = list(combinations(range(11), 5))
     rows, columns = steiner_cover_instance(11, 4, boundary_blocks)
     base_boundary = set(algox_solutions(rows, columns, cap=1)[0])

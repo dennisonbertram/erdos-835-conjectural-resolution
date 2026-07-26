@@ -21,7 +21,7 @@ repository's deterministic Algorithm X implementation.
 
 ## 1. The exact finite-field formulation
 
-Let \(p=k+1\) be prime, let
+Let \(k\ge2\), let \(p=k+1\) be prime (so \(p\ge3\)), and let
 \[
  X=\binom{[2k]}k,\qquad
  Y=\binom{[2k]}{k-1},\qquad
@@ -188,8 +188,28 @@ The stronger control
 python3 -B collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py --k6
 ```
 
-also reconstructs all 144 Witt mates.  Their top extensions give 144
-design-valued isotropic lines.  Every pair is mixed-product incompatible:
+also reconstructs all 144 Witt mates.  The completeness of the extension
+step is elementary but important.  In any \(S(5,6,12)\), fix a block \(B\)
+and let \(n_i\) count the other blocks meeting it in \(i\) points.  No
+intersection of size at least five is possible.  Double-counting the
+\(s\)-subsets of \(B\) in other blocks gives
+\[
+ \sum_{i=s}^4\binom{i}{s}n_i
+ =\binom6s(\lambda_s-1),\qquad
+ (\lambda_0,\ldots,\lambda_4)=(132,66,30,12,4).
+\]
+Back-substitution yields
+\[
+ (n_0,n_1,n_2,n_3,n_4)=(1,0,45,40,45).
+\]
+Thus every block has exactly one disjoint block, necessarily its complement,
+so every \(S(5,6,12)\) is complement-closed and is uniquely determined by
+its derivation at one point.  Disjoint top systems are consequently in
+bijection with disjoint derived \(S(4,5,11)\) systems.  The verifier's 144
+boundary mates therefore exhaust the whole top Steiner-mate sector.
+
+Their top extensions give 144 design-valued isotropic lines.  Every pair is
+mixed-product incompatible:
 the two systems meet in 12 or 36 blocks, so
 \[
  M_D(h_C\circ h_E)

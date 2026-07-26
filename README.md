@@ -138,11 +138,33 @@ New exact results in the note include:
   raw labels per star and is not a decoder witness; and
 - an unrestricted necessary theorem for every hypothetical \(k=16\) cover.
   Its triangle-monodromy Schreier graph is \(120\)-regular on
-  \(17{,}678{,}835\) vertices, has odd girth at least \(11\), and has
-  nonprincipal spectrum in \([-97,101]\).  Its least eigenvalue is exactly
-  \(-97\), with multiplicity at least \(30\), and every mixed product of
-  \(1,3,5,7,\) or \(9\) triangle monodromies is fixed-point-free.  These are
-  sharp conditional constraints, not a contradiction; and
+  \(17{,}678{,}835\) vertices and has the forced spectral decomposition
+  \[
+   \operatorname{Spec}(R)
+   =\{120^1,(-97)^{30},77^{434}\}\mathbin{\uplus}\Lambda,
+   \qquad \Lambda\subseteq[-83,82].
+  \]
+  The \(77\)-eigenvalue may occur again in \(\Lambda\), while \(-97\) has
+  exactly multiplicity \(30\).  Exact two-step algebra gives
+  \(R^2=120I+5A_{13}+Q\), with \(Q\) supported on intersection twelve,
+  entries in \(\{0,1,2,3\}\), and row sum \(10080\).  Every mixed product
+  of \(1,3,5,7,\) or \(9\) triangle monodromies is fixed-point-free, although
+  the corresponding odd-girth-\(11\) condition is already automatic from
+  the set-intersection geometry.  These are conditional constraints, not a
+  contradiction; and
+- a sharp continuation of that unrestricted theorem on the forced
+  \(434\)-dimensional pair-harmonic module.  Every zero-extended unit vector
+  has exact global Odd spectral measure
+  \[
+    \frac1{17}\delta_{14}+\frac{29}{85}\delta_{-3}
+    +\frac4{15}\delta_2+\frac13\delta_{-1},
+  \]
+  hence satisfies a quartic annihilator.  This forces the exact compressed
+  scalars \(449,1488,5148,3564\) for
+  \(A_{13},A_2,A_{12},Q\), respectively.  All displayed Krein, trace, and
+  multiplicity tests remain compatible, without constructing a joint
+  \((R,Q)\) witness, so this is a stronger necessary condition rather than
+  a contradiction; and
 - a second unrestricted necessary theorem obtained by deleting one colour
   class \(D\).  Any tight prime colouring forces a
   \((p-2)\)-dimensional subspace \(U\le\ker M_D\) on which every Hadamard
@@ -152,6 +174,21 @@ New exact results in the note include:
   \(56\times56\) kernel has only eight isotropic projective lines and no
   compatible pair, so its maximum capacity is \(1<3\).  The required
   capacity at \(k=16\) is \(15\); no uniform bound there is yet proved.
+  Independent Opus 5 and Fable audits verify the frame reformulation and
+  show that derivation preserves the full \(15\)-dimensional structure while
+  linear inclusion-matrix rank gives no useful capacity bound.  An exact
+  \(k=6\) computation gives deleted-kernel dimension \(77\), refuting the
+  tempting \(|D|/2\) guess without closing the full quadratic cone.  A frozen
+  \(5\!-\!(12,6,3)\) witness produces a non-mate isotropic \(k=6\) line,
+  proving that the 144 Steiner-mate lines do not exhaust that cone.  Gluing
+  the local simplexes forces a global equal-norm tight frame whose nonedge
+  first and square moments are exact; these moments rule out constant
+  nonedge squared inner products, but standard Schur-product, modular-rank,
+  and finite-field Gerzon theorems do not yet bound the capacity.  Abstract
+  linear-hypergraph countermodels realize all displayed moment-only
+  identities in this attack at the target parameters, so any further
+  obstruction must use additional structure such as the actual Johnson
+  subset geometry.
 
 - a reduction proving that the triangle-closure law for boundary Steiner
   systems is exactly a statement about the design derived at the pair
@@ -669,12 +706,40 @@ routes, but not the asymmetric case.
   have trivial scalar holonomy.  Neither result constructs a compatible
   \(N\)-table.
 - [`collaboration/triangle_monodromy_spectrum/README.md`](collaboration/triangle_monodromy_spectrum/README.md):
-  the mixed-word odd-girth theorem and exact Schreier-spectrum interval for
-  every hypothetical cover, including the forced \(-97\) point module at
-  \(k=16\).
+  the mixed-word theorem and initial exact Schreier-spectrum interval for
+  every hypothetical cover.
+- [`collaboration/schreier_spectrum_obstruction/README.md`](collaboration/schreier_spectrum_obstruction/README.md):
+  the strengthened point/pair harmonic decomposition, exact multiplicity of
+  \(-97\), residual interval \([-83,82]\), two-step intersection algebra,
+  and fourth-moment constraints, including a complete \(k=6\) Witt control.
+- [`collaboration/schreier_krein_followup/README.md`](collaboration/schreier_krein_followup/README.md):
+  the exact four-point global support theorem for the pair-harmonic module,
+  its quartic annihilator and higher compressed moments, and a complete
+  audit of the still-feasible Schur/Krein and harmonic trace budgets.
 - [`collaboration/hadamard_kernel_attack/README.md`](collaboration/hadamard_kernel_attack/README.md):
   the deleted-colour Hadamard-kernel theorem, complete \(k=2,4\) quadratic
   controls, and the explicitly limited \(k=6\) design-valued sector audit.
+- [`collaboration/opus5/hadamard_kernel_followup/NOTE.md`](collaboration/opus5/hadamard_kernel_followup/NOTE.md)
+  and [`collaboration/fable_hadamard_kernel/2026-07-26_fable_note.md`](collaboration/fable_hadamard_kernel/2026-07-26_fable_note.md):
+  independent audits of the kernel theorem, its finite-field frame
+  reformulation, the exact \(k=6\) nullity \(77\), and the proof that
+  derivation preserves the required dimension while linear rank alone
+  supplies no capacity obstruction.
+- [`collaboration/schur_product_literature/README.md`](collaboration/schur_product_literature/README.md):
+  a primary-source hypothesis audit and the exact global tight-frame theorem,
+  including forced nonedge moments and explicit two-star gluing controls.
+- [`collaboration/opus5/post_spectrum_kernel_synthesis/NOTE.md`](collaboration/opus5/post_spectrum_kernel_synthesis/NOTE.md):
+  an Opus 5 audit showing that several coarse residual spectral-moment bounds
+  overlap, without claiming spectral consistency, plus an exact standalone
+  \(LS(2,3,9)\) control for the derived degree-two capacity condition.
+- [`collaboration/fable_hadamard_global_gluing/2026-07-26_fable_note.md`](collaboration/fable_hadamard_global_gluing/2026-07-26_fable_note.md):
+  the finite orthogonal-group coset-CSP reformulation of global frame gluing.
+  Its attempted \(k=6\) decision hit the connected Fable account's spend
+  limit and produced no mathematical verdict.
+- [`collaboration/global_frame_moment_attack/`](collaboration/global_frame_moment_attack/):
+  abstract linear-hypergraph countermodels to every displayed moment-only
+  frame obstruction in scope, and a frozen exact \(k=6\) non-mate
+  isotropic-line witness with an independent standard-library verifier.
 - [`evidence/p19_rank4_half_catalog_schur_search.md`](evidence/p19_rank4_half_catalog_schur_search.md):
   the complete 210-anchor Schur-complement exhaustion excluding every
   rank-at-most-four paired half-link over \(\mathbb F_{19}\), with explicit
@@ -826,9 +891,29 @@ python3 -B collaboration/opus5/rank4_plucker_ratio/verify_rank4_ratio.py
 python3 -B collaboration/rank4_plucker_ratio/verify_rank4_plucker_ratio.py
 python3 -B \
   collaboration/triangle_monodromy_spectrum/verify_triangle_monodromy_spectrum.py
+python3 -B \
+  collaboration/schreier_spectrum_obstruction/verify_schreier_spectrum_obstruction.py
+python3 -B \
+  collaboration/schreier_krein_followup/verify_schreier_krein_followup.py
 python3 -B collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py
 python3 -B \
   collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py --k6
+python3 -B \
+  collaboration/fable_hadamard_kernel/verify_layer_capacity_facts.py
+python3 -B \
+  collaboration/opus5/hadamard_kernel_followup/verify_frame_and_clique.py
+python3 -B \
+  collaboration/opus5/hadamard_kernel_followup/verify_k6_kernel.py
+python3 -B \
+  collaboration/schur_product_literature/verify_literature_hypotheses.py
+python3 -B \
+  collaboration/opus5/post_spectrum_kernel_synthesis/verify_spectrum_moments.py
+python3 -B \
+  collaboration/opus5/post_spectrum_kernel_synthesis/verify_derived_capacity_control.py
+python3 -B \
+  collaboration/global_frame_moment_attack/verify_global_frame_moment_no_go.py
+python3 -B \
+  collaboration/global_frame_moment_attack/verify_k6_lambda3_witness.py
 python3 -B collaboration/opus5/full_n_sign/verify_full_n_sign.py
 python3 -B collaboration/fable_sign_head/verify_sign_head.py
 python3 -B evidence/verify_triangle_monodromy_cycle_girth.py
