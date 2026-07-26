@@ -83,6 +83,19 @@ New exact results in the note include:
   Griesmer when the unresolved middle layer is bounded only by independent
   endpoints.  This closes that coding route, not the design or the large
   set;
+- a static rational facet-profile certificate proving that every
+  intersection-six block pair in a hypothetical \(S(14,15,31)\) has at
+  least \(666\) completing blocks of profile \((0,4,4,7)\).  Their
+  complements force affine two-flats of weights
+  \((14,16,16,16)\), so the numerically best dimension-two shortening
+  has exact parameters
+  \([4\,419\,003,28,2\,197\,848]\) and still misses Griesmer by
+  \(23\,291\);
+- an exhaustive perfect-information closure of **every**
+  dimension-two common-zero shortening: even after allowing arbitrary
+  joint resolution of all middle-layer indicators, each candidate
+  satisfies Griesmer with at least \(14\,940\) slack.  Dimensions three
+  and above remain open under such coupling;
 - exact cyclic prescribed-link completions for all \(105\) radius-five
   slices, directly reconstructed as \(1{,}785\) Steiner triple systems;
   their shared-\(N\) compatibility still fails in the checked seeds, so
@@ -154,6 +167,21 @@ routes, but not the asymmetric case.
 - [`evidence/s141531_dim2_subcode_audit.md`](evidence/s141531_dim2_subcode_audit.md):
   an exhaustive \(1{,}450\)-profile dimension-two shortening audit and
   two explicitly nonexhaustive dimension-three controls.
+- [`evidence/s141531_affine_triple_forcing.md`](evidence/s141531_affine_triple_forcing.md):
+  an exact nonlinear refinement of the dimension-two audit.  A static
+  rational dual forces abundant three-block profiles and proves that all
+  three uncertain size-\(16\) endpoints in the best affine coset occur
+  simultaneously; this closes that candidate but is not a design or a
+  nonexistence proof.
+- [`evidence/s141531_m2_perfect_info_closure.md`](evidence/s141531_m2_perfect_info_closure.md):
+  an exhaustive \(1{,}450\)-profile theorem closing the entire
+  dimension-two common-zero/Griesmer route even with perfect joint
+  knowledge of the middle layer.  The checked per-profile table is
+  [`evidence/s141531_dim2_margins.csv`](evidence/s141531_dim2_margins.csv).
+- [`evidence/boundary_triangle_closure.md`](evidence/boundary_triangle_closure.md):
+  exact coset-cell calibration at the Fano and Witt boundary systems.
+  It isolates a triangle-closure law verified at \(r=3,5\) but explicitly
+  conjectural at \(r=15\).
 - [`evidence/full_color_block_hodge_audit.md`](evidence/full_color_block_hodge_audit.md):
   an exact audit of the full \(17\times17\) signed colour-block operator.
   It proves the majority-block nullity bounds, identifies the canonical
