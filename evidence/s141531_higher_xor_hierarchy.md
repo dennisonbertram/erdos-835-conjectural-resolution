@@ -5,11 +5,15 @@ Date: 2026-07-26.  Verifier: `verify_s141531_higher_xor_hierarchy.py`
 
 > **Scope, stated up front.**  This note proves an explicit formula for the
 > whole hierarchy (Theorem A), proves that its positivity conditions hold for
-> **every** \(j\) (Theorem B), and verifies its remaining *integrality*
-> conditions on an explicit finite range.  The integrality half is **not**
-> closed, so the route is **not** closed, and this does **not** solve
-> Erdős–Rosenfeld Problem #835.  Everything is conditional on the
-> existence of an \(S(14,15,31)\).
+> **every** \(j\) (Theorem B), and performs the original finite integrality
+> sweep.  Two audited companions now finish the arithmetic:
+> `s141531_higher_xor_2adic_closure.md` proves the \(2^{31}\)-divisibility
+> for every \(j\), and `s141531_xor_divisibility_reduction.md` proves that
+> this implies both \(A_j\)-integrality and \(b\mid jA_j\).  Thus this
+> necessary-condition route is closed.  It yields no contradiction and does
+> **not** solve Erdős–Rosenfeld Problem #835.  The hierarchy itself is
+> conditional on the existence of an \(S(14,15,31)\); the arithmetic closure
+> is a direct theorem about the forced formulas.
 >
 > **Correction to an earlier draft of this note.**  A first version asserted
 > that because the hierarchy is an inverse transform of the forced weight
@@ -249,10 +253,14 @@ nothing depends on which threshold is used.
 - **Non-negativity.**  Now **settled for all \(j\)** by Corollary B1.  It was a
   genuine test — it is *tight* in places, e.g. \(a_2(0)=0\) and the whole
   \(|D|=30\) layer vanishes — and it is now closed.
-- **Integrality.**  Still a genuine test at every \(j\), and **not** addressed
-  by Theorem B: the analytic bound is archimedean and says nothing about the
-  \(2\)-adic conditions \(2^{31}\mid\) numerator, \(2^{30}\mid\) the \(A_j\)
-  numerator, or \(b\mid jA_j\).
+- **Integrality.**  Theorem B is archimedean and does not address it, but the
+  companion 2-adic note now does: a Δ-divisibility lemma handles branch
+  differences, a tail theorem reduces the problem to \(j\le570\,314\), and
+  independent Python and C++ NTT/CRT runs find zero violations throughout that
+  finite window.  A separate formal-series identity
+  \((1-z^2)A'=b(C_B-zA)\) proves that this condition implies both
+  \(A_j\in\mathbb Z\) and \(b\mid jA_j\).  Hence all three arithmetic families
+  are settled for every \(j\).
 - **Parity.**  No fixed-point-free involution is available on weight-\(j\) dual
   words, so no parity argument is in hand.
 - **Convexity.**  Tight at \(j=4\) (\(\sum_D\binom{m_D}2=3A_4\)), which is what
@@ -293,20 +301,30 @@ nothing depends on which threshold is used.
    \(20\,001+20\,001=40\,002\) of the \(17\,678\,836\) possible \(j\), about
    \(0.23\%\).  This sweep also supplies the residual \(j\le39\) needed by
    Corollary B1.
-3. **Open:** the *arithmetic* half.  For \(20\,000<j<b-20\,000\) the integrality
-   conditions — \(2^{31}\) dividing the \(a_j(D)\) numerator, \(2^{30}\) dividing
-   the \(A_j\) numerator, and \(b\mid jA_j\) — are untested, and **no theorem
-   closes them**.  Theorem B is archimedean and gives no information about these
-   \(2\)-adic conditions.  Whether some larger \(j\) exposes a non-integral
-   coefficient is unresolved.
+3. **Closed after the original sweep:** the companion Δ/tail/window proof
+   establishes \(2^{31}\)-divisibility of every layer/branch numerator for all
+   \(0\le j\le b\).  The Python run checked every layer, both parities, and
+   \(j\le570\,344\); the independent C++ implementation checked
+   \(9\,125\,520\) on-parity conditions with certificate
+   `1314b8cf68397219e2c1294027bef3185c5d0bd4812f2a22444d7af375c404bf`.
+   The tail theorem covers \(j\ge570\,315\), and the Δ-lemma covers the second
+   middle-layer branch.  Finally, the forced-constant differential identity
+   proves condition (1) \(\Rightarrow\) conditions (2),(3).
 
-So the route is now **half closed**: positivity is a theorem, integrality is
-not.  **This does not solve Erdős–Rosenfeld Problem #835, and it does not close
-this route.**
+The complete higher-XOR necessary-condition route is therefore **closed**:
+positivity, integrality, and local divisibility all hold identically for the
+forced formulas.  It supplies no contradiction.  **This does not solve
+Erdős–Rosenfeld Problem #835.**
 
 ## 8. Reproducing
 
 ```bash
 python3 -B evidence/verify_s141531_higher_xor_hierarchy.py                 # j <= 1000, ~2 s
 python3 -B evidence/verify_s141531_higher_xor_hierarchy.py --max-j 20000   # the recorded range, ~6 min
+python3 -B evidence/verify_s141531_higher_xor_2adic_closure.py              # lemmas + r=9 control
+python3 -B evidence/verify_s141531_higher_xor_2adic_closure.py --window     # full Python window
+python3 -B evidence/verify_s141531_xor_divisibility_reduction.py
 ```
+
+The independent C++ command and build dependencies are recorded at the top of
+`verify_s141531_higher_xor_window.cpp`.

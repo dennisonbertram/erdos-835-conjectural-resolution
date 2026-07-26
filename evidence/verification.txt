@@ -660,3 +660,72 @@ Result:
   information about these 2-adic conditions.  The route is NOT closed.
 See:
   evidence/s141531_higher_xor_hierarchy.md
+
+================================================================================
+2026-07-26  SUPERSEDING RESULT: the higher block-XOR route is fully closed
+================================================================================
+
+This block supersedes only the OPEN status in the preceding higher-XOR
+entries.  Their proofs, finite-sweep results, and circularity audit remain
+valid.
+
+Commands:
+  python3 -B evidence/verify_s141531_higher_xor_2adic_closure.py
+  python3 -B evidence/verify_s141531_higher_xor_2adic_closure.py --window
+  clang++ -O3 -std=c++20 -I/opt/homebrew/include \
+    evidence/verify_s141531_higher_xor_window.cpp \
+    -L/opt/homebrew/lib -lcrypto \
+    -o /private/tmp/verify_s141531_higher_xor_window
+  /private/tmp/verify_s141531_higher_xor_window
+  python3 -B evidence/verify_s141531_xor_divisibility_reduction.py
+  python3 -B evidence/verify_s141531_spot_integrality.py
+  python3 -B evidence/verify_s141531_higher_xor_integrality_closure_draft.py
+
+Proof and computation:
+  1. Delta lemma: 2^15 divides K_j(F_1)-K_j(F_0) for every j, so the
+     internal/external branch difference is always integral.  The bound is
+     sharp (minimum valuation 15, 64 hits through j=1200).
+  2. Tail collapse: after cancellation by the triangular unit
+     (1-z^2)^(-8,554,275), every nontrivial cofactor has degree at most
+     mu=570,285 and the trivial residual vanishes mod 2^31 for
+     j >= mu+30 = 570,315.  Thus only j <= 570,314 requires computation.
+  3. Python/Fable window: PASS, every layer d=0..31, on- and off-parity,
+     every j <= 570,344, zero violations.  Runtime 15:52.50 wall.
+     Recorded certificate:
+       df20f9f13ea50d2f0a9a9e6efc577686935f6c91fd11d936caf7f5ab0170dcc9
+     Exact independent component checks pass through j=400.
+  4. Independent C++ window: coefficients represented mod 2^31, three NTT
+     primes, exact unsigned-128-bit CRT, paired-layer assembly, and cpp_int
+     controls on all 32 layers through j=400.  PASS on 9,125,520 on-parity
+     conditions, zero violations, 38.823 seconds.  Certificate:
+       1314b8cf68397219e2c1294027bef3185c5d0bd4812f2a22444d7af375c404bf
+     A final-source rebuild reproduced the same certificate in 37.504 seconds.
+     Nine independent direct spot tests from j=50,000 through 17,600,000 also
+     passed the 2-adic conditions and b | j*A_j; they are controls, not inputs
+     to the proof.
+  5. Forced-constant reduction:
+       (1-z^2) A'(z) = b (C_B(z) - z A(z)).
+     Its proof is an explicit binomial/Krawtchouk identity and never assumes
+     Fourier self-consistency of a block indicator.  Since
+       kappa(z)=z(C_B-zA)/(1-z^2)
+     has integer coefficients whenever all a_j(D) do, the identity gives
+       b*kappa_j = j*A_j.
+     Hence condition (1) implies A_j integrality and b | j*A_j for every j.
+     The exact verifier passes every stated identity and end-to-end control.
+  6. The earlier Theorem-C closure remains REJECTED as circular.  Its audit
+     verifier passes; the valid closure above uses a different argument.
+
+CONCLUSION:
+  Positivity, all a_j(D) integrality, A_j integrality, and b | j*A_j now hold
+  for every 0 <= j <= b in the forced higher-XOR formulas.  This exhausts the
+  complete higher-XOR necessary-condition route and shows that it yields no
+  contradiction.  It neither constructs nor excludes S(14,15,31), and it does
+  NOT solve Erdős-Rosenfeld Problem #835.
+
+See:
+  evidence/s141531_higher_xor_hierarchy.md
+  evidence/s141531_higher_xor_2adic_closure.md
+  evidence/s141531_higher_xor_window_run_log.txt
+  evidence/s141531_higher_xor_window_cpp_run_log.txt
+  evidence/s141531_xor_divisibility_reduction.md
+  evidence/s141531_higher_xor_integrality_closure_draft.md

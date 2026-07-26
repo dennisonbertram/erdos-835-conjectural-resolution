@@ -1,0 +1,84 @@
+# Independent C++ finite-window run
+# Date: 2026-07-26
+# Source: evidence/verify_s141531_higher_xor_window.cpp
+# Current source SHA-256:
+#   ff0eaa7f70fe5de0d24fb2d8dac7c1bfb649f17fd0c1fdeec8b1d3eabd7e2d96
+# Compiled source SHA-256 before the comment-only command-order correction:
+#   1ff4c8481981f8b4acf4d8ba0a3f47c542696d4b56fd6d3ae332e0589736803c
+# Compiler:
+#   Apple clang version 17.0.0 (clang-1700.6.4.2)
+#   Target: arm64-apple-darwin24.6.0
+# Command:
+#   /usr/bin/clang++ -O3 -std=c++20 -I/opt/homebrew/include \
+#     evidence/verify_s141531_higher_xor_window.cpp \
+#     -L/opt/homebrew/lib -lcrypto \
+#     -o /private/tmp/verify_s141531_higher_xor_window
+# Binary SHA-256:
+#   7eed6ee35dba6eaad1cdc0f24b54ae49e2b4f67a4bbee12157dbda2b6c35deb7
+# Final-source rebuild SHA-256:
+#   5bad39ae712ac38beabe161d1a1242e74a4fdb9ae574c0094d420c5364410fcc
+# The final-source rebuild was rerun after all comment/provenance edits.  It
+# reproduced every coefficient hash, zero violations, and certificate
+# 1314b8cf68397219e2c1294027bef3185c5d0bd4812f2a22444d7af375c404bf
+# in 37.504 seconds.
+# Run:
+#   /private/tmp/verify_s141531_higher_xor_window
+#
+# The verifier is independent of the Python/Fable run.  It represents inputs
+# modulo 2^31, uses three NTT primes with exact unsigned-128-bit CRT, assembles
+# paired weight layers, and checks all low-degree components independently with
+# boost::multiprecision::cpp_int.
+
+r=15 finite XOR window, independent C++ verifier
+b=17678835, M=570285, A=8554275, threshold=570315, checked through 570344
+CRT log2(product)=88.606, coefficient bound <2^81.121
+  U_429 sha256=a8c4368811daad76a48fe624c5c4a38a2725d7b0bcdae406659ae4f21fb6c52a
+  U_627 sha256=3fd7a450268257386b107118786094abff61af4cd46742129833e661f8f8a138
+  U_1197 sha256=4b61c587f3f349c4966e7735b10b845386b4388403ceee0ae183f5769dc4dbff
+  U_1549 sha256=6e420d2639f017b4a1f1b229e74ebb103dd50669e58ed93937400d8b70e1425b
+  U_3059 sha256=cce0f57ef2fa575e6752af6671c490d3c3eb2ba2464dad484f45977da6da2757
+  U_10925 sha256=2a8c382e06dda34ecf35826bb82e75f01e4711879a46f7953f98d5b5c182aad3
+  U_31219 sha256=471c2c8315d9111ff5c9b629bb72108cc64a2552cb28d93883cd3f6962c56c8c
+  U_58995 sha256=cf64881728492747b5e85a4bb3eaacb1b78991c59265eb798cb4ffd047c8ac43
+  U_570285 sha256=bd802c07a34c507453204436d94c064a5fcd9185afa5e778b07b70121d9abd32
+[ok] all 9 positive and negative U_F match cpp_int through j=400
+  S sha256=2da90b966300898a4ef1b203f2202de25cd1d3ba165619d7bd41f0876892863e
+[ok] trivial residual S matches cpp_int through j=400
+  layer d= 0: violations=0
+  layer d= 1: violations=0
+  layer d= 2: violations=0
+  layer d= 3: violations=0
+  layer d= 4: violations=0
+  layer d= 5: violations=0
+  layer d= 6: violations=0
+  layer d= 7: violations=0
+  layer d= 8: violations=0
+  layer d= 9: violations=0
+  layer d=10: violations=0
+  layer d=11: violations=0
+  layer d=12: violations=0
+  layer d=13: violations=0
+  layer d=14: violations=0
+  layer d=15: violations=0
+  layer d=16: violations=0
+  layer d=17: violations=0
+  layer d=18: violations=0
+  layer d=19: violations=0
+  layer d=20: violations=0
+  layer d=21: violations=0
+  layer d=22: violations=0
+  layer d=23: violations=0
+  layer d=24: violations=0
+  layer d=25: violations=0
+  layer d=26: violations=0
+  layer d=27: violations=0
+  layer d=28: violations=0
+  layer d=29: violations=0
+  layer d=30: violations=0
+  layer d=31: violations=0
+[ok] uncancelled cpp_int numerators vanish mod 2^31 for all 32 layers through j=400
+conditions checked=9125520, total violations=0
+certificate material: conditions=9125520;violations=0;S=2da90b966300898a4ef1b203f2202de25cd1d3ba165619d7bd41f0876892863e;U_429=a8c4368811daad76a48fe624c5c4a38a2725d7b0bcdae406659ae4f21fb6c52a;U_627=3fd7a450268257386b107118786094abff61af4cd46742129833e661f8f8a138;U_1197=4b61c587f3f349c4966e7735b10b845386b4388403ceee0ae183f5769dc4dbff;U_1549=6e420d2639f017b4a1f1b229e74ebb103dd50669e58ed93937400d8b70e1425b;U_3059=cce0f57ef2fa575e6752af6671c490d3c3eb2ba2464dad484f45977da6da2757;U_10925=2a8c382e06dda34ecf35826bb82e75f01e4711879a46f7953f98d5b5c182aad3;U_31219=471c2c8315d9111ff5c9b629bb72108cc64a2552cb28d93883cd3f6962c56c8c;U_58995=cf64881728492747b5e85a4bb3eaacb1b78991c59265eb798cb4ffd047c8ac43;U_570285=bd802c07a34c507453204436d94c064a5fcd9185afa5e778b07b70121d9abd32;d0=0;d1=0;d2=0;d3=0;d4=0;d5=0;d6=0;d7=0;d8=0;d9=0;d10=0;d11=0;d12=0;d13=0;d14=0;d15=0;d16=0;d17=0;d18=0;d19=0;d20=0;d21=0;d22=0;d23=0;d24=0;d25=0;d26=0;d27=0;d28=0;d29=0;d30=0;d31=0
+certificate sha256=1314b8cf68397219e2c1294027bef3185c5d0bd4812f2a22444d7af375c404bf
+elapsed_seconds=38.823
+WINDOW VERDICT: PASS

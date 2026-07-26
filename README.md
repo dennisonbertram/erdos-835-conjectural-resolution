@@ -145,18 +145,26 @@ New exact results in the note include:
   \(4A_4/b=858\,252\,625\,232\); convexity is tight at \(j=4\) but has slack
   \(354\,375\,828\,032\,095\,615\,907\,520\) at \(j=6\).  Being an inverse
   transform of the forced enumerator does **not** make the hierarchy vacuous:
-  non-negativity and exact integrality of \(a_j(D)\) remain genuine
+  non-negativity and exact integrality of \(a_j(D)\) are genuine
   MacWilliams/Delsarte-type necessary conditions.  The **positivity** half is
-  now a theorem for all \(j\): for nontrivial \(u\) one has
+  a theorem for all \(j\): for nontrivial \(u\) one has
   \(|F(u)|\le b/31\), so a Cauchy estimate against the maximal binomial term
   gives \(|K_j(F)|/\binom bj\le(b+1)\rho^{\,b-f}\) with
   \(\rho^{\,b-f}\le\exp(-30j(b-j)/(31b))\); the two trivial characters
   contribute \(2\binom bj\) and dominate the other \(2^{31}-2\) for
   \(40\le j\le b-40\), which with the finite sweep gives \(a_j(D)\ge0\) for
-  **every** \(j\).  The **integrality** half is verified exhaustively only for
-  \(0\le j\le20\,000\) and its mirror.  **The route is therefore half closed
-  and not closed**: for \(20\,000<j<b-20\,000\) the \(2\)-adic conditions are
-  untested and no theorem settles them; and
+  **every** \(j\).  The **integrality** half is now closed as well.  A
+  Δ-divisibility lemma handles the two middle branches; factoring out
+  \((1-z^2)^{8\,554\,275}\) reduces the nontrivial terms to nine
+  degree-\(570\,285\) cofactors; and a tail theorem makes every condition with
+  \(j\ge570\,315\) automatic modulo \(2^{31}\).  Independent Python and C++
+  NTT/CRT computations certify the complete remaining window with zero
+  violations (the C++ run checks \(9\,125\,520\) on-parity conditions).
+  Finally, the formal identity
+  \((1-z^2)A'(z)=b(C_B(z)-zA(z))\), proved from explicit binomial identities,
+  shows that \(a_j(D)\)-integrality implies both \(A_j\)-integrality and
+  \(b\mid jA_j\).  Thus the entire higher-XOR necessary-condition route is
+  closed and yields no contradiction; it does not solve #835; and
 - an exact elementary modular audit of the two necessary designs
   \(S(14,15,31)\) and \(S(7,8,24)\).  Forced incidence-Gram spectra,
   Wilson-rank upper bounds, determinant divisibility, chain squeezes, and
@@ -448,9 +456,13 @@ routes, but not the asymmetric case.
   independent proofs of the complete block-pair difference table, including a
   direct inverse-transform proof showing why it supplies no new obstruction.
 - [`evidence/s141531_higher_xor_hierarchy.md`](evidence/s141531_higher_xor_hierarchy.md):
-  the all-level block-XOR transform, an all-\(j\) positivity theorem, and the
-  exact finite integrality sweep through \(j=20\,000\).  The unswept
-  \(2\)-adic integrality range remains open.
+  the all-level block-XOR transform and the all-\(j\) positivity theorem.
+- [`evidence/s141531_higher_xor_2adic_closure.md`](evidence/s141531_higher_xor_2adic_closure.md)
+  and [`evidence/s141531_xor_divisibility_reduction.md`](evidence/s141531_xor_divisibility_reduction.md):
+  the Δ/tail/finite-window closure of \(2^{31}\)-divisibility, two independent
+  certified window computations, and the noncircular formal reduction from
+  that condition to \(A_j\)-integrality and \(b\mid jA_j\).  These close the
+  higher-XOR route, not Problem #835.
 - [`evidence/s141531_prank_snf_audit.md`](evidence/s141531_prank_snf_audit.md):
   the scoped elementary p-rank, determinant, chain, point-Gram, and standard
   modular-intersection audit for \(S(14,15,31)\) and \(S(7,8,24)\).

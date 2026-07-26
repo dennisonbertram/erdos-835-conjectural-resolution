@@ -28,9 +28,10 @@ derived from forced spectral data can still expose a negative or non-integral
 coefficient -- that is precisely how MacWilliams/Delsarte nonexistence tests
 work.  So nonnegativity and integrality of a_j(D) are genuine necessary
 conditions at every j, not automatic.  Theorem B proves nonnegativity for
-every j.  Exact integrality is verified only on an explicit finite range and
-its mirror; outside that range the arithmetic route remains open.  Nothing
-here solves Erdos-Rosenfeld Problem #835.
+every j.  This script verifies integrality only on an explicit finite range
+and its mirror.  The separate 2-adic closure and divisibility-reduction
+verifiers now close the remaining range and the two derived arithmetic
+families.  Nothing here solves Erdos-Rosenfeld Problem #835.
 
 Run:  python3 -B evidence/verify_s141531_higher_xor_hierarchy.py [--max-j N]
       (default N = 1000, about 2 s; the note reports a larger recorded sweep)
@@ -341,10 +342,10 @@ def main():
     print(f"0 <= j <= {max_j} (which covers the residual j <= 39), NON-NEGATIVITY")
     print("IS PROVED FOR ALL 0 <= j <= b.")
     print()
-    print("Still OPEN, and therefore the route is NOT closed: exact integrality")
-    print("of a_j(D) and of A_j, and the divisibility b | j*A_j, are verified")
-    print(f"only for 0 <= j <= {max_j} and its mirror under a_(b-j)(D) = a_j(1+D).")
-    print("The analytic bound says nothing about these 2-adic conditions.")
+    print("THIS SCRIPT checks exact integrality and b | j*A_j only for")
+    print(f"0 <= j <= {max_j} and its mirror under a_(b-j)(D) = a_j(1+D).")
+    print("The companion 2-adic and divisibility-reduction proofs close all")
+    print("remaining j, so the full higher-XOR necessary-condition route is closed.")
     print("This does NOT solve Erdos-Rosenfeld Problem #835.")
 
 
