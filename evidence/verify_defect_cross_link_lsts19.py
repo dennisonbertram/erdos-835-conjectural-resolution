@@ -195,6 +195,27 @@ def normalized_link_row_sign(
     return answer
 
 
+def raw_link_row_sign(
+    colouring: dict[Triple, int],
+    centre: int,
+) -> int:
+    """Product of the row signs in the unnormalized point link."""
+    vertices = [
+        point for point in POINTS
+        if point != centre
+    ]
+    answer = 1
+    for vertex in vertices:
+        row = [
+            colouring[canonical((centre, vertex, other))]
+            for other in vertices
+            if other != vertex
+        ]
+        assert set(row) == COLOURS
+        answer *= permutation_sign(row)
+    return answer
+
+
 def defect_multiplicities(
     colouring: dict[Triple, int],
 ) -> tuple[Counter[int], tuple[int, tuple[int, int, int]], tuple[int, tuple[int, int, int]]]:
@@ -271,6 +292,22 @@ def main() -> None:
         if centre != INFINITY
     )
     assert signs == Counter({-1: 17, 1: 1})
+    normalized_product = 1
+    for centre in POINTS:
+        if centre != INFINITY:
+            normalized_product *= normalized_link_row_sign(
+                colouring, centre
+            )
+    raw_signs = {
+        centre: raw_link_row_sign(colouring, centre)
+        for centre in POINTS
+    }
+    raw_product = 1
+    for sign in raw_signs.values():
+        raw_product *= sign
+    assert Counter(raw_signs.values()) == Counter({-1: 18, 1: 1})
+    assert raw_product == 1
+    assert normalized_product == raw_signs[INFINITY] == -1
     distribution, zero, multiple = defect_multiplicities(colouring)
     six_witness = triangles_with_colours(colouring, 0, (1, 12, 14))
     assert six_witness == [
@@ -285,6 +322,14 @@ def main() -> None:
     print("LS(2,3,19): PASS (17 STS classes, 969 triples)")
     print("19 coherent K18 links and all 171 pair transports: PASS")
     print(f"normalized link row-sign distribution: {dict(sorted(signs.items()))}")
+    print(
+        "raw point-link sign distribution/product: "
+        f"{dict(sorted(Counter(raw_signs.values()).items()))}, {raw_product}"
+    )
+    print(
+        "orientation boundary identity "
+        f"product(normalized) = raw(infinity) = {normalized_product}"
+    )
     print(
         "finite rainbow multiplicity distribution over 18 links: "
         f"{dict(sorted(distribution.items()))}"

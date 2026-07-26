@@ -5,7 +5,7 @@ rigorous reductions, exact structural theorems, and reproducible evidence.
 
 ## Status
 
-The full problem remains open as of 25 July 2026. This repository does
+The full problem remains open as of 26 July 2026. This repository does
 **not** claim a complete proof. It advances and precisely formulates the
 negative conjecture
 
@@ -71,6 +71,12 @@ New exact results in the note include:
   quotient, together with audited controls showing that the corresponding
   modular, quadratic, SOS, scalar-sign, and proposed Norton \(1/3\)-gap
   reductions do not finish the degree-\(16\) case;
+- an exact defect-map reduction whose indegrees are rainbow-triangle
+  counts, together with a coherent \(LS(2,3,19)\) certificate realizing
+  every multiplicity from zero through six and an orientation-boundary
+  identity.  This proves that the complete codimension-three link layer
+  does not force bijectivity; the next genuine compatibility layer is
+  \(LS(3,4,20)\);
 - exact cyclic prescribed-link completions for all \(105\) radius-five
   slices, directly reconstructed as \(1{,}785\) Steiner triple systems;
   their shared-\(N\) compatibility still fails in the checked seeds, so
@@ -161,6 +167,13 @@ routes, but not the asymmetric case.
   has reference-order-dependent rowspace membership and that the exterior
   sign retains genuine quadratic crossing terms.  This closes that proposed
   linearization route, not the parity conjecture or Problem #835.
+- [`evidence/defect_facet_map_audit.md`](evidence/defect_facet_map_audit.md):
+  the exact defect-map/rainbow-triangle correspondence, its corrected
+  universal indegree bound, and explicit local countermodels.
+- [`evidence/defect_cross_link_lsts19.md`](evidence/defect_cross_link_lsts19.md):
+  the full link-tower reduction, a verified coherent \(LS(2,3,19)\)
+  countermodel to link-local bijectivity, and the scalar orientation
+  boundary identity.  This is a no-go for one proof layer, not a colouring.
 - [`evidence/modular_kernel/`](evidence/modular_kernel/): exact modular-kernel
   identities, a characteristic-17 module audit, and a tensor-ansatz
   obstruction.
