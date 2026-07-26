@@ -153,19 +153,22 @@ New exact results in the note include:
   the set-intersection geometry.  These are conditional constraints, not a
   contradiction; and
 - a sharp continuation of that unrestricted theorem on the forced
-  \(434\)-dimensional pair-harmonic module.  Every zero-extended unit vector
+  point- and pair-harmonic modules.  Every zero-extended pair-harmonic unit vector
   has exact global Odd spectral measure
   \[
     \frac1{17}\delta_{14}+\frac{29}{85}\delta_{-3}
     +\frac4{15}\delta_2+\frac13\delta_{-1},
   \]
-  hence satisfies a quartic annihilator.  In fact the corresponding fibre
-  relations preserve the module exactly, with scalars \(449,1488,5148,3564\)
-  for
-  \(A_{13},A_2,A_{12},Q\), respectively.  All displayed Krein, trace, and
-  multiplicity tests remain compatible, without constructing a joint
-  \((R,Q)\) witness, so this is a stronger necessary condition rather than
-  a contradiction; and
+  hence satisfies a quartic annihilator.  Every fibre relation preserves
+  both modules and acts by an explicit integer scalar; on the pair module
+  those scalars include \(449,1488,5148,3564\) for
+  \(A_{13},A_2,A_{12},Q\), respectively.  The complete single-fibre
+  Frobenius moment test still passes.  A new local double count identifies
+  its first free statistic and sharpens
+  \(10080n\leq\operatorname{tr}Q^2\leq13440n\), equivalently
+  \(2100n\leq\#C_4(R)\leq2520n\).  The proof and its factor-of-two audit are
+  checked against the actual \(k=6\) Witt fibre.  This is stronger necessary
+  structure, not a contradiction; and
 - a degree-three continuation of the same unrestricted theorem.  Design
   quadrature forces every zero-extended \(H_3\) vector onto exactly the five
   global eigenspaces \(E_3,E_{12},E_{13},E_{14},E_{15}\).  All endpoint
@@ -178,8 +181,20 @@ New exact results in the note include:
   \]
   A compatible integral compressed-\(R\) spectrum at the upper endpoint
   proves that support, rank, scalar moment, and elementary integrality tests
-  still do not contradict a hypothetical cover.  The first unforced joint
-  term is the orientation of the \(H_3\) leakage in \(Q\); and
+  still do not contradict a hypothetical cover.  Pointwise refinement
+  identifies the two first leakages as the integer commutators
+  \([R,P_3]=\Delta/305900\) and
+  \([Q,P_3]=(R\Delta+\Delta R-5\Delta)/305900\); explicit integral moment
+  witnesses realize every local \(Q\)-state.  The missing datum is therefore
+  the two-root/global coupling of those one-factorization asymmetries; and
+- a degree-four continuation.  Design quadrature confines \(H_4\) to six
+  global eigenspaces and reduces every fibre relation to a right action in
+  \(\operatorname{span}(I,R,A_{13})P_4\).  The exact two-operator endpoint
+  cone, its first leakage inequality, all endpoint rank budgets, and the
+  regular-simplex coupling of all seventeen fibres admit explicit finite
+  operator witnesses.  These witnesses deliberately omit the fixed
+  entrywise Johnson kernels and are not covers; they close this relaxation,
+  not the problem; and
 - a second unrestricted necessary theorem obtained by deleting one colour
   class \(D\).  Any tight prime colouring forces a
   \((p-2)\)-dimensional subspace \(U\le\ker M_D\) on which every Hadamard
@@ -729,8 +744,28 @@ routes, but not the asymmetric case.
   and fourth-moment constraints, including a complete \(k=6\) Witt control.
 - [`collaboration/schreier_krein_followup/README.md`](collaboration/schreier_krein_followup/README.md):
   the exact four-point global support theorem for the pair-harmonic module,
-  its quartic annihilator and higher compressed moments, and a complete
+  its quartic annihilator and full fibre-relation invariance, and a complete
   audit of the still-feasible Schur/Krein and harmonic trace budgets.
+- [`collaboration/schreier_h3_support/README.md`](collaboration/schreier_h3_support/README.md):
+  the exact five-eigenspace support theorem on \(H_3\), the one-operator
+  endpoint parametrisation, the affine right action of every fibre relation,
+  sharp leakage/rank bounds, and an integral moment-level compatibility
+  witness.
+- [`collaboration/h3_state_refinement/README.md`](collaboration/h3_state_refinement/README.md):
+  the pointwise \(H_3\) commutator formulas, the four masked \(Q\)-states,
+  exact integral pair-moment witnesses, and the two-root finite frontier.
+- [`collaboration/schreier_h3_triple_profiles/README.md`](collaboration/schreier_h3_triple_profiles/README.md):
+  all exact block-through-triple profiles, their global double counts, a
+  strictly positive rational witness for every known linear one-root margin,
+  and reproducible but nondecisive cyclic zero-one probes.
+- [`collaboration/schreier_h4_support/README.md`](collaboration/schreier_h4_support/README.md):
+  the six-eigenspace \(H_4\) support theorem, exact endpoint cone and
+  three-map right module, together with explicit 17-colour operator
+  relaxation witnesses.
+- [`collaboration/opus5/joint_schreier_krein_attack/NOTE.md`](collaboration/opus5/joint_schreier_krein_attack/NOTE.md):
+  Opus 5's independently audited point/pair rigidity proof, the precisely
+  scoped single-fibre quadratic moment no-go result, and the corrected
+  \(\varepsilon\) double count sharpening the fourth-moment interval.
 - [`collaboration/hadamard_kernel_attack/README.md`](collaboration/hadamard_kernel_attack/README.md):
   the deleted-colour Hadamard-kernel theorem, complete \(k=2,4\) quadratic
   controls, and the explicitly limited \(k=6\) design-valued sector audit.
@@ -910,6 +945,16 @@ python3 -B \
   collaboration/schreier_spectrum_obstruction/verify_schreier_spectrum_obstruction.py
 python3 -B \
   collaboration/schreier_krein_followup/verify_schreier_krein_followup.py
+python3 -B \
+  collaboration/schreier_h3_support/verify_schreier_h3_support.py
+python3 -B \
+  collaboration/h3_state_refinement/verify_h3_state_refinement.py
+python3 -B \
+  collaboration/schreier_h3_triple_profiles/verify_schreier_h3_triple_profiles.py
+python3 -B \
+  collaboration/schreier_h4_support/verify_schreier_h4_support.py
+python3 -B \
+  collaboration/opus5/joint_schreier_krein_attack/verify_joint_schreier_krein_attack.py
 python3 -B collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py
 python3 -B \
   collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py --k6
@@ -982,6 +1027,7 @@ Expected decisive outputs:
 ## Primary references
 
 - [Erdős Problem #835](https://www.erdosproblems.com/835)
+- [Recent official/X status audit, 26 July 2026](evidence/recent_status_audit_2026-07-26.md)
 - J. Ma and Q. Tang,
   [A Note on Erdős Problem #835](https://github.com/QuanyuTang/erdos-problem-835/blob/main/On_Problem_835.pdf)
 - P. Hammond and D. H. Smith,
