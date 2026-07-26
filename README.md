@@ -96,6 +96,14 @@ New exact results in the note include:
   joint resolution of all middle-layer indicators, each candidate
   satisfies Griesmer with at least \(14\,940\) slack.  Dimensions three
   and above remain open under such coupling;
+- exact exhaustive audits of two frozen higher-dimensional shortenings.
+  The dimension-ten choice forces a projective doubly-even
+  \([16\,359,20]\) image with \(1640\le d\le8024\), still \(303\) above
+  its optimistic Griesmer boundary.  The dimension-twelve choice gives
+  \([4291,18]\) with a joint Johnson-graph/Hoffman lower bound \(d\ge556\);
+  an exact word of weight \(2188\) crosses Griesmer by \(96\), but it is an
+  upper rather than lower bound.  These close two promising frozen
+  subspaces without contradicting a hypothetical \(S(14,15,31)\);
 - exact cyclic prescribed-link completions for all \(105\) radius-five
   slices, directly reconstructed as \(1{,}785\) Steiner triple systems;
   their shared-\(N\) compatibility still fails in the checked seeds, so
@@ -213,9 +221,13 @@ New exact results in the note include:
     \prod_{i,u}\operatorname{AT}(Q^{i,u})
     =(-1)^{k(k-1)/2}\operatorname{AT}(T)\prod_i\delta(S_i),
   \]
-  entirely from the radius-three \(L,M\) data. The formula and global
-  pair-orientation cancellation are unrestricted structural theorems, but no
-  independent forced-fiber value or \(k=16\) sign contradiction is known; and
+  entirely from the radius-three \(L,M\) data.  The residual generic
+  hole-orientation product is in fact identically \(+1\) for every
+  admissible even-\(k\) chart, so any genuine extension must have partial
+  fiber-sign product equal to the displayed right-hand side.  Exact
+  one-sided controls show that separate prescribed \(ij\)-trace slices do
+  not determine the fiber signs.  No theorem coupling the full shared
+  \(N\)-table, and hence no \(k=16\) sign contradiction, is known; and
 - a certificate-ready CNF for the complete unrestricted radius-four ball plus
   all 1,680 forced traces: 883,521 variables and 1,909,497 clauses, with
   canonical SHA-256
@@ -311,6 +323,12 @@ routes, but not the asymmetric case.
   dimension-two common-zero/Griesmer route even with perfect joint
   knowledge of the middle layer.  The checked per-profile table is
   [`evidence/s141531_dim2_margins.csv`](evidence/s141531_dim2_margins.csv).
+- [`evidence/s141531_high_dimension_boundaries.md`](evidence/s141531_high_dimension_boundaries.md):
+  exhaustive common-zero shortening audits for fixed dimensions ten and
+  twelve, including exact quotient enumerators, divisible-code structure,
+  joint middle-layer occupancy bounds, and both Griesmer margins.  The
+  companion stdlib verifier checks every coset and records a canonical
+  digest.
 - [`evidence/boundary_triangle_closure.md`](evidence/boundary_triangle_closure.md):
   exact coset-cell calibration at the Fano and Witt boundary systems.
   It isolates a triangle-closure law verified at \(r=3,5\) but explicitly
@@ -377,6 +395,11 @@ routes, but not the asymmetric case.
   a separate cofactor proof of the global flag-sign formula, the exact
   residual left by completing the partial symbol fibers, and a stdlib verifier
   covering 450,176 finite sign cases plus the genuine \(k=2\) control.
+- [`evidence/odd_graph_local_ball/partial_fiber_sign_head.md`](evidence/odd_graph_local_ball/partial_fiber_sign_head.md):
+  the proof that the residual orientation factor is universally \(+1\),
+  the resulting exact required value of the full partial-fiber sign product,
+  and finite one-sided controls proving that separate prescribed
+  \(ij\)-trace slices cannot determine individual fiber signs.
 - [`evidence/odd_graph_local_ball/small_k_balls/`](evidence/odd_graph_local_ball/small_k_balls/):
   deterministic small-\(k\) CNFs, independently checked DRAT certificates,
   semantic witnesses, hashes, and the repaired \(k=16\) positive-control

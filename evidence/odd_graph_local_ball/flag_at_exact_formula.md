@@ -186,11 +186,37 @@ The reason is that the generic omitted rows run once over
 \]
 The fixed factor in (10) cancels over the even number \(k(k-1)\) of
 flags.  What remains is an orientation product computable from \(L,M\)
-times a partial-fiber sign product depending on \(N\).  Equation (7)
-and theorem (1) constrain their product, but neither determines the
-partial-fiber factor alone.  Thus there is no conflicting second sign
-in the present calculation, while the possibility of deriving one from
-additional cross-fiber structure remains genuinely open.
+times a partial-fiber sign product depending on \(N\).  Consequently,
+with the induced orders fixed, (1), (7), and (10) give the exact
+necessary identity
+\[
+ \boxed{\displaystyle
+ \prod_{i,u}\prod_{x\in\mathcal C\setminus\{L_i(u)\}}
+   \operatorname{sgn}\Phi_{i,u,x}
+ =E(L,M)(-1)^{k(k-1)/2}\operatorname{AT}(T)
+   \prod_i\delta(S_i), }\tag{11}
+\]
+where
+\[
+ E(L,M)=\prod_{i,u}\prod_{x\ {\rm generic}}
+ \varepsilon(v_M(i,u,x),v_L(i,u,x)).
+\]
+Thus (11) does determine the required global partial-fiber sign from
+\(L,M\); it is not, however, an independent evaluation.  A contradiction
+would require a second per-\(ij\), per-\(uv\), or joint compatibility
+theorem forcing a different value.  No such theorem is proved here.
+
+The companion note `partial_fiber_sign_head.md` proves the further
+unrestricted simplification \(E(L,M)=+1\) for every even-\(k\) chart
+satisfying conditions 1--2.  Hence every genuine radius-5 extension must
+satisfy
+\[
+ \prod_{i,u}\prod_{x\in\mathcal C\setminus\{L_i(u)\}}
+   \operatorname{sgn}\Phi_{i,u,x}
+ =(-1)^{k(k-1)/2}\operatorname{AT}(T)\prod_i\delta(S_i).
+\]
+This remains the same completion/cofactor evaluation, not an independent
+constraint on the shared \(N\)-table.
 
 ## Reproducible audit
 

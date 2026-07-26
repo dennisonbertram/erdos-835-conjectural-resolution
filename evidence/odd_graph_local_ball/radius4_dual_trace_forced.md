@@ -339,14 +339,19 @@ every edge in the full ordered product occurs twice.  For the second
 equality, condition 1 makes \(L_i(v)\) run through \(V\setminus\{v\}\);
 every unordered pair again occurs twice.  This proves
 reference-independence of the global **generic partial-fiber**
-contribution, not its value.
+contribution.  The companion `partial_fiber_sign_head.md` strengthens this:
+the absolute orientation product \(E(L,M)\) is \(+1\) for every admissible
+even-\(k\) chart.
 
 **Sign programme status.**  Formula (5) evaluates the global flag
 Alon--Tarsi product from \(L,M\), and the universal Latin identity
 implies that the completed symbol-sign product is the same global
-invariant.  No independent value formula for the forced partial fibers
-has been proved.  Such a formula could still contradict (5); (7) only
-removes a reference-order ambiguity.  The certified star theorem
+invariant.  After \(E(L,M)=+1\), it fixes the required global product of
+partial-fiber signs to the right side of (5), but this is the same cofactor
+calculation rather than an independent theorem about the shared
+\(N\)-table.  A genuinely independent per-\(ij\), per-\(uv\), or joint
+formula could still exclude charts by conflicting with (5).  The certified
+star theorem
 excludes only the fixed-Wallis **cyclic-17 slice-family ansatz** and
 does not exclude an arbitrary shared \(N\)-table on the Wallis chart.
 

@@ -59,6 +59,33 @@ text explicitly says that work begun from Problem #835 led to a **distinct**
 covering problem.  It is therefore not a claimed solution of #835.  This
 refresh likewise found no recent public claim resolving the open prime cases.
 
+### 2026-07-26 refresh and provenance separation
+
+The live Erdős Problems page was opened again on 2026-07-26 and still
+labelled #835 `Open`.  Recent-window X searches for
+
+```text
+"Erdős-Rosenfeld" OR "Erdos-Rosenfeld"
+"Problem #835" math
+"erdosproblems.com/835"
+"J(2k,k)" chromatic
+```
+
+found no external post claiming a resolution of #835.  The first query
+returned only the author's own 2026-07-24 post and one repost.
+
+A reply by Tommy King Jr. (`@ctkrug`), X post
+[`2081039606297063872`](https://x.com/i/status/2081039606297063872), says
+that the agent working on the **separate** \(C(12,6,4)\) covering-number
+result appears to have encountered his existing repository and reused some
+methodology; he also disputes that the covering result is complete.  The
+whole reply thread and a search of his recent posts contain no claim about
+solving Erdős--Rosenfeld #835.  This is therefore a provenance/completeness
+issue for the distinct covering-number repository, not evidence for or
+against the status of #835.  Any priority claim about \(C(12,6,4)\) should
+remain qualified until the two repositories and timestamps are compared
+directly.
+
 ## Archive limitation
 
 A full-archive query for the combined Erdős-835 spellings was attempted.
