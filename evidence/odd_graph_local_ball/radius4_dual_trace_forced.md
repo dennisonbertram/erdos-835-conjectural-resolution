@@ -182,8 +182,116 @@ oriented hole-pair terms over flags and compare the per-\(ij\) and
 per-\(uv\) fiberings, or to produce a certified witness falsifying the
 candidate.
 
-**The residual pair-orientation product, made explicit (derived, not
-yet forced).**  For a column relabelling \(\tau\), the uncancelled
+## Theorem (flag Latin-square augmentation; verified)
+
+Fix a flag \((i,u)\).  On rows \((A\setminus\{i\})\cup\{m,l\}\),
+columns \((V\setminus\{u\})\cup\{*\}\), symbols
+\(\mathcal C\setminus\{L_i(u)\}\), define
+\(Q(j,v)=N_{uv}(ij)\), \(Q(j,*)=L_j(u)\), \(Q(m,v)=M_i(uv)\),
+\(Q(m,*)=u\), \(Q(l,v)=L_i(v)\), \(Q(l,*)=\infty\).  In every radius-5
+structure \(Q\) is a **Latin square of order \(k\)**: rows \(j\) are
+rainbow by the forced radius-5 trace (Lemma 3's missing pair
+\(\{L_i(u),L_j(u)\}\) is restored by the \(*\) entry), rows \(m,l\) by
+conditions 2 and 1, columns \(v\) by condition 4 (its missing triple
+restored by the two dummy entries), column \(*\) by condition 1.  Its
+symbol permutations are exactly the Lemma-3 partial permutations
+completed by their prescribed missing rows/columns.  Verifier:
+`verify_flag_latin_square.py` — checks the universal parity identity
+\(\prod_{\rm rows}\operatorname{sgn}\cdot\prod_{\rm cols}
+\operatorname{sgn}\cdot\prod_{\rm syms}\operatorname{sgn}
+=(-1)^{n(n-1)/2}\) on 210 random Latin squares (n = 2..8), and the
+N-free parts of the augmentation (rows \(m,l\), column \(*\)) rainbow
+at all 240 flags of the audited k=16 Wallis chart.
+
+For completeness, the parity identity has a short permutation proof.
+Order the row, column and symbol sets, and let \(R,C,S\) be the three
+products of permutation signs.  The bijection
+\((r,c)\mapsto(r,Q(r,c))\) on ordered pairs has sign \(R\).  The
+bijection \((r,s)\mapsto(s,c_s(r))\), where \(c_s(r)\) is the column
+containing symbol \(s\) in row \(r\), has sign
+\((-1)^{k(k-1)/2}S\): transpose the two \(k\)-element coordinates,
+then apply the \(k\) symbol permutations.  Their composition is
+\((r,c)\mapsto(Q(r,c),c)\), whose sign is \(C\) (grouping it by
+columns introduces two identical coordinate-transposition signs,
+which cancel).  Hence
+\[
+ C=(-1)^{k(k-1)/2}RS,\qquad
+ RCS=(-1)^{k(k-1)/2}.
+\]
+
+## Theorem (exact global Alon--Tarsi product)
+
+For even \(k\), let \(T\) be the order-\(k\) Latin square on rows
+\(A\cup\{e\}\), columns and symbols \(V\), defined by
+\[
+ T(i,u)=L_i(u),\qquad T(e,u)=u.
+\]
+Let \(S_i\) be the symmetric idempotent Latin square of order \(k+1\)
+on \(\mathcal C\) defined by
+\[
+ S_i(u,u)=u,\quad S_i(u,v)=M_i(uv),\quad
+ S_i(u,\infty)=S_i(\infty,u)=L_i(u),\quad
+ S_i(\infty,\infty)=\infty.
+\]
+Write \(\delta(S_i)\) for the product of the \(k+1\) row-permutation
+signs.  Then every radius-5 structure satisfies
+\[
+ \boxed{\displaystyle
+ \prod_{i\in A,\ u\in V}\operatorname{AT}(Q^{i,u})
+ =(-1)^{k(k-1)/2}\operatorname{AT}(T)
+  \prod_{i\in A}\delta(S_i). }\tag{5}
+\]
+Here \(\operatorname{AT}\) is row-sign product times column-sign
+product; it is intrinsic at even order.
+
+*Proof.*  Fix induced orders on \(A,V,\mathcal C=V\cup\{\infty\}\),
+with dummy labels last.  We use the cofactor identity
+\[
+ \operatorname{sgn}(f_a)\operatorname{sgn}(f_b)
+ =(-1)^{\operatorname{pos}(a)+\operatorname{pos}(b)+1},\tag{6}
+\]
+where \(f_a,f_b\) append respectively \(*\mapsto b\) and
+\(*\mapsto a\) to a common bijection onto
+\(\mathcal C\setminus\{a,b\}\).  It follows by deleting the appended
+entry from each permutation; the two common signs square to one.
+
+Pair row \(j\) of \(Q^{i,u}\) with row \(i\) of \(Q^{j,u}\).  Their
+common \(N\)-part has image
+\(\mathcal C\setminus\{L_i(u),L_j(u)\}\), so (6) applies.  For fixed
+\(u\), the exponent is
+\[
+ (k-2)\sum_i\operatorname{pos}(L_i(u))+\binom{k-1}{2};
+\]
+after multiplying over the \(k\) values of \(u\) it is even.  Thus
+all existing rows contribute \(1\).  Pairing column \(v\) of
+\(Q^{i,u}\) with column \(u\) of \(Q^{i,v}\) gives (6) with
+\(L_i(u),L_i(v)\); for fixed \(i\) the images run over all pairs of
+\(V\), and the exponent is \(k\binom{k}{2}\), again even.  Thus all
+existing columns contribute \(1\).
+
+The \(l\)-rows are cofactors of
+\(v\mapsto L_i(v),\infty\mapsto\infty\); their product over \(u\) is
+\(\operatorname{sgn}(L_i)^k(-1)^{k(k-1)}=1\).  The \(m\)-rows are
+cofactors of the finite rows of \(S_i\), with \(u\) moved to the dummy
+position, and contribute
+\(\delta(S_i)\operatorname{sgn}(L_i)\) over \(u\).  Finally extend the
+\(*\)-column before deletion to
+\(\Lambda_u(i)=L_i(u),\Lambda_u(m)=u,\Lambda_u(l)=\infty\).
+Multiplying its cofactors gives
+\((-1)^{k(k-1)/2}C(T)\).  Since
+\(R(T)=\prod_i\operatorname{sgn}(L_i)\), multiplication yields (5).
+\(\square\)
+
+`collaboration/opus5/radius5_followup/verify_formula_F.py` independently
+checks the deletion and completion identities on 3,000 random
+instances, the five factors on all 1,680 \(k=6\) radius-3 families and
+the \(k=16\) Wallis \(L,M\) data, and the genuine \(k=2\) equality.
+Those \(k=6,16\) runs test the \(L,M\)-only factorization; they are not
+radius-5 witnesses.  Formula (5) is a structural evaluation, not a
+contradiction.
+
+**The residual pair-orientation product and its global cancellation.**
+For a column relabelling \(\tau\), the uncancelled
 factor at flag \((i,u)\) is
 \(R_\tau(i,u)=\prod_{x\ \mathrm{generic}}
 \varepsilon_\tau\bigl(\{v_1(x),v_2(x)\}\bigr)\), where
@@ -198,64 +306,71 @@ in colour \(x\), the pair at \(x\) is \(\{v,\psi_{i,u}(v)\}\) for
  \text{ in colour }L_i(v).
 \]
 
-So the multiset of generic hole pairs is exactly the edge set of the
-functional graph of \(\psi_{i,u}\) on \(V\setminus\{u\}\) — a disjoint
-union of \(\psi\)-paths and \(\psi\)-cycles whose two exceptional
-vertices are \(w_\infty\) (the \(M_i\)-\(\infty\)-partner of \(u\),
-never a \(v_1\)) and \(L_i^{-1}(u)\) (never a \(v_2\)), coinciding
-exactly when \(M_i(u,L_i^{-1}(u))=\infty\).  Hence
+Here \(v\in V\setminus\{u,L_i^{-1}(u)\}\), exactly the values for which
+\(L_i(v)\) is generic.  The map is a bijection
+\[
+ \psi_{i,u}:
+ V\setminus\{u,L_i^{-1}(u)\}\longrightarrow
+ V\setminus\{u,w_\infty\}.
+\]
+Thus the multiset of generic hole pairs is the undirected edge
+multiset of its partial functional graph on \(V\setminus\{u\}\).
+This graph is a disjoint union of directed cycles plus one directed
+path from \(w_\infty\) to \(L_i^{-1}(u)\); when those vertices
+coincide, the path degenerates to an isolated vertex.  Here
+\(w_\infty\), the \(M_i\)-\(\infty\)-partner of \(u\), is never a
+\(v_1\), while \(L_i^{-1}(u)\) is never a \(v_2\); they coincide
+exactly when \(M_i(u,L_i^{-1}(u))=\infty\).  A directed 2-cycle
+contributes its undirected edge twice.  Hence
 \(R_\tau(i,u)=\prod_{e\in\psi_{i,u}\text{-graph}}\varepsilon_\tau(e)\):
 the residual is a \(\pm1\) function of the \(L_i,M_i\) data alone
-(radius-4 data — no \(N\) required), and the global question is
-whether \(\prod_{(i,u)}R_\tau(i,u)\), or a fibering-matched partial
-product, is forced to \(1\) by conditions 1–3.  This is precisely
-where the programme now stands: no cancellation is claimed.
+(radius-4 data — no \(N\) required).  In fact it cancels globally:
+\[
+ \prod_uR_\tau(i,u)=
+ \prod_{v\in V}\varepsilon_\tau(\{v,L_i(v)\}),\qquad
+ \prod_{i,u}R_\tau(i,u)=1.\tag{7}
+\]
+For the first equality, fix \(v\), put \(x=L_i(v)\), and vary \(u\)
+over the support \(V\setminus\{v,L_i(v)\}\) of the \(x\)-matching of
+\(M_i\).  Its mate map is a permutation of that support, so each
+\(\varepsilon_\tau(\{v,z\})\), \(z\ne v,L_i(v)\), occurs once.
+Restoring the omitted factor leaves the displayed product because
+every edge in the full ordered product occurs twice.  For the second
+equality, condition 1 makes \(L_i(v)\) run through \(V\setminus\{v\}\);
+every unordered pair again occurs twice.  This proves
+reference-independence of the global **generic partial-fiber**
+contribution, not its value.
 
-**Sign programme status (explicitly untested).**  The candidate
-nonlinear invariant — products of \(\operatorname{sgn}\) of the
-\(\Phi_{i,u,x}\) bijections across flags, compared through the two
-fiberings — is well-defined once reference orderings are fixed, but
-**no radius-5 witness exists on which to falsify it**: the shared
-\(N\)-table does not exist for the Wallis chart at \(k=16\) (star
-theorem), the \(k=4\) suite verdicts on disk read UNSAT at both radii,
-and the \(k=6\) radius-5 log now also reads `s UNSATISFIABLE`
-(certificates pending).  Until either a small-\(k\) witness appears
-(none may exist) or the suite's UNSATs are certified, no sign lemma is
-proposed as fact.  If the small-\(k\) local nonexistence pattern is
-certified, the productive question inverts: whether the LOCAL ball
-already fails at \(k=16\) — with the certified small-\(k\) mechanisms
-as lifting templates — rather than which invariant separates a ball
-that exists.
+**Sign programme status.**  Formula (5) evaluates the global flag
+Alon--Tarsi product from \(L,M\), and the universal Latin identity
+implies that the completed symbol-sign product is the same global
+invariant.  No independent value formula for the forced partial fibers
+has been proved.  Such a formula could still contradict (5); (7) only
+removes a reference-order ambiguity.  The certified star theorem
+excludes only the fixed-Wallis **cyclic-17 slice-family ansatz** and
+does not exclude an arbitrary shared \(N\)-table on the Wallis chart.
 
-## Ground-truth computations in progress (statuses at write time)
+## Certified small-\(k\) controls
 
-To honour falsify-first discipline, every future proposed lemma will be
-tested against exact small-even-\(k\) ground truth.  A background
-decision suite (session scratchpad `small_k_balls/`) is running:
+The complete package, commands, hashes and independent audit are in
+`small_k_balls/`.
 
-- Gate: the encoder PASSES on the known-good \(k=16\) Wallis chart —
-  `k16_r4_wallisfix.cadical.log`: `s SATISFIABLE`, with the decoded
-  control witness recorded (`k16_r4_encoder_control_witness.json`).
-- \(k=4\): solver verdicts on disk read **radius-4 UNSAT and radius-5
-  UNSAT** (`k4_r4.cadical.log`, `k4_r5.cadical.log`, DRAT files
-  present) — *pending drat-trim verification and the agent's
-  certificate report before being treated as proved*.  If confirmed,
-  the unrestricted radius-4 local ball already fails at \(k=4\): a
-  purely local proof of that case.
-- \(k=6\): radius-4 and radius-5 cadical runs in progress (no verdict
-  lines yet); CP-SAT second engine in progress.
-- \(k=8\): radius-4 and radius-5 cadical runs in progress.
+- The \(k=16\) Wallis-fixed radius-4 encoder gate is SAT; its complete
+  6,850,440-clause model and all 120 semantic \(N\)-slices pass.
+- \(k=4\) radius 4 and radius 5 are UNSAT with independently checked
+  DRAT certificates.
+- \(k=6\) radius 5 is UNSAT with an independently checked DRAT
+  certificate (13,633,410 resolution steps).
+- The package makes no certified claim for \(k=6\) radius 4 or either
+  \(k=8\) run.
 
-A \(k=6\) radius-5 witness would become the mandatory falsification
-instance for all proposed invariants; a certified \(k=6\) local
-nonexistence would be a new *local* proof of the \(k=6\) case of #835
-and a lifting template.  Certificates (witness JSON + independent
-semantic verifier, or DRAT + drat-trim) will be exported when the runs
-land.
+There is therefore no positive radius-5 control beyond the degenerate
+\(k=2\) case.  The \(k=16\) Wallis data test the \(L,M\)-only factors
+in (5), but do not instantiate the flag squares \(Q^{i,u}\).
 
 ## Scope at k=16
 
 These lemmas constrain every unrestricted radius-5 local ball of
 \(O_{16}\); they construct nothing and exclude nothing at \(k=16\).
-**#835 is not solved**, and no claim beyond the three proved lemmas and
-the recorded run statuses is made here.
+**#835 is not solved**, and no claim beyond the proved structural
+statements and the explicitly qualified run statuses is made here.

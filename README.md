@@ -185,7 +185,10 @@ New exact results in the note include:
   radius-three families fail at radius four for every root-colour choice.
   All 45,360 infeasible \(k=6\) subproblems have the same forced-edge
   collision mechanism. The self-contained exhaustive verifier also proves
-  why that mechanism does not transfer to \(k=16\); and
+  why that mechanism does not transfer to \(k=16\). A separate portable
+  certificate package independently checks DRAT exclusions for \(k=4\) at
+  radii four and five and for \(k=6\) at radius five, together with a
+  6,850,440-clause SAT/semantic positive control at \(k=16\); and
 - a lossless radius-five trace theorem: in every unrestricted local
   \(O_k\to K_{k+1}\) extension for even \(k\), parity forces the
   \(N\)-traces to be perfect or near-perfect matchings. At \(k=16\), the
@@ -202,8 +205,25 @@ New exact results in the note include:
   and supplies no \(k=16\) obstruction. At radius five, fixing a flag
   \((i,u)\) gives a third forced fibering: every colour class in the
   \((j,v)\) rectangle is a partial permutation with its omitted rows and
-  columns prescribed exactly. This supplies a canonical carrier for a
-  possible sign invariant, but no such obstruction is yet proved; and
+  columns prescribed exactly. Adding two canonical dummy rows and one dummy
+  column completes every such flag to a Latin square \(Q^{i,u}\) of order
+  \(k\). A cofactor calculation now evaluates its global Alon--Tarsi product
+  exactly as
+  \[
+    \prod_{i,u}\operatorname{AT}(Q^{i,u})
+    =(-1)^{k(k-1)/2}\operatorname{AT}(T)\prod_i\delta(S_i),
+  \]
+  entirely from the radius-three \(L,M\) data. The formula and global
+  pair-orientation cancellation are unrestricted structural theorems, but no
+  independent forced-fiber value or \(k=16\) sign contradiction is known; and
+- a certificate-ready CNF for the complete unrestricted radius-four ball plus
+  all 1,680 forced traces: 883,521 variables and 1,909,497 clauses, with
+  canonical SHA-256
+  `2eb2e0efba279655021e4c709b03148e3cea73d98e32c745637864ba177327d4`.
+  Its independent verifier reconstructs the entire parent and augmented byte
+  streams, checks every semantic trace incidence, and exhaustively validates
+  the Sinz projection on all \(2^{15}\) primary assignments. A proof-logging
+  search is in progress; no SAT or UNSAT result is claimed; and
 - a complete unrestricted CNF for the necessary shadow \(LS(3,4,20)\):
   159,885 variables and 251,957 clauses, independently reconstructed
   byte-for-byte with canonical SHA-256
@@ -346,11 +366,25 @@ routes, but not the asymmetric case.
   \(k=6\) radius-four obstruction, and independent audit of the forced-trace
   theorem, with both quick and full finite verifiers. It also contains an
   independent structural audit of the \(LS(3,4,20)\) and \(S(4,5,21)\)
-  shadows.
+  shadows and an independent line-by-line audit of the global flag-sign
+  formula.
 - [`evidence/odd_graph_local_ball/radius4_dual_trace_forced.md`](evidence/odd_graph_local_ball/radius4_dual_trace_forced.md):
   the ansatz-free per-\(uv\) matching decomposition forced at radius four,
-  plus the proof that its naive allowed-set parity is vacuous for every even
-  \(k\).
+  the flag partial-permutation fibering and canonical order-\(k\) Latin-square
+  augmentation at radius five, the exact global Alon--Tarsi product, plus the
+  proof that the naive allowed-set parity is vacuous for every even \(k\).
+- [`evidence/odd_graph_local_ball/flag_at_exact_formula.md`](evidence/odd_graph_local_ball/flag_at_exact_formula.md):
+  a separate cofactor proof of the global flag-sign formula, the exact
+  residual left by completing the partial symbol fibers, and a stdlib verifier
+  covering 450,176 finite sign cases plus the genuine \(k=2\) control.
+- [`evidence/odd_graph_local_ball/small_k_balls/`](evidence/odd_graph_local_ball/small_k_balls/):
+  deterministic small-\(k\) CNFs, independently checked DRAT certificates,
+  semantic witnesses, hashes, and the repaired \(k=16\) positive-control
+  archive.
+- [`evidence/odd_graph_local_ball/radius4_forced_trace_cnf.md`](evidence/odd_graph_local_ball/radius4_forced_trace_cnf.md):
+  the deterministic materializer, pinned manifest, and independent verifier
+  for the complete unrestricted radius-four-plus-forced-trace CNF. The
+  exact authenticated 37 MB instance and trace map are checked into Git.
 - [`evidence/odd_graph_local_ball/radius5_large_set_equivalence.md`](evidence/odd_graph_local_ball/radius5_large_set_equivalence.md):
   an exact equivalence between a radius-five slice and a prescribed-link
   \(LS(2,3,19)\), plus an eight-`AllDifferent` cyclic quotient.
