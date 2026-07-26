@@ -208,7 +208,10 @@ This observation describes the partial in its original labels.  The later
 even-flag verifier constructs an exact point/colour relabelling that moves
 the same 4,773 assignments and 72 holes into branch 0, of type \(2^8\).
 Branch 54 is therefore not needed in a lossless sweep and its labelled CNF is
-not known to be SAT or UNSAT.
+not known to be SAT or UNSAT.  The deterministic
+[branch-0 handoff](../collaboration/ls3420_branch0_search/README.md) exports
+and independently checks that relabelled partial as a solver hint, including
+an inverse round trip and all sixteen branch units.
 
 ## 5. Bounded encoding probe
 

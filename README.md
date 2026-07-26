@@ -429,7 +429,11 @@ routes, but not the asymmetric case.
   [`28-branch reduction`](collaboration/ls3420_structural_attack/LS3420_EVEN_FLAG_REDUCTION.md)
   and its independent verifier prove that only the 28 even cycle types need
   be searched; they also relabel the Etzion--Hartman partial exactly from
-  branch 54 to branch 0. No branch verdict is claimed.
+  branch 54 to branch 0. The
+  [`branch-0 search handoff`](collaboration/ls3420_branch0_search/README.md)
+  authenticates the resulting 4,773-assignment hint, its inverse relabelling,
+  and the exact propagation-enhanced branch-0 CNF. No branch verdict is
+  claimed.
 - [`evidence/cyclic17_all_105_exact_slices_status.md`](evidence/cyclic17_all_105_exact_slices_status.md):
   the exact certificates, independent verifier, and carefully limited scope
   for those \(105\) separately feasible prescribed-link slices.
