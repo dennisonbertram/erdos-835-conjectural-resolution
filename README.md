@@ -240,13 +240,15 @@ New exact results in the note include:
   159,885 variables and 251,957 clauses, independently reconstructed
   byte-for-byte with canonical SHA-256
   `f855ff1dcd09c420d8d086a9bd759c7906b7685b0e40eb0149eb42768424625f`.
-  The root-star normalization leaves a lossless 55-way second-star split,
-  indexed by all fixed-point-free cycle types on 16 points. Its independent
-  verifier checks that their conjugacy classes sum to all
-  \(7{,}697{,}064{,}251{,}745\) derangements. SAT and proof-logging searches
-  are in progress; no SAT or UNSAT result is claimed. Checked UNSAT
-  certificates for all 55 branches would exclude \(k=16\), while SAT would
-  construct a derived large set but would not solve #835; and
+  The root-star normalization gives a lossless 55-way second-star split,
+  indexed by all fixed-point-free cycle types on 16 points. A subsequent
+  four-bijection parity lemma proves that every model can be relabelled into
+  exactly one of the 28 even-permutation types, so only those 28 branches are
+  needed for an exhaustive sweep. Independent verifiers check both the full
+  derangement census and the 55-to-28 reduction. SAT and proof-logging
+  searches are in progress; no SAT or UNSAT result is claimed. Checked UNSAT
+  certificates for all 28 even branches would exclude \(k=16\), while SAT
+  would construct a derived large set but would not solve #835; and
 - a parameter-free "one short of a large set" lemma: \(P-1\) pairwise disjoint
   \(S(k-1,k,v)\) force a \(P\)-th, so the maximum number of pairwise disjoint
   systems is never exactly \(P-1\).  In particular no search for \(16\)
@@ -423,7 +425,11 @@ routes, but not the asymmetric case.
   and [`evidence/ls_3_4_20_second_star_branches/`](evidence/ls_3_4_20_second_star_branches/):
   the proof, deterministic generator, compact cubes, manifests, materializer,
   and independent verifier for the lossless 55-way second-star
-  decomposition. No branch verdict is claimed.
+  decomposition. The later
+  [`28-branch reduction`](collaboration/ls3420_structural_attack/LS3420_EVEN_FLAG_REDUCTION.md)
+  and its independent verifier prove that only the 28 even cycle types need
+  be searched; they also relabel the Etzion--Hartman partial exactly from
+  branch 54 to branch 0. No branch verdict is claimed.
 - [`evidence/cyclic17_all_105_exact_slices_status.md`](evidence/cyclic17_all_105_exact_slices_status.md):
   the exact certificates, independent verifier, and carefully limited scope
   for those \(105\) separately feasible prescribed-link slices.

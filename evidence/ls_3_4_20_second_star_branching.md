@@ -4,13 +4,16 @@
 
 This note gives a **lossless 55-way symmetry decomposition** of the complete
 unrestricted \(LS(3,4,20)\) CNF.  It does not assume that a solution has an
-automorphism.
+automorphism.  A later
+[four-bijection parity reduction](../collaboration/ls3420_structural_attack/LS3420_EVEN_FLAG_REDUCTION.md)
+proves that every model can be relabelled into one of the 28 even-permutation
+branches, so only those 28 are needed for an exhaustive sweep.
 
 No branch has been proved SAT or UNSAT here.  Therefore this is a search
 reduction, not a solution of \(LS(3,4,20)\) or Erdős--Rosenfeld #835.
 
 Every \(LS(15,16,32)\) derives to an \(LS(3,4,20)\).  Consequently, checked
-UNSAT proofs for **all 55 branches** would exclude the \(k=16\) case of
+UNSAT proofs for the **28 even branches** would exclude the \(k=16\) case of
 #835.  A satisfying branch would construct the necessary derived large set
 only; it would not by itself construct an \(LS(15,16,32)\).  These branches
 say nothing about the later prime cases.
@@ -201,9 +204,11 @@ in deterministic branch 54, whose plain and propagation-enhanced
 materializations are authenticated in
 `ls_3_4_20_second_star_branches/probe_2026-07-26.json`.
 
-This observation makes branch 54 the natural place to search for a completion
-of that particular near-solution.  It does not make branch 54 exhaustive:
-arbitrary solutions may occupy any of the 55 cycle types.
+This observation describes the partial in its original labels.  The later
+even-flag verifier constructs an exact point/colour relabelling that moves
+the same 4,773 assignments and 72 holes into branch 0, of type \(2^8\).
+Branch 54 is therefore not needed in a lossless sweep and its labelled CNF is
+not known to be SAT or UNSAT.
 
 ## 5. Bounded encoding probe
 

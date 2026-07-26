@@ -1,5 +1,12 @@
 # LS(3,4,20) and S(4,5,21): structure, audits, and a lossless branch
 
+> **Subsequent exact improvement (2026-07-26).**  The 55-way decomposition
+> below remains correct, but a four-bijection parity lemma now proves that
+> every \(LS(3,4,20)\) can be relabelled into one of the 28
+> even-permutation branches.  The Etzion--Hartman partial also relabels
+> exactly from branch 54 to branch 0.  See
+> [`LS3420_EVEN_FLAG_REDUCTION.md`](../../ls3420_structural_attack/LS3420_EVEN_FLAG_REDUCTION.md).
+
 **Scope, stated first.** Neither target is resolved. **Erdős–Rosenfeld #835
 remains open.** I found no construction and no obstruction for either
 LS(3,4,20) or S(4,5,21). What is delivered is: an audit of both WLOG
