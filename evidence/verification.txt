@@ -753,3 +753,43 @@ Scope:
 See:
   evidence/cyclic17_all_power_sums_audit.md
   evidence/audit_cyclic17_all_power_sums.py
+
+================================================================================
+2026-07-26  Prime cyclic-layer census and Z2 reduction
+================================================================================
+
+Commands:
+  python3 -B evidence/verify_cyclic_layer_recursion_prime_census.py
+  python3 -B evidence/verify_cyclic17_z2_equivariant_reduction.py
+  python3 -B evidence/search_cyclic17_z2_equivariant_radius5.py \
+    --seconds 420 --workers 1
+
+Exact results:
+  1. The full stdlib-only census completed and passed.  It independently
+     enumerates the starters for p=3,5,7,11,13 and proves that the maximum
+     pairwise-disjoint families have sizes 1,1,3,7,11 respectively.
+  2. Z_13 has exactly four cyclic golf designs.  For every one, exhaustive
+     exact cover gives 24 feasible and 31 infeasible prescribed-link slices.
+     This is a result only about the cyclic ansatz at k=12.
+  3. The new negation-symmetric Z_17 golf design is checked directly.
+     Certificate SHA-256:
+       573e381dde4562b4076c76f687d33367db6a555b2ac43a04880d6de0be5bb593
+  4. The independent structural verifier checks all 4,200 phase-domain
+     transports.  The involution has 56 singleton cells with forced in-domain
+     values and 2,072 paired free phase orbits.
+  5. The first reduced CP-SAT run returned UNKNOWN after 420.0 seconds,
+     4,126,421 branches, and 360,839 conflicts.  UNKNOWN is a resource result
+     and supplies no mathematical evidence.
+
+Scope:
+  The census theorems concern only colour-transitive cyclic ansatzes.  The
+  Z2 model concerns one symmetric golf design and only the joint layer-two
+  radius-five boundary.  No witness or infeasibility proof was obtained, and
+  none of these results resolves Erdős-Rosenfeld Problem #835.
+
+See:
+  evidence/cyclic_layer_recursion_prime_census.md
+  evidence/verify_cyclic_layer_recursion_prime_census.py
+  evidence/cyclic17_symmetric_golf_design.json
+  evidence/verify_cyclic17_z2_equivariant_reduction.py
+  evidence/search_cyclic17_z2_equivariant_radius5.py

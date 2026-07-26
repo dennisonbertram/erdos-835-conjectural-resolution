@@ -324,6 +324,12 @@ routes, but not the asymmetric case.
   route.  All dependency-cancelled power sums through degree \(16\) are
   consistent (3,240 rows, rank 3,000), so the nonlinear phase constraints
   remain the genuine obstruction.
+- [`evidence/cyclic_layer_recursion_prime_census.md`](evidence/cyclic_layer_recursion_prime_census.md):
+  a solver-free census of the small prime cyclic layers, a new
+  negation-symmetric \(G(17)\) certificate, and an exact
+  \(\mathbb Z_2\)-equivariant reduction of its joint radius-five boundary.
+  The reduced search is still `UNKNOWN`; these are cyclic-ansatz results,
+  not a solution of Problem #835.
 - [`evidence/global_latin_compatibility.md`](evidence/global_latin_compatibility.md):
   the exact Latin-square transition, its golf-design form, a cyclic
   \(G(17)\), and the verified bridge through the complete radius-four ball.
