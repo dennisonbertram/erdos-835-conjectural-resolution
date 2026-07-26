@@ -187,6 +187,13 @@ New exact results in the note include:
   105 fixed-pair slices is necessarily a prescribed-link
   \(LS(2,3,19)\). This removes a previously stated “minimal-trace ansatz”
   without constructing the shared trace or solving #835; and
+- a complete unrestricted CNF for the necessary shadow \(LS(3,4,20)\):
+  159,885 variables and 251,957 clauses, independently reconstructed
+  byte-for-byte with canonical SHA-256
+  `f855ff1dcd09c420d8d086a9bd759c7906b7685b0e40eb0149eb42768424625f`.
+  SAT and proof-logging searches are in progress; no SAT or UNSAT result is
+  claimed. A checked UNSAT certificate would exclude \(k=16\), while SAT
+  would construct a derived large set but would not solve #835; and
 - a parameter-free "one short of a large set" lemma: \(P-1\) pairwise disjoint
   \(S(k-1,k,v)\) force a \(P\)-th, so the maximum number of pairwise disjoint
   systems is never exactly \(P-1\).  In particular no search for \(16\)
@@ -320,6 +327,10 @@ routes, but not the asymmetric case.
   proves that the required trace matching is forced, not an ansatz. All
   \(105\) Wallis slices have independent exact cyclic completions, while
   their shared-\(N\) compatibility remains the decisive condition.
+- [`evidence/ls_3_4_20_generic_cnf/`](evidence/ls_3_4_20_generic_cnf/):
+  a deterministic complete CNF for the unrestricted \(LS(3,4,20)\)
+  necessary shadow, together with a canonical variable map, manifest, and an
+  independent stream verifier.
 - [`evidence/cyclic17_all_105_exact_slices_status.md`](evidence/cyclic17_all_105_exact_slices_status.md):
   the exact certificates, independent verifier, and carefully limited scope
   for those \(105\) separately feasible prescribed-link slices.

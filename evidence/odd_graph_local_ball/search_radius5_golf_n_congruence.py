@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Find a full N layer satisfying all forced radius-five congruences.
+"""Find a full fixed-golf N layer satisfying the forced radius-five trace.
 
 This is an intermediate exact search only.  It omits P and therefore never
 claims a radius-five ball; its output is a coherent N-layer hint for the
 complete joint model.  Every constraint retained here is an N constraint of
 the complete model or a consequence forced by its P triangle decomposition.
+In particular, every fixed ``ij,u`` trace is all-different, as proved without
+any golf or cyclic assumption in ``radius5_minimal_trace_forced.md``.
 """
 
 from __future__ import annotations
@@ -20,10 +22,28 @@ from search_radius5_golf_joint import IJS, SQUARES, UVS, golf_sha256, n_allowed,
 from search_radius5_golf_joint_tight import add_forced_triangle_congruences
 from global_latin_audit import construct_golf17
 
-SCHEMA = "odd-graph-o16-radius5-fixed-golf-n-congruence-v1"
+SCHEMA = "odd-graph-o16-radius5-fixed-golf-n-forced-trace-v2"
 
 
-def build_n_model():
+def add_forced_trace_stars(model: cp_model.CpModel, n) -> int:
+    """Add the 105*16 lossless all-different consequences on the N layer."""
+
+    count = 0
+    for ij in IJS:
+        for u in range(16):
+            model.AddAllDifferent(
+                [
+                    n[(min(u, v), max(u, v)) + ij]
+                    for v in range(16)
+                    if v != u
+                ]
+            )
+            count += 1
+    assert count == 1_680
+    return count
+
+
+def build_n_model(include_redundant_congruences: bool = False):
     golf = construct_golf17()
     verify_l_m(golf)
     model = cp_model.CpModel()
@@ -36,17 +56,27 @@ def build_n_model():
     for uv in UVS:
         for i in SQUARES:
             model.AddAllDifferent([n[uv + (min(i, j), max(i, j))] for j in SQUARES if j != i])
-    literal_count = add_forced_triangle_congruences(model, n, golf)
-    return model, n, golf, literal_count
+    trace_star_count = add_forced_trace_stars(model, n)
+    # The exact trace stars already force |D_infinity|=8 and |D_x|=7, with
+    # the parity pattern from radius5_minimal_trace_forced.md.  Hence the
+    # older reified mod-3/parity constraints are logically redundant.  Keep
+    # them as an optional propagation experiment, not in the lean default.
+    literal_count = (
+        add_forced_triangle_congruences(model, n, golf)
+        if include_redundant_congruences
+        else 0
+    )
+    return model, n, golf, literal_count, trace_star_count
 
 
-def make_payload(solver, n, golf, literal_count):
+def make_payload(solver, n, golf, literal_count, trace_star_count):
     payload = {
         "schema": SCHEMA,
         "golf_sha256": golf_sha256(golf),
         "n_order": "uv-major then ij-major, lexicographic combinations",
         "n_values": [solver.Value(n[uv + ij]) for uv in UVS for ij in IJS],
         "triangle_congruence_literals": literal_count,
+        "forced_trace_stars": trace_star_count,
     }
     payload["sha256_without_hash"] = hashlib.sha256((json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n").encode()).hexdigest()
     return payload
@@ -58,16 +88,35 @@ def main():
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--output", type=Path)
+    parser.add_argument(
+        "--redundant-congruences",
+        action="store_true",
+        help=(
+            "Also instantiate the older 143,640 reified parity/mod-3 literals. "
+            "They are consequences of the exact forced trace and may slow presolve."
+        ),
+    )
     args = parser.parse_args()
-    model, n, golf, literal_count = build_n_model()
+    model, n, golf, literal_count, trace_star_count = build_n_model(
+        args.redundant_congruences
+    )
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = args.seconds
     solver.parameters.num_search_workers = args.workers
     solver.parameters.random_seed = args.seed
     status = solver.Solve(model)
-    result = {"schema": SCHEMA, "status": solver.StatusName(status), "golf_sha256": golf_sha256(golf), "triangle_congruence_literals": literal_count, "wall_time_seconds": solver.WallTime(), "branches": solver.NumBranches(), "conflicts": solver.NumConflicts()}
+    result = {
+        "schema": SCHEMA,
+        "status": solver.StatusName(status),
+        "golf_sha256": golf_sha256(golf),
+        "triangle_congruence_literals": literal_count,
+        "forced_trace_stars": trace_star_count,
+        "wall_time_seconds": solver.WallTime(),
+        "branches": solver.NumBranches(),
+        "conflicts": solver.NumConflicts(),
+    }
     if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
-        payload = make_payload(solver, n, golf, literal_count)
+        payload = make_payload(solver, n, golf, literal_count, trace_star_count)
         result["n_sha256_without_hash"] = payload["sha256_without_hash"]
         if args.output:
             args.output.write_text(json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n", encoding="utf-8")

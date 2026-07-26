@@ -77,12 +77,41 @@ def verify_assignment(
         assert sorted(closed_colours) == list(range(COLOR_COUNT))
 
 
+def radius5_trace_position_groups(
+    vertices: list[int], distances: list[int]
+) -> list[list[int]]:
+    """Return the 1,680 forced N-trace stars in the radius-four layer."""
+
+    index = {vertex: position for position, vertex in enumerate(vertices)}
+    groups = []
+    for first_fixed, second_fixed in combinations(range(15), 2):
+        fixed_mask = ROOT ^ (1 << first_fixed) ^ (1 << second_fixed)
+        for first_moving in range(16):
+            trace_positions = []
+            for second_moving in range(16):
+                if second_moving == first_moving:
+                    continue
+                vertex = (
+                    fixed_mask
+                    | (1 << (15 + first_moving))
+                    | (1 << (15 + second_moving))
+                )
+                position = index[vertex]
+                assert distances[position] == 4
+                trace_positions.append(position)
+            assert len(trace_positions) == 15
+            groups.append(trace_positions)
+    assert len(groups) == 1_680
+    return groups
+
+
 def solve(
     radius: int,
     seconds: float,
     workers: int,
     encoding: str,
     radius5_trace_strengthening: bool = True,
+    radius5_trace_only: bool = False,
 ):
     vertices, distances = generate_ball(radius)
     index = {vertex: position for position, vertex in enumerate(vertices)}
@@ -140,41 +169,28 @@ def solve(
     # radius-five neighbourhood equations, not a symmetry or construction
     # ansatz.  Stating them explicitly gives CP-SAT much earlier propagation.
     trace_constraint_count = 0
-    if radius >= 5 and radius5_trace_strengthening:
-        for first_fixed, second_fixed in combinations(range(15), 2):
-            fixed_mask = (
-                ROOT
-                ^ (1 << first_fixed)
-                ^ (1 << second_fixed)
-            )
-            for first_moving in range(16):
-                trace_positions = []
-                for second_moving in range(16):
-                    if second_moving == first_moving:
-                        continue
-                    vertex = (
-                        fixed_mask
-                        | (1 << (15 + first_moving))
-                        | (1 << (15 + second_moving))
-                    )
-                    position = index[vertex]
-                    assert distances[position] == 4
-                    trace_positions.append(position)
-                assert len(trace_positions) == 15
-                if encoding == "integer":
-                    assert colour is not None
-                    model.AddAllDifferent(
-                        [colour[position] for position in trace_positions]
+    apply_forced_trace = (
+        (radius >= 5 and radius5_trace_strengthening)
+        or (radius == 4 and radius5_trace_only)
+    )
+    trace_position_groups = []
+    if apply_forced_trace:
+        trace_position_groups = radius5_trace_position_groups(vertices, distances)
+        for trace_positions in trace_position_groups:
+            if encoding == "integer":
+                assert colour is not None
+                model.AddAllDifferent(
+                    [colour[position] for position in trace_positions]
+                )
+                trace_constraint_count += 1
+            else:
+                assert indicator is not None
+                for assigned_colour in range(COLOR_COUNT):
+                    model.AddAtMostOne(
+                        indicator[position][assigned_colour]
+                        for position in trace_positions
                     )
                     trace_constraint_count += 1
-                else:
-                    assert indicator is not None
-                    for assigned_colour in range(COLOR_COUNT):
-                        model.AddAtMostOne(
-                            indicator[position][assigned_colour]
-                            for position in trace_positions
-                        )
-                        trace_constraint_count += 1
 
     def fix(vertex: int, assigned_colour: int) -> None:
         if encoding == "integer":
@@ -220,6 +236,7 @@ def solve(
         "radius5_trace_strengthening": (
             radius >= 5 and radius5_trace_strengthening
         ),
+        "radius5_trace_only": radius == 4 and radius5_trace_only,
         "radius5_trace_constraints": trace_constraint_count,
         "status": solver.StatusName(status),
         "wall_time_seconds": solver.WallTime(),
@@ -243,6 +260,10 @@ def solve(
             ]
         verify_assignment(vertices, distances, assignment, radius)
         result["certificate_verified"] = True
+        if apply_forced_trace:
+            for trace_positions in trace_position_groups:
+                assert len({assignment[position] for position in trace_positions}) == 15
+            result["radius5_trace_verified"] = True
     return result, vertices, distances, assignment
 
 
@@ -270,9 +291,24 @@ def main() -> None:
             "Useful only as a performance control."
         ),
     )
+    parser.add_argument(
+        "--radius5-trace-only",
+        action="store_true",
+        help=(
+            "At radius 4, add the lossless forced N-trace consequence of any "
+            "radius-five extension without constructing the sphere-five P layer. "
+            "This is a necessary-condition search, not a radius-five witness."
+        ),
+    )
     args = parser.parse_args()
     if args.radius < 1:
         parser.error("--radius must be positive")
+    if args.radius5_trace_only and args.radius != 4:
+        parser.error("--radius5-trace-only requires --radius 4")
+    if args.radius5_trace_only and args.no_radius5_trace_strengthening:
+        parser.error(
+            "--radius5-trace-only conflicts with --no-radius5-trace-strengthening"
+        )
 
     result, vertices, distances, assignment = solve(
         args.radius,
@@ -280,6 +316,7 @@ def main() -> None:
         args.workers,
         args.encoding,
         not args.no_radius5_trace_strengthening,
+        args.radius5_trace_only,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
 

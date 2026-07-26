@@ -121,6 +121,39 @@ shared \(N\)-table compatibility. The existing 105 cyclic slice certificates
 show that the slices can be completed separately for the Wallis chart; their
 shared trace remains unresolved.
 
+## Lossless necessary-condition searches
+
+The theorem permits two searches that omit the \(58{,}800\) sphere-five
+\(P\)-variables while retaining a necessary consequence of every genuine
+radius-five extension.
+
+The first is completely unrestricted:
+
+```sh
+python3 -B evidence/odd_graph_local_ball/search_local_cover.py \
+  --radius 4 --radius5-trace-only \
+  --encoding integer --seconds 21600 --workers 8
+```
+
+It builds the full generic radius-four ball and adds the 1,680 forced
+`AllDifferent(15)` trace stars. A satisfying assignment is only a
+radius-four-plus-trace witness; infeasibility would exclude a radius-five
+extension and hence exclude \(k=16\).
+
+The second fixes the verified Wallis \(L/M\) chart and searches only its
+12,600 shared \(N\)-values:
+
+```sh
+python3 -B evidence/odd_graph_local_ball/search_radius5_golf_n_congruence.py \
+  --seconds 21600 --workers 8 --seed 835
+```
+
+Its lean default uses the original 1,800 radius-four
+`AllDifferent(14)` stars and the 1,680 forced trace stars. The older parity
+and mod-three reifications are redundant once (1) is imposed and are
+available only through `--redundant-congruences`. Infeasibility here would
+exclude this one \(L/M\) chart, not arbitrary radius-five balls.
+
 ## Reproduce the finite audit
 
 ```sh
