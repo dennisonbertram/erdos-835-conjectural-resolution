@@ -182,15 +182,6 @@ def rainbow_triangles(
     return answer
 
 
-def pairwise_disjoint(triangles: list[tuple[int, int, int]]) -> bool:
-    used: set[int] = set()
-    for triangle in triangles:
-        if used.intersection(triangle):
-            return False
-        used.update(triangle)
-    return True
-
-
 def verify_zero_completion() -> None:
     extended_given: list[Matching] = []
     for matching, unmatched in zip(
@@ -225,7 +216,7 @@ def arithmetic() -> None:
     assert facets == 265_182_525
     assert facets == r * blocks
     assert (r + 1) // 2 == 8
-    assert (r + 2) // 3 == 5
+    assert r == 15
 
     contained_average = (
         blocks * comb(r + 1, 2) // comb(2 * r + 1, r + 2)
@@ -251,8 +242,7 @@ def main() -> None:
         edges = validate_matchings(matchings, unmatched)
         triangles = rainbow_triangles(edges)
         assert triangles == expected, (name, triangles)
-        assert pairwise_disjoint(triangles)
-        assert len(triangles) <= 5
+        assert len(triangles) <= 15
         print(
             f"{name}: unmatched={unmatched}, "
             f"rainbow_triangles={triangles}"

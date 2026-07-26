@@ -111,16 +111,25 @@ Equation (5) says exactly that \(F+a,F+b,F+c\) are the respective
 blocks of the three systems through \(F\).  Therefore (1) gives
 \(T(F)=R\).  The two constructions are inverse. \(\square\)
 
-Distinct rainbow triangles in a union of three matchings are
-vertex-disjoint.  Indeed, at a shared vertex each triangle uses two of the
-three colours; the two colour pairs intersect, forcing a repeated incident
-edge, and then the matching property forces the triangles to coincide.
+Distinct rainbow triangles need not be vertex-disjoint: two of them can
+share their common edge of one colour and exchange the other two colours.
+There is nevertheless a useful elementary bound.  In the union of the
+three near-perfect matchings, the three distinct unmatched vertices have
+degree two and the other \(r-1\) vertices have degree three.  A degree-two
+vertex lies in at most one triangle, and a degree-three vertex in at most
+three.  If \(t\) is the number of rainbow triangles, summing
+triangle--vertex incidences gives
+\[
+ 3t\leq 3+3(r-1)=3r.
+\]
 Consequently
 \[
- 0\leq |T^{-1}(R)|\leq
- \left\lfloor\frac{r+2}{3}\right\rfloor.                \tag{7}
+ 0\leq |T^{-1}(R)|\leq r.                              \tag{7}
 \]
-For \(r=15\), every indegree lies in \(\{0,1,2,3,4,5\}\).
+For \(r=15\), every indegree lies between zero and fifteen.  The coherent
+cross-link certificate in `verify_defect_cross_link_lsts19.py` already
+realizes multiplicity six, so the earlier tempting
+\(\lfloor(r+2)/3\rfloor\) bound is false.
 
 Since \(T\) is a function on all \(\binom{2r+1}{r-1}\) facets,
 \[
@@ -142,8 +151,8 @@ unmatched vertices:
 
 * a triple with no rainbow triangle;
 * a triple with exactly one rainbow triangle;
-* a triple with exactly two, necessarily vertex-disjoint, rainbow
-  triangles.
+* a triple with exactly two rainbow triangles (the displayed certificate
+  happens to make them vertex-disjoint).
 
 For example, the zero-triangle triple has unmatched points
 \((5,7,4)\) and matchings
@@ -214,7 +223,7 @@ ingredient is proved here.
 What is proved is:
 
 1. the exact rainbow-triangle interpretation of every indegree;
-2. the sharp local upper bound (7);
+2. the elementary local upper bound (7);
 3. average indegree one; and
 4. explicit local models showing that all of this falls short of
    bijectivity.
@@ -249,7 +258,7 @@ distinct other endpoints; the edge joining those endpoints has one unique
 third colour \(\gamma\).  A triangle with colours
 \(\alpha,\beta,\gamma\) is counted exactly once, at the vertex incident
 with its \(\alpha\)- and \(\beta\)-edges.  At \(r=15\), the right side of
-(11) is \(18\), so the full triangle-parity vector is a binary
+(12) is \(18\), so the full triangle-parity vector is a binary
 2-cycle on the colour simplex.
 
 It is tempting to use Theorem 2 to say that, globally, the finite
