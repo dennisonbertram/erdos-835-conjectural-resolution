@@ -79,6 +79,15 @@ So P has no counterexample at any testable parameter.  \(r=7,11,13\) are
 parameter-empty; \(r=9\) needs an \(S(8,9,19)\) (existence open);
 \(r=15\) needs a first \(S(14,15,31)\).
 
+> **Correction, 2026-07-26.**  The \(r=9\) entry is settled negatively, so
+> "existence open" is wrong.  Deriving \(S(8,9,19)\) at a \(4\)-set gives
+> \(S(4,5,15)\), which does not exist (Mendelsohn–Hung, 1972).  Hence no
+> \(S(8,9,19)\) exists and \(r=9\) is parameter-empty too.  The accessible
+> list is therefore \(r\in\{3,5\}\) testable, \(r=15\) open — \(r=15\)
+> surviving because the same derivation lands on \(S(4,5,21)\), the smallest
+> \(S(4,5,v)\) of unknown existence.  See
+> `triangle_closure_derived_reduction.md` §3b.
+
 ## 4. A lattice proof of P at r=3 (Proved, new)
 
 Let \(\Lambda(A)=\{z\in\mathbb Z^{\text{non-}A\text{ blocks}}:\ Wz=0,\ \text{all

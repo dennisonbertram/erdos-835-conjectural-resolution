@@ -108,6 +108,42 @@ New exact results in the note include:
   paired half-link.  Arbitrary rank-four links and higher-rank Pfaffian
   matrices remain open.
 
+- a reduction proving that the triangle-closure law for boundary Steiner
+  systems is exactly a statement about the design derived at the pair
+  intersection, an \(S(m,m+1,3m+3)\) with \(m=(r-1)/2\).  It follows whenever a
+  block of that design is disjoint from exactly two others, which happens
+  **only** at \(r=3,5\) (the count is \(22\) at \(r=9\) and \(758\) at
+  \(r=15\)).  This proves the law at \(r=3,5\) and shows the exhaustive
+  verifications there carry no weight at \(r=15\), where it becomes a
+  resolvability statement about a hypothetical \(S(7,8,24)\).  That statement is
+  then **refuted**: a triangle-closure triple is exactly a weight-3 word of the
+  even-subcode dual, whose count is forced at \(927\,696\,866\,625\), so only
+  \(10495/162591\approx6.45\%\) of critical pairs complete, against ratio
+  exactly \(1\) at \(r=3,5\); and
+- a closure of the third-moment shortening route for \(S(14,15,31)\): because a
+  weight-3 dual word of the even subcode is exactly such a triple,
+  \(\sum(n-2w)^3=|C|\cdot6A_3(Z_H)\ge0\), so a strictly negative third moment is
+  what an existing design predicts rather than a contradiction.  Exact dual
+  certificates give
+  \(57\,485\,606\,222\le A_3(Z_H)\le60\,070\,286\,637\); and
+- the exact autocorrelation law of every hypothetical \(S(14,15,31)\):
+  the number of block pairs with symmetric difference \(D\) is uniform on every
+  even weight layer, except for the forced \(157\,425/142\,590\) split at
+  \(|D|=16\).  A direct inverse Fourier transform proves that this strong
+  regularity is already equivalent to the forced weight enumerator, so it is a
+  consistency theorem and candidate falsification test, not an obstruction; and
+- a structural proof of the \(k=4\) case: the \(30\) systems \(S(3,4,8)\) are
+  the \(30\) maximal totally singular subspaces of a hyperbolic \(O_6^+(2)\)
+  form, block-disjointness forces opposite Klein families, and there are only
+  two families — so at most two are pairwise disjoint.  This replaces the
+  brute-force count with a mechanism and realizes the conjectured
+  disjointness-parity sign at \(k=4\); and
+- a parameter-free "one short of a large set" lemma: \(P-1\) pairwise disjoint
+  \(S(k-1,k,v)\) force a \(P\)-th, so the maximum number of pairwise disjoint
+  systems is never exactly \(P-1\).  In particular no search for \(16\)
+  pairwise disjoint \(SQS(20)\), or for \(16\) pairwise disjoint
+  \(S(15,16,32)\), can succeed.
+
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
 
@@ -359,6 +395,45 @@ routes, but not the asymmetric case.
   and [`evidence/monodromy_character_factorisation_audit.md`](evidence/monodromy_character_factorisation_audit.md):
   exact long-odd-cycle constraints and a countermodel showing why the
   current one-fibre character factorisation cannot contradict them.
+- [`evidence/triangle_closure_derived_reduction.md`](evidence/triangle_closure_derived_reduction.md):
+  the exact reduction of the triangle-closure law to the derived
+  \(S(m,m+1,3m+3)\), a complete proof at \(r=3,5\) from the count
+  \(N_0=2\), and the demonstration that this mechanism is absent at every
+  larger admissible parameter.  The later exact census refutes the law at
+  \(r=15\), while leaving existence of the design open.
+- [`evidence/s141531_triangle_third_moment_audit.md`](evidence/s141531_triangle_third_moment_audit.md)
+  and [`evidence/triangle_census_r15.md`](evidence/triangle_census_r15.md):
+  independent exact derivations of the \(927\,696\,866\,625\) triangle triples,
+  the \(6.45\%\) closure ratio, and the certified dimension-two shortening
+  interval.
+- [`evidence/s141531_autocorrelation_law.md`](evidence/s141531_autocorrelation_law.md)
+  and [`evidence/s141531_pair_difference_regularity.md`](evidence/s141531_pair_difference_regularity.md):
+  independent proofs of the complete block-pair difference table, including a
+  direct inverse-transform proof showing why it supplies no new obstruction.
+- [`evidence/s7824_nonexistence_audit.md`](evidence/s7824_nonexistence_audit.md)
+  and [`evidence/s7824_tower_config_sweep.md`](evidence/s7824_tower_config_sweep.md):
+  exact necessary-condition audits for the derived \(S(7,8,24)\) tower.  Every
+  tested distribution and localized configuration LP is feasible.
+- [`evidence/s7824_literature_survey.md`](evidence/s7824_literature_survey.md):
+  a source-graded survey of the smallest open high-strength Steiner tower,
+  published exclusion mechanisms, current symmetry-restricted computations,
+  and comparatively unexplored \(p\)-rank/SNF directions.  It also records the
+  independent 2026 Erdős-forum post of the same \(k=16\) tower refinement.
+- [`evidence/sqs8_klein_family_parity.md`](evidence/sqs8_klein_family_parity.md):
+  the \(O_6^+(2)\) Klein-family proof that at most two \(S(3,4,8)\) are
+  pairwise disjoint, and the explicit disjointness-parity sign at \(k=4\).
+  The mechanism is specific to length-eight binary codes and gives no
+  information about \(k=16\).
+- [`evidence/large_set_literature_2026-07-26.md`](evidence/large_set_literature_2026-07-26.md):
+  the parameter-free "one short of a large set" lemma, cited status of every
+  tower level, and the record that no nontrivial \(LS(3,4,v)\) has been
+  constructed at any order.
+- [`evidence/execution_debt_2026-07-26.md`](evidence/execution_debt_2026-07-26.md):
+  first actual runs of eleven validators left unrun by earlier
+  permission-blocked sessions, one validator bug found and fixed, the
+  \(e_4\)-level decision \(\omega(G_0)=\omega(G_1)=17\), and the finding that
+  the proposed \(\varepsilon_{\mathrm{row}}\) "open lever" was already
+  answered elsewhere in this repository.
 - [`evidence/verification.txt`](evidence/verification.txt): recorded output
   from the reproducibility checks.
 
@@ -451,6 +526,20 @@ python3 -B evidence/s_4_5_21_cnf.py \
   --cycles 8 \
   --cnf /tmp/s4521-cycle-8.cnf \
   --map /tmp/s4521-cycle-8.map.json
+python3 -B evidence/verify_triangle_closure_reduction.py
+python3 -B evidence/verify_s141531_triangle_third_moment.py
+python3 -B evidence/verify_triangle_census.py
+python3 -B evidence/verify_s141531_autocorrelation_law.py
+python3 -B evidence/verify_pair_difference_regularity.py
+python3 -B evidence/verify_s7824_conditions.py
+python3 -B evidence/verify_derived_closure_lp.py
+python3 -B evidence/verify_ambient_moment_lp.py
+python3 -B evidence/verify_s7824_tower_config_sweep.py
+python3 -B evidence/verify_sqs8_klein_family_parity.py
+python3 -B collaboration/opus5/verify_opus5_forced_structure.py
+python3 -B collaboration/opus5_v2/verify_intersection_numbers.py
+python3 -B collaboration/opus5_v2/verify_disjointness_parity.py
+python3 -B collaboration/fable_e4/remote_run_e4.py
 ```
 
 Expected decisive outputs:

@@ -326,11 +326,23 @@ def check_theorem5a_and_7a():
                 assert lam == avg, (k, v, j, lam, avg)
     print("T7a  lambda_j == average value, k in 2..11, 40 values of v   OK")
 
-    # 5a reduces to 5 at v = 2k
+    # 5a reduces to 5 at v = 2k.  Only for k where an S(k-1,k,2k) is
+    # arithmetically possible: at k = 8, 14 the formula is deliberately
+    # non-integral, which is the Cor 1.5 sieve, not a failure.
+    sieved = []
     for k in range(2, 20, 2):
+        P = k + 1
+        integral = all(
+            (binom(k, u) * (binom(k, u) + (-1) ** u * (P - 1))) % P == 0
+            for u in range(k + 1))
+        if not integral:
+            sieved.append(k)
+            continue
         for u in range(k + 1):
             assert pred_inner_general(k, 2 * k, u) == pred_inner(k, u), (k, u)
+    assert sieved == [8, 14], sieved
     print("T5a  general formula reduces to (5.2) at v = 2k              OK")
+    print(f"T5a  integrality sieve rejects k = {sieved} in 2..18          OK")
 
     # 5a: nonnegative integers summing to |B| = binom(v,k)/P
     for k, v in [(4, 8), (6, 12), (5, 21), (4, 20), (3, 19), (4, 8),

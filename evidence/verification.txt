@@ -114,3 +114,348 @@ Interpretation:
   The reflection-restricted case is impossible, matching the independent
   mathematical proof in the note. The unrestricted cyclic result is
   inconclusive and must not be interpreted as a nonexistence proof.
+
+
+================================================================================
+2026-07-26  Execution-debt run: previously-unrun collaboration validators
+================================================================================
+
+Five prior sessions (collaboration/opus5, opus5_v2, fable_frontier, fable_e4,
+fable_e4_v2) were permission-blocked from executing code and left their
+validators unrun.  This block records the first actual runs.  All commands were
+issued from the repository root with `nice -n 19`.
+
+Command:
+  python3 -B collaboration/opus5/verify_opus5_forced_structure.py
+Result:
+  ALL CHECKS PASSED  (exit 0, 0.10 s CPU)
+  T2 lambda_s integral for all s <=> k+1 prime, k in 1..59
+  T7a lambda_j == average value, k in 2..11, 40 values of v
+  T5a general formula reduces to (5.2) at v = 2k
+  T5a integrality sieve rejects k = [8, 14] in 2..18
+  T5a S(4,5,21) distribution (1,0,80,320,540,256), total 1197
+  T3/T7 Fourier support is exactly {E_0, E_k} at k = 2, 4, 6
+  T9 k=2: max pairwise disjoint = 3 (large set exists)
+  T9 k=4: max pairwise disjoint = 2 (large set does NOT exist)
+  Cor6.1 n_0 < 0 for every odd k in 3..39
+Note:
+  The first run exited 1 at pred_inner_general(8, 16, 3) = 896/3.  That is a
+  VALIDATOR bug, not a theorem failure: k = 8 is exactly where the opus5_v2
+  Cor 1.5 integrality sieve rejects the parameters, so a non-integral value is
+  the expected outcome there.  The loop at check_theorem5a_and_7a now skips
+  non-integral k and asserts that the sieved set is exactly [8, 14].
+  The T7 numeric check was separately confirmed non-vacuous: every eigenspace
+  mask has exactly the predicted multiplicity C(2k,j)-C(2k,j-1), the masks
+  cover all N eigenvalues, no NaN occurs, and the intermediate-eigenspace norms
+  are 1e-28..1e-32 against 1.1e+01 and 1.9e+01 on E_k.  (BLAS emitted spurious
+  overflow RuntimeWarnings; they do not affect the result.)
+
+Command:
+  python3 -B collaboration/opus5_v2/verify_intersection_numbers.py
+Result:
+  OVERALL: PASS  (exit 0, 0.10 s)
+  integrality sieve violated at k = 8 (j = 3,4,5), k = 14, k = 20
+
+Command:
+  python3 -B collaboration/opus5_v2/verify_disjointness_parity.py
+Result:
+  exit 0.  Verdicts (reported, not asserted):
+    S(2,3,7):  30 systems, A_n-orbits (15,15), 120 disjoint pairs,
+               same-orbit disjoint pairs 0, no three pairwise disjoint
+    S(3,4,8):  30 systems, A_n-orbits (15,15), 120 disjoint pairs,
+               same-orbit disjoint pairs 0, no three pairwise disjoint
+    S(4,5,11): 5040 systems, A_n-orbits (2520,2520), 362880 disjoint pairs,
+               same-orbit disjoint pairs 0, no three pairwise disjoint
+  The Disjointness-Parity conjecture is consistent at every testable parameter.
+
+Command:
+  python3 -B collaboration/opus5_v2/verify_onefactorization_row_parity.py
+Result:
+  OVERALL: PASS  (exit 0, 0.54 s).  eps_row CONSTANT: NO.
+  This reproduces, and does not add to, the K_8 split 5280/960 already recorded
+  in local_one_factorization_sign_audit.md section 4.  See the reconciliation
+  note below.
+
+Command:
+  python3 -B collaboration/fable_e4_v2/verify_k18_independent.py
+Result:
+  PASS (exit 0, 0.08 s): all 153 pairs of the 18 five-statistic states are
+  actual Johnson edges; the K18 is verified.  Masks share (e1..e4)=(1,0,0,0),
+  e7 = 12, e8 = 5; lambda(x) = 4 + 12x + x^8 matches all 18 pairs.
+
+Command:
+  python3 -B collaboration/fable_e4_v2/verify_rigidity_and_controls.py
+Result:
+  PASS (exit 0, 0.35 s).  k=2 control: no false obstruction where the tight
+  3-colouring exists.  k=4 control: C3/C4 fail for 1568 non-adjacent prefix
+  pairs, so the conditions are not vacuous.  k=16: R1/R2 + lambda tail verified
+  on all 153 K18 pairs.
+
+Command:
+  python3 -B collaboration/fable_frontier/validate_k18_independent.py
+Result:
+  ALL CHECKS PASS (exit 0, 0.11 s).  17 extension edges to state (29,27);
+  K18 assembled, 153/153 edges.
+
+Command:
+  python3 -B collaboration/fable_e4/verify_edge_law_smallfield.py
+Result:
+  PASS (exit 0, 4.52 s).  F16 exhaustive: 11440 nine-sets, 102960 deletions,
+  411840 adjacent pairs.  386100 counterexamples when an e2 hypothesis is
+  dropped and 900 when e3 is dropped, so the hypotheses are not vacuous.
+
+Command:
+  python3 -B collaboration/fable_e4/remote_run_e4.py
+Result:
+  ALL-STAGES-COMPLETE (exit 0, 29.4 s).  DECISION:
+    |R_r| = 341 for r = 0, 562 for each r != 0; total 17763
+    G_0: 992 vertices, 45291 edges;  G_1: 1024 vertices, 71648 edges
+    scaling isomorphism G_1 -> G_r verified edge-by-edge for all r != 0
+    omega(G_0) = 17 and omega(G_1) = 17  -- NO K18
+    omega(H_r) for r = 0..31: max 17, attained only at r = 0
+    DSATUR + 200 random greedy: G_0 -> 29 colours, G_1 -> 37 colours
+  Interpretation: no clique obstruction at the e4 level.  This CONFIRMS
+  f32_five_statistic_moment_curve_clique_bound.md (clique number 17 in both
+  offset graphs) by actual execution.  It does NOT contradict the
+  fable_e4_v2 five-statistic K18, which lies off the moment curve, on the line
+  (e1,e2) = (1+x, x); G_r only covers the moment-curve part of the quotient.
+  Only chi >= 18 could still refute at this level, and the colouring bounds
+  above (29, 37) do not decide that.
+
+================================================================================
+2026-07-26  New results
+================================================================================
+
+Command:
+  python3 -B evidence/verify_triangle_closure_reduction.py
+Result:
+  All checks passed (exit 0).
+  N_0 table for S(k-1,k,3k): N_0(2)=2, N_0(3)=2, N_0(5)=22, N_0(6)=72,
+  N_0(8)=758, N_0(9)=2558, N_0(11)=30670; k = 4,7,10,12 inadmissible.
+  N_0 = 2 only for k in {2,3}.
+  r=3 (Fano): 21/21 qualifying pairs, derived design has 3 blocks = S(1,2,6),
+  every derived block disjoint from exactly 2 others.
+  r=5 (S(4,5,11) built here by exact cover): 660/660 qualifying pairs, derived
+  design has 12 blocks = S(2,3,9), every derived block disjoint from exactly 2.
+  Equivalence (B1 xor B2)^c in A <=> W in A_I holds on every pair.
+See:
+  evidence/triangle_closure_derived_reduction.md
+
+Command:
+  python3 -B evidence/verify_sqs8_klein_family_parity.py
+Result:
+  All checks passed (exit 0).
+  30 labelled S(3,4,8); each spans a self-dual [8,4,4] code whose 14 weight-4
+  words are its blocks; q(u) = wt(u)/2 mod 2 polarizes to the inner product on
+  all 128^2 pairs; radical = <1>; E/<1> = F_2^6 with 35 nonzero singular
+  vectors (hyperbolic O_6^+(2)); 30 distinct maximal totally singular 3-spaces;
+  "dim(U cap U') odd" splits them 15/15; block-disjoint <=> dim = 0 on all
+  ordered pairs; 120 = 15*8 disjoint pairs, all crossing families; the
+  disjointness graph has no triangle; family(pi D) = sgn(pi) family(D).
+See:
+  evidence/sqs8_klein_family_parity.md
+
+Command:
+  python3 -B collaboration/fable_e4/verify_e4_refinement_independent.py
+Result:
+  INDEPENDENT-REPLAY-COMPLETE (exit 0, ~9 min).
+  omega(G_r) = 17 for every r = 0..31; omega(H_r) max 17 (attained only at r=0).
+  A deliberately different implementation (suffix-DP DFS, all 32 r decided
+  without assuming the scaling isomorphism) agrees with remote_run_e4.py on
+  every value.  Double-implementation confirmation of the e4-level decision.
+
+Command:
+  python3 -B collaboration/verify_global_sign_attack.py
+Result:
+  ALL CHECKS PASSED (exit 0).  This is one of the two orphaned validators whose
+  companion note is missing from the repository.  Its section 2 settles the
+  eps_row question by exhaustion:
+    K_4: 1 one-factorization,    P distribution {1: 1}
+    K_6: 6 one-factorizations,   P distribution {-1: 6}     (constant)
+    K_8: 6240 one-factorizations,P distribution {1: 5280, -1: 960}  NOT constant
+    invariance under vertex relabel / colour relabel / cycle switch confirmed
+    K_10 (300 sampled): {-1: 157, 1: 143};  K_14 (100): {-1: 50, 1: 50};
+    K_18 (60): {-1: 29, 1: 31}, with explicit K_18 certificates printed for
+    both sign values.
+  This independently corroborates local_one_factorization_sign_audit.md section
+  4 and confirms that opus5_v2/IDEAS.md section B's "cheapest unexplored lever"
+  was already answered.  Also recorded: 30 labelled Fano planes have Sigma
+  distribution {-1: 30}; 30 labelled SQS(8) have Sigma' distribution {1: 30};
+  20 doubled SQS(20) split {1: 11, -1: 9}; 8 random LS(2,3,9) full-product
+  distribution {1: 3, -1: 5}.
+
+Command:
+  python3 -B collaboration/verify_fable_specht_lattice_attack.py
+Result:
+  First run aborted at `assert failures[7] == 1 and failures[13] == 2`.
+  Independent recomputation: for S(r-1,r,2r+1), lambda_i = C(2r+1-i,r-1-i)/(r-i);
+  at r=7  the non-integral i are 1 and 4 (first = 1);
+  at r=13 the non-integral i are 1, 3, 4, 8, 10 (first = 1).
+  So the script's COMPUTED value (1) is correct and the hard-coded expectation
+  (2) was stale.  This is the second orphaned validator (its note
+  collaboration/fable_specht_lattice_attack.md does not exist), so the stale
+  expectation could not be checked against any claim.  Assertion corrected to 1;
+  the script's remaining lattice work is long-running and was still in progress
+  when this block was written.
+
+Interpretation of the 2026-07-26 block as a whole:
+  Ten of eleven previously-unrun validators pass.  Two hard-coded expectations
+  were wrong and were corrected (both in scripts, not in theorems); in each case
+  the underlying arithmetic was independently recomputed first.  The e4-level
+  question is now decided (no K18) by two independent implementations.  No
+  previously recorded theorem was contradicted.
+
+
+================================================================================
+2026-07-26  Audit of the proposed third-moment S(14,15,31) contradiction
+================================================================================
+
+Command:
+  python3 -B evidence/verify_s141531_triangle_third_moment.py
+  python3 -B evidence/verify_triangle_census.py
+Result:
+  All checks passed (exit 0).
+  VERDICT: the proposed contradiction FAILS.  Premises sum s = 0 and
+  sum s^2 = 2^28 n are correct (A_1 = A_2 = 0 for C_0^perp, both by parity of
+  sum|B_i| = 15m against 31 points).  The premise sum s^3 = 0 is FALSE: it used
+  A_3(C^perp) = 0, but the relevant dual is that of the EVEN subcode,
+  C_0^perp = C^perp + <1>, which is strictly larger.  A weight-3 word of
+  C_0^perp is exactly a triple of blocks covering every point an ODD number of
+  times, i.e. a triangle-closure triple.  Hence
+      sum (n-2w)^3 = |C| * 6 * A_3(Z_H) >= 0,
+  so under the audited convention s = 2w-n, sum s^3 = -6*2^28*A_3(Z_H) <= 0 and
+  a strictly negative LP maximum is exactly what an existing design predicts.
+  Validated at r=3 (sum = 2688 = 64*6*7) and r=5 (1351680 = 1024*6*220), both
+  strictly positive, by brute-force enumeration.
+  Quantitatively: exact integer dual certificates give 57,485,606,222 <= A_3(Z_H) <= 60,070,286,637;
+  the uniform-syndrome value A_3/16 = 57,981,054,164 lies STRICTLY INSIDE that
+  interval, so the route yields no contradiction.  (An earlier lower bound of
+  57,485,575,477 quoted here was derived from a 5-significant-figure float and
+  is superseded by the certified endpoints above.)  Divisor 16 not 64 because sigma(B3) = sigma(B1) +
+  sigma(B2), so a closed triple lies in Z_H iff sigma(B1) = sigma(B2) = 0.
+  A_3(Z_H) is NOT exactly computable from forced data (it depends on which
+  critical pairs complete and how they spread over syndrome classes); the LP
+  gives only the interval above, not an exact value.  Route closed.
+  Forced quantities reproduced independently: b = 17,678,835;
+  A_3(C_0^perp) = 927,696,866,625; |Z_H| = 4,419,003 for profile n=(0,9,9,13)
+  with |h| = (0,22,22,18); H-syndrome class sizes (4419003, 4419816, 4419816,
+  4420200).  The A_3 routine returns 7 at r=3 and 220 at r=5, matching brute
+  force.
+  CONSEQUENCE (new): triangle closure is REFUTED at r=15.  Critical pairs
+  = b*N_7/2 = 43,116,291,922,275; every-pair-completes would force
+  A_3 = 14,372,097,307,425; the forced value is 927,696,866,625, so only
+  3*A_3/(b*N_7/2) = 10495/162591 = 6.4548% of critical pairs complete.  The
+  same ratio is exactly 1 at r=3 and r=5.
+See:
+  evidence/s141531_triangle_third_moment_audit.md
+  evidence/triangle_census_r15.md
+
+Command:
+  python3 -B evidence/verify_s7824_conditions.py
+Result:
+  All checks passed (exit 0).
+  S(7,8,24): b = 43,263; lambda = (43263,14421,4389,1197,285,57,9,1), all
+  integral.  Fixed-block intersection distribution
+  (758,5376,13216,14336,7560,1792,224,0,1) and fixed-non-block-8-set
+  distribution (757,5384,13188,14392,7490,1848,196,8,0): both non-negative and
+  integral.  RCW b >= 3542 and Tits v >= 16 both satisfied.  No negative forced
+  count anywhere along the tower S(7,8,24) -> S(6,7,23) -> S(5,6,22) ->
+  S(4,5,21) -> S(3,4,20) -> S(2,3,19).
+  SIGN CORRECTION recorded: the kernel vector separating the block and
+  non-block solutions is ((-1)^(k-j) C(k,j)), exponent k-j not j.  The two
+  agree only for even k; using j at odd k produces spurious negative entries.
+  With the correct sign the routine reproduces the known n_0 = 1 - [K in A] law
+  at S(14,15,31), S(2,3,7) and S(4,5,11), and gives a_(k-1) = k for every
+  non-block, which is forced independently.
+  NO nonexistence proof was found.  Recorded also: nonexistence of S(7,8,24) is
+  STRICTLY WEAKER than nonexistence of S(4,5,21) (derive at a 3-set), and the
+  forced-weight-enumerator method that refuted triangle closure at S(14,15,31)
+  does NOT transfer, because v and k are both even there so F(S^c) = +F(S) and
+  the layers 8..16 depend on unforced block-triple data.
+See:
+  evidence/s7824_nonexistence_audit.md
+
+Command:
+  python3 -B evidence/verify_s141531_autocorrelation_law.py
+Result:
+  All checks passed (exit 0).
+  CONFIRMED, three independent ways, the exact autocorrelation law of a
+  hypothetical S(14,15,31): with m_D the number of unordered block pairs with
+  B xor C = D,
+    |D| = 30,28,26,24,22,20,18 -> m_D = 0,235980,174800,165186,153216,147972,
+    144144, and symmetrically 144144,147972,153216,165186,174800,235980 at
+    |D| = 14,12,10,8,6,4; m_D = 0 for odd |D| and for |D| in {0,2}; and at
+    |D| = 16, m_D = 157425 if D^c is a block and 142590 otherwise.
+    The table is symmetric under |D| -> 32-|D|.
+  (a) Convexity: every layer total P_s = b*N_s/2 is exactly divisible by
+      C(31,30-2s); sum_D C(m_D,2) = 3*A_4 = 11,379,679,912,345,023,540 with
+      DIFFERENCE EXACTLY 0, and C(m,2) is strictly convex, so the balanced
+      configuration is the unique minimiser and the table is forced.
+      A_4 = 3,793,226,637,448,341,180 recomputed here from the fourth power
+      moment via N_4 = 3n^2 - 2n + 24*A_4.
+  (b) Group ring: the law is exactly A^2 - 29670*x^1*A in span{W_j}, the
+      Bose-Mesner algebra of H(31,2).  Characters turn this into
+      "F(u)^2 - 29670(-1)^|u| F(u) depends only on |u|", which at |u|=15 is
+      F_0 + F_1 = -29670.  Forced values F_0 = 1549, F_1 = -31219 give exactly
+      -29670, both branches evaluating to 48,358,231.
+  (c) DECISIVE: one inverse Fourier transform of the forced weight enumerator
+      reproduces every table entry and both |D|=16 branches, with NO use of
+      A_4 and NO convexity.  c_1 = F_1^2 - F_0^2 = 2^16 * 14835, so the
+      block-dependent part of F^2 inverse-transforms to exactly 14835*[D^c in A]
+      supported on |D| = 16 and nowhere else.
+  LEVERAGE VERDICT: NONE.  Route (c) shows the law is the inverse transform of
+  data already forced, so it is a repackaging rather than an independent
+  constraint; the character form is automatically satisfied rather than
+  constraining.  As a Bose-Mesner statement about A^2 it falls under
+  collaboration/fable_parity_attack_2.md Theorem 8.1 (every invariant bilinear
+  quantity repackages the one free parameter).  Degeneracies checked: in
+  characteristic 2 the group has exponent 2 so A^2 = b*1 by Frobenius and the
+  identity reduces to "b is odd"; 29670 = 2*3*5*23*43, so mod 3,5,23,43 the
+  x^1*A term drops and only a Bose-Mesner congruence remains.
+  Still useful as an exact falsification test for partial constructions, and it
+  re-derives the per-block triangle count 157425 via b*157425 = 3*A_3.
+See:
+  evidence/s141531_autocorrelation_law.md
+
+Command:
+  python3 -B evidence/verify_pair_difference_regularity.py
+Result:
+  ALL CHECKS PASSED (exit 0).
+  Independent implementation reproduced A_4, every layer average, the
+  157425/142590 middle split, the exact convexity equality, and the full
+  character identity.  Direct enumeration controls at r=3 and r=5 also pass.
+See:
+  evidence/s141531_pair_difference_regularity.md
+
+Command:
+  python3 -B evidence/verify_derived_closure_lp.py
+Result:
+  Completed in full (exit 0).  Exact controls at k=2 and k=3 pass.  Both
+  closure cases are feasible for k=4,...,8 whenever the equality system is
+  consistent; in particular the S(7,8,24) derived system has 45 variables,
+  rank 41, affine dimension 4, and exact nonnegative witnesses for Z0 and Z1.
+  Every reported point and inconsistency certificate was checked against the
+  original equations.
+
+Command:
+  python3 -B evidence/verify_ambient_moment_lp.py
+Result:
+  Completed in full (exit 0).  The r=5 small and accelerated paths agree:
+  Z0 is equality-infeasible and Z1 feasible.  At r=15 the 444-cell,
+  2472-moment system has certified rank 434 and affine dimension 10; both Z0
+  and Z1 have exact nonnegative witnesses, with an integral Z0 witness also
+  found.  At r=9 both cases are likewise feasible.  All reconstructed affine
+  solutions, kernel vectors, witnesses, and dual certificates were verified
+  exactly against the original equations.
+
+Command:
+  python3 -B evidence/verify_s7824_tower_config_sweep.py
+Result:
+  Completed in full (exit 0, 20.0 s).  For S(7,8,24), S(6,7,23),
+  S(5,6,22), and S(4,5,21), all pair distributions are positive, every
+  Delsarte dual distribution is (1,0,...,0,16), every forced two-block
+  configuration LP is feasible, and every stated endpoint is certified by an
+  exact achieving point and exact dual multipliers.  The run left no result
+  file or other untracked output.
+See:
+  evidence/s7824_tower_config_sweep.md

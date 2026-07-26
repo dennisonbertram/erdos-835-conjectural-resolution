@@ -53,3 +53,35 @@ the shortening routes lack.  Open: prove or refute at general odd
 \(r\); the two verified scales are unique designs with large groups,
 so accidental rigidity is a live possibility.  Status at \(r=15\):
 CONJECTURAL.
+
+## Superseded, 2026-07-26 — read with `triangle_closure_derived_reduction.md`
+
+The "accidental rigidity" worry above is now settled, and the answer is
+that the two verifications are **explained rather than evidential**.
+Triangle closure is exactly a statement about the design derived at
+\(I=B_1\cap B_2\), which is an \(S(m,m+1,3m+3)\) with \(m=(r-1)/2\); it
+follows whenever a block of that design is disjoint from exactly two
+others, and that count is \(2\) **only** for \(m=1,2\), i.e. only at
+\(r=3,5\).  It is \(22\) at \(r=9\) and \(758\) at \(r=15\).  So the
+law is now PROVED at \(r=3\) and \(r=5\) — but by a mechanism that does
+not recur, and the 21/21 and 660/660 counts give no support at
+\(r=15\).  At \(r=15\) the conjecture is equivalent to a strong
+resolvability property of a hypothetical \(S(7,8,24)\).
+
+## REFUTED at r=15, 2026-07-26 — see `s141531_triangle_third_moment_audit.md` §2
+
+A triangle-closure triple is exactly a weight-3 word of \(C_0^\perp\)
+(three blocks covering every point an odd number of times).  That count
+is FORCED by the weight enumerator of \(C_0\):
+\(A_3=927\,696\,866\,625\).  Since each triple carries three critical
+pairs and a critical pair has at most one completion, exactly \(3A_3\)
+of the \(bN_7/2=43\,116\,291\,922\,275\) critical pairs complete —
+
+\[
+ \frac{3A_3}{bN_7/2}=\frac{10495}{162591}\approx 6.45\%\ <\ 1 .
+\]
+
+So **not** every critical pair completes: the law is FALSE at \(r=15\),
+given only that an \(S(14,15,31)\) exists.  The r=3 and r=5 ratios are
+exactly 1, as the derived-design mechanism requires.  The "Why it
+matters" programme above therefore does not apply at \(r=15\).

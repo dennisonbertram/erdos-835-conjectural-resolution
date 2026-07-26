@@ -74,7 +74,12 @@ def survey():
               f"r mod 4 = {r_mod4}")
     print("  divisibility failures (r: first bad i):",
           dict(sorted(failures.items())))
-    assert failures[7] == 1 and failures[13] == 2
+    # First non-integral index, recomputed independently 2026-07-26:
+    # r=7  lambda_i = C(15-i,6-i)/(7-i)   first bad i = 1 (all bad: 1, 4)
+    # r=13 lambda_i = C(27-i,12-i)/(13-i) first bad i = 1 (all bad: 1,3,4,8,10)
+    # The previous expectation failures[13] == 2 was stale and made this
+    # orphaned script abort before any of its lattice work ran.
+    assert failures[7] == 1 and failures[13] == 1
     assert all(r in dict((a, None) for a, *_ in admissible)
                for r in (3, 5, 9, 11, 15))
     odd_b = [r for r, b, parity, _ in admissible if parity]
