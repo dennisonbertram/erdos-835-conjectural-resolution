@@ -319,6 +319,11 @@ routes, but not the asymmetric case.
   symmetry, with a direct-verified 40-phase certificate for one
   prescribed-link \(LS(2,3,19)\) slice.  The joint layer, later layers,
   and asymmetric colourings remain open.
+- [`evidence/cyclic17_all_power_sums_audit.md`](evidence/cyclic17_all_power_sums_audit.md):
+  the exact endpoint of the cyclic layer's finite-field linearized moment
+  route.  All dependency-cancelled power sums through degree \(16\) are
+  consistent (3,240 rows, rank 3,000), so the nonlinear phase constraints
+  remain the genuine obstruction.
 - [`evidence/global_latin_compatibility.md`](evidence/global_latin_compatibility.md):
   the exact Latin-square transition, its golf-design form, a cyclic
   \(G(17)\), and the verified bridge through the complete radius-four ball.

@@ -233,6 +233,15 @@ audit finds that all 120 are consistent and add no rank beyond 1,320.
 Consequently even every linear consequence obtainable by this
 second-moment cancellation supplies no obstruction.
 
+The same calculation has now been completed for **every** power through
+degree \(16\), the full polynomial-function range over \(\mathbb F_{17}\).
+At each degree the same 120 dependencies cancel the new leading monomials.
+Exact incremental elimination finishes with 3,240 rows, rank 3,000, and a
+consistent augmented system.  Thus the complete dependency-cancelled
+power-sum family supplies no obstruction; see
+`cyclic17_all_power_sums_audit.md`.  This closes only the linearized moment
+route, not the nonlinear phase CSP.
+
 Another strict necessary relaxation keeps the phase lists and cross-slice
 permutations but replaces each full residual-edge decomposition by its vertex
 degrees.  The two zero one-factors avoid moving point \(0\), so their
@@ -419,6 +428,9 @@ exactly.  With zero-sum triple representatives,
 first moment is \(s_i=-1\) for every square.  Its proposed equation is
 therefore the tautology \(0=0\) and supplies no new rank or obstruction; the
 independent audit is in `evidence/cyclic17_opus_second_moment_audit.md`.
+More generally, the exact all-power audit through degree \(16\) is consistent
+with final rank 3,000.  It exhausts the dependency-cancelled finite-field
+moment route but leaves the integral nonlinear constraints untouched.
 The tightened compact integer and independent compact SAT searches continue.
 None of these facts settles problem 835.
 

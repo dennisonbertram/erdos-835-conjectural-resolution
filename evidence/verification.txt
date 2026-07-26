@@ -729,3 +729,27 @@ See:
   evidence/s141531_higher_xor_window_cpp_run_log.txt
   evidence/s141531_xor_divisibility_reduction.md
   evidence/s141531_higher_xor_integrality_closure_draft.md
+
+================================================================================
+2026-07-26  Complete cyclic-17 power-sum audit
+================================================================================
+
+Command:
+  python3 -B evidence/audit_cyclic17_all_power_sums.py
+
+Result:
+  PASS / CONSISTENT through every degree 1..16 over F_17.
+  The original 1,440 first-moment rows have rank 1,320 and left nullity 120.
+  Applying all 120 dependencies to each lifted power-sum family gives 3,240
+  rows in total.  Exact sparse elimination finishes at rank 3,000 with no
+  contradictory augmented row.
+
+Scope:
+  This exhausts the dependency-cancelled finite-field linearized moment route
+  for the fixed-Wallis, C17-equivariant radius-five layer.  It is not a joint
+  radius-five witness, not an exclusion of the cyclic ansatz, and not a
+  solution of Erdős-Rosenfeld Problem #835.
+
+See:
+  evidence/cyclic17_all_power_sums_audit.md
+  evidence/audit_cyclic17_all_power_sums.py
