@@ -2,12 +2,13 @@
 
 Date: 2026-07-26.  Companion to `radius5_minimal_trace_forced.md` (the
 per-\(ij\) fibering, which needs radius five); this note settles the
-per-\(uv\) fibering, which is forced **one radius earlier**.  Both
-lemmas below are proved for every even \(k\) from the radius-4
-conditions of `radius4_reduction.md` alone — no cyclic action, golf
-chart, Wallis choice, or radius-5 assumption.  Scope: structure of any
-unrestricted local ball; **not** a construction, not an obstruction,
-and not a result on Erdős–Rosenfeld #835.
+per-\(uv\) fibering, which is forced **one radius earlier**.  Lemmas 1
+and 2 below are proved for every even \(k\) from the radius-4
+conditions of `radius4_reduction.md` alone; Lemma 3 combines those
+conditions with the forced radius-5 trace.  None uses a cyclic action,
+golf chart, or Wallis choice.  Scope: structure of any unrestricted
+local ball; **not** a construction, not an obstruction, and not a
+result on Erdős–Rosenfeld #835.
 
 Notation as in `radius4_reduction.md`: \(|V|=k\) (even),
 \(\mathcal C=V\sqcup\{\infty\}\), \(A\) the \(k-1\) indices; conditions
@@ -73,6 +74,92 @@ the two forced fiberings (per-\(ij\): prescribed-link
 \(LS(2,3,k+3)\) slices; per-\(uv\): hole-matching decompositions of
 \(K_{k-1}\)).
 
+## Lemma 3 (flag fibering: prescribed partial permutations; radius 5)
+
+Fix a flag \((i,u)\), \(i\in A\), \(u\in V\), and a colour \(x\).  In
+any radius-5 structure the cell set
+\(\Phi_{i,u,x}=\{(j,v):j\ne i,\ v\ne u,\ N_{uv}(ij)=x\}\) is a partial
+matching of the \((k-2)\times(k-1)\) rectangle, of exact size
+
+\[
+ 0\ (x=L_i(u)),\qquad k-2\ (x\in\{u,\infty\}),\qquad
+ k-3\ (\text{all other finite }x),
+\]
+
+with explicitly forced missed rows/columns:
+
+- rows: none missed for \(x\in\{u,\infty\}\); for generic \(x\) exactly
+  the row \(j_0\) with \(L_{j_0}(u)=x\); all rows missed for
+  \(x=L_i(u)\);
+- columns: for \(x=\infty\), exactly the \(M_i\)-\(\infty\)-partner of
+  \(u\); for \(x=u\), exactly \(v=L_i^{-1}(u)\); for generic \(x\), the
+  two (always distinct) columns \(v_1=\) the \(M_i\)-\(x\)-partner of
+  \(u\) and \(v_2=L_i^{-1}(x)\).
+
+*Proof.*  Fix \(j\ne i\).  The entries in row \(j\) are precisely the
+colours on the edges \(uv\) incident with \(u\) in the matching
+\(D^{(ij)}_x\) of `radius5_minimal_trace_forced.md`.  Hence at most one
+entry of that row can equal \(x\).  Moreover, the forced trace says
+that the row is hit unless \(x\) is finite and
+\[
+ u\in\{L_i^{-1}(x),L_j^{-1}(x)\},
+\]
+equivalently unless \(x\in\{L_i(u),L_j(u)\}\).  Thus:
+
+- \(x=\infty\) and \(x=u\) hit every one of the \(k-2\) rows;
+- \(x=L_i(u)\) hits none;
+- every other finite \(x\) misses exactly the unique row \(j_0\ne i\)
+  satisfying \(L_{j_0}(u)=x\), by the rainbow column condition on
+  the \(L_j(u)\).
+
+Now fix a column \(v\ne u\).  The entries in that column are the
+colours on the edges \(ij\) incident with \(i\) in the proper
+edge-colouring \(N_{uv}\), so again at most one can equal \(x\).
+Condition 4 of `radius4_reduction.md` says that the column is hit
+exactly when
+\[
+ x\notin\{M_i(uv),L_i(u),L_i(v)\}.
+\]
+For \(x=\infty\), only the first equality can occur, at the unique
+\(\infty\)-coloured \(M_i\)-edge incident with \(u\).  For \(x=u\),
+the first two equalities are impossible by the \(M_i\) palette and
+derangement conditions, while \(L_i(v)=u\) holds at the unique
+\(v=L_i^{-1}(u)\).  For finite
+\(x\notin\{u,L_i(u)\}\), exactly two columns are missed: the unique
+\(M_i\)-\(x\)-partner \(v_1\) of \(u\), and
+\(v_2=L_i^{-1}(x)\).  They are distinct, since the palette at \(v_2\)
+forbids \(M_i(uv_2)=L_i(v_2)=x\).
+
+The row and column counts agree in every case.  Since both projections
+are injective, each nonempty colour class is the claimed partial
+matching with exactly the stated complements.  Finally,
+\[
+ (k-2)+(k-2)+0+(k-2)(k-3)=(k-2)(k-1),
+\]
+so the colour classes account for every cell of the rectangle.
+\(\square\)
+
+Each generic class is thus a **bijection with prescribed
+domain/codomain complements** — a canonical carrier for sign
+invariants.  Per instruction, this matching structure is NOT presented
+as a \(k=16\) obstruction: it is a forced-structure lemma only.
+
+**Sign programme status (explicitly untested).**  The candidate
+nonlinear invariant — products of \(\operatorname{sgn}\) of the
+\(\Phi_{i,u,x}\) bijections across flags, compared through the two
+fiberings — is well-defined once reference orderings are fixed, but
+**no radius-5 witness exists on which to falsify it**: the shared
+\(N\)-table does not exist for the Wallis chart at \(k=16\) (star
+theorem), the \(k=4\) suite verdicts on disk read UNSAT at both radii,
+and the \(k=6\) radius-5 log now also reads `s UNSATISFIABLE`
+(certificates pending).  Until either a small-\(k\) witness appears
+(none may exist) or the suite's UNSATs are certified, no sign lemma is
+proposed as fact.  If the small-\(k\) local nonexistence pattern is
+certified, the productive question inverts: whether the LOCAL ball
+already fails at \(k=16\) — with the certified small-\(k\) mechanisms
+as lifting templates — rather than which invariant separates a ball
+that exists.
+
 ## Ground-truth computations in progress (statuses at write time)
 
 To honour falsify-first discipline, every future proposed lemma will be
@@ -103,5 +190,5 @@ land.
 
 These lemmas constrain every unrestricted radius-5 local ball of
 \(O_{16}\); they construct nothing and exclude nothing at \(k=16\).
-**#835 is not solved**, and no claim beyond the two proved lemmas and
+**#835 is not solved**, and no claim beyond the three proved lemmas and
 the recorded run statuses is made here.

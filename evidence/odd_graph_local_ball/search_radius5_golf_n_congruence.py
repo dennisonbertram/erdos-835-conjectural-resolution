@@ -21,6 +21,7 @@ from ortools.sat.python import cp_model
 from search_radius5_golf_joint import IJS, SQUARES, UVS, golf_sha256, n_allowed, verify_l_m
 from search_radius5_golf_joint_tight import add_forced_triangle_congruences
 from global_latin_audit import construct_golf17
+from global_latin_radius4_certificate import construct_one_n
 
 SCHEMA = "odd-graph-o16-radius5-fixed-golf-n-forced-trace-v2"
 
@@ -82,6 +83,19 @@ def make_payload(solver, n, golf, literal_count, trace_star_count):
     return payload
 
 
+def add_audited_radius4_hints(model: cp_model.CpModel, n, golf) -> int:
+    """Hint the independently solved radius-four N tables before trace repair."""
+
+    count = 0
+    for uv in UVS:
+        table, _allowed = construct_one_n(golf, *uv)
+        for ij in IJS:
+            model.AddHint(n[uv + ij], table[ij])
+            count += 1
+    assert count == 12_600
+    return count
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--seconds", type=float, default=120.0)
@@ -96,14 +110,30 @@ def main():
             "They are consequences of the exact forced trace and may slow presolve."
         ),
     )
+    parser.add_argument(
+        "--hint-audited-n",
+        action="store_true",
+        help=(
+            "Use the verified independent radius-four N tables as a repair hint. "
+            "The hint need not satisfy the forced trace and is not fixed."
+        ),
+    )
     args = parser.parse_args()
     model, n, golf, literal_count, trace_star_count = build_n_model(
         args.redundant_congruences
+    )
+    hinted_values = (
+        add_audited_radius4_hints(model, n, golf)
+        if args.hint_audited_n
+        else 0
     )
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = args.seconds
     solver.parameters.num_search_workers = args.workers
     solver.parameters.random_seed = args.seed
+    if args.hint_audited_n:
+        solver.parameters.repair_hint = True
+        solver.parameters.hint_conflict_limit = 1_000_000
     status = solver.Solve(model)
     result = {
         "schema": SCHEMA,
@@ -111,6 +141,8 @@ def main():
         "golf_sha256": golf_sha256(golf),
         "triangle_congruence_literals": literal_count,
         "forced_trace_stars": trace_star_count,
+        "hint_audited_n": args.hint_audited_n,
+        "hinted_values": hinted_values,
         "wall_time_seconds": solver.WallTime(),
         "branches": solver.NumBranches(),
         "conflicts": solver.NumConflicts(),

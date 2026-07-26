@@ -199,14 +199,22 @@ New exact results in the note include:
   indices and the other fourteen colours match 12 indices, giving
   \(3\cdot7+14\cdot6=105\). The three generic holes are always distinct,
   so the corresponding first-order parity test is automatically satisfied
-  and supplies no \(k=16\) obstruction; and
+  and supplies no \(k=16\) obstruction. At radius five, fixing a flag
+  \((i,u)\) gives a third forced fibering: every colour class in the
+  \((j,v)\) rectangle is a partial permutation with its omitted rows and
+  columns prescribed exactly. This supplies a canonical carrier for a
+  possible sign invariant, but no such obstruction is yet proved; and
 - a complete unrestricted CNF for the necessary shadow \(LS(3,4,20)\):
   159,885 variables and 251,957 clauses, independently reconstructed
   byte-for-byte with canonical SHA-256
   `f855ff1dcd09c420d8d086a9bd759c7906b7685b0e40eb0149eb42768424625f`.
-  SAT and proof-logging searches are in progress; no SAT or UNSAT result is
-  claimed. A checked UNSAT certificate would exclude \(k=16\), while SAT
-  would construct a derived large set but would not solve #835; and
+  The root-star normalization leaves a lossless 55-way second-star split,
+  indexed by all fixed-point-free cycle types on 16 points. Its independent
+  verifier checks that their conjugacy classes sum to all
+  \(7{,}697{,}064{,}251{,}745\) derangements. SAT and proof-logging searches
+  are in progress; no SAT or UNSAT result is claimed. Checked UNSAT
+  certificates for all 55 branches would exclude \(k=16\), while SAT would
+  construct a derived large set but would not solve #835; and
 - a parameter-free "one short of a large set" lemma: \(P-1\) pairwise disjoint
   \(S(k-1,k,v)\) force a \(P\)-th, so the maximum number of pairwise disjoint
   systems is never exactly \(P-1\).  In particular no search for \(16\)
@@ -336,7 +344,9 @@ routes, but not the asymmetric case.
 - [`collaboration/opus5/radius5_followup/`](collaboration/opus5/radius5_followup/):
   Opus 5's self-contained unrestricted radius-three census, exhaustive
   \(k=6\) radius-four obstruction, and independent audit of the forced-trace
-  theorem, with both quick and full finite verifiers.
+  theorem, with both quick and full finite verifiers. It also contains an
+  independent structural audit of the \(LS(3,4,20)\) and \(S(4,5,21)\)
+  shadows.
 - [`evidence/odd_graph_local_ball/radius4_dual_trace_forced.md`](evidence/odd_graph_local_ball/radius4_dual_trace_forced.md):
   the ansatz-free per-\(uv\) matching decomposition forced at radius four,
   plus the proof that its naive allowed-set parity is vacuous for every even
@@ -352,6 +362,11 @@ routes, but not the asymmetric case.
   a deterministic complete CNF for the unrestricted \(LS(3,4,20)\)
   necessary shadow, together with a canonical variable map, manifest, and an
   independent stream verifier.
+- [`evidence/ls_3_4_20_second_star_branching.md`](evidence/ls_3_4_20_second_star_branching.md)
+  and [`evidence/ls_3_4_20_second_star_branches/`](evidence/ls_3_4_20_second_star_branches/):
+  the proof, deterministic generator, compact cubes, manifests, materializer,
+  and independent verifier for the lossless 55-way second-star
+  decomposition. No branch verdict is claimed.
 - [`evidence/cyclic17_all_105_exact_slices_status.md`](evidence/cyclic17_all_105_exact_slices_status.md):
   the exact certificates, independent verifier, and carefully limited scope
   for those \(105\) separately feasible prescribed-link slices.
