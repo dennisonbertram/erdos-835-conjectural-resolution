@@ -1,0 +1,21 @@
+Independent replay: 2026-07-26
+
+Input CNF:
+  erdos835-star-core-2-7-support.cnf
+  SHA-256 4cd5a9b81e06b5401a7f828c5801a431f95db1067c6cc20545a2aac3d5bb5cc3
+
+Input DRAT after decompressing erdos835-star-core-2-7-support.drat.gz:
+  SHA-256 0c3086e155fde25d3780b9acc3130cb31148e078537997a68ae31d29f1357e2f
+
+Command:
+  drat-trim erdos835-star-core-2-7-support.cnf erdos835-star-core-2-7-support.drat
+
+Checker output:
+  c parsing input formula with 5792 variables and 15672 clauses
+  c finished parsing
+  c detected empty clause; start verification via backward checking
+  c 15577 of 15672 clauses in core
+  c 102108 of 309343 lemmas in core using 37971974 resolution steps
+  c 0 RAT lemmas in core; 479940 redundant literals in core lemmas
+  s VERIFIED
+  c verification time: 166.217 seconds
