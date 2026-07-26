@@ -77,6 +77,12 @@ New exact results in the note include:
   identity.  This proves that the complete codimension-three link layer
   does not force bijectivity; the next genuine compatibility layer is
   \(LS(3,4,20)\);
+- the complete forced binary weight enumerator of a hypothetical
+  \(S(14,15,31)\) point-incidence code, plus a Fourier-averaging theorem
+  proving that **no** common-zero shortening in any dimension can violate
+  Griesmer when the unresolved middle layer is bounded only by independent
+  endpoints.  This closes that coding route, not the design or the large
+  set;
 - exact cyclic prescribed-link completions for all \(105\) radius-five
   slices, directly reconstructed as \(1{,}785\) Steiner triple systems;
   their shared-\(N\) compatibility still fails in the checked seeds, so
@@ -137,6 +143,17 @@ routes, but not the asymmetric case.
   hypothetical \(S(14,15,31)\) has full binary point-incidence rank, derives
   the complete \(2\)-adic subset-star norm filtration, and isolates the
   unresolved saturation and half-spin steps; it is not a nonexistence proof.
+- [`evidence/s141531_incidence_code_audit.md`](evidence/s141531_incidence_code_audit.md):
+  the forced \([17\,678\,835,31]\) point-incidence weight enumerator,
+  its \(30\)-dimensional even subcode, initial MacWilliams checks, and
+  exact simplex-shortening parameters.
+- [`evidence/s141531_griesmer_averaging_no_go.md`](evidence/s141531_griesmer_averaging_no_go.md):
+  a global Fourier-averaging proof that independent size-\(16\) endpoint
+  bounds plus common-zero shortening and Griesmer cannot contradict a
+  hypothetical \(S(14,15,31)\), for any shortening subspace.
+- [`evidence/s141531_dim2_subcode_audit.md`](evidence/s141531_dim2_subcode_audit.md):
+  an exhaustive \(1{,}450\)-profile dimension-two shortening audit and
+  two explicitly nonexhaustive dimension-three controls.
 - [`evidence/full_color_block_hodge_audit.md`](evidence/full_color_block_hodge_audit.md):
   an exact audit of the full \(17\times17\) signed colour-block operator.
   It proves the majority-block nullity bounds, identifies the canonical
