@@ -120,7 +120,38 @@ New exact results in the note include:
   \(p\equiv1\pmod4\) and \(p\equiv3\pmod8\) arguments.  Consequently the
   single-maximal-minor colouring proposal is impossible for every
   \(k>2\).  This closes that one determinantal ansatz only; ratios or tuples
-  of several Plücker coordinates and arbitrary colourings remain open.
+  of several Plücker coordinates and arbitrary colourings remain open; and
+- a projective-geometric no-go theorem for the next genuinely
+  two-coordinate family: for every odd prime \(p\ge5\), no arbitrary
+  decoder of the ratio of two maximal-minor systems spanning a line inside
+  the Grassmannian can colour \(J(2p-2,p-1)\).  In the \(p=17\) rank-two
+  link, decoder rigidity would require sixteen internal points of a conic
+  on one projective line, while the exact maximum is nine.  Two unrelated
+  minors, affine pairs retaining scale, and three-or-more-coordinate tuples
+  remain open;
+- an exact delimiter for the unrelated two-minor frontier.  Two independent
+  decomposable contracted forms either give the excluded rank-two
+  Grassmann-line pencil or the canonical rank-four pencil
+  \(e_1\wedge e_2,e_3\wedge e_4\).  An explicit \(p=17\) rank-four member has
+  a perfect-matching zero graph, proving that the conic-parallelism argument
+  cannot simply be extended.  The same exact control has only nine or ten
+  raw labels per star and is not a decoder witness; and
+- an unrestricted necessary theorem for every hypothetical \(k=16\) cover.
+  Its triangle-monodromy Schreier graph is \(120\)-regular on
+  \(17{,}678{,}835\) vertices, has odd girth at least \(11\), and has
+  nonprincipal spectrum in \([-97,101]\).  Its least eigenvalue is exactly
+  \(-97\), with multiplicity at least \(30\), and every mixed product of
+  \(1,3,5,7,\) or \(9\) triangle monodromies is fixed-point-free.  These are
+  sharp conditional constraints, not a contradiction; and
+- a second unrestricted necessary theorem obtained by deleting one colour
+  class \(D\).  Any tight prime colouring forces a
+  \((p-2)\)-dimensional subspace \(U\le\ker M_D\) on which every Hadamard
+  product has constant star sums, with a nondegenerate scalar pairing.
+  Complete finite-field enumeration passes the true \(k=2\) control and
+  rejects the false \(k=4\) control already at degree two: its deleted
+  \(56\times56\) kernel has only eight isotropic projective lines and no
+  compatible pair, so its maximum capacity is \(1<3\).  The required
+  capacity at \(k=16\) is \(15\); no uniform bound there is yet proved.
 
 - a reduction proving that the triangle-closure law for boundary Steiner
   systems is exactly a statement about the design derived at the pair
@@ -242,10 +273,15 @@ New exact results in the note include:
   The infinity value genuinely depends on its one-factorization: exact
   \(k=16\) tensors realize both signs.  Nevertheless, the product of all
   \(k+1\) layer equations simplifies identically to the displayed
-  radius-three flag formula for every admissible chart.  Thus the total
-  full-\(N\) sign route is now closed as a new obstruction; only individual
-  layer or cross-root refinements remain open, and no \(k=16\)
-  contradiction follows; and
+  radius-three flag formula for every admissible chart.  The seventeen
+  individual equations have explicit quadratic XOR forms, but the existing
+  exact-one and forced-trace constraints already imply every one of them.
+  Across the \(k+1\) roots of one golf design,
+  \(P(\Psi^{r,x})\) is root-independent and all scalar transitions form a
+  coboundary, so every root-cycle product is \(+1\).  Thus the total,
+  individual-XOR, and formal scalar cross-root sign routes are closed as new
+  obstructions.  Finer relations from the overlap of actual cross-root
+  \(N\)-tables remain open, and no \(k=16\) contradiction follows; and
 - a certificate-ready CNF for the complete unrestricted radius-four ball plus
   all 1,680 forced traces: 883,521 variables and 1,909,497 clauses, with
   canonical SHA-256
@@ -613,6 +649,32 @@ routes, but not the asymmetric case.
   the top-two-moment and quadratic-character proof for all primes
   \(p\equiv7\pmod8\), \(p\ge23\), completing the single-maximal-minor
   no-go across every possible prime parameter.
+- [`collaboration/multi_plucker_construction/grassmann_line_ratio_no_go.md`](collaboration/multi_plucker_construction/grassmann_line_ratio_no_go.md):
+  the oval-and-internal-point proof excluding every arbitrary projective
+  decoder of two maximal-minor coordinates spanning a Grassmann line, with
+  an exact \(p=3\) boundary control and a \(p=17\) census.
+- [`collaboration/opus5/rank4_plucker_ratio/NOTE.md`](collaboration/opus5/rank4_plucker_ratio/NOTE.md):
+  Claude Opus 5's exact classification of the next local rank-four pencil
+  as one congruence orbit, its Segre-quadric formulation, and a checked
+  \(p=3\) local positive link.  Seeded searches find no \(p=5,7,11\)
+  link, but are explicitly non-exhaustive and prove nothing at \(p=17\).
+- [`collaboration/rank4_plucker_ratio/rank4_plucker_ratio.md`](collaboration/rank4_plucker_ratio/rank4_plucker_ratio.md):
+  an independent exact \(p=17\) rank-four control whose one pencil member
+  has a perfect-matching zero graph, sharply disproving the naive extension
+  of the rank-two oval argument while failing the full decoder condition.
+- [`collaboration/layer_sign_xor_cuts/README.md`](collaboration/layer_sign_xor_cuts/README.md)
+  and [`collaboration/cross_root_layer_sign/README.md`](collaboration/cross_root_layer_sign/README.md):
+  exact proofs that the individual layer XOR equations are already entailed
+  by the reduced \(N\)-constraints and that their formal root transitions
+  have trivial scalar holonomy.  Neither result constructs a compatible
+  \(N\)-table.
+- [`collaboration/triangle_monodromy_spectrum/README.md`](collaboration/triangle_monodromy_spectrum/README.md):
+  the mixed-word odd-girth theorem and exact Schreier-spectrum interval for
+  every hypothetical cover, including the forced \(-97\) point module at
+  \(k=16\).
+- [`collaboration/hadamard_kernel_attack/README.md`](collaboration/hadamard_kernel_attack/README.md):
+  the deleted-colour Hadamard-kernel theorem, complete \(k=2,4\) quadratic
+  controls, and the explicitly limited \(k=6\) design-valued sector audit.
 - [`evidence/p19_rank4_half_catalog_schur_search.md`](evidence/p19_rank4_half_catalog_schur_search.md):
   the complete 210-anchor Schur-complement exhaustion excluding every
   rank-at-most-four paired half-link over \(\mathbb F_{19}\), with explicit
@@ -756,6 +818,17 @@ python3 -B collaboration/full_layer_augmentation/verify_full_layer_augmentation.
 python3 -B collaboration/global_h_parity/verify_global_h_parity.py
 /opt/homebrew/bin/python3 -B \
   collaboration/finite_total_identity/verify_finite_total_identity.py
+python3 -B collaboration/layer_sign_xor_cuts/verify_layer_sign_xor_cuts.py
+python3 -B collaboration/cross_root_layer_sign/verify_cross_root_layer_sign.py
+python3 -B \
+  collaboration/multi_plucker_construction/verify_grassmann_line_ratio_no_go.py
+python3 -B collaboration/opus5/rank4_plucker_ratio/verify_rank4_ratio.py
+python3 -B collaboration/rank4_plucker_ratio/verify_rank4_plucker_ratio.py
+python3 -B \
+  collaboration/triangle_monodromy_spectrum/verify_triangle_monodromy_spectrum.py
+python3 -B collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py
+python3 -B \
+  collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py --k6
 python3 -B collaboration/opus5/full_n_sign/verify_full_n_sign.py
 python3 -B collaboration/fable_sign_head/verify_sign_head.py
 python3 -B evidence/verify_triangle_monodromy_cycle_girth.py

@@ -624,9 +624,9 @@ The complete proofs, including the character sum and an exact verifier, are
 in `evidence/constructive_no_go.md`.  These theorems do not exclude a
 smaller-symmetry or genuinely higher-order construction.
 
-### 7.2 July 2026 addendum: two completed restricted routes
+### 7.2 July 2026 addendum: four completed restricted routes
 
-Two later calculations sharpen the boundary without resolving the
+Four later calculations sharpen the boundary without resolving the
 unrestricted problem.
 
 First, the single-maximal-minor proposal is now excluded at every possible
@@ -663,6 +663,147 @@ formula \(F(L,M)\).  It therefore yields no new single-root obstruction.
 The proof and an independent rederivation are in
 `collaboration/global_h_parity/` and
 `collaboration/finite_total_identity/`.
+
+Third, neither the individual layer equations nor their formal change of
+root supplies the missing obstruction.  For a fixed Wallis chart the
+seventeen individual signs can be written as explicit quadratic XORs in the
+shared-\(N\) indicator variables.  The existing exact-one and forced-trace
+constraints already imply all seventeen equations by the same no-hole
+completion, so their incremental rank is zero.  More generally, if all
+roots are taken inside one golf design, then
+\[
+ P(\Psi^{r,x})
+\]
+is independent of \(r\), and the exact root transitions are a coboundary.
+Every scalar root-cycle product therefore telescopes to \(+1\).  This
+exhausts the already-proved scalar layer formulas under root change; it does
+not rule out a stronger relation obtained from the cellwise overlap of
+actual cross-root \(N\)-tables.  The proofs and exact Wallis audits are in
+`collaboration/layer_sign_xor_cuts/` and
+`collaboration/cross_root_layer_sign/`.
+
+Fourth, a genuinely two-coordinate Plücker family can also be excluded.
+Let two maximal-minor systems span a projective line lying inside the
+Grassmannian, equivalently let their matrices share \(k-1\) rows.  For every
+odd prime \(p\ge5\), no arbitrary decoder
+\[
+ h:\mathbb P^1(\mathbb F_p)\longrightarrow\mathbb F_p
+\]
+of their projective ratio properly colours \(J(2p-2,p-1)\).  In any
+rank-two link the \(p+1\) coordinate points form an oval, while the
+parameters of the decomposable pencil are collinear chord centres.  Decoder
+rigidity forces \(p-1\) of those centres to be internal.  Segre's theorem
+identifies the oval with a conic, and a line contains at most
+\((p+1)/2\) internal conic points.  At the target this is the exact
+contradiction \(16>9\).  The proof, finite census, and sharp \(p=3\)
+positive boundary control are in
+`collaboration/multi_plucker_construction/`.  Unrelated two-minor pencils
+with rank-four links, affine pairs retaining common scale, larger tuples,
+and arbitrary colourings remain open.  At that next rank-four boundary,
+the two contracted decomposable forms have one canonical local congruence
+orbit, represented by
+\[
+ e_1\wedge e_2,\qquad e_3\wedge e_4,
+\]
+and the link becomes a weighted configuration on
+\(\mathbb P^1\times\mathbb P^1\).  An exact \(p=3\) local link shows that
+the rank-two oval proof cannot simply be reused.  Seeded searches at
+\(p=5,7,11\) find no link but are non-exhaustive; no theorem or
+construction at \(p=17\) follows.  This sharp frontier is recorded in
+`collaboration/opus5/rank4_plucker_ratio/`.
+
+An independent exact control shows why a further idea is genuinely needed.
+On eighteen twisted-cubic points over \(\mathbb F_{17}\), two independent
+decomposable forms generate a rank-four pencil member whose zero graph is a
+perfect matching of \(K_{18}\).  Thus the matching condition that drove the
+rank-two oval proof can hold for an individual rank-four member without any
+projective-parallelism interpretation.  The displayed control itself has
+only nine or ten distinct raw ratios at each vertex, rather than the required
+seventeen, so it fails the decoder condition and is not a colouring.  Its
+exact audit is in `collaboration/rank4_plucker_ratio/`.
+
+### 7.3 Unrestricted triangle-monodromy spectral theorem
+
+There is also a new theorem that applies to every hypothetical cover, without
+assuming a construction ansatz.  Fix one colour fibre \(C_a\) and let \(R\)
+join two fibre blocks when their intersection has size one.  If
+\(\tau_{abc}\) is the permutation obtained by lifting the base triangle
+\(a\to b\to c\to a\), then
+\[
+ \sum_{\substack{b,c\ne a\\b\ne c}}P_{\tau_{abc}}=2R.
+\]
+Any fixed point of a product of \(s\) such permutations yields a closed walk
+of length \(3s\) in the Odd graph.  Its odd girth is \(2k-1\), so every mixed
+product with \(s\) odd and \(3s<2k-1\) is fixed-point-free.  At \(k=16\)
+this covers \(s=1,3,5,7,9\), and the simple Schreier graph \(R\) has odd
+girth at least \(11\).
+
+The complete Odd-graph spectrum gives more.  For an \(R\)-eigenvector
+supported on \(C_a\), the first three global adjacency moments are
+\[
+ 0,\qquad k,\qquad 2\mu.
+\]
+The two nonnegative spectral polynomials
+\[
+ (t+k-1)(t-2)(t+1),\qquad
+ (k-2-t)(t+3)(t+1)
+\]
+therefore force every nonprincipal eigenvalue of \(R\) into
+\[
+ \frac{-k^2+4k-2}{2}\le\mu\le
+ \frac{k^2-3k-6}{2}.
+\]
+The point-incidence difference space of the fibre's
+\(S(k-2,k-1,2k-1)\) design attains the lower endpoint with dimension
+\(2k-2\).  Hence at \(k=16\), a hypothetical \(R\) is \(120\)-regular on
+\(17{,}678{,}835\) vertices, has nonprincipal spectrum in
+\([-97,101]\), and has least eigenvalue exactly \(-97\) with multiplicity
+at least \(30\).  This is an exact unrestricted necessary condition, not a
+nonexistence proof: the Fano and Witt fibre controls attain the same lower
+bound at \(k=4,6\).  The proof and verifier are in
+`collaboration/triangle_monodromy_spectrum/`.
+
+### 7.4 Unrestricted deleted-colour Hadamard-kernel theorem
+
+A different exact necessary condition uses all colour classes at once.  Let
+\(p=k+1\) be prime, let \(W\) be the incidence matrix from
+\((k-1)\)-sets to \(k\)-sets, and write the colours as
+\(\mathbb F_p\).  Every star is a permutation of the field, so for its
+colour vector \(g\),
+\[
+ W(g^{\circ m})=0\quad(1\le m\le p-2),\qquad
+ W(g^{\circ(p-1)})=-\mathbf1.
+\]
+Fix the zero class \(D\), delete its columns, and call the remaining
+incidence matrix \(M_D\).  Then the \(p-2\) vectors
+\[
+ g,g^{\circ2},\ldots,g^{\circ(p-2)}
+\]
+span a \((p-2)\)-dimensional subspace \(U\le\ker M_D\) satisfying
+\[
+ M_D(x\circ y)\in\langle\mathbf1\rangle
+ \qquad(x,y\in U).
+\]
+The surviving scalar form is nondegenerate: in the displayed power basis
+its matrix is \(-1\) on the anti-diagonal and zero elsewhere.  Thus a single
+Steiner system can extend only if its deleted incidence kernel contains a
+large totally constant-Hadamard-product space.
+
+This degree-two relaxation already distinguishes the first controls.  At
+\(k=2\), its required and maximum dimensions are both one.  At \(k=4\), an
+exact enumeration of all \(19{,}531\) projective lines in the
+seven-dimensional deleted kernel finds eight isotropic lines, exactly the
+eight disjoint Steiner mates, but no compatible pair.  The maximum dimension
+is therefore one, below the required three.  At \(k=6\), all 144
+design-valued Witt-mate lines are pairwise incompatible, but the full
+quadratic cone is too large and is not claimed closed.
+
+At \(k=16\), the necessary space would have dimension \(15\) inside the
+kernel of a \(565{,}722{,}720\)-square matrix over \(\mathbb F_{17}\).
+A uniform capacity bound below \(15\), either for every possible zero system
+or already in a derived \(LS(4,5,21)\) layer, would settle this route.  No
+such bound is proved here.  The theorem, exact controls, and verifier are in
+`collaboration/hadamard_kernel_attack/`.
 
 ## 8. Bottom line
 
@@ -710,3 +851,6 @@ derived large sets \(LS(4,5,21)\) and \(LS(3,4,20)\) as smaller shadows.
 - S. F. Jørgensen,
   [On the clique covering numbers of Johnson
   graphs](https://arxiv.org/abs/2502.15019).
+- B. Segre,
+  [Ovals in a finite projective plane](https://doi.org/10.4153/CJM-1955-045-x),
+  *Canadian Journal of Mathematics* 7 (1955), 414–416.
