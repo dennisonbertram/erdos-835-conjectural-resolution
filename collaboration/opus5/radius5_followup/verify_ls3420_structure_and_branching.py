@@ -254,6 +254,41 @@ def section_c():
     print("      (Not all 55 need be realisable; 55 is an upper bound on the")
     print("       number of branches, which is what exhaustiveness requires.)")
 
+    # Target the verified 4,773-block Etzion--Hartman partial after applying
+    # the same root-star colour normalization as the canonical CNF.
+    colour = load_eh()
+    old_colour_to_point = {
+        colour[(0, 1, 2, point)]: point for point in range(3, 20)
+    }
+    assert len(old_colour_to_point) == 17
+    permutation = {
+        point: old_colour_to_point[colour[(0, 1, 3, point)]]
+        for point in range(4, 20)
+    }
+    assert set(permutation) == set(permutation.values()) == set(range(4, 20))
+    assert all(permutation[point] != point for point in permutation)
+    unseen = set(permutation)
+    cycle_lengths = []
+    while unseen:
+        start = min(unseen)
+        point = start
+        length = 0
+        while point in unseen:
+            unseen.remove(point)
+            length += 1
+            point = permutation[point]
+        assert point == start
+        cycle_lengths.append(length)
+    eh_type = tuple(sorted(cycle_lengths))
+    assert eh_type == (16,)
+    assert p16.index(eh_type) == 54
+    print()
+    print("    The verified 4,773-block Etzion--Hartman partial has all 16")
+    print("    entries of this row assigned.  After the canonical root-star")
+    print("    colour normalization, that row is one 16-cycle: branch 54.")
+    print("    This targets a near-completion search; it does not make branch")
+    print("    54 WLOG for arbitrary solutions.")
+
 
 # ---------------------------------------------------------------- D. CNF audit
 

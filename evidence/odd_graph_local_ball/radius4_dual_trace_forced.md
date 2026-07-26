@@ -144,6 +144,73 @@ domain/codomain complements** — a canonical carrier for sign
 invariants.  Per instruction, this matching structure is NOT presented
 as a \(k=16\) obstruction: it is a forced-structure lemma only.
 
+## Lemma 4 (uniform omission over a flag; foundation of the sign calculus)
+
+Fix a flag \((i,u)\) and run \(x\) over all \(k\) colours
+\(\mathcal C\setminus\{L_i(u)\}\) (sixteen colours when \(k=16\)).
+Then in any radius-5 structure:
+
+- every row \(j\ne i\) is omitted from the domain of \(\Phi_{i,u,x}\)
+  for **exactly one** \(x\), namely \(x=L_j(u)\) (always a generic
+  colour, since \(L_j(u)\notin\{u,\infty,L_i(u)\}\));
+- every column \(v\ne u\) is omitted for **exactly two** \(x\): once as
+  the \(M_i\)-partner (\(x=M_i(uv)\), landing in the \(\infty\)-class
+  when \(M_i(uv)=\infty\)), and once as the \(L_i\)-preimage
+  (\(x=L_i(v)\), landing in the \(u\)-class when \(L_i(v)=u\)).
+
+*Proof.*  Rows: by Lemma 3 the row \(j\) is missed exactly at generic
+\(x=L_j(u)\); derangement and the rainbow column at \(u\) exclude
+\(u\), \(\infty\) and \(L_i(u)\) as values of \(L_j(u)\).  Columns:
+each \(v\) is the \(M_i\)-partner of \(u\) for the single colour
+\(M_i(uv)\) (never \(L_i(u)\), by the \(M_i\)-palette at \(u\)), and
+the \(L_i\)-preimage for the single colour \(L_i(v)\) (never
+\(L_i(u)\), by injectivity; equal to \(u\) exactly when
+\(v=L_i^{-1}(u)\)).  Lemma 3's case list shows these are precisely the
+omissions. \(\square\)
+
+This uniformity is necessary input to a reference-order-free sign
+product, but it does **not by itself prove cancellation**.  Indeed, the
+cofactor formula shows that the product of the row-restriction signs
+does cancel under a row relabelling: there are two full domains and
+the generic domains omit each of the \(k-2\) rows once.  On the column
+side, however, the generic fibers omit *pairs*.  Even though every
+column occurs in two omitted sets, the product retains the orientation
+signs induced on those two-element hole sets.  Those pair-orientation
+terms need a further global identity; counting omissions twice is not
+enough.  The remaining programme is therefore to assemble the
+oriented hole-pair terms over flags and compare the per-\(ij\) and
+per-\(uv\) fiberings, or to produce a certified witness falsifying the
+candidate.
+
+**The residual pair-orientation product, made explicit (derived, not
+yet forced).**  For a column relabelling \(\tau\), the uncancelled
+factor at flag \((i,u)\) is
+\(R_\tau(i,u)=\prod_{x\ \mathrm{generic}}
+\varepsilon_\tau\bigl(\{v_1(x),v_2(x)\}\bigr)\), where
+\(\varepsilon_\tau(S)=-1\) exactly when \(\tau\) reverses the relative
+order of the two holes.  The hole pairs have a clean shape: since
+\(v_2(x)=L_i^{-1}(x)\) and \(v_1(x)\) is the \(M_i\)-partner of \(u\)
+in colour \(x\), the pair at \(x\) is \(\{v,\psi_{i,u}(v)\}\) for
+\(v=L_i^{-1}(x)\), where
+
+\[
+ \psi_{i,u}(v)\ :=\ \text{the }M_i\text{-partner of }u
+ \text{ in colour }L_i(v).
+\]
+
+So the multiset of generic hole pairs is exactly the edge set of the
+functional graph of \(\psi_{i,u}\) on \(V\setminus\{u\}\) — a disjoint
+union of \(\psi\)-paths and \(\psi\)-cycles whose two exceptional
+vertices are \(w_\infty\) (the \(M_i\)-\(\infty\)-partner of \(u\),
+never a \(v_1\)) and \(L_i^{-1}(u)\) (never a \(v_2\)), coinciding
+exactly when \(M_i(u,L_i^{-1}(u))=\infty\).  Hence
+\(R_\tau(i,u)=\prod_{e\in\psi_{i,u}\text{-graph}}\varepsilon_\tau(e)\):
+the residual is a \(\pm1\) function of the \(L_i,M_i\) data alone
+(radius-4 data — no \(N\) required), and the global question is
+whether \(\prod_{(i,u)}R_\tau(i,u)\), or a fibering-matched partial
+product, is forced to \(1\) by conditions 1–3.  This is precisely
+where the programme now stands: no cancellation is claimed.
+
 **Sign programme status (explicitly untested).**  The candidate
 nonlinear invariant — products of \(\operatorname{sgn}\) of the
 \(\Phi_{i,u,x}\) bijections across flags, compared through the two

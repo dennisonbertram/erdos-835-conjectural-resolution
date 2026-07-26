@@ -170,6 +170,22 @@ row derangement is forced to be an involution (which would collapse this to one
 branch): **it is not.** At order 5 every row is a 4-cycle; at order 7 all four
 derangement types \((2,2,2),(2,4),(3,3),(6)\) occur among the 6,240 squares.
 
+### The Etzion--Hartman near-completion lies in branch 54
+
+The verified 4,773-block Etzion--Hartman partial assigns every block in the
+chosen second-star row.  Relabel its old colours by the canonical root-star
+rule \(c(\{0,1,2,q\})=q\).  The resulting permutation on
+\(\{4,\ldots,19\}\) is
+\[
+4\mapsto19\mapsto14\mapsto7\mapsto10\mapsto9\mapsto12\mapsto5
+\mapsto8\mapsto13\mapsto16\mapsto17\mapsto15\mapsto6\mapsto11
+\mapsto18\mapsto4.
+\]
+It is one 16-cycle, which is branch 54 in the deterministic ordering.  The
+verifier derives this directly from the checked partial file.  This makes
+branch 54 the natural targeted completion search; it does **not** make that
+branch WLOG for arbitrary solutions.
+
 ---
 
 ## 5. Controls

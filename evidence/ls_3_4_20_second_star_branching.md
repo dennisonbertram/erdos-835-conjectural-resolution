@@ -192,6 +192,19 @@ No solver exit caused by a time limit is evidence of SAT or UNSAT.  Only a
 model checked as an \(LS(3,4,20)\), or a proof checked against the exact
 authenticated branch CNF, can settle a branch.
 
+## 5. Targeted near-completion branch
+
+The independently verified 4,773-block Etzion--Hartman partial assigns all
+sixteen entries in the selected second-star row.  After normalizing its
+colours by the root star, that row is a single 16-cycle.  It therefore lies
+in deterministic branch 54, whose plain and propagation-enhanced
+materializations are authenticated in
+`ls_3_4_20_second_star_branches/probe_2026-07-26.json`.
+
+This observation makes branch 54 the natural place to search for a completion
+of that particular near-solution.  It does not make branch 54 exhaustive:
+arbitrary solutions may occupy any of the 55 cycle types.
+
 ## 5. Bounded encoding probe
 
 On 2026-07-26, branch 54 (cycle type \(16\)) was materialized and
