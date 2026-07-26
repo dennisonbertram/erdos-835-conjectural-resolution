@@ -49,6 +49,17 @@ Compiled 2026-07-26. Every item marked [V] was verified against a primary source
    (Probl. Inf. Transm. 2006); P. Sin, SNF of incidence matrices (survey);
    Brouwer–van Eijl, p-ranks of SRG adjacency matrices.  This makes the route
    comparatively unexplored for these targets, not proved unprecedented.
+   *Addendum 2026-07-26 (see `s141531_prank_snf_audit.md`):* "unexplored"
+   must be read narrowly.  Modular nonexistence proofs for designs do have
+   genuine precedents, with distinct hypotheses: **Bruck–Ryser–Chowla**
+   needs a *symmetric* design (square incidence; rational congruence of the
+   square Gram), whereas **Calderbank's** self-orthogonality exclusions
+   need *few block-intersection classes* (quasi-symmetric).  Neither
+   addresses these non-symmetric parameter sets, which realize 13 resp. 7
+   intersection classes.  The explicitly listed elementary
+   p-rank/determinant/point-Gram tests have now been swept without
+   contradiction for both designs (all relevant primes, with the exact
+   scope recorded in the companion audit).
 6. **ILP/SAT at configuration level**: routine inside classification papers (and the 2021 Lam SAT verification; DLX in Ö-P); no standalone precedent for a Steiner system of strength ≥ 4 beyond Ö-P's exact-cover framework.
 
 ## Q4. Keevash / GKLO: asymptotic only — but now with an explicit constant

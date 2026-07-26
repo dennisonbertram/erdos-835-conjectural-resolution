@@ -3,6 +3,14 @@
 Status as of 2026-07-24: **UNKNOWN**.  No run in this file is an
 infeasibility result and no radius-4 witness has yet been found.
 
+> **Update, 2026-07-26.**  This historical status has been superseded:
+> [`global_latin_radius4_bridge.md`](global_latin_radius4_bridge.md)
+> gives a deterministic radius-four witness and an independently checked
+> complete assignment for the unrestricted generic CNF.  Thus the radius-four
+> instance is **SAT**.  The bounded runs below remain useful only as a record
+> of the earlier restricted search; the unresolved local frontier is radius
+> five.
+
 The searched ansatz is
 \[
 L_i(u)=u\mathbin{\mathtt{XOR}}i

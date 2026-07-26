@@ -132,6 +132,40 @@ New exact results in the note include:
   \(|D|=16\).  A direct inverse Fourier transform proves that this strong
   regularity is already equivalent to the forced weight enumerator, so it is a
   consistency theorem and candidate falsification test, not an obstruction; and
+- the complete higher block-XOR hierarchy of a hypothetical \(S(14,15,31)\).
+  A \(j\)-subset of blocks is a dual word exactly when its XOR is \(0\) (\(j\)
+  even) or all-ones (\(j\) odd), and the general law
+  \(a_j(D)=g_j(|D|)+\Delta_jF(D)/2^{30}\) shows every \(j\)-fold XOR count is
+  uniform on weight layers apart from one split — at \(|D|=15\) for odd \(j\),
+  \(|D|=16\) for even \(j\).  This yields the forced values
+  \(A_5=13\,402\,303\,385\,620\,814\,734\,177\,080\) and
+  \(A_6=39\,490\,202\,682\,224\,904\,419\,269\,612\,470\,360\), the exact
+  identities \(\sum_Dm_Dt_{\mathbf 1+D}=10A_5+3(b-3)A_3\) and
+  \(\sum_Et_E^2=\binom b3+6(b-4)A_4+20A_6\), and the per-block identity
+  \(4A_4/b=858\,252\,625\,232\); convexity is tight at \(j=4\) but has slack
+  \(354\,375\,828\,032\,095\,615\,907\,520\) at \(j=6\).  Being an inverse
+  transform of the forced enumerator does **not** make the hierarchy vacuous:
+  non-negativity and exact integrality of \(a_j(D)\) remain genuine
+  MacWilliams/Delsarte-type necessary conditions.  The **positivity** half is
+  now a theorem for all \(j\): for nontrivial \(u\) one has
+  \(|F(u)|\le b/31\), so a Cauchy estimate against the maximal binomial term
+  gives \(|K_j(F)|/\binom bj\le(b+1)\rho^{\,b-f}\) with
+  \(\rho^{\,b-f}\le\exp(-30j(b-j)/(31b))\); the two trivial characters
+  contribute \(2\binom bj\) and dominate the other \(2^{31}-2\) for
+  \(40\le j\le b-40\), which with the finite sweep gives \(a_j(D)\ge0\) for
+  **every** \(j\).  The **integrality** half is verified exhaustively only for
+  \(0\le j\le20\,000\) and its mirror.  **The route is therefore half closed
+  and not closed**: for \(20\,000<j<b-20\,000\) the \(2\)-adic conditions are
+  untested and no theorem settles them; and
+- an exact elementary modular audit of the two necessary designs
+  \(S(14,15,31)\) and \(S(7,8,24)\).  Forced incidence-Gram spectra,
+  Wilson-rank upper bounds, determinant divisibility, chain squeezes, and
+  honest mod-\(p\) ranks through inclusion level three all close consistently;
+  several ranks saturate exactly.  A rectangular point-Gram factorization and
+  an exhaustive check of the standard modular intersection-rank contradiction
+  also give no obstruction.  These results close only the explicitly stated
+  tests; higher-Gram lattice structure and \(0/1\) compatibility remain open;
+  and
 - a structural proof of the \(k=4\) case: the \(30\) systems \(S(3,4,8)\) are
   the \(30\) maximal totally singular subspaces of a hyperbolic \(O_6^+(2)\)
   form, block-disjointness forces opposite Klein families, and there are only
@@ -304,6 +338,9 @@ routes, but not the asymmetric case.
 - [`evidence/literature_and_x_search_2026-07-24.md`](evidence/literature_and_x_search_2026-07-24.md):
   exact recent X queries, the one matching preliminary report, and the
   full-archive tier limitation.
+- [`evidence/x_search_refresh_2026-07-26.md`](evidence/x_search_refresh_2026-07-26.md):
+  a fresh, explicitly limited seven-day X claim search.  It found no post
+  claiming a solution of #835; this is not evidence of priority or absence.
 - [`evidence/large_set_literature_attack_2026-07-25.md`](evidence/large_set_literature_attack_2026-07-25.md):
   a primary-literature audit of the exact
   \(LS(15,16,32)\)/\(O_{16}\) frontier and the nearby theorems that do not
@@ -410,6 +447,13 @@ routes, but not the asymmetric case.
   and [`evidence/s141531_pair_difference_regularity.md`](evidence/s141531_pair_difference_regularity.md):
   independent proofs of the complete block-pair difference table, including a
   direct inverse-transform proof showing why it supplies no new obstruction.
+- [`evidence/s141531_higher_xor_hierarchy.md`](evidence/s141531_higher_xor_hierarchy.md):
+  the all-level block-XOR transform, an all-\(j\) positivity theorem, and the
+  exact finite integrality sweep through \(j=20\,000\).  The unswept
+  \(2\)-adic integrality range remains open.
+- [`evidence/s141531_prank_snf_audit.md`](evidence/s141531_prank_snf_audit.md):
+  the scoped elementary p-rank, determinant, chain, point-Gram, and standard
+  modular-intersection audit for \(S(14,15,31)\) and \(S(7,8,24)\).
 - [`evidence/s7824_nonexistence_audit.md`](evidence/s7824_nonexistence_audit.md)
   and [`evidence/s7824_tower_config_sweep.md`](evidence/s7824_tower_config_sweep.md):
   exact necessary-condition audits for the derived \(S(7,8,24)\) tower.  Every
@@ -531,6 +575,8 @@ python3 -B evidence/verify_s141531_triangle_third_moment.py
 python3 -B evidence/verify_triangle_census.py
 python3 -B evidence/verify_s141531_autocorrelation_law.py
 python3 -B evidence/verify_pair_difference_regularity.py
+python3 -B evidence/verify_s141531_higher_xor_hierarchy.py
+python3 -B evidence/verify_s141531_prank_snf_audit.py --fast
 python3 -B evidence/verify_s7824_conditions.py
 python3 -B evidence/verify_derived_closure_lp.py
 python3 -B evidence/verify_ambient_moment_lp.py

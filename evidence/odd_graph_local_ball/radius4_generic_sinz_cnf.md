@@ -26,6 +26,11 @@ generic radius-4 local-cover instance is satisfiable.  A checked UNSAT
 proof would therefore exclude a global \(O_{16}\to K_{17}\) cover.
 A SAT result is only a radius-4 local witness.
 
+The status is now **SAT**: [`global_latin_radius4_bridge.md`](global_latin_radius4_bridge.md)
+constructs a deterministic complete model.  Its independent semantic and
+clause-by-clause verifier checks all 14,657 vertices and all 738,537 clauses
+against the canonical CNF hash below.  This does not extend to radius five.
+
 ## Fixed dimensions
 
 | item | count |
