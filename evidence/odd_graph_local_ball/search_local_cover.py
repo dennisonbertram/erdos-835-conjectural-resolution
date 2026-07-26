@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 from collections import deque
+from itertools import combinations
 from pathlib import Path
 
 from ortools.sat.python import cp_model
@@ -76,7 +77,13 @@ def verify_assignment(
         assert sorted(closed_colours) == list(range(COLOR_COUNT))
 
 
-def solve(radius: int, seconds: float, workers: int, encoding: str):
+def solve(
+    radius: int,
+    seconds: float,
+    workers: int,
+    encoding: str,
+    radius5_trace_strengthening: bool = True,
+):
     vertices, distances = generate_ball(radius)
     index = {vertex: position for position, vertex in enumerate(vertices)}
     layer_sizes = [
@@ -120,6 +127,55 @@ def solve(radius: int, seconds: float, workers: int, encoding: str):
                 )
         centre_count += 1
 
+    # A radius-five extension forces an additional, lossless propagation
+    # layer on its sphere-four N variables.  In the coordinates of
+    # radius4_reduction.md, for every fixed {i,j} and u the fifteen values
+    #
+    #     N_{uv}(ij),  v != u,
+    #
+    # are pairwise distinct.  This is Theorem
+    # radius5_minimal_trace_forced.md: parity makes each N-colour trace a
+    # perfect or near-perfect matching, and the lower bounds use all edges
+    # of K_16.  These constraints are consequences of the complete
+    # radius-five neighbourhood equations, not a symmetry or construction
+    # ansatz.  Stating them explicitly gives CP-SAT much earlier propagation.
+    trace_constraint_count = 0
+    if radius >= 5 and radius5_trace_strengthening:
+        for first_fixed, second_fixed in combinations(range(15), 2):
+            fixed_mask = (
+                ROOT
+                ^ (1 << first_fixed)
+                ^ (1 << second_fixed)
+            )
+            for first_moving in range(16):
+                trace_positions = []
+                for second_moving in range(16):
+                    if second_moving == first_moving:
+                        continue
+                    vertex = (
+                        fixed_mask
+                        | (1 << (15 + first_moving))
+                        | (1 << (15 + second_moving))
+                    )
+                    position = index[vertex]
+                    assert distances[position] == 4
+                    trace_positions.append(position)
+                assert len(trace_positions) == 15
+                if encoding == "integer":
+                    assert colour is not None
+                    model.AddAllDifferent(
+                        [colour[position] for position in trace_positions]
+                    )
+                    trace_constraint_count += 1
+                else:
+                    assert indicator is not None
+                    for assigned_colour in range(COLOR_COUNT):
+                        model.AddAtMostOne(
+                            indicator[position][assigned_colour]
+                            for position in trace_positions
+                        )
+                        trace_constraint_count += 1
+
     def fix(vertex: int, assigned_colour: int) -> None:
         if encoding == "integer":
             assert colour is not None
@@ -161,6 +217,10 @@ def solve(radius: int, seconds: float, workers: int, encoding: str):
         "vertices": len(vertices),
         "constrained_centres": centre_count,
         "encoding": encoding,
+        "radius5_trace_strengthening": (
+            radius >= 5 and radius5_trace_strengthening
+        ),
+        "radius5_trace_constraints": trace_constraint_count,
         "status": solver.StatusName(status),
         "wall_time_seconds": solver.WallTime(),
         "branches": solver.NumBranches(),
@@ -202,12 +262,24 @@ def main() -> None:
         type=Path,
         help="Optional JSON path for a feasible assignment",
     )
+    parser.add_argument(
+        "--no-radius5-trace-strengthening",
+        action="store_true",
+        help=(
+            "Disable the lossless forced N-trace propagation constraints. "
+            "Useful only as a performance control."
+        ),
+    )
     args = parser.parse_args()
     if args.radius < 1:
         parser.error("--radius must be positive")
 
     result, vertices, distances, assignment = solve(
-        args.radius, args.seconds, args.workers, args.encoding
+        args.radius,
+        args.seconds,
+        args.workers,
+        args.encoding,
+        not args.no_radius5_trace_strengthening,
     )
     print(json.dumps(result, indent=2, sort_keys=True))
 

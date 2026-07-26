@@ -25,3 +25,26 @@ Johnson-graph formulation, or the three first-open design formulations above.
 The live problem page also still labels
 [Problem #835](https://www.erdosproblems.com/835) **Open**.  Neither observation
 can establish that no private or unpublished solution exists.
+
+## Later same-day link-resolution pass
+
+A second pass queried the exact name, exact first-open parameters, and
+Johnson-graph/problem-number combinations. Besides the project's own post and
+retweet, it found two posts by
+[@NathanWilbanks_](https://x.com/NathanWilbanks_) that list “erdős 835”:
+
+- [status 2080454669420175497](https://x.com/NathanWilbanks_/status/2080454669420175497),
+  created 2026-07-24 00:47:00 UTC;
+- [status 2081113474050977824](https://x.com/NathanWilbanks_/status/2081113474050977824),
+  created 2026-07-25 20:24:52 UTC.
+
+The API’s expanded-link metadata resolves both entries to the same AGNT report,
+*Erdős 835: A Primality Sieve and Machine-Checked Small Cases*. Its own
+description claims a reduction, a primality sieve, and machine-checked cases
+\(k=2,3,4,5\); it does **not** claim a construction or impossibility theorem
+settling the existential question. Thus these hits do not change the status
+assessment.
+
+An independent web search on 2026-07-26 again returned the Erdős Problems page
+as **Open** and found no exact-parameter \(J(32,16)\) solution claim. This is
+still only a bounded public-search audit, not a priority theorem.

@@ -39,8 +39,8 @@ The dot denotes disjoint union.  When \(x,y\in V\), (2) is exactly
 the radius-five extension equation: its \(z=\infty\) term is
 \(N_{xy}(ij)\), and the other fourteen terms are the \(P\)-values.
 
-The equations with \(y=\infty\) are additional structure.  They have
-the following exact interpretation.  For a colour \(c\), let
+The equations with \(y=\infty\) have the following exact interpretation.
+For a colour \(c\), let
 \[
  D_{ij,c}=\{uv\in\binom V2:N_{uv}(ij)=c\}.
  \tag{3}
@@ -63,10 +63,13 @@ are the fifteen distinct colours outside
 \(L_i,L_j\) are permutations and disagree pointwise, this is (4).
 The converse is the same degree statement read backwards.
 
-Thus (4) is the **minimal-trace ansatz**: it strengthens the necessary
-degree parities in `radius5_reduction.md` to the smallest possible
-nonnegative degrees.  It is not forced by an arbitrary radius-five
-extension.
+Condition (4) was originally introduced as the **minimal-trace ansatz**.
+The counting theorem in `radius5_minimal_trace_forced.md` shows that it is
+in fact forced by every arbitrary radius-five extension: the degree parities
+give lower bounds of \(8\) edges for \(D_{ij,\infty}\) and \(7\) for each
+finite \(D_{ij,c}\), and these lower bounds already sum to all \(120\)
+edges of \(K_{16}\). Thus the remainder of this note is a lossless
+reformulation of a genuine radius-five slice, not a restricted ansatz.
 
 ## 2. Exact large-set equivalence
 
@@ -171,7 +174,8 @@ once, while an exact cover is necessarily distinct in each class.
 `search_cyclic17_r3_extension.py` implements this quotient and checks
 the resulting pair-star equations directly.  A SAT completion for a
 single pair is therefore a compact, exact radius-five **slice** in
-the minimal-trace ansatz.
+the forced minimal-trace form. The additional cyclic covariance remains an
+ansatz; the trace matching pattern does not.
 
 ## 4. The simultaneous \(105\)-slice condition
 

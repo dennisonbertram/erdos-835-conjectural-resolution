@@ -180,6 +180,13 @@ New exact results in the note include:
   two families — so at most two are pairwise disjoint.  This replaces the
   brute-force count with a mechanism and realizes the conjectured
   disjointness-parity sign at \(k=4\); and
+- a lossless radius-five trace theorem: in every unrestricted local
+  \(O_k\to K_{k+1}\) extension for even \(k\), parity forces the
+  \(N\)-traces to be perfect or near-perfect matchings. At \(k=16\), the
+  lower bounds \(8+16\cdot7=120\) exhaust \(E(K_{16})\), so every one of the
+  105 fixed-pair slices is necessarily a prescribed-link
+  \(LS(2,3,19)\). This removes a previously stated “minimal-trace ansatz”
+  without constructing the shared trace or solving #835; and
 - a parameter-free "one short of a large set" lemma: \(P-1\) pairwise disjoint
   \(S(k-1,k,v)\) force a \(P\)-th, so the maximum number of pairwise disjoint
   systems is never exactly \(P-1\).  In particular no search for \(16\)
@@ -307,10 +314,12 @@ routes, but not the asymmetric case.
   generated \(738{,}537\)-clause CNF.  Radius five and global extension
   remain open, so this local feasibility is not a global colouring.
 - [`evidence/odd_graph_local_ball/radius5_large_set_equivalence.md`](evidence/odd_graph_local_ball/radius5_large_set_equivalence.md):
-  an exact equivalence between one minimal-trace radius-five slice and a
-  prescribed-link \(LS(2,3,19)\), plus an eight-`AllDifferent` cyclic
-  quotient.  All \(105\) slices now have independent exact completions,
-  while their shared-\(N\) compatibility remains the decisive condition.
+  an exact equivalence between a radius-five slice and a prescribed-link
+  \(LS(2,3,19)\), plus an eight-`AllDifferent` cyclic quotient.
+  [`radius5_minimal_trace_forced.md`](evidence/odd_graph_local_ball/radius5_minimal_trace_forced.md)
+  proves that the required trace matching is forced, not an ansatz. All
+  \(105\) Wallis slices have independent exact cyclic completions, while
+  their shared-\(N\) compatibility remains the decisive condition.
 - [`evidence/cyclic17_all_105_exact_slices_status.md`](evidence/cyclic17_all_105_exact_slices_status.md):
   the exact certificates, independent verifier, and carefully limited scope
   for those \(105\) separately feasible prescribed-link slices.
@@ -319,6 +328,19 @@ routes, but not the asymmetric case.
   symmetry, with a direct-verified 40-phase certificate for one
   prescribed-link \(LS(2,3,19)\) slice.  The joint layer, later layers,
   and asymmetric colourings remain open.
+- [`evidence/cyclic17_star_centre0_infeasibility.md`](evidence/cyclic17_star_centre0_infeasibility.md)
+  and [`evidence/cyclic17_star_centre0/`](evidence/cyclic17_star_centre0/):
+  a fixed-Wallis centre-star obstruction whose minimal incompatible core has
+  six rows. Three independently encoded UNSAT certificates replay with
+  `drat-trim`; the stored slice-family completeness is independently
+  reproduced by two exhaustive traversals. This excludes one cyclic chart
+  only, not all cyclic charts and not #835.
+- [`evidence/cyclic17_star_scope_rev2_and_pointwise_exhaustion.md`](evidence/cyclic17_star_scope_rev2_and_pointwise_exhaustion.md):
+  the repaired theorem that every colour-transitive tight solution is
+  cyclic-\(17\), a chart-independent proof that every individual star orbit
+  satisfies Hall, and an unrestricted proof that the entire purely
+  pointwise indicator algebra is parameter-forced. These identify the scope
+  and close proof strategies; they do not decide existence.
 - [`evidence/cyclic17_all_power_sums_audit.md`](evidence/cyclic17_all_power_sums_audit.md):
   the exact endpoint of the cyclic layer's finite-field linearized moment
   route.  All dependency-cancelled power sums through degree \(16\) are
@@ -358,8 +380,9 @@ routes, but not the asymmetric case.
   exact recent X queries, the one matching preliminary report, and the
   full-archive tier limitation.
 - [`evidence/x_search_refresh_2026-07-26.md`](evidence/x_search_refresh_2026-07-26.md):
-  a fresh, explicitly limited seven-day X claim search.  It found no post
-  claiming a solution of #835; this is not evidence of priority or absence.
+  a fresh, explicitly limited seven-day X claim search, including resolution
+  of two third-party “erdős 835” links to a small-cases/primality-sieve note.
+  It found no full-solution claim; this is not evidence of priority or absence.
 - [`evidence/large_set_literature_attack_2026-07-25.md`](evidence/large_set_literature_attack_2026-07-25.md):
   a primary-literature audit of the exact
   \(LS(15,16,32)\)/\(O_{16}\) frontier and the nearby theorems that do not

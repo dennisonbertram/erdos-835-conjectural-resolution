@@ -48,9 +48,10 @@ lives inside \(\{0,2\}..\{0,14\}\) — family \(\{0,1\}\) is unnecessary.
    \(\{0,2\},\ldots,\{0,7\}\); it does not rely on \(\{0,1\}\).
 2. **Exhaustive master.**  Exact DFS over the complete families
    (`star_master.cpp`): 0 solutions, 15,190 nodes, 0.027 s (contrast: a
-   6,785-variable CP-SAT master was UNKNOWN at 120 s).  The 13-family
-   dummy-row probe already gives 0 solutions without \(\{0,1\}\)
-   (15,716 nodes).
+   6,785-variable CP-SAT master was UNKNOWN at 120 s).  Independence
+   from \(\{0,1\}\) is double-confirmed: the dummy-row probe (14
+   families, one artificial row) gives 0 solutions in 15,716 nodes,
+   and the clean 13-family master gives 0 solutions in 15,715 nodes.
 3. **Portable six-core DRAT certificate.**  Support-encoded master CNF
    over the six core families \(\{0,2\}..\{0,7\}\)
    (`emit_star_support_cnf.py`, audited: sequential AMO sound;
@@ -72,14 +73,56 @@ lives inside \(\{0,2\}..\{0,14\}\) — family \(\{0,1\}\) is unnecessary.
    disjointness: PASS (re-run against the canonical store, 1.9 s).
    Census source: `erdos835-star-subset-census.cpp` (SHA-256
    `8db87c…2764878`).
-5. **Trust roots.**  The six-core DRAT reduces the incompatibility to
-   machine-checkable form; its soundness rests on (a) the audited CNF
-   encoder semantics and (b) completeness of the six core families —
-   currently checked by the two exhaustive traversal orders
-   (identical counts and canonical row sets) and, in progress, by
-   per-family exhaustion CNFs (all stored rows blocked + DRAT UNSAT),
-   which will make leg (b) portable as well.  Slice-\(\{0,2\}\)
-   exhaustion runs are underway; their hashes will be appended here.
+5. **Additional verified certificates.**
+   Independent second encodings, both cadical-UNSAT and drat-trim
+   **VERIFIED**: the 14-family master CNF
+   (`star_master_centre0.cnf`, 284,396 vars / 832,273 clauses, SHA
+   `25a940d8…71e735`; DRAT SHA `a5aa01b9…ecca5a8`) and a second
+   six-core master CNF (`star_master_6core.cnf`, 121,192 vars /
+   354,319 clauses, SHA `6bd9085a…08d59be`; DRAT SHA
+   `31d43309…c4d5df2a`).  Both compressed proof files are retained in
+   this directory; the six-core gzip is split into three GitHub-safe
+   pieces with exact reassembly instructions in `README.md`.  Census
+   independently reproduced:
+   `census_2_14_le6.json` (SHA `f89ba7cc…95fe165`, 50.4 s) confirms
+   1,712/1,716 and the exact four compatible six-subsets.
+   Deterministic DFS trace: `star_master_trace.log.gz` (SHA of plain
+   log `44978c0a…909f84f`, 45,568 lines; rerun identical).
+6. **Centre-1 replication (final agent report).**  Twelve further
+   complete families (sizes 454–520; centre-1 total 6,857 rows with
+   \(\{0,1\},\{1,2\}\); single-run enumerations, no alt recount —
+   flagged): the centre-1 14-family exhaustive master also has
+   **0 solutions** (15,685 nodes, 0.008 s).  The ansatz fails at both
+   tested centres.  Family store: `families_centre1/`.
+7. **Trust roots and the one open leg.**  The incompatibility side is
+   triply DRAT-certified (support CNF + two independent encodings).
+   Completeness of the six core families currently rests on the two
+   exhaustive traversal orders (identical counts and canonical row
+   sets) plus the encoder positive control
+   (`control_exh_0_2_hinted.cnf`: SAT in 0.02 s, model = the omitted
+   stored solution, verified twice).  The per-family exhaustion CNFs
+   (all stored rows blocked; expected UNSAT ⟹ completeness portable)
+   are emitted and hashed in this directory (`exh_0_{2..7}.cnf` +
+   `.sha256`, 456 vars, ~10,200 clauses each).  **All per-family
+   CaDiCaL attempts ended without verdicts**: five outputs record
+   `c UNKNOWN` and one is empty, with no proof files retained — these
+   exhaustion instances (UNSAT after blocking ~450–526 solutions) are
+   evidently hard for CDCL, and no further solves are planned under
+   the current CPU priorities.  One external \(\{0,2\}\) attempt by
+   the companion session was still running at finalization; nothing
+   here depends on it.  **The family-completeness leg is, finally, the
+   dual-traversal enumeration agreement** (identical counts and
+   canonical row sets under two tie-breaking orders) **plus the
+   encoder controls** — not a CNF certificate.  The hashed CNFs remain
+   available to anyone wishing to attempt portable completeness
+   proofs later.
+8. **Auxiliary exact data.**  \(\{0,1\}\) three-way completeness
+   (471 = primary = alt = the repo searcher's full enumeration,
+   1,453,023,818 nodes, solution-sets equal); exact cross-family
+   collision distribution for \(\{0,1\}\times\{0,2\}\)
+   (`collision_0_1_x_0_2.json`: 7.23 % of the 211,479 pairs
+   collision-free, mean 2.82); slot profiles at both centres have no
+   zero-user slots (centre-0 min 424, centre-1 min 410).
 
 The slot profile shows the obstruction is global, not a gap: all 560
 centre-allowed slots have between 424 and 554 using rows.
@@ -101,6 +144,7 @@ frontier.
 
 A monolithic direct-star CNF (35,504 vars, SHA
 `cebb35…939ddcd`) with two terminated CaDiCaL attempts reached no
-verdict; toolchain, logs, and the attempt-2 partial proof are preserved
-in the session scratchpad record (`star_sat/FINAL_STATUS.md`).  The
-six-core route supersedes it.
+verdict. Its deterministic CNF, tooling, complete logs, and status record are
+preserved under `cyclic17_star_centre0/abandoned_direct_star/`; the incomplete
+519 MiB transient proof is recorded by hash but is not versioned because it
+carries no SAT or UNSAT verdict. The six-core route supersedes it.
