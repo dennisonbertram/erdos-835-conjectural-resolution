@@ -25,3 +25,26 @@ Exit code: 0.
 
 The macOS toolchain emitted two sandbox cache warnings before the Python
 output.  They did not affect the deterministic verifier or its exit status.
+
+Extended execution 2026-07-27:
+
+  k=6 tower indexing: 924 vertices, 792 stars,
+    16632 uniquely covered adjacencies: PASS
+  LS(2,3,19) parity identity: 197,676 (five-set, colour) pairs;
+    support histogram {8: 93024, 10: 93024, 12: 11628}: PASS
+  K18/K13-hole one-factorization control: 78 hole edges;
+    support histogram {8: 10, 10: 4, 12: 3}: PASS
+  all-lift design divisibility arithmetic:
+    78 (level, link-size) cases through j=12: PASS
+  j=2 triangle-leave control: 286 triples partitioned;
+    t histogram {0: 5, 1: 4, 2: 8};
+    leave-edge histogram {48: 8, 51: 4, 54: 5}: PASS
+  scope: exact reduction controls only; no simultaneous fan or
+    J(32,16) colouring constructed; #835 remains open
+
+Exit code: 0.
+
+The extended verifier proves no fan or completion.  Its local
+LS(2,3,19) control witnesses the exact triangle-leave identities, while the
+general theorem proves only that every standard local design-divisibility
+condition is automatic.

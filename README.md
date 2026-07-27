@@ -1058,7 +1058,10 @@ routes, but not the asymmetric case.
   \(J(32,16)\) colouring.  It identifies the simultaneous \(13\)-fan as the
   exact truncation through level one and reduces the first lift to linked
   \(K_{13}\)-hole completions of partial one-factorizations of \(K_{18}\);
-  the elementary parity condition for every hole is proved automatic.
+  the elementary parity condition for every hole is proved automatic.  More
+  generally, each subsequent lift is exactly a joint
+  \(K_{j+1}^{(j)}\)-decomposition problem, and every standard local
+  divisibility condition for all twelve lifts is proved automatic.
 - [`collaboration/fan_small_controls/ALL_K6_THEOREM.md`](collaboration/fan_small_controls/ALL_K6_THEOREM.md):
   the complete universal \(k=6\) fan obstruction, including the exhaustive
   two-type \(LS(2,3,9)\) classification and two explicit 18-cell human
@@ -1070,11 +1073,15 @@ routes, but not the asymmetric case.
 - [`collaboration/fan_13adic_screen/NOTE.md`](collaboration/fan_13adic_screen/NOTE.md):
   the exact Smith/cokernel screen proving that the cyclic quotient's signed
   matching equation is solvable over \(\mathbb Z\).
+- [`collaboration/fan_13adic_screen/branch0_prefix1_refutation/README.md`](collaboration/fan_13adic_screen/branch0_prefix1_refutation/README.md):
+  one byte-reconstructible \(88\)-row prefix-local refutation in the fixed
+  cyclic-link quotient, with its exact CNF and independently replayable
+  compressed DRAT proof.  This excludes only that explicit prefix.
 - [`collaboration/fan_gadget_generalization/NOTE.md`](collaboration/fan_gadget_generalization/NOTE.md):
   the nonlinear \(k=6\) delimiter, sharp palette-anchor bounds, and the
   universal theorem \(\omega(H_L)=13\), together with the exhaustive cyclic
   quotient theorem that every nonzero squarefree trade has support at least
-  ten.  Three of the seven possible support-ten Q-group partitions are also
+  ten.  Four of the seven possible support-ten Q-group partitions are also
   excluded exactly.
 - [`collaboration/h3_k6_fan_theorem_audit/README.md`](collaboration/h3_k6_fan_theorem_audit/README.md):
   an independent reconstruction of the universal \(k=6\) theorem and
@@ -1324,6 +1331,10 @@ python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support8.py
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support10_compact.py
+python3 -B \
+  collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining.py
+python3 -B \
+  collaboration/fan_13adic_screen/branch0_prefix1_refutation/verify_prefix_refutation.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
 python3 -B \
   collaboration/opus5/unrestricted_ls3420_attack_2/verify_solution.py \

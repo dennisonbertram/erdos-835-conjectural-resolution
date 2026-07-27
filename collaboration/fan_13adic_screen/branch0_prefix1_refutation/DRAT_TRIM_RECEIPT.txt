@@ -1,0 +1,15 @@
+Command:
+/private/tmp/drat-trim-build.tsJCcW/drat-trim-master/drat-trim finite_completion.cnf finite_completion.drat
+
+Output:
+c parsing input formula with 1016 variables and 17046 clauses
+c finished parsing
+c detected empty clause; start verification via backward checking
+c 10668 of 17046 clauses in core
+c 59738 of 97851 lemmas in core using 2772961 resolution steps
+c 0 RAT lemmas in core; 35293 redundant literals in core lemmas
+s VERIFIED
+c verification time: 3.853 seconds
+
+The proof checked here is stored as finite_completion.drat.gz. Its
+uncompressed SHA-256 is recorded in prefix.json.

@@ -10,6 +10,7 @@ Erdos--Rosenfeld Problem #835.
 from __future__ import annotations
 
 import itertools
+import math
 import sys
 from collections import Counter
 from pathlib import Path
@@ -265,10 +266,138 @@ def verify_k18_hole_control():
     )
 
 
+def verify_all_lift_divisibility_arithmetic():
+    """Check the binomial divisibility used in Theorem 5 at every lift."""
+
+    checked = 0
+    for j in range(1, 13):
+        for i in range(j):
+            divisor = j + 1 - i
+            total_degree = math.comb(j + 17 - i, j - i)
+            assert total_degree % divisor == 0
+            checked += 1
+    assert checked == sum(range(1, 13))
+    print(
+        "all-lift design divisibility arithmetic:",
+        f"{checked} (level, link-size) cases through j=12: PASS",
+    )
+
+
+def verify_j2_triangle_control():
+    """Realize Theorem 5 and formulas (27)--(29) in a local large set."""
+
+    # A fixed six-set R and thirteen-set A partition the 19 points of a
+    # complete LS(2,3,19).  Complementing inside R turns its triple colours
+    # into exact local tower data through level 3.
+    R = tuple(range(6))
+    A = tuple(range(6, 19))
+    colours = tuple(range(17))
+    large_set = construct_link()
+
+    def tower_value(B, Q):
+        triple = canonical((set(R) - set(Q)) | set(B))
+        assert len(triple) == 3
+        return large_set[triple]
+
+    # Tower laws through level 1 and top properness at level 2.
+    for j in (0, 1):
+        for B in itertools.combinations(A, j):
+            for P in itertools.combinations(R, j + 4):
+                values = [
+                    tower_value(B, canonical(set(P) - {x}))
+                    for x in P
+                ]
+                values += [
+                    tower_value(canonical(set(B) | {a}), P)
+                    for a in A
+                    if a not in B
+                ]
+                assert len(values) == 17
+                assert set(values) == set(colours)
+
+    for B in itertools.combinations(A, 2):
+        values = [
+            tower_value(B, canonical(set(R) - {x}))
+            for x in R
+        ]
+        assert len(values) == len(set(values)) == 6
+
+    t_histogram = Counter()
+    edge_histogram = Counter()
+    all_coloured_triangles = set()
+    for colour in colours:
+        leave = {
+            frozenset(B)
+            for B in itertools.combinations(A, 2)
+            if colour not in {
+                tower_value(B, canonical(set(R) - {x}))
+                for x in R
+            }
+        }
+
+        u = {}
+        for a in A:
+            coloured_four_sets = {
+                frozenset(Q)
+                for Q in itertools.combinations(R, 4)
+                if tower_value((a,), Q) == colour
+            }
+            complement_edges = {
+                frozenset(set(R) - set(Q))
+                for Q in coloured_four_sets
+            }
+            touched = [x for edge in complement_edges for x in edge]
+            assert len(touched) == len(set(touched))
+            u[a] = len(coloured_four_sets)
+            assert u[a] <= 3
+
+            degree = sum(a in edge for edge in leave)
+            assert degree == 6 + 2 * u[a]
+            assert degree % 2 == 0
+
+        t = sum(
+            tower_value((), T) == colour
+            for T in itertools.combinations(R, 3)
+        )
+        assert sum(u.values()) == 15 - 3 * t
+        assert len(leave) == 39 + sum(u.values()) == 54 - 3 * t
+        assert len(leave) % 3 == 0
+
+        # The all-A triples of the same LS(2,3,19) provide an actual
+        # triangle decomposition of this leave.
+        blocks = {
+            frozenset(B)
+            for B in itertools.combinations(A, 3)
+            if tower_value(B, R) == colour
+        }
+        covered = Counter(
+            frozenset(edge)
+            for block in blocks
+            for edge in itertools.combinations(block, 2)
+        )
+        assert set(covered) == leave
+        assert set(covered.values()) == {1}
+        assert len(blocks) * 3 == len(leave)
+        assert all_coloured_triangles.isdisjoint(blocks)
+        all_coloured_triangles.update(blocks)
+
+        t_histogram[t] += 1
+        edge_histogram[len(leave)] += 1
+
+    assert len(all_coloured_triangles) == math.comb(13, 3)
+    print(
+        "j=2 triangle-leave control:",
+        f"286 triples partitioned; t histogram {dict(sorted(t_histogram.items()))};",
+        f"leave-edge histogram {dict(sorted(edge_histogram.items()))}: PASS",
+    )
+
+
 if __name__ == "__main__":
     verify_tower_indexing_control()
     verify_link_parity_identity()
     verify_k18_hole_control()
+    verify_all_lift_divisibility_arithmetic()
+    verify_j2_triangle_control()
     print(
         "scope: exact reduction controls only; no simultaneous fan or",
         "J(32,16) colouring constructed; #835 remains open",

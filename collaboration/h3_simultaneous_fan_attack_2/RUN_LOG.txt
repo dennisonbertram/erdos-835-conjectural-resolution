@@ -518,3 +518,19 @@ scope:
   randomized only its search order.  Every run terminated at its time limit.
   The aggregate node count is exact telemetry, not an exhaustion certificate
   or evidence for nonexistence.
+
+25. One-hour exact SCIP matching run
+
+result:
+  backend=SCIP
+  status=NOT_SOLVED
+  variables=2964
+  constraints=1140
+  wall_time=3600.206000
+  branch_and_bound_nodes=1939
+  certificate=NONE
+
+scope:
+  The time-limited backend returned neither a binary exact cover nor a
+  portable infeasibility certificate.  NOT_SOLVED and the node count have no
+  mathematical status.

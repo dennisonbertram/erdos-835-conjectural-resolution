@@ -286,7 +286,190 @@ form a matching with
 \]
 edges, leaving precisely \(8+2t_c(P)\) unmatched vertices, all in \(A\).
 
-## 5. Exact remaining compatibility problem
+## 5. All local decomposition divisibility tests vanish
+
+The first-lift matching problem is the \(j=1\) member of a uniform sequence
+of local design-completion problems.  Suppose \(1\le j\le12\), that the
+tower maps \(G_B\) have been defined for \(|B|\le j\), that the tower laws
+hold through level \(j-1\), and that level \(j\) is top-proper:
+\[
+ \bigl(G_B(R\setminus\{x\})\bigr)_{x\in R}
+ \quad\hbox{are distinct}
+ \tag{20}
+\]
+for every \(B\in\binom Aj\) and \(R\in\binom U{j+4}\).
+
+Fix such an \(R\) and a colour \(\gamma\).  Define the \(j\)-uniform leave
+on \(A\)
+\[
+ {\cal H}^{(j)}_\gamma(R)=
+ \left\{B\in\binom Aj:
+   \gamma\notin
+   \{G_B(R\setminus\{x\}):x\in R\}\right\}.
+ \tag{21}
+\]
+
+> **Theorem 5 (local-design equivalence and automatic divisibility).**
+> The level-\((j+1)\) values for this fixed \(R\) satisfy every level-\(j\)
+> tower law if and only if, for each colour \(\gamma\), the
+> \(\gamma\)-coloured \((j+1)\)-sets decompose
+> \({\cal H}^{(j)}_\gamma(R)\) into copies of \(K_{j+1}^{(j)}\), and the
+> chosen blocks across the seventeen colours partition
+> \(\binom A{j+1}\).
+>
+> Moreover, every standard divisibility condition for the individual
+> \(K_{j+1}^{(j)}\)-decomposition holds identically.  Explicitly, for every
+> \(I\in\binom Ai\), \(0\le i<j\),
+> \[
+> d_\gamma(I):=
+> \#\{B\in{\cal H}^{(j)}_\gamma(R):I\subseteq B\}
+> \equiv0\pmod{j+1-i}.
+> \tag{22}
+> \]
+
+### Proof
+
+Put \(W=R\mathbin{\dot\cup}A\), so \(|W|=j+17\).  Every
+\((j+1)\)-set \(D\subset W\) meeting \(R\) has the unique coordinates
+\[
+ B=D\cap A,\qquad Q=R\setminus(D\cap R),
+ \qquad |Q|=|B|+3,
+\]
+and hence the known colour \(G_B(Q)\).
+
+Every \(j\)-set \(Y\subset W\) meeting \(R\) has
+\(|Y\cap A|\le j-1\).  Its seventeen one-point extensions are exactly the
+two lists in the corresponding tower law (4).  Consequently the known
+\(\gamma\)-coloured \((j+1)\)-sets cover every such \(Y\) exactly once.
+For \(B\in\binom Aj\), its known extensions are \(B\cup\{x\}\), \(x\in R\),
+and (20) says that at most one has colour \(\gamma\).  Thus (21) is exactly
+the leave that must be covered by \(\gamma\)-coloured \((j+1)\)-sets wholly
+inside \(A\).  Each such set covers its \(j+1\) constituent \(j\)-sets, which
+proves the decomposition statement.  Requiring every new \((j+1)\)-set to
+receive one colour is exactly the additional cross-colour partition
+condition.  Conversely, such a joint partition covers every allowed
+\((B,\gamma)\) exactly once and no forbidden one, so together with the
+\(j+4\) distinct known colours it makes all seventeen extensions of every
+\(B\in\binom Aj\) rainbow.  This recovers the level-\(j\) tower laws.
+
+It remains to prove (22).  Fix \(I\in\binom Ai\).  Let \(N_\gamma(I)\) be
+the number of known \(\gamma\)-coloured \((j+1)\)-sets containing \(I\),
+and let
+\[
+ f_\gamma(I)=
+ \#\{B\in\binom Aj\setminus{\cal H}^{(j)}_\gamma(R):I\subseteq B\}.
+\]
+Count the \(j\)-sets containing \(I\) and meeting \(R\).  Each is covered
+once by a known \(\gamma\)-block.  A known block containing \(I\) has
+\(j+1-i\) constituent \(j\)-sets containing \(I\), except that deleting
+its unique \(R\)-point produces an all-\(A\) set precisely for each of the
+\(f_\gamma(I)\) forbidden sets.  Hence
+\[
+ \binom{j+17-i}{j-i}-\binom{13-i}{j-i}
+   =(j+1-i)N_\gamma(I)-f_\gamma(I).
+ \tag{23}
+\]
+Since
+\[
+ d_\gamma(I)=\binom{13-i}{j-i}-f_\gamma(I),
+\]
+equation (23) rearranges to
+\[
+ d_\gamma(I)=
+ \binom{j+17-i}{j-i}-(j+1-i)N_\gamma(I).
+ \tag{24}
+\]
+Write \(r=j-i\).  Here \(1\le r\le12\), and
+\[
+ \frac1{r+1}\binom{17+r}{r}
+   =\frac1{17}\binom{17+r}{r+1}\in\mathbb Z.
+ \tag{25}
+\]
+The last integrality holds because the numerator product
+\(17\cdot18\cdots(17+r)\) contains a factor \(17\), whereas
+\((r+1)!\) does not.  Thus the first term of (24) is divisible by
+\(j+1-i=r+1\), proving (22). \(\square\)
+
+The requested next layer has especially transparent arithmetic.  For
+\(j=2\), fix \(R\in\binom U6\), and put
+\[
+ u_{a,\gamma}(R)=
+ \#\{Q\in\binom R4:F_a(Q)=\gamma\},\qquad
+ t_\gamma(R)=
+ \#\{T\in\binom R3:L(T)=\gamma\}.
+ \tag{26}
+\]
+The complements in \(R\) of the \(\gamma\)-coloured \(F_a\)-quadruples
+form a matching, so \(u_{a,\gamma}\le3\).  For each \(x\in R\), apply the
+level-\(1\) tower law at \(a\) and \(R\setminus\{x\}\).  It uses
+\(\gamma\) on one extension edge \(ab\) exactly when \(\gamma\) is absent
+from the five \(F_a\)-values.  Level-\(2\) top properness makes the extension
+edges obtained for different \(x\)'s distinct.  Each
+\(\gamma\)-coloured \(F_a\)-quadruple is contained in exactly two of these
+five-sets, so \(6-2u_{a,\gamma}\) incident edges are forbidden.  Consequently
+\[
+ \deg_{{\cal H}^{(2)}_\gamma(R)}(a)=6+2u_{a,\gamma}(R),
+\tag{27}
+\]
+since \(A\setminus\{a\}\) has twelve vertices.
+
+Now sum the fan law over the fifteen four-sets in \(R\).  The colour
+\(\gamma\) appears once among their thirteen fan values unless a triple face
+has link colour \(\gamma\).  Each \(\gamma\)-coloured link triple belongs to
+three of those four-sets, and no four-set has two such faces.  Hence
+\[
+ \sum_{a\in A}u_{a,\gamma}(R)=15-3t_\gamma(R).
+\tag{28}
+\]
+Therefore
+\[
+ |E({\cal H}^{(2)}_\gamma(R))|
+ =39+\sum_a u_{a,\gamma}(R)
+ =54-3t_\gamma(R).
+ \tag{29}
+\]
+Thus every vertex degree is even and the edge count is divisible by three:
+both necessary divisibility conditions for a triangle decomposition are
+automatic.
+
+There is no first divisibility failure at the following lift either.  If
+level \(3\) has been reached and \(R\in\binom U7\), define
+\[
+ v_{a,\gamma}=\#\{Q\in\binom R4:F_a(Q)=\gamma\},\qquad
+ w_{ab,\gamma}=\#\{P\in\binom R5:G_{\{a,b\}}(P)=\gamma\}.
+ \tag{30}
+\]
+For the allowed \(3\)-graph \({\cal H}^{(3)}_\gamma(R)\), the same count
+gives
+\[
+ \deg(ab)=4+2w_{ab,\gamma},\qquad
+ \deg(a)=45-3v_{a,\gamma},\qquad
+ |E|=160+4t_\gamma(R).
+\tag{31}
+\]
+Indeed, the intermediate incidence identities are
+\[
+ \sum_{b\ne a}w_{ab,\gamma}=21-3v_{a,\gamma},
+ \qquad
+ \sum_{a\in A}v_{a,\gamma}=35-4t_\gamma(R).
+\tag{32}
+\]
+For the first, sum the level-\(1\) tower law over the twenty-one five-sets
+in \(R\); each \(\gamma\)-coloured \(F_a\)-quadruple occurs in three of
+them.  For the second, sum the fan law over the thirty-five four-sets in
+\(R\); each \(\gamma\)-coloured link triple occurs in four of them.
+Level-\(3\) top properness gives the first formula in (31).  Summing its
+pair-codegrees at \(a\) and using the first identity in (32) gives the
+second formula; summing vertex degrees and using the second identity gives
+the third.
+These are respectively divisible by \(2,3,4\), exactly the divisibility
+conditions for a \(K_4^{(3)}\)-decomposition.  Theorem 5 shows that this
+phenomenon continues at every remaining lift.  Any obstruction must
+therefore be a genuine decomposition failure or a failure to choose the
+seventeen decompositions so that their blocks partition
+\(\binom A{j+1}\), not a standard local divisibility failure.
+
+## 6. Exact remaining compatibility problem
 
 A simultaneous \(13\)-fan lifts to a proper colouring of all vertices with
 \(|S\cap A|\le2\) if and only if there are choices \(G_{\{a,b\}}(P)\) such
@@ -301,13 +484,15 @@ Condition 1 is a finite prescribed-leave matching decomposition.  Theorem 4
 proves that its most immediate parity test is always passed.  Condition 2 is
 the first coupling across different five-sets.  Repeating the same mechanism
 at higher \(j\) gives Theorem 1's full tower, terminating at \(j=13\).
+Theorem 5 additionally removes every standard local design-divisibility test
+at every one of those lifts; it does not supply the required decompositions.
 
 Thus a positive fan is not yet a colouring of \(J(32,16)\), but the missing
 bridge is now explicit: first complete \(\binom{19}{5}=11,628\) linked
 \(K_{13}\)-hole one-factorization problems, then satisfy their
 \(\binom{13}{2}\binom{19}{6}\) top-properness constraints.
 
-## 6. Verification
+## 7. Verification
 
 Run:
 
@@ -324,8 +509,11 @@ The verifier is deterministic and standard-library-only.  It:
   control and checks (19) for all \(11,628\cdot17\) pairs \((P,c)\);
 * builds the round-robin one-factorization of \(K_{18}\), restricts it to the
   exact \(K_{13}\)-hole shape, and verifies both directions of Theorem 3 and
-  the support-count identity.
+  the support-count identity;
+* verifies (25) at every lift and checks (27)--(29), including an actual
+  triangle decomposition of every leave, in a complete local
+  \(LS(2,3,19)\) control.
 
-The cyclic link and the round-robin factorization are controls for
+The cyclic large set and the round-robin factorization are controls for
 parameter-independent proofs.  They are not a simultaneous fan and are not
 evidence that the unrestricted completion always exists.
