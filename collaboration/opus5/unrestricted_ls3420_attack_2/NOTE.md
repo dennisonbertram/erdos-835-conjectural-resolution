@@ -291,9 +291,11 @@ For \(R\in\binom X{t-1}\) and \(a\ne b\) in \(X\setminus R\) put
 \]
 It is defined on \([m]\) minus the colour \(c(R\cup\{a,b\})\) and permutes that
 set (because \(\chi_{R\cup b}(a)=c(R\cup\{a,b\})=\chi_{R\cup a}(b)\)); extended
-by fixing that colour it lies in \(S_m\) and fixes at least one point.  Its
-**cycle type** is a conjugation invariant, strictly finer than its sign, which
-it determines via \(\operatorname{sgn}=(-1)^{m-\#\text{cycles}}\).  Write
+by fixing that colour it lies in \(S_m\).  This is its **unique** fixed point:
+another fixed colour would give two same-coloured edges incident with one
+vertex in the induced one-factorization.  Its **cycle type** is a conjugation
+invariant, strictly finer than its sign, which it determines via
+\(\operatorname{sgn}=(-1)^{m-\#\text{cycles}}\).  Write
 \(N_\kappa(c)\) for the number of pairs \((R,\{a,b\})\) whose holonomy has cycle
 type \(\kappa\).
 
@@ -312,15 +314,16 @@ type \(\kappa\).
 At the \(LS(3,4,20)\) rung this reads
 \(\sum_{p\in[20]}N_\kappa(c^{\,p})\equiv0\pmod 2\) for **every** cycle type
 \(\kappa\) — a joint condition on the twenty derived \(LS(2,3,19)\), one parity
-per cycle type.  The relevant types are the partitions of \(17\) with at least
-one part \(1\), of which there are \(p(16)=231\).
+per cycle type.  The relevant types have exactly one part \(1\): they are
+\((\lambda,1)\), where \(\lambda\vdash16\) has no part \(1\).  There are
+\(p(16)-p(15)=231-176=\mathbf{55}\), not 231.
 
 *Certified computational.*  Theorem 7 is replayed on the exhaustively
 constructed \(LS(2,3,9)\) (\(9\binom82=252\) holonomy pairs, \(4\) cycle types)
 and on the repository's cyclic \(LS(2,3,19)\) (\(19\binom{18}2=2907\) pairs,
-**\(34\)** distinct cycle types, every one with a fixed point).  Thirty-four
-values where the sign layer has two is a direct measurement that this layer is
-strictly finer.
+**\(34\)** distinct cycle types, every one with exactly one fixed point).
+Thirty-four values where the sign layer has two is a direct measurement that
+this layer is strictly finer.
 
 **What is not claimed.**  Theorem 7 is an identity, so on any genuine object it
 holds automatically; it is a necessary condition on *candidate* families of
@@ -412,17 +415,16 @@ its G1 lift as \(LS(2,3,9)\).  Separately, `verify_star_sign.py` performs an
 exhaustive solver-free refutation of \(LS(2,3,7)\).  An attempted
 \(LS(3,4,10)\) solver control did not finish and no claim is made from it.
 
-**State of the sweep at the close of this session: inconclusive.**  The
-\(J(15,4)\) sweep was launched with a \(900\)-second CaDiCaL limit per branch,
-four at a time, on a machine already carrying the repository's own long-running
-searches (load average above \(200\), so each solver received roughly a third
-of a core).  The first eight branches all returned `UNKNOWN`; the remaining
-forty-eight were still queued.  The retained snapshot is
-`runs/j15_branches.log`; interrupted temporary branch CNFs are deliberately
-ignored.  A completed sweep would write
-`runs/j15_branches/verdicts.json`.  The unbranched \(J(19,4)\) run produced
-no verdict and no retained output.  See `runs/README.md` for exact scope and
-hashes.
+**State of the sweep at the close of this session: complete but
+inconclusive.**  The \(J(15,4)\) sweep used a \(900\)-second CaDiCaL limit per
+branch, four at a time, on a machine already carrying the repository's own
+long-running searches (load average above \(200\), so each solver initially
+received roughly a third of a core).  All \(56\) branches returned
+`UNKNOWN(exit 0)`.  The complete log and structured ledger are retained as
+`runs/j15_branches.log` and `runs/j15_branches/verdicts.json`; temporary branch
+CNFs were deleted by the runner.  The unbranched \(J(19,4)\) run likewise
+retained only `c UNKNOWN` and produced no verdict.  See `runs/README.md` for
+exact scope and hashes.
 
 Per the standing discipline of this repository: an `UNKNOWN`, a timeout, or an
 unfinished search is **not** mathematical evidence in either direction; a SAT

@@ -793,3 +793,50 @@ See:
   evidence/cyclic17_symmetric_golf_design.json
   evidence/verify_cyclic17_z2_equivariant_reduction.py
   evidence/search_cyclic17_z2_equivariant_radius5.py
+
+================================================================================
+2026-07-27  Holonomy group-algebra and census-route audit
+================================================================================
+
+Commands:
+  python3 -B evidence/verify_holonomy_group_algebra_tower.py
+  python3 -B collaboration/opus5/holonomy_followup/verify_holonomy_followup.py
+  python3 -B collaboration/h3_holonomy_audit/verify_holonomy_audit.py --core-only
+  python3 -B collaboration/h3_holonomy_audit/verify_holonomy_audit.py \
+    --full --affine-only
+  python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/verify_star_sign.py
+
+Results:
+  1. Independent group-algebra verifier: 19/19 checks passed.
+  2. Claude Opus 5 follow-up verifier: 94/94 checks passed.
+  3. Independent H3 core audit: 33/33 checks passed.
+  4. Independent H3 full K18 audit: 5/5 checks passed; seed 932741,
+     3,000 valid and distinct one-factorizations, affine F2 rank 53.
+  5. Existing star-sign and holonomy verifier: 44/44 checks passed.
+  6. A separate brute-force unit audit compared the corrected F2 nullspace
+     implementation against all solutions of 900 random systems through
+     dimension nine; every system agreed.
+
+Exact conclusions:
+  - For t >= 2, the group-algebra tower identity holds for every chart family,
+    including non-design families, so none of its representation projections
+    can obstruct existence.
+  - For odd m, the holonomy sign layer is exactly the existing epsilon layer.
+  - Every one-factorization satisfies
+      sum_{pairs {a,b}} m_2(sigma_ab) = 2*C_4(F).
+  - At K18 the total count and this 2-cycle congruence span the full universal
+    affine F2 census-equation space.  Opus's 150 samples plus three explicit
+    witnesses and the independent 3,000-object rank computation prove the
+    same dimension-two conclusion by separate finite spanning sets.
+  - Twenty fully matching LS(2,3,19) point links are exactly an LS(3,4,20);
+    aggregate holonomy matching is strictly weaker and gauge-vacuous.
+
+Scope:
+  These are exact route delimiters, not a construction or nonexistence proof.
+  They do not decide LS(3,4,20), exclude k=16, or resolve Erdős-Rosenfeld
+  Problem #835.
+
+See:
+  evidence/holonomy_group_algebra_tower.md
+  collaboration/opus5/holonomy_followup/NOTE.md
+  collaboration/h3_holonomy_audit/README.md

@@ -8,7 +8,9 @@ gives a bijection ``chi_T : X\\T -> [m]``.  For ``R`` of size ``t-1`` and
 
 It is defined on ``[m]`` minus the colour ``c(R u {a,b})`` and permutes that
 set; extended by fixing that colour it is an element of ``S_m``.  Its cycle
-type is a conjugation invariant, strictly finer than its sign.
+type is a conjugation invariant, strictly finer than its sign.  The common
+colour is its unique fixed point: a second fixed colour would give two
+same-coloured edges incident with one vertex in the induced one-factorization.
 
 ``N_kappa(c)`` counts the pairs ``(R, {a,b})`` whose holonomy has cycle type
 ``kappa``.  Theorem 7 of NOTE.md:

@@ -456,18 +456,19 @@ def section_holonomy() -> None:
         len(cen19) == 34,
     )
     check(
-        "every holonomy permutation fixes at least one colour",
-        all(k[-1] == 1 for k in cen19) and all(k[-1] == 1 for k in cen9),
+        "every holonomy permutation fixes exactly one colour",
+        all(k.count(1) == 1 for k in cen19) and all(k.count(1) == 1 for k in cen9),
     )
-    # Fixed-point cycle types of S_17 are in bijection with partitions of 16.
+    # Exactly-one-fixed-point types of S_17 are in bijection with
+    # fixed-point-free partitions of 16.
     parts = [0] * 17
     parts[0] = 1
     for summand in range(1, 17):
         for total in range(summand, 17):
             parts[total] += parts[total - summand]
     check(
-        "there are p(16)=231 possible fixed-point holonomy cycle types",
-        parts[16] == 231,
+        "there are p(16)-p(15)=55 possible holonomy cycle types",
+        parts[16] == 231 and parts[15] == 176 and parts[16] - parts[15] == 55,
     )
 
 

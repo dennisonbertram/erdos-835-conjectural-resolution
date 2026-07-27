@@ -5,7 +5,7 @@ rigorous reductions, exact structural theorems, and reproducible evidence.
 
 ## Status
 
-The full problem remains open as of 26 July 2026. This repository does
+The full problem remains open as of 27 July 2026. This repository does
 **not** claim a complete proof. It advances and precisely formulates the
 negative conjecture
 
@@ -455,7 +455,21 @@ New exact results in the note include:
   reconstructed \(2{,}964\times1{,}140\) exact-cover formulation.  The
   type-(i) layer has exactly \(1{,}326\) feasible branches; a complete
   bounded sweep found no witness but timed out on every branch, so no
-  SAT/UNSAT verdict is claimed.
+  SAT/UNSAT verdict is claimed; and
+- an exact delimiter for the holonomy-census route.  The full
+  \(\mathbb Z[S_m]\) tower identity, every representation projection, and
+  its fixed-colour and orientation projections are proved to hold for
+  arbitrary chart families, so they carry no design-existence information.
+  At the genuinely design-dependent one-factorization layer,
+  \[
+    \sum_{\{a,b\}}m_2(\sigma_{ab})=2C_4(F),
+  \]
+  and exact finite spanning witnesses prove that, for \(K_{18}\), this parity
+  law and the total count span every universal affine
+  \(\mathbb F_2\) census equation.  An independent implementation reaches the
+  maximal affine rank \(53\) on \(3{,}000\) verified \(K_{18}\)
+  one-factorizations.  These results close this linear holonomy route only;
+  they neither construct nor exclude \(LS(3,4,20)\).
 
 These are restricted-core, shadow, and ansatz results, not a construction or
 proof of #835.
@@ -1016,9 +1030,23 @@ routes, but not the asymmetric case.
   non-abelian tower identity, reproducible CNFs, retained positive control,
   and an independent audit. These are necessary identities and route
   delimiters; they do not decide \(LS(3,4,20)\), \(k=16\), or #835.
+- [`evidence/holonomy_group_algebra_tower.md`](evidence/holonomy_group_algebra_tower.md):
+  the exact noncommutative tower identity, augmented cocycle, natural-module
+  flatness theorem, and a twenty-link pseudogluing control that passes all
+  aggregate fingerprints while failing \(27{,}478\) actual overlap
+  comparisons.
+- [`collaboration/opus5/holonomy_followup/NOTE.md`](collaboration/opus5/holonomy_followup/NOTE.md):
+  Opus 5's proof that the tower identity is gauge-vacuous, the exact
+  one-factorization intercalate congruence, and the certified
+  two-dimensional universal \(\mathbb F_2\) census space at \(K_{18}\).
+- [`collaboration/h3_holonomy_audit/README.md`](collaboration/h3_holonomy_audit/README.md):
+  an independent proof and implementation audit, including a separate
+  deterministic \(3{,}000\)-factorization computation attaining the maximal
+  affine rank \(53\).
 - [`evidence/solver_reconnaissance_2026-07-27.md`](evidence/solver_reconnaissance_2026-07-27.md):
   the completed one-hour unrestricted forced-trace CP-SAT `UNKNOWN` result and
-  scope-explicit snapshots of the still-running SAT, DRAT, and DLX searches.
+  scope-explicit snapshots of the remaining live searches and the two
+  proof-writing runs stopped without verdict for disk safety.
 - [`evidence/execution_debt_2026-07-26.md`](evidence/execution_debt_2026-07-26.md):
   first actual runs of eleven validators left unrun by earlier
   permission-blocked sessions, one validator bug found and fixed, the
@@ -1225,6 +1253,10 @@ python3 -B \
 python3 -B \
   collaboration/opus5/cyclic_lsts19_extension_attack/verify_cyclic_lsts19_extension_attack.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/verify_star_sign.py
+python3 -B evidence/verify_holonomy_group_algebra_tower.py
+python3 -B collaboration/opus5/holonomy_followup/verify_holonomy_followup.py
+python3 -B collaboration/h3_holonomy_audit/verify_holonomy_audit.py \
+  --full --affine-only
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
 python3 -B \
   collaboration/opus5/unrestricted_ls3420_attack_2/verify_solution.py \
