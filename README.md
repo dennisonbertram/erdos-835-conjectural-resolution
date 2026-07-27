@@ -1107,6 +1107,11 @@ routes, but not the asymmetric case.
   first-lift palette has a simultaneously matchable five-colour prefix and
   that every profile containing a support-twelve colour has a six-colour
   prefix.  Global compatibility across all seventeen colours remains open.
+- [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
+  an exhaustive relaxation theorem proving that the aggregate degree
+  sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
+  sequences pass both Erdős--Gallai and Havel--Hakimi, so any obstruction
+  must use colour-by-colour compatibility rather than aggregate degrees.
 - [`collaboration/fan_small_controls/ALL_K6_THEOREM.md`](collaboration/fan_small_controls/ALL_K6_THEOREM.md):
   the complete universal \(k=6\) fan obstruction, including the exhaustive
   two-type \(LS(2,3,9)\) classification and two explicit 18-cell human
