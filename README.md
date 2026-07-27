@@ -228,6 +228,14 @@ New exact results in the note include:
   disjointness gives the perfect matchings of the graph cover
   \(O_{16}\to K_{17}\), but their elementary parity and monodromy constraints
   remain consistent; and
+- an exact audit of the next intersection/cover shortcut.  Hoffman equality
+  makes every exact-intersection relation equitable, and the
+  intersection-one endpoints in the Odd graph are exactly two-to-one images
+  of ordered intermediate-colour pairs along length-three geodesics.  The
+  two paths to an endpoint need not reverse their intermediate colours, so
+  the proposed commutativity, matching-sign, and parity conclusions do not
+  follow.  Fano and Witt controls show that one-class intersection data
+  cannot supply the missing simultaneous cross-colour obstruction; and
 - a second unrestricted necessary theorem obtained by deleting one colour
   class \(D\).  Any tight prime colouring forces a
   \((p-2)\)-dimensional subspace \(U\le\ker M_D\) on which every Hadamard
@@ -1106,6 +1114,8 @@ python3 -B \
   collaboration/opus5/staircase_support_frontier/verify_staircase_support_frontier.py
 python3 -B \
   collaboration/steiner_disjoint_matching/verify_steiner_disjoint_matching.py
+python3 -B \
+  collaboration/h3_intersection_cover_audit/verify_intersection_cover_audit.py
 python3 -B collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py
 python3 -B \
   collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py --k6
