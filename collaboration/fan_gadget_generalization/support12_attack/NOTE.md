@@ -10,12 +10,12 @@ Q-balance gives the eleven partitions of six:
 6,\ 5+1,\ 4+2,\ 4+1+1,\ 3+3,\ 3+2+1,\ 3+1+1+1,\ 2+2+2,
 \ 2+2+1+1,\ 2+1+1+1+1,\ 1^6.
 \]
-The verifier currently excludes eight complete partitions:
+The verifier currently excludes nine complete partitions:
 \[
 \boxed{6,\quad5+1,\quad4+2,\quad3+3,\quad4+1+1,\quad
-2+2+2,\quad3+1+1+1,\quad3+2+1.}
+2+2+2,\quad3+1+1+1,\quad3+2+1,\quad2+2+1+1.}
 \]
-The other three are not claimed excluded.
+The other two are not claimed excluded.
 
 Each forcing verifier also checks explicitly that every single, double, or
 triple/four target from which it selects a signed coordinate is nonzero.
@@ -92,3 +92,31 @@ The twelve ranges exhaust 7,824,960 triple configurations,
 1,103,664,772 single probes, 59,641,423,270 double probes, 126,352,944
 single low-table hits, and 62,515,800 double low-table hits.  There are no
 full-hash hits.  Thus partition \(3+2+1\) is impossible.
+
+## Exact \(2+2+1+1\) overlap forcing
+
+Order the two double-swap Q-groups and fix the move \(a\) in the smaller
+group.  If a second double swap \(b\) can be completed by two single swaps,
+then \(a+b\) has support at most 16.  If \(I\) is the number of common
+nonzero coordinates of \(a\) and \(b\), then
+\[
+ |\operatorname{supp}(a+b)|
+ \geq |\operatorname{supp}(a)|+|\operatorname{supp}(b)|-2I.
+\]
+Consequently only posting-list pairs with
+\[
+ I\geq
+ \left\lceil
+ \frac{|\operatorname{supp}(a)|+|\operatorname{supp}(b)|-16}{2}
+ \right\rceil
+\]
+can complete.  The verifier counts intersections exactly, then rejects
+targets with support above 16 or coefficients outside \([-2,2]\).
+
+For each remaining nonzero target, a signed coordinate forces at least one
+of the two single swaps.  The other is uniquely fingerprinted; every
+fingerprint match is checked by exact sparse equality and all four Q-groups
+must be distinct.  The twelve ranges exhaust 978,120 outer double swaps,
+120,799,660,300 posting hits, 410,224 overlap candidates, 12,432 bounded
+targets, and 1,670,964 single probes.  There are no fingerprint hits.
+Thus partition \(2+2+1+1\) is impossible.

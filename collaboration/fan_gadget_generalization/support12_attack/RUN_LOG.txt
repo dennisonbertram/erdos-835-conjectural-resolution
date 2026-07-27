@@ -39,3 +39,12 @@ expected final output:
   case 3+2+1: NONE
   support-12 partition 3+2+1 audit: PASS
   scope: three support-12 partitions remain unexplored
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/support12_attack/verify_case2211.py
+
+observed final output:
+  aggregate counters: (978120, 120799660300, 81226473248, 410224, 12432, 1670964, 0, 0)
+  case 2+2+1+1: NONE
+  support-12 partition 2+2+1+1 audit: PASS
+  scope: two support-12 partitions remain unexplored
