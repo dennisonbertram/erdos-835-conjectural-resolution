@@ -1,0 +1,71 @@
+First-lift sufficiency follow-up
+================================
+
+All runs executed 2026-07-27 from the repository root.
+
+1. Exhaustive K5 analogue
+
+Command:
+  python3 -B \
+    collaboration/first_lift_sufficiency_search/exhaust_n5_capacity.py
+
+Output:
+  n=5 multisets=1194 complete=272 incomplete=922
+    capacity_rejected=922 capacity_pass_incomplete=0
+  first capacity-rejected incomplete instance:
+    [([0, 4], 4), ([1, 2], 2), ([1, 3], 2), ([2, 3], 2)]
+    F=[(0, 4)] demand=4 |F|=1
+  No n=5 counterexample to sufficiency; this does not address n=13.
+
+Exit code: 0.
+
+2. Fixed-size Kempe connectivity in the K5 analogue
+
+Command:
+  python3 -B \
+    collaboration/first_lift_sufficiency_search/audit_kempe_n5_connectivity.py
+
+Output:
+  states=20880 components=1 component_sizes={20880: 1}
+  support_signatures_per_component={14520: 1}
+  Connected in this analogue; no general or K13 conclusion.
+
+Exit code: 0.
+
+3. Weighted target obstruction search
+
+For q=0:
+  python3 -B \
+    collaboration/first_lift_sufficiency_search/search_weighted_obstruction.py \
+    --random 30 --seed 130835 --max-weight 100 --seconds 10 --q 0
+
+For q=1,2,3,4,5 the same command used seeds 130836,...,130840,
+--seconds 2, and the corresponding --q value.
+
+Each run output:
+  checked=37 statuses={'OPTIMAL': 37}
+  no weighted violation found
+  finite search only; no universal or fan conclusion
+
+Across all six runs: 222/222 outer maximizations were certified OPTIMAL.
+The uniform vector was tight in every histogram, with demand=sum_w=78.
+
+4. One-chain Kempe audit
+
+Command:
+  python3 -B \
+    collaboration/first_lift_sufficiency_search/audit_kempe_switch.py
+
+Output:
+  abstract_size_preserving_2_switches=1160
+    one_chain_realizable=130 not_one_chain=1030
+  first_not_one_chain={'colours': (0, 3), 'vertices': (5, 13),
+    'support_sizes': (8, 10), 'components': (0, 1)}
+  Conclusion: the naive one-chain Kempe lemma is false even for a
+    round-robin-completable target instance; multi-step connectivity
+    remains open.
+
+Exit code: 0.
+
+The macOS toolchain emitted sandbox cache warnings before Python output.
+They did not affect the listed exit codes.

@@ -1069,6 +1069,12 @@ routes, but not the asymmetric case.
   and a proof that all ordinary cut instances are automatic.  The logged
   dense completion searches are positive evidence only, not a universal
   first-lift theorem.
+- [`collaboration/first_lift_sufficiency_search/NOTE.md`](collaboration/first_lift_sufficiency_search/NOTE.md):
+  a proof that the arbitrary nonnegative-weight matching inequalities
+  characterize fractional first-lift completion, an exact identification
+  of the deletion inequalities as their binary slice, exhaustive order-five
+  controls, and a counterexample to the naive one-chain Kempe shortcut.
+  Integer completion on thirteen vertices remains unproved.
 - [`collaboration/fan_small_controls/ALL_K6_THEOREM.md`](collaboration/fan_small_controls/ALL_K6_THEOREM.md):
   the complete universal \(k=6\) fan obstruction, including the exhaustive
   two-type \(LS(2,3,9)\) classification and two explicit 18-cell human
@@ -1355,6 +1361,15 @@ python3 -B \
   collaboration/fan_13adic_screen/c17_layer_scan_1326/verify_scan_telemetry.py
 python3 -B \
   collaboration/first_lift_support_completion/verify_capacity_lemma.py
+python3 -B \
+  collaboration/first_lift_sufficiency_search/exhaust_n5_capacity.py
+python3 -B \
+  collaboration/first_lift_sufficiency_search/audit_kempe_switch.py
+python3 -B \
+  collaboration/first_lift_sufficiency_search/audit_kempe_n5_connectivity.py
+python3 -B \
+  collaboration/first_lift_sufficiency_search/search_weighted_obstruction.py \
+  --random 30 --seed 130835 --max-weight 100 --seconds 10 --q 0
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
 python3 -B \
   collaboration/opus5/unrestricted_ls3420_attack_2/verify_solution.py \
