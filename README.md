@@ -1138,8 +1138,8 @@ routes, but not the asymmetric case.
   twelve.  All seven possible support-ten Q-group partitions are excluded
   exactly; this remains a local rigidity result, not a fan obstruction.
 - [`collaboration/fan_gadget_generalization/support12_attack/NOTE.md`](collaboration/fan_gadget_generalization/support12_attack/NOTE.md):
-  exact exclusions for eight of the eleven multiplicity partitions of a
-  support-twelve cyclic quotient trade.  Three partitions remain
+  exact exclusions for nine of the eleven multiplicity partitions of a
+  support-twelve cyclic quotient trade.  Two partitions remain
   unclassified, so this is a local quotient obstruction and neither a
   support-thirteen theorem nor a resolution of the simultaneous fan.
 - [`collaboration/h3_k6_fan_theorem_audit/README.md`](collaboration/h3_k6_fan_theorem_audit/README.md):
@@ -1419,6 +1419,8 @@ python3 -B \
   collaboration/fan_gadget_generalization/support12_attack/verify_case3111.py
 python3 -B \
   collaboration/fan_gadget_generalization/support12_attack/verify_case321.py
+python3 -B \
+  collaboration/fan_gadget_generalization/support12_attack/verify_case2211.py
 python3 -B \
   collaboration/fan_13adic_screen/branch0_prefix1_refutation/verify_prefix_refutation.py
 python3 -B \
