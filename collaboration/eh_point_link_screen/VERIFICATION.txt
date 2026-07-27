@@ -1,0 +1,107 @@
+Certificate generation
+======================
+
+Generators:
+
+  python3 -B collaboration/eh_point_link_screen/point_link_cnf.py \
+    --drop 0,1,5 --point 0 \
+    --cnf collaboration/eh_point_link_screen/drop_0_1_5_point_0.cnf
+
+  python3 -B collaboration/eh_point_link_screen/point_link_cnf.py \
+    --drop 0,5,10 --point 0 \
+    --cnf collaboration/eh_point_link_screen/drop_0_5_10_point_0.cnf
+
+Generator output:
+
+  drop=(0, 1, 5) point=0 vertices=285 pairs=171 vars=1425 clauses=12545 sha256=ac8e2176860e5f2d002a29e2592c4dc009d0262e7674fb35c47d11c9467f3e6f
+  drop=(0, 5, 10) point=0 vertices=285 pairs=171 vars=1425 clauses=12545 sha256=b0e0ebe97c289a9c44ff6ac48efbfecbf238d1b7f0dbfae2e934a9d6f1444654
+
+Solver
+======
+
+  CaDiCaL version 3.0.1
+
+  cadical -q \
+    collaboration/eh_point_link_screen/drop_0_1_5_point_0.cnf \
+    /tmp/drop_0_1_5_point_0.drat
+
+  cadical -q \
+    collaboration/eh_point_link_screen/drop_0_5_10_point_0.cnf \
+    /tmp/drop_0_5_10_point_0.drat
+
+Solver output:
+
+  s UNSATISFIABLE
+  s UNSATISFIABLE
+
+Proof checker
+=============
+
+  drat-trim upstream commit
+  2e3b2dc0ecf938addbd779d42877b6ed69d9a985
+
+  gzip -dc \
+    collaboration/eh_point_link_screen/drop_0_1_5_point_0.drat.gz |
+    drat-trim \
+      collaboration/eh_point_link_screen/drop_0_1_5_point_0.cnf -i
+
+Output:
+
+  c reading proof from stdin
+  c parsing input formula with 1425 variables and 12545 clauses
+  c WARNING: backward mode ignores deletion of (pseudo) unit clause [0] 25 0
+  c finished parsing, read 2380258 bytes from proof file
+  c detected empty clause; start verification via backward checking
+  c 3071 of 12545 clauses in core
+  c 28295 of 43940 lemmas in core using 1127898 resolution steps
+  c 0 RAT lemmas in core; 16096 redundant literals in core lemmas
+  s VERIFIED
+  c verification time: 0.777 seconds
+
+  gzip -dc \
+    collaboration/eh_point_link_screen/drop_0_5_10_point_0.drat.gz |
+    drat-trim \
+      collaboration/eh_point_link_screen/drop_0_5_10_point_0.cnf -i
+
+Output:
+
+  c reading proof from stdin
+  c parsing input formula with 1425 variables and 12545 clauses
+  c WARNING: backward mode ignores deletion of (pseudo) unit clause [0] 25 0
+  c finished parsing, read 5902433 bytes from proof file
+  c detected empty clause; start verification via backward checking
+  c 3842 of 12545 clauses in core
+  c 64979 of 106575 lemmas in core using 2526811 resolution steps
+  c 0 RAT lemmas in core; 34812 redundant literals in core lemmas
+  s VERIFIED
+  c verification time: 1.721 seconds
+
+Hashes
+======
+
+  b1ea090d3e3b88366c87e95660c1c82a406d2c3b100cc1d39bcc2c7e8fde47f9  evidence/ls_3_4_20_eh15_seed.txt
+  ac8e2176860e5f2d002a29e2592c4dc009d0262e7674fb35c47d11c9467f3e6f  collaboration/eh_point_link_screen/drop_0_1_5_point_0.cnf
+  648c029837933e1d4896b3342e6fc057c48540c2a7259e1a0c53e897745d9f51  collaboration/eh_point_link_screen/drop_0_1_5_point_0.drat.gz
+  06112a768e0892980bd02ffd21e2abca56324ee35c1c3d76be0ef828a12f63b9  uncompressed drop_0_1_5_point_0 DRAT stream
+  b0e0ebe97c289a9c44ff6ac48efbfecbf238d1b7f0dbfae2e934a9d6f1444654  collaboration/eh_point_link_screen/drop_0_5_10_point_0.cnf
+  195887f5ecebc335ecd80fae826d176b10c97f3122a38be1b896469666ad6f6b  collaboration/eh_point_link_screen/drop_0_5_10_point_0.drat.gz
+  9831caf77ec2588cbcbb695837d82201a037f06e5d9fbd90883c8595a60528a7  uncompressed drop_0_5_10_point_0 DRAT stream
+
+Independent semantic verifier
+=============================
+
+Command:
+
+  python3 -B \
+    collaboration/eh_point_link_screen/verify_point_link_certificate.py \
+    --drat-trim /path/to/drat-trim
+
+Final output:
+
+  [ok] (0, 1, 5) independent drat-trim replay returns s VERIFIED
+  [theorem] drop (0, 1, 5) cannot be retained: its point-0 derived leave has no partition into five STS(19)s.
+  [ok] (0, 5, 10) independent drat-trim replay returns s VERIFIED
+  [theorem] drop (0, 5, 10) cannot be retained: its point-0 derived leave has no partition into five STS(19)s.
+  [scope] Together with the prior 30 same-five-pack cases, exactly 32 of 455 EH retain-twelve repairs now have portable exclusions; 423 remain.
+  [scope] This does not decide LS(3,4,20) or Erdős--Rosenfeld #835.
+  status: PASS

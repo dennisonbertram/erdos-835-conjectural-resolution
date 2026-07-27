@@ -137,3 +137,42 @@ that necessary derived-design problem, not Erdős--Rosenfeld #835.  An UNSAT
 certificate would exclude \(k=16\), not every other possible prime
 parameter.  A fully verified global Odd-graph colouring or an unrestricted
 all-parameter theorem is still required to resolve Problem #835.
+
+## Later terminal and live updates
+
+The Wallis shared-\(N\), forced-trace CP-SAT run reached its configured
+six-hour limit and returned `UNKNOWN`.  Its exact terminal JSON was:
+
+```json
+{
+  "branches": 1262701750,
+  "conflicts": 45686786,
+  "forced_trace_stars": 1680,
+  "golf_sha256": "e419aad73c4275a29702db282ea2378357435b330312bde8fed0c7829be3f857",
+  "hint_audited_n": true,
+  "hinted_values": 12600,
+  "schema": "odd-graph-o16-radius5-fixed-golf-n-forced-trace-v2",
+  "status": "UNKNOWN",
+  "triangle_congruence_literals": 0,
+  "wall_time_seconds": 21601.932101000002
+}
+```
+
+The authenticated \(LS(3,4,20)\) branch-0 Kissat run also terminated
+`UNKNOWN`, after 6,323.95 seconds of process time, 59,996,510 conflicts,
+422,486,886 decisions, and 30,551,090,317 propagations.  It emitted no
+witness or proof.
+
+The parallel branch-0 CP-SAT log contains only its startup and presolve
+header.  Its session ended without a durable terminal response in that log,
+so it has no recordable solver verdict and no mathematical status.
+
+At 21:10 EDT two independent searches were still live:
+
+- the complete radius-four-plus-forced-traces Kissat run, at about
+  8,438 seconds of process time and with no terminal verdict; and
+- the complete generic radius-five CaDiCaL run, at about 11,523 seconds of
+  process time and with no terminal verdict.
+
+These are operational facts only.  Every terminal result in this section is
+either `UNKNOWN` or absent; none changes the mathematical status.

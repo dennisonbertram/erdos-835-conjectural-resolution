@@ -388,8 +388,10 @@ New exact results in the note include:
   `2eb2e0efba279655021e4c709b03148e3cea73d98e32c745637864ba177327d4`.
   Its independent verifier reconstructs the entire parent and augmented byte
   streams, checks every semantic trace incidence, and exhaustively validates
-  the Sinz projection on all \(2^{15}\) primary assignments. A proof-logging
-  search is in progress; no SAT or UNSAT result is claimed; and
+  the Sinz projection on all \(2^{15}\) primary assignments.  A proof-logging
+  run was stopped without a verdict for disk safety; a separate non-proof
+  Kissat reconnaissance run is still live.  No SAT or UNSAT result is
+  claimed; and
 - a complete unrestricted CNF for the necessary shadow \(LS(3,4,20)\):
   159,885 variables and 251,957 clauses, independently reconstructed
   byte-for-byte with canonical SHA-256
@@ -400,14 +402,42 @@ New exact results in the note include:
   exactly one of the 28 even-permutation types, so only those 28 branches are
   needed for an exhaustive sweep. Independent verifiers check both the full
   derangement census and the 55-to-28 reduction. SAT and proof-logging
-  searches are in progress; no SAT or UNSAT result is claimed. Checked UNSAT
-  certificates for all 28 even branches would exclude \(k=16\), while SAT
-  would construct a derived large set but would not solve #835; and
+  runs attempted so far have ended `UNKNOWN` or without a durable verdict;
+  no SAT or UNSAT result is claimed. Checked UNSAT certificates for all 28
+  even branches would exclude \(k=16\), while SAT would construct a derived
+  large set but would not solve #835; and
 - a parameter-free "one short of a large set" lemma: \(P-1\) pairwise disjoint
   \(S(k-1,k,v)\) force a \(P\)-th, so the maximum number of pairwise disjoint
   systems is never exactly \(P-1\).  In particular no search for \(16\)
   pairwise disjoint \(SQS(20)\), or for \(16\) pairwise disjoint
-  \(S(15,16,32)\), can succeed.
+  \(S(15,16,32)\), can succeed; and
+- three newly certified route delimiters.  The corrected \(234\)-equation
+  degree-three profile system has exact nonnegative rational and integer
+  witnesses for every intersection parameter, closing the local
+  profile/Farkas route.  For every odd prime \(p\), the \(p\)-primary critical
+  group of \(O_{p-1}\) is
+  \((\mathbb Z/p)^{\,2\binom{2p-3}{p-2}/p-1}\), whose enormous \(p\)-rank
+  supplies no cover obstruction.  Finally, the commutator asymmetry
+  \(\Delta\) vanishes on fibre intersection layers \(12\) and \(13\), but
+  its exact rank bound and compatible integral endpoint spectrum still give
+  no \(k=16\) contradiction; and
+- two exact construction-frontier results.  Any arbitrary decoder of the
+  two-layer additive syndrome
+  \(\sum_{z\in S}z\in\mathbb F_{17}^2\) on
+  \(\mathbb F_{17}^{*}\times\{0,1\}\) needs at least \(34\) colours, witnessed
+  by an explicit quotient \(K_{34}\).  In the authenticated
+  Etzion--Hartman \(15\)-system \(SQS(20)\) core, the full point/system
+  automorphism group is trivial.  A general leave-graph theorem proves that
+  a partial large set completes exactly when its \(j\)-fold leave is
+  \(j\)-colourable, and the four intrinsic \(K_5\)s show that any completion
+  retaining this core must replace at least three systems.  An exhaustive
+  ten-point colouring certificate then excludes exactly the \(30\)
+  same-five-pack retain-twelve repairs, while independently replayed
+  point-link DRAT certificates exclude \((0,1,5)\) and \((0,5,10)\), leaving
+  \(423\).  In contrast, an independent exact screen shows that all
+  \(86{,}450\) pair-links of all \(455\) cases are \(1\)-factorizable,
+  proving that point links are a strictly stronger local invariant here.
+  These are shadow and ansatz results, not a construction or proof of #835.
 
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
@@ -791,6 +821,14 @@ routes, but not the asymmetric case.
   all exact block-through-triple profiles, their global double counts, a
   strictly positive rational witness for every known linear one-root margin,
   and reproducible but nondecisive cyclic zero-one probes.
+- [`collaboration/corrected_triple_profile_lp/README.md`](collaboration/corrected_triple_profile_lp/README.md):
+  the corrected exact-rank census and explicit nonnegative rational and
+  integer witnesses for every intersection parameter in the local
+  \(234\)-equation triple-profile system.
+- [`collaboration/h3_delta_rank_attack/README.md`](collaboration/h3_delta_rank_attack/README.md):
+  the vanishing of the degree-three commutator asymmetry on intersection
+  layers \(12\) and \(13\), its exact even-rank ceiling, and a carefully
+  scoped no-go for the generic skew-rank/Pfaffian route.
 - [`collaboration/schreier_h4_support/README.md`](collaboration/schreier_h4_support/README.md):
   the six-eigenspace \(H_4\) support theorem, exact endpoint cone and
   three-map right module, together with explicit 17-colour operator
@@ -897,6 +935,31 @@ routes, but not the asymmetric case.
   the parameter-free "one short of a large set" lemma, cited status of every
   tower level, and the record that no nontrivial \(LS(3,4,v)\) has been
   constructed at any order.
+- [`collaboration/critical_group_cover_obstruction/README.md`](collaboration/critical_group_cover_obstruction/README.md):
+  the exact \(p\)-primary critical group of \(O_{p-1}\), with an independent
+  modular Smith-rank verifier and the explicit reason this invariant does
+  not obstruct a locally bijective cover.
+- [`collaboration/f17_additive_syndrome_k34/README.md`](collaboration/f17_additive_syndrome_k34/README.md):
+  an explicit \(K_{34}\) in the exact quotient of the two-layer additive
+  \(\mathbb F_{17}^2\) syndrome, excluding every arbitrary decoder of that
+  statistic into seventeen colours.
+- [`collaboration/eh_residual_odd_cycle/README.md`](collaboration/eh_residual_odd_cycle/README.md),
+  [`collaboration/eh_core_symmetry_orbits/README.md`](collaboration/eh_core_symmetry_orbits/README.md),
+  and [`collaboration/eh_j5_repair_search/README.md`](collaboration/eh_j5_repair_search/README.md):
+  authenticated exact structure of the Etzion--Hartman \(15\)-core, its
+  trivial automorphism group, the ten-point obstruction excluding \(30\) of
+  \(455\) retain-twelve repairs, bounded CP-SAT reconnaissance, and two
+  independent exact confirmations that every one of the \(86{,}450\)
+  pair-links is \(1\)-factorizable.
+- [`collaboration/opus5/large_set_completion_colouring/NOTE.md`](collaboration/opus5/large_set_completion_colouring/NOTE.md):
+  the general leave-graph colouring equivalence, the corrected
+  completability-only rainbow criterion, the Etzion--Hartman repair-distance
+  theorem, and exhaustive negative screens of the local triple, pair-link,
+  and labelled cross-pair conditions.
+- [`collaboration/eh_point_link_screen/README.md`](collaboration/eh_point_link_screen/README.md):
+  two portable derived-point non-colourability theorems, including
+  deterministic semantic CNF reconstruction and independently replayed
+  compressed DRAT proofs.
 - [`evidence/execution_debt_2026-07-26.md`](evidence/execution_debt_2026-07-26.md):
   first actual runs of eleven validators left unrun by earlier
   permission-blocked sessions, one validator bug found and fixed, the
@@ -1004,6 +1067,10 @@ python3 -B \
 python3 -B \
   collaboration/schreier_h3_triple_profiles/verify_schreier_h3_triple_profiles.py
 python3 -B \
+  collaboration/corrected_triple_profile_lp/verify_corrected_triple_profile_lp.py
+python3 -B \
+  collaboration/h3_delta_rank_attack/verify_h3_delta_rank_attack.py
+python3 -B \
   collaboration/schreier_h4_support/verify_schreier_h4_support.py
 python3 -B \
   collaboration/opus5/joint_schreier_krein_attack/verify_joint_schreier_krein_attack.py
@@ -1064,6 +1131,23 @@ python3 -B evidence/verify_derived_closure_lp.py
 python3 -B evidence/verify_ambient_moment_lp.py
 python3 -B evidence/verify_s7824_tower_config_sweep.py
 python3 -B evidence/verify_sqs8_klein_family_parity.py
+python3 -B \
+  collaboration/critical_group_cover_obstruction/verify_critical_group_cover_obstruction.py
+python3 -B \
+  collaboration/f17_additive_syndrome_k34/verify_f17_additive_syndrome_k34.py
+python3 -B \
+  collaboration/eh_residual_odd_cycle/verify_eh_residual_odd_cycle.py
+python3 -B \
+  collaboration/eh_core_symmetry_orbits/verify_eh_core_symmetry_orbits.py
+python3 -B \
+  collaboration/eh_j5_repair_search/screen_pair_links.py
+python3 -B \
+  collaboration/eh_j5_repair_search/verify_pair_links_direct.py
+python3 -B \
+  collaboration/opus5/large_set_completion_colouring/verify_large_set_completion_colouring.py
+python3 -B \
+  collaboration/eh_point_link_screen/verify_point_link_certificate.py \
+  --drat-trim /path/to/drat-trim
 python3 -B collaboration/opus5/verify_opus5_forced_structure.py
 python3 -B collaboration/opus5_v2/verify_intersection_numbers.py
 python3 -B collaboration/opus5_v2/verify_disjointness_parity.py
