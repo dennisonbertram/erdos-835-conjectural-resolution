@@ -1,0 +1,5 @@
+J(12,3) with 11 colours: 220 vertices, degree 27, class size 20
+  best conflicts 14 (0.5s, 579438 moves)
+  best conflicts 13 (4.9s, 6306626 moves)
+  best conflicts 11 (33.6s, 43078512 moves)
+RESULT J(12,3) m=11 best_conflicts=11 moves=152879104 secs=120.0

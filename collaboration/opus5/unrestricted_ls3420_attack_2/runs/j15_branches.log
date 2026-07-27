@@ -1,0 +1,10 @@
+{"n": 15, "s": 4, "m": 13, "vertices": 1365, "stars": 455, "star_size": 12, "class_size": 105, "root_units": 12, "clauses": 498237, "vars": 17745}
+56 branches, 900s each, 4 in parallel
+  branch 000: UNKNOWN(exit 0)
+  branch 002: UNKNOWN(exit 0)
+  branch 001: UNKNOWN(exit 0)
+  branch 003: UNKNOWN(exit 0)
+  branch 004: UNKNOWN(exit 0)
+  branch 005: UNKNOWN(exit 0)
+  branch 006: UNKNOWN(exit 0)
+  branch 007: UNKNOWN(exit 0)

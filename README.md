@@ -1010,6 +1010,12 @@ routes, but not the asymmetric case.
 - [`collaboration/h3_simultaneous_fan_audit/README.md`](collaboration/h3_simultaneous_fan_audit/README.md):
   an independent derivation, edge census, Gram-identity check, and
   standard-library verifier for the simultaneous-fan theorem.
+- [`collaboration/opus5/unrestricted_ls3420_attack_2/NOTE.md`](collaboration/opus5/unrestricted_ls3420_attack_2/NOTE.md):
+  Opus 5's unrestricted star-sign and holonomy attack, including the
+  correctly indexed joint parity law, its exact top-rung rank, a
+  non-abelian tower identity, reproducible CNFs, retained positive control,
+  and an independent audit. These are necessary identities and route
+  delimiters; they do not decide \(LS(3,4,20)\), \(k=16\), or #835.
 - [`evidence/solver_reconnaissance_2026-07-27.md`](evidence/solver_reconnaissance_2026-07-27.md):
   the completed one-hour unrestricted forced-trace CP-SAT `UNKNOWN` result and
   scope-explicit snapshots of the still-running SAT, DRAT, and DLX searches.
@@ -1218,6 +1224,11 @@ python3 -B \
   collaboration/opus5/derivation_tower_obstruction/verify_derivation_tower_obstruction.py
 python3 -B \
   collaboration/opus5/cyclic_lsts19_extension_attack/verify_cyclic_lsts19_extension_attack.py
+python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/verify_star_sign.py
+python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
+python3 -B \
+  collaboration/opus5/unrestricted_ls3420_attack_2/verify_solution.py \
+  8 3 7 collaboration/opus5/unrestricted_ls3420_attack_2/controls/j8_3_m7.model
 python3 -B collaboration/opus5/verify_opus5_forced_structure.py
 python3 -B collaboration/opus5_v2/verify_intersection_numbers.py
 python3 -B collaboration/opus5_v2/verify_disjointness_parity.py
