@@ -195,6 +195,39 @@ New exact results in the note include:
   operator witnesses.  These witnesses deliberately omit the fixed
   entrywise Johnson kernels and are not covers; they close this relaxation,
   not the problem; and
+- all-parameter degree-one and degree-two rigidity theorems.  For every even
+  \(k\) admitting a hypothetical cover, design cross-quadrature confines
+  \(H_1\) to \(E_1,E_{k-2},E_{k-1}\) and \(H_2\) to
+  \(E_2,E_{k-3},E_{k-2},E_{k-1}\), with explicit weights and full scalar
+  actions for every fibre intersection relation.  The resulting divisibility
+  conditions automatically pass whenever \(k+1\) is prime; the ordinary
+  design indices separately recover the Ma--Tang exclusion of every composite
+  \(k+1\).  Thus this uniform spectral route sharpens the necessary structure
+  but gives no new obstruction at a surviving prime; and
+- a corrected staircase theorem for \(k=16\).  Exact design quadrature
+  confines \(H_a\) to
+  \(E_a\oplus E_{15-a}\oplus\cdots\oplus E_{15}\) for every
+  \(0\le a\le7\).  Together with \(N_aP_a=P_a/17\), this gives a certified
+  relation family and the honest upper bound
+  \(\dim{\cal J}P_a\le\max(1,a-1)\), not the false exact-rank claim in an
+  initial draft.  Exact ranks are proved only for \(a\le3\); in particular
+  \(A_{13}P_3=(R+372I)P_3\), so the previously proposed free level-three Gram
+  entries are actually forced.  The corrected \(234\)-equation
+  triple-profile system is rationally consistent, while its joint
+  nonnegative-integral feasibility remains open; and
+- an automatic-intersection theorem.  The full fixed-block moments of every
+  \(S(k-2,k-1,2k-1)\) force
+  \[
+  n_s=\frac{\binom{k-1}{s}}{k+1}
+  \left(\binom{k}{s+1}+(-1)^{k-1-s}k\right).
+  \]
+  Hence even \(k\) forces \(n_0=0\); specifically, every
+  \(S(14,15,31)\) is already intersecting and has \(n_1=120\).
+  Therefore the \(k=16\) problem is exactly the existence of
+  \(LS(14,15,31)\), with no additional disjointness condition.  Cross-fibre
+  disjointness gives the perfect matchings of the graph cover
+  \(O_{16}\to K_{17}\), but their elementary parity and monodromy constraints
+  remain consistent; and
 - a second unrestricted necessary theorem obtained by deleting one colour
   class \(D\).  Any tight prime colouring forces a
   \((p-2)\)-dimensional subspace \(U\le\ker M_D\) on which every Hadamard
@@ -766,6 +799,25 @@ routes, but not the asymmetric case.
   Opus 5's independently audited point/pair rigidity proof, the precisely
   scoped single-fibre quadratic moment no-go result, and the corrected
   \(\varepsilon\) double count sharpening the fourth-moment interval.
+- [`collaboration/general_h1_rigidity/README.md`](collaboration/general_h1_rigidity/README.md)
+  and [`collaboration/general_h2_rigidity/README.md`](collaboration/general_h2_rigidity/README.md):
+  the all-even-\(k\) point- and pair-harmonic support theorems, exact spectral
+  weights, closed scalar actions for every fibre relation, and proofs that
+  those scalar divisibilities add no obstruction when \(k+1\) is prime.
+- [`collaboration/opus5/staircase_support_frontier/NOTE.md`](collaboration/opus5/staircase_support_frontier/NOTE.md):
+  Opus 5's corrected \(H_0,\dots,H_7\) staircase-support computation, the
+  certified compression-rank upper bounds, the forced level-three Gram
+  entries, and the exactly scoped rational triple-profile audit.  The note
+  explicitly retracts an initial false exact-rank claim.
+- [`collaboration/steiner_disjoint_matching/README.md`](collaboration/steiner_disjoint_matching/README.md):
+  the general fixed-block intersection formula proving automatic
+  intersectingness, the exact equivalence of the \(k=16\) case with
+  \(LS(14,15,31)\), and the still-consistent cross-fibre matching and
+  monodromy counts.
+- [`evidence/general_rigidity_staircase_audit_2026-07-26.md`](evidence/general_rigidity_staircase_audit_2026-07-26.md):
+  the independent verification checkpoint and explicit record of the
+  exact-rank, level-three Gram, disjointness, and triple-profile corrections
+  made before this research batch was committed.
 - [`collaboration/hadamard_kernel_attack/README.md`](collaboration/hadamard_kernel_attack/README.md):
   the deleted-colour Hadamard-kernel theorem, complete \(k=2,4\) quadratic
   controls, and the explicitly limited \(k=6\) design-valued sector audit.
@@ -955,6 +1007,14 @@ python3 -B \
   collaboration/schreier_h4_support/verify_schreier_h4_support.py
 python3 -B \
   collaboration/opus5/joint_schreier_krein_attack/verify_joint_schreier_krein_attack.py
+python3 -B \
+  collaboration/general_h1_rigidity/verify_general_h1_rigidity.py
+python3 -B \
+  collaboration/general_h2_rigidity/verify_general_h2_rigidity.py
+python3 -B \
+  collaboration/opus5/staircase_support_frontier/verify_staircase_support_frontier.py
+python3 -B \
+  collaboration/steiner_disjoint_matching/verify_steiner_disjoint_matching.py
 python3 -B collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py
 python3 -B \
   collaboration/hadamard_kernel_attack/verify_hadamard_kernel_attack.py --k6
