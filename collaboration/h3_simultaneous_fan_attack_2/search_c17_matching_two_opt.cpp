@@ -1,7 +1,9 @@
-// Stochastic one- and two-variable local search for the canonical C17 exact
-// cover.  This is a witness hunter only: a score-zero assignment is checked
-// against all 1,140 columns before an exclusive SAT-candidate file is written.
-// A timeout or positive score has no mathematical status.
+// Stochastic one-, two-, and three-variable local search for the canonical
+// C17 exact cover.  Global neighborhood scans are atomic, so a run may finish
+// one scan after its nominal deadline.  This is a witness hunter only: a
+// score-zero assignment is checked against all 1,140 columns before an
+// exclusive SAT-candidate file is written.  A timeout or positive score has
+// no mathematical status.
 
 #include <algorithm>
 #include <array>
@@ -17,6 +19,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <unordered_set>
 #include <utility>
 #include <vector>
 #include <unistd.h>
@@ -270,35 +273,111 @@ int ApplyBestGlobalImprovement(
   const Move* best_first = nullptr;
   const Move* best_second = nullptr;
   int best_pair_delta = 0;
+  std::vector<std::pair<int, int>> triple_pair_candidates;
+  std::unordered_set<std::uint64_t> seen_pairs;
   for (int group = 0; group < kTripleColourGroups; ++group) {
     for (const int positive : positive_moves[group]) {
       for (const int negative : negative_moves[group]) {
         if (all_moves[positive].quad == all_moves[negative].quad) continue;
+        const int interaction =
+            Interaction(all_moves[positive], all_moves[negative]);
         const int delta =
             all_moves[positive].delta + all_moves[negative].delta +
-            Interaction(all_moves[positive], all_moves[negative]);
+            interaction;
         if (delta < best_pair_delta) {
           best_pair_delta = delta;
           best_first = &all_moves[positive];
           best_second = &all_moves[negative];
         }
+        if (interaction < 0 && delta >= 0 && delta <= 15) {
+          const int first = std::min(positive, negative);
+          const int second = std::max(positive, negative);
+          const std::uint64_t key =
+              static_cast<std::uint64_t>(first) * all_moves.size() + second;
+          if (seen_pairs.insert(key).second) {
+            triple_pair_candidates.push_back({first, second});
+          }
+        }
       }
     }
   }
   ++*pair_scans;
-  if (best_first == nullptr || best_second == nullptr) return 0;
-  for (int index = 0; index < best_first->change_count; ++index) {
-    counts->at(best_first->changes[index].first) +=
-        best_first->changes[index].second;
+  if (best_first != nullptr && best_second != nullptr) {
+    for (int index = 0; index < best_first->change_count; ++index) {
+      counts->at(best_first->changes[index].first) +=
+          best_first->changes[index].second;
+    }
+    for (int index = 0; index < best_second->change_count; ++index) {
+      counts->at(best_second->changes[index].first) +=
+          best_second->changes[index].second;
+    }
+    selected->at(best_first->quad) = best_first->row;
+    selected->at(best_second->quad) = best_second->row;
+    *score += best_pair_delta;
+    return 2;
   }
-  for (int index = 0; index < best_second->change_count; ++index) {
-    counts->at(best_second->changes[index].first) +=
-        best_second->changes[index].second;
+
+  const Move* best_triple_first = nullptr;
+  const Move* best_triple_second = nullptr;
+  const Move* best_triple_third = nullptr;
+  int best_triple_delta = 0;
+  std::vector<int> third_seen(all_moves.size(), 0);
+  int third_token = 0;
+  for (const auto [first_index, second_index] : triple_pair_candidates) {
+    if (++third_token == std::numeric_limits<int>::max()) {
+      std::fill(third_seen.begin(), third_seen.end(), 0);
+      third_token = 1;
+    }
+    const Move& first = all_moves[first_index];
+    const Move& second = all_moves[second_index];
+    std::vector<int> third_candidates;
+    const auto append_opposites =
+        [&](const Move& move) {
+          for (int change = 0; change < move.change_count; ++change) {
+            const auto [group, amount] = move.changes[change];
+            const auto& opposites =
+                amount > 0 ? negative_moves[group] : positive_moves[group];
+            for (const int third : opposites) {
+              if (third_seen[third] != third_token) {
+                third_seen[third] = third_token;
+                third_candidates.push_back(third);
+              }
+            }
+          }
+        };
+    append_opposites(first);
+    append_opposites(second);
+    const int pair_delta =
+        first.delta + second.delta + Interaction(first, second);
+    for (const int third_index : third_candidates) {
+      const Move& third = all_moves[third_index];
+      if (third.quad == first.quad || third.quad == second.quad) continue;
+      const int delta =
+          pair_delta + third.delta + Interaction(first, third) +
+          Interaction(second, third);
+      if (delta < best_triple_delta) {
+        best_triple_delta = delta;
+        best_triple_first = &first;
+        best_triple_second = &second;
+        best_triple_third = &third;
+      }
+    }
   }
-  selected->at(best_first->quad) = best_first->row;
-  selected->at(best_second->quad) = best_second->row;
-  *score += best_pair_delta;
-  return 2;
+  if (best_triple_first == nullptr || best_triple_second == nullptr ||
+      best_triple_third == nullptr) {
+    return 0;
+  }
+  const std::array<const Move*, 3> best_triple = {
+      best_triple_first, best_triple_second, best_triple_third};
+  for (const Move* move : best_triple) {
+    for (int index = 0; index < move->change_count; ++index) {
+      counts->at(move->changes[index].first) +=
+          move->changes[index].second;
+    }
+    selected->at(move->quad) = move->row;
+  }
+  *score += best_triple_delta;
+  return 3;
 }
 
 bool VerifyExactCover(

@@ -146,7 +146,7 @@ The signed solution in (8) need not have coordinates in \(\{0,1\}\).  It
 does not produce an exact cover, much less a partition into thirteen exact
 covers.  It only closes the linear route.
 
-## 4. The first possible squarefree trade has support at least eight
+## 4. The first possible squarefree trade has support at least ten
 
 A squarefree trade is a pair of disjoint cell sets \(P,N\) satisfying
 \[
@@ -156,7 +156,8 @@ Such trades are the natural local moves for changing a \(0/1\) exact cover
 without changing any group count.
 
 For the cyclic quotient there is no nonzero squarefree trade on two, four,
-or six cells.  The finite proof uses the \(228\) quadruple-group rows.
+six, or eight cells.  The finite proof uses the \(228\) quadruple-group
+rows.
 
 - At support two, two cells would have identical incidence columns.
 - At support four, quadruple-group balance leaves either \(2+2\) cells in
@@ -178,11 +179,64 @@ or six cells.  The finite proof uses the \(228\) quadruple-group rows.
 
 Therefore
 \[
-\boxed{\text{every nonzero squarefree quotient trade has support at least }8.}
+\text{every nonzero squarefree quotient trade has support at least }8.
 \]
-This is a local-rigidity delimiter.  It does not exclude nonsquarefree
-integer kernel vectors, trades of support eight or more, an exact cover, or
-a fan.
+
+At support eight there are four positive and four negative cells.  Balance
+in every quadruple-group row forces the positive and negative multiplicity
+of each \(Q\)-group to agree.  The distribution of the four positive cells
+is therefore one of the five partitions
+\[
+4,\qquad3+1,\qquad2+2,\qquad2+1+1,\qquad1+1+1+1.
+\]
+All five cases are exhausted exactly.
+
+- For \(4\), the verifier compares the TC-row multisets of all
+  \(228\binom{13}{4}=163,020\) four-subsets within a \(Q\)-group.  There is
+  no signature collision at all.
+- For \(3+1\), it enumerates the
+  \(228\binom{13}{3}\binom{10}{3}=7,824,960\) oriented disjoint
+  triple-versus-triple differences and looks up the required opposite
+  single swap in a different \(Q\)-group.  None exists.
+- For \(2+2\), it enumerates the
+  \(228\binom{13}{2}\binom{11}{2}=978,120\) oriented disjoint
+  pair-versus-pair differences and looks for its opposite in a different
+  \(Q\)-group.  None exists.
+- For \(2+1+1\), it enumerates the same \(978,120\) double swaps.  Choose
+  any nonzero coordinate of the required residual, preferring magnitude
+  two.  At least one of the two remaining single swaps must have the
+  required sign there, so a signed-row index enumerates it; the other move
+  is then an exact dictionary lookup.  The exhaustive run makes
+  \(118,592,198\) residual lookups and finds none.
+- For \(1+1+1+1\), fix the least of the four distinct \(Q\)-groups and one
+  of its oriented swaps.  At the first nonzero coordinate, one of the
+  other three swaps must have the opposite sign, so all possibilities for
+  the second swap are enumerated.  At a nonzero coordinate of their
+  partial sum, one of the last two swaps must again have the opposite
+  sign; enumerate the third and look up the uniquely determined fourth.
+  Coefficient bounds discard only partial sums that one or two remaining
+  \(\{-1,0,1\}\)-valued swaps cannot cancel.  The run checks
+  \(1,204,296\) second-move hits, \(101,780,540\) third-move hits, and
+  \(92,958,652\) exact final lookups, with no trade.
+
+These five cases exhaust support eight, and every squarefree trade has even
+support.
+Consequently
+\[
+\boxed{\text{every nonzero squarefree quotient trade has support at least }10.}
+\]
+In particular, the difference of two distinct binary solutions of
+\(B_0x=\mathbf1\) is such a trade, so any two invariant exact covers are
+separated by Hamming distance at least ten.
+
+The driver `verify_cyclic_support8.py` independently reconstructs the
+quotient columns and checks their SHA-256 digest before compiling and
+running the three C++17 exhaustive searches.  The search sources use only
+the C++ standard library.
+
+This remains a local-rigidity delimiter.  It does not exclude
+nonsquarefree integer kernel vectors, trades of support ten or more, an
+exact cover, or a fan.
 
 ## 5. Why padding the eleven triangles fails
 

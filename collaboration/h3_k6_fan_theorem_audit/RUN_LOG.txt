@@ -285,3 +285,157 @@ scope:
   the best-effort row-label file is not a SAT model
   UNKNOWN and positive score have no mathematical status
   no matching candidate was emitted
+
+13. Independent three-Q extension audit
+
+file:
+  ../h3_simultaneous_fan_attack_2/search_c17_matching_two_opt.cpp
+
+completeness proof:
+  every move has at most eight distinct +/-1 changed TC coordinates
+  every pair interaction is therefore at least -8
+  triple delta is:
+    d1+d2+d3+I12+I13+I23
+  after no improving single or pair:
+    every di is nonnegative
+    every pair delta is nonnegative
+  an improving triple has a pair with negative interaction
+  for every pair in an improving triple:
+    pair_delta < 16-d_third
+    hence integer pair_delta <=15
+  the third move must have negative total interaction with that pair
+  hence it shares an opposite-sign coordinate with at least one pair member
+
+enumeration audit:
+  pair key=first*2736+second with first<second
+  result=collision-free unique indexing
+  opposite-sign group indices cover every negative interaction
+  third candidates are deduplicated per pair
+  same-Q pairs and thirds are correctly excluded
+
+independent brute-force comparisons:
+  200 random real-move subsets:
+    moves per subset=40
+    brute-force triples=1976000
+    sparse and exhaustive best deltas agree in every subset
+  real two-move local optimum:
+    seed=0
+    score=94
+    improving single steps=119
+    improving pair steps=7
+    improving triple found with delta=-1
+  40-move subset containing that triple:
+    exhaustive improving triples=1
+    sparse improving triples=1
+    exhaustive best delta=-1
+    sparse best delta=-1
+
+application and gate:
+  three distinct Q choices are applied to counts and selection
+  score is incremented by the exact quadratic combined delta
+  every improvement is recorded immediately after the atomic scan returns
+  score zero still passes all-1140-column loaded-matrix verification and
+  requires the independent semantic verifier
+
+build:
+  c++ -std=c++17 -O3 -Wall -Wextra -pedantic
+  result=PASS
+
+atomic deadline smoke:
+  requested seconds=0.01
+  hinted initial score=54
+  pair_scans=1
+  status=UNKNOWN
+  certificate=NONE
+
+scope:
+  a global one/two/three-move scan is atomic and may overrun the nominal time
+  after a non-improving scan that crosses the deadline, one ordinary move may
+  still be performed before the loop condition is checked again
+  these timing effects do not suppress or fabricate a candidate
+  UNKNOWN and score 54 remain mathematically inconclusive
+
+14. Independent support-eight squarefree-trade audit
+
+files:
+  ../fan_gadget_generalization/verify_cyclic_support8.py
+  ../fan_gadget_generalization/verify_cyclic_support8_cases_compact.cpp
+  ../fan_gadget_generalization/verify_cyclic_support8_case_211.cpp
+  ../fan_gadget_generalization/verify_cyclic_support8_case_1111.cpp
+
+global reduction:
+  Q rows partition the cells
+  Q balance gives equal positive and negative multiplicity in every Q group
+  support eight therefore means four positive and four negative cells
+  integer partitions of four:
+    4
+    3+1
+    2+2
+    2+1+1
+    1+1+1+1
+  result=complete
+  within-Q positive/negative subsets are disjoint in every enumerated case
+  different Q groups contain disjoint cells automatically
+
+independent front-end reconstruction:
+  column SHA-256=8ccea7ad608b584d117ec8970c9bef485d79c5f328da364cb93d678ee35e8ff8
+  cells=2964
+  Q groups=228
+  cells per Q=13
+  oriented swaps=35568
+  oriented-swap support census=6:658,8:34910
+  four-subsets=163020
+  four-subset signature collisions=0
+  triple-pair configurations=7824960
+  double-pair configurations=978120
+
+case completeness:
+  4:
+    exact TC-row multiset signature for every four-subset
+    no collision, hence no disjoint collision
+  3+1:
+    every oriented disjoint triple difference in one Q is enumerated
+    exact opposite single-swap lookup requires a different Q
+  2+2:
+    every oriented disjoint double swap is enumerated
+    exact opposite-vector lookup tracks distinct Q groups
+    independent Python enumeration also found NONE across 978120 configs
+  2+1+1:
+    target is the negative double-swap residual
+    at any chosen nonzero coordinate at least one remaining swap has the
+    target sign; magnitude-two coordinates force both
+    signed index enumerates that swap and exact dictionary lookup determines
+    the other; Q-distinctness is checked
+  1+1+1+1:
+    the least Q group uniquely anchors the first swap
+    its least changed row forces an opposite-sign second candidate
+    a nonzero two-swap residual forces an opposite-sign third candidate
+    coefficient bounds +/-2 then +/-1 are necessary for two then one
+    remaining swaps and discard no solution
+    exact dictionary lookup determines the fourth; all Q groups are distinct
+
+canonical standard-library driver output:
+  case 4=NONE
+  case 3+1=NONE
+  case 2+2=NONE
+  case 2+1+1=NONE
+  case 1+1+1+1=NONE
+  2+1+1 exact residual lookups=118592198
+  1+1+1+1 second hits=1204296
+  1+1+1+1 third hits=101780540
+  1+1+1+1 exact residual lookups=92958652
+  theorem=every nonzero squarefree quotient trade has support at least 10
+
+build and portability:
+  all three C++ sources:
+    c++ -std=c++17 -O3 -Wall -Wextra -pedantic
+    result=PASS
+  driver Ruff=PASS
+  driver Python-3.9 AST parse=PASS
+
+scope:
+  the low-level C++ programs assume the canonical driver-produced column file
+  the driver independently reconstructs and hash-checks that file first
+  the theorem excludes only squarefree trades of support at most eight
+  it does not exclude nonsquarefree kernel vectors, support-ten trades, an
+  exact cover, or a fan

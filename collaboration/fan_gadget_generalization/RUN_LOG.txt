@@ -55,3 +55,28 @@ output:
   squarefree trade support 6: 0
   theorem: every nonzero squarefree trade has support at least 8
   scope: this does not construct or exclude an exact cover or fan
+
+5. cyclic quotient support-eight exhaustive audit
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support8.py
+
+output:
+  case 4: NONE
+  four-subsets: 163020
+  same-signature collisions: 0
+  case 3+1: NONE
+  triple-pair configurations: 7824960
+  case 2+2: NONE
+  double-pair configurations: 978120
+  case 2+1+1: NONE
+  double-swap configurations: 978120
+  exact residual lookups: 118592198
+  case 1+1+1+1: NONE
+  second-move hits: 1204296
+  third-move hits: 101780540
+  exact residual lookups: 92958652
+  cyclic quotient support-eight audit: PASS
+  theorem: every nonzero squarefree quotient trade has support at least 10
+  corollary: distinct binary exact covers have Hamming distance at least 10
+  scope: this does not construct or exclude an exact cover or fan

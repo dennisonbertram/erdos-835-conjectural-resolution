@@ -403,7 +403,7 @@ scope:
   no portable nonexistence status.  Only semantic defect zero can produce a
   matching candidate.
 
-20. One- and two-Q local witness hunter
+20. One-, two-, and three-Q local witness hunter
 
 artifact:
   search_c17_matching_two_opt.cpp
@@ -417,6 +417,15 @@ verification:
     exhaustive_improving_pairs=20
     sparse_missed_pairs=0
     best_pair_delta=-1 in both searches
+  sparse versus brute-force triple audit:
+    random_subsets=200
+    real_moves_per_subset=40
+    triples_checked=1976000
+    sparse_and_exhaustive_best_delta_and_count_agree=PASS
+  positive triple control:
+    real_two-move_local_optimum_score=94
+    unique_improving_triple_delta=-1
+    sparse_and_exhaustive_identity_agree=PASS
   five-second hinted smoke:
     status=UNKNOWN
     best_collision_score=54
@@ -424,6 +433,12 @@ verification:
     restarts=105
     pair_scans=1
     certificate=NONE
+  thirty-second nominal hinted triple smoke:
+    atomic_scan_wall_time_about=40s
+    status=UNKNOWN
+    best_collision_score=54
+    pair_scans=1
+    conclusion=no improving one-, two-, or three-Q move at this hint
   emitted best-effort recomputation=collision 54 PASS
   identical model/best-effort path rejection=PASS
 
@@ -431,3 +446,57 @@ scope:
   Score zero would be checked against all 1140 loaded-matrix columns and must
   still pass the independent semantic verifier.  Positive score and timeout
   have no mathematical status.
+
+21. Five one-hour randomized DLX traversals
+
+results:
+  seed=835 nodes=676413440 status=UNKNOWN
+  seed=836 nodes=732079104 status=UNKNOWN
+  seed=837 nodes=677584896 status=UNKNOWN
+  seed=838 nodes=672612352 status=UNKNOWN
+  hinted_seed=900 nodes=621984768 status=UNKNOWN
+  aggregate_nodes=3380674560
+  candidate_models=0
+
+scope:
+  Each traversal used the exact 2964-row by 1140-column matrix.  The hint
+  changed search order only.  Timeouts and explored-node counts have no
+  mathematical status.
+
+22. Extended three-Q witness search
+
+command:
+  /private/tmp/search_c17_matching_three_opt \
+    collaboration/cyclic_lsts19_extension/c17_exact_cover.matrix \
+    /private/tmp/erdos835-c17-matching-three-opt-seed20260736.model \
+    600 20260736 \
+    --hint /private/tmp/erdos835-c17-matching-dlx-hint-seed20260728.txt \
+    --best-effort \
+      /private/tmp/erdos835-c17-matching-three-opt-seed20260736.best
+
+result:
+  status=UNKNOWN
+  best_collision_score=54
+  moves=80252785
+  restarts=16051
+  complete_global_neighborhood_scans=9
+  certificate=NONE
+
+scope:
+  Each complete global scan exhausted all improving one-, two-, and three-Q
+  changes at its current state.  The run did not improve the score-54 hint.
+  This is local-search telemetry, not a global lower bound.
+
+23. One-hour soft CP-SAT matching run
+
+result:
+  status=FEASIBLE
+  conflicts=4312800
+  branches=6887562
+  wall_time=3599.996982
+  semantic_l1_defect=108
+  certificate=NONE
+
+scope:
+  The solver reproduced but did not improve the score-54 hint.  A positive
+  incumbent has no matching or nonexistence status.

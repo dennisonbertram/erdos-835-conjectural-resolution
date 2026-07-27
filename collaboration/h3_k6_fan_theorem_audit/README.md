@@ -311,6 +311,80 @@ performed 523,952 moves, and ended `UNKNOWN` at score 54.  Its 228-row
 best-effort file independently recomputed to score 54; no candidate model was
 emitted.
 
+## 8. Three-Q neighborhood extension
+
+The same hunter now checks the full improving three-Q neighborhood after it
+has excluded improving singles and pairs.  Each move changes at most eight
+distinct triple-colour coordinates by \(\pm1\), so a pair interaction is at
+least \(-8\).  For an improving triple with nonnegative single deltas and no
+improving pair, every constituent pair has integer pair delta at most 15:
+the two interactions with the third move total at least \(-16\).  At least one
+pair has negative interaction, and the third move must interact negatively
+with at least one member of that pair.  Thus indexing pair members and third
+candidates through shared opposite-sign coordinates is exhaustive.
+
+The unique-pair key and third-candidate deduplication were checked directly.
+Across 200 random 40-move subsets, the sparse result agreed with all 1,976,000
+brute-force triples.  A stronger real-state test descended a random assignment
+through 119 improving singles and seven improving pairs to a two-move local
+optimum at score 94.  The sparse search found an improving triple of delta
+\(-1\); in a tractable 40-move subset containing it, brute force found exactly
+one improving triple and the sparse search found the same one with the same
+best delta.
+
+The combined score update includes all three individual deltas and all three
+pair interactions, and the three distinct Q choices are applied before the
+usual immediate candidate gate.  Global neighborhood scans are atomic and can
+overrun the nominal deadline; if a non-improving scan crosses the deadline,
+one ordinary move can still occur before the next loop check.  This affects
+runtime telemetry only: it neither loses a found zero nor promotes a positive
+score.  The extension compiled cleanly under C++17 with strict warnings.
+
+## 9. Support-eight squarefree trades
+
+The new support-eight exclusion was independently audited case by case.  Q
+rows partition the quotient cells, so a squarefree trade has equal positive
+and negative multiplicity in each Q group.  Support eight therefore consists
+of four positive and four negative cells, and the five integer partitions
+\[
+  4,\quad3+1,\quad2+2,\quad2+1+1,\quad1+1+1+1
+\]
+are exhaustive, including every repeated-Q pattern.  Positive and negative
+subsets are explicitly disjoint within a repeated Q group; cells from
+different Q groups are automatically distinct.
+
+The compact enumerator checks every four-subset multiset signature, every
+oriented disjoint triple-versus-triple difference followed by an exact
+single-swap lookup, and every oriented disjoint double swap followed by an
+opposite-vector lookup in a distinct Q group.  The \(2+1+1\) search chooses a
+nonzero coordinate of the double-swap residual: at least one remaining swap
+must have the required sign there, with magnitude two forcing both.  It
+enumerates that signed index and determines the last swap by exact lookup.
+For \(1+1+1+1\), the least Q group anchors the first move; an opposite sign is
+forced at its least changed row, then again at a nonzero two-move residual.
+The coefficient bounds \(\pm2\) and \(\pm1\) are necessary for two and one
+remaining swaps, respectively, so they cannot prune a valid trade.
+
+An independent reconstruction reproduced the five partitions, all 35,568
+unique oriented swaps and their support census \(658\) of size six and
+\(34,910\) of size eight, 163,020 four-subsets with no signature collision,
+7,824,960 triple-pair configurations, and 978,120 double-pair configurations.
+A separate Python enumeration also excluded all 978,120 \(2+2\)
+configurations.
+
+The canonical standard-library driver passed with column digest
+`8ccea7ad608b584d117ec8970c9bef485d79c5f328da364cb93d678ee35e8ff8`.
+Its deeper searches performed 118,592,198 residual lookups for \(2+1+1\) and
+92,958,652 final lookups for \(1+1+1+1\), with no trade.  All three C++17
+sources compiled under `-O3 -Wall -Wextra -pedantic`; the driver passed Ruff
+and Python 3.9 parsing.
+
+Thus every nonzero squarefree quotient trade has support at least ten.  This
+does not exclude nonsquarefree kernel vectors, squarefree trades of support ten
+or more, an exact cover, or a fan.  The low-level binaries assume the
+driver-produced column file; the proof pipeline independently reconstructs
+and hash-checks that file before invoking them.
+
 ## Reproduction
 
 ```sh

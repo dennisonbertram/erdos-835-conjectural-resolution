@@ -457,14 +457,21 @@ inconclusive.
 
 The C++ witness hunter `search_c17_matching_two_opt.cpp` supplements the
 exact solvers.  It searches Q-transversals under the collision objective and
-checks all single changes plus every improving two-Q change: because
-\(\binom n2\) is quadratic, the combined delta is the sum of the individual
-deltas and their coordinatewise interaction.  Once no improving single
-change remains, every improving pair must share an affected triple-colour
-group with opposite signs, which makes the sparse enumeration exhaustive.
-The implementation and 12,500 randomized delta checks were independently
-audited.  Its five-second hinted smoke stayed at collision score 54 and wrote
-no model.  This is a witness search, not a lower-bound method.
+exhausts improving changes of one, two, or three Q variables.  Because
+\(\binom n2\) is quadratic, a combined delta is the sum of the individual
+deltas and all pairwise coordinate interactions.  Opposite-sign incidence
+indices make the two-change screen exhaustive.  After singles and pairs fail,
+each interaction is at least \(-8\), so any improving triple has a constituent
+negative-interaction pair of combined delta at most 15; the third move must
+also share an opposite-sign affected group.  These facts make the sparse
+three-change enumeration exhaustive.
+
+The implementation passed 12,500 randomized one/pair delta checks and an
+independent sparse-versus-brute comparison on 1,976,000 sampled triples.  A
+positive control found the same unique improving triple of delta \(-1\) by
+both methods.  The score-54 hint has no improving one-, two-, or three-Q
+change.  This is only a local-optimality certificate for one best effort,
+not a global lower bound; the timed witness search wrote no model.
 
 Long CaDiCaL and Kissat searches on both exact-cover encodings, and a
 diversified fan search, remain the current computational frontier.  None has
