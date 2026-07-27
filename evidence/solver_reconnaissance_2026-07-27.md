@@ -31,23 +31,24 @@ conflicts: 14,464,614
 This is inconclusive.  CP-SAT emitted neither a colouring nor a portable
 infeasibility certificate.
 
-## Concurrent exact searches at this checkpoint
+## Other exact-search status at this checkpoint
 
-The following independent searches were still running:
+The following independent tracks were either still running or had just
+terminated inconclusively:
 
 | track | latest observable state |
 |---|---|
-| proof-producing CaDiCaL, unrestricted radius-four-plus-forced-trace CNF | no verdict; raw DRAT stream `/private/tmp/erdos835-r4-forcedtrace.drat` was 6.3 GiB |
-| proof-producing CaDiCaL, \(C_{17}\)-equivariant cover CNF | no verdict; raw DRAT stream `/private/tmp/erdos835-c17-cover.drat` was 6.8 GiB |
+| proof-producing CaDiCaL, unrestricted radius-four-plus-forced-trace CNF | still running with no verdict; raw DRAT stream `/private/tmp/erdos835-r4-forcedtrace.drat` was 13 GiB |
+| proof-producing CaDiCaL, \(C_{17}\)-equivariant cover CNF | still running with no verdict; raw DRAT stream `/private/tmp/erdos835-c17-cover.drat` was 12 GiB |
 | proof-producing CaDiCaL, fixed full cyclic-link \(LS(3,4,20)\) instance | no verdict |
 | SAT-tuned CaDiCaL, unrestricted radius-four-plus-forced-trace CNF | no verdict; solver reported 33% of variables remaining |
 | SAT-tuned CaDiCaL, \(C_{17}\)-equivariant cover CNF | no verdict; solver reported 76% of variables remaining |
-| independent C++ Algorithm X/DLX, \(C_{17}\)-equivariant exact cover | no verdict after more than 585 million nodes |
+| independent C++ Algorithm X/DLX, \(C_{17}\)-equivariant exact cover | terminated at its time limit with `UNKNOWN` after 656,759,808 nodes |
 
 The two raw DRAT files are live temporary streams, not repository artifacts.
 They cannot be checked, compressed, hashed, or interpreted until their
 respective solvers terminate.  At the snapshot above, the data volume had
-99 GiB of free space.
+86 GiB of free space.
 
 ## Verdict discipline
 
@@ -59,4 +60,5 @@ respective solvers terminate.  At the snapshot above, the data volume had
 - Even a certified negative answer for the \(k=16\) instance would not by
   itself settle the existential quantifier in Erdős–Rosenfeld #835.
 
-At this checkpoint every listed exact search remains undecided.
+At this checkpoint every listed track remains undecided, including the
+completed DLX run: its node count and timeout carry no mathematical verdict.

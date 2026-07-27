@@ -1001,6 +1001,15 @@ routes, but not the asymmetric case.
   an independent proof and implementation audit of the one-point theorem,
   labelled inverse, two-point counterexamples, restriction quantifiers, and
   the small packing maxima through \(S(4,5,11)\).
+- [`collaboration/simultaneous_ls3420_fan/README.md`](collaboration/simultaneous_ls3420_fan/README.md):
+  the unrestricted \(51{,}357\)-vertex shadow forced at \(k=16\), equivalently
+  thirteen labelled \(LS(3,4,20)\) extensions sharing one
+  \(LS(2,3,19)\) point-link with \(3{,}876\) cross-copy all-different
+  constraints; its \(50{,}388\)-vertex fixed-link conflict graph and exact
+  Hoffman-bound delimiter are independently audited and executable.
+- [`collaboration/h3_simultaneous_fan_audit/README.md`](collaboration/h3_simultaneous_fan_audit/README.md):
+  an independent derivation, edge census, Gram-identity check, and
+  standard-library verifier for the simultaneous-fan theorem.
 - [`evidence/solver_reconnaissance_2026-07-27.md`](evidence/solver_reconnaissance_2026-07-27.md):
   the completed one-hour unrestricted forced-trace CP-SAT `UNKNOWN` result and
   scope-explicit snapshots of the still-running SAT, DRAT, and DLX searches.
