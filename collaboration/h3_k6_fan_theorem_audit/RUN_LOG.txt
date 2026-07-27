@@ -1,0 +1,113 @@
+Independent audit run log
+Date: 2026-07-27
+Audited commit: 7aec3f32f181 (Prove the universal k6 fan obstruction)
+
+1. Committed verifier
+
+$ python3 -B collaboration/fan_small_controls/verify_all_k6_links.py
+LS(2,3,9) classification: PASS
+labelled STS(9)s: 840
+large sets on the fixed labelled point set: 15360
+type A: aut=42, orbit=8640, obstruction_nodes=31
+type B: aut=54, orbit=6720, obstruction_nodes=29
+certified theorem: no LS(2,3,9) admits a simultaneous 3-fan
+scope: this proves the k=6 shadow obstruction, not k=16 or #835
+
+2. Independent classification, incidence, and prose-proof verifier
+
+$ python3 -B collaboration/h3_k6_fan_theorem_audit/verify_k6_fan_theorem_audit.py
+independent k=6 audit: PASS
+labelled_sts=840
+fixed_point_unordered_large_sets=15360
+exact_cover_cache_states=108170
+type_A_automorphisms=42 type_A_orbit=8640
+type_B_automorphisms=54 type_B_orbit=6720
+type_A_cliques=ABC=Q:0278,KLM=Q:0258,OPQ=Q:0245,ADE=TC:027;4,AGI=TC:028;4,BJK=TC:028;1,CHL=TC:028;5,DGO=TC:024;4,JNR=TC:026;1,KPR=TC:025;1,FLQ=TC:025;5
+type_B_cliques=BCD=Q:0134,PQR=Q:0378,ABE=TC:013;0,CFG=TC:013;1,AHI=TC:023;0,DKL=TC:034;4,EIP=TC:037;0,FJQ=TC:037;1,KNR=TC:037;4,GOQ=TC:038;1,LMR=TC:038;4
+type_A_colourings_without_JNR=18
+type_B_colourings_without_PQR=8
+full_type_A_colourings=0 full_type_B_colourings=0
+scope=k=6_only; no claim for k=16 or Erdos-Rosenfeld #835
+
+3. Base cyclic CNF generation
+
+$ python3 -B collaboration/h3_simultaneous_fan_attack_2/write_cyclic_invariant_fan_cnf.py /tmp/cyclic_invariant_fan_audit.cnf
+path=/tmp/cyclic_invariant_fan_audit.cnf
+variables=74100
+clauses=121537
+redundant_group_amo=False
+pairwise_cell_amo=False
+sha256=b247b458dfeb3daff7c37046bd2def635601e26737761f5450541722dccb85a5
+PASS
+
+4. Independent base CNF and decoder audit
+
+$ python3 -B collaboration/h3_k6_fan_theorem_audit/verify_cyclic_cnf_audit.py /tmp/cyclic_invariant_fan_audit.cnf
+independent cyclic CNF audit: PASS
+orbit_cells=2964 quotient_groups=1140 cell_degree=5
+variables=74100 clauses=121537
+clause_lengths=1:13,2:103740,13:17784
+sinz_amo_truth_table=PASS (all 8192 primary assignments)
+group_coverage_plus_one_hot=rainbow because every group has 13 cells
+first_group_label_normalization=13 unit clauses; lossless label symmetry
+redundant_group_amo=False pairwise_cell_amo=False distinct_conflict_edges=88591
+sha256=b247b458dfeb3daff7c37046bd2def635601e26737761f5450541722dccb85a5
+decoder_semantic_one_hot_and_rainbow_tests=PASS; status_parser=HARDENED: exact 's SATISFIABLE' required
+scope=encoding audit only; no SAT model and no k=16/#835 solution
+
+5. Optional redundant-group-AMO generation and independent audit
+
+$ python3 -B collaboration/h3_simultaneous_fan_attack_2/write_cyclic_invariant_fan_cnf.py /tmp/cyclic_invariant_fan_audit_redundant.cnf --redundant-group-amo
+path=/tmp/cyclic_invariant_fan_audit_redundant.cnf
+variables=74100
+clauses=1273220
+redundant_group_amo=True
+pairwise_cell_amo=False
+sha256=896d975b3246202daa0b1d6fd101e60d3f53814dc4f50ea1ada859f5715d2591
+PASS
+
+$ python3 -B collaboration/h3_k6_fan_theorem_audit/verify_cyclic_cnf_audit.py /tmp/cyclic_invariant_fan_audit_redundant.cnf --redundant-group-amo
+independent cyclic CNF audit: PASS
+orbit_cells=2964 quotient_groups=1140 cell_degree=5
+variables=74100 clauses=1273220
+clause_lengths=1:13,2:1255423,13:17784
+sinz_amo_truth_table=PASS (all 8192 primary assignments)
+group_coverage_plus_one_hot=rainbow because every group has 13 cells
+first_group_label_normalization=13 unit clauses; lossless label symmetry
+redundant_group_amo=True pairwise_cell_amo=False distinct_conflict_edges=88591
+sha256=896d975b3246202daa0b1d6fd101e60d3f53814dc4f50ea1ada859f5715d2591
+decoder_semantic_one_hot_and_rainbow_tests=PASS; status_parser=HARDENED: exact 's SATISFIABLE' required
+scope=encoding audit only; no SAT model and no k=16/#835 solution
+
+6. Direct pairwise-cell-AMO generation and independent audit
+
+$ python3 -B collaboration/h3_simultaneous_fan_attack_2/write_cyclic_invariant_fan_cnf.py /tmp/cyclic_invariant_fan_audit_direct.cnf --redundant-group-amo --pairwise-cell-amo
+path=/tmp/cyclic_invariant_fan_audit_direct.cnf
+variables=38532
+clauses=1400672
+redundant_group_amo=True
+pairwise_cell_amo=True
+sha256=74ac2417ffdc1410075faabb5d2292969f2247566583980ed46f777f98bc9249
+PASS
+
+$ python3 -B collaboration/h3_k6_fan_theorem_audit/verify_cyclic_cnf_audit.py /tmp/cyclic_invariant_fan_audit_direct.cnf --redundant-group-amo --pairwise-cell-amo
+independent cyclic CNF audit: PASS
+orbit_cells=2964 quotient_groups=1140 cell_degree=5
+variables=38532 clauses=1400672
+clause_lengths=1:13,2:1382875,13:17784
+sinz_amo_truth_table=PASS (all 8192 primary assignments)
+group_coverage_plus_one_hot=rainbow because every group has 13 cells
+first_group_label_normalization=13 unit clauses; lossless label symmetry
+redundant_group_amo=True pairwise_cell_amo=True distinct_conflict_edges=88591
+sha256=74ac2417ffdc1410075faabb5d2292969f2247566583980ed46f777f98bc9249
+decoder_semantic_one_hot_and_rainbow_tests=PASS; status_parser=HARDENED: exact 's SATISFIABLE' required
+scope=encoding audit only; no SAT model and no k=16/#835 solution
+
+7. Static lint
+
+$ ruff check collaboration/h3_k6_fan_theorem_audit
+All checks passed!
+
+Environment note: the system Python shim printed harmless xcrun cache/FSEvents
+warnings under sandboxing before several Python commands. Every command above
+completed with exit status 0.

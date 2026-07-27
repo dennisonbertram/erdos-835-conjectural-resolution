@@ -49,6 +49,21 @@ in every such row.  Therefore
 \]
 Conversely, a zero-one solution of (1) is a maximum independent transversal.
 
+Equivalently, regard the \(19\,380\) constraint groups as vertices and each
+cell as the five-element hyperedge consisting of its five incident groups.
+This gives a \(5\)-uniform, \(13\)-regular linear hypergraph
+\(\mathcal G_L\), and \(H_L\) is its line graph. A binary solution of (1) is
+a perfect matching of \(\mathcal G_L\), while a fan is a decomposition into
+thirteen perfect matchings. Thus the exact question is whether this special
+hypergraph is class one:
+\[
+\boxed{\chi'(\mathcal G_L)=\Delta(\mathcal G_L)=13.}
+\]
+The universal \(k=6\) control in `collaboration/fan_small_controls/` proves
+that the analogous \(5\)-uniform, \(3\)-regular hypergraph is class two for
+both possible link isomorphism types. Hence regularity and linearity alone
+do not imply resolvability.
+
 Over \(\mathbb R\), put
 \[
 y=x-\frac1{13}\mathbf1.
@@ -168,14 +183,28 @@ dependency.  The finite-field alternative then gives
 Together with the constant solutions for \(p\ne13\), (1) is consistent over
 every prime field.
 
-This is a delimiter, not an integer solution.  Since
-\(B\mathbf1=13\mathbf1\), the cokernel class of the right-hand side has order
-dividing 13.  Prime-field consistency still permits that class to be a
-13-multiple of hidden \(13^2\)-torsion.  A complete Smith obstruction screen
-must therefore determine the \(13\)-primary Smith data or solve (1) over the
-integers; the calculation above does neither.
+The companion exact screen in `../fan_13adic_screen/` now closes the hidden
+\(13^2\)-torsion possibility for this quotient.  It constructs 57 independent
+integral left-row dependencies, all annihilating \(\mathbf1\), and proves
+\[
+\operatorname{rank}_{\mathbb Q}B_0
+=\operatorname{rank}_{\mathbb F_{13}}B_0
+=1083.
+\]
+Thus every nonzero Smith factor of \(B_0\) is a unit in
+\(\mathbb Z_{13}\).  Moreover \(B_0\mathbf1=13\mathbf1\), so the cokernel
+class of the right-hand side is killed by 13.  It is torsion because the 57
+left dependencies annihilate it, but the Smith calculation shows that the
+torsion cokernel has no 13-torsion.  The class is therefore zero:
+\[
+\boxed{B_0x=\mathbf1\text{ has a signed integral solution over }\mathbb Z.}
+\]
+The quotient solution lifts constant-on-orbits to a signed integral solution
+of the full fixed-link incidence system.  Explicit compatible reductions
+through \(13^6\) are also checked.  This is still only a signed linear
+solution: it is neither a zero-one exact cover nor a simultaneous fan.
 
-## 4. No clique obstruction for the cyclic link
+## 4. No clique obstruction for any fixed link
 
 The same order-17 action has 2,964 cell orbits and 1,140 group orbits:
 \[
@@ -202,10 +231,18 @@ different full neighbour orbits can coalesce; its exact degree census is
 58^{\times257},\qquad59^{\times144},\qquad60^{\times2563}.
 \]
 
-Equation (10) closes only the larger-clique route for this link.  It says
-nothing about chromatic number 13 versus greater than 13 through non-clique
-mechanisms, and it is not a parameter-independent theorem for arbitrary
-links.
+The companion gadget audit in `../fan_gadget_generalization/` proves (10)
+without cyclicity.  An outside cell has at most one neighbour in a fixed
+\(Q\)-group and at most two in a fixed \((T,c)\)-group.  In a hypothetical
+14-clique, choose a cell \(v\).  Among the other thirteen cells, three share
+one of the five constraint groups through \(v\).  Any remaining clique cell
+outside that group would have three neighbours inside it, contradicting the
+preceding sharp bound.  Hence every clique has size at most thirteen, while
+every constraint group attains thirteen.
+
+Equation (10) therefore closes the larger-clique route for every fixed link.
+It says nothing about chromatic number 13 versus greater than 13 through
+non-clique mechanisms.
 
 ## 5. A Schur-power formulation in characteristic 13
 
@@ -302,6 +339,20 @@ one label, and all thirteen labels occur, so each occurs exactly once.  A SAT
 model gives a portable 2,964-line semantic certificate.  A proof-checked UNSAT
 result excludes only \(C_{17}\)-invariant fans over this fixed cyclic link.
 
+`write_cyclic_invariant_fan_cnf.py` emits three equivalent deterministic
+encodings, all independently reconstructed byte-for-byte by
+`../h3_k6_fan_theorem_audit/verify_cyclic_cnf_audit.py`:
+
+| encoding | variables | clauses | SHA-256 |
+|---|---:|---:|---|
+| sequential cell AMO | 74,100 | 121,537 | `b247b458dfeb3daff7c37046bd2def635601e26737761f5450541722dccb85a5` |
+| plus conflict-edge AMO | 74,100 | 1,273,220 | `896d975b3246202daa0b1d6fd101e60d3f53814dc4f50ea1ada859f5715d2591` |
+| direct cell AMO plus conflict-edge AMO | 38,532 | 1,400,672 | `74ac2417ffdc1410075faabb5d2292969f2247566583980ed46f777f98bc9249` |
+
+The hardened decoder accepts only an exact `s SATISFIABLE` status and then
+checks the combinatorial certificate directly: one label per orbit cell and
+all 1,140 groups rainbow.
+
 ## 7. Search result and next exact target
 
 The optional OR-Tools helper
@@ -310,16 +361,20 @@ after fixing one quotient group to the thirteen labels.  It returned
 `UNKNOWN`, with no candidate.  This has no negative mathematical status.
 No `cyclic_invariant_fan.txt` is claimed.
 
+A second finite screen tested 272 translation-invariant rank formulae.  For
+each quadruple it cyclically orders the thirteen allowed colours around an
+anchor blending the finite-point barycentre and the face-colour barycentre;
+the rank is automatically rainbow on every \(Q\)-group.  None was rainbow on
+all \((T,c)\)-groups.  The best collision score was 4,098.  This excludes only
+that explicit formula family and is not evidence of global infeasibility.
+
 The exact next targets, in order, are:
 
-1. generate the 74,100-variable CNF above and seek either a semantically
-   checked 2,964-line model or a proof-checked UNSAT certificate;
-2. compute the \(13\)-primary Smith data needed to decide whether
-   \(Bx=\mathbf1\) has a signed integral solution, specifically whether the
-   right-hand-side class is hidden inside \(13\) times \(13^2\)-torsion;
-3. attack the nonlinear Schur-power intersection (12), rather than another
+1. seek either a semantically checked 2,964-line model or a proof-checked
+   UNSAT certificate for the independently audited CNFs above;
+2. attack the nonlinear Schur-power intersection (12), rather than another
    ordinary rank or Hoffman calculation;
-4. if the invariant ansatz fails, return to the unrestricted 50,388-cell
+3. if the invariant ansatz fails, return to the unrestricted 50,388-cell
    resolution problem.  Invariant UNSAT would not exclude nonsymmetric fans,
    other links, \(LS(3,4,20)\), \(k=16\), or Problem #835.
 

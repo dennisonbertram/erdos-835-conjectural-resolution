@@ -870,6 +870,22 @@ Exact results:
   5. Exact quotient search proved the full cyclic conflict graph has clique
      number 13.  Its C17-invariant fan target has 2,964 cells, 1,140 rainbow
      groups, and a 74,100-variable / 121,537-clause direct SAT encoding.
+  6. A separate local argument sharpened the clique result to every fixed
+     link: an outside cell sees at most one member of a Q-group and at most
+     two members of a (T,c)-group, forcing omega(H_L)=13 universally.
+  7. The cyclic quotient incidence matrix has 57 independent integral
+     left-row dependencies and rank 1,083 over both Q and F_13.  Every
+     nonzero Smith factor is therefore a 13-adic unit.  Since B0*1=13*1,
+     the right-hand-side cokernel class is killed by 13 and must vanish:
+     B0*x=1 has a signed integral solution over Z, which lifts to the full
+     fixed-link system.  Compatible reductions through 13^6 were checked.
+  8. Three equivalent deterministic invariant-fan CNFs were independently
+     reconstructed byte-for-byte:
+       base:   74,100 variables /   121,537 clauses / SHA b247b458...85a5
+       strong: 74,100 variables / 1,273,220 clauses / SHA 896d975b...2591
+       direct: 38,532 variables / 1,400,672 clauses / SHA 74ac2417...9249
+     The hardened model decoder independently checks one-hot and rainbow
+     semantics and accepts only the exact status line "s SATISFIABLE".
 
 Scope:
   The k=6 theorem is complete but concerns a previously settled small
@@ -881,3 +897,6 @@ See:
   collaboration/fan_small_controls/ALL_K6_THEOREM.md
   collaboration/fan_small_controls/README.md
   collaboration/h3_simultaneous_fan_attack_2/NOTE.md
+  collaboration/fan_13adic_screen/NOTE.md
+  collaboration/fan_gadget_generalization/NOTE.md
+  collaboration/h3_k6_fan_theorem_audit/README.md

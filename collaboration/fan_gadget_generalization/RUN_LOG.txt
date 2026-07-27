@@ -1,0 +1,42 @@
+2026-07-27 deterministic verification
+
+1. k=6 nonlinear/linear delimiter
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_k6_linear_obstruction.py
+
+output:
+  type A: gadget rank=11 and consistent; full rank before contradiction=229; certificate support=92; anchor maxima=(1, 2)
+  type B: gadget rank=11 and consistent; full rank before contradiction=228; certificate support=86; anchor maxima=(1, 2)
+  k=6 characteristic-3 audit: PASS
+  scope: the small 18-cell gadgets need nonlinear rainbow information; the full k=6 fan systems also have linear obstructions
+
+2. cyclic-link linear and palette delimiter
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_linear_delimiter.py
+
+output:
+  cyclic C17 orbit quotient: PASS
+  full incidence: 19,380 groups by 50,388 cells
+  orbit incidence: 1,140 equations by 2,964 variables
+  rank over F_13: 1083
+  independent integral row dependencies: 57
+  rank over Q: 1083
+  row-dependency sha256: a28b18429d322bdd2b6e124479aa1623082bf3c4ee7a242a28bc5780f6e44c5d
+  quotient nullity: 1881
+  outside-cell neighbours in one constraint clique: Q max=1, TC max=2
+  consequence: clique number is exactly 13
+  result: Bx=1 is CONSISTENT over F_13
+  orbit solution sha256: d68e33b42c10d4c745ae767bf26d929de17423ca0209fce5f31cf72f0a349928
+  Smith consequence: Bx=1 has a signed integral solution over Z
+  scope: no integral or modular linear certificate can exclude a fan for this cyclic link
+  scope: no 13-fan was constructed; k=16 and #835 remain open
+
+3. static lint
+
+command:
+  ruff check collaboration/fan_gadget_generalization
+
+output:
+  All checks passed!

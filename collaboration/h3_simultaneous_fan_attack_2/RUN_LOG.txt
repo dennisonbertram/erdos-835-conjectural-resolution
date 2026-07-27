@@ -32,3 +32,83 @@ result:
 scope:
   UNKNOWN has no mathematical status.  This run neither constructs nor
   excludes a C17-invariant fan.
+
+3. Deterministic CNF encodings and independent byte-level audits
+
+base:
+  variables=74100
+  clauses=121537
+  sha256=b247b458dfeb3daff7c37046bd2def635601e26737761f5450541722dccb85a5
+
+redundant conflict-edge AMO:
+  variables=74100
+  clauses=1273220
+  sha256=896d975b3246202daa0b1d6fd101e60d3f53814dc4f50ea1ada859f5715d2591
+
+direct pairwise cell AMO plus conflict-edge AMO:
+  variables=38532
+  clauses=1400672
+  sha256=74ac2417ffdc1410075faabb5d2292969f2247566583980ed46f777f98bc9249
+
+Independent verifier:
+  collaboration/h3_k6_fan_theorem_audit/verify_cyclic_cnf_audit.py
+
+result:
+  all three clause streams match byte-for-byte
+  base Sinz AMO truth table passes all 8192 primary assignments
+  all 1140 reconstructed groups have size 13
+  lossless first-group label normalization verified
+  exact-status decoder and direct one-hot/rainbow checks pass
+
+4. Permutation-swap local search
+
+command:
+  python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/search_cyclic_invariant_fan_local.py \
+    --seconds 600 --seed 20260727 --progress 50000 \
+    --certificate /private/tmp/erdos835-c17-local-certificate2.txt
+
+result:
+  moves=981725
+  restarts=6
+  best_collision_score=1312
+  status=UNKNOWN
+  certificate=NONE
+
+scope:
+  A timeout and a nonzero best score have no negative mathematical status.
+
+5. Translation-invariant barycentre/rank formula screen
+
+command:
+  python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/screen_cyclic_invariant_fan_formulas.py
+
+result:
+  formulae_checked=272
+  status=NO_WITNESS_IN_FAMILY
+  best_collision_score=4098
+  best_blend=1
+  best_multiplier=2
+
+scope:
+  This is a finite ansatz exclusion only, not an UNSAT result.
+
+6. OR-Tools 9.15.6755 smoke test after documented run-control hardening
+
+command:
+  PYTHONPATH=/private/tmp/erdos835-pydeps python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/search_cyclic_invariant_fan.py \
+    --seconds 1 --workers 1 --seed 20260727 \
+    --certificate /private/tmp/erdos835-c17-cpsat-smoke.txt
+
+result:
+  status=UNKNOWN
+  conflicts=0
+  branches=130675
+  wall_time=1.017009
+  certificate=NONE
+
+scope:
+  This was an API and model-construction smoke only.  The longer diversified
+  CP-SAT and CaDiCaL searches are tracked separately until they terminate.

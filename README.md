@@ -487,13 +487,18 @@ New exact results in the note include:
     \dim\ker_{\mathbb F_2}B=34{,}425,
   \]
   while \(Bx=\mathbf1\) is consistent over every prime field.  An exhaustive
-  orbit search proves \(\omega(H_L)=13\), excluding hidden-clique
-  obstructions for this link, and the exact nonlinear target is the
+  orbit search first proved \(\omega(H_L)=13\) for the cyclic link, and a
+  subsequent local argument proves the same equality for every fixed link.
+  The quotient equation moreover has a signed integral solution, which lifts
+  to the full fixed-link incidence system, so no signed linear obstruction
+  exists for this link.  The exact nonlinear target is the
   Schur-power condition
   \(f,\ldots,f^{11}\in\ker_{\mathbb F_{13}}B\),
   \(Bf^{12}=-\mathbf1\).  The \(C_{17}\)-invariant restriction has
-  \(2{,}964\) cells and \(1{,}140\) rainbow groups; its 60-second search was
-  `UNKNOWN`, so neither a fan nor an obstruction is claimed.
+  \(2{,}964\) cells and \(1{,}140\) rainbow groups. Three equivalent
+  deterministic CNFs, including a 38,532-variable direct encoding, have
+  independent byte-level audits. Their searches have not yet returned a
+  model or certificate, so neither a fan nor an obstruction is claimed.
 
 These are restricted-core, shadow, and ansatz results, not a construction or
 proof of #835.
@@ -1056,6 +1061,15 @@ routes, but not the asymmetric case.
   exact cyclic-link kernel ranks, the prime-field consistency delimiter, the
   full clique-number-\(13\) proof, the Schur-power characterization, and the
   \(C_{17}\)-invariant certificate target.
+- [`collaboration/fan_13adic_screen/NOTE.md`](collaboration/fan_13adic_screen/NOTE.md):
+  the exact Smith/cokernel screen proving that the cyclic quotient's signed
+  matching equation is solvable over \(\mathbb Z\).
+- [`collaboration/fan_gadget_generalization/NOTE.md`](collaboration/fan_gadget_generalization/NOTE.md):
+  the nonlinear \(k=6\) delimiter, sharp palette-anchor bounds, and the
+  universal theorem \(\omega(H_L)=13\).
+- [`collaboration/h3_k6_fan_theorem_audit/README.md`](collaboration/h3_k6_fan_theorem_audit/README.md):
+  an independent reconstruction of the universal \(k=6\) theorem and
+  byte-level audits of all three cyclic invariant-fan CNFs.
 - [`collaboration/opus5/unrestricted_ls3420_attack_2/NOTE.md`](collaboration/opus5/unrestricted_ls3420_attack_2/NOTE.md):
   Opus 5's unrestricted star-sign and holonomy attack, including the
   correctly indexed joint parity law, its exact top-rung rank, a

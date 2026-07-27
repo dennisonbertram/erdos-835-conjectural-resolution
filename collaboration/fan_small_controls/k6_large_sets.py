@@ -159,7 +159,7 @@ def system_orbit_masks(seed: System) -> tuple[int, ...]:
 
 
 def count_large_sets(systems: tuple[int, ...]) -> tuple[int, int]:
-    """Count exact covers of the 84 triples by seven labelled STS masks."""
+    """Count unordered exact covers of the 84 triples by seven STS masks."""
     by_triple: list[list[int]] = [[] for _ in TRIPLES]
     for system in systems:
         remaining = system
