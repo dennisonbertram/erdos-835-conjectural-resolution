@@ -1102,6 +1102,11 @@ routes, but not the asymmetric case.
   five-saturated-vertex counterexample at order \(12\), showing that no
   unrestricted five-row completion theorem is possible; the order-\(18\)
   target remains untouched because its supports are much denser.
+- [`collaboration/first_lift_dense_support_prefix/NOTE.md`](collaboration/first_lift_dense_support_prefix/NOTE.md):
+  a solver-free dense-support packing lemma.  It proves that every target
+  first-lift palette has a simultaneously matchable five-colour prefix and
+  that every profile containing a support-twelve colour has a six-colour
+  prefix.  Global compatibility across all seventeen colours remains open.
 - [`collaboration/fan_small_controls/ALL_K6_THEOREM.md`](collaboration/fan_small_controls/ALL_K6_THEOREM.md):
   the complete universal \(k=6\) fan obstruction, including the exhaustive
   two-type \(LS(2,3,9)\) classification and two explicit 18-cell human
