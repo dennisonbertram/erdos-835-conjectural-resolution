@@ -7,7 +7,7 @@ and aggregate counter matched the committed expectation.
 command:
   python3 -B collaboration/fan_gadget_generalization/support12_attack/verify_partial.py
 
-expected final output:
+observed final output:
   case 4+1+1 aggregate counters: (20540520, 2893266152, 2893266152, 6128590, 0, 0)
   support-12 partial audit: PASS
   excluded complete partitions: 6, 5+1, 4+2, 3+3, 4+1+1
@@ -16,7 +16,7 @@ expected final output:
 command:
   python3 -B collaboration/fan_gadget_generalization/support12_attack/verify_case222.py
 
-expected final output:
+observed final output:
   aggregate counters: (978120, 1823898120, 103316764, 0, 0)
   case 2+2+2: NONE
   support-12 partition 2+2+2 audit: PASS
@@ -25,7 +25,7 @@ expected final output:
 command:
   python3 -B collaboration/fan_gadget_generalization/support12_attack/verify_case3111.py
 
-expected final output:
+observed final output:
   aggregate counters: (7824960, 1102759494, 146898268636, 311205246, 0, 0)
   case 3+1+1+1: NONE
   support-12 partition 3+1+1+1 audit: PASS
@@ -34,7 +34,7 @@ expected final output:
 command:
   python3 -B collaboration/fan_gadget_generalization/support12_attack/verify_case321.py
 
-expected final output:
+observed final output:
   aggregate counters: (7824960, 1103664772, 59641423270, 126352944, 62515800, 0, 0, 0)
   case 3+2+1: NONE
   support-12 partition 3+2+1 audit: PASS
@@ -48,3 +48,21 @@ observed final output:
   case 2+2+1+1: NONE
   support-12 partition 2+2+1+1 audit: PASS
   scope: two support-12 partitions remain unexplored
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/support12_attack/verify_case21111.py
+
+observed final output:
+  aggregate counters: (978120, 138202888, 18498726888, 62550, 8446888, 0, 0)
+  case 2+1+1+1+1: NONE
+  support-12 partition 2+1+1+1+1 audit: PASS
+  scope: only support-12 partition 1^6 remains
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/support12_attack/verify_case111111.py
+
+observed final output:
+  aggregate counters: (35568, 2150540, 184653052, 708486, 61299516, 0, 0)
+  case 1+1+1+1+1+1: NONE
+  support-12 partition 1^6 audit: PASS
+  theorem: every nonzero squarefree quotient trade has support at least 14

@@ -10,12 +10,14 @@ Q-balance gives the eleven partitions of six:
 6,\ 5+1,\ 4+2,\ 4+1+1,\ 3+3,\ 3+2+1,\ 3+1+1+1,\ 2+2+2,
 \ 2+2+1+1,\ 2+1+1+1+1,\ 1^6.
 \]
-The verifier currently excludes nine complete partitions:
+The verifier excludes all eleven complete partitions:
 \[
 \boxed{6,\quad5+1,\quad4+2,\quad3+3,\quad4+1+1,\quad
-2+2+2,\quad3+1+1+1,\quad3+2+1,\quad2+2+1+1.}
+2+2+2,\quad3+1+1+1,\quad3+2+1,\quad2+2+1+1,\quad
+2+1+1+1+1,\quad1^6.}
 \]
-The other two are not claimed excluded.
+Therefore every nonzero squarefree trade in this cyclic quotient has support
+at least 14.
 
 Each forcing verifier also checks explicitly that every single, double, or
 triple/four target from which it selects a signed coordinate is nonzero.
@@ -120,3 +122,38 @@ must be distinct.  The twelve ranges exhaust 978,120 outer double swaps,
 120,799,660,300 posting hits, 410,224 overlap candidates, 12,432 bounded
 targets, and 1,670,964 single probes.  There are no fingerprint hits.
 Thus partition \(2+2+1+1\) is impossible.
+
+## Exact \(2+1+1+1+1\) support-bounded forcing
+
+Fix a double-swap target.  Four single swaps in distinct other Q-groups
+would have to equal it.  At each nonzero residual coordinate at least one
+remaining single has the residual sign.  After forcing the first single,
+the residual must be a sum of three single swaps, so its coefficients have
+magnitude at most three and its support is at most 24.  After forcing the
+second, the corresponding bounds are two and 16.  These necessary bounds
+reduce the final pair targets sharply.  A signed posting list then forces
+one member of the last pair, and the other is fingerprinted and
+exact-checked.
+
+The twelve ranges exhaust 978,120 double targets, 138,202,888 first moves,
+18,498,726,888 second moves, 62,550 support-bounded pair targets, and
+8,446,888 final pair probes.  There are no full-fingerprint hits.  Thus
+partition \(2+1+1+1+1\) is impossible.
+
+## Exact \(1^6\) canonical forcing
+
+Choose the unique least Q-group among the six and fix its oriented single
+swap.  For a partial sum with \(r\) single swaps still unchosen, any
+completion has coefficient magnitudes at most \(r\) and support at most
+\(8r\).  At a nonzero coordinate, at least one remaining move has the
+cancelling sign.  The verifier repeatedly uses that signed posting,
+enforces the coefficient and support bounds for four, three, and two
+remaining moves, and resolves the final pair by deterministic fingerprint
+plus exact sparse equality.  All later Q-groups must be distinct and
+strictly larger than the canonical least group where appropriate; all
+representatives in a fingerprint bucket are retained.
+
+The twelve ranges exhaust 35,568 canonical outer moves, 2,150,540 second
+moves, 184,653,052 third moves, 708,486 support-bounded fourth moves, and
+61,299,516 final pair probes.  There are no full-fingerprint hits.  Thus
+partition \(1^6\) is impossible, completing the support-12 exclusion.
