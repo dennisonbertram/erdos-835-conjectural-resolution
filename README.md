@@ -1088,6 +1088,14 @@ routes, but not the asymmetric case.
   of the deletion inequalities as their binary slice, exhaustive order-five
   controls, and a counterexample to the naive one-chain Kempe shortcut.
   Integer completion on thirteen vertices remains unproved.
+- [`collaboration/opus5/first_lift_k13_hole/NOTE.md`](collaboration/opus5/first_lift_k13_hole/NOTE.md):
+  Opus 5's independently replayed first-lift attack.  It proves two cut
+  inequalities necessary for every prescribed \(K_{13}\)-hole completion
+  and proves by exact dynamic programming that neither can fail at
+  \(k=16\).  It also supplies smaller class-B′ counterexamples and a
+  cut-clean non-completable instance, so the inequalities are not sufficient
+  in general.  All \(42{,}300\) sampled \(k=16\) instances completed, but
+  universal completion remains open.
 - [`collaboration/fan_small_controls/ALL_K6_THEOREM.md`](collaboration/fan_small_controls/ALL_K6_THEOREM.md):
   the complete universal \(k=6\) fan obstruction, including the exhaustive
   two-type \(LS(2,3,9)\) classification and two explicit 18-cell human
@@ -1113,7 +1121,10 @@ routes, but not the asymmetric case.
   orbits in the fixed cyclic-link quotient, with a semantic witness checker
   and byte-reconstructed telemetry for 140 size-139 searches.  This proves
   only the lower bound \(\alpha_{\rm finite}\ge132\); every size-139 run
-  remained `UNKNOWN`, so the upper bound is still the trivial 140.
+  remained `UNKNOWN`, so the upper bound is still the trivial 140.  A
+  separate exact search excludes 302,743 explicitly defined neighborhoods
+  around one score-ten near-assignment, without implying a global upper
+  bound.
 - [`collaboration/fan_gadget_generalization/NOTE.md`](collaboration/fan_gadget_generalization/NOTE.md):
   the nonlinear \(k=6\) delimiter, sharp palette-anchor bounds, and the
   universal theorem \(\omega(H_L)=13\), together with the exhaustive cyclic
@@ -1419,6 +1430,8 @@ python3 -B \
 python3 -B \
   collaboration/first_lift_sufficiency_search/search_weighted_obstruction.py \
   --random 30 --seed 130835 --max-weight 100 --seconds 10 --q 0
+python3 -B \
+  collaboration/opus5/first_lift_k13_hole/verify_first_lift_obstruction.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
 python3 -B \
   collaboration/opus5/unrestricted_ls3420_attack_2/verify_solution.py \

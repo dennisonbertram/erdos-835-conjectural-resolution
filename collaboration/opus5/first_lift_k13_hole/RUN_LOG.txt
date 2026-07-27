@@ -1,0 +1,203 @@
+First-lift K_13-hole obstruction: verification log
+=================================================
+
+Provenance:
+  Generated in an isolated public clone by Claude Opus 5.
+  Independently replayed and audited by Codex before import.
+
+Command:
+  cd collaboration/opus5/first_lift_k13_hole && \
+    python3 -B verify_first_lift_obstruction.py
+
+Output:
+Verifier for collaboration/opus5/first_lift_k13_hole/NOTE.md
+===============================================
+
+1. instance-class arithmetic
+----------------------------
+n= 3 q= 7 : 3 admissible (n5,n3,n1) profiles [(0, 4, 3), (1, 2, 4), (2, 0, 5)]
+n= 5 q= 9 : 5 admissible (n5,n3,n1) profiles [(0, 8, 1), (1, 6, 2), (2, 4, 3), (3, 2, 4), (4, 0, 5)]
+n= 7 q=11 : 6 admissible (n5,n3,n1) profiles [(1, 10, 0), (2, 8, 1), (3, 6, 2), (4, 4, 3), (5, 2, 4), (6, 0, 5)]
+n= 9 q=13 : 6 admissible (n5,n3,n1) profiles [(3, 10, 0), (4, 8, 1), (5, 6, 2), (6, 4, 3), (7, 2, 4), (8, 0, 5)]
+n=11 q=15 : 6 admissible (n5,n3,n1) profiles [(5, 10, 0), (6, 8, 1), (7, 6, 2), (8, 4, 3), (9, 2, 4), (10, 0, 5)]
+n=13 q=17 : 6 admissible (n5,n3,n1) profiles [(7, 10, 0), (8, 8, 1), (9, 6, 2), (10, 4, 3), (11, 2, 4), (12, 0, 5)]
+k=16: n3 = 24-2*n5 and n1 = n5-7 for all six profiles;
+      sum_c |V_c| = 156 = 13*12 and sum_c |V_c|/2 = 78 = C(13,2): PASS
+      so at k=16 at most five colours have |V_c| = 12 and
+      every colour has |V_c| in {8,10,12}: PASS
+partitions of E(K_5) into matchings (= proper colourings L of the
+      ten triples of P): 332, each re-checked: PASS
+
+level-0 packing count (why class C is empty for some k):
+  k= 6: v= 9,  7 colours cover at most 84 of the 84 triples
+  k= 8: v=11,  9 colours cover at most 162 of the 165 triples   -> IMPOSSIBLE
+  k=10: v=13, 11 colours cover at most 286 of the 286 triples
+  k=12: v=15, 13 colours cover at most 455 of the 455 triples
+  k=14: v=17, 15 colours cover at most 675 of the 680 triples   -> IMPOSSIBLE
+  k=16: v=19, 17 colours cover at most 969 of the 969 triples
+  k=18: v=21, 19 colours cover at most 1330 of the 1330 triples
+  so at k=8 and k=14 no level-0 link exists at all: PASS
+
+2. exact solver cross-validation (n=5, independent search order)
+----------------------------------------------------------------
+600 class-B' instances at n=5: fast solver and brute force agree on
+  all of them (429 SAT, 171 UNSAT); every SAT witness re-checked: PASS
+200 instances at n=9: solve and solve_randomised agree, and every
+  randomised witness re-checked: PASS
+caveat recorded: a 'BUDGET' verdict from solve() is NOT evidence of
+  infeasibility; only a finished search or a cut certificate is.
+
+3. Lemma 1 (both cut conditions are necessary): empirical check
+---------------------------------------------------------------
+n= 5, 4000 class-B' instances: {('SAT', 'cut-clean'): 2877, ('UNSAT', 'cut-violated'): 1123}
+      SAT with a violated cut condition: 0 (must be 0): PASS
+n= 7, 4000 class-B' instances: {('SAT', 'cut-clean'): 3299, ('UNSAT', 'cut-violated'): 681, ('UNSAT', 'cut-clean'): 20}
+      SAT with a violated cut condition: 0 (must be 0): PASS
+n= 9, 4000 class-B' instances: {('SAT', 'cut-clean'): 3999, ('UNSAT', 'cut-violated'): 1}
+      SAT with a violated cut condition: 0 (must be 0): PASS
+Reading: no completable instance ever violates a cut condition, so
+both conditions are necessary.  Where the 'UNSAT + cut-clean' cell
+above is nonzero, they are also NOT sufficient; the stored
+certificate of section 5 is one such instance.
+
+4. Theorem A: class-B' counterexamples (re-checked from definitions)
+--------------------------------------------------------------------
+n= 5 k= 8  |V_c| multiset {0: 1, 2: 6, 4: 2}  m-profile {1: 2, 3: 6, 5: 1}
+      certificate: capacity(X) = 0 < C(|X|,2) = 1 with |X| = 2
+      exhaustive solver: UNSAT in 1 nodes: PASS
+n= 7 k=10  |V_c| multiset {2: 4, 4: 4, 6: 3}  m-profile {1: 3, 3: 4, 5: 4}
+      certificate: forced(X) = 2 > C(|X|,2) = 1 with |X| = 2
+      exhaustive solver: UNSAT in 2 nodes: PASS
+n= 9 k=12  |V_c| multiset {4: 5, 6: 6, 8: 2}  m-profile {1: 2, 3: 6, 5: 5}
+      certificate: forced(X) = 5 > C(|X|,2) = 3 with |X| = 3
+      exhaustive solver: UNSAT in 16 nodes: PASS
+n=11 k=14  |V_c| multiset {6: 10, 10: 5}  m-profile {1: 5, 5: 10}
+      certificate: forced(X) = 17 > C(|X|,2) = 15 with |X| = 6
+      exhaustive solver not run (certificate alone is the proof)
+
+5. the cut conditions are necessary but NOT sufficient
+------------------------------------------------------
+n=7 (k=10) class-B' instance, |V_c| = [2, 2, 6, 2, 4, 2, 6, 4, 6, 2, 6]
+  violates NO cut condition (all 2^7-1 = 127 subsets checked)
+  yet the exhaustive solver proves UNSAT in 6 nodes: PASS
+  => no argument that only rules out cut violations can settle k=16.
+
+6. Theorem B: exact cut margins by dynamic programming
+------------------------------------------------------
+margin > 0 means the condition CAN be violated somewhere in the
+relaxation; margin <= 0 is a proof that it never fires.
+n= 3 (k= 6): forced-inside +0 (at |X|=1, profile (0, 4, 3)) | capacity +0 (at |X|=1, profile (0, 4, 3))
+n= 5 (k= 8): forced-inside +2 (at |X|=2, profile (0, 8, 1)) | capacity +1 (at |X|=2, profile (0, 8, 1))
+n= 7 (k=10): forced-inside +3 (at |X|=2, profile (4, 4, 3)) | capacity +0 (at |X|=1, profile (1, 10, 0))
+n= 9 (k=12): forced-inside +4 (at |X|=4, profile (5, 6, 2)) | capacity +0 (at |X|=1, profile (3, 10, 0))
+n=11 (k=14): forced-inside +2 (at |X|=5, profile (6, 8, 1)) | capacity +0 (at |X|=1, profile (5, 10, 0))
+n=13 (k=16): forced-inside +0 (at |X|=1, profile (7, 10, 0)) | capacity +0 (at |X|=1, profile (7, 10, 0))
+n=15 (k=18): forced-inside +0 (at |X|=1, profile (9, 10, 0)) | capacity +0 (at |X|=1, profile (9, 10, 0))
+n=17 (k=20): forced-inside +0 (at |X|=1, profile (11, 10, 0)) | capacity +0 (at |X|=1, profile (11, 10, 0))
+n=19 (k=22): forced-inside +0 (at |X|=1, profile (13, 10, 0)) | capacity +0 (at |X|=1, profile (13, 10, 0))
+n=21 (k=24): forced-inside +0 (at |X|=1, profile (15, 10, 0)) | capacity +0 (at |X|=1, profile (15, 10, 0))
+n=23 (k=26): forced-inside +0 (at |X|=1, profile (17, 10, 0)) | capacity +0 (at |X|=1, profile (17, 10, 0))
+n=25 (k=28): forced-inside +0 (at |X|=1, profile (19, 10, 0)) | capacity +0 (at |X|=1, profile (19, 10, 0))
+n=27 (k=30): forced-inside +0 (at |X|=1, profile (21, 10, 0)) | capacity +0 (at |X|=1, profile (21, 10, 0))
+n=29 (k=32): forced-inside +0 (at |X|=1, profile (23, 10, 0)) | capacity +0 (at |X|=1, profile (23, 10, 0))
+n=31 (k=34): forced-inside +0 (at |X|=1, profile (25, 10, 0)) | capacity +0 (at |X|=1, profile (25, 10, 0))
+
+a cut condition can fire for k in [8, 10, 12, 14] and for no other k <= 34: PASS
+
+per-|X| margins at k=16 (maximum over all six m-profiles):
+  |X| =  1 : forced-inside +0   capacity +0
+  |X| =  2 : forced-inside -1   capacity -6
+  |X| =  3 : forced-inside -3   capacity -7
+  |X| =  4 : forced-inside -6   capacity -10
+  |X| =  5 : forced-inside -2   capacity -12
+  |X| =  6 : forced-inside -1   capacity -13
+  |X| =  7 : forced-inside -1   capacity -13
+  |X| =  8 : forced-inside -2   capacity -12
+  |X| =  9 : forced-inside -6   capacity -10
+  |X| = 10 : forced-inside -3   capacity -7
+  |X| = 11 : forced-inside -1   capacity -6
+  |X| = 12 : forced-inside +0   capacity +0
+  |X| = 13 : forced-inside +0   capacity +0
+all thirteen forced-inside and all thirteen capacity margins are
+<= 0 at k=16: PASS
+
+The relaxation used: d_c = #{a in X : c in S_a} ranges over every
+integer profile with sum_c d_c = 5|X| and
+max(0, m_c-(13-|X|)) <= d_c <= min(m_c,|X|).  Every class-B instance
+satisfies these, so a nonpositive margin is a theorem about all of
+class B, hence about class B' and about any simultaneous fan.
+
+7a. amalgamation outline arithmetic (Section 7 of the NOTE)
+-----------------------------------------------------------
+  t_c=0: 5 cross edges + 2*4 loops = 13 = multiplicity of alpha
+  t_c=1: 3 cross edges + 2*5 loops = 13 = multiplicity of alpha
+  t_c=2: 1 cross edges + 2*6 loops = 13 = multiplicity of alpha
+so amalgamating A to one vertex is a legitimate outline for every
+colour, which is exactly why detachment alone cannot recover the
+prescribed cross-edge assignment: PASS
+
+7. remark: class B strictly contains class B'
+---------------------------------------------
+n=7: the pattern 'all five vertices of Y forbid the same five
+  colours' lies in class B (row sums 5, all m_c in {1,3,5}), but in
+  class B' every one of the six other colours would need
+  5-2t_c <= |X| = 2, forcing t_c = 2, hence sum_c t_c = 6*2 = 12,
+  contradicting sum_c t_c = 10 = C(5,3): PASS
+  (this is why the n=7 certificate above is a different instance)
+
+8. k=16 smoke search (deterministic, small)
+-------------------------------------------
+300 class-B' instances at k=16: {'SAT': 300}, max 161 search nodes
+support multisets seen (all six m-profiles):
+    ((8, 7), (10, 10)) 1
+    ((8, 8), (10, 8), (12, 1)) 16
+    ((8, 9), (10, 6), (12, 2)) 53
+    ((8, 10), (10, 4), (12, 3)) 137
+    ((8, 11), (10, 2), (12, 4)) 86
+    ((8, 12), (12, 5)) 7
+every one completed, and every completion was re-checked: PASS
+
+scope
+-----
+Proved here: the two cut conditions are necessary; explicit
+class-B' instances with no completion exist at k = 8, 10, 12, 14;
+no cut condition can fire at k = 16; the cut conditions are not
+sufficient at k = 10.  NOT proved here: that every class-B' or
+fan-realisable instance completes at k=16, that a simultaneous fan
+exists, or anything about Erdos--Rosenfeld Problem #835, which
+remains open.
+
+
+k=16 search drivers (search_k16.py).  These are searches, not proofs;
+only the verifier output above is evidence for a stated claim.
+
+  mode=random trials=8000 seed=14335 tested=8000 {'SAT': 8000}
+    max solver nodes: 931   elapsed 105.8s
+  NON-SAT lines: 0
+
+  mode=random trials=8000 seed=20260727 tested=8000 {'SAT': 8000}
+    max solver nodes: 671   elapsed 148.3s
+  NON-SAT lines: 0
+
+  mode=climb trials=8000 seed=14335 tested=8000 {'SAT': 8000}
+    max solver nodes: 2806   elapsed 90.6s
+  NON-SAT lines: 0
+
+  NON-SAT lines: 0
+
+  mode=classb trials=8000 seed=14335 tested=8000 {'SAT': 8000, 'genfail': 286}
+    max solver nodes: 16252   elapsed 140.8s
+  NON-SAT lines: 0
+
+  mode=classb trials=8000 seed=991 tested=8000 {'SAT': 8000, 'genfail': 248}
+    max solver nodes: 4394   elapsed 170.1s
+  NON-SAT lines: 0
+
+The structured run was stopped at its 2000-instance progress checkpoint.
+Its last checkpoint line was:
+    ... 2000 tested, {'SAT': 2000}, max nodes 0, 72.2s
+It reports no 'mode=' summary line for that reason, and the structured
+path calls solve_randomised, which does not track node counts.
+
+SCOPE: no simultaneous fan, no LS(3,4,20) and no colouring of J(32,16) is
+constructed anywhere here; Erdos-Rosenfeld Problem #835 remains open.
