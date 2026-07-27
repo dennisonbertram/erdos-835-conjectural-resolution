@@ -30,6 +30,25 @@ The checker deterministically reconstructs all 140 CNFs and checks their
 SHA-256 digests.  The recorded timeout outcomes are telemetry, not proof:
 `UNKNOWN` cannot be used to infer `alpha_finite < 139`.
 
+## Exact 302,743-neighborhood search
+
+`near_assignment_score10.json` records a complete 140-orbit assignment with
+10 finite-demand collisions.  Its conflict graph has 10 edges on 18 bad rows,
+leaving 122 conflict-free rows.
+
+`verify_neighborhood_302743.py` performs two exact local searches:
+
+- It enumerates all 64 minimum vertex covers of size 8 in the conflict graph,
+  then exactly tries to refill each resulting 132-row packing.
+- It removes all 18 bad rows, additionally removes every subset of one, two,
+  or three of the 122 good rows, and exactly reassigns every removed
+  quadruple orbit.  This comprises
+  `C(122,1) + C(122,2) + C(122,3) = 302,743` neighborhoods.
+
+No completion exists in either local family.  This excludes only the
+precisely defined neighborhood of the recorded assignment.  It does not prove
+`alpha_finite < 140`, exclude the complete `C17` ansatz, or solve problem 835.
+
 ## Verify
 
 From the repository root:
@@ -37,6 +56,13 @@ From the repository root:
 ```sh
 /opt/homebrew/bin/python3 \
   collaboration/fan_13adic_screen/finite_first_packing_132/verify_finite_packing_132.py
+```
+
+Replay the exact neighborhood exhaustion:
+
+```sh
+/opt/homebrew/bin/python3 \
+  collaboration/fan_13adic_screen/finite_first_packing_132/verify_neighborhood_302743.py
 ```
 
 Expected final scope line:
@@ -49,7 +75,10 @@ scope: alpha_finite >= 132 only; upper bound remains the trivial 140
 
 - `packing.json`: exact 132-row witness and its deliberately narrow claim.
 - `omit_one_manifest.csv`: reproducible CNF digests and bounded-run outcomes.
+- `near_assignment_score10.json`: exact starting assignment for the local
+  search.
 - `RUN_RECEIPT.json`: package hashes and aggregate counts.
+- `RUN_LOG.txt`: commands, exact counters, and scope delimiters.
 - `verify_finite_packing_132.py`: independent semantic and reconstruction
   checker.
-
+- `verify_neighborhood_302743.py`: deterministic exact neighborhood search.

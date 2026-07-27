@@ -8,6 +8,24 @@
   },
   "omit_one_wall_limit_seconds_each": 30,
   "packing_sha256": "c1dd743d32aeaa7858af99d5a6272dd98f13ab3a7b72d996913dc4ec35f53b6f",
+  "neighborhood_302743": {
+    "bad_rows": 18,
+    "checker_sha256": "4b1e90c0ffc44297c34382a1e11227e8de76fff674256c438d79178cc9cca113",
+    "completions_found": 0,
+    "conflict_edges": 10,
+    "extra_good_subset_counts": {
+      "1": 122,
+      "2": 7381,
+      "3": 295240
+    },
+    "good_rows": 122,
+    "minimum_cover_size": 8,
+    "minimum_covers": 64,
+    "near_assignment_sha256": "97763d7cf94965ed1c3bcde1a037eb2bfe8751fa29617c022965cead68d395d0",
+    "neighborhoods_tested": 302743,
+    "scope": "Exact local-neighborhood exhaustion only; no global upper bound below 140.",
+    "starting_score": 10
+  },
   "schema": "erdos835-c17-finite-packing-receipt-v1",
   "scope": "The witness proves alpha_finite >= 132. All omit-one results are UNKNOWN telemetry; the only upper bound recorded is the trivial 140.",
   "solver": "CaDiCaL 2.1.3",
