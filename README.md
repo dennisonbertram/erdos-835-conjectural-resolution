@@ -1066,7 +1066,13 @@ routes, but not the asymmetric case.
   a proof that at \(j=10,11,12\) those divisibility conditions are also
   sufficient for every fixed-\(R\) decomposition, with cross-colour block
   compatibility automatic.  The rank-three case reduces two-graphs to
-  upper shadows of matchings; cross-\(R\) top-properness remains open.
+  upper shadows of matchings.
+- [`collaboration/high_lift_top_properness/NOTE.md`](collaboration/high_lift_top_properness/NOTE.md):
+  a proof that the cross-\(R\) top-properness condition at the final
+  \(j=12\) lift is automatic.  On each \(17\)-set it becomes the
+  missing-colour map of a proper \(17\)-edge-colouring of \(K_{17}\);
+  odd matching defects force that map to be a bijection.  The analogous
+  \(j=10,11\) implications remain open.
 - [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
   the exact separation between support-admissible,
   partial-factorization-realizable, and fan-realizable first-lift
@@ -1355,6 +1361,8 @@ python3 -B \
 python3 -B \
   collaboration/high_lift_complement_decomposition/enumerate_r3_small.py \
   --max-n 7
+python3 -B \
+  collaboration/high_lift_top_properness/verify_j12_top_properness.py
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support8.py
 python3 -B \

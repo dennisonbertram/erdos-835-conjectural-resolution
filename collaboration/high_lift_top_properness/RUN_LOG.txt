@@ -1,0 +1,17 @@
+High-lift top-properness
+========================
+
+All runs executed 2026-07-27 from the repository root.
+
+1. j=12 -> j=13 sanity control
+
+Command:
+  python3 -B \
+    collaboration/high_lift_top_properness/verify_j12_top_properness.py
+
+Expected output:
+  cyclic K17 control:
+    136 edges, 17 matching classes of size 8,
+    one distinct missing colour per vertex: PASS
+  scope: sanity control for the proved j=12 implication only;
+    no lower-level or #835 conclusion
