@@ -992,6 +992,18 @@ routes, but not the asymmetric case.
 - [`collaboration/opus5/derivation_tower_obstruction/NOTE.md`](collaboration/opus5/derivation_tower_obstruction/NOTE.md):
   the derivation homomorphism, packing dichotomy, and the exact implication
   from the \(455\)-case aggregate certificate to EH-core repair distance four.
+- [`collaboration/opus5/generic_radius4_certificate_attack/NOTE.md`](collaboration/opus5/generic_radius4_certificate_attack/NOTE.md):
+  the generic one-point lift theorem, including its \(s=1\) boundary, and the
+  exact fixed-root restriction quantifiers.  Its exhaustive tower profiler
+  independently reproduces the classical Kramer--Mesner value \(D(10)=5\);
+  it does not decide \(LS(3,4,20)\) or #835.
+- [`collaboration/h3_generic_one_point_audit/README.md`](collaboration/h3_generic_one_point_audit/README.md):
+  an independent proof and implementation audit of the one-point theorem,
+  labelled inverse, two-point counterexamples, restriction quantifiers, and
+  the small packing maxima through \(S(4,5,11)\).
+- [`evidence/solver_reconnaissance_2026-07-27.md`](evidence/solver_reconnaissance_2026-07-27.md):
+  the completed one-hour unrestricted forced-trace CP-SAT `UNKNOWN` result and
+  scope-explicit snapshots of the still-running SAT, DRAT, and DLX searches.
 - [`evidence/execution_debt_2026-07-26.md`](evidence/execution_debt_2026-07-26.md):
   first actual runs of eleven validators left unrun by earlier
   permission-blocked sessions, one validator bug found and fixed, the
