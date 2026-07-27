@@ -840,3 +840,44 @@ See:
   evidence/holonomy_group_algebra_tower.md
   collaboration/opus5/holonomy_followup/NOTE.md
   collaboration/h3_holonomy_audit/README.md
+
+================================================================================
+2026-07-27  Simultaneous-fan small theorem and cyclic-link kernel audit
+================================================================================
+
+Commands:
+  python3 -B collaboration/fan_small_controls/verify_all_k6_links.py
+  python3 -B collaboration/fan_small_controls/verify_k6_fan_certificate.py
+  python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/verify_fan_kernel_reduction.py
+
+Exact results:
+  1. Exhaustive enumeration produced all 840 labelled STS(9)s and all 15,360
+     large sets on the fixed labelled point set.  The two representative
+     point-orbits have automorphism orders 42 and 54, hence sizes 8,640 and
+     6,720, and exhaust the census.
+  2. Each representative contains a verified non-3-colourable subgraph on
+     18 cells and eleven genuine constraint triangles.  The accompanying
+     human proofs show that no LS(2,3,9) admits a simultaneous 3-fan, hence
+     chi(J(12,6)) >= 8.
+  3. An independent 141-line DRAT certificate for one deterministic link was
+     replayed by the standard-library RUP checker: 1,134 variables, 3,405
+     clauses, 131 RUP additions, ten deletions, and the empty clause.
+  4. For the cyclic LS(2,3,19), exact computation gave
+       rank_F2(B) = 15,963 and dim ker_F2(B) = 34,425.
+     The characteristic-13 invariant dependency test has rank 855 before and
+     after augmentation, so Bx=1 passes every prime-field consistency test.
+  5. Exact quotient search proved the full cyclic conflict graph has clique
+     number 13.  Its C17-invariant fan target has 2,964 cells, 1,140 rainbow
+     groups, and a 74,100-variable / 121,537-clause direct SAT encoding.
+
+Scope:
+  The k=6 theorem is complete but concerns a previously settled small
+  parameter.  The cyclic k=16 results are route delimiters.  No invariant
+  fan certificate was found, the restricted search returned UNKNOWN, and
+  neither LS(3,4,20), k=16, nor Problem #835 is decided.
+
+See:
+  collaboration/fan_small_controls/ALL_K6_THEOREM.md
+  collaboration/fan_small_controls/README.md
+  collaboration/h3_simultaneous_fan_attack_2/NOTE.md

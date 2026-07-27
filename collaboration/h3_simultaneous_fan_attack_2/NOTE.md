@@ -1,0 +1,326 @@
+# Kernel, modular, clique, and symmetry audit of the cyclic simultaneous fan
+
+Date: 2026-07-27
+
+Status: **new exact reductions and delimiters; no fan construction and no
+nonexistence proof.  Erdős--Rosenfeld Problem #835 remains open.**
+
+This note attacks the exact conflict graph associated with the committed
+cyclic \(LS(2,3,19)\).  It does not repeat the fan-colouring equivalence.
+The new results are:
+
+1. a universal \(969\)-dimensional row-dependency space omitted by the first
+   Hoffman count;
+2. the exact cyclic rank over \(\mathbb F_2\), sharpening
+   \(\dim\ker B\) from \(31\,008\) to \(34\,425\);
+3. an exact characteristic-\(13\) computation showing that the exact-cover
+   equations \(Bx=\mathbf1\) are consistent over every prime field;
+4. an exhaustive proof that the cyclic conflict graph has clique number
+   exactly \(13\), so no hidden \(K_{14}\) can obstruct this link;
+5. a Schur-power characterization of a fan inside the
+   \(\mathbb F_{13}\) code \(\ker B\);
+6. a \(C_{17}\)-invariant finite target with 2,964 variables and 1,140
+   rainbow groups, together with a certificate checker.
+
+All computations proving claims in this note are reproduced by:
+
+```text
+python3 -B \
+  collaboration/h3_simultaneous_fan_attack_2/verify_fan_kernel_reduction.py
+```
+
+The verifier is standard-library-only and reconstructs the cyclic large set
+from its two starters and forty phases.  It imports no repository code.
+
+## 1. Hoffman equality is the exact-cover equation
+
+Let \(B\) be the \(19\,380\times50\,388\) group-versus-cell incidence matrix:
+there are 3,876 quadruple rows, 15,504 triple-colour rows, and every cell
+belongs to five rows.  Every row contains thirteen cells.
+
+If \(x\) is the indicator of an independent set of size 3,876, then every
+quadruple group contains at most one selected cell.  Since there are exactly
+3,876 such groups, every quadruple row contains exactly one.  The selected
+cells have \(4\cdot3\,876=15\,504\) triple-colour incidences; independence
+and the fact that there are 15,504 triple-colour rows then force exactly one
+in every such row.  Therefore
+\[
+\boxed{Bx=\mathbf1.} \tag{1}
+\]
+Conversely, a zero-one solution of (1) is a maximum independent transversal.
+
+Over \(\mathbb R\), put
+\[
+y=x-\frac1{13}\mathbf1.
+\]
+Because every row of \(B\) has sum 13, (1) is exactly \(By=0\).  Thus the
+Hoffman equality vector is not merely in the least eigenspace abstractly: its
+integral shape is
+\[
+13y\in\{-1,12\}^{50\,388},\qquad B(13y)=0. \tag{2}
+\]
+A fan is a resolution into thirteen such binary solutions
+\[
+x_0+\cdots+x_{12}=\mathbf1.
+\]
+The linear kernel is large; the difficulty is the simultaneous
+\(\{-1,12\}\) integrality and disjointness in (2).
+
+## 2. A universal 969-dimensional row kernel
+
+For each triple \(T\), define a vector on the rows of \(B\) by
+\[
+r_T
+=
+\sum_{c\ne L(T)}e_{(T,c)}
+-
+\sum_{Q\supset T}e_Q. \tag{3}
+\]
+For a cell \((Q,c)\), the coefficient of that column in \(B^{\mathsf T}r_T\)
+is zero unless \(T\subset Q\).  If \(T\subset Q\), the allowed-cell
+condition gives \(c\ne L(T)\), and the \(+1\) from row \((T,c)\) cancels the
+\(-1\) from row \(Q\).  Hence
+\[
+\boxed{B^{\mathsf T}r_T=0.} \tag{4}
+\]
+
+The 969 vectors are independent over every field: the triple-colour rows
+appearing in \(r_T\) do not appear in \(r_{T'}\) for \(T'\ne T\).  Therefore
+\[
+\operatorname{rank}B\le19\,380-969=18\,411
+\]
+and
+\[
+\boxed{\dim\ker B\ge50\,388-18\,411=31\,977.} \tag{5}
+\]
+This improves the parameter-only lower bound \(31\,008\).  It still does not
+approach a construction.
+
+### Exact cyclic rank in characteristic two
+
+Write a general row dependency as coefficients \(\lambda_Q\) on quadruple
+rows and \(\mu_{T,c}\) on triple-colour rows.  The column equation is
+\[
+\lambda_Q+\sum_{T\in\binom Q3}\mu_{T,c}=0
+\quad
+(c\text{ allowed at }Q). \tag{6}
+\]
+For a fixed \(Q\), subtract one allowed-colour equation from the other
+twelve.  This eliminates \(\lambda_Q\) and gives 46,512 equations in the
+15,504 variables \(\mu_{T,c}\).  Conversely, every solution of those
+difference equations determines each \(\lambda_Q\) uniquely, so their
+nullity is exactly \(\dim\ker B^{\mathsf T}\).
+
+For the committed cyclic link the verifier performs exact bitset Gaussian
+elimination and obtains
+\[
+\operatorname{rank}_{\mathbb F_2}D=12\,087,
+\qquad
+\dim\ker_{\mathbb F_2}B^{\mathsf T}
+=15\,504-12\,087
+=3\,417.
+\]
+Consequently
+\[
+\boxed{
+\operatorname{rank}_{\mathbb F_2}B=15\,963,\qquad
+\dim\ker_{\mathbb F_2}B=34\,425.
+} \tag{7}
+\]
+There are 2,448 characteristic-two dependencies beyond the universal 969.
+They do not obstruct (1): modulo two, the all-one cell vector itself satisfies
+\(B\mathbf1=\mathbf1\), because every row has odd size 13.
+
+## 3. The prime-field modular screen is completely consistent
+
+For any prime \(p\ne13\), the constant vector
+\[
+x=13^{-1}\mathbf1
+\]
+solves \(Bx=\mathbf1\) over \(\mathbb F_p\).  Characteristic 13 is the only
+prime-field case that could carry a first-order incidence obstruction.
+
+The cyclic link has an order-17 covariance: translate its seventeen finite
+points and all colours simultaneously, fixing the other two points.  This
+acts freely on the cells and rows.  Since \(17\ne0\) in \(\mathbb F_{13}\),
+any row dependency \(w\) with nonzero coefficient sum could be averaged over
+the group to give an invariant dependency with coefficient sum
+\[
+17\sum_iw_i=4\sum_iw_i\ne0. \tag{8}
+\]
+It is therefore enough to test invariant dependencies.
+
+After eliminating the quadruple coefficients as in (6), the invariant system
+has:
+
+- 912 triple-colour variable orbits;
+- 2,736 difference equations;
+- rank 855 over \(\mathbb F_{13}\).
+
+Let \(s\) be the linear functional that sums all row coefficients, after the
+quadruple coefficients have been substituted from (6).  Appending \(s\) as
+one more row leaves the rank equal to 855.  Thus \(s\) lies in the row span
+and vanishes on every invariant dependency.  By (8), it vanishes on every
+dependency.  The finite-field alternative then gives
+\[
+\boxed{Bx=\mathbf1\text{ is consistent over }\mathbb F_{13}.} \tag{9}
+\]
+Together with the constant solutions for \(p\ne13\), (1) is consistent over
+every prime field.
+
+This is a delimiter, not an integer solution.  Since
+\(B\mathbf1=13\mathbf1\), the cokernel class of the right-hand side has order
+dividing 13.  Prime-field consistency still permits that class to be a
+13-multiple of hidden \(13^2\)-torsion.  A complete Smith obstruction screen
+must therefore determine the \(13\)-primary Smith data or solve (1) over the
+integers; the calculation above does neither.
+
+## 4. No clique obstruction for the cyclic link
+
+The same order-17 action has 2,964 cell orbits and 1,140 group orbits:
+\[
+2\,964=50\,388/17,\qquad
+1\,140=19\,380/17=228+912.
+\]
+Every quotient group contains thirteen distinct cell orbits.  In particular,
+no two adjacent full cells lie in the same cell orbit.
+
+Project a clique in the full cyclic conflict graph to cell orbits.  The
+projection is injective by the preceding observation, and adjacency projects
+to adjacency in the quotient conflict graph.  Thus the full clique number is
+at most the quotient clique number.
+
+The verifier constructs the complete quotient adjacency graph and performs an
+exact bitset search for a clique of size 14.  None exists.  Since every
+constraint group is already a clique of size 13,
+\[
+\boxed{\omega(H_L)=13} \tag{10}
+\]
+for the committed cyclic link.  The quotient graph is not regular because
+different full neighbour orbits can coalesce; its exact degree census is
+\[
+58^{\times257},\qquad59^{\times144},\qquad60^{\times2563}.
+\]
+
+Equation (10) closes only the larger-clique route for this link.  It says
+nothing about chromatic number 13 versus greater than 13 through non-clique
+mechanisms, and it is not a parameter-independent theorem for arbitrary
+links.
+
+## 5. A Schur-power formulation in characteristic 13
+
+Let
+\[
+\mathcal C=\ker_{\mathbb F_{13}}B
+\subseteq\mathbb F_{13}^{50\,388}
+\]
+and write powers coordinatewise.  A fan labelling
+\(f:\mathcal V_L\to\mathbb F_{13}\) makes each group contain every field
+element once.  Therefore
+\[
+Bf^k=0\quad(1\le k\le11),
+\qquad
+Bf^{12}=-\mathbf1. \tag{11}
+\]
+
+These equations are also sufficient.  For one row, let its thirteen entries
+be \(a_1,\ldots,a_{13}\), with power sums \(p_k\).  Equations (11) say
+\[
+p_1=\cdots=p_{11}=0,\qquad p_{12}=-1.
+\]
+Newton's identities are valid for \(1,\ldots,12\) in
+\(\mathbb F_{13}\) and give
+\[
+e_1=\cdots=e_{11}=0,\qquad e_{12}=-1.
+\]
+Hence
+\[
+\prod_i(z-a_i)=z^{13}-z-e_{13}.
+\]
+Every \(a_i\in\mathbb F_{13}\) satisfies \(a_i^{13}-a_i=0\), so substituting
+any one of the thirteen entries forces \(e_{13}=0\).  The polynomial is
+\(z^{13}-z\), whose roots are the thirteen distinct field elements.  Thus
+the row is rainbow.
+
+We obtain the exact nonlinear code target
+\[
+\boxed{
+\text{fan}
+\iff
+\exists f:
+f,f^2,\ldots,f^{11}\in\mathcal C,\quad
+Bf^{12}=-\mathbf1.
+} \tag{12}
+\]
+For each \(a\in\mathbb F_{13}\), the corresponding exact-cover indicator is
+\[
+x_a=1-(f-a)^{12}.
+\]
+
+This separates the live obstruction from the large linear kernel: one needs
+a vector whose first eleven Schur powers remain in the code and whose
+twelfth power lands in a specified affine coset.  Ordinary rank, Hoffman
+equality, and first-order parity do not test this.
+
+## 6. The exact \(C_{17}\)-invariant fan target
+
+Requiring the fan labels to be constant on the 2,964 cell orbits is a
+restricted ansatz, not a without-loss reduction.  In that ansatz a fan is
+exactly a labelling of the 2,964 quotient cells by \(0,\ldots,12\) such that
+each of the 1,140 quotient groups is rainbow.
+
+The quotient incidence matrix \(B_0\) has rank
+\[
+\operatorname{rank}_{\mathbb F_{13}}B_0
+=228+855
+=1\,083,
+\]
+so its power code has dimension
+\[
+\boxed{\dim\ker_{\mathbb F_{13}}B_0=2\,964-1\,083=1\,881.} \tag{13}
+\]
+
+A certificate is simply 2,964 integers, in the canonical orbit order emitted
+by the verifier.  If
+`cyclic_invariant_fan.txt` is present, the standard-library verifier checks
+all 1,140 rainbow groups and thereby checks the lifted full 13-fan
+semantically.
+
+The smallest direct certificate-producing SAT target has:
+
+- \(2\,964\cdot13=38\,532\) primary label variables;
+- \(2\,964\cdot12=35\,568\) Sinz auxiliaries;
+- 74,100 variables total;
+- 2,964 cell at-least-one clauses;
+- \(2\,964(3\cdot13-4)=103\,740\) cell at-most-one clauses;
+- \(1\,140\cdot13=14\,820\) group-label coverage clauses;
+- 13 lossless global label-symmetry units;
+- \(\boxed{121\,537}\) clauses total.
+
+Coverage is sufficient: a group has thirteen cells, every cell has exactly
+one label, and all thirteen labels occur, so each occurs exactly once.  A SAT
+model gives a portable 2,964-line semantic certificate.  A proof-checked UNSAT
+result excludes only \(C_{17}\)-invariant fans over this fixed cyclic link.
+
+## 7. Search result and next exact target
+
+The optional OR-Tools helper
+`search_cyclic_invariant_fan.py` was run for 60 seconds with eight workers
+after fixing one quotient group to the thirteen labels.  It returned
+`UNKNOWN`, with no candidate.  This has no negative mathematical status.
+No `cyclic_invariant_fan.txt` is claimed.
+
+The exact next targets, in order, are:
+
+1. generate the 74,100-variable CNF above and seek either a semantically
+   checked 2,964-line model or a proof-checked UNSAT certificate;
+2. compute the \(13\)-primary Smith data needed to decide whether
+   \(Bx=\mathbf1\) has a signed integral solution, specifically whether the
+   right-hand-side class is hidden inside \(13\) times \(13^2\)-torsion;
+3. attack the nonlinear Schur-power intersection (12), rather than another
+   ordinary rank or Hoffman calculation;
+4. if the invariant ansatz fails, return to the unrestricted 50,388-cell
+   resolution problem.  Invariant UNSAT would not exclude nonsymmetric fans,
+   other links, \(LS(3,4,20)\), \(k=16\), or Problem #835.
+
+No construction or nonexistence theorem is asserted.

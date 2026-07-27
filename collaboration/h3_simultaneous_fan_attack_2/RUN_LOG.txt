@@ -1,0 +1,34 @@
+2026-07-27 deterministic computations
+
+1. Standard-library theorem verifier
+
+command:
+  python3 -B collaboration/h3_simultaneous_fan_attack_2/verify_fan_kernel_reduction.py
+
+result:
+  rank_mod_2=12087
+  row_dependency_dimension_mod_2=3417
+  invariant_rank_mod_13=855
+  invariant_augmented_rank_mod_13=855
+  orbit_cells=2964
+  orbit_groups=1140
+  orbit_degree_census={58: 257, 59: 144, 60: 2563}
+  orbit_and_full_cyclic_clique_number=13
+  cyclic_invariant_fan_certificate=False
+  PASS
+
+2. Optional restricted witness search
+
+command:
+  python3 -B collaboration/h3_simultaneous_fan_attack_2/search_cyclic_invariant_fan.py --seconds 60 --workers 8
+
+result:
+  status=UNKNOWN
+  conflicts=1193088
+  branches=11081034
+  wall_time=60.081713
+  certificate=NONE
+
+scope:
+  UNKNOWN has no mathematical status.  This run neither constructs nor
+  excludes a C17-invariant fan.

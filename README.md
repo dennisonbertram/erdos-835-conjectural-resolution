@@ -469,7 +469,31 @@ New exact results in the note include:
   \(\mathbb F_2\) census equation.  An independent implementation reaches the
   maximal affine rank \(53\) on \(3{,}000\) verified \(K_{18}\)
   one-factorizations.  These results close this linear holonomy route only;
-  they neither construct nor exclude \(LS(3,4,20)\).
+  they neither construct nor exclude \(LS(3,4,20)\); and
+- a complete small-parameter theorem for the simultaneous-fan formulation.
+  Exact enumeration gives all \(840\) labelled \(STS(9)\)'s and all
+  \(15{,}360\) large sets on a fixed labelled nine-point set, exhausted by
+  two point-isomorphism orbits of sizes \(8{,}640\) and \(6{,}720\).
+  Each representative's fan conflict graph contains an explicit
+  non-\(3\)-colourable subgraph on only eighteen cells and eleven constraint
+  triangles, with a short human proof.  Hence no \(LS(2,3,9)\) admits a
+  simultaneous \(3\)-fan and \(\chi(J(12,6))\ge8\).  This recovers a known
+  small case by this local route; it does not extend to \(k=16\); and
+- exact kernel and symmetry delimiters for the cyclic \(k=16\) fan graph.
+  There is a universal \(969\)-dimensional row-dependency space.  For the
+  committed cyclic link,
+  \[
+    \operatorname{rank}_{\mathbb F_2}B=15{,}963,\qquad
+    \dim\ker_{\mathbb F_2}B=34{,}425,
+  \]
+  while \(Bx=\mathbf1\) is consistent over every prime field.  An exhaustive
+  orbit search proves \(\omega(H_L)=13\), excluding hidden-clique
+  obstructions for this link, and the exact nonlinear target is the
+  Schur-power condition
+  \(f,\ldots,f^{11}\in\ker_{\mathbb F_{13}}B\),
+  \(Bf^{12}=-\mathbf1\).  The \(C_{17}\)-invariant restriction has
+  \(2{,}964\) cells and \(1{,}140\) rainbow groups; its 60-second search was
+  `UNKNOWN`, so neither a fan nor an obstruction is claimed.
 
 These are restricted-core, shadow, and ansatz results, not a construction or
 proof of #835.
@@ -1024,6 +1048,14 @@ routes, but not the asymmetric case.
 - [`collaboration/h3_simultaneous_fan_audit/README.md`](collaboration/h3_simultaneous_fan_audit/README.md):
   an independent derivation, edge census, Gram-identity check, and
   standard-library verifier for the simultaneous-fan theorem.
+- [`collaboration/fan_small_controls/ALL_K6_THEOREM.md`](collaboration/fan_small_controls/ALL_K6_THEOREM.md):
+  the complete universal \(k=6\) fan obstruction, including the exhaustive
+  two-type \(LS(2,3,9)\) classification and two explicit 18-cell human
+  proofs.
+- [`collaboration/h3_simultaneous_fan_attack_2/NOTE.md`](collaboration/h3_simultaneous_fan_attack_2/NOTE.md):
+  exact cyclic-link kernel ranks, the prime-field consistency delimiter, the
+  full clique-number-\(13\) proof, the Schur-power characterization, and the
+  \(C_{17}\)-invariant certificate target.
 - [`collaboration/opus5/unrestricted_ls3420_attack_2/NOTE.md`](collaboration/opus5/unrestricted_ls3420_attack_2/NOTE.md):
   Opus 5's unrestricted star-sign and holonomy attack, including the
   correctly indexed joint parity law, its exact top-rung rank, a
@@ -1257,6 +1289,10 @@ python3 -B evidence/verify_holonomy_group_algebra_tower.py
 python3 -B collaboration/opus5/holonomy_followup/verify_holonomy_followup.py
 python3 -B collaboration/h3_holonomy_audit/verify_holonomy_audit.py \
   --full --affine-only
+python3 -B collaboration/fan_small_controls/verify_all_k6_links.py
+python3 -B collaboration/fan_small_controls/verify_k6_fan_certificate.py
+python3 -B \
+  collaboration/h3_simultaneous_fan_attack_2/verify_fan_kernel_reduction.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
 python3 -B \
   collaboration/opus5/unrestricted_ls3420_attack_2/verify_solution.py \
