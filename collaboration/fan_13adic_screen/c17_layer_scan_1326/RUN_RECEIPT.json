@@ -1,0 +1,17 @@
+{
+  "branches": 1326,
+  "compatible_prefixes": 19,
+  "compatible_prefixes_sha256": "6710a06cc7e08d14ba81dbafbabf9d4724c6091737d2328d92223d661c7e9b8a",
+  "finite_status_counts": {
+    "UNSATISFIABLE_TELEMETRY": 19
+  },
+  "full_exact_covers_found": 0,
+  "layer_instances": 2652,
+  "scan_manifest_sha256": "deaf7d42a5453d3f096c7f87f8167808c743a0caca659ec3e639568e5b547ba0",
+  "schema": "erdos835-c17-layer-scan-receipt-v1",
+  "scope": "Every timeout is UNKNOWN. This bounded scan and its nineteen prefix-local outcomes do not prove global UNSAT.",
+  "status_counts": {
+    "SAT": 167,
+    "UNKNOWN": 2485
+  }
+}

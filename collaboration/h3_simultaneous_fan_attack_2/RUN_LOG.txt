@@ -534,3 +534,27 @@ scope:
   The time-limited backend returned neither a binary exact cover nor a
   portable infeasibility certificate.  NOT_SOLVED and the node count have no
   mathematical status.
+
+26. One-hour soft SCIP matching run
+
+result:
+  backend=SCIP
+  status=FEASIBLE
+  variables=4788
+  constraints=1140
+  wall_time=3600.147000
+  branch_and_bound_nodes=245
+  reported_objective=108.000000
+  semantic_l1_defect=108
+  certificate=NONE
+
+independent semantic replay:
+  selected Q-transversal cells=228
+  recomputed L1 defect=108
+  status=PASS
+
+scope:
+  The incumbent selects exactly one cell in each of the 228 Q-groups but
+  misses the 912 triple-colour equations by total L1 defect 108.  A positive
+  soft objective has no existence or nonexistence status and is not an exact
+  matching certificate.

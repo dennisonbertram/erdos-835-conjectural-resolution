@@ -1084,6 +1084,11 @@ routes, but not the asymmetric case.
   one byte-reconstructible \(88\)-row prefix-local refutation in the fixed
   cyclic-link quotient, with its exact CNF and independently replayable
   compressed DRAT proof.  This excludes only that explicit prefix.
+- [`collaboration/fan_13adic_screen/c17_layer_scan_1326/README.md`](collaboration/fan_13adic_screen/c17_layer_scan_1326/README.md):
+  scope-explicit bounded telemetry for both fixed-point layers of all
+  \(1{,}326\) mixed branches.  It records 19 compatible prefix-local
+  failures and 2,485 `UNKNOWN` layer outcomes; it is not a global
+  unsatisfiability result.
 - [`collaboration/fan_gadget_generalization/NOTE.md`](collaboration/fan_gadget_generalization/NOTE.md):
   the nonlinear \(k=6\) delimiter, sharp palette-anchor bounds, and the
   universal theorem \(\omega(H_L)=13\), together with the exhaustive cyclic
@@ -1346,6 +1351,8 @@ python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_221_unit.py
 python3 -B \
   collaboration/fan_13adic_screen/branch0_prefix1_refutation/verify_prefix_refutation.py
+python3 -B \
+  collaboration/fan_13adic_screen/c17_layer_scan_1326/verify_scan_telemetry.py
 python3 -B \
   collaboration/first_lift_support_completion/verify_capacity_lemma.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
