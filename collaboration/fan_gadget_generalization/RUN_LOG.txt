@@ -80,3 +80,23 @@ output:
   theorem: every nonzero squarefree quotient trade has support at least 10
   corollary: distinct binary exact covers have Hamming distance at least 10
   scope: this does not construct or exclude an exact cover or fan
+
+6. cyclic quotient compact support-ten audit
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_compact.py
+
+output:
+  case 5: NONE
+  five-subsets: 293436
+  same-signature collisions: 0
+  case 4+1: NONE
+  four-pair configurations: 20540520
+  unit-bounded four-pair vectors: 18091188
+  case 3+2: NONE
+  triple-pair configurations: 7824960
+  double-bounded triple-pair vectors: 7824960
+  consequence: any support-10 trade spans at least three Q-groups
+  cyclic quotient compact support-ten audit: PASS
+  remaining partitions: 3+1+1, 2+2+1, 2+1+1+1, 1+1+1+1+1
+  scope: support ten is not fully excluded

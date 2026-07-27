@@ -1,0 +1,27 @@
+Unrestricted layer-tower checkpoint
+===================================
+
+Run:
+  python3 -B collaboration/unrestricted_lift_tower/verify_unrestricted_lift_tower.py
+
+Status before execution:
+  NOTE.md contains a reversible full-tower theorem, the exact simultaneous
+  fan truncation, the K13-hole first-lift equivalence, and the automatic
+  parity theorem.  The verifier is standard-library-only and makes no search
+  or #835 solution claim.
+
+Executed 2026-07-27:
+
+  k=6 tower indexing: 924 vertices, 792 stars,
+    16632 uniquely covered adjacencies: PASS
+  LS(2,3,19) parity identity: 197,676 (five-set, colour) pairs;
+    support histogram {8: 93024, 10: 93024, 12: 11628}: PASS
+  K18/K13-hole one-factorization control: 78 hole edges;
+    support histogram {8: 10, 10: 4, 12: 3}: PASS
+  scope: exact reduction controls only; no simultaneous fan or
+    J(32,16) colouring constructed; #835 remains open
+
+Exit code: 0.
+
+The macOS toolchain emitted two sandbox cache warnings before the Python
+output.  They did not affect the deterministic verifier or its exit status.

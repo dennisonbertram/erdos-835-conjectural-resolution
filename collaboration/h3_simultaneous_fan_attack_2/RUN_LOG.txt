@@ -500,3 +500,21 @@ result:
 scope:
   The solver reproduced but did not improve the score-54 hint.  A positive
   incumbent has no matching or nonexistence status.
+
+24. Five additional ten-minute randomized DLX traversals
+
+results:
+  seed=1701 nodes=118523904 status=UNKNOWN
+  seed=1702 nodes=111163392 status=UNKNOWN
+  seed=1703 nodes=110988288 status=UNKNOWN
+  seed=1704 nodes=119251968 status=UNKNOWN
+  seed=1705 nodes=110430208 status=UNKNOWN
+  aggregate_nodes_this_batch=570357760
+  aggregate_nodes_all_ten_recorded_traversals=3951032320
+  candidate_models=0
+
+scope:
+  Each traversal used the same exact 2964-row by 1140-column matrix and
+  randomized only its search order.  Every run terminated at its time limit.
+  The aggregate node count is exact telemetry, not an exhaustion certificate
+  or evidence for nonexistence.

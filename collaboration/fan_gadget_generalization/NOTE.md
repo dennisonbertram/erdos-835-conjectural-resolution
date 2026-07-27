@@ -238,6 +238,33 @@ This remains a local-rigidity delimiter.  It does not exclude
 nonsquarefree integer kernel vectors, trades of support ten or more, an
 exact cover, or a fan.
 
+### The support-ten search is reduced to four partitions
+
+At support ten, Q-balance gives the seven partitions of five
+\[
+5,\quad4+1,\quad3+2,\quad3+1+1,\quad2+2+1,\quad
+2+1+1+1,\quad1+1+1+1+1.
+\]
+The compact support-ten verifier exactly excludes the first three.
+
+- Case \(5\) compares all \(228\binom{13}{5}=293,436\) five-subsets
+  within their Q-groups and finds no TC-signature collision.
+- Case \(4+1\) checks all
+  \(228\binom{13}{4}\binom{9}{4}=20,540,520\) oriented disjoint
+  four-versus-four differences against the required single swap in
+  another Q-group.  Of these, \(18,091,188\) survive the necessary
+  coefficient bound, and none completes.
+- Case \(3+2\) checks all \(7,824,960\) oriented disjoint
+  triple-versus-triple differences against the dictionary of \(978,120\)
+  double-swap configurations in another Q-group.  None completes.
+
+Thus a support-ten trade, if one exists, spans at least three Q-groups and
+has one of
+\[
+\boxed{3+1+1,\quad2+2+1,\quad2+1+1+1,\quad1+1+1+1+1.}
+\]
+This is not a full exclusion of support ten.
+
 ## 5. Why padding the eleven triangles fails
 
 At \(q=3\), a constraint triangle uses the whole palette.  Knowing two
