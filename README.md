@@ -1099,8 +1099,8 @@ routes, but not the asymmetric case.
   the nonlinear \(k=6\) delimiter, sharp palette-anchor bounds, and the
   universal theorem \(\omega(H_L)=13\), together with the exhaustive cyclic
   quotient theorem that every nonzero squarefree trade has support at least
-  ten.  Five of the seven possible support-ten Q-group partitions are also
-  excluded exactly; only \(2+1+1+1\) and \(1+1+1+1+1\) remain.
+  twelve.  All seven possible support-ten Q-group partitions are excluded
+  exactly; this remains a local rigidity result, not a fan obstruction.
 - [`collaboration/h3_k6_fan_theorem_audit/README.md`](collaboration/h3_k6_fan_theorem_audit/README.md):
   an independent reconstruction of the universal \(k=6\) theorem and
   byte-level audits of all three cyclic invariant-fan CNFs, plus the
@@ -1355,6 +1355,10 @@ python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_221_coeff2.py
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_221_unit.py
+python3 -B \
+  collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_2111.py
+python3 -B \
+  collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_11111.py
 python3 -B \
   collaboration/fan_13adic_screen/branch0_prefix1_refutation/verify_prefix_refutation.py
 python3 -B \

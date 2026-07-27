@@ -32,3 +32,21 @@ expected final output:
   case 2+2+1 all-unit stratum: PASS
   consequence: case 2+2+1 is fully excluded
   remaining partitions: 2+1+1+1, 1+1+1+1+1
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_2111.py
+
+expected final output:
+  aggregate counters: (978120, 138197446, 18498153804, 39181742, 0, 0)
+  case 2+1+1+1: NONE
+  cyclic quotient support-ten 2+1+1+1 audit: PASS
+  remaining partition: 1+1+1+1+1
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_11111.py
+
+expected final output:
+  aggregate counters: (2150540, 184640524, 17360802928, 36769906, 0, 0)
+  case 1+1+1+1+1: NONE
+  cyclic quotient support-ten 1^5 audit: PASS
+  theorem: every nonzero squarefree quotient trade has support at least 12

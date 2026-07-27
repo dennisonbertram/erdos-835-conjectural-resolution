@@ -235,10 +235,10 @@ running the three C++17 exhaustive searches.  The search sources use only
 the C++ standard library.
 
 This remains a local-rigidity delimiter.  It does not exclude
-nonsquarefree integer kernel vectors, trades of support ten or more, an
+nonsquarefree integer kernel vectors, trades of support twelve or more, an
 exact cover, or a fan.
 
-### The support-ten search is reduced to four partitions
+### Every support-ten partition is excluded
 
 At support ten, Q-balance gives the seven partitions of five
 \[
@@ -258,12 +258,17 @@ The compact support-ten verifier exactly excludes the first three.
   triple-versus-triple differences against the dictionary of \(978,120\)
   double-swap configurations in another Q-group.  None completes.
 
-Thus a support-ten trade, if one exists, spans at least three Q-groups and
-has one of
+The supplemental exact audit in
+`SUPPORT10_REMAINING_NOTE.md` excludes the four remaining partitions
 \[
-\boxed{3+1+1,\quad2+2+1,\quad2+1+1+1,\quad1+1+1+1+1.}
+3+1+1,\quad2+2+1,\quad2+1+1+1,\quad1+1+1+1+1.
 \]
-This is not a full exclusion of support ten.
+All seven partitions are therefore impossible, and
+\[
+\boxed{\text{every nonzero squarefree quotient trade has support at least }12.}
+\]
+This is still only a local cyclic-quotient theorem; it does not exclude an
+exact cover or a fan.
 
 ## 5. Why padding the eleven triangles fails
 

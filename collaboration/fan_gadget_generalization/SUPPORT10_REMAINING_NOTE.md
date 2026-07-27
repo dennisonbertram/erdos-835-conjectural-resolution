@@ -86,3 +86,66 @@ exact residual lookups.  It finds none.  Therefore
 \boxed{\text{the support-ten partition }2+2+1\text{ is impossible}.}
 \]
 The only remaining support-ten partitions are \(2+1+1+1\) and \(1^5\).
+
+## Exclusion of \(2+1+1+1\)
+
+For each of the 978,120 double swaps, let \(t\) be its negative TC vector.
+Three single swaps \(u,v,w\), in three mutually distinct Q-groups also
+distinct from the double group, would have to satisfy \(u+v+w=t\).
+At a nonzero coordinate of \(t\), at least one of the three moves has the
+target sign.  The signed-row index enumerates it.  The residual is bounded
+by two because only two unit moves remain.  A second signed-row forcing
+then reduces the problem to one exact single-vector lookup.
+If the first residual is zero, the double and first single already form a
+smaller-support trade excluded by the preceding support audits; the driver
+therefore omits that already-settled branch.
+
+For speed, the final lookup first uses a deterministic additive 64-bit
+fingerprint
+\[
+h(x)=\sum_r x_r\,w_r\pmod{2^{64}},
+\]
+where the committed source defines every \(w_r\) by a fixed integer mixing
+function.  A 24-bit membership table rejects most candidates before the
+full fingerprint lookup.  This filtering is exact: vector equality implies
+fingerprint equality, and any full-fingerprint collision is checked by
+exact sparse-vector equality.  It therefore has no probabilistic
+soundness assumption.
+
+The twelve fixed Q-ranges exhaust all 978,120 double configurations,
+138,197,446 first forced moves, 18,498,153,804 fingerprint probes, and
+39,181,742 low-table hits.  There are no full fingerprint hits and hence no
+trade.  Therefore
+\[
+\boxed{\text{the support-ten partition }2+1+1+1\text{ is impossible}.}
+\]
+Only \(1+1+1+1+1\) remains at this stage.
+
+## Exclusion of \(1+1+1+1+1\)
+
+Represent a candidate as five oriented single swaps in five distinct
+Q-groups.  Fix the least Q-group and its first move.  At a nonzero row of
+the current partial sum, one remaining move must have the opposite sign.
+Three successive signed-row forcing steps enumerate the second, third, and
+fourth moves.  Coefficient bounds \(3,2,1\) discard only partial sums that
+the remaining three, two, or one unit moves cannot cancel.  The fifth move
+is uniquely determined and looked up by the same exact fingerprint filter
+described above.  All later Q-groups are required to exceed the fixed
+minimum and to be mutually distinct.
+If the first two moves already cancel, they form a support-four trade
+excluded earlier, so the corresponding zero partial sum is safely skipped.
+
+The twelve fixed minimum-Q ranges process 2,150,540 second-move hits,
+184,640,524 third-move hits, 17,360,802,928 final fingerprint probes, and
+36,769,906 low-table hits.  There are no full fingerprint hits and no
+trade.  Hence the \(1^5\) partition is impossible.
+
+All seven partitions of five have now been excluded.  Together with the
+support-two through support-eight audits, this proves
+\[
+\boxed{\text{every nonzero squarefree cyclic-quotient trade has support
+at least }12.}
+\]
+This is a local rigidity theorem for the cyclic quotient.  It does not
+exclude an exact cover or a fan and does not solve Erdős--Rosenfeld Problem
+#835.
