@@ -1068,11 +1068,13 @@ routes, but not the asymmetric case.
   compatibility automatic.  The rank-three case reduces two-graphs to
   upper shadows of matchings.
 - [`collaboration/high_lift_top_properness/NOTE.md`](collaboration/high_lift_top_properness/NOTE.md):
-  a proof that the cross-\(R\) top-properness condition at the final
-  \(j=12\) lift is automatic.  On each \(17\)-set it becomes the
-  missing-colour map of a proper \(17\)-edge-colouring of \(K_{17}\);
-  odd matching defects force that map to be a bijection.  The analogous
-  \(j=10,11\) implications remain open.
+  proofs that cross-\(R\) top-properness is automatic at all three final
+  lifts \(j=10,11,12\).  The last lift is the missing-colour map of a
+  proper \(17\)-edge-colouring of \(K_{17}\); the two preceding lifts are
+  forced by exact defect recurrences.  At \(j=10\), every colour's
+  multiplicity graph is either all of \(K_{13}\) or \(K_{13}\) with one
+  star deleted.  These theorems remain conditional on constructing the
+  lower tower.
 - [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
   the exact separation between support-admissible,
   partial-factorization-realizable, and fan-realizable first-lift
@@ -1118,6 +1120,11 @@ routes, but not the asymmetric case.
   quotient theorem that every nonzero squarefree trade has support at least
   twelve.  All seven possible support-ten Q-group partitions are excluded
   exactly; this remains a local rigidity result, not a fan obstruction.
+- [`collaboration/fan_gadget_generalization/support12_attack/NOTE.md`](collaboration/fan_gadget_generalization/support12_attack/NOTE.md):
+  exact exclusions for eight of the eleven multiplicity partitions of a
+  support-twelve cyclic quotient trade.  Three partitions remain
+  unclassified, so this is a local quotient obstruction and neither a
+  support-thirteen theorem nor a resolution of the simultaneous fan.
 - [`collaboration/h3_k6_fan_theorem_audit/README.md`](collaboration/h3_k6_fan_theorem_audit/README.md):
   an independent reconstruction of the universal \(k=6\) theorem and
   byte-level audits of all three cyclic invariant-fan CNFs, plus the
@@ -1370,6 +1377,10 @@ python3 -B \
 python3 -B \
   collaboration/high_lift_top_properness/verify_j12_top_properness.py
 python3 -B \
+  collaboration/high_lift_top_properness/verify_j11_top_properness.py
+python3 -B \
+  collaboration/high_lift_top_properness/verify_j10_top_properness.py
+python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support8.py
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support10_compact.py
@@ -1383,6 +1394,14 @@ python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_2111.py
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_11111.py
+python3 -B \
+  collaboration/fan_gadget_generalization/support12_attack/verify_partial.py
+python3 -B \
+  collaboration/fan_gadget_generalization/support12_attack/verify_case222.py
+python3 -B \
+  collaboration/fan_gadget_generalization/support12_attack/verify_case3111.py
+python3 -B \
+  collaboration/fan_gadget_generalization/support12_attack/verify_case321.py
 python3 -B \
   collaboration/fan_13adic_screen/branch0_prefix1_refutation/verify_prefix_refutation.py
 python3 -B \
