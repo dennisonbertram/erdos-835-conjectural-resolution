@@ -442,6 +442,30 @@ Four 600-second local-search runs did not find a matching; their best
 collision scores were 51, 53, 51, and 54.  The extended 272-formula screen
 tested all thirteen rank classes and attained 237.  The Boolean fan CP-SAT
 model also returned only `UNKNOWN` after 964 seconds.  These are search
-statistics, not negative mathematical evidence.  Exact CP-SAT and CaDiCaL
-matching searches, and a diversified long CaDiCaL fan search, are therefore
-the current computational frontier.
+statistics, not negative mathematical evidence.
+
+The exact single-matching CP-SAT model subsequently ran for one hour and
+returned `UNKNOWN` after 22,236,271 conflicts and 42,619,484 branches.  Two
+independently audited MIP variants give complementary reconnaissance: the
+exact variant has 2,964 binary variables and all 1,140 equalities, while the
+soft variant keeps the 228 Q equations hard and minimizes the exact integer
+L1 defect of the remaining 912 equations.  A SCIP smoke reproduced the
+score-54 hint at semantic L1 defect 108.  Only a semantically verified
+zero-defect incumbent can write a certificate; backend-local `INFEASIBLE`,
+timeouts, positive defects, and unknown status codes are explicitly
+inconclusive.
+
+The C++ witness hunter `search_c17_matching_two_opt.cpp` supplements the
+exact solvers.  It searches Q-transversals under the collision objective and
+checks all single changes plus every improving two-Q change: because
+\(\binom n2\) is quadratic, the combined delta is the sum of the individual
+deltas and their coordinatewise interaction.  Once no improving single
+change remains, every improving pair must share an affected triple-colour
+group with opposite signs, which makes the sparse enumeration exhaustive.
+The implementation and 12,500 randomized delta checks were independently
+audited.  Its five-second hinted smoke stayed at collision score 54 and wrote
+no model.  This is a witness search, not a lower-bound method.
+
+Long CaDiCaL and Kissat searches on both exact-cover encodings, and a
+diversified fan search, remain the current computational frontier.  None has
+yet produced a model or a proof.

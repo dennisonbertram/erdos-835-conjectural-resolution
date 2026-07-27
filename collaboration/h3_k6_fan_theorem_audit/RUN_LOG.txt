@@ -139,3 +139,149 @@ result:
 
 scope:
   This local theorem neither constructs nor excludes an exact cover or fan.
+
+10. Audit-only exact-cover value-order benchmark
+
+artifact:
+  solve_c17_exact_cover_order_bench.cpp
+
+invariant:
+  every mode uses the same 2,964 rows, 1,140 columns, minimum-column rule,
+  DLX cover/uncover operations, and exclusive candidate-model writer
+  only row order and optional equal-size column tie order change
+
+two-second telemetry, seed 1701:
+  random             nodes=271360 max_depth=103 status=UNKNOWN
+  lcv                nodes=232448 max_depth=98  status=UNKNOWN
+  mcv                nodes=226304 max_depth=87  status=UNKNOWN
+  damage             nodes=227328 max_depth=94  status=UNKNOWN
+  hint-random        nodes=258048 max_depth=95  status=UNKNOWN
+  hint-random-ties   nodes=233472 max_depth=100 status=UNKNOWN
+  hint-damage        nodes=219136 max_depth=95  status=UNKNOWN
+  hint-repair        nodes=259072 max_depth=95  status=UNKNOWN
+
+ten-second restart comparison:
+  one random traversal:
+    nodes=1236992 max_depth=103 elapsed=10.0012 status=UNKNOWN
+  ten one-second random seeds 1701 through 1710:
+    aggregate_nodes=1458176 best_max_depth=104 aggregate_elapsed=10.21175
+    all ten statuses=UNKNOWN
+
+verdict:
+  neither least-constraining proxy nor exact damage ordering beat the existing
+  randomized order in this benchmark
+  short randomized restarts gave the only positive telemetry signal:
+  more processed nodes and one extra level of maximum depth
+
+scope:
+  node counts across different orders are not comparable as proof work and may
+  include overlapping restart prefixes
+  no candidate model was emitted
+  no matching was found and every UNKNOWN is mathematically inconclusive
+  any future SAT_CANDIDATE must pass verify_c17_equivariant_cnf.py --model
+
+11. Independent OR-Tools MIP audit
+
+files:
+  ../h3_simultaneous_fan_attack_2/search_cyclic_invariant_matching_mip.py
+  ../h3_simultaneous_fan_attack_2/search_cyclic_invariant_matching_mip_soft.py
+
+exact-model reconstruction:
+  binary variables=2964
+  equality constraints=1140
+  group size=13
+  cell degree=5
+  Q degree=1
+  triple-colour degree=4
+  result=identical binary exact-cover incidence problem
+
+soft-model reconstruction:
+  binary selected variables=2964
+  continuous under/over variables=1824
+  equality constraints=1140
+  hard Q equalities=228
+  soft triple-colour equalities=912
+  count + under - over = 1
+  minimum under + over for fixed integer count = abs(count - 1)
+  certificate gate recomputes the integer L1 defect independently
+
+SCIP 10.0, three-second smoke:
+  exact:
+    status=NOT_SOLVED variables=2964 constraints=1140 nodes=1
+    certificate=NONE
+  soft, with validated 228-cell hint:
+    status=FEASIBLE variables=4788 constraints=1140 nodes=1
+    reported_objective=108 semantic_l1_defect=108
+    certificate=NONE
+
+backend telemetry:
+  OR-Tools=9.15.6755
+  HIGHS one-second runs returned UNKNOWN_CODE_99 and no certificate
+  CBC one-second exact run reported wall_time=5.659 and NOT_SOLVED
+  neither result is promoted to a proof
+
+verification:
+  Ruff=PASS
+  Python-3.9 AST parse=PASS
+
+scope:
+  hints are advisory and are never trusted as assignments
+  INFEASIBLE, NOT_SOLVED, unknown codes, and timeouts have no portable
+  nonexistence status
+  a positive semantic defect is only a best effort
+  no MIP run produced a matching certificate
+
+12. Independent C++ two-move witness-hunter audit
+
+file:
+  ../h3_simultaneous_fan_attack_2/search_c17_matching_two_opt.cpp
+
+source invariants:
+  canonical header=2964 rows by 1140 columns
+  row labels positive, unique, and at most 3876
+  every row has five distinct columns: one Q and four triple-colour
+  every Q group has exactly thirteen choices
+  model, hint, and best-effort paths are required to be distinct
+  all candidate and best-effort writes use O_EXCL
+
+score proof:
+  score=sum_g binomial(count_g,2)
+  every Q-transversal has 912 triple-colour incidences over 912 groups
+  score zero iff every triple-colour group has count one
+  loaded-matrix exact-cover verification gates every SAT candidate
+  candidate output explicitly requires the independent semantic verifier
+
+incremental audit:
+  randomized full recomputation checks:
+    assignments=250
+    one-move and two-move checks=12500
+    result=PASS
+  quadratic identity:
+    Delta(a+b)=Delta(a)+Delta(b)+sum_g a_g*b_g
+  sparse pair-index exhaustive comparison at a single-move local optimum:
+    hill steps=115
+    possible moves=2736
+    indexed pairs=121982
+    improving pairs=20
+    missed improving pairs=0
+    exhaustive best pair delta=-1
+    sparse best pair delta=-1
+
+build:
+  c++ -std=c++17 -O3 -Wall -Wextra -pedantic
+  result=PASS
+
+five-second hinted smoke, seed 835:
+  best_collision_score=54
+  moves=523952
+  restarts=105
+  pair_scans=1
+  status=UNKNOWN
+  certificate=NONE
+  best-effort rows=228
+  independently recomputed best-effort collision score=54
+
+scope:
+  the best-effort row-label file is not a SAT model
+  UNKNOWN and positive score have no mathematical status
+  no matching candidate was emitted

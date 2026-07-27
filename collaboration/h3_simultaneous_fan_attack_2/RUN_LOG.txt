@@ -354,3 +354,80 @@ scope:
   The three parameters may differ according to whether a quadruple contains
   zero, one, or two fixed points.  Coordinate descent is not exhaustive, and
   this no-witness result is not UNSAT evidence.
+
+18. One-hour exact CP-SAT matching search
+
+command:
+  PYTHONPATH=/private/tmp/erdos835-pydeps python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/search_cyclic_invariant_matching_cpsat.py \
+    --seconds 3600 --workers 8 --violation-ls-workers 1 \
+    --seed 20260727 \
+    --certificate /private/tmp/erdos835-c17-matching-cpsat-seed20260727.txt
+
+result:
+  status=UNKNOWN
+  conflicts=22236271
+  branches=42619484
+  wall_time=3601.712467
+  certificate=NONE
+
+scope:
+  UNKNOWN or an unproved backend-local infeasibility result has no
+  mathematical status.
+
+19. Exact and soft OR-Tools MIP models
+
+exact model:
+  binary variables=2964
+  equality constraints=1140
+  SCIP one-second smoke status=NOT_SOLVED
+  certificate=NONE
+
+soft model:
+  binary variables=2964
+  continuous under/over variables=1824
+  hard Q equalities=228
+  soft triple-colour equalities=912
+  SCIP one-second hinted smoke status=FEASIBLE
+  reported_objective=108
+  semantic_l1_defect=108
+  certificate=NONE
+
+independent audit:
+  exact incidence reconstruction=PASS
+  integer semantic defect and certificate gate=PASS
+  hint validation and fail-closed status handling=PASS
+
+scope:
+  Backend-local INFEASIBLE, timeout, unknown status, and positive defect have
+  no portable nonexistence status.  Only semantic defect zero can produce a
+  matching candidate.
+
+20. One- and two-Q local witness hunter
+
+artifact:
+  search_c17_matching_two_opt.cpp
+
+verification:
+  C++17 -O3 -Wall -Wextra -pedantic build=PASS
+  randomized one/pair delta checks=12500 PASS
+  sparse versus exhaustive pair audit:
+    moves=2736
+    indexed_pairs=121982
+    exhaustive_improving_pairs=20
+    sparse_missed_pairs=0
+    best_pair_delta=-1 in both searches
+  five-second hinted smoke:
+    status=UNKNOWN
+    best_collision_score=54
+    moves=523952
+    restarts=105
+    pair_scans=1
+    certificate=NONE
+  emitted best-effort recomputation=collision 54 PASS
+  identical model/best-effort path rejection=PASS
+
+scope:
+  Score zero would be checked against all 1140 loaded-matrix columns and must
+  still pass the independent semantic verifier.  Positive score and timeout
+  have no mathematical status.

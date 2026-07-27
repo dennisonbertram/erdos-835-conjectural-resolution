@@ -232,6 +232,85 @@ cycle and induced \(C_5\).  It also checks the local/CP-SAT/DLX certificate
 gates and hint bridge.  None of these audits supplies a matching, fan, or
 Problem #835 solution.
 
+## 5. Audit-only exact-cover search ordering
+
+`solve_c17_exact_cover_order_bench.cpp` retains the exact matrix and DLX
+cover/uncover semantics while benchmarking randomized, least-constraining,
+most-constraining, exact-damage, near-hint, and randomized-column-tie orders.
+No heuristic filters or fixes a row.
+
+On seed 1701, the existing randomized value order was better than every
+least-constraining or damage score tested: it reached depth 103 in two seconds,
+versus 98 for the cheap LCV proxy and 94 for the exact damage score.  A
+ten-second randomized run processed 1,236,992 nodes and reached depth 103.
+Ten one-second random restarts processed 1,458,176 nodes in 10.21 aggregate
+seconds and reached depth 104.
+
+That is only a diversification signal, not evidence of a solution or a
+universal speedup.  Restarted traversals can revisit common prefixes, node
+counts from different search trees are not proof-work measures, and every run
+returned `UNKNOWN`.  The safe operational recommendation is to retain the
+current randomized row order and, for witness hunting, run independent short
+seeds in parallel or a geometrically increasing restart schedule.  Any
+`SAT_CANDIDATE` remains provisional until
+`verify_c17_equivariant_cnf.py --model ...` passes.
+
+## 6. OR-Tools MIP audit
+
+The exact MIP script was independently checked against the quotient incidence:
+it has exactly 2,964 binary cell variables and all 1,140 size-13 exact-cover
+equalities.  Every cell occurs in one Q group and four triple-colour groups, so
+this is precisely the same binary exact-cover problem as the sparse matrix.
+
+The soft MIP keeps the 228 Q equalities hard and uses, for each of the 912
+triple-colour groups,
+\[
+  \operatorname{count}+u-v=1,\qquad u,v\geq0,
+\]
+minimizing \(u+v\).  For a fixed integer count its minimum is exactly
+\(\lvert\operatorname{count}-1\rvert\).  More importantly, the script does not
+trust the floating-point objective: it reconstructs the selected cells,
+checks the Q transversal, recomputes the integer L1 defect, and calls the
+independent combinatorial verifier before writing a zero-defect certificate.
+Warm starts are validated one-per-Q hints and remain advisory.
+
+With OR-Tools 9.15.6755 and SCIP 10.0, a three-second exact run returned
+`NOT_SOLVED`; a three-second hinted soft run returned a feasible incumbent
+with both reported and semantic defect 108.  Neither wrote a certificate.
+HiGHS returned unmapped status code 99 in one-second smokes, and CBC did not
+respect the nominal one-second wall time tightly; both paths still fail
+closed.  No backend-local `INFEASIBLE`, timeout, unknown code, or positive
+defect is treated as a proof.
+
+## 7. C++ one- and two-move witness hunter
+
+`search_c17_matching_two_opt.cpp` was audited against full recomputation.  Its
+collision score is
+\(\sum_g\binom{\operatorname{count}_g}{2}\).  A Q-transversal has exactly 912
+triple-colour incidences over 912 groups, so score zero is equivalent to every
+triple-colour count being one.  Every zero is then checked against all 1,140
+loaded-matrix columns before an exclusive SAT-candidate write, and the output
+still states that independent semantic verification is required.
+
+For two moves with changed incidences \(a_g,b_g\), the exact interaction is
+\[
+  \Delta(a+b)=\Delta(a)+\Delta(b)+\sum_g a_gb_g.
+\]
+After all single moves are nonnegative, any improving pair must therefore
+share at least one group with opposite signs.  The sparse positive/negative
+index is exhaustive: at a sampled single-move local optimum, a brute-force
+comparison found 20 improving pairs, all 20 indexed, with best delta \(-1\)
+in both searches.  A further 12,500 randomized one- and two-move checks agreed
+with complete count and score recomputation.
+
+The parser unconditionally validates positive unique row labels, five distinct
+columns per row, one Q plus four triple-colour incidences, and thirteen rows
+per Q group.  Hint, model, and best-effort paths must be distinct; both output
+formats use exclusive creation.  A five-second hinted smoke compiled cleanly,
+performed 523,952 moves, and ended `UNKNOWN` at score 54.  Its 228-row
+best-effort file independently recomputed to score 54; no candidate model was
+emitted.
+
 ## Reproduction
 
 ```sh
@@ -278,6 +357,13 @@ python3 -B \
   --cover-cnf /tmp/c17_matching_cover.cnf \
   --cover-map /tmp/c17_matching_cover-map.json \
   --direct-cnf /tmp/c17_matching_direct.cnf
+
+c++ -std=c++17 -O3 -Wall -Wextra -pedantic \
+  collaboration/h3_k6_fan_theorem_audit/solve_c17_exact_cover_order_bench.cpp \
+  -o /tmp/c17_order_bench
+/tmp/c17_order_bench \
+  collaboration/cyclic_lsts19_extension/c17_exact_cover.matrix \
+  /tmp/c17_order_candidate.model 2 1701 random -
 
 ruff check collaboration/h3_k6_fan_theorem_audit
 ```
