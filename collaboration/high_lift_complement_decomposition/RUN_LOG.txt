@@ -1,0 +1,51 @@
+High-lift complement decomposition
+==================================
+
+All runs executed 2026-07-27 from the repository root.
+
+1. Main deterministic verifier
+
+Command:
+  python3 -B \
+    collaboration/high_lift_complement_decomposition/verify_high_lift_complements.py
+
+Output:
+  complement dictionary on n=7:
+    packing families by r={1: 2, 2: 8, 3: 232}: PASS
+  r=1 exhaustive n=6: only empty and complete: PASS
+  r=2 exhaustive n=6:
+    7 graphs = empty plus six stars: PASS
+  r=3 four-vertex table:
+    64 labelled graphs, exactly 26 in five allowed types: PASS
+  r=3 switching classes exhaustive through n=7:
+    {4: 8, 5: 26, 6: 76, 7: 232}, all matching shadows: PASS
+  cross-colour inclusion ranks mod 1,000,003:
+    {'W_1,2': (78, 13, 13), 'W_2,3': (286, 78, 78)}: PASS
+  scope: local complement/decomposition theorems only;
+    no full tower or #835 conclusion
+
+Exit code: 0.
+
+2. Standalone small switching-class enumeration
+
+Command:
+  python3 -B \
+    collaboration/high_lift_complement_decomposition/enumerate_r3_small.py \
+    --max-n 7
+
+Output:
+  n=4 switching_classes=8 divisible=8 matching_class=8 nonmatching=0
+    h_sizes={0: 1, 2: 6, 4: 1}
+  n=5 switching_classes=64 divisible=26 matching_class=26 nonmatching=0
+    h_sizes={0: 1, 3: 10, 6: 15}
+  n=6 switching_classes=1024 divisible=76 matching_class=76 nonmatching=0
+    h_sizes={0: 1, 4: 15, 8: 45, 12: 15}
+  n=7 switching_classes=32768 divisible=232 matching_class=232 nonmatching=0
+    h_sizes={0: 1, 5: 21, 10: 105, 15: 105}
+  scope: exhaustive only through the requested max-n;
+    no K13 or tower conclusion
+
+Exit code: 0.
+
+The macOS toolchain emitted sandbox cache warnings before Python output.
+They did not affect the listed exit codes.

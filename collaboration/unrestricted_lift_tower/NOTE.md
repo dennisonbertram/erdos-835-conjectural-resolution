@@ -487,6 +487,14 @@ at higher \(j\) gives Theorem 1's full tower, terminating at \(j=13\).
 Theorem 5 additionally removes every standard local design-divisibility test
 at every one of those lifts; it does not supply the required decompositions.
 
+The supplemental theorem in
+`collaboration/high_lift_complement_decomposition/NOTE.md` goes further at
+the final three local stages.  For \(j=10,11,12\), the automatic
+divisibility conditions force the required fixed-\(R\) decompositions, and
+the exact cross-colour cover forces their blocks to partition
+\(\binom A{j+1}\).  This still does not enforce top-properness between
+different \(R\)'s, so it does not complete those lifts globally.
+
 Thus a positive fan is not yet a colouring of \(J(32,16)\), but the missing
 bridge is now explicit: first complete \(\binom{19}{5}=11,628\) linked
 \(K_{13}\)-hole one-factorization problems, then satisfy their

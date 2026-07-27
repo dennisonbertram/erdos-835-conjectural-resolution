@@ -1062,6 +1062,11 @@ routes, but not the asymmetric case.
   generally, each subsequent lift is exactly a joint
   \(K_{j+1}^{(j)}\)-decomposition problem, and every standard local
   divisibility condition for all twelve lifts is proved automatic.
+- [`collaboration/high_lift_complement_decomposition/NOTE.md`](collaboration/high_lift_complement_decomposition/NOTE.md):
+  a proof that at \(j=10,11,12\) those divisibility conditions are also
+  sufficient for every fixed-\(R\) decomposition, with cross-colour block
+  compatibility automatic.  The rank-three case reduces two-graphs to
+  upper shadows of matchings; cross-\(R\) top-properness remains open.
 - [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
   the exact separation between support-admissible,
   partial-factorization-realizable, and fan-realizable first-lift
@@ -1345,6 +1350,11 @@ python3 -B \
   collaboration/h3_simultaneous_fan_attack_2/verify_fan_kernel_reduction.py
 python3 -B \
   collaboration/unrestricted_lift_tower/verify_unrestricted_lift_tower.py
+python3 -B \
+  collaboration/high_lift_complement_decomposition/verify_high_lift_complements.py
+python3 -B \
+  collaboration/high_lift_complement_decomposition/enumerate_r3_small.py \
+  --max-n 7
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support8.py
 python3 -B \
