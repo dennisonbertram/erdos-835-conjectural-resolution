@@ -1096,6 +1096,12 @@ routes, but not the asymmetric case.
   cut-clean non-completable instance, so the inequalities are not sufficient
   in general.  All \(42{,}300\) sampled \(k=16\) instances completed, but
   universal completion remains open.
+- [`collaboration/first_lift_partial_factorization_audit/NOTE.md`](collaboration/first_lift_partial_factorization_audit/NOTE.md):
+  an independent audit of the exact class-B′/partial-factorization
+  equivalence and the nearby literature.  It gives a solver-free
+  five-saturated-vertex counterexample at order \(12\), showing that no
+  unrestricted five-row completion theorem is possible; the order-\(18\)
+  target remains untouched because its supports are much denser.
 - [`collaboration/fan_small_controls/ALL_K6_THEOREM.md`](collaboration/fan_small_controls/ALL_K6_THEOREM.md):
   the complete universal \(k=6\) fan obstruction, including the exhaustive
   two-type \(LS(2,3,9)\) classification and two explicit 18-cell human
@@ -1432,6 +1438,8 @@ python3 -B \
   --random 30 --seed 130835 --max-weight 100 --seconds 10 --q 0
 python3 -B \
   collaboration/opus5/first_lift_k13_hole/verify_first_lift_obstruction.py
+python3 -B \
+  collaboration/first_lift_partial_factorization_audit/verify_boundary.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
 python3 -B \
   collaboration/opus5/unrestricted_ls3420_attack_2/verify_solution.py \
