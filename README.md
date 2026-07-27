@@ -1106,6 +1106,12 @@ routes, but not the asymmetric case.
   \(1{,}326\) mixed branches.  It records 19 compatible prefix-local
   failures and 2,485 `UNKNOWN` layer outcomes; it is not a global
   unsatisfiability result.
+- [`collaboration/fan_13adic_screen/finite_first_packing_132/README.md`](collaboration/fan_13adic_screen/finite_first_packing_132/README.md):
+  an exact collision-free packing of 132 of the 140 finite quadruple
+  orbits in the fixed cyclic-link quotient, with a semantic witness checker
+  and byte-reconstructed telemetry for 140 size-139 searches.  This proves
+  only the lower bound \(\alpha_{\rm finite}\ge132\); every size-139 run
+  remained `UNKNOWN`, so the upper bound is still the trivial 140.
 - [`collaboration/fan_gadget_generalization/NOTE.md`](collaboration/fan_gadget_generalization/NOTE.md):
   the nonlinear \(k=6\) delimiter, sharp palette-anchor bounds, and the
   universal theorem \(\omega(H_L)=13\), together with the exhaustive cyclic
@@ -1381,6 +1387,8 @@ python3 -B \
   collaboration/fan_13adic_screen/branch0_prefix1_refutation/verify_prefix_refutation.py
 python3 -B \
   collaboration/fan_13adic_screen/c17_layer_scan_1326/verify_scan_telemetry.py
+python3 -B \
+  collaboration/fan_13adic_screen/finite_first_packing_132/verify_finite_packing_132.py
 python3 -B \
   collaboration/first_lift_support_completion/verify_capacity_lemma.py
 python3 -B \
