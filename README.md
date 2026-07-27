@@ -1066,10 +1066,14 @@ routes, but not the asymmetric case.
   matching equation is solvable over \(\mathbb Z\).
 - [`collaboration/fan_gadget_generalization/NOTE.md`](collaboration/fan_gadget_generalization/NOTE.md):
   the nonlinear \(k=6\) delimiter, sharp palette-anchor bounds, and the
-  universal theorem \(\omega(H_L)=13\).
+  universal theorem \(\omega(H_L)=13\), together with the exhaustive cyclic
+  quotient theorem that every nonzero squarefree trade has support at least
+  eight.
 - [`collaboration/h3_k6_fan_theorem_audit/README.md`](collaboration/h3_k6_fan_theorem_audit/README.md):
   an independent reconstruction of the universal \(k=6\) theorem and
-  byte-level audits of all three cyclic invariant-fan CNFs.
+  byte-level audits of all three cyclic invariant-fan CNFs, plus the
+  independently reconstructed \(C_{17}\)-invariant matching matrix and both
+  exact matching CNFs.
 - [`collaboration/opus5/unrestricted_ls3420_attack_2/NOTE.md`](collaboration/opus5/unrestricted_ls3420_attack_2/NOTE.md):
   Opus 5's unrestricted star-sign and holonomy attack, including the
   correctly indexed joint parity law, its exact top-rung rank, a

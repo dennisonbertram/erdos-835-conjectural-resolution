@@ -40,3 +40,18 @@ command:
 
 output:
   All checks passed!
+
+4. cyclic quotient squarefree-trade audit
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_small_trades.py
+
+output:
+  cyclic quotient small-trade audit: PASS
+  squarefree trade support 2: none
+  squarefree trade support 4: none
+  oriented within-Q swaps: 35568
+  algebraic zero-sum pair-completion hits: 391248
+  squarefree trade support 6: 0
+  theorem: every nonzero squarefree trade has support at least 8
+  scope: this does not construct or exclude an exact cover or fan

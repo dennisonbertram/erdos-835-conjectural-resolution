@@ -112,3 +112,245 @@ result:
 scope:
   This was an API and model-construction smoke only.  The longer diversified
   CP-SAT and CaDiCaL searches are tracked separately until they terminate.
+
+7. Diversified integer-variable CP-SAT reconnaissance
+
+command:
+  PYTHONPATH=/private/tmp/erdos835-pydeps python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/search_cyclic_invariant_fan.py \
+    --seconds 3600 --workers 8 --seed 20260727 \
+    --certificate /private/tmp/erdos835-c17-cpsat-seed20260727.txt
+
+result after manual replacement by the Boolean exactly-one model:
+  status=UNKNOWN
+  conflicts=11204685
+  branches=45576194
+  wall_time=882.935976
+  certificate=NONE
+
+scope:
+  The interrupted UNKNOWN run has no mathematical status.
+
+8. Small hypergraph-colouring route delimiters
+
+command:
+  python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/verify_hypergraph_coloring_delimiters.py
+
+result:
+  strong_odd_cycle_length=3
+  incidence_matrix=((1,1,0),(1,0,1),(0,1,1))
+  determinant=-2
+  conclusion=cyclic fan hypergraph is not balanced
+  odd_hole_length=5
+  conclusion=cyclic conflict graph is not perfect
+
+scope:
+  These witnesses close the balanced-hypergraph and perfect-graph shortcuts
+  only.  They do not decide the fan.
+
+9. Boolean exactly-one CP-SAT fan reconnaissance
+
+command:
+  PYTHONPATH=/private/tmp/erdos835-pydeps python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/search_cyclic_invariant_fan_bool.py \
+    --seconds 3600 --workers 8 --violation-ls-workers 1 \
+    --seed 20260727 \
+    --certificate /private/tmp/erdos835-c17-cpsat-bool-seed20260727.txt
+
+result after manual replacement by the smaller single-matching model:
+  status=UNKNOWN
+  conflicts=10692909
+  branches=43005488
+  wall_time=964.348691
+  certificate=NONE
+
+scope:
+  The interrupted UNKNOWN run has no mathematical status.
+
+10. Four independent local-search runs for one invariant matching
+
+common command:
+  python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/search_cyclic_invariant_matching_local.py \
+    --seconds 600 --seed SEED \
+    --certificate /private/tmp/erdos835-c17-matching-local-SEED.txt
+
+results:
+  seed=101 moves=2608612 restarts=161 best_collision_score=51 status=UNKNOWN
+  seed=202 moves=2622899 restarts=159 best_collision_score=53 status=UNKNOWN
+  seed=303 moves=2606812 restarts=158 best_collision_score=51 status=UNKNOWN
+  seed=404 moves=2621199 restarts=157 best_collision_score=54 status=UNKNOWN
+  certificate=NONE
+
+scope:
+  Score zero would be a semantically checked exact matching.  Nonzero timeout
+  scores have no mathematical status.
+
+11. Extended formula-family screen for individual matchings
+
+command:
+  python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/screen_cyclic_invariant_fan_formulas.py
+
+result:
+  formulae_checked=272
+  fan_status=NO_WITNESS_IN_FAMILY
+  best_fan_collision_score=4098
+  best_matching_collision_score=237
+  best_matching_blend=1
+  best_matching_multiplier=8
+  best_matching_label=12
+  matching_certificate=NONE
+
+scope:
+  Each of the thirteen label classes of every screened fan formula was tested
+  as a possible invariant matching.  This excludes only 3,536 named
+  candidates and is not an UNSAT result.
+
+12. Independently audited exact-CNF target for one invariant matching
+
+files:
+  /private/tmp/erdos835-c17-matching-cover.cnf
+  /private/tmp/erdos835-c17-matching-cover-map.json
+
+result:
+  variables=3876
+  clauses=33060
+  allowed_phase_variables=2964
+  forbidden_phase_variables=912
+  auxiliary_variables=0
+  constraints=1140
+  cnf_sha256=860aba8e26b2ec8c0fdbe268e5a19cac63647ef3593b123d7a12c5dec63eccf2
+  map_sha256=2908c7b90fc14a5229600b359fddf7e874f8665418b7e85ed94215143abab358
+  independent_clause_and_map_audit=PASS
+
+propagation-strong direct encoding:
+  variables=3876
+  clauses=90060
+  group_at_least_one_clauses=1140
+  pairwise_group_at_most_one_clauses=88920
+  sha256=bfd7e07ffbdeb1c4a2a2f74f6a2af38c62845f3a114b5294848288ebfb0a6252
+  independent_byte_level_audit=PASS
+
+scope:
+  SAT is equivalent to one C17-equivariant LS(3,4,20) extending the fixed
+  cyclic link.  It is not yet a 13-fan and is not Problem #835.
+
+13. Four completed one-hour CaDiCaL fan searches
+
+base, default seed:
+  model=/private/tmp/erdos835-c17-invariant-fan.model
+  final_model_line=c UNKNOWN
+
+base, seed 1 with shuffling:
+  model=/private/tmp/erdos835-c17-invariant-fan-seed1.model
+  final_model_line=c UNKNOWN
+
+redundant conflict-edge encoding:
+  model=/private/tmp/erdos835-c17-invariant-fan-strong.model
+  final_model_line=c UNKNOWN
+
+direct pairwise cell and conflict-edge encoding:
+  model=/private/tmp/erdos835-c17-invariant-fan-direct.model
+  final_model_line=c UNKNOWN
+
+scope:
+  All four exact solvers exhausted their one-hour search limits without a
+  model or proof.  UNKNOWN has no mathematical status.
+
+14. Best-effort matching hint and soft-objective replay
+
+local command:
+  python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/search_cyclic_invariant_matching_local.py \
+    --seconds 180 --seed 20260728 \
+    --best-effort /private/tmp/erdos835-c17-matching-best-seed20260728.txt
+
+local result:
+  moves=481932
+  restarts=28
+  best_collision_score=54
+  status=UNKNOWN
+  certificate=NONE
+
+soft replay result:
+  status=FEASIBLE
+  wall_time=600.017727
+  semantic_l1_defect=108
+  certificate=NONE
+
+corrected objective/hint smoke:
+  status=FEASIBLE
+  wall_time=10.006905
+  semantic_l1_defect=108
+  certificate=NONE
+
+scope:
+  The 228-line best-effort file is a one-per-Q-group solver hint, not a
+  matching certificate.  The soft model now uses exact absolute-value
+  constraints, and the complete hint reproduces twice the collision score.
+
+15. Exact-cover row bridge and bounded repair probes
+
+command:
+  python3 -B \
+    collaboration/h3_simultaneous_fan_attack_2/convert_matching_hint_to_dlx.py \
+    /private/tmp/erdos835-c17-matching-best-seed20260728.txt \
+    collaboration/cyclic_lsts19_extension/c17_exact_cover.matrix \
+    /private/tmp/erdos835-c17-matching-dlx-hint-seed20260728.txt
+
+result:
+  quotient_cells=2964
+  matrix_rows=2964
+  full_incidence_bijection=PASS
+  hinted_rows=228
+
+implementation:
+  solve_c17_exact_cover.cpp accepts --hint ROW_LABEL_FILE
+  hint labels change row order only and do not prune
+  preferred labels are required to be actual positive matrix rows
+  semantic converter and Python-3.9/Ruff checks pass
+
+bounded repair telemetry:
+  twelve 160-fixed-row cores exhausted immediately at one local DLX node
+  one live-column-filtered 75-fixed-row core exhausted at five local DLX nodes
+
+scope:
+  These particular cores are not extendible inside their fixed branches.
+  This is neither a global UNSAT certificate nor evidence that a matching
+  does not exist.
+
+16. Independent SAT-solver portfolio
+
+solver:
+  Kissat 4.0.4, official rel-4.0.4 source
+  configured with --no-options --sat and compiled locally in /private/tmp
+
+targets launched:
+  21600-second matching-cover CNF search
+  21600-second propagation-strong direct matching CNF search
+  21600-second base invariant-fan CNF search
+
+scope:
+  These are live certificate searches at this checkpoint.  No SAT model or
+  UNSAT proof is recorded here, and process liveness has no mathematical
+  status.
+
+17. Category-dependent covariant matching-formula search
+
+command:
+  python3 -B \
+    collaboration/h3_k6_fan_theorem_audit/search_category_formula_matching.py \
+    --seed 835 --restarts 20 --rounds 20
+
+result:
+  category_pattern_counts=[3536,3536,3280]
+  best_collision_score=213
+  best_parameters=[(1,7,12),(1,4,1),(8,13,1)]
+  status=NO_WITNESS_FOUND
+
+scope:
+  The three parameters may differ according to whether a quadruple contains
+  zero, one, or two fixed points.  Coordinate descent is not exhaustive, and
+  this no-witness result is not UNSAT evidence.

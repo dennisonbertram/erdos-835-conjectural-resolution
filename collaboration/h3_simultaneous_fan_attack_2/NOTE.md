@@ -64,6 +64,39 @@ that the analogous \(5\)-uniform, \(3\)-regular hypergraph is class two for
 both possible link isomorphism types. Hence regularity and linearity alone
 do not imply resolvability.
 
+One classical sufficient condition also fails immediately.  A balanced
+hypergraph has chromatic index equal to its maximum degree, but
+\(\mathcal G_L\) is not balanced.  In the cyclic link, the three cells
+\[
+ (0123,0),\qquad(0126,0),\qquad(0136,0)
+\]
+and the three triple-colour groups
+\[
+ (012,0),\qquad(013,0),\qquad(016,0)
+\]
+have incidence submatrix
+\[
+\begin{pmatrix}
+1&1&0\\
+1&0&1\\
+0&1&1
+\end{pmatrix},
+\]
+a strong odd cycle of length three.  All cells are allowed and all three
+groups are genuine; `verify_hypergraph_coloring_delimiters.py` checks the
+witness.  Thus the balanced-matrix/perfect-line-graph shortcut cannot prove a
+fan for this link.
+
+Nor is the conflict graph perfect.  The five allowed cells
+\[
+(0123,0),(0124,0),(0146,0),(0168,0),(0138,0)
+\]
+induce a \(C_5\): consecutive quadruples share, respectively, the triples
+\(012,014,016,018,013\), while each nonconsecutive pair shares only the pair
+\(01\).  Thus the perfect-graph shortcut
+\(\chi(H_L)=\omega(H_L)=13\) is also unavailable.  The same verifier checks
+all five allowed-cell conditions and all ten induced adjacencies/nonedges.
+
 Over \(\mathbb R\), put
 \[
 y=x-\frac1{13}\mathbf1.
@@ -379,3 +412,36 @@ The exact next targets, in order, are:
    other links, \(LS(3,4,20)\), \(k=16\), or Problem #835.
 
 No construction or nonexistence theorem is asserted.
+
+## 8. Necessary first step: one invariant matching
+
+Before resolving all thirteen colour classes simultaneously, one can ask for
+one binary solution of
+\[
+B_0x=\mathbf1,\qquad x\in\{0,1\}^{2964}. \tag{14}
+\]
+The first 228 quotient groups partition the cells, so (14) chooses exactly
+one cell above every quadruple orbit.  The remaining 912 equations require
+these choices to hit every triple-colour orbit exactly once.  A solution is
+one \(C_{17}\)-equivariant \(LS(3,4,20)\) extending the fixed cyclic link;
+equivalently, it is one perfect matching of the quotient hypergraph.  It is
+necessary for an invariant fan but is neither a fan nor a solution of
+Problem #835.
+
+The deterministic exact-cover CNF for (14) has 3,876 phase variables:
+2,964 allowed phases and 912 forbidden phases forced false.  It uses no
+auxiliary variables and has 33,060 clauses.  Its independently audited digests
+are:
+
+```text
+CNF  860aba8e26b2ec8c0fdbe268e5a19cac63647ef3593b123d7a12c5dec63eccf2
+map  2908c7b90fc14a5229600b359fddf7e874f8665418b7e85ed94215143abab358
+```
+
+Four 600-second local-search runs did not find a matching; their best
+collision scores were 51, 53, 51, and 54.  The extended 272-formula screen
+tested all thirteen rank classes and attained 237.  The Boolean fan CP-SAT
+model also returned only `UNKNOWN` after 964 seconds.  These are search
+statistics, not negative mathematical evidence.  Exact CP-SAT and CaDiCaL
+matching searches, and a diversified long CaDiCaL fan search, are therefore
+the current computational frontier.

@@ -111,3 +111,31 @@ All checks passed!
 Environment note: the system Python shim printed harmless xcrun cache/FSEvents
 warnings under sandboxing before several Python commands. Every command above
 completed with exit status 0.
+
+8. Independent invariant-matching audit
+
+$ python3 -B collaboration/h3_k6_fan_theorem_audit/verify_invariant_matching_attack.py --matrix collaboration/cyclic_lsts19_extension/c17_exact_cover.matrix --cover-cnf /private/tmp/erdos835-c17-matching-cover.cnf --cover-map /private/tmp/erdos835-c17-matching-cover-map.json --direct-cnf /private/tmp/h3-matching-direct-exact.cnf
+invariant matching attack audit: PASS
+exact_matrix_rows=2964 columns=1140 row_degree=5 column_size=13
+identity=pre-existing C17-equivariant LS(3,4,20) exact-cover instance
+full_cell_index_to_matrix_row_bijection=PASS
+cover_cnf_sha256=860aba8e26b2ec8c0fdbe268e5a19cac63647ef3593b123d7a12c5dec63eccf2
+cover_map_sha256=2908c7b90fc14a5229600b359fddf7e874f8665418b7e85ed94215143abab358
+cover_clause_lengths=1:912,2:31008,16:912,17:228
+cover_encoding_auxiliaries=0 forbidden_phase_units=912
+formulae=272 best_fan=(4098,1,2) matching_candidates=3536 best_matching=(237,1,8,12)
+strong_odd_cycle_and_induced_C5_descend_to_quotient=PASS
+direct_exact_cover_cnf_sha256=bfd7e07ffbdeb1c4a2a2f74f6a2af38c62845f3a114b5294848288ebfb0a6252
+scope=no matching found; every UNKNOWN remains inconclusive
+
+9. Independent small-trade proof audit
+
+result:
+  support-6 reduction to three oriented within-Q swaps is exhaustive
+  repeated Q-groups and shared-cell cancellations are retained
+  support-2 and support-4 case splits are exhaustive
+  unchanged verifier output PASS
+  every nonzero squarefree quotient trade has support at least 8
+
+scope:
+  This local theorem neither constructs nor excludes an exact cover or fan.

@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+"""Minimize exact-cover defects for one C17-invariant matching.
+
+The 228 quadruple-orbit constraints remain hard.  For every one of the 912
+triple-colour constraints, an exact absolute-value variable measures the
+distance of its selected-cell count from one.  Objective zero is therefore
+exactly a matching and is checked semantically before a certificate is
+written.  A positive objective, timeout, or unproved optimum has no negative
+mathematical status.
+"""
+
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+
+from ortools.sat.python import cp_model
+
+from search_cyclic_invariant_matching_local import QUAD_GROUPS, verify_matching
+from verify_fan_kernel_reduction import (
+    build_orbit_hypergraph,
+    construct_large_set,
+    verify_large_set,
+)
+
+
+def load_hint(path: Path, groups: tuple[tuple[int, ...], ...]) -> set[int]:
+    cells = [
+        int(line)
+        for line in path.read_text(encoding="ascii").splitlines()
+        if line.strip()
+    ]
+    hinted = set(cells)
+    if len(cells) != QUAD_GROUPS or len(hinted) != QUAD_GROUPS:
+        raise ValueError(
+            f"hint must contain {QUAD_GROUPS} distinct orbit-cell indices"
+        )
+    if any(len(hinted & set(group)) != 1 for group in groups[:QUAD_GROUPS]):
+        raise ValueError("hint is not a one-per-Q-group transversal")
+    return hinted
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--seconds", type=float, default=3600.0)
+    parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--violation-ls-workers", type=int, default=1)
+    parser.add_argument("--seed", type=int, default=835)
+    parser.add_argument("--log-progress", action="store_true")
+    parser.add_argument("--hint", type=Path)
+    parser.add_argument(
+        "--best-effort",
+        type=Path,
+        help="optional 228-line Q-transversal output; never a certificate",
+    )
+    parser.add_argument(
+        "--certificate",
+        type=Path,
+        default=Path(__file__).with_name("cyclic_invariant_matching.txt"),
+    )
+    args = parser.parse_args()
+
+    colouring = construct_large_set()
+    verify_large_set(colouring)
+    cells, groups = build_orbit_hypergraph(colouring)
+
+    model = cp_model.CpModel()
+    selected = [
+        model.new_bool_var(f"selected_{cell}") for cell in range(len(cells))
+    ]
+    for group in groups[:QUAD_GROUPS]:
+        model.add_exactly_one(selected[cell] for cell in group)
+
+    defects = []
+    for index, group in enumerate(groups[QUAD_GROUPS:]):
+        count = sum(selected[cell] for cell in group)
+        defect = model.new_int_var(0, len(group) - 1, f"defect_{index}")
+        model.add_abs_equality(defect, count - 1)
+        defects.append(defect)
+    model.minimize(sum(defects))
+
+    if args.hint is not None:
+        hinted = load_hint(args.hint, groups)
+        for cell, variable in enumerate(selected):
+            model.add_hint(variable, int(cell in hinted))
+        for defect, group in zip(defects, groups[QUAD_GROUPS:]):
+            model.add_hint(defect, abs(len(hinted & set(group)) - 1))
+
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = args.seconds
+    solver.parameters.num_workers = args.workers
+    solver.parameters.num_violation_ls = args.violation_ls_workers
+    solver.parameters.random_seed = args.seed
+    solver.parameters.log_search_progress = args.log_progress
+    status = solver.solve(model)
+    print(f"status={solver.status_name(status)}")
+    print(f"conflicts={solver.num_conflicts}")
+    print(f"branches={solver.num_branches}")
+    print(f"wall_time={solver.wall_time:.6f}")
+    if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        print("certificate=NONE")
+        print("scope=no feasible assignment was returned before timeout")
+        return
+
+    chosen = [
+        cell
+        for cell, variable in enumerate(selected)
+        if solver.boolean_value(variable)
+    ]
+    if len(chosen) != QUAD_GROUPS:
+        raise AssertionError("solver assignment is not a Q-transversal")
+    chosen_set = set(chosen)
+    counts = [
+        len(chosen_set & set(group)) for group in groups[QUAD_GROUPS:]
+    ]
+    defect = sum(abs(count - 1) for count in counts)
+    reported = round(solver.objective_value)
+    if defect != reported:
+        raise AssertionError(
+            f"semantic defect {defect} disagrees with objective {reported}"
+        )
+    print(f"semantic_l1_defect={defect}")
+
+    if defect:
+        if args.best_effort is not None:
+            args.best_effort.write_text(
+                "".join(f"{cell}\n" for cell in chosen),
+                encoding="ascii",
+            )
+            print(f"best_effort={args.best_effort}")
+        print("certificate=NONE")
+        print("scope=positive defect has no matching/nonexistence status")
+        return
+
+    verify_matching(chosen, groups)
+    args.certificate.write_text(
+        "".join(f"{cell}\n" for cell in chosen),
+        encoding="ascii",
+    )
+    print(f"certificate={args.certificate}")
+    print(f"selected_orbit_cells={len(chosen)}")
+    print("semantic_verification=PASS")
+    print("scope=one invariant matching only; not a 13-fan or #835 solution")
+
+
+if __name__ == "__main__":
+    main()

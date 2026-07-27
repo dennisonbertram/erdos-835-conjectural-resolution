@@ -5,12 +5,16 @@ For each quadruple, order its thirteen allowed link colours by a cyclic
 coordinate based on a translation-covariant blend of the point barycentre and
 the four face-colour barycentre.  The rank in that order is automatically
 rainbow on every Q-group.  This script tests whether it is also rainbow on all
-triple-colour groups.  Failure of the whole family is only an ansatz delimiter.
+triple-colour groups.  It also tests every individual rank class as a possible
+single invariant matching.  Failure of the whole family is only an ansatz
+delimiter.
 """
 
 from __future__ import annotations
 
+import argparse
 from itertools import combinations
+from pathlib import Path
 
 from verify_fan_kernel_reduction import (
     build_orbit_hypergraph,
@@ -67,11 +71,19 @@ def labels_for_formula(
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--matching-certificate",
+        type=Path,
+        default=Path(__file__).with_name("cyclic_invariant_matching_formula.txt"),
+    )
+    args = parser.parse_args()
     colouring = construct_large_set()
     verify_large_set(colouring)
     cells, groups = build_orbit_hypergraph(colouring)
     target = set(range(LABELS))
     best: tuple[int, int, int] | None = None
+    best_matching: tuple[int, int, int, int] | None = None
     for blend in range(MODULUS):
         for multiplier in range(1, MODULUS):
             labels = labels_for_formula(colouring, cells, blend, multiplier)
@@ -88,6 +100,44 @@ def main() -> None:
                     f"best_score={score} blend={blend} multiplier={multiplier}",
                     flush=True,
                 )
+            for label in range(LABELS):
+                selected = [
+                    cell for cell, cell_label in enumerate(labels)
+                    if cell_label == label
+                ]
+                chosen = set(selected)
+                counts = [0] * len(groups[QUAD_GROUPS:])
+                for tindex, group in enumerate(groups[QUAD_GROUPS:]):
+                    counts[tindex] = sum(cell in chosen for cell in group)
+                matching_score = sum(
+                    count * (count - 1) // 2 for count in counts
+                )
+                matching_candidate = (
+                    matching_score,
+                    blend,
+                    multiplier,
+                    label,
+                )
+                if best_matching is None or matching_candidate < best_matching:
+                    best_matching = matching_candidate
+                    print(
+                        f"best_matching_score={matching_score} blend={blend} "
+                        f"multiplier={multiplier} label={label}",
+                        flush=True,
+                    )
+                if matching_score == 0:
+                    if len(chosen) != QUAD_GROUPS or any(
+                        len(chosen & set(group)) != 1 for group in groups
+                    ):
+                        raise AssertionError("zero-score formula matching failed")
+                    args.matching_certificate.write_text(
+                        "".join(f"{cell}\n" for cell in selected),
+                        encoding="ascii",
+                    )
+                    print("matching_status=SAT")
+                    print(f"matching_certificate={args.matching_certificate}")
+                    print("matching_semantic_verification=PASS")
+                    return
             if score == 0:
                 if any(
                     {labels[cell] for cell in group} != target for group in groups
@@ -103,6 +153,12 @@ def main() -> None:
     print(f"best_score={best[0]}")
     print(f"best_blend={best[1]}")
     print(f"best_multiplier={best[2]}")
+    if best_matching is None:
+        raise AssertionError("matching formula screen was empty")
+    print(f"best_matching_score={best_matching[0]}")
+    print(f"best_matching_blend={best_matching[1]}")
+    print(f"best_matching_multiplier={best_matching[2]}")
+    print(f"best_matching_label={best_matching[3]}")
     print("scope=finite ansatz exclusion only; not an UNSAT result")
 
 

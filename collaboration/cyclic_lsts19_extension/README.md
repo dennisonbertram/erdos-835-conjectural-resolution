@@ -105,7 +105,9 @@ For a faster independent search implementation, the Python script can dump
 that matrix and `solve_c17_exact_cover.cpp` runs bounded dancing links on it.
 Its SAT output is still only a candidate until the semantic verifier passes.
 Optional row labels after the seed fix a compatible partial branch; they do
-not constitute symmetry breaking unless justified separately.
+not constitute symmetry breaking unless justified separately.  The optional
+`--hint ROW_LABEL_FILE` form merely searches the listed active rows first and
+does not fix them; it changes search order only.
 
 `enumerate_c17_type_i_branches.py` independently lists all 1,326 feasible
 type-(i) branches.  `batch_search_c17_type_i.py` can distribute bounded

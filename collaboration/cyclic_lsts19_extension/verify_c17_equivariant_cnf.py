@@ -204,16 +204,16 @@ def verify_instance(
 
 def parse_model(path: Path) -> set[int]:
     positives = set()
-    saw_sat = False
+    statuses = []
     for line in path.read_text(encoding="ascii").splitlines():
         if line.startswith("s "):
-            saw_sat = "SATISFIABLE" in line and "UNSATISFIABLE" not in line
+            statuses.append(line.split()[1:])
         elif line.startswith("v "):
             positives.update(
                 literal for literal in map(int, line[2:].split()) if literal > 0
             )
-    if not saw_sat:
-        raise AssertionError("model does not assert SATISFIABLE")
+    if statuses != [["SATISFIABLE"]]:
+        raise AssertionError("model must contain exactly 's SATISFIABLE'")
     return positives
 
 

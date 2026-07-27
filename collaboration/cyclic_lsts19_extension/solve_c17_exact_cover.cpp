@@ -28,7 +28,7 @@ struct InputRow {
 class Dlx {
  public:
   Dlx(int column_count, const std::vector<InputRow>& rows, std::uint64_t seed,
-      double seconds)
+      double seconds, const std::vector<int>& preferred_labels)
       : rng_(seed),
         deadline_(std::chrono::steady_clock::now() +
                   std::chrono::milliseconds(
@@ -44,6 +44,7 @@ class Dlx {
     int maximum_label = 0;
     for (const auto& row : rows) maximum_label = std::max(maximum_label, row.label);
     row_node_.assign(1 + maximum_label, -1);
+    preferred_.assign(1 + maximum_label, false);
 
     for (int node = 0; node <= column_count; ++node) {
       left_[node] = node - 1;
@@ -90,6 +91,12 @@ class Dlx {
         throw std::runtime_error("duplicate or negative row label");
       }
       row_node_[row.label] = first;
+    }
+    for (const int label : preferred_labels) {
+      if (label <= 0 || label > maximum_label || row_node_[label] < 0) {
+        throw std::runtime_error("preferred row label is absent from matrix");
+      }
+      preferred_[label] = true;
     }
   }
 
@@ -180,6 +187,9 @@ class Dlx {
       options.push_back(row);
     }
     std::shuffle(options.begin(), options.end(), rng_);
+    std::stable_partition(options.begin(), options.end(), [&](const int row) {
+      return preferred_[row_label_[row]];
+    });
     Cover(header);
     for (const int row : options) {
       solution_.push_back(row_label_[row]);
@@ -199,6 +209,7 @@ class Dlx {
 
   std::vector<int> left_, right_, up_, down_, column_, row_label_, size_;
   std::vector<int> row_node_;
+  std::vector<bool> preferred_;
   std::vector<int> solution_;
   std::mt19937_64 rng_;
   std::chrono::steady_clock::time_point deadline_;
@@ -241,6 +252,18 @@ std::vector<InputRow> ReadMatrix(const std::string& path, int* columns) {
   return rows;
 }
 
+std::vector<int> ReadLabels(const std::string& path) {
+  std::ifstream input(path);
+  if (!input) throw std::runtime_error("cannot open preferred-row file");
+  std::vector<int> labels;
+  int label;
+  while (input >> label) labels.push_back(label);
+  if (!input.eof()) {
+    throw std::runtime_error("invalid preferred-row file");
+  }
+  return labels;
+}
+
 void WriteModelExclusive(const std::string& path,
                          const std::vector<int>& labels) {
   std::ostringstream content;
@@ -273,7 +296,8 @@ void WriteModelExclusive(const std::string& path,
 int main(int argc, char** argv) {
   if (argc < 5) {
     std::cerr
-        << "usage: solve_c17_exact_cover MATRIX MODEL SECONDS SEED [FIXED_ROW...]\n";
+        << "usage: solve_c17_exact_cover MATRIX MODEL SECONDS SEED "
+           "[--hint ROW_LABEL_FILE] [FIXED_ROW...]\n";
     return 64;
   }
   try {
@@ -284,8 +308,17 @@ int main(int argc, char** argv) {
     }
     const double seconds = std::stod(argv[3]);
     const std::uint64_t seed = std::stoull(argv[4]);
-    Dlx solver(columns, rows, seed, seconds);
-    for (int argument = 5; argument < argc; ++argument) {
+    int first_fixed = 5;
+    std::vector<int> preferred_labels;
+    if (first_fixed < argc && std::string(argv[first_fixed]) == "--hint") {
+      if (first_fixed + 1 >= argc) {
+        throw std::runtime_error("--hint requires a row-label file");
+      }
+      preferred_labels = ReadLabels(argv[first_fixed + 1]);
+      first_fixed += 2;
+    }
+    Dlx solver(columns, rows, seed, seconds, preferred_labels);
+    for (int argument = first_fixed; argument < argc; ++argument) {
       const int label = std::stoi(argv[argument]);
       if (!solver.ApplyFixedRow(label)) {
         throw std::runtime_error("incompatible or invalid fixed row");

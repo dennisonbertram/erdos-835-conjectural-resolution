@@ -7,7 +7,9 @@ This directory audits:
 - commit `7aec3f3` (`Prove the universal k6 fan obstruction`), especially
   `ALL_K6_THEOREM.md`, `k6_large_sets.py`, and `verify_all_k6_links.py`;
 - the then-uncommitted cyclic invariant-fan CNF generator and model decoder in
-  `collaboration/h3_simultaneous_fan_attack_2/`.
+  `collaboration/h3_simultaneous_fan_attack_2/`; and
+- the later \(C_{17}\)-invariant single-matching models, exact-cover matrix,
+  formula screen, and direct CNF.
 
 The universal **k=6** theorem passes an independent reconstruction. I found no
 gap in the 840/15,360/two-orbit classification, either 18-cell contradiction,
@@ -191,6 +193,45 @@ certificate: the decoder verifies the stronger, direct combinatorial object
 (one label per cell and every group rainbow), rather than trusting that the
 solver's auxiliary assignment satisfies the DIMACS.
 
+## 4. Cyclic invariant single-matching audit
+
+`verify_invariant_matching_attack.py` independently proves that the newer
+single-matching model is exactly the pre-existing \(C_{17}\)-equivariant
+\(LS(3,4,20)\) exact-cover instance:
+
+```text
+matrix: 2,964 rows x 1,140 columns
+row degree: 5
+column size: 13
+matrix sha256 059c4f30f2355100ce5589acaac1e8ddc337ee8e3fe55294103d68379d078186
+```
+
+It checks the full quotient-cell-index to sparse-matrix-row bijection.  The
+compact cover CNF has 3,876 phase variables, of which 912 are forbidden by
+unit clauses; it has no auxiliaries:
+
+```text
+clause census  1:912, 2:31,008, 16:912, 17:228
+total clauses  33,060
+sha256 860aba8e26b2ec8c0fdbe268e5a19cac63647ef3593b123d7a12c5dec63eccf2
+map sha256 2908c7b90fc14a5229600b359fddf7e874f8665418b7e85ed94215143abab358
+```
+
+`write_matching_direct_exact_cover_cnf.py` emits a propagation-strong
+equivalent encoding with one coverage clause and all 78 pairwise clauses for
+each of the 1,140 exact-cover groups.  The audit reconstructs all 90,060
+clauses independently:
+
+```text
+sha256 bfd7e07ffbdeb1c4a2a2f74f6a2af38c62845f3a114b5294848288ebfb0a6252
+```
+
+The same audit independently reproduces all 272 fan formulae, all 3,536
+individual matching classes, their optima 4,098 and 237, and the strong odd
+cycle and induced \(C_5\).  It also checks the local/CP-SAT/DLX certificate
+gates and hint bridge.  None of these audits supplies a matching, fan, or
+Problem #835 solution.
+
 ## Reproduction
 
 ```sh
@@ -221,6 +262,22 @@ python3 -B \
   collaboration/h3_k6_fan_theorem_audit/verify_cyclic_cnf_audit.py \
   /tmp/cyclic_invariant_fan_audit_direct.cnf \
   --redundant-group-amo --pairwise-cell-amo
+
+python3 -B \
+  collaboration/cyclic_lsts19_extension/generate_c17_equivariant_cnf.py \
+  --cnf /tmp/c17_matching_cover.cnf \
+  --map /tmp/c17_matching_cover-map.json \
+  --encoding cover
+python3 -B \
+  collaboration/h3_k6_fan_theorem_audit/write_matching_direct_exact_cover_cnf.py \
+  --matrix collaboration/cyclic_lsts19_extension/c17_exact_cover.matrix \
+  --cnf /tmp/c17_matching_direct.cnf
+python3 -B \
+  collaboration/h3_k6_fan_theorem_audit/verify_invariant_matching_attack.py \
+  --matrix collaboration/cyclic_lsts19_extension/c17_exact_cover.matrix \
+  --cover-cnf /tmp/c17_matching_cover.cnf \
+  --cover-map /tmp/c17_matching_cover-map.json \
+  --direct-cnf /tmp/c17_matching_direct.cnf
 
 ruff check collaboration/h3_k6_fan_theorem_audit
 ```

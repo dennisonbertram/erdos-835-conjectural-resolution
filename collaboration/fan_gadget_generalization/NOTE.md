@@ -146,7 +146,45 @@ The signed solution in (8) need not have coordinates in \(\{0,1\}\).  It
 does not produce an exact cover, much less a partition into thirteen exact
 covers.  It only closes the linear route.
 
-## 4. Why padding the eleven triangles fails
+## 4. The first possible squarefree trade has support at least eight
+
+A squarefree trade is a pair of disjoint cell sets \(P,N\) satisfying
+\[
+ B_{\rm orb}{\bf1}_P=B_{\rm orb}{\bf1}_N.
+\]
+Such trades are the natural local moves for changing a \(0/1\) exact cover
+without changing any group count.
+
+For the cyclic quotient there is no nonzero squarefree trade on two, four,
+or six cells.  The finite proof uses the \(228\) quadruple-group rows.
+
+- At support two, two cells would have identical incidence columns.
+- At support four, quadruple-group balance leaves either \(2+2\) cells in
+  one quadruple group or one positive/negative pair in each of two groups.
+  Exact multiset comparison excludes both cases.
+- At support six, quadruple-group balance allows the three positive cells
+  to be paired with the three negative cells within their common
+  quadruple groups.  Thus every candidate is a zero sum of three oriented
+  within-group column differences.  The verifier enumerates all
+  \(228\cdot13\cdot12=35,568\) such differences.  Their supports have the
+  exact census
+  \[
+  34,910\text{ of size }8,\qquad658\text{ of size }6.
+  \]
+  Sparse meet-in-the-middle enumeration encounters \(391,248\) algebraic
+  zero-sum pair-completion hits, but every completed triple cancels or
+  repeats a cell; none has three distinct \(+1\) and three distinct
+  \(-1\) coordinates.
+
+Therefore
+\[
+\boxed{\text{every nonzero squarefree quotient trade has support at least }8.}
+\]
+This is a local-rigidity delimiter.  It does not exclude nonsquarefree
+integer kernel vectors, trades of support eight or more, an exact cover, or
+a fan.
+
+## 5. Why padding the eleven triangles fails
 
 At \(q=3\), a constraint triangle uses the whole palette.  Knowing two
 colours determines the third, which powers every deduction in the
@@ -162,7 +200,7 @@ The fillers must therefore have their palettes aligned across different
 constraint groups.  That requires an equality or permutation-propagation
 gadget.
 
-## 5. A sharp one-step palette barrier in \(H_L\)
+## 6. A sharp one-step palette barrier in \(H_L\)
 
 For the fixed-link fan hypergraph, there are two kinds of constraint
 \(K_{13}\)'s:
@@ -231,7 +269,7 @@ duplicate vertex would need twelve neighbours in the original
 
 It does not rule out a multistage sparse equality gadget.
 
-## 6. The remaining nonlinear target
+## 7. The remaining nonlinear target
 
 Label the thirteen fan colours by \(\mathbb F_{13}\), and let \(t_v\) be
 the label on cell \(v\).  A constraint group is rainbow exactly when its
@@ -254,7 +292,7 @@ thirteen powers in (11), or build a sparse multistage palette gadget despite
 A failure to find such a set is only a delimiter.  It is not evidence that
 a fan exists.
 
-## 7. Verification
+## 8. Verification
 
 Run:
 
@@ -264,6 +302,9 @@ python3 -B \
 
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_linear_delimiter.py
+
+python3 -B \
+  collaboration/fan_gadget_generalization/verify_cyclic_small_trades.py
 ```
 
 The first script reconstructs both \(k=6\) links, both complete fan
@@ -271,4 +312,4 @@ hypergraphs, both small gadgets, and both characteristic-\(3\)
 certificates.  The second reconstructs the committed cyclic link, every
 cell and group, the \(C_{17}\) quotient, exact rank and solution over
 \(\mathbb F_{13}\), the expanded full-system check, and the palette-anchor
-maxima.
+maxima.  The third exhausts every squarefree trade of support at most six.
