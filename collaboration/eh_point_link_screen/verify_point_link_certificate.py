@@ -267,24 +267,26 @@ def main() -> None:
         audit_certificate_bytes(certificate, expected_cnf)
         if args.drat_trim is not None:
             replay_drat(certificate, args.drat_trim)
+            print(
+                f"[theorem] drop {certificate.drop} cannot be retained: its "
+                f"point-{certificate.point} derived leave has no partition "
+                "into five STS(19)s."
+            )
         else:
             print(
                 f"[scope] {certificate.drop} semantic checks passed; "
-                "DRAT replay was not requested"
+                "DRAT replay was not requested, so no UNSAT theorem is claimed"
             )
-        print(
-            f"[theorem] drop {certificate.drop} cannot be retained: its "
-            f"point-{certificate.point} derived leave has no partition "
-            "into five STS(19)s."
-        )
 
     print(
-        "[scope] Together with the prior 30 same-five-pack cases, exactly 32 "
-        "of 455 EH retain-twelve repairs now have portable exclusions; "
-        "423 remain."
+        "[scope] These are the two legacy point-link certificates used by the "
+        "separate all-455 aggregate coverage gate."
     )
     print("[scope] This does not decide LS(3,4,20) or Erdős--Rosenfeld #835.")
-    print("status: PASS")
+    if args.drat_trim is not None:
+        print("status: PASS")
+    else:
+        print("status: PASS (semantic package audit only)")
 
 
 if __name__ == "__main__":

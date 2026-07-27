@@ -398,11 +398,13 @@ family of all point-link conditions implies the family of all pair-link
 conditions.  The implication is now known to be **strict on these EH repair
 instances**: all pair-links pass Theorem 6, while the independently replayed
 DRAT certificates in `collaboration/eh_point_link_screen/` prove that the
-point-\(0\) links for source-label drop triples \((0,1,5)\) and
-\((0,5,10)\) are not five-colourable.  A failure at a **single** point kills
-that discard triple.  These two certificates exclude two more of the 425
-cases left by the ten-point theorem, leaving 423.  The remaining point-link
-instances are not decided.
+point-\(0\) links for every one of the \(425\) cases not already excluded by
+the ten-point theorem are not five-colourable.  A failure at a **single**
+point kills that discard triple.  The aggregate gate independently
+reconstructs all CNFs, replays all compressed DRAT proofs, and checks the exact
+\(30+2+423=455\) partition.  Consequently every retain-twelve subfamily of
+this EH core is excluded, and any \(LS(3,4,20)\) shares at most eleven of its
+fifteen systems.
 
 > **Theorem 8 (the labelled cross-pair invariant — decided, and negative).**
 > Assume the retained twelve sit inside an \(LS(3,4,20)\).  By Theorem 4 the
@@ -473,15 +475,15 @@ arguments out:
 * every one of the \(455\times190\) pair-links is \(1\)-factorizable
   (Theorem 6);
 * the labelled cross-pair invariant obstructs nothing either (Theorem 8);
-* the stronger point-link invariant excludes the two certified drop triples
-  \((0,1,5)\) and \((0,5,10)\), leaving 423 retain-twelve cases.
+* the stronger point-link invariant, together with the ten-point theorem,
+  excludes all \(455\) retain-twelve subfamilies of this EH core.
 
-This note reports no terminal verdict for a full \(1425\)-vertex
-\(5\)-colouring.  Separate bounded CP-SAT reconnaissance is recorded in
+This note still reports no verdict on arbitrary \(LS(3,4,20)\).  Separate
+bounded CP-SAT reconnaissance is recorded in
 `collaboration/eh_j5_repair_search/`; its `INFEASIBLE` and `UNKNOWN` rows are
 not used as portable proofs.  Theorems 5, 6 and 8 are exact finite
-enumerations that terminate on every stated instance.  The two Theorem-7
-exclusions are backed by independently replayed DRAT proofs.
+enumerations that terminate on every stated instance.  All \(425\)
+point-link exclusions are backed by independently replayed DRAT proofs.
 
 ## 8. Quantifier audit of Theorems 1–8
 

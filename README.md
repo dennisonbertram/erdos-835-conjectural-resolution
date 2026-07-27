@@ -431,13 +431,26 @@ New exact results in the note include:
   a partial large set completes exactly when its \(j\)-fold leave is
   \(j\)-colourable, and the four intrinsic \(K_5\)s show that any completion
   retaining this core must replace at least three systems.  An exhaustive
-  ten-point colouring certificate then excludes exactly the \(30\)
-  same-five-pack retain-twelve repairs, while independently replayed
-  point-link DRAT certificates exclude \((0,1,5)\) and \((0,5,10)\), leaving
-  \(423\).  In contrast, an independent exact screen shows that all
+  ten-point colouring certificate excludes exactly the \(30\)
+  same-five-pack retain-twelve repairs, while independently reconstructed and
+  replayed point-link DRAT certificates exclude all other \(425\) cases.
+  Therefore every \(LS(3,4,20)\), if one exists, shares at most eleven of
+  these fifteen EH systems: the repair distance of this fixed core is at least
+  four.  The \(425\) point-link-certified leaves have \(STS(19)\) packing
+  number exactly three.  In contrast, an independent exact screen shows that all
   \(86{,}450\) pair-links of all \(455\) cases are \(1\)-factorizable,
-  proving that point links are a strictly stronger local invariant here.
-  These are shadow and ansatz results, not a construction or proof of #835.
+  proving that point links are a strictly stronger local invariant here; and
+- a fixed-link construction frontier for \(LS(3,4,20)\).  The unrestricted
+  completion CNF for an independently reconstructed cyclic
+  \(LS(2,3,19)\) point link has \(159{,}885\) variables and \(252{,}909\)
+  clauses.  Its \(C_{17}\)-equivariant restriction has an independently
+  reconstructed \(2{,}964\times1{,}140\) exact-cover formulation.  The
+  type-(i) layer has exactly \(1{,}326\) feasible branches; a complete
+  bounded sweep found no witness but timed out on every branch, so no
+  SAT/UNSAT verdict is claimed.
+
+These are restricted-core, shadow, and ansatz results, not a construction or
+proof of #835.
 
 These results close several natural algebraic and symmetric construction
 routes, but not the asymmetric case.
@@ -957,9 +970,20 @@ routes, but not the asymmetric case.
   theorem, and exhaustive negative screens of the local triple, pair-link,
   and labelled cross-pair conditions.
 - [`collaboration/eh_point_link_screen/README.md`](collaboration/eh_point_link_screen/README.md):
-  two portable derived-point non-colourability theorems, including
-  deterministic semantic CNF reconstruction and independently replayed
-  compressed DRAT proofs.
+  the aggregate theorem excluding all \(455\) retain-twelve subfamilies of the
+  EH core, including deterministic semantic CNF reconstruction and
+  independently replayed compressed DRAT proofs for \(425\) point links.
+- [`collaboration/cyclic_lsts19_extension/README.md`](collaboration/cyclic_lsts19_extension/README.md):
+  the fixed cyclic-point-link completion CNF, the \(C_{17}\)-equivariant
+  exact-cover reduction, the exact \(1{,}326\)-branch census, and the
+  scope-explicit bounded sweep.
+- [`collaboration/opus5/cyclic_lsts19_extension_attack/NOTE.md`](collaboration/opus5/cyclic_lsts19_extension_attack/NOTE.md):
+  Opus 5's independently executable algebraic audit of that construction
+  frontier, including the orbit congruence, the full-rank first-moment system,
+  the type-(i) domino reduction, and the exact-cover branch invariant.
+- [`collaboration/opus5/derivation_tower_obstruction/NOTE.md`](collaboration/opus5/derivation_tower_obstruction/NOTE.md):
+  the derivation homomorphism, packing dichotomy, and the exact implication
+  from the \(455\)-case aggregate certificate to EH-core repair distance four.
 - [`evidence/execution_debt_2026-07-26.md`](evidence/execution_debt_2026-07-26.md):
   first actual runs of eleven validators left unrun by earlier
   permission-blocked sessions, one validator bug found and fixed, the
@@ -1148,6 +1172,21 @@ python3 -B \
 python3 -B \
   collaboration/eh_point_link_screen/verify_point_link_certificate.py \
   --drat-trim /path/to/drat-trim
+python3 -B \
+  collaboration/eh_point_link_screen/verify_all_455_coverage.py \
+  --batch-recon collaboration/eh_point_link_screen/remaining_423_point0_recon.jsonl \
+  --batch-manifest collaboration/eh_point_link_screen/remaining_423_point0_certificate_manifest.jsonl \
+  --batch-base-dir collaboration/eh_point_link_screen \
+  --drat-trim /path/to/drat-trim \
+  --receipt collaboration/eh_point_link_screen/all_455_point0_theorem_receipt.json
+python3 -B \
+  collaboration/eh_point_link_screen/verify_drop_four_sample.py \
+  --results collaboration/eh_point_link_screen/drop_four_point0_sample_recon.jsonl \
+  --receipt collaboration/eh_point_link_screen/drop_four_point0_sample_receipt.json
+python3 -B \
+  collaboration/opus5/derivation_tower_obstruction/verify_derivation_tower_obstruction.py
+python3 -B \
+  collaboration/opus5/cyclic_lsts19_extension_attack/verify_cyclic_lsts19_extension_attack.py
 python3 -B collaboration/opus5/verify_opus5_forced_structure.py
 python3 -B collaboration/opus5_v2/verify_intersection_numbers.py
 python3 -B collaboration/opus5_v2/verify_disjointness_parity.py

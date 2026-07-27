@@ -1,154 +1,223 @@
-# Two certified derived-point obstructions for EH retain-twelve repairs
+# Complete exclusion of EH retain-twelve repairs
 
 ## Exact result
 
 Let \(\mathcal C_0,\ldots,\mathcal C_{14}\) be the fifteen authenticated
-Etzion--Hartman SQS(20)s.  Neither of the following twelve-system families can
-occur together in an \(LS(3,4,20)\):
+Etzion--Hartman SQS(20)s. Every twelve-member subfamily of this fixed EH
+15-core is excluded from an \(LS(3,4,20)\). Consequently:
 
-- retain all systems except \(\mathcal C_0,\mathcal C_1,\mathcal C_5\);
-- retain all systems except \(\mathcal C_0,\mathcal C_5,\mathcal C_{10}\).
+> Any \(LS(3,4,20)\), if one exists, shares at most eleven of these fifteen
+> EH systems.
 
-These are two new portable exclusions among the 425 cases left by the exact
-ten-point theorem in `collaboration/eh_core_symmetry_orbits`.  Together, the
-results exclude exactly 32 of the 455 ways to retain twelve members of this
-particular EH core, leaving 423.
+The \(\binom{15}{3}=455\) drop-three cases are covered without overlap:
 
-This does **not** decide whether some unrelated \(LS(3,4,20)\) exists, and it
-does not resolve Erdős--Rosenfeld Problem #835.
+| exclusion route | cases | evidence |
+|---|---:|---|
+| ten-point obstruction | 30 | exhaustive deterministic DSATUR |
+| legacy point-0 obstruction | 2 | independently replayed DRAT |
+| batch point-0 obstruction | 423 | independently replayed trimmed DRAT |
+| total | 455 | complete |
 
-## Why one bad derived point is decisive
+The aggregate gate checks that these three sets are pairwise disjoint and
+their union is all 455 cases. It also runs every underlying verifier.
 
-For either discarded triple, fix point \(0\).  Delete it from every block of
-the five-fold leave that contains it.  The result is a
-\(2\text{-}(19,3,5)\) design:
+This is a theorem about overlap with one fixed EH core. It does **not** prove
+that \(LS(3,4,20)\) is nonexistent, and it does not resolve
+Erdős--Rosenfeld Problem #835.
 
-- 285 triples on the other nineteen points;
-- every one of the \(\binom{19}{2}=171\) pairs lies in exactly five triples;
-- its leave graph joins triples that share a pair and is 12-regular.
+## Why a derived-point obstruction is decisive
+
+Discard three EH systems, retain the other twelve, and fix point \(0\).
+Delete \(0\) from every leave block containing it. The resulting point-link
+is a \(2\text{-}(19,3,5)\) design:
+
+- 285 triples on nineteen points;
+- 171 point pairs;
+- exactly five triples over each pair;
+- a 12-regular graph when triples sharing a pair are adjacent.
 
 If the five-fold SQS(20) leave could be partitioned into five replacement
-SQS(20)s, deriving those five systems at point 0 would partition these 285
-triples into five STS(19)s.  Equivalently, the derived leave graph would have
-a proper five-colouring.  Therefore uncolourability at this single point
-rules out the entire retain-twelve repair.
+SQS(20)s, deriving those five systems at point \(0\) would partition the
+285 triples into five STS(19)s. Therefore an UNSAT point-link certificate is
+a rigorous obstruction to the global repair. The converse is not claimed:
+a colourable link at one point alone need not construct a global repair.
 
-## Transparent CNF
-
-`point_link_cnf.py` emits a one-hot encoding.  Variable \(x_{B,c}\) says that
-derived triple \(B\) has colour \(c\in\{0,\ldots,4\}\).
+`point_link_cnf.py` encodes the point-link partition transparently. Variable
+\(x_{B,c}\) assigns one of five colours to derived triple \(B\).
 
 1. Every triple has exactly one colour.
-2. For every point pair and every colour, exactly one of the five triples on
-   that pair has that colour.
-3. The colours on the lexicographically first five-triple pair-star are fixed
-   to \(0,\ldots,4\).  This loses no solutions: every proper colouring can be
-   globally relabelled to satisfy the five units.
+2. For every pair and every colour, exactly one of the five triples over that
+   pair has that colour.
+3. The first five-triple pair-star is fixed to colours \(0,\ldots,4\), which
+   is without loss under a global colour relabelling.
 
-Thus satisfying assignments are exactly partitions into five STS(19)s, up to
-the harmless colour normalization.  Each committed instance has 1,425
-variables and 12,545 clauses:
+Every instance has 1,425 variables and 12,545 clauses. Satisfying
+assignments are exactly partitions of that point-link into five STS(19)s.
 
-```text
-drop (0,1,5), point 0:
-ac8e2176860e5f2d002a29e2592c4dc009d0262e7674fb35c47d11c9467f3e6f
+## Exact STS packing number in the certified links
 
-drop (0,5,10), point 0:
-b0e0ebe97c289a9c44ff6ac48efbfecbf238d1b7f0dbfae2e934a9d6f1444654
-```
+The three discarded EH systems derive to three pairwise disjoint STS(19)s
+inside every one of the 455 point-0 leaves. This gives a canonical
+three-pack.
 
-Reproduce them:
+There is also an elementary complement lemma. If a five-fold leave contained
+four disjoint STS(19)s, those systems would use four of the five available
+triples over every point pair. The 57 unused triples would therefore cover
+every pair exactly once and form a forced fifth STS(19).
 
-```sh
-python3 -B \
-  collaboration/eh_point_link_screen/point_link_cnf.py \
-  --drop 0,1,5 --point 0 \
-  --cnf /tmp/drop_0_1_5_point_0.cnf
+It follows that an UNSAT five-colouring certificate rules out even a
+four-pack. Hence the STS(19) packing number is exactly three in the 425
+point-link-certified cases: the two legacy cases plus the 423-case batch.
+The separate ten-point theorem excludes the other 30 global repairs, but
+does not by itself determine the packing number of their point-0 links.
 
-python3 -B \
-  collaboration/eh_point_link_screen/point_link_cnf.py \
-  --drop 0,5,10 --point 0 \
-  --cnf /tmp/drop_0_5_10_point_0.cnf
-
-cmp /tmp/drop_0_1_5_point_0.cnf \
-  collaboration/eh_point_link_screen/drop_0_1_5_point_0.cnf
-
-cmp /tmp/drop_0_5_10_point_0.cnf \
-  collaboration/eh_point_link_screen/drop_0_5_10_point_0.cnf
-```
-
-## Independently replayed UNSAT certificate
-
-CaDiCaL 3.0.1 generated the binary DRAT proofs.  Re-running these commands
-produces the identical raw proofs on this machine:
-
-```sh
-cadical -q \
-  collaboration/eh_point_link_screen/drop_0_1_5_point_0.cnf \
-  /tmp/drop_0_1_5_point_0.drat
-
-cadical -q \
-  collaboration/eh_point_link_screen/drop_0_5_10_point_0.cnf \
-  /tmp/drop_0_5_10_point_0.drat
-```
-
-Hashes and size:
+The all-455 canonical three-pack audit has digest:
 
 ```text
-drop (0,1,5), point 0
-raw bytes: 2,380,258
-raw SHA-256:
-06112a768e0892980bd02ffd21e2abca56324ee35c1c3d76be0ef828a12f63b9
-gzip SHA-256:
-648c029837933e1d4896b3342e6fc057c48540c2a7259e1a0c53e897745d9f51
-
-drop (0,5,10), point 0
-raw bytes: 5,902,433
-raw SHA-256:
-9831caf77ec2588cbcbb695837d82201a037f06e5d9fbd90883c8595a60528a7
-gzip SHA-256:
-195887f5ecebc335ecd80fae826d176b10c97f3122a38be1b896469666ad6f6b
+c27934a1d370abad000b1bc83bcd5a83e479603e25545416e49e394133dee9e7
 ```
 
-The committed proofs are gzip-compressed and total approximately 4.1 MB.  They
-were replayed with `drat-trim` at upstream commit
-`2e3b2dc0ecf938addbd779d42877b6ed69d9a985`.  Because CaDiCaL's proof is
-binary, force binary parsing when streaming it through standard input:
+## Portable certificate bundle
+
+The authenticated EH seed is
+`evidence/ls_3_4_20_eh15_seed.txt`, SHA-256:
+
+```text
+b1ea090d3e3b88366c87e95660c1c82a406d2c3b100cc1d39bcc2c7e8fde47f9
+```
+
+The new batch contains 423 deterministic gzip files in `certificates/`.
+Each stores a trimmed binary DRAT proof. The manifest records the exact CNF
+hash, compressed and uncompressed proof hashes, dimensions, tool versions,
+and provenance timings.
+
+```text
+batch proof files:                 423
+batch compressed proof bytes:     608,518,572
+largest compressed proof:           3,618,195 bytes
+batch manifest SHA-256:
+0ae9a6a7b840cd2927e1b150d9a5ff5cd89d7b0c50d4b0b77b543c42d5c2d4f9
+batch certificate bundle digest:
+1698fc1e5e14814ac37b5a6a9d8a8375420fdb8f304eb1e237040ce9a2d48c67
+```
+
+CaDiCaL 3.0.1 produced the proofs. `drat-trim` at upstream commit
+`2e3b2dc0ecf938addbd779d42877b6ed69d9a985` checked and trimmed them.
+The portable gate:
+
+- authenticates and reconstructs all fifteen source SQS(20)s;
+- independently reconstructs every design-to-CNF serialization without
+  importing the CNF generator;
+- validates every manifest field and compressed/uncompressed hash;
+- detects missing or orphan proof files;
+- streams all 423 proofs through `drat-trim`;
+- separately replays the two legacy proofs;
+- reruns the exact 30-case ten-point theorem;
+- checks the complete \(30+2+423=455\) coverage partition.
+
+The raw-proof and first-check fields in the manifest are generation
+provenance: raw proofs are not committed. Portable verification uses the
+committed trimmed gzip files and fresh `drat-trim` replay.
+
+## Verify the committed theorem
+
+Python 3.10 or newer is required because the existing ten-point verifier uses
+`int.bit_count()`.
 
 ```sh
-gzip -dc \
-  collaboration/eh_point_link_screen/drop_0_1_5_point_0.drat.gz |
-  drat-trim \
-    collaboration/eh_point_link_screen/drop_0_1_5_point_0.cnf -i
-
-gzip -dc \
-  collaboration/eh_point_link_screen/drop_0_5_10_point_0.drat.gz |
-  drat-trim \
-    collaboration/eh_point_link_screen/drop_0_5_10_point_0.cnf -i
+/opt/homebrew/bin/python3 -B \
+  collaboration/eh_point_link_screen/verify_all_455_coverage.py \
+  --batch-recon \
+    collaboration/eh_point_link_screen/remaining_423_point0_recon.jsonl \
+  --batch-manifest \
+    collaboration/eh_point_link_screen/remaining_423_point0_certificate_manifest.jsonl \
+  --batch-base-dir collaboration/eh_point_link_screen \
+  --drat-trim /path/to/drat-trim \
+  --receipt \
+    collaboration/eh_point_link_screen/all_455_point0_theorem_receipt.json
 ```
 
-Both checks returned `s VERIFIED`; `VERIFICATION.txt` records the full
-transcripts.  Both report 0 RAT lemmas.
+Expected final output:
 
-The standard-library verifier independently rebuilds all fifteen source
-SQS(20)s, the derived \(2\)-design, its 12-regular leave graph, and every CNF
-clause.  It then checks the committed hashes and can stream the proof directly
-to a supplied checker:
+```text
+[theorem] every twelve-system subfamily of the EH 15-core is excluded
+[theorem] any LS(3,4,20) shares at most 11 of the EH 15-core
+[theorem] the 425 point-link-certified leaves have STS(19) packing number exactly 3
+[scope] The separate ten-point theorem does not determine the point-0 packing number in its other 30 cases.
+[scope] This does not decide LS(3,4,20) or #835.
+[exact] aggregate receipt SHA-256: 312096aa9e489156778094e7ab7dc4fd3e3fe34c11d9a2d82531489684c4b085
+status: PASS
+```
+
+The aggregate receipt also binds the coverage digest, source hash, legacy
+evidence hashes, recon receipt, manifest, bundle digest, tool identifiers,
+proof byte total, and packing scope.
+
+## Recorded reconnaissance and regeneration
+
+Before certification, all 423 new point-0 cases returned CaDiCaL's UNSAT
+competition code:
+
+```text
+census:                       423 UNSAT_RECONNAISSANCE
+total solver seconds:         928.751818
+minimum / maximum seconds:    0.652791 / 7.108775
+recon JSONL SHA-256:
+cf3d33428cfdb62781afa2ef0015bd1b1da76a9898523e0e921f0009e82503a9
+recon receipt SHA-256:
+563a52d46c4f242e0ba0856e09b0940e05bcd4bfaa1f3caa58a9363c9ce599d2
+```
+
+Those solver statuses became theorems only after the DRAT certificates were
+generated and replayed. To regenerate fresh evidence, use
+`screen_point_links.py`, `finalize_recon_receipt.py`, and
+`certify_point_links.py`. Timings are stored in the JSONL and manifest, so a
+fresh run is not expected to reproduce those whole-file hashes byte-for-byte.
+The committed evidence is verified by semantic reconstruction and proof
+replay, not by expecting a rerun to have identical timings.
+
+## Separate retain-eleven frontier
+
+Dropping four EH systems and retaining eleven gives a point-link
+\(2\text{-}(19,3,6)\) design with 342 triples. A packing of five disjoint
+STS(19)s forces the sixth by the same complement argument, so a six-colouring
+is equivalent to a five-pack. The four discarded EH systems give a canonical
+four-pack, making the point-link packing number either four or six.
+
+`drop_four_point_link_cnf.py` emits the direct six-colour encoding:
+
+```text
+variables: 2,052
+clauses:  21,894
+```
+
+`screen_drop_four_samples.py` tested nine point-0 cases, one in every cell of
+the construction-pack-multiplicity/full-top structural census. These are
+diverse reconnaissance cases, not automorphism-orbit representatives; the EH
+core has trivial automorphism group.
+
+All nine reached the 30-second bound:
+
+```text
+census:               9 UNKNOWN
+total solver seconds: 270.321988
+results SHA-256:
+e29ba7363bc1ad67d30586161a089d1c4e82eb33c198ceece5bb3055d093a3b7
+```
+
+`verify_drop_four_sample.py` regenerates all nine CNFs, checks the intended
+structural cells, validates the receipt, and would independently check any
+stored SAT colour vector as six STS(19)s. Here there are no SAT or UNSAT
+claims:
 
 ```sh
-python3 -B \
-  collaboration/eh_point_link_screen/verify_point_link_certificate.py \
-  --drat-trim /path/to/drat-trim
+/opt/homebrew/bin/python3 -B \
+  collaboration/eh_point_link_screen/verify_drop_four_sample.py \
+  --results \
+    collaboration/eh_point_link_screen/drop_four_point0_sample_recon.jsonl \
+  --receipt \
+    collaboration/eh_point_link_screen/drop_four_point0_sample_receipt.json
 ```
 
-## Reconnaissance beyond the certificate
-
-`screen_point_links.py` ran CaDiCaL on all twenty derived points for drop
-`(0,5,10)`.  All twenty returned the SAT-competition UNSAT return code 20, in
-1.3--4.6 seconds each in the recorded run.  Those nineteen additional
-statuses are deliberately labelled `UNSAT_RECONNAISSANCE`; no portable proof
-for them is needed because the certified point-0 obstruction already excludes
-the drop triple.
-
-No result in this directory claims that a timeout or an uncertified solver
-status is a theorem.
+This bounded sample identifies the next frontier as materially harder. It
+does not exclude or construct a retain-eleven completion.

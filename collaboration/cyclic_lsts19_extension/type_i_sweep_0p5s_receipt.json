@@ -1,0 +1,27 @@
+{
+  "branch_count": 1326,
+  "branch_file_sha256": "f5281dc2cafaad77e15a3194dfd83342785ba37507758e2c9eb2469a61eabaaf",
+  "elapsed_seconds_max": 0.654568,
+  "elapsed_seconds_min": 0.507209,
+  "elapsed_seconds_total": 711.81012,
+  "matrix_sha256": "059c4f30f2355100ce5589acaac1e8ddc337ee8e3fe55294103d68379d078186",
+  "merged_jsonl_sha256": "71a5b2203a4b76e6adbf4539604147b2fa4acfe3dc5dbba6d2df348c116844eb",
+  "models_found": 0,
+  "nodes_max": 234496,
+  "nodes_min": 91136,
+  "nodes_total": 207040512,
+  "schema": "erdos835-c17-type-i-bounded-sweep-v1",
+  "scope": "bounded witness-search telemetry only; 1326 timeouts do not prove UNSAT for any branch or for the equivariant ansatz",
+  "seconds_per_branch": 0.5,
+  "seed_rule": "835 + branch_index",
+  "solver_source_sha256": "3500b92f3ed8598be6b4d99f829d2434fe5fc840d7871b554920feaa131ad321",
+  "source_summary_sha256": {
+    "ls3420-c17-typei-sweep-0.jsonl": "8dcf265f48b6805f52615a1163617e4ed594fe35b00fb32bb7e1cf0c7e28dc85",
+    "ls3420-c17-typei-sweep-1.jsonl": "2309deb95e4b3fb55b86b94f4f68fac62ec34bc5da0da1b68c4986d234812b89",
+    "ls3420-c17-typei-sweep-2.jsonl": "3aa99b4411655c359ebe0c6bf6629500994710e168000c857a6f058121c93181",
+    "ls3420-c17-typei-sweep-3.jsonl": "fb911cd25aacb79a7c583b89a262a4e08dc6b8f792c40834b4ab0dfaeec2b28e"
+  },
+  "status_counts": {
+    "UNKNOWN_TIMEOUT": 1326
+  }
+}

@@ -29,6 +29,8 @@ from point_link_cnf import (
 )
 
 
+RECON_SCHEMA = "eh-point-link-recon-v1"
+
 CONSTRUCTION_PACKS = (
     frozenset(range(0, 5)),
     frozenset(range(5, 10)),
@@ -91,12 +93,15 @@ def solve_one(
             colour_sha256 = None
 
     return {
+        "schema": RECON_SCHEMA,
         "drop": list(drop),
         "point": point,
         "status": status,
         "elapsed_seconds": round(elapsed, 6),
         "cadical_returncode": completed.returncode,
         "cnf_sha256": cnf_sha256,
+        "cnf_variables": 1_425,
+        "cnf_clauses": 12_545,
         "colour_sha256": colour_sha256,
     }
 
