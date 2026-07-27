@@ -64,5 +64,25 @@ which the required single swap is an exact dictionary lookup.
 The verifier exhausts all 33,642 coefficient-two double swaps, performs
 234,386,020 indexed double checks and 104,226,058 exact single lookups, and
 finds no completion.  Consequently, in any \(2+2+1\) trade both double-swap
-vectors must be unit-valued: every nonzero TC coefficient is \(+1\) or
-\(-1\).  The all-unit stratum remains open.
+vectors would have to be unit-valued: every nonzero TC coefficient is
+\(+1\) or \(-1\).
+
+The all-unit stratum is also exactly excluded.  For a unit double vector
+\(A\), unit single vector \(S\), and required unit double
+\(B=-A-S\), let \(k=|\operatorname{supp}A|\), \(s=|\operatorname{supp}S|\),
+and let \(c\) count opposite-sign overlaps of \(A,S\).  Same-sign overlap
+would make a forbidden coefficient two, while
+\[
+|\operatorname{supp}B|=k+s-2c\le16.
+\]
+Thus \(c\ge\lceil(k+s-16)/2\rceil\).  Signed posting lists enumerate every
+\(A\) meeting this necessary threshold; \(B\) is then an exact lookup.
+The sole zero-threshold case \(k=10,s=6\) is enumerated separately.
+
+Across all 35,568 single swaps, the verifier processes 2,328,439,580 signed
+posting hits, tests 2,614,558 threshold candidates, and makes 2,329,004
+exact residual lookups.  It finds none.  Therefore
+\[
+\boxed{\text{the support-ten partition }2+2+1\text{ is impossible}.}
+\]
+The only remaining support-ten partitions are \(2+1+1+1\) and \(1^5\).

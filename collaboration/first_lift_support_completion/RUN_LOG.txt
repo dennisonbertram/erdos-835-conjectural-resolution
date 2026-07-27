@@ -1,0 +1,97 @@
+First-lift support-completion checkpoint
+========================================
+
+All runs executed 2026-07-27 from the repository root.
+
+1. Standard-library theorem controls
+
+Command:
+  python3 -B collaboration/first_lift_support_completion/verify_capacity_lemma.py
+
+Output:
+  six target support histograms
+    [(7, 10, 0), (8, 8, 1), (9, 6, 2),
+     (10, 4, 3), (11, 2, 4), (12, 0, 5)]: PASS
+  small even-support counterexample:
+    capacity demand 2 > |F|=1: PASS
+  target round-robin control:
+    support histogram {8: 10, 10: 4, 12: 3};
+    middle-tier K5 partition;
+    8192 cuts and 29 edge families: PASS
+  scope: necessary-condition controls only; no universal first lift,
+    fan, or #835 conclusion
+
+Exit code: 0.
+
+2. Arbitrary support-admissible samples
+
+Command:
+  python3 -B \
+    collaboration/first_lift_support_completion/search_support_instances.py \
+    --samples 3000 --seed 160835 \
+    --support-seconds 0.25 --completion-seconds 2
+
+Output:
+  scope=arbitrary-even-supports samples=3000 seed=160835
+    counts={'OPTIMAL': 2978, 'SUPPORT_UNKNOWN': 22}
+  no universal theorem or fan-realizable conclusion is claimed
+
+Exit code: 0.  The 22 UNKNOWN support-generation attempts were not completion
+instances and are not counted as successes or failures.
+
+3. Arbitrary supports with the intermediate partial-factorization test
+
+Command:
+  python3 -B \
+    collaboration/first_lift_support_completion/search_support_instances.py \
+    --samples 300 --seed 2835 \
+    --support-seconds 0.5 --completion-seconds 3 --test-partial
+
+Output:
+  scope=arbitrary-even-supports samples=300 seed=2835
+    counts={'OPTIMAL': 300, 'PARTIAL_OPTIMAL': 300}
+  no universal theorem or fan-realizable conclusion is claimed
+
+Exit code: 0.
+
+4. Proper five-saturated-vertex partial colourings
+
+Command:
+  python3 -B \
+    collaboration/first_lift_support_completion/search_partial_factorizations.py \
+    --samples 1000 --seed 16835 \
+    --internal-seconds 0.5 --completion-seconds 2
+
+Output:
+  scope=proper-K18-minus-K13 samples=1000 seed=16835
+    counts={'OPTIMAL': 1000}
+  no universal theorem or fan-realizable conclusion is claimed
+
+Exit code: 0.
+
+5. Matching-capacity optimization, structured cases
+
+Command:
+  python3 -B \
+    collaboration/first_lift_support_completion/search_capacity_obstruction.py \
+    --random 0 \
+    --case cut_1_12 --case cut_2_11 \
+    --case clique_8 --case incident_5 \
+    --seconds 10
+
+Output:
+  best name=cut_1_12 q=0 |F|=12 demand=12 slack=0 status=OPTIMAL
+  checked=24 statuses={'OPTIMAL': 24}
+    best=('cut_1_12', 0, 12, 12, 'OPTIMAL')
+    no matching-capacity violation found
+  this finite sample is not a universal completion theorem
+
+Exit code: 0.
+
+An earlier bounded run also checked all 72 combinations of clique edge sets
+K_x, 2 <= x <= 13, with the six histograms.  It found no candidate
+violation; because the earlier log did not count every solver status, it is
+reported only as a bounded search, not as an exhaustive theorem.
+
+The macOS toolchain emitted sandbox cache warnings before Python output.
+They did not affect the listed exit codes.

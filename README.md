@@ -1062,6 +1062,13 @@ routes, but not the asymmetric case.
   generally, each subsequent lift is exactly a joint
   \(K_{j+1}^{(j)}\)-decomposition problem, and every standard local
   divisibility condition for all twelve lifts is proved automatic.
+- [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
+  the exact separation between support-admissible,
+  partial-factorization-realizable, and fan-realizable first-lift
+  instances; a matching-deletion capacity inequality for every edge set;
+  and a proof that all ordinary cut instances are automatic.  The logged
+  dense completion searches are positive evidence only, not a universal
+  first-lift theorem.
 - [`collaboration/fan_small_controls/ALL_K6_THEOREM.md`](collaboration/fan_small_controls/ALL_K6_THEOREM.md):
   the complete universal \(k=6\) fan obstruction, including the exhaustive
   two-type \(LS(2,3,9)\) classification and two explicit 18-cell human
@@ -1081,8 +1088,8 @@ routes, but not the asymmetric case.
   the nonlinear \(k=6\) delimiter, sharp palette-anchor bounds, and the
   universal theorem \(\omega(H_L)=13\), together with the exhaustive cyclic
   quotient theorem that every nonzero squarefree trade has support at least
-  ten.  Four of the seven possible support-ten Q-group partitions are also
-  excluded exactly.
+  ten.  Five of the seven possible support-ten Q-group partitions are also
+  excluded exactly; only \(2+1+1+1\) and \(1+1+1+1+1\) remain.
 - [`collaboration/h3_k6_fan_theorem_audit/README.md`](collaboration/h3_k6_fan_theorem_audit/README.md):
   an independent reconstruction of the universal \(k=6\) theorem and
   byte-level audits of all three cyclic invariant-fan CNFs, plus the
@@ -1334,7 +1341,13 @@ python3 -B \
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining.py
 python3 -B \
+  collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_221_coeff2.py
+python3 -B \
+  collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_221_unit.py
+python3 -B \
   collaboration/fan_13adic_screen/branch0_prefix1_refutation/verify_prefix_refutation.py
+python3 -B \
+  collaboration/first_lift_support_completion/verify_capacity_lemma.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
 python3 -B \
   collaboration/opus5/unrestricted_ls3420_attack_2/verify_solution.py \

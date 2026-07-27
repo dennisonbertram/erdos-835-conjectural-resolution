@@ -23,3 +23,12 @@ expected output:
   case 2+2+1 coefficient-two stratum: PASS
   consequence: both double-swap vectors in any candidate are unit-valued
   scope: the all-unit 2+2+1 stratum remains open
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_221_unit.py
+
+expected final output:
+  aggregate counters: (2328439580, 2614558, 2329004, 247260)
+  case 2+2+1 all-unit stratum: PASS
+  consequence: case 2+2+1 is fully excluded
+  remaining partitions: 2+1+1+1, 1+1+1+1+1
