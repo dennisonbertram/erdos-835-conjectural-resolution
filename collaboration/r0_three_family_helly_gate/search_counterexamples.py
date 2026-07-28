@@ -175,12 +175,19 @@ def build_instance(
     omitted_triples: tuple[tuple[int, ...], ...],
     *,
     full_rows: bool,
+    matching_constraints: bool = True,
+    fixed_prefix_sizes: bool = True,
+    vertex_symmetry: bool = True,
 ) -> tuple[Cnf, tuple[tuple[tuple[int, ...], ...], ...]]:
     supports = tuple(
         frozenset(VERTICES) - frozenset(triple) for triple in omitted_triples
     )
-    families = tuple(
-        perfect_matchings(tuple(sorted(support))) for support in supports
+    families = (
+        tuple(
+            perfect_matchings(tuple(sorted(support))) for support in supports
+        )
+        if matching_constraints
+        else ((), (), ())
     )
     cnf = Cnf()
 
@@ -203,8 +210,8 @@ def build_instance(
         cnf.cardinality(
             ("colour_size", colour),
             colour_edges,
-            lower=size,
-            upper=size,
+            lower=size if fixed_prefix_sizes else None,
+            upper=size if fixed_prefix_sizes else len(VERTICES) // 2,
         )
         for vertex in VERTICES:
             cnf.cardinality(
@@ -242,6 +249,14 @@ def build_instance(
             cnf.add(-literal, deleted(edge_index))
         cnf.add(-deleted(edge_index), *colours)
 
+    if not fixed_prefix_sizes:
+        cnf.cardinality(
+            ("deleted_edge_total",),
+            [deleted(edge_index) for edge_index in range(len(EDGES))],
+            lower=sum(PREFIX_SIZES),
+            upper=sum(PREFIX_SIZES),
+        )
+
     for vertex in VERTICES:
         cnf.cardinality(
             ("deleted_degree", vertex),
@@ -261,39 +276,50 @@ def build_instance(
     # membership cell, so the following generator constraints are
     # orbit-complete.  They do not assume that the remaining rows are
     # distinct.
-    triple_sets = tuple(frozenset(triple) for triple in omitted_triples)
-    membership_cells: dict[tuple[bool, ...], list[int]] = {}
-    for vertex in VERTICES:
-        pattern = tuple(vertex in triple for triple in triple_sets)
-        membership_cells.setdefault(pattern, []).append(vertex)
-    deleted_vector = [deleted(edge_index) for edge_index in range(len(EDGES))]
-    for cell_index, cell in enumerate(
-        sorted(membership_cells.values(), key=lambda vertices: tuple(vertices))
-    ):
-        for swap_index, (left_vertex, right_vertex) in enumerate(
-            zip(cell, cell[1:])
-        ):
-            def swapped(vertex: int) -> int:
-                if vertex == left_vertex:
-                    return right_vertex
-                if vertex == right_vertex:
-                    return left_vertex
-                return vertex
-
-            swapped_vector = [
-                deleted(
-                    EDGE_INDEX[
-                        tuple(sorted((swapped(edge[0]), swapped(edge[1]))))
-                    ]
-                )
-                for edge in EDGES
-            ]
-            lexicographic_leq(
-                cnf,
-                ("deleted_vertex_swap", cell_index, swap_index),
-                deleted_vector,
-                swapped_vector,
+    if vertex_symmetry:
+        triple_sets = tuple(frozenset(triple) for triple in omitted_triples)
+        membership_cells: dict[tuple[bool, ...], list[int]] = {}
+        for vertex in VERTICES:
+            pattern = tuple(vertex in triple for triple in triple_sets)
+            membership_cells.setdefault(pattern, []).append(vertex)
+        deleted_vector = [
+            deleted(edge_index) for edge_index in range(len(EDGES))
+        ]
+        for cell_index, cell in enumerate(
+            sorted(
+                membership_cells.values(),
+                key=lambda vertices: tuple(vertices),
             )
+        ):
+            for swap_index, (left_vertex, right_vertex) in enumerate(
+                zip(cell, cell[1:])
+            ):
+
+                def swapped(vertex: int) -> int:
+                    if vertex == left_vertex:
+                        return right_vertex
+                    if vertex == right_vertex:
+                        return left_vertex
+                    return vertex
+
+                swapped_vector = [
+                    deleted(
+                        EDGE_INDEX[
+                            tuple(
+                                sorted(
+                                    (swapped(edge[0]), swapped(edge[1]))
+                                )
+                            )
+                        ]
+                    )
+                    for edge in EDGES
+                ]
+                lexicographic_leq(
+                    cnf,
+                    ("deleted_vertex_swap", cell_index, swap_index),
+                    deleted_vector,
+                    swapped_vector,
+                )
 
     if full_rows:
         # The eleven remaining complements are seven triples followed by four
@@ -355,36 +381,40 @@ def build_instance(
                 upper=12,
             )
 
-    for family_index, family in enumerate(families):
-        for matching_index, matching in enumerate(family):
-            literal = available(family_index, matching_index)
-            deletions = [deleted(edge_index) for edge_index in matching]
-            for edge_literal in deletions:
-                cnf.add(-literal, -edge_literal)
-            cnf.add(literal, *deletions)
-        cnf.add(
-            *(
-                available(family_index, matching_index)
-                for matching_index in range(len(family))
+    if matching_constraints:
+        for family_index, family in enumerate(families):
+            for matching_index, matching in enumerate(family):
+                literal = available(family_index, matching_index)
+                deletions = [deleted(edge_index) for edge_index in matching]
+                for edge_literal in deletions:
+                    cnf.add(-literal, -edge_literal)
+                cnf.add(literal, *deletions)
+            cnf.add(
+                *(
+                    available(family_index, matching_index)
+                    for matching_index in range(len(family))
+                )
             )
-        )
 
-    # The certified pair gate says that two live families fail to coordinate
-    # iff some common-support edge is forced in both.  Exclude every such edge.
-    for left, right in combinations(range(3), 2):
-        for edge in combinations(sorted(supports[left] & supports[right]), 2):
-            edge_index = EDGE_INDEX[edge]
-            witnesses = [
-                available(left, matching_index)
-                for matching_index, matching in enumerate(families[left])
-                if edge_index not in matching
-            ]
-            witnesses.extend(
-                available(right, matching_index)
-                for matching_index, matching in enumerate(families[right])
-                if edge_index not in matching
-            )
-            cnf.add(*witnesses)
+        # The certified pair gate says that two live families fail to coordinate
+        # iff some common-support edge is forced in both.  Exclude every such
+        # edge.
+        for left, right in combinations(range(3), 2):
+            for edge in combinations(
+                sorted(supports[left] & supports[right]), 2
+            ):
+                edge_index = EDGE_INDEX[edge]
+                witnesses = [
+                    available(left, matching_index)
+                    for matching_index, matching in enumerate(families[left])
+                    if edge_index not in matching
+                ]
+                witnesses.extend(
+                    available(right, matching_index)
+                    for matching_index, matching in enumerate(families[right])
+                    if edge_index not in matching
+                )
+                cnf.add(*witnesses)
 
     return cnf, families
 

@@ -20,11 +20,24 @@ New exact results in the note include:
 
 - a solver-free \(r=0\) cut-feasible repair-selection theorem: after at
   most one support-preserving two-edge switch, some three of the seven
-  remaining size-ten rows satisfy every internal-edge capacity cut.  The
-  proof combines Opus 5's dense-cut coexistence ledger with the certified
-  incompatibility graph and closes the \(|A|=7\), \(|A|=6\), and
-  \(|A|\le5\) branches.  This is not yet coordinated nine: sufficiency of
-  those cuts for three simultaneous perfect matchings remains open;
+  remaining size-ten rows satisfy every internal-edge capacity cut.  A
+  complete Tutte--Lovász audit now proves that those cuts and the full
+  eleven-row ledger always supply the required simple \(b\)-factor.  The
+  prescribed three-edge-colouring of that factor remains open in fifteen
+  of the sixteen selected-support Venn types, so this is not yet
+  coordinated nine;
+- a computer-assisted closure of the identical-support Venn type
+  (orbit zero): after reducing a compatible pair to \(C_{10}\) or
+  \(C_4\mathbin{\dot\cup}C_6\), both exact finite CNFs are UNSAT.  CaDiCaL
+  generated the proof traces, its internal DRAT/LRAT checks passed, and an
+  independent `drat-trim` replay also reports `VERIFIED`.  The other
+  fifteen Venn types remain open;
+- an exact boundary-flow formulation of the remaining colouring problem.
+  For a fixed \(b\)-factor it is a nowhere-zero
+  \(\mathbb F_2^2\) flow with prescribed boundary.  Explicit audited
+  uncolourable \(b\)-factors exist in every Venn type, so a proof must
+  choose a favourable factor using the ambient residual graph rather than
+  claim that an arbitrary factor is colourable;
 - coordinated-nine theorems for the class-B \(r=1,2\) profiles: in
   \(r=1\), a complement-cover prefix of type \(8^4\,10^2\) can be
   switched on the same supports and extended; in \(r=2\), every legal
@@ -1330,14 +1343,38 @@ routes, but not the asymmetric case.
   that the full class-B row inventory excludes that example.  It retains the
   valid small-cut and single-row reductions while rejecting an erroneous
   directed-cut bound and an unproved edge-colouring jump.  Cut sufficiency
-  under the full eleven-row equations remains open.
+  under the full eleven-row equations was still open at that stage; the
+  later factor theorem below closes the \(b\)-factor half only.
 - [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_factor_followup_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_factor_followup_audit.md):
   the corrected audit of the follow-up factor/colouring attack.  It identifies
   (C) with the elementary \(b\)-Hall slice when all three terms are positive,
   proves the component-parity and bridge-colour necessities, and independently
   verifies a full-row instance that fails exactly one six-set cut by one edge.
   It rejects the run's false independence-number lemma and does not promote
-  the incomplete Tutte--Lovász case analysis to a theorem.
+  the incomplete Tutte--Lovász case analysis to a theorem.  The repaired,
+  exhaustive factor proof below supersedes that incomplete analysis.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_sufficiency_agent_factor_complete.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_sufficiency_agent_factor_complete.md):
+  the complete Tutte--Lovász elimination.  The first draft omitted three
+  \(|A|=5\) size triples; an independent audit found them, the proof now
+  closes them by six-, seven-, and eight-set cuts, and two independent
+  arithmetic verifiers partition all 105 feasible separator-size triples.
+  Thus (C) plus the full row ledger always gives the exact simple
+  \(b\)-factor.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_sufficiency_agent_factor_independent_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_sufficiency_agent_factor_independent_audit.md):
+  a line-by-line independent audit of the repaired factor theorem,
+  including the exact normalization, parity, component bounds, all
+  equality branches, and the three repaired \(|A|=5\) cases.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_colour_factor_agent_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_colour_factor_agent_audit.md):
+  the exact nowhere-zero \(\mathbb F_2^2\) boundary-flow formulation for
+  prescribed colouring.  Its verifier supplies balanced,
+  bridge-admissible but uncolourable exact-degree factors in every one of
+  the sixteen Venn types, proving that ambient factor switching is
+  essential.
+- [`collaboration/r0_three_family_helly_gate/2026-07-28_orbit0_cut_sufficiency.md`](collaboration/r0_three_family_helly_gate/2026-07-28_orbit0_cut_sufficiency.md):
+  the computer-assisted closure of the identical-support orbit.  Two
+  canonical compatible-pair types reduce to frozen UNSAT CNFs; their
+  CaDiCaL traces pass both the generator's internal checks and a separate
+  DRAT-trim replay.
 - [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_audit.md):
   a solver-free rigid-branch theorem from the concise Opus selection attack.
   When one dense six-set has all seven triple rows on its far side, one legal
