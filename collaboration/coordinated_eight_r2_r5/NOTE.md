@@ -230,7 +230,8 @@ Hamiltonian threshold arithmetic.
 
 The proof covers every abstract class-B instance for \(r=2,3,4,5\), and
 therefore also their class-B-prime and fan-realizable subfamilies.  The
-\(r=1\) coordinated-eight case remains open: there is only one
-size-twelve colour, so the final Hamilton-path construction cannot be
-used twice.  No full seventeen-colour completion or solution of
-Erdős--Rosenfeld Problem #835 is claimed.
+companion theorem in `../coordinated_eight_r1/NOTE.md` subsequently closes
+the \(r=1\) case by a different saturated-core argument.  Together with
+the exceptional-\(r=0\) theorem, these results prove coordinated eight
+for all six profiles.  No full seventeen-colour completion or solution
+of Erdős--Rosenfeld Problem #835 is claimed.

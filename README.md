@@ -1198,15 +1198,21 @@ routes, but not the asymmetric case.
   \((7,10,0)\) seven-prefix of type \(8^4\,10^3\) extends to an eighth
   matching.  Its dependency ledger gives the exact commits and replay
   artifacts for all one-through-seven-core branches.  The theorem is
-  strictly \(r=0\); the coordinated theorem below handles \(r=2,3,4,5\),
-  while \(r=1\) and the final nine colours remain open.
+  strictly \(r=0\); the two coordinated theorems below handle every
+  nonzero profile.  The final nine colours remain open.
+- [`collaboration/coordinated_eight_r1/NOTE.md`](collaboration/coordinated_eight_r1/NOTE.md):
+  a solver-free coordinated eight-packing theorem for the last outstanding
+  profile \(r=1\).  An affine expectation bound selects a six-complement
+  cover; saturated \(K_{5,5}\) and \(K_6\) obstruction cores then force a
+  seventh matching, and a twelve-vertex Tutte lemma supplies the eighth.
 - [`collaboration/coordinated_eight_r2_r5/NOTE.md`](collaboration/coordinated_eight_r2_r5/NOTE.md):
   a solver-free universal coordinated eight-packing theorem for every
   class-B profile with \(r=2,3,4,5\).  A probabilistic complement-cover
   lemma produces six matchings whose union has maximum degree at most five;
   Ore/Dirac Hamiltonicity then supplies two further size-twelve matchings.
-  Together with the \(r=0\) theorem, only \(r=1\) remains at the coordinated
-  eighth frontier.
+  Together with the \(r=0\) and \(r=1\) theorems, this closes the coordinated
+  eighth frontier for all six class-B profiles.  Packing colours nine
+  through seventeen remains open.
 - [`collaboration/first_lift_global_theorem/R1_DEAD_SEVEN_PREFIX.md`](collaboration/first_lift_global_theorem/R1_DEAD_SEVEN_PREFIX.md):
   an exact \(r=1\) class-B seven-prefix that blocks all ten remaining
   supports even though the same support matrix has a separate full

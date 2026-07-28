@@ -208,7 +208,7 @@ def main() -> None:
     verify_covering_arithmetic()
     verify_profile_and_degree_arithmetic()
     print("PASS universal coordinated-eight arithmetic for r=2,3,4,5")
-    print("SCOPE: proof arithmetic; r=1 and full completion remain open")
+    print("SCOPE: proof arithmetic; companion closes r=1, full completion open")
 
 
 if __name__ == "__main__":

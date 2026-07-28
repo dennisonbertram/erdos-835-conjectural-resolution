@@ -190,14 +190,16 @@ This theorem advances the universal prefix length from seven to eight for
 the exceptional profile \((7,10,0)\) and after a seven-prefix of type
 \(8^4\,10^3\).  Subsequent work sharpens the frontier:
 
-1. `../coordinated_eight_r2_r5/NOTE.md` proves a coordinated eight-packing
-   theorem for every profile \(r=2,3,4,5\).  Thus \(r=1\) is the only
-   remaining coordinated-eight profile.
+1. `../coordinated_eight_r1/NOTE.md` and
+   `../coordinated_eight_r2_r5/NOTE.md` prove coordinated eight-packing
+   theorems for every profile \(r=1,\ldots,5\).  Together with the present
+   \(r=0\) result, the coordinated-eight frontier is closed for all six
+   profiles.
 2. Literal arbitrary-prefix analogues are false for every \(r=1,2,3,4,5\),
    by the exact dead-but-fully-completable certificates in
    `R1_DEAD_SEVEN_PREFIX.md`, `R2_DEAD_SEVEN_PREFIX.md`,
    `R3_DEAD_SEVEN_PREFIXES.md`, `R4_DEAD_SEVEN_PREFIX.md`, and
    `R5_DEAD_SEVEN_PREFIX.md`.  Hence the surviving \(r=1\) proof must
    coordinate or switch the earlier choices.
-3. Even after the coordinated eighth frontier is closed, a new invariant is
-   needed to propagate toward all seventeen colours.
+3. A new invariant is still needed to propagate from eight toward all
+   seventeen colours.
