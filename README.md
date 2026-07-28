@@ -1092,7 +1092,10 @@ routes, but not the asymmetric case.
   an exact reduction of every \(j=8\) four-cube coefficient to
   \(0,\pm60\), together with prime-field rank calculations proving that the
   nine-set mod-\(6\) rows add nothing beyond the five-set mod-\(2\) and
-  six-set mod-\(3\) rows.  The normalized \(\Delta=60\) branch remains open.
+  six-set mod-\(3\) rows.  In the normalized \(\Delta=60\) branch, the
+  negative-cell load is at most \(20\), the positive-cell load at most
+  \(80\), and every triple load has one binary mod-\(7\) choice.  That
+  branch remains open.
 - [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
   the exact separation between support-admissible,
   partial-factorization-realizable, and fan-realizable first-lift
@@ -1134,6 +1137,17 @@ routes, but not the asymmetric case.
   reproducible negative evidence from all \(1{,}344\) cases in a fixed
   finite three-cell weighted relaxation.  Its best obstruction margin is
   zero; this is a scoped search record, not a completion theorem.
+- [`collaboration/first_lift_global_theorem/TWO_STAR_NOTE.md`](collaboration/first_lift_global_theorem/TWO_STAR_NOTE.md):
+  a coordinated two-star theorem at the target order.  Two
+  minimum-degree-six \(11\)-by-\(11\) incidence matchings can always be
+  chosen without a common-label collision, so every class-B instance admits
+  a proper support-respecting colouring of all \(23\) edges incident with
+  any chosen pair of vertices.
+- [`collaboration/first_lift_global_theorem/SIX_PACKING_NOTE.md`](collaboration/first_lift_global_theorem/SIX_PACKING_NOTE.md):
+  a universal six-colour packing theorem for every target class-B support
+  profile.  A Tutte-extremal switching argument handles the unique
+  non-greedy profile, proving that some dense five-colour prefix always
+  extends to a sixth matching; the remaining eleven colours are unresolved.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
