@@ -269,7 +269,9 @@ def audit_witness(path: Path) -> None:
             not selected_union.isdisjoint(matching)
             for matching in compact.perfect_matchings(support)
         )
-    print("PASS SAT witness is a direct totally blocked seven-prefix")
+    print(
+        "PASS SAT witness blocks all seven remaining size-ten supports"
+    )
 
 
 def main() -> None:

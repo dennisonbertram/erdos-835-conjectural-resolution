@@ -1,4 +1,4 @@
-"""Write a compact exact CNF for a totally blocked exceptional seven-prefix.
+"""Write a compact exact CNF for all seven blocked remaining size-ten supports.
 
 This is an independent encoding of the same mathematical search as
 ``write_r0_full_blocking_cnf.py``.  The main simplification is to represent

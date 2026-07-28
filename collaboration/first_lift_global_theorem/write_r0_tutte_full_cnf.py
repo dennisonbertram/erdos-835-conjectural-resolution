@@ -12,14 +12,16 @@ s+2 odd blocks of the catalogue shape.  Every edge between distinct blocks is
 required to lie in F.  This is equivalent to the residual graph on V having
 no perfect matching.
 
-SAT is therefore a directly checkable totally blocked seven-prefix.  Checked
-UNSAT, together with the independently verified exhaustive barrier catalogue,
-proves the exceptional r=0 eighth-matching lemma.
+SAT is therefore a directly checkable seven-prefix blocking all seven
+remaining size-ten supports. Checked UNSAT, together with the independently
+verified exhaustive barrier catalogue, proves the exceptional r=0
+eighth-matching lemma.
 """
 
 from __future__ import annotations
 
 import argparse
+from itertools import combinations
 from pathlib import Path
 
 import write_r0_compact_full_cnf as compact
@@ -37,7 +39,51 @@ BARRIERS = (
 )
 
 
-def build(path: Path, surviving_only: bool = False) -> None:
+def require_four_distinct_cores(
+    writer: compact.Writer,
+    descriptors: list[list[int]],
+) -> None:
+    """Forbid seven rows from using at most three distinct sorted cores."""
+    different: dict[tuple[int, int], int] = {}
+    for left, right in combinations(range(7), 2):
+        assert len(descriptors[left]) == len(descriptors[right])
+        difference_bits = []
+        for left_bit, right_bit in zip(
+            descriptors[left], descriptors[right]
+        ):
+            xor = writer.variable()
+            difference_bits.append(xor)
+            # xor iff left_bit and right_bit differ.
+            writer.add([-xor, left_bit, right_bit])
+            writer.add([-xor, -left_bit, -right_bit])
+            writer.add([-left_bit, right_bit, xor])
+            writer.add([left_bit, -right_bit, xor])
+        pair_different = writer.variable()
+        writer.add([-pair_different, *difference_bits])
+        different[left, right] = pair_different
+
+    # If there are at least four equivalence classes, then outside every
+    # three chosen representatives is a row different from all three.
+    for representatives in combinations(range(7), 3):
+        witnesses = []
+        for row in range(7):
+            if row in representatives:
+                continue
+            witness = writer.variable()
+            witnesses.append(witness)
+            for representative in representatives:
+                pair = tuple(sorted((row, representative)))
+                writer.add([-witness, different[pair]])
+        writer.add(witnesses)
+
+
+def build(
+    path: Path,
+    surviving_only: bool = False,
+    require_four_cores: bool = False,
+) -> None:
+    if require_four_cores and not surviving_only:
+        raise ValueError("--require-four-cores requires --surviving-only")
     writer = compact.Writer(path)
     barriers = BARRIERS[3:] if surviving_only else BARRIERS
 
@@ -99,9 +145,11 @@ def build(path: Path, surviving_only: bool = False) -> None:
         writer.exactly([*omissions, *unused_incident], 10)
 
     # Every remaining size-ten support chooses a coarsened Tutte barrier.
+    core_descriptors = []
     for row in range(7):
         choices = writer.variables_block(len(barriers))
         writer.exactly_one(choices)
+        descriptor = list(choices)
 
         for choice, (_, separator_size, block_sizes) in zip(
             choices, barriers
@@ -128,6 +176,9 @@ def build(path: Path, surviving_only: bool = False) -> None:
                 writer.exactly(group, size, gate=choice)
 
             blocks = groups[1:]
+            descriptor.extend(
+                variable for block in blocks for variable in block
+            )
             # Blocks of the same size are exchangeable.  Sorting adjacent
             # equal-size blocks removes factors as large as 6! for K_6.
             for block in range(len(blocks) - 1):
@@ -150,12 +201,17 @@ def build(path: Path, surviving_only: bool = False) -> None:
                                 f[edge],
                             ]
                         )
+        core_descriptors.append(descriptor)
+
+    if require_four_cores:
+        require_four_distinct_cores(writer, core_descriptors)
 
     writer.finish()
     print(
         f"WROTE {path} variables={writer.variables} "
         f"clauses={writer.clauses} "
-        f"barriers={'surviving' if surviving_only else 'all'}",
+        f"barriers={'surviving' if surviving_only else 'all'} "
+        f"four_cores={require_four_cores}",
         flush=True,
     )
 
@@ -171,8 +227,20 @@ def main() -> None:
             "from a total obstruction"
         ),
     )
+    parser.add_argument(
+        "--require-four-cores",
+        action="store_true",
+        help=(
+            "Use the prior three-core capacity theorem that a total "
+            "obstruction needs at least four distinct surviving cores"
+        ),
+    )
     args = parser.parse_args()
-    build(args.output, surviving_only=args.surviving_only)
+    build(
+        args.output,
+        surviving_only=args.surviving_only,
+        require_four_cores=args.require_four_cores,
+    )
 
 
 if __name__ == "__main__":

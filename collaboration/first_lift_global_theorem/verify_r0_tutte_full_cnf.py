@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import subprocess
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import verify_r0_compact_full_cnf as compact_audit
 import write_r0_tutte_full_cnf as tutte
@@ -50,6 +52,39 @@ def audit_catalogue() -> None:
     print("PASS exhaustive seven-shape size-ten Tutte catalogue")
 
 
+def audit_four_core_projection() -> None:
+    cases = (
+        ((0, 0, 0, 0, 0, 0, 0), False),
+        ((0, 1, 0, 1, 0, 1, 0), False),
+        ((0, 1, 2, 0, 1, 2, 0), False),
+        ((0, 1, 2, 3, 0, 1, 2), True),
+        ((0, 1, 2, 3, 0, 1, 3), True),
+    )
+    with TemporaryDirectory(prefix="r0-four-core-") as directory:
+        for case_index, (values, expected_sat) in enumerate(cases):
+            path = Path(directory) / f"case-{case_index}.cnf"
+            writer = tutte.compact.Writer(path)
+            descriptors = [
+                writer.variables_block(2) for _ in range(7)
+            ]
+            tutte.require_four_distinct_cores(writer, descriptors)
+            for descriptor, value in zip(descriptors, values):
+                for bit_index, variable in enumerate(descriptor):
+                    writer.add(
+                        [variable if value >> bit_index & 1 else -variable]
+                    )
+            writer.finish()
+            result = subprocess.run(
+                ["/opt/homebrew/bin/cadical", "-q", str(path)],
+                check=False,
+                capture_output=True,
+            )
+            observed_sat = result.returncode == 10
+            assert result.returncode in (10, 20)
+            assert observed_sat == expected_sat
+    print("PASS four-distinct-core projection on 1/2/3/4-class controls")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--cnf", type=Path)
@@ -61,6 +96,7 @@ def main() -> None:
     compact_audit.audit_lex_projection()
     compact_audit.audit_matching_enumeration()
     audit_catalogue()
+    audit_four_core_projection()
     if args.cnf:
         compact_audit.scan_dimacs(args.cnf)
     if args.witness:
