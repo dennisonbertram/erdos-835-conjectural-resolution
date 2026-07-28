@@ -1189,6 +1189,12 @@ routes, but not the asymmetric case.
   six matching layers, a residual perfect matching can avoid any prescribed
   one or two disjoint available edges; every seventh-layer obstruction must
   contribute a critical matching pattern of size at least three.
+- [`collaboration/first_lift_global_theorem/R0_CORE_PAIR_CATALOGUE.md`](collaboration/first_lift_global_theorem/R0_CORE_PAIR_CATALOGUE.md):
+  an exact \(S_{13}\)-reduced enumeration of all \(764{,}764\) labelled
+  size-ten obstruction cores in the exceptional profile.  The pair table
+  rules out every coexistence involving \(K_{3,3,3}\), restricts
+  \(K_{5,5}\) to one partner type, and leaves a finite sparse-core overlap
+  frontier for the eighth matching.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
@@ -1558,6 +1564,8 @@ python3 -B \
   collaboration/first_lift_global_theorem/verify_eighth_matching_core_catalogue.py
 python3 -B \
   collaboration/first_lift_global_theorem/verify_twelve_support_switching.py
+python3 -B \
+  collaboration/first_lift_global_theorem/verify_r0_core_pairs.py
 python3 -B \
   collaboration/first_lift_aggregate_graphicity/verify_aggregate_graphicity.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
