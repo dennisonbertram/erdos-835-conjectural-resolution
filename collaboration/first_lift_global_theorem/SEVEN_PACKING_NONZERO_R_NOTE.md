@@ -10,10 +10,11 @@ Write the target class-B support profile as
 \]
 This note proves a seven-colour packing theorem for every \(r\ge1\).  It also
 reduces the exceptional \(r=0\) case to two explicit Tutte-barrier shapes.
+`SEVEN_PACKING_R0_NOTE.md` subsequently eliminates those shapes and closes
+the universal seven-prefix theorem.
 
-Thus it is not yet a universal seven-prefix theorem, and it is not a
-seventeen-colour completion theorem for class B, class B-prime, or the
-fan-realizable subclass.
+Neither result is a seventeen-colour completion theorem for class B,
+class B-prime, or the fan-realizable subclass.
 
 ## A six-matching resilience lemma on twelve vertices
 
@@ -116,13 +117,13 @@ must have one of exactly two forms:
 fully covered by the six previously selected matchings, on the vertices
 outside the respective Tutte set.
 
-## Remaining frontier
+## Subsequent closure of the boundary
 
 The two surviving saturation patterns are equality cases, not
-counterexamples.  The six-prefix can still be re-chosen, and no class-B
-instance is known in which every eligible third size-ten support produces
-one of them.  Closing \(r=0\) requires a switching argument that breaks both
-patterns, or a checkable instance proving that no seven-prefix exists.
+counterexamples.  `SEVEN_PACKING_R0_NOTE.md` proves that a six-matchings
+union contains at most one such core and that the class-B row sums force a
+remaining size-ten support to omit it.  Thus the \(r=0\) case, and hence the
+universal seven-prefix theorem, is now closed.
 
 `verify_seven_packing_boundary.py` checks the finite component arithmetic,
 profile choices, capacity eliminations, and the row-sum contradiction for

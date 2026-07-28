@@ -111,3 +111,24 @@ Exit code: 0.
 The universal paper argument for r>=1 and the exact r=0 boundary are in
 SEVEN_PACKING_NONZERO_R_NOTE.md.  The remaining r=0 equality cases are not
 claimed to be counterexamples.
+
+
+Seven-colour theorem for r=0
+============================
+
+Command:
+
+  /opt/homebrew/bin/python3 -B \
+    collaboration/first_lift_global_theorem/verify_seven_packing_r0.py
+
+Expected output:
+
+  PASS exhaustive core-pair audit: at most one B/C core exists
+  PASS row sums force a remaining size-10 support to omit the core
+  PASS the exceptional r=0 profile has a seven-colour packing
+  SCOPE: seven colours pack; the remaining ten are unresolved.
+
+Exit code: 0.
+
+Together with SEVEN_PACKING_NONZERO_R_NOTE.md, SEVEN_PACKING_R0_NOTE.md
+proves the universal seven-prefix theorem for every target class-B profile.
