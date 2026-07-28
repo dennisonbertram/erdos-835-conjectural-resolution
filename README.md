@@ -1321,7 +1321,10 @@ routes, but not the asymmetric case.
   a three-colour continuation.  Strict canonical replay has been audited; a
   replayed ten-minute campaign accumulated 2,190,962 valid repair cuts
   without finding either a counterexample or UNSAT.  The bounded run is
-  coverage evidence, not a theorem.
+  coverage evidence, not a theorem; the two compressed witness logs are
+  published in the
+  [`r0-cegis-evidence-2026-07-28`](https://github.com/dennisonbertram/erdos-835-conjectural-resolution/releases/tag/r0-cegis-evidence-2026-07-28)
+  release.
 - [`collaboration/coordinated_nine_r1_reduction/NOTE.md`](collaboration/coordinated_nine_r1_reduction/NOTE.md):
   the exact \(r=1\) one- and two-step Tutte catalogues, core-reuse ceilings,
   and three literal class-B pair obstructions with triple intersections

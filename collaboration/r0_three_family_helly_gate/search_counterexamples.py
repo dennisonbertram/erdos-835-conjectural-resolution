@@ -149,6 +149,27 @@ class Cnf:
             self.add(-state(count_literals, upper + 1))
 
 
+def lexicographic_leq(
+    cnf: Cnf,
+    tag: tuple,
+    left: list[int],
+    right: list[int],
+) -> None:
+    """Encode the bit vector ``left`` as lexicographically <= ``right``."""
+    if len(left) != len(right):
+        raise ValueError("lexicographic vectors have different lengths")
+    prefix_equal = cnf.true
+    for position, (left_bit, right_bit) in enumerate(zip(left, right)):
+        cnf.add(-prefix_equal, -left_bit, right_bit)
+        next_equal = cnf.variable(("lex_equal", tag, position))
+        cnf.add(-next_equal, prefix_equal)
+        cnf.add(-next_equal, -left_bit, right_bit)
+        cnf.add(-next_equal, left_bit, -right_bit)
+        cnf.add(-prefix_equal, -left_bit, -right_bit, next_equal)
+        cnf.add(-prefix_equal, left_bit, right_bit, next_equal)
+        prefix_equal = next_equal
+
+
 def build_instance(
     omitted_triples: tuple[tuple[int, ...], ...],
     *,
@@ -194,6 +215,22 @@ def build_instance(
                 ],
                 upper=1,
             )
+
+    # The three size-four layers and the three size-five layers are unordered:
+    # only their union is used by the matching families and capacity cuts.
+    for left, right in ((0, 1), (1, 2), (3, 4), (4, 5)):
+        lexicographic_leq(
+            cnf,
+            ("prefix", left, right),
+            [
+                colour_edge(left, edge_index)
+                for edge_index in range(len(EDGES))
+            ],
+            [
+                colour_edge(right, edge_index)
+                for edge_index in range(len(EDGES))
+            ],
+        )
 
     for edge_index, edge in enumerate(EDGES):
         colours = [

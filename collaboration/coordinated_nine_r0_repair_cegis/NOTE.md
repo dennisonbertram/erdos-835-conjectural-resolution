@@ -192,6 +192,15 @@ The standalone second-wave JSONL hash was
 317d845dc152737e0d33b2607936fe40be9f405f12baf422ee64202199b5969b
 ```
 
+Both logs are published as compressed assets in the public
+[`r0-cegis-evidence-2026-07-28`](https://github.com/dennisonbertram/erdos-835-conjectural-resolution/releases/tag/r0-cegis-evidence-2026-07-28)
+release.  Their gzip SHA-256 values are
+
+```text
+wave 1: 1ea8c0e40842e2570f9ae0fc539f7884d9d0650256007cec9fb04e28d3165a95
+wave 2: e96f82ea68bfe81beabb4bbe08ec5966b28f96ec4d3a899f9f6c802c1a65e82f
+```
+
 It exercised all \(990=6\binom{11}{3}\) repair-layer/route signatures and
 found neither a validated counterexample nor UNSAT.  This is positive
 coverage evidence only.
