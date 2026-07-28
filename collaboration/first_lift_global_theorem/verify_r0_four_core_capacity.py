@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Screen an arbitrary four-core type multiset by subset capacity."""
+"""Screen an arbitrary four- or five-core multiset by subset capacity."""
 
 from __future__ import annotations
 
@@ -32,9 +32,11 @@ def anchor_cost(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("kinds", nargs=4, choices=KINDS)
+    parser.add_argument("kinds", nargs="+", choices=KINDS)
     parser.add_argument("--stop-cover", action="store_true")
     args = parser.parse_args()
+    if len(args.kinds) not in (4, 5):
+        parser.error("provide exactly four or five core types")
 
     pattern = tuple(sorted(args.kinds, key=KINDS.index))
     if sum(BASE_CAPACITY[kind] for kind in pattern) < 7:
@@ -165,7 +167,10 @@ def main() -> None:
     )
     print(f"covering_union_edge_counts={dict(sorted(union_edges.items()))}")
     if covering == 0:
-        print("PASS: four-core type multiset cannot cover seven supports")
+        print(
+            f"PASS: {len(pattern)}-core type multiset cannot cover "
+            "seven supports"
+        )
     elif unresolved == 0:
         print("PASS: complement-row identity excludes every capacity cover")
     else:
