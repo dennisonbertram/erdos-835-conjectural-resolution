@@ -74,6 +74,16 @@ New exact results in the note include:
   CNF/learned/log/DRAT artifacts pass both hash layers, and all sixteen DRAT
   traces replay as `VERIFIED`.  Thus orbits zero through six and orbit eight
   are closed; orbit seven and orbits nine through fifteen remain open;
+- an [exact post-\(r=0\) bridge audit](collaboration/opus5/post_r0_global_bridge/INDEPENDENT_AUDIT.md).
+  For a fixed six-set, the tower data through level two are identified with
+  a partial proper colouring of \(J(19,3)\); the six first-lift instances
+  share thirteen proper \(17\)-edge-colourings of \(K_6\), and their
+  level-two compatibility is exactly a same-colour six-matching packing.
+  An explicit class-B-prime \(r=3\) instance has a legitimate
+  fourteen-matching prefix whose residual is the Petersen graph, even though
+  an independently checked alternative full completion of the same instance
+  exists.  This refutes arbitrary-prefix extension and locates the missing
+  global implication, but does not prove that implication or #835;
 - an exact generic compatible-pair classifier covering orbits four through
   fifteen.  A complete alternating path/cycle word
   invariant, checked independently against the full stabilizer action
