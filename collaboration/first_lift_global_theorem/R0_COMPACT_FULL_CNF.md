@@ -231,6 +231,34 @@ clauses=148262
 sha256=e7b3a1d68bc8ff7fe688bfe068a0df93bef5518d86715e2240a845c37fa1ceb9
 ```
 
+Commit `34ec83d` proves that an exactly-five-core total obstruction cannot
+contain even one \(K_{3,3,1,1}\) core. Thus any obstruction containing that
+type needs at least six distinct cores. The corresponding strongest generated
+target is:
+
+```bash
+/opt/homebrew/bin/python3 -B \
+  collaboration/first_lift_global_theorem/write_r0_tutte_full_cnf.py \
+  --surviving-only --require-four-cores --require-five-cores \
+  --exclude-all-k6 --b-needs-six-cores \
+  /private/tmp/erdos835-r0-tutte-b-six.cnf
+```
+
+It has:
+
+```text
+variables=23168
+clauses=148501
+sha256=dd5555cc4f508dc5278ac7a911898be4579fd72f5a9536cd885c9a6fd5c9f827
+```
+
+The deterministic row-type partition and its SAT-witness/DRAT-replay hooks
+are in `r0_five_core_type_branches/`. It has 119 exhaustive row-count
+branches: 35 \(B\)-free branches requiring at least five distinct cores and
+84 \(B\)-present branches requiring at least six. These row-count branches
+must not be confused with the 21 unresolved exactly-five-core type multisets
+over \(A,C,D\).
+
 ## Current status
 
 Both exact encodings and their local projection tests are verified. A
@@ -241,3 +269,32 @@ real-time cap and returned `UNKNOWN` after 542.62 CPU seconds and
 1,420,140 conflicts, with 2,637 variables remaining. Its partial DRAT trace
 is nonterminal and is not a certificate. This is bounded search telemetry
 only.
+
+Earlier uncapped catalogue-dependent searches that were manually stopped or
+interrupted also have status `UNKNOWN`; their partial proof streams are not
+certificates. The superseded two-\(B\) run was cleanly interrupted after the
+stronger one-\(B\) theorem had been encoded and audited. Its terminal record
+is:
+
+```text
+CNF=/private/tmp/erdos835-r0-tutte-two-b.cnf
+variables=23168
+clauses=148514
+sha256=bc57e73ffed4a1796a27cb6070cfde31cf202c1173e05d65631faf1a835ff383
+wall_time=00:06:20
+cpu_time=00:02:53.46
+returncode=130
+witness=absent
+partial_drat_bytes=381919232
+partial_drat_sha256=5b22fbb3ecee217dbba1076b50d4e22acd792bfd1f2a855875047e0e1bd10270
+status=UNKNOWN_NONTERMINAL
+```
+
+The uncapped one-\(B\) target above is now active with seed 83548, witness
+target `/private/tmp/erdos835-r0-tutte-b-six.witness`, and proof stream
+`/private/tmp/erdos835-r0-tutte-b-six.drat`. Its witness remains absent while
+the solver is running, and its growing proof stream is nonterminal.
+
+No branch solver is launched while the monolithic process is active. A result
+remains nonterminal unless it is either a directly audited SAT witness or an
+UNSAT proof independently replayed by `drat-trim -i`.

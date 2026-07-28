@@ -244,6 +244,86 @@ def audit_five_core_projection() -> None:
     print("PASS five-distinct-core projection controls")
 
 
+def audit_high_b_needs_six_projection() -> None:
+    cases = (
+        ((0, 1, 2, 3, 4, 0, 1), 1, True),
+        ((0, 1, 2, 3, 4, 0, 1), 2, False),
+        ((0, 1, 2, 3, 4, 5, 0), 2, True),
+    )
+    with TemporaryDirectory(prefix="r0-high-b-six-core-") as directory:
+        for case_index, (values, b_count, expected_sat) in enumerate(cases):
+            path = Path(directory) / f"case-{case_index}.cnf"
+            writer = tutte.compact.Writer(path)
+            descriptors = [writer.variables_block(3) for _ in range(7)]
+            choices = [writer.variables_block(2) for _ in range(7)]
+            different = tutte.require_four_distinct_cores(
+                writer, descriptors
+            )
+            tutte.require_five_distinct_cores(writer, different)
+            tutte.require_six_cores_if_two_b_rows(
+                writer, choices, different
+            )
+            for descriptor, value in zip(descriptors, values):
+                for bit_index, variable in enumerate(descriptor):
+                    writer.add(
+                        [variable if value >> bit_index & 1 else -variable]
+                    )
+            for row, row_choices in enumerate(choices):
+                writer.add(
+                    [row_choices[1] if row < b_count else -row_choices[1]]
+                )
+            writer.finish()
+            result = subprocess.run(
+                ["/opt/homebrew/bin/cadical", "-q", str(path)],
+                check=False,
+                capture_output=True,
+            )
+            observed_sat = result.returncode == 10
+            assert result.returncode in (10, 20)
+            assert observed_sat == expected_sat
+    print("PASS two-K3311-implies-six-core projection controls")
+
+
+def audit_b_needs_six_projection() -> None:
+    cases = (
+        ((0, 1, 2, 3, 4, 0, 1), 0, True),
+        ((0, 1, 2, 3, 4, 0, 1), 1, False),
+        ((0, 1, 2, 3, 4, 5, 0), 1, True),
+    )
+    with TemporaryDirectory(prefix="r0-b-six-core-") as directory:
+        for case_index, (values, b_count, expected_sat) in enumerate(cases):
+            path = Path(directory) / f"case-{case_index}.cnf"
+            writer = tutte.compact.Writer(path)
+            descriptors = [writer.variables_block(3) for _ in range(7)]
+            choices = [writer.variables_block(2) for _ in range(7)]
+            different = tutte.require_four_distinct_cores(
+                writer, descriptors
+            )
+            tutte.require_five_distinct_cores(writer, different)
+            tutte.require_six_cores_if_barrier_b(
+                writer, choices, different
+            )
+            for descriptor, value in zip(descriptors, values):
+                for bit_index, variable in enumerate(descriptor):
+                    writer.add(
+                        [variable if value >> bit_index & 1 else -variable]
+                    )
+            for row, row_choices in enumerate(choices):
+                writer.add(
+                    [row_choices[1] if row < b_count else -row_choices[1]]
+                )
+            writer.finish()
+            result = subprocess.run(
+                ["/opt/homebrew/bin/cadical", "-q", str(path)],
+                check=False,
+                capture_output=True,
+            )
+            observed_sat = result.returncode == 10
+            assert result.returncode in (10, 20)
+            assert observed_sat == expected_sat
+    print("PASS K3311-implies-six-core projection controls")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--cnf", type=Path)
@@ -259,6 +339,8 @@ def main() -> None:
     audit_four_core_projection()
     audit_b_needs_five_projection()
     audit_five_core_projection()
+    audit_high_b_needs_six_projection()
+    audit_b_needs_six_projection()
     if args.cnf:
         compact_audit.scan_dimacs(args.cnf)
     if args.witness:

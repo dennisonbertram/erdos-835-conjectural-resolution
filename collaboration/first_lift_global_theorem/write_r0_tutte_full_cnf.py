@@ -112,6 +112,54 @@ def require_five_distinct_cores(
         writer.add(witnesses if gate is None else [-gate, *witnesses])
 
 
+def require_six_distinct_cores(
+    writer: compact.Writer,
+    different: dict[tuple[int, int], int],
+    gate: int,
+) -> None:
+    """Conditionally require at least six core equivalence classes."""
+    for representatives in combinations(range(7), 5):
+        witnesses = []
+        for row in range(7):
+            if row in representatives:
+                continue
+            witness = writer.variable()
+            witnesses.append(witness)
+            for representative in representatives:
+                pair = tuple(sorted((row, representative)))
+                writer.add([-witness, different[pair]])
+        writer.add([-gate, *witnesses])
+
+
+def require_six_cores_if_two_b_rows(
+    writer: compact.Writer,
+    barrier_choices_by_row: list[list[int]],
+    different: dict[tuple[int, int], int],
+) -> None:
+    """If at least two rows have 3311 cores, require six core classes."""
+    b_choices = [choices[1] for choices in barrier_choices_by_row]
+    at_least_two_b = writer.variable()
+    for pair in combinations(b_choices, 2):
+        writer.add([-pair[0], -pair[1], at_least_two_b])
+    require_six_distinct_cores(
+        writer, different, gate=at_least_two_b
+    )
+
+
+def require_six_cores_if_barrier_b(
+    writer: compact.Writer,
+    barrier_choices_by_row: list[list[int]],
+    different: dict[tuple[int, int], int],
+) -> None:
+    """If any row has a 3311 core, require six core classes."""
+    b_choices = [choices[1] for choices in barrier_choices_by_row]
+    has_b = writer.variable()
+    for choice in b_choices:
+        writer.add([-choice, has_b])
+    writer.add([-has_b, *b_choices])
+    require_six_distinct_cores(writer, different, gate=has_b)
+
+
 def build(
     path: Path,
     surviving_only: bool = False,
@@ -119,6 +167,8 @@ def build(
     require_five_cores: bool = False,
     exclude_all_k6: bool = False,
     b_needs_five_cores: bool = False,
+    high_b_needs_six_cores: bool = False,
+    b_needs_six_cores: bool = False,
     type_counts: tuple[int, ...] | None = None,
 ) -> None:
     if require_four_cores and not surviving_only:
@@ -132,6 +182,14 @@ def build(
     if b_needs_five_cores and not require_four_cores:
         raise ValueError(
             "--b-needs-five-cores requires --require-four-cores"
+        )
+    if high_b_needs_six_cores and not require_five_cores:
+        raise ValueError(
+            "--high-b-needs-six-cores requires --require-five-cores"
+        )
+    if b_needs_six_cores and not require_five_cores:
+        raise ValueError(
+            "--b-needs-six-cores requires --require-five-cores"
         )
     writer = compact.Writer(path)
     barriers = BARRIERS[3:] if surviving_only else BARRIERS
@@ -284,6 +342,14 @@ def build(
         )
         if require_five_cores:
             require_five_distinct_cores(writer, different)
+            if high_b_needs_six_cores:
+                require_six_cores_if_two_b_rows(
+                    writer, barrier_choices_by_row, different
+                )
+            if b_needs_six_cores:
+                require_six_cores_if_barrier_b(
+                    writer, barrier_choices_by_row, different
+                )
         elif b_needs_five_cores:
             require_five_cores_if_barrier_b(
                 writer, barrier_choices_by_row, different
@@ -298,6 +364,8 @@ def build(
         f"five_cores={require_five_cores} "
         f"exclude_all_k6={exclude_all_k6} "
         f"b_needs_five_cores={b_needs_five_cores} "
+        f"high_b_needs_six_cores={high_b_needs_six_cores} "
+        f"b_needs_six_cores={b_needs_six_cores} "
         f"type_counts={type_counts}",
         flush=True,
     )
@@ -353,6 +421,22 @@ def main() -> None:
             "K3311, at least five distinct cores are required"
         ),
     )
+    parser.add_argument(
+        "--high-b-needs-six-cores",
+        action="store_true",
+        help=(
+            "Use the exact five-core high-B theorem: at least two "
+            "K3311 rows require at least six distinct cores"
+        ),
+    )
+    parser.add_argument(
+        "--b-needs-six-cores",
+        action="store_true",
+        help=(
+            "Use the exact five-core B theorem: any K3311 row "
+            "requires at least six distinct cores"
+        ),
+    )
     args = parser.parse_args()
     type_counts = (
         tuple(map(int, args.type_counts.split(",")))
@@ -366,6 +450,8 @@ def main() -> None:
         require_five_cores=args.require_five_cores,
         exclude_all_k6=args.exclude_all_k6,
         b_needs_five_cores=args.b_needs_five_cores,
+        high_b_needs_six_cores=args.high_b_needs_six_cores,
+        b_needs_six_cores=args.b_needs_six_cores,
         type_counts=type_counts,
     )
 
