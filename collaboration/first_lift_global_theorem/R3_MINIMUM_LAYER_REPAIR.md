@@ -1,6 +1,6 @@
 # Exact layer-repair distances for the two \(r=3\) dead prefixes
 
-Date: 2026-07-27.
+Date: 2026-07-28.
 
 ## Result and scope
 
