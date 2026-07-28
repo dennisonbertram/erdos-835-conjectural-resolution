@@ -1,0 +1,22 @@
+Target-order dense-prefix non-extension
+=======================================
+
+Run from the repository root on 2026-07-27.
+
+Command:
+
+  /opt/homebrew/bin/python3 -B \
+    collaboration/first_lift_global_theorem/verify_dead_prefix.py
+
+Expected output:
+
+  Exact verifier: target-order dense-prefix non-extension
+  =========================================================
+  PASS class-B target shape: row sums 5, profile (n8,n10,n12)=(7,10,0)
+  PASS explicit proper K18-E(K13) colouring: the instance is class B-prime
+  PASS dense-criterion five-prefix is dead: colour 5 sees K3 disjoint-union K5
+  PASS different explicit 17-matching certificate partitions all 78 edges
+  SCOPE: counterexample to arbitrary greedy prefix extension only;
+         no counterexample to class-B, class-B-prime, or fan completion.
+
+Exit code: 0.
