@@ -61,7 +61,7 @@ occurrences of vertices of \(W\) among all ten remaining complement sets
 is
 \[
  \sum_{v\in W}(d_F(v)-2)
- \ge 2|E(J)|-2|W|. \tag{2}
+ \ge 2|E(J)|-2|W|. \tag{3}
 \]
 The three complement five-sets contribute at most fifteen occurrences in
 \(W\).
@@ -76,7 +76,7 @@ the six-core case, check both possible doubled-core choices, except that
 the \(B\)-core has reuse ceiling one and cannot be doubled.
 
 For every row of (2), even the larger of the possible triple-incidence
-bounds is strictly below the lower bound in (2):
+bounds is strictly below the lower bound in (3):
 \[
 \begin{array}{c|c|c|c}
 X&|W|&2|E(J)|-2|W|&
@@ -87,7 +87,7 @@ C&7&28&21\\
 C&8&34&28\\
 D&7&28&22\\
 D&8&36&29
-\end{array} \tag{3}
+\end{array} \tag{4}
 \]
 The same upper bounds cover the seven-core all-singleton assignment.
 
@@ -98,4 +98,8 @@ cover the seven blocked supports.
 
 `verify_r0_six_seven_k6.py` independently rebuilds all four candidate
 pools, solves every fixed-\(|W|\) finite optimization, checks the exact
-table (2), and checks every strict row-rank inequality in (3).
+table (2), and checks every strict row-rank inequality in (4).  It computes
+the optimization table twice: once with CP-SAT and once with a separate
+standard-library exhaustive backtracking search.  The latter fixes the
+support union under the stabilizer of the canonical first core and exhausts
+all distinct \(K_6\)-subfamilies subject to the edge and degree bounds.

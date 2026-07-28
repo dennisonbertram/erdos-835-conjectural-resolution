@@ -5,10 +5,17 @@ from __future__ import annotations
 
 from ortools.sat.python import cp_model
 
-from verify_r0_core_pairs import INCIDENT, VERTICES, embeddings, popcount
+from verify_r0_core_pairs import (
+    EDGE_ID,
+    INCIDENT,
+    VERTICES,
+    embeddings,
+    popcount,
+)
 
 
 EDGE_COUNT = 78
+EDGES = tuple(sorted(EDGE_ID, key=EDGE_ID.get))
 
 
 def compatible_candidates(kind: str) -> tuple[
@@ -115,6 +122,112 @@ def minimum_edges(
     return name, round(solver.objective_value)
 
 
+def standard_library_minimum_edges(
+    core_count: int,
+    union_order: int,
+    first_support: frozenset[int],
+    first_edges: frozenset[int],
+    candidates: list[tuple[frozenset[int], frozenset[int]]],
+) -> int | None:
+    """Independently exhaust one fixed-union-order branch.
+
+    The vertices outside the fixed core are interchangeable under its
+    stabilizer.  Hence a family with this union order may be relabelled so
+    that its support union is the canonical target below.
+    """
+    outside = tuple(vertex for vertex in VERTICES if vertex not in first_support)
+    target = first_support | frozenset(
+        outside[: union_order - len(first_support)]
+    )
+    target_mask = sum(1 << vertex for vertex in target)
+    first_edge_mask = sum(1 << edge for edge in first_edges)
+    filtered = [
+        (
+            sum(1 << vertex for vertex in support),
+            sum(1 << edge for edge in edges),
+        )
+        for support, edges in candidates
+        if support <= target
+    ]
+    filtered.sort(
+        key=lambda item: (
+            popcount(item[1] & ~first_edge_mask),
+            item,
+        )
+    )
+
+    suffix_support = [0] * (len(filtered) + 1)
+    for index in range(len(filtered) - 1, -1, -1):
+        suffix_support[index] = (
+            suffix_support[index + 1] | filtered[index][0]
+        )
+
+    first_support_mask = sum(1 << vertex for vertex in first_support)
+    first_degrees = tuple(
+        popcount(first_edge_mask & INCIDENT[vertex])
+        for vertex in VERTICES
+    )
+    best: int | None = None
+
+    def search(
+        start: int,
+        needed: int,
+        support_mask: int,
+        edge_mask: int,
+        degrees: tuple[int, ...],
+    ) -> None:
+        nonlocal best
+        edge_count = popcount(edge_mask)
+        if best is not None and edge_count >= best:
+            return
+        if needed == 0:
+            if support_mask == target_mask:
+                best = edge_count
+            return
+        if len(filtered) - start < needed:
+            return
+        if support_mask | suffix_support[start] != target_mask:
+            return
+
+        final_start = len(filtered) - needed
+        for index in range(start, final_start + 1):
+            candidate_support, candidate_edges = filtered[index]
+            new_edges = candidate_edges & ~edge_mask
+            if edge_count + popcount(new_edges) > 31:
+                continue
+            new_degrees = list(degrees)
+            bits = new_edges
+            valid = True
+            while bits:
+                least = bits & -bits
+                edge = least.bit_length() - 1
+                left, right = EDGES[edge]
+                new_degrees[left] += 1
+                new_degrees[right] += 1
+                if new_degrees[left] > 7 or new_degrees[right] > 7:
+                    valid = False
+                    break
+                bits ^= least
+            if not valid:
+                continue
+            search(
+                index + 1,
+                needed - 1,
+                support_mask | candidate_support,
+                edge_mask | candidate_edges,
+                tuple(new_degrees),
+            )
+
+    search(
+        0,
+        core_count - 1,
+        first_support_mask,
+        first_edge_mask,
+        first_degrees,
+    )
+    return best
+
+
 def main() -> None:
     expected_pools = {
         "5111": 28,
@@ -150,6 +263,14 @@ def main() -> None:
                 else:
                     assert status == "INFEASIBLE"
                     assert edge_count is None
+                independent_edge_count = standard_library_minimum_edges(
+                    core_count,
+                    union_order,
+                    first_support,
+                    first_edges,
+                    candidates,
+                )
+                assert independent_edge_count == edge_count
 
                 if edge_count is None:
                     continue
@@ -171,6 +292,7 @@ def main() -> None:
 
     print("PASS rebuilt all fixed-core compatible K6 partner pools")
     print("PASS exact minimum union orders and edge counts match the note")
+    print("PASS standard-library enumeration independently matches CP-SAT")
     print("PASS every unlisted union order is graph-screen infeasible")
     print("PASS full row-rank inequality excludes every surviving branch")
     print("SCOPE: six/seven cores with at most one non-K6 core")
