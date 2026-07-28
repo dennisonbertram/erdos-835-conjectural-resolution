@@ -164,6 +164,58 @@ def verify_six_prefix_reduction() -> None:
     print("PASS K55 capacity, unique-K6, reuse, and rigid-type arithmetic")
 
 
+def clique(vertices) -> frozenset[tuple[int, int]]:
+    return frozenset(combinations(sorted(vertices), 2))
+
+
+def verify_forced_edge_frontier() -> None:
+    # Refine the one-deleted-matching catalogue to one deleted edge.
+    # A block vertex with internal+separator degree below four needs to be
+    # an endpoint of that sole edge; at most two vertices can be deficient.
+    forced_rows = []
+    for separator, blocks in coarsened_catalogue(1):
+        deficient_vertices = sum(
+            block
+            for block in blocks
+            if block - 1 + separator < 4
+        )
+        if deficient_vertices <= 2:
+            forced_rows.append((separator, blocks))
+    assert forced_rows == [
+        (0, (5, 5)),
+        (4, (1, 1, 1, 1, 1, 1)),
+    ]
+
+    # K5,5-e requires 38 remaining incidences on its support, while its
+    # own outside triple requires three more; only 39 exist globally.
+    assert 8 * 4 + 2 * 3 + 3 == 41 > 39
+
+    # K6-e has four degree-five and two degree-at-least-four vertices.
+    # If all six triples avoid it, only the four fives+singleton can pay.
+    assert 4 * 4 + 2 * 3 == 22 > 4 * 5 + 1
+
+    # Exhaust the tiny coexistence claim for two K6-minus-edge cores.
+    base_vertices = frozenset(range(6))
+    base_missing = (0, 1)
+    base = clique(base_vertices) - frozenset((base_missing,))
+    feasible = []
+    for vertices in combinations(sorted(VERTICES), 6):
+        vertices = frozenset(vertices)
+        for missing in combinations(sorted(vertices), 2):
+            current = clique(vertices) - frozenset((missing,))
+            union = base | current
+            degrees = Counter(
+                vertex
+                for edge in union
+                for vertex in edge
+            )
+            if len(union) <= 26 and max(degrees.values()) <= 5:
+                feasible.append((vertices, missing))
+    assert len(feasible) == 15
+    assert all(vertices == base_vertices for vertices, _ in feasible)
+    print("PASS exact forced-edge rows and K6-minus-edge coexistence")
+
+
 def endpoints(matching: frozenset[tuple[int, int]]) -> frozenset[int]:
     return frozenset(vertex for edge in matching for vertex in edge)
 
@@ -309,6 +361,7 @@ def verify_pair_certificates() -> None:
 def main() -> None:
     verify_catalogues()
     verify_six_prefix_reduction()
+    verify_forced_edge_frontier()
     verify_pair_certificates()
     print("PASS coordinated-nine r=1 reduction")
     print("SCOPE: finite reduction and pair counterexample; no ninth theorem")

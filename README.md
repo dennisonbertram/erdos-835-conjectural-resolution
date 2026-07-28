@@ -1292,6 +1292,13 @@ routes, but not the asymmetric case.
   saturated \(K_6\) and \(K_5\) obstruction cores would require respectively
   \(22>21\) and \(15>14\) row incidences.  Packing the two prescribed
   size-twelve near-factors after that guaranteed first matching remains open.
+- [`collaboration/r2_size10_terminal_obstruction/NOTE.md`](collaboration/r2_size10_terminal_obstruction/NOTE.md):
+  a literal class-B certificate showing that an arbitrary perfect matching
+  on a live size-ten support need not extend with the two prescribed
+  size-twelve near-factors.  Both near-factor families are nonempty but all
+  \(120^2\) cross-pairs share one forced edge.  Together with the size-eight
+  delimiter, this proves that the initial-support dichotomy must be
+  strengthened to a globally coordinated choice.
 - [`collaboration/k7_terminal_switching/NOTE.md`](collaboration/k7_terminal_switching/NOTE.md):
   a self-contained independent proof and \(6^7\)-case arithmetic audit of
   the last separator-five \(K_7\) switch.  It tracks the exact Hall

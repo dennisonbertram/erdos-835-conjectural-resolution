@@ -181,15 +181,21 @@ exceeding the total \(39\) in (4).
 
 Hence every forced edge in a remaining support comes from a
 \(K_6-e\) deletion core.  Two such cores can coexist in \(D\) only on
-the same six-set.  Indeed, the four non-endpoints of the missing edge in
-one core already have \(D\)-degree five.  If another core used a vertex
-outside the first six-set, their intersection could contain only the two
-endpoints; the two cores would then use at least
+the same six-set.  To see this, let their six-sets meet in \(k\) vertices.
+If \(k\le2\), their union has at least
 \[
-14+14-\binom22=27
+14+14-\binom k2\ge27
 \]
-edges.  On the same six-set, two different missing edges unite to a full
-\(K_6\).
+edges.  If \(3\le k\le5\), take the first core's \(k-2\) or more common
+vertices that are not endpoints of its missing edge.  They already have
+\(D\)-degree five and hence have no selected neighbour outside the first
+six-set.  The second \(K_6\)-minus-edge core would require all but at most
+one of the
+\[
+(k-2)(6-k)\ge3
+\]
+edges from those vertices to its new vertices, a contradiction.  On the
+same six-set, two different missing edges unite to a full \(K_6\).
 
 After switch (7a), there is consequently at most one forced-edge core,
 with one missing edge \(e\).  It can make \(e\) forced only in supports
