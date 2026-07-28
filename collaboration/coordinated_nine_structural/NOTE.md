@@ -368,13 +368,82 @@ The latter exists by Dirac, because it has order six and minimum degree
 at least three.  These six edges form the required matching missing
 \(z\).
 
+The separator-four type in (24) is also always switch-repairable.  Let
+\(S\) be the separator, \(|S|=4\).  The coarsening can be chosen so that
+five vertices \(T\) are actual singleton components of \(R-S\), while
+the other three vertices form a block \(C\).  Hence
+\[
+ |T|=5,\quad |C|=3,\quad
+ E_R(T,T\cup C)=\varnothing. \tag{26}
+\]
+Every \(t\in T\) has degree at least four in \(R\), so it is adjacent in
+\(R\) to all four vertices of \(S\).
+
+Put \(L=S\cup\{z\}\).  Since \(\delta(G)\ge7\), each \(t\in T\) must use
+all three possible additional, distinct incidences: \(tz\), its edge in
+\(M_x\), and its edge in \(M_y\).  Neither selected edge can go to
+\(S\) or to \(z\), because all four \(T\)-to-\(S\) edges survive in
+\(R\), and using \(tz\) would merge two of the three additional
+incidences.  Thus \(x,y\notin T\), and in each selected matching all five
+vertices of \(T\) are paired into \(T\cup C\).
+
+For one selected matching, let \(a\) be its number of \(T\)-to-\(T\)
+edges and \(b\) its number of \(T\)-to-\(C\) edges.  Then
+\[
+ 2a+b=5,\qquad b\le3,
+\]
+so \(b\in\{1,3\}\) and \(a\ge1\).  The matching also has an edge wholly
+inside \(L\): after the \(T\)-vertices are covered, at most \(3-b\)
+unused \(C\)-vertices are available to partner the at least four
+non-omitted vertices of \(L\).
+
+First suppose \(R[C]\) contains an edge \(c_1c_2\), and write
+\(C=\{c_1,c_2,c_3\}\).  Choose a \(T\)-to-\(T\) edge \(t_1t_2\) and an
+\(L\)-to-\(L\) edge \(uv\) in the same selected matching, and switch
+\[
+ t_1t_2,\ uv
+ \quad\text{to}\quad
+ t_1u,\ t_2v. \tag{27}
+\]
+All required new edges exist: every \(T\)-to-\(S\) edge survives in
+\(R\), and every \(tz\) was forced above.  They are unused by the other
+selected matching.  Now use the freed \(t_1t_2\) in the third matching.
+The vertex \(c_3\) has an \(R\)-neighbour \(s_0\in S\), since
+\(d_R(c_3)\ge4\) and it has only two possible neighbours in \(C\).
+Use \(c_1c_2,c_3s_0\), and match the three vertices of
+\(T-\{t_1,t_2\}\) bijectively to \(S-\{s_0\}\).  Together with
+\(t_1t_2\), these are six pairwise disjoint edges forming the matching
+missing \(z\); none is an edge introduced in (27).
+
+It remains to treat \(R[C]\) empty.  Then the degree-four condition makes
+every edge between
+\[
+ W=T\cup C\quad\text{and}\quad S
+\]
+present in \(R\).  Applying the same three-additional-incidences argument
+to each \(c\in C\) shows that \(cz\) is present and unused, and that each
+of \(M_x,M_y\) pairs every vertex of \(W\) inside \(W\).  In particular,
+\(x,y\in L\); each selected matching consists locally of a perfect
+matching of the eight vertices \(W\) and two edges on the four vertices
+of \(L\) other than its omission.
+
+In \(M_x\), choose two \(W\)-edges and its two \(L\)-edges.  Delete those
+four edges and match the four exposed \(W\)-vertices bijectively to the
+four exposed \(L\)-vertices.  Every such edge is available by the
+complete \(W\)-to-\(S\) residual graph and the forced \(W\)-to-\(z\)
+edges, and none is used by \(M_y\).  For the third matching, use the two
+freed \(W\)-edges and match the other four vertices of \(W\)
+bijectively to \(S\).  The new first-matching edges and the third
+matching use disjoint sets of \(W\)-endpoints, so the three matchings are
+edge-disjoint and have the required omissions.
+
 Consequently, any genuine counterexample to the three-near-factor
 assertion must survive all choices of the first two matchings and must
-end in one of only the two separator-core families
+end in only the separator-five core
 \[
- K_{3,1,1,1,1,1}\quad\text{or}\quad K_7. \tag{26}
+ K_7. \tag{28}
 \]
-No proof eliminating (26), and no counterexample realizing it against
+No proof eliminating (28), and no counterexample realizing it against
 every possible first-two-matching choice, is presently claimed.
 
 ## Finite ninth-matching frontier
@@ -392,10 +461,10 @@ reductions.
 * For \(r=0,1,2,3\), the displayed vectors identify exactly which single
   core types can saturate an entire remaining support-size family and
   which branches necessarily require distinct cores.
-* For \(r=3,4,5\), the six-prefix route (23)--(26) says that a ninth
+* For \(r=3,4,5\), the six-prefix route (23)--(28) says that a ninth
   matching follows unless every admissible choice of two of the three
-  size-twelve matchings leaves a separator-four or separator-five
-  obstruction for the third.
+  size-twelve matchings leaves a separator-five \(K_7\) obstruction for
+  the third.
 
 Thus the ninth step is reduced to coexistence and switching among finitely
 many labelled core embeddings inside graphs with 36, 37, 38, or 40 edges

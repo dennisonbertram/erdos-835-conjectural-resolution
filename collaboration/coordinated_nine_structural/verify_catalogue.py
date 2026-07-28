@@ -209,7 +209,23 @@ def verify_near_factor_reduction() -> None:
     assert 5 * (7 - 4 - 1) == 10
     assert 2 * 5 == 10
     assert 4 - 1 == 6 // 2
-    print("PASS two-near-factor lemma and exact terminal core reduction")
+
+    # In the separator-four repair, each selected matching pairs all five
+    # singleton vertices into T union C.  These are the only possible
+    # counts (T-T edges, T-C edges), and both force a T-T edge.
+    singleton_patterns = tuple(
+        (tt_edges, tc_edges)
+        for tt_edges in range(3)
+        for tc_edges in range(4)
+        if 2 * tt_edges + tc_edges == 5
+    )
+    assert singleton_patterns == ((1, 3), (2, 1))
+    for _, tc_edges in singleton_patterns:
+        unused_core = 3 - tc_edges
+        covered_l_vertices = 4
+        assert covered_l_vertices > unused_core
+
+    print("PASS two-near-factor lemma and exact terminal K7 reduction")
 
 
 def core_lookup(
