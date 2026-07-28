@@ -1153,6 +1153,11 @@ routes, but not the asymmetric case.
   size-twelve support.  A six-matching resilience lemma on twelve vertices
   proves the extension; the exceptional profile \((7,10,0)\) is reduced to
   two explicit residual equality barriers, \(K_7-E(K_3)\) and \(K_6\).
+- [`collaboration/first_lift_global_theorem/SEVEN_PACKING_R0_NOTE.md`](collaboration/first_lift_global_theorem/SEVEN_PACKING_R0_NOTE.md):
+  closes the exceptional \((7,10,0)\) profile by proving the two equality
+  cores cannot coexist and using the class-B row sums to escape the unique
+  surviving core.  Together the two notes give a universal seven-colour
+  prefix; completion of the remaining ten colours is still open.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
