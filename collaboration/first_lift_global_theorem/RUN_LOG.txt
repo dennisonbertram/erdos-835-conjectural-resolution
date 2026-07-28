@@ -67,3 +67,24 @@ Exit code: 0.
 The universal argument is the paper proof in TWO_STAR_NOTE.md.  The verifier
 checks its finite inequality skeleton and critical-complement connectivity;
 it is not a graph enumeration or a substitute for that proof.
+
+
+Six-colour coordinated-prefix theorem
+=====================================
+
+Command:
+
+  /opt/homebrew/bin/python3 -B \
+    collaboration/first_lift_global_theorem/verify_six_packing_arithmetic.py
+
+Expected output:
+
+  PASS Tutte arithmetic leaves only s=0 and s=4
+  PASS both critical complement blocks are connected
+  PASS all six target profiles contain the stated six supports
+  PASS dense inequalities and the residual degree-5 bound
+  SCOPE: six colours always pack; eleven colours remain unresolved.
+
+Exit code: 0.
+
+The paper proof is in SIX_PACKING_NOTE.md.  No random search is used.
