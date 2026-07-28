@@ -1,0 +1,8 @@
+$ python3 -B collaboration/h3_j8_torsion_dichotomy/verify_j8_torsion_dichotomy.py
+four-cube extraction, lcm, and 104 bound: PASS
+rank M5 and even stack over F2: 495 = 495
+rank M6 and [M6;M9] over F3: 441 = 441
+rank M8 over F5: 429
+rank M10 over F7: 208
+PASS: q=6 is redundant and every cube coefficient is 0 or +/-60
+scope: the Delta=60 branch, the full lift, and Problem #835 remain open
