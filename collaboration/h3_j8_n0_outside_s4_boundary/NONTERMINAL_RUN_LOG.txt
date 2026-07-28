@@ -1,0 +1,75 @@
+One-fixed-exterior / remaining-S4-symmetric N=0, Delta=60
+Nonterminal and interrupted telemetry from 2026-07-27
+
+THIS FILE CONTAINS NO INFEASIBILITY OR FEASIBILITY RESULT.
+TIME_LIMIT, UNKNOWN, and INTERRUPTED prove nothing.
+
+INITIAL 1,800-SECOND GUROBI BRANCH SWEEP
+
+All runs had solution_count=0 but retained open search-tree nodes.
+
+  branch    status       explored_nodes  runtime_seconds
+  m=9,w=7  TIME_LIMIT            37,097  1800.000588
+  m=9,w=8  TIME_LIMIT            23,836  1800.017475
+  m=9,w=9  TIME_LIMIT            28,700  1800.007131
+
+  m=11,w=7  TIME_LIMIT           35,626  1800.018692
+  m=11,w=8  TIME_LIMIT           34,076  1800.039024
+  m=11,w=9  TIME_LIMIT           32,397  1800.003221
+  m=11,w=11 TIME_LIMIT           34,303  1800.000888
+
+  m=13,w=6  TIME_LIMIT           32,739  1800.000651
+  m=13,w=7  TIME_LIMIT           38,679  1800.136199
+  m=13,w=8  TIME_LIMIT           37,387  1800.076995
+  m=13,w=9  TIME_LIMIT           26,203  1800.014673
+  m=13,w=11 TIME_LIMIT           32,791  1800.023062
+  m=13,w=13 TIME_LIMIT           30,186  1800.000497
+
+Each model had 1,377 rows and 1,266 integer columns.  Zero solutions in an
+unfinished infeasibility search is not evidence of infeasibility.
+
+CPU-REALLOCATION INTERRUPTS
+
+The long m=9,w=7 and m=9,w=8 duplicates were deliberately interrupted so an
+independent compact exact search could use the machine.  They had no solution
+and no terminal proof:
+
+  branch    status       explored_nodes  open_nodes  runtime_seconds
+  m=9,w=7  INTERRUPTED           89,513       6,616       960.037078
+  m=9,w=8  INTERRUPTED          108,695       9,281      1077.899818
+
+The corresponding full-equation CP-SAT runs were also interrupted:
+
+  branch    status   branches  wall_seconds
+  m=9,w=7  UNKNOWN    64,429   1150.857868
+  m=9,w=8  UNKNOWN    74,414   1150.776957
+
+The corresponding exact rank-reduced CP-SAT runs were interrupted:
+
+  branch    status    branches  wall_seconds
+  m=9,w=7  UNKNOWN     556,167     664.568444
+  m=9,w=8  UNKNOWN     111,642     665.162303
+
+After full-equation CP-SAT independently confirmed the terminal Gurobi
+result at m=9,w=9, its redundant rank-reduced CP-SAT duplicates were
+interrupted:
+
+  branch    status    workers  branches  wall_seconds
+  m=9,w=9  UNKNOWN          4   134,451     721.621408
+  m=9,w=9  UNKNOWN          8   108,185     170.675872
+
+M=8 FIXED-CUBE CONTROL
+
+The first of the 71 symmetry-normalized positive-cube assignments,
+
+  8,8,8,8,8,8,8,4
+
+returned UNKNOWN in the rank-reduced CP-SAT casewise driver after
+300.190845 seconds and 197,078 branches.  The driver therefore returned the
+aggregate status UNKNOWN and made no claim about the other 70 cases.
+
+STRICT INTERPRETATION
+
+This telemetry is retained for reproducibility and search planning only.  It
+does not eliminate any listed branch and does not strengthen the theorem
+claims in NOTE.md or RUN_LOG.txt.

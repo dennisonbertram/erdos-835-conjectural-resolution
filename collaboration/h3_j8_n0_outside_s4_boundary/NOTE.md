@@ -5,26 +5,27 @@
 Normalize a \(\Delta=60\) four-cube on vertices \(0,\ldots,7\).  Fix exterior
 vertex \(8\), and require invariance under every permutation of exterior
 vertices \(9,\ldots,12\).  In the \(N=0\) branch, exact integer searches
-independently replayed by CP-SAT and Gurobi eliminate these five subcases:
+independently replayed by CP-SAT and Gurobi eliminate these six subcases:
 
 \[
 \begin{array}{c|c}
 \text{maximum positive cube value }m&
 \text{maximum weight-two positive value }w\\ \hline
+9&9\\
 10&\text{unrestricted}\\
-12&\text{unrestricted}\\
 11&10\\
+12&\text{unrestricted}\\
 13&10\\
 13&12.
 \end{array}
 \]
 
 These are exact finite subcase eliminations, not a complete elimination of
-the exterior-\(S_4\) model.  Fourteen branches remain unresolved:
+the exterior-\(S_4\) model.  Thirteen branches remain unresolved:
 \[
 \begin{split}
 &(8,8);\\
-&(9,7),(9,8),(9,9);\\
+&(9,7),(9,8);\\
 &(11,7),(11,8),(11,9),(11,11);\\
 &(13,6),(13,7),(13,8),(13,9),(13,11),(13,13).
 \end{split}
@@ -151,3 +152,8 @@ independent implementations, while the repository does not yet contain a
 proof-checker-consumable UNSAT certificate.  Accordingly, the defensible
 claim is an independently replayed exact finite subcase elimination with a
 separately audited translation.
+
+Time-limited, unknown, and deliberately interrupted searches are retained
+separately in
+[`NONTERMINAL_RUN_LOG.txt`](NONTERMINAL_RUN_LOG.txt).  They are telemetry only
+and support no mathematical claim.

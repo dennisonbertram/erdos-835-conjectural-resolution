@@ -23,6 +23,10 @@ TERMINAL EXACT SUBCASES
    Gurobi: INFEASIBLE; runtime_seconds=0.029271
    CP-SAT: INFEASIBLE; wall_seconds=0.026756; branches=0
 
+6. reference_positive=9, reference_weight_two=9
+   Gurobi: INFEASIBLE; runtime_seconds=637.376907; nodes=56,184
+   CP-SAT: INFEASIBLE; wall_seconds=1139.812661; branches=96,338
+
 PACKAGED-SCRIPT REPLAY
 
 After copying the implementations into this directory, all five CP-SAT
@@ -69,6 +73,6 @@ UNKNOWN proves neither feasibility nor infeasibility.
 
 STRICT SCOPE
 
-The exterior S4 symmetry is an extra ansatz.  The five terminal results do
+The exterior S4 symmetry is an extra ansatz.  The six terminal results do
 not eliminate the complete exterior-S4 model, unrestricted N=0, the j=8
 lift, or Erdős-Rosenfeld Problem #835.
