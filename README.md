@@ -1254,6 +1254,14 @@ routes, but not the asymmetric case.
   that component without creating another.  Consequently every remaining
   size-ten support is individually matchable.  Simultaneous selection of
   three such matchings is still open.
+- [`collaboration/r0_three_ten_obstruction/K6_FREE_THREE_TEN_OBSTRUCTION.md`](collaboration/r0_three_ten_obstruction/K6_FREE_THREE_TEN_OBSTRUCTION.md):
+  a literal distinct-complement class-B \(r=0\) certificate showing that
+  the \(K_6\)-free conclusion still does not coordinate three size-ten
+  colours.  All seven supports are individually live, but six matching
+  families force the same edge, so none of the \(35\) triples packs.  The
+  same prefix has an explicit mixed \(10+10+8\) extension, so the
+  \(r=0\) proof must use a size-eight colour, change more than two prefix
+  edges, or choose a different complement-cover prefix.
 - [`collaboration/coordinated_nine_r1_reduction/NOTE.md`](collaboration/coordinated_nine_r1_reduction/NOTE.md):
   the exact \(r=1\) one- and two-step Tutte catalogues, core-reuse ceilings,
   and three literal class-B pair obstructions with triple intersections
