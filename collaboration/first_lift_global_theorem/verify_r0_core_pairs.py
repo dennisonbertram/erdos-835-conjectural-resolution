@@ -249,11 +249,65 @@ def main() -> None:
     )
     assert 2 * (31 - 28) < 3 * 3
 
+    # Structural sharpening for a fixed K6.  Every compatible distinct core
+    # spanning the cut between that K6 and the outside seven vertices uses
+    # at least four cross edges.
+    first_6 = cores["6"][0]
+    core_vertices = {
+        vertex
+        for vertex in VERTICES
+        if popcount(first_6 & INCIDENT[vertex])
+    }
+    outside_6 = set(VERTICES) - core_vertices
+    spanning_cross_counts = []
+    for kind in KINDS:
+        for second in cores[kind]:
+            if second == first_6:
+                continue
+            union = first_6 | second
+            union_edges = popcount(union)
+            if union_edges > 31:
+                continue
+            degrees = [
+                popcount(union & INCIDENT[vertex])
+                for vertex in VERTICES
+            ]
+            if max(degrees) > 7:
+                continue
+            deficit = sum(max(0, 2 - degree) for degree in degrees)
+            if union_edges + (deficit + 1) // 2 > 31:
+                continue
+            if union_edges >= 29 and any(
+                popcount(union & clique) > 28
+                for clique in NINE_CLIQUES
+            ):
+                continue
+            second_vertices = {
+                vertex
+                for vertex in VERTICES
+                if popcount(second & INCIDENT[vertex])
+            }
+            if not (second_vertices & core_vertices):
+                continue
+            if not (second_vertices & outside_6):
+                continue
+            cross_edges = sum(
+                1
+                for edge, index in EDGE_ID.items()
+                if second >> index & 1
+                and ((edge[0] in core_vertices) != (edge[1] in core_vertices))
+            )
+            spanning_cross_counts.append(cross_edges)
+    assert spanning_cross_counts
+    assert min(spanning_cross_counts) == 4
+    assert 18 - 5 * 3 == 3 < min(spanning_cross_counts)
+
     print("PASS generated all 764,764 labelled cores of the seven types")
     print("PASS exhausted every pair orbit after fixing the first core")
     print("PASS enforced |E|<=31, Delta<=7, delta-extension, and capacity")
     print("PASS exact minimum-new-edge table matches the note")
     print("PASS K5,5 partners are same-support triangles, so none can be used")
+    print("PASS every spanning partner of K6 uses at least four cross edges")
     print("SCOPE: necessary pair screen; eighth-colour packing remains open")
 
 

@@ -114,6 +114,49 @@ contradicting (6).
 Therefore a \(K_{5,5}\) cannot be an obstruction core used by any of the
 seven blocked supports in a total-obstruction argument.
 
+## A \(K_6\) cannot be reused five times
+
+Let \(C\) be the vertex set of a \(K_6\) core, and let \(O\) be the other
+seven vertices.  Suppose five blocked supports reused this core.  The
+sixfold exclusion in `EIGHTH_MATCHING_CORE_CATALOGUE.md` shows that the
+other two supports do not reuse it.  Since the clique fills every pair
+inside \(C\), write the other sixteen edges of \(F\) as
+\[
+ a=|E_F(C,O)|,\qquad c=|E_F(O)|,\qquad a+c=16.
+\]
+The complement capacity in \(O\) is
+\[
+ \sum_{v\in O}(d_F(v)-2)=2c+a-14=18-a.
+\]
+Five complement triples inside \(O\) require fifteen incidences, so
+\[
+ a\le3. \tag{7}
+\]
+
+The other two blocked supports require a distinct obstruction core \(J\).
+It cannot lie wholly in \(C\), where the only core is the original \(K_6\).
+If it lies wholly in \(O\), it needs at least fifteen edges.  For
+\(a\ge2\), however, \(c=16-a<15\).  For \(a=0\) or \(1\), the only possible
+type is a \(K_6\); its fifteen edges leave the seventh vertex of \(O\)
+incident with at most the one remaining edge inside \(O\) and the at most
+one cross edge, giving degree at most one when \(a=0\) or \(1\).  This
+contradicts \(\delta(F)\ge2\).
+
+Finally, \(J\) cannot meet both \(C\) and \(O\).  The exact pair enumeration
+has the following structural refinement:
+
+> Every distinct obstruction core compatible with a fixed \(K_6\) and
+> meeting both sides of the cut \((C,O)\) uses at least four
+> \(C\)-to-\(O\) edges.
+
+The minimum four is attained by a core of type \(K_{3,1,1,1,1}\);
+\(K_{5,1,1,1}\) needs at least six.  This contradicts (7).  Hence no
+distinct core exists, and the two remaining blocked supports cannot be
+explained.
+
+Therefore a fixed \(K_6\) can be reused at most four times in a total
+seven-support obstruction.
+
 ## Exhaustiveness
 
 The verifier fixes a canonical first core and generates every distinct
@@ -128,6 +171,7 @@ labelled second core on thirteen vertices.  The exact embedding counts are
 It then checks the 31-edge budget, maximum degree seven, (3), and every
 nine-vertex induced capacity before recording the minimum in (4).  It also
 checks all twenty surviving \(K_{5,5}+K_{5,1,1,1}\) embeddings and verifies
-the structural form (5).
+the structural form (5), and checks the four-edge cross-cut lower bound for
+every surviving partner of a fixed \(K_6\).
 
 `verify_r0_core_pairs.py` reproduces the complete table deterministically.
