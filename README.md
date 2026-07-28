@@ -1230,6 +1230,14 @@ routes, but not the asymmetric case.
   A distinct-triple example also refutes the tempting universal \(4+2\)
   complement cover.  Three further matchings in the residual
   minimum-degree-seven graph are still required for coordinated nine.
+- [`collaboration/r0_three_ten_obstruction/NOTE.md`](collaboration/r0_three_ten_obstruction/NOTE.md):
+  a sharp delimiter for extending that \(r=0\) prefix.  At least two of the
+  seven remaining size-ten supports always extend individually, and an exact
+  valid class-B instance has precisely two, so an arbitrary such prefix
+  cannot reach nine by appending three size-ten colours.  The same instance
+  refutes an ambient forced-edge strengthening of the three-near-factor
+  theorem.  A successful proof must switch the prefix or use a remaining
+  size-eight support.
 - [`collaboration/coordinated_nine_r2_obstruction/NOTE.md`](collaboration/coordinated_nine_r2_obstruction/NOTE.md):
   an exact \(r=2\) delimiter.  A legitimate \(8^4\,10^2\)
   complement-cover prefix can block every remaining size-ten support, so the
