@@ -1191,14 +1191,22 @@ routes, but not the asymmetric case.
   cores; a blocked size-twelve support forces \(K_7\) or
   \(K_8-E(K_3)\).  This is a historical intermediate reduction: its
   exceptional-\(r=0\) configurations are now closed by the theorem below,
-  while the nonzero-\(r\) eighth-matching profiles remain open.
+  while coordinated packing, rather than arbitrary-prefix extension, is
+  now the relevant nonzero-profile question.
 - [`collaboration/first_lift_global_theorem/R0_EIGHTH_MATCHING_THEOREM.md`](collaboration/first_lift_global_theorem/R0_EIGHTH_MATCHING_THEOREM.md):
   the consolidated computer-assisted theorem that every exceptional
   \((7,10,0)\) seven-prefix of type \(8^4\,10^3\) extends to an eighth
   matching.  Its dependency ledger gives the exact commits and replay
   artifacts for all one-through-seven-core branches.  The theorem is
-  strictly \(r=0\): coordinated nonzero-profile extension and the final
-  nine colours remain open.
+  strictly \(r=0\); the coordinated theorem below handles \(r=2,3,4,5\),
+  while \(r=1\) and the final nine colours remain open.
+- [`collaboration/coordinated_eight_r2_r5/NOTE.md`](collaboration/coordinated_eight_r2_r5/NOTE.md):
+  a solver-free universal coordinated eight-packing theorem for every
+  class-B profile with \(r=2,3,4,5\).  A probabilistic complement-cover
+  lemma produces six matchings whose union has maximum degree at most five;
+  Ore/Dirac Hamiltonicity then supplies two further size-twelve matchings.
+  Together with the \(r=0\) theorem, only \(r=1\) remains at the coordinated
+  eighth frontier.
 - [`collaboration/first_lift_global_theorem/R1_DEAD_SEVEN_PREFIX.md`](collaboration/first_lift_global_theorem/R1_DEAD_SEVEN_PREFIX.md):
   an exact \(r=1\) class-B seven-prefix that blocks all ten remaining
   supports even though the same support matrix has a separate full
@@ -1217,6 +1225,18 @@ routes, but not the asymmetric case.
   exact repair distances for the two \(r=3\) certificates: one changed
   layer admits an eighth matching, while full completion requires four
   changes in the \(C\subset G\) case and three in the \(D\subset G\) case.
+- [`collaboration/first_lift_global_theorem/R2_DEAD_SEVEN_PREFIX.md`](collaboration/first_lift_global_theorem/R2_DEAD_SEVEN_PREFIX.md)
+  and [`R4_DEAD_SEVEN_PREFIX.md`](collaboration/first_lift_global_theorem/R4_DEAD_SEVEN_PREFIX.md):
+  fully completable dead arbitrary prefixes closing the analogous boundary
+  for \(r=2\) and \(r=4\).
+- [`collaboration/first_lift_global_theorem/R2_R4_STRUCTURAL_REPAIR.md`](collaboration/first_lift_global_theorem/R2_R4_STRUCTURAL_REPAIR.md):
+  exact one-layer and full-completion repair distances for those two
+  certificates, a cut-bound transport lemma across the \(r=1\to2\) and
+  \(r=3\to4\) lifts, and literal class-B-prime realizations.
+- [`collaboration/first_lift_global_theorem/CLASS_B_PRIME_DEAD_PREFIX_REALIZATIONS.md`](collaboration/first_lift_global_theorem/CLASS_B_PRIME_DEAD_PREFIX_REALIZATIONS.md):
+  proper saturated partial \(K_{18}\) factorizations inducing the \(r=1\)
+  and both \(r=3\) dead-prefix support matrices.  These examples are
+  class-B-prime but are not asserted fan-realizable.
 - [`collaboration/first_lift_global_theorem/CUT_CAPACITY_FULL_REPAIR_BOUNDS.md`](collaboration/first_lift_global_theorem/CUT_CAPACITY_FULL_REPAIR_BOUNDS.md):
   a general crossing-cut lower bound for the number of prefix layers any
   full repair must change, with exhaustive all-cut audits recovering the
@@ -1224,7 +1244,13 @@ routes, but not the asymmetric case.
 - [`collaboration/first_lift_global_theorem/R5_LARGE_SUPPORT_PAIR_COUNTEREXAMPLE.md`](collaboration/first_lift_global_theorem/R5_LARGE_SUPPORT_PAIR_COUNTEREXAMPLE.md):
   an \(r=5\) certificate blocking both remaining size-twelve supports while
   every remaining size-eight support still extends.  It refutes only the
-  large-support-first route, not arbitrary-prefix extension itself.
+  large-support-first route; the stronger certificate below subsequently
+  closed arbitrary-prefix extension itself.
+- [`collaboration/first_lift_global_theorem/R5_DEAD_SEVEN_PREFIX.md`](collaboration/first_lift_global_theorem/R5_DEAD_SEVEN_PREFIX.md):
+  a fully completable class-B-prime \(r=5\) instance with a seven-prefix
+  blocking all ten remaining supports.  Together with the \(r=1,2,3,4\)
+  certificates, blind arbitrary-prefix induction is now refuted for every
+  nonzero profile.
 - [`collaboration/first_lift_global_theorem/TWELVE_SUPPORT_SWITCHING_NOTE.md`](collaboration/first_lift_global_theorem/TWELVE_SUPPORT_SWITCHING_NOTE.md):
   a two-edge switching-resilience theorem on twelve vertices.  After any
   six matching layers, a residual perfect matching can avoid any prescribed

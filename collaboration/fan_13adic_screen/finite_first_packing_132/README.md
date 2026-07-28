@@ -19,6 +19,13 @@ Therefore this package proves only
 The trivial upper bound is `alpha_finite <= 140`.  Neither the equality
 `alpha_finite = 140` nor a full `C17`-equivariant extension is proved.
 
+The committed 132-row packing itself cannot extend to a full 228-row
+quotient exact cover.  After fixing its 660 covered columns, fourteen
+uncovered required columns have no compatible remaining row.
+`verify_fixed_132_nonextension.py` reconstructs all thirteen blocked options
+for every such column.  This excludes only this literal packing, not another
+132-row packing or a different full exact cover.
+
 ## Omit-one telemetry
 
 `omit_one_manifest.csv` records a bounded SAT search for a packing of size
@@ -65,6 +72,13 @@ Replay the exact neighborhood exhaustion:
   collaboration/fan_13adic_screen/finite_first_packing_132/verify_neighborhood_302743.py
 ```
 
+Verify the fixed-packing nonextension:
+
+```sh
+/opt/homebrew/bin/python3 \
+  collaboration/fan_13adic_screen/finite_first_packing_132/verify_fixed_132_nonextension.py
+```
+
 Expected final scope line:
 
 ```text
@@ -82,3 +96,5 @@ scope: alpha_finite >= 132 only; upper bound remains the trivial 140
 - `verify_finite_packing_132.py`: independent semantic and reconstruction
   checker.
 - `verify_neighborhood_302743.py`: deterministic exact neighborhood search.
+- `verify_fixed_132_nonextension.py`: literal empty-column proof that the
+  committed 132-row packing cannot extend to the full quotient.

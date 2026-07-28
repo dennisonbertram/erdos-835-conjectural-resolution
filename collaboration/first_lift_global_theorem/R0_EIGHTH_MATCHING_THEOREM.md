@@ -186,17 +186,18 @@ proof-assistant development.
 
 ## Strict frontier
 
-This theorem advances the universal prefix length from seven to eight only
-for the exceptional profile \((7,10,0)\) and only after a seven-prefix of
-type \(8^4\,10^3\).  The immediate remaining questions are:
+This theorem advances the universal prefix length from seven to eight for
+the exceptional profile \((7,10,0)\) and after a seven-prefix of type
+\(8^4\,10^3\).  Subsequent work sharpens the frontier:
 
-1. prove a **coordinated-choice or switching** eighth-matching theorem for
-   the nonzero profiles.  Literal analogues for arbitrary seven-prefixes
-   are false at \(r=1\) and \(r=3\), by the exact dead-but-fully-completable
-   certificates in `R1_DEAD_SEVEN_PREFIX.md` and
-   `R3_DEAD_SEVEN_PREFIXES.md`.  At \(r=5\), the certificate in
-   `R5_LARGE_SUPPORT_PAIR_COUNTEREXAMPLE.md` rules out only the
-   large-support-first route; the \(r=2,4\) arbitrary-prefix boundary is
-   still open.
-2. find an invariant that coordinates the earlier choices and propagates
-   beyond the eighth matching toward all seventeen colours.
+1. `../coordinated_eight_r2_r5/NOTE.md` proves a coordinated eight-packing
+   theorem for every profile \(r=2,3,4,5\).  Thus \(r=1\) is the only
+   remaining coordinated-eight profile.
+2. Literal arbitrary-prefix analogues are false for every \(r=1,2,3,4,5\),
+   by the exact dead-but-fully-completable certificates in
+   `R1_DEAD_SEVEN_PREFIX.md`, `R2_DEAD_SEVEN_PREFIX.md`,
+   `R3_DEAD_SEVEN_PREFIXES.md`, `R4_DEAD_SEVEN_PREFIX.md`, and
+   `R5_DEAD_SEVEN_PREFIX.md`.  Hence the surviving \(r=1\) proof must
+   coordinate or switch the earlier choices.
+3. Even after the coordinated eighth frontier is closed, a new invariant is
+   needed to propagate toward all seventeen colours.

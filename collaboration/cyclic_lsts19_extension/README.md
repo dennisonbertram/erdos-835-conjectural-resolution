@@ -101,6 +101,14 @@ search.  A timeout has no mathematical status, and even process-local
 exhaustion is not treated as portable UNSAT evidence without an independently
 checkable certificate.
 
+`search_c17_equivariant_cpsat.py` supplies two additional witness-search
+encodings of the same quotient: one preserves the 57 native all-different
+constraints on 228 phase variables, and the other uses the 1,140 exact-one
+rows directly.  It can accept fixed or hinted row sets for scoped extension
+searches.  Only a SAT candidate that passes the independent semantic verifier
+has positive mathematical status; `UNKNOWN` and uncertified `INFEASIBLE`
+statuses are telemetry only.
+
 For a faster independent search implementation, the Python script can dump
 that matrix and `solve_c17_exact_cover.cpp` runs bounded dancing links on it.
 Its SAT output is still only a candidate until the semantic verifier passes.
