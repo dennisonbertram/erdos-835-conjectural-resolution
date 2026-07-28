@@ -87,6 +87,14 @@ def main() -> None:
         4,
         6,
     ]
+    # If K6 attained its generic ceiling six in a total seven-obstruction,
+    # equality leaves 16 edges on the outside seven vertices.  The only
+    # catalogue core that fits is a 15-edge K6, leaving the last vertex with
+    # at most one incident edge, contrary to delta(F) >= 2.
+    assert 3 * 6 == 36 + 2 * 6 - 2 * 15 == 18
+    assert 31 - 15 == 16
+    assert min(edges for _, _, edges, _ in expected_ten if edges > 15) == 18
+    assert 16 - 15 == 1
 
     profiles = {
         0: ((4, 3, 0), 31),
@@ -118,6 +126,7 @@ def main() -> None:
     print("PASS size-12 catalogue: three cores, with K5,7 over global budget")
     print("PASS reuse ceilings follow from d_H(v)=12-d_F(v)")
     print("PASS r=0 complement-degree ceilings are 4, 2, 0, 5, 2, 4, 6")
+    print("PASS total-obstruction equality sharpens K6 reuse from six to five")
     print("PASS target seven-prefix edge totals are 31, 32, 33, 33, 33, 34")
     print("SCOPE: exact obstruction reduction; eighth-colour packing remains open")
 

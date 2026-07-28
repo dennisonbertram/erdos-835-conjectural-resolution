@@ -163,6 +163,36 @@ supports were blocked after a seven-prefix, \(F\) would have to contain at
 least two distinct obstruction cores.  This reduces the exceptional profile
 to an overlap-or-switching problem.
 
+### Equality exclusion for \(K_6\)
+
+In a hypothetical obstruction of all seven size-ten supports, the \(K_6\)
+ceiling in (5) improves from six to five.  Suppose a \(K_6\) on \(C\) were
+reused six times, and put \(O=V(K_{13})\setminus C\).  Then equality holds
+throughout (9):
+\[
+ 3\cdot6=18=36+2\cdot6-2\cdot15.
+\]
+Consequently \(\sum_{v\in C}d_F(v)=30\).  Every vertex of \(C\) already has
+degree five in the clique, so there is no \(F\)-edge from \(C\) to \(O\).
+The six complement triples in \(O\) consume all eighteen available
+complement incidences there.  The seventh triple and all three remaining
+five-set complements therefore lie inside \(C\).
+
+The seventh size-ten support contains all seven vertices of \(O\) but only
+three vertices of \(C\).  Its obstruction core is connected and has at
+least six vertices.  Since \(F\) has no \(C\)-to-\(O\) edge, that core must
+lie wholly in \(O\).  The graph \(F[O]\) has
+\[
+ 31-\binom62=16
+\]
+edges.  Of the seven core types in (5), only \(K_6\), with fifteen edges,
+fits on at most seven vertices and within this edge budget.  But after
+placing that clique, the one remaining edge gives the seventh vertex of
+\(O\) degree at most one, contradicting \(\delta(F)\ge2\).
+
+Thus a fixed \(K_6\) can account for at most five of the seven supports in a
+total-obstruction argument.
+
 ## Remaining frontier
 
 To prove an eighth-colour theorem it now suffices to show that the cores
