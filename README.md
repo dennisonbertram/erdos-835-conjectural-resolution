@@ -47,6 +47,11 @@ New exact results in the note include:
   independent semantic verifier checks every one of the 2,352,609 learned
   clauses, and all sixteen DRAT traces replay as `VERIFIED`.  The other
   twelve Venn types remain open;
+- an exact generic compatible-pair classifier for those twelve remaining
+  Venn types.  A complete alternating path/cycle word invariant, checked
+  independently against the full stabilizer action graph, reduces
+  7,077,840 labelled matching pairs to 1,126 canonical cases.  This is a
+  finite reduction, not yet cut sufficiency for those orbits;
 - an exact boundary-flow formulation of the remaining colouring problem.
   For a fixed \(b\)-factor it is a nowhere-zero
   \(\mathbb F_2^2\) flow with prescribed boundary.  Explicit audited
@@ -1404,6 +1409,11 @@ routes, but not the asymmetric case.
   types reduce to frozen UNSAT CNFs; a separate verifier reconstructs the
   static formulas and checks every learned prescribed-triple clause, and
   all sixteen compressed DRAT traces replay independently.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_remaining_pair_orbit_classifier.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_remaining_pair_orbit_classifier.md):
+  the complete compatible-pair symmetry catalogue for support orbits
+  four through fifteen.  Its component-word invariant and independent
+  generator-action audit agree on all 7,077,840 labelled pairs, reducing
+  them to exactly 1,126 canonical types.
 - [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_audit.md):
   a solver-free rigid-branch theorem from the concise Opus selection attack.
   When one dense six-set has all seven triple rows on its far side, one legal
