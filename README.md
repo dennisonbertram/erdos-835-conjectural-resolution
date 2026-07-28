@@ -23,15 +23,20 @@ New exact results in the note include:
   remaining size-ten rows satisfy every internal-edge capacity cut.  A
   complete Tutte--Lovász audit now proves that those cuts and the full
   eleven-row ledger always supply the required simple \(b\)-factor.  The
-  prescribed three-edge-colouring of that factor remains open in fifteen
+  prescribed three-edge-colouring of that factor remains open in fourteen
   of the sixteen selected-support Venn types, so this is not yet
   coordinated nine;
 - a computer-assisted closure of the identical-support Venn type
   (orbit zero): after reducing a compatible pair to \(C_{10}\) or
   \(C_4\mathbin{\dot\cup}C_6\), both exact finite CNFs are UNSAT.  CaDiCaL
   generated the proof traces, its internal DRAT/LRAT checks passed, and an
-  independent `drat-trim` replay also reports `VERIFIED`.  The other
-  fifteen Venn types remain open;
+  independent `drat-trim` replay also reports `VERIFIED`;
+- a second computer-assisted closure for the common-nine-core Venn type
+  (orbit one).  Every compatible pair has one of five exhaustive
+  path-and-cycle types.  All five frozen CNFs are UNSAT, with CaDiCaL
+  internal checking, independent Glucose 4 solves, and independent
+  `drat-trim` verification of the committed proof traces.  The other
+  fourteen Venn types remain open;
 - an exact boundary-flow formulation of the remaining colouring problem.
   For a fixed \(b\)-factor it is a nowhere-zero
   \(\mathbb F_2^2\) flow with prescribed boundary.  Explicit audited
@@ -1375,6 +1380,11 @@ routes, but not the asymmetric case.
   canonical compatible-pair types reduce to frozen UNSAT CNFs; their
   CaDiCaL traces pass both the generator's internal checks and a separate
   DRAT-trim replay.
+- [`collaboration/r0_three_family_helly_gate/2026-07-28_orbit1_cut_sufficiency.md`](collaboration/r0_three_family_helly_gate/2026-07-28_orbit1_cut_sufficiency.md):
+  the certified common-nine-core orbit theorem.  Its exhaustive
+  path-and-cycle catalogue gives five canonical compatible-pair types.
+  Every frozen CNF is UNSAT, independently solved with Glucose 4, and
+  accompanied by a compressed DRAT trace that replays as `VERIFIED`.
 - [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_audit.md):
   a solver-free rigid-branch theorem from the concise Opus selection attack.
   When one dense six-set has all seven triple rows on its far side, one legal
