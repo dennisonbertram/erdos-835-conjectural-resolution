@@ -1189,8 +1189,16 @@ routes, but not the asymmetric case.
   the exact large-support obstruction catalogue after seven matchings.
   A blocked size-ten support forces one of seven complete multipartite
   cores; a blocked size-twelve support forces \(K_7\) or
-  \(K_8-E(K_3)\).  Row-sum reuse ceilings isolate the finite switching
-  configurations still needed for an eighth-colour theorem.
+  \(K_8-E(K_3)\).  This is a historical intermediate reduction: its
+  exceptional-\(r=0\) configurations are now closed by the theorem below,
+  while the nonzero-\(r\) eighth-matching profiles remain open.
+- [`collaboration/first_lift_global_theorem/R0_EIGHTH_MATCHING_THEOREM.md`](collaboration/first_lift_global_theorem/R0_EIGHTH_MATCHING_THEOREM.md):
+  the consolidated computer-assisted theorem that every exceptional
+  \((7,10,0)\) seven-prefix of type \(8^4\,10^3\) extends to an eighth
+  matching.  Its dependency ledger gives the exact commits and replay
+  artifacts for all one-through-seven-core branches.  The theorem is
+  strictly \(r=0\): other eighth-matching profiles and the final nine
+  colours remain open.
 - [`collaboration/first_lift_global_theorem/TWELVE_SUPPORT_SWITCHING_NOTE.md`](collaboration/first_lift_global_theorem/TWELVE_SUPPORT_SWITCHING_NOTE.md):
   a two-edge switching-resilience theorem on twelve vertices.  After any
   six matching layers, a residual perfect matching can avoid any prescribed
@@ -1206,14 +1214,28 @@ routes, but not the asymmetric case.
   combines the pair catalogue with exact complement row sums to eliminate
   \(K_{3,3,3}\), \(K_{5,5}\), and \(K_{3,7}\) from any obstruction of all
   seven remaining size-ten supports.  The exhaustive \(K_{3,7}\) branch
-  checks 147 degree-valid prefix graphs and 588 reuse cases; four sparse
-  core types remain unresolved.
+  checks 147 degree-valid prefix graphs and 588 reuse cases.  Its statement
+  that four sparse types remained unresolved records that intermediate
+  stage; those \(r=0\) types are now exhausted in the consolidated theorem.
 - [`collaboration/first_lift_global_theorem/r0_two_core_refutations/README.md`](collaboration/first_lift_global_theorem/r0_two_core_refutations/README.md):
   independently replayed DRAT certificates for all twenty-two two-core
   branches that have enough reuse capacity to block all seven remaining
   size-ten supports.  Together with the analytic disjoint-\(K_6\) case,
   this proves that any total obstruction must use at least three distinct
-  surviving cores; the three-or-more-core frontier remains open.
+  surviving cores.  Its three-or-more-core frontier is historical: the
+  later three-through-seven-core layers close it for \(r=0\).
+- [`collaboration/first_lift_global_theorem/R0_FIVE_CORE_ZERO_B.md`](collaboration/first_lift_global_theorem/R0_FIVE_CORE_ZERO_B.md)
+  and [`R0_FIVE_CORE_ZERO_B_UNION.md`](collaboration/first_lift_global_theorem/R0_FIVE_CORE_ZERO_B_UNION.md):
+  two independent exact exclusions of all 21 five-core type multisets over
+  \(K_{5,1,1,1},K_{3,1,1,1,1},K_6\): a full labelled-family census with
+  vertex-set row cuts, and a compact support-union optimization.  Together
+  with the \(K_{3,3,1,1}\)-containing screen, they close every exactly-five-
+  core \(r=0\) obstruction.
+- [`collaboration/first_lift_global_theorem/R0_SIX_SEVEN_SIX_SEVEN_EXCEPTIONAL.md`](collaboration/first_lift_global_theorem/R0_SIX_SEVEN_SIX_SEVEN_EXCEPTIONAL.md):
+  the terminal six/seven-core layer.  With the companion zero-through-five
+  non-\(K_6\) classifications, it exhausts every exactly-six- or
+  exactly-seven-core \(r=0\) cover by exact union minima and complement
+  row-rank inequalities.
 - [`collaboration/first_lift_global_theorem/write_r0_full_blocking_cnf.py`](collaboration/first_lift_global_theorem/write_r0_full_blocking_cnf.py):
   a core-independent exact CNF for the complete exceptional-profile
   eighth-matching obstruction, including all perfect matchings of every
