@@ -81,42 +81,53 @@ class Writer:
         for left, right in combinations(literals, 2):
             self.add([-left, -right])
 
-    def exactly(self, literals: list[int], target: int) -> None:
+    def exactly(
+        self,
+        literals: list[int],
+        target: int,
+        gate: int | None = None,
+    ) -> None:
         """Encode an exact count using a deterministic unary-state automaton.
 
         State s[i,j] means that exactly j of the first i signed literals are
         true.  Every layer is one-hot.  The transition clauses force the next
         state for both truth values of the next literal; trying to increment
-        past ``target`` is forbidden.  Finally s[n,target] is asserted.
+        past ``target`` is forbidden.  Finally s[n,target] is asserted.  If
+        ``gate`` is supplied, every clause is conditional on that literal.
         """
+        def emit(clause: list[int]) -> None:
+            self.add(clause if gate is None else [-gate, *clause])
+
         if not 0 <= target <= len(literals):
-            self.add([])
+            emit([])
             return
 
         states = [
             self.variables_block(target + 1)
             for _ in range(len(literals) + 1)
         ]
-        self.add([states[0][0]])
+        emit([states[0][0]])
         for count in range(1, target + 1):
-            self.add([-states[0][count]])
+            emit([-states[0][count]])
 
         for index, literal in enumerate(literals, start=1):
             current = states[index]
             previous = states[index - 1]
-            self.exactly_one(current)
+            emit(current)
+            for left, right in combinations(current, 2):
+                emit([-left, -right])
             for count, previous_state in enumerate(previous):
                 # If the literal is false, the count is unchanged.
-                self.add([-previous_state, literal, current[count]])
+                emit([-previous_state, literal, current[count]])
                 # If the literal is true, the count increases by one.
                 if count < target:
-                    self.add(
+                    emit(
                         [-previous_state, -literal, current[count + 1]]
                     )
                 else:
-                    self.add([-previous_state, -literal])
+                    emit([-previous_state, -literal])
 
-        self.add([states[-1][target]])
+        emit([states[-1][target]])
 
     def lex_not_greater(self, left: list[int], right: list[int]) -> None:
         """Encode the bit-vector relation left <=_lex right."""

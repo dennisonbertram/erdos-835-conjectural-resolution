@@ -84,6 +84,23 @@ def audit_cardinality_projection() -> None:
     print("PASS signed exact-cardinality projection")
 
 
+def audit_gated_cardinality_projection() -> None:
+    with TemporaryDirectory(prefix="r0-compact-gated-card-") as directory:
+        path = Path(directory) / "gated-card.cnf"
+        writer = compact.Writer(path)
+        gate, a, b = writer.variables_block(3)
+        writer.exactly([a, b], 1, gate=gate)
+        writer.finish()
+        variables, clauses = read_cnf(path)
+
+    for gate_value, av, bv in product((False, True), repeat=3):
+        primary = {gate: gate_value, a: av, b: bv}
+        observed = projected_satisfiable(variables, clauses, primary)
+        expected = not gate_value or sum((av, bv)) == 1
+        assert observed == expected, (primary, observed, expected)
+    print("PASS gated exact-cardinality projection")
+
+
 def audit_lex_projection() -> None:
     with TemporaryDirectory(prefix="r0-compact-lex-") as directory:
         path = Path(directory) / "lex.cnf"
@@ -262,6 +279,7 @@ def main() -> None:
     args = parser.parse_args()
 
     audit_cardinality_projection()
+    audit_gated_cardinality_projection()
     audit_lex_projection()
     audit_matching_enumeration()
     if args.cnf:

@@ -1,0 +1,146 @@
+# Compact exact full model for the exceptional eighth-matching frontier
+
+Date: 2026-07-27.
+
+## Exact statement represented
+
+Let \(F\) be the union of seven pairwise edge-disjoint matchings on
+\(K_{13}\): four have four edges and three have five edges. Let
+\(T_1,\ldots,T_7\) be triples and \(Q_1,Q_2,Q_3\) be five-sets. The compact
+CNF represents exactly the following conditions:
+
+1. for every vertex \(v\),
+   \[
+   \#\{i:v\in T_i\}+\#\{j:v\in Q_j\}=d_F(v)-2;
+   \]
+2. for every \(i\), every perfect matching of
+   \(K_{13}-T_i\) meets \(F\).
+
+Thus a satisfying assignment is exactly an exceptional-profile
+seven-prefix for which all seven remaining size-ten supports are blocked.
+An independently replayed UNSAT certificate would prove that every such
+prefix has an eighth matching. This is only the exceptional \(r=0\)
+eighth-matching frontier, not the full first-lift theorem and not a
+resolution of Erdős--Rosenfeld problem 835.
+
+The encoding does not use the Tutte-core catalogue.
+
+## Compact row equation
+
+The original full model used six conditional degree states per vertex.
+They are unnecessary. Since \(K_{13}\) has twelve incident edges at each
+vertex,
+\[
+\begin{aligned}
+\operatorname{omissions}(v)&=d_F(v)-2\\
+\Longleftrightarrow\quad
+\operatorname{omissions}(v)+(12-d_F(v))&=10.
+\end{aligned}
+\]
+The second line is one exact-cardinality constraint over ten complement
+membership literals and the twelve signed literals \(\neg f_e\) incident
+with \(v\).
+
+Each complement triple is represented by thirteen membership bits of
+cardinality three. For a fixed triple \(T\), the three membership bits
+indexed by \(T\) are all true if and only if the row is exactly \(T\).
+Consequently the clause
+\[
+ \bigvee_{v\in T}\neg t_{i,v}\ \vee\ \bigvee_{e\in M}f_e
+\]
+correctly gates the assertion that a perfect matching \(M\) of
+\(K_{13}-T\) meets \(F\).
+
+## Symmetry
+
+The first four-edge matching is fixed to
+\[
+\{01,23,45,67\},
+\]
+which is without loss under vertex relabelling. The other three four-edge
+matchings and the three five-edge matchings are separately sorted
+lexicographically. The seven triples and three five-sets are likewise
+sorted within their exchangeable families. These restrictions select
+orbit representatives and do not change feasibility.
+
+## Reproduction
+
+Generate the symmetry-broken model:
+
+```bash
+/opt/homebrew/bin/python3 -B \
+  collaboration/first_lift_global_theorem/write_r0_compact_full_cnf.py \
+  /private/tmp/erdos835-r0-compact-sym.cnf
+```
+
+The generated instance has:
+
+```text
+variables=8117
+clauses=1940870
+sha256=434dbb40b8e0489c5e4b8c67fb8e6be5db9b605df3b3e0cda107f9681b5bb148
+```
+
+Audit the custom encodings, all perfect-matching enumerations, and the
+DIMACS stream:
+
+```bash
+/opt/homebrew/bin/python3 -B \
+  collaboration/first_lift_global_theorem/verify_r0_compact_full_cnf.py \
+  --cnf /private/tmp/erdos835-r0-compact-sym.cnf
+```
+
+Expected output:
+
+```text
+PASS signed exact-cardinality projection
+PASS lexicographic projection
+PASS 286 supports each have exactly 945 enumerated perfect matchings
+PASS DIMACS variables=8117 clauses=1940870 sha256=434dbb40b8e0489c5e4b8c67fb8e6be5db9b605df3b3e0cda107f9681b5bb148
+SCOPE: encoding audit only; terminal SAT or replay-checked UNSAT is required for the eighth-matching lemma
+```
+
+If the solver returns SAT, pass its model through the same verifier with
+`--witness`; this checks the mathematical object directly and ignores all
+auxiliary CNF variables.
+
+## Catalogue-dependent exact cross-check
+
+`write_r0_tutte_full_cnf.py` replaces the 945 perfect-matching clauses per
+support by an existential coarsened Tutte barrier. For each row it chooses
+one of the seven exhaustively enumerated shapes
+\[
+(0;3,7),(0;5,5),(1;3,3,3),(2;5,1,1,1),
+(2;3,3,1,1),(3;3,1,1,1,1),(4;1,1,1,1,1,1)
+\]
+and requires every edge between distinct odd blocks to lie in \(F\).
+Equal-sized blocks are lexicographically sorted.
+
+Generate and audit it with:
+
+```bash
+/opt/homebrew/bin/python3 -B \
+  collaboration/first_lift_global_theorem/write_r0_tutte_full_cnf.py \
+  /private/tmp/erdos835-r0-tutte-sym.cnf
+/opt/homebrew/bin/python3 -B \
+  collaboration/first_lift_global_theorem/verify_r0_tutte_full_cnf.py \
+  --cnf /private/tmp/erdos835-r0-tutte-sym.cnf
+```
+
+The symmetry-broken instance has:
+
+```text
+variables=22733
+clauses=152748
+sha256=1d757439ff2c61ee9336c6b3d3fe7b7c7855c65b313b5f0bf84b601e5e3b47e1
+```
+
+Its verifier exhaustively regenerates the seven barrier shapes from Tutte
+arithmetic, tests gated cardinality and lexicographic projections, and can
+pass any SAT witness to the same direct perfect-matching validator used for
+the core-independent model.
+
+## Current status
+
+Both exact encodings and their local projection tests are verified. A
+terminal SAT witness or independently replayed UNSAT proof is still required.
