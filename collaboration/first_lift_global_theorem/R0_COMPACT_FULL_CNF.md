@@ -210,6 +210,27 @@ clauses=148270
 sha256=1f215ddc83032a975705f08dae5c20d1e714e86e61b9c9e3ce7e91db3ea977ee
 ```
 
+Commit `856478f` exhausts all 32 exactly-four-core type multisets and
+eliminates every one. Hence a seven-large-support obstruction needs at
+least five distinct surviving cores unconditionally. The new strongest
+target is:
+
+```bash
+/opt/homebrew/bin/python3 -B \
+  collaboration/first_lift_global_theorem/write_r0_tutte_full_cnf.py \
+  --surviving-only --require-four-cores --require-five-cores \
+  --exclude-all-k6 \
+  /private/tmp/erdos835-r0-tutte-five-core.cnf
+```
+
+It has:
+
+```text
+variables=23125
+clauses=148262
+sha256=e7b3a1d68bc8ff7fe688bfe068a0df93bef5518d86715e2240a845c37fa1ceb9
+```
+
 ## Current status
 
 Both exact encodings and their local projection tests are verified. A

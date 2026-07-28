@@ -90,6 +90,15 @@ def require_five_cores_if_barrier_b(
         writer.add([-choice, has_b])
     writer.add([-has_b, *b_choices])
 
+    require_five_distinct_cores(writer, different, gate=has_b)
+
+
+def require_five_distinct_cores(
+    writer: compact.Writer,
+    different: dict[tuple[int, int], int],
+    gate: int | None = None,
+) -> None:
+    """Require five core classes, optionally conditional on ``gate``."""
     for representatives in combinations(range(7), 4):
         witnesses = []
         for row in range(7):
@@ -100,19 +109,24 @@ def require_five_cores_if_barrier_b(
             for representative in representatives:
                 pair = tuple(sorted((row, representative)))
                 writer.add([-witness, different[pair]])
-        writer.add([-has_b, *witnesses])
+        writer.add(witnesses if gate is None else [-gate, *witnesses])
 
 
 def build(
     path: Path,
     surviving_only: bool = False,
     require_four_cores: bool = False,
+    require_five_cores: bool = False,
     exclude_all_k6: bool = False,
     b_needs_five_cores: bool = False,
     type_counts: tuple[int, ...] | None = None,
 ) -> None:
     if require_four_cores and not surviving_only:
         raise ValueError("--require-four-cores requires --surviving-only")
+    if require_five_cores and not require_four_cores:
+        raise ValueError(
+            "--require-five-cores requires --require-four-cores"
+        )
     if exclude_all_k6 and not surviving_only:
         raise ValueError("--exclude-all-k6 requires --surviving-only")
     if b_needs_five_cores and not require_four_cores:
@@ -268,7 +282,9 @@ def build(
         different = require_four_distinct_cores(
             writer, core_descriptors
         )
-        if b_needs_five_cores:
+        if require_five_cores:
+            require_five_distinct_cores(writer, different)
+        elif b_needs_five_cores:
             require_five_cores_if_barrier_b(
                 writer, barrier_choices_by_row, different
             )
@@ -279,6 +295,7 @@ def build(
         f"clauses={writer.clauses} "
         f"barriers={'surviving' if surviving_only else 'all'} "
         f"four_cores={require_four_cores} "
+        f"five_cores={require_five_cores} "
         f"exclude_all_k6={exclude_all_k6} "
         f"b_needs_five_cores={b_needs_five_cores} "
         f"type_counts={type_counts}",
@@ -313,6 +330,14 @@ def main() -> None:
         ),
     )
     parser.add_argument(
+        "--require-five-cores",
+        action="store_true",
+        help=(
+            "Use the prior exact four-core-family theorem that a total "
+            "obstruction needs at least five distinct surviving cores"
+        ),
+    )
+    parser.add_argument(
         "--exclude-all-k6",
         action="store_true",
         help=(
@@ -338,6 +363,7 @@ def main() -> None:
         args.output,
         surviving_only=args.surviving_only,
         require_four_cores=args.require_four_cores,
+        require_five_cores=args.require_five_cores,
         exclude_all_k6=args.exclude_all_k6,
         b_needs_five_cores=args.b_needs_five_cores,
         type_counts=type_counts,
