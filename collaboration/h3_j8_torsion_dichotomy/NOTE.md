@@ -91,6 +91,53 @@ Consequently
 \tag{4}
 \]
 
+In fact the two endpoints in (4) can be removed.  Regard the positive and
+negative cube cells as the two halves of the bipartite 4-cube.  For a subset
+\(B\) of \(k\) negative cells, let \(f(k)\) be the minimum size of its
+positive neighborhood.  The elementary neighborhood table is
+\[
+\bigl(f(0),\ldots,f(8)\bigr)=(0,4,6,7,7,8,8,8,8).
+\tag{5}
+\]
+For \(k=1,2\), this follows directly from the fact that two same-parity
+4-cube vertices have at least six distinct neighbors.  For \(k=3,4\), two
+missed positive vertices would have at least six neighbors inside a
+negative complement of size at most five.  For \(k\ge5\), one missed
+positive vertex would need all four of its neighbors in a complement of
+size at most three.
+
+Write \(n_v=d_v\) on the negative cube cells, and put
+\[
+m_u=\max_{v\sim u}n_v
+\]
+on the positive cells.  The edge inequalities give
+\[
+d_u\le13-m_u,\qquad
+P\le104-\sum_um_u.
+\tag{6}
+\]
+For the level sets \(B_t=\{v:n_v\ge t\}\), with \(k_t=|B_t|\), layer-cake
+counting and (5) give
+\[
+\sum_um_u=\sum_{t\ge1}|N(B_t)|\ge\sum_{t\ge1}f(k_t),
+\qquad \sum_tk_t=N.
+\tag{7}
+\]
+If \(N=21\) or \(22\), at least three levels are nonempty.  With exactly
+three, every \(k_t\ge N-16\ge5\), so (7) is at least \(24\).  With at least
+four, use \(f(k)\ge k\), with equality only at \(k=8\) and excess at least
+one otherwise.  There can be at most two 8s because \(N\le22\).  Total
+excess at most two would force two further values \(k=7\), already giving
+sum at least \(30\).  Hence the excess is at least three and (7) is again
+at least \(24\).
+
+But \(P=N+60\) and (6) require
+\(\sum_um_u\le44-N\), which is at most \(23\) for \(N=21,22\).  Therefore
+\[
+0\le N\le20,\qquad 60\le P\le80.
+\tag{8}
+\]
+
 There is also an exact binary description of every triple load.  Write
 \(L_U=\sum_{Q\supseteq U}d_Q\), including \(L_\varnothing=\sum_Qd_Q\).
 For a triple \(T\), the \(q=7\) congruence on \(A\setminus T\), together
@@ -100,13 +147,13 @@ with \(\binom{10}{4}=210\equiv0\pmod7\), gives
 L_\varnothing-\sum_{a\in T}L_a
 +\sum_{\{a,b\}\in\binom T2}L_{ab}-L_T
 \pmod7.
-\tag{5}
+\tag{9}
 \]
-If \(r_T\in\{0,\ldots,6\}\) is the residue on the right of (5) before
+If \(r_T\in\{0,\ldots,6\}\) is the residue on the right of (9) before
 subtracting \(L_T\), then the capacity range \(0\le L_T\le13\) implies
 \[
 L_T=r_T+7b_T,\qquad b_T\in\{0,1\}.
-\tag{6}
+\tag{10}
 \]
 Thus a fixed torsion cube has only one binary \(7\)-adic choice per triple,
 although coupling those 286 choices remains unresolved.

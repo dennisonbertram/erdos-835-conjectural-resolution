@@ -135,6 +135,52 @@ def audit_fixed_cube_local_structure() -> None:
     ]
     assert possible_n == list(range(23))
 
+    negative_vertices = [
+        bits for bits in product((0, 1), repeat=4) if sum(bits) % 2
+    ]
+    positive_vertices = [
+        bits for bits in product((0, 1), repeat=4) if sum(bits) % 2 == 0
+    ]
+
+    def adjacent(first: tuple[int, ...], second: tuple[int, ...]) -> bool:
+        return sum(a != b for a, b in zip(first, second)) == 1
+
+    expansion = [0]
+    for size in range(1, 9):
+        smallest = 8
+        for chosen in combinations(negative_vertices, size):
+            neighborhood = {
+                vertex
+                for vertex in positive_vertices
+                if any(adjacent(vertex, other) for other in chosen)
+            }
+            smallest = min(smallest, len(neighborhood))
+        expansion.append(smallest)
+    assert expansion == [0, 4, 6, 7, 7, 8, 8, 8, 8]
+
+    def level_partitions(
+        total: int,
+        largest: int = 8,
+    ) -> list[tuple[int, ...]]:
+        if total == 0:
+            return [()]
+        answer = []
+        for first in range(min(largest, total), 0, -1):
+            for tail in level_partitions(total - first, first):
+                answer.append((first, *tail))
+        return answer
+
+    minima = {}
+    for total in (20, 21, 22):
+        minima[total] = min(
+            sum(expansion[size] for size in levels)
+            for levels in level_partitions(total)
+        )
+    assert minima == {20: 23, 21: 24, 22: 24}
+    # P=N+60 and P<=104-M require M<=44-N; totals 21 and 22 fail.
+    assert minima[21] > 44 - 21
+    assert minima[22] > 44 - 22
+
     # Coefficientwise inclusion-exclusion for the complement of every triple.
     for triple in combinations(V, 3):
         for q in FOUR_SETS:
@@ -156,7 +202,7 @@ def main() -> None:
     print("four-cube extraction, lcm, and 104 bound: PASS")
     audit_ranks()
     audit_fixed_cube_local_structure()
-    print("fixed Delta=60 edge bound and binary triple residues: PASS")
+    print("fixed Delta=60 bound N<=20 and binary triple residues: PASS")
     print("PASS: q=6 is redundant and every cube coefficient is 0 or +/-60")
     print("scope: the Delta=60 branch, the full lift, and Problem #835 remain open")
 
