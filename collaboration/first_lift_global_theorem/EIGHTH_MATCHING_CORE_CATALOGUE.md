@@ -208,6 +208,93 @@ placing that clique, the one remaining edge gives the seventh vertex of
 Thus a fixed \(K_6\) can account for at most five of the seven supports in a
 total-obstruction argument.
 
+### Three more equality exclusions
+
+The same complement accounting, followed by a direct matching construction,
+sharpens three other ceilings in a total-obstruction argument.
+
+#### The \(K_{5,1,1,1}\) ceiling is three
+
+Write the core vertex set as \(C=L\mathbin{\dot\cup}S\), where
+\((|L|,|S|)=(5,3)\), and put \(O=V(K_{13})\setminus C\).  The vertices of
+\(S\) already have core degree seven.  Classify the thirteen noncore edges
+of \(F\) as
+\[
+ a=|E_F(L,O)|,\qquad b=|E_F(L)|,\qquad c=|E_F(O)|.
+\]
+Then
+\[
+ a+b+c=13,\qquad c\le10. \tag{13}
+\]
+The total complement capacity in \(O\) is
+\[
+ \sum_{v\in O}(d_F(v)-2)=2c+a-10.
+\]
+If four complement triples lay in \(O\), this quantity would be at least
+twelve.  Substituting (13) gives \(a+2b\le4\).  Together with \(c\le10\),
+the only possibilities for \((c,a,b)\) are
+\[
+ (10,3,0),\qquad(10,2,1),\qquad(9,4,0). \tag{14}
+\]
+Thus the four triples consume twelve of at most thirteen complement
+incidences in \(O\).  At least two of the other three large complement
+triples lie wholly in \(C\).
+
+For either such triple \(T\), its support is \(O\mathbin{\dot\cup}R\), where
+\(|O|=|R|=5\) and \(R=C\setminus T\).  Between \(O\) and \(R\), the residual
+graph contains \(K_{5,5}\) minus at most \(a\le4\) edges.  Deleting fewer
+than five edges from \(K_{5,5}\) cannot destroy all perfect matchings:
+a Hall-deficient \(k\)-set would require deleting at least
+\(k(6-k)\ge5\) edges.  Hence this support has a perfect matching, a
+contradiction.  A fixed \(K_{5,1,1,1}\) can therefore be reused at most
+three times.
+
+#### The \(K_{3,3,1,1}\) ceiling is one
+
+Here \(|C|=8\), \(|E(J)|=22\), and \(|O|=5\).  Let \(a,b,c\) count,
+respectively, noncore edges crossing from \(O\) to \(C\), lying inside
+\(C\), and lying inside \(O\).  Then
+\[
+ a+b+c=9,\qquad
+ \sum_{v\in O}(d_F(v)-2)=2c+a-10=8-a-2b.
+\]
+If two blocked supports reused the core, the last expression would be at
+least six, so \(a+2b\le2\).  After their two triples consume six
+incidences, at most two \(O\)-incidences remain.  At least one of the other
+five large complement triples lies wholly in \(C\).  Its support splits as
+two five-sets \(O\) and \(R=C\setminus T\), and the residual graph contains
+\(K_{5,5}\) between them minus at most \(a\le2\) edges.  It has a perfect
+matching, again a contradiction.  Thus the reuse ceiling is one.
+
+#### The \(K_{3,1,1,1,1}\) ceiling is three
+
+Now \(|C|=7\), \(|E(J)|=18\), and \(|O|=6\).  With the same notation,
+\[
+ a+b+c=13,\qquad
+ \sum_{v\in O}(d_F(v)-2)=2c+a-12=14-a-2b.
+\]
+Four reused triples would force \(a+2b\le2\), hence \(a\le2\).  They leave
+at most two complement incidences in \(O\), so at least one of the other
+three large triples \(T\) lies wholly in \(C\).
+
+The support of \(T\) is \(O\mathbin{\dot\cup}R\), with
+\((|O|,|R|)=(6,4)\).  Moreover
+\[
+ |E(H[O])|=\binom62-c=2+a+b\ge2.
+\]
+Choose one residual edge inside \(O\).  The four unused vertices of \(O\)
+and the four vertices of \(R\) span \(K_{4,4}\) minus at most \(a\le2\)
+edges in \(H\), so they have a perfect matching.  Together with the chosen
+edge this is a perfect matching of the support, a contradiction.  The
+reuse ceiling is three.
+
+Combining these arguments with (12) and the \(K_6\) equality exclusion, the
+ceilings for a hypothetical obstruction of all seven size-ten supports are
+\[
+ (2,1,0,3,1,3,5) \tag{15}
+\]
+for the core types in the order displayed in (5).
+
 ## Remaining frontier
 
 To prove an eighth-colour theorem it now suffices to show that the cores

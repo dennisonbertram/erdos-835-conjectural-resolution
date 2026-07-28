@@ -104,6 +104,28 @@ def main() -> None:
     assert min(edges for _, _, edges, _ in expected_ten if edges > 15) == 18
     assert 16 - 15 == 1
 
+    # K5111 fourfold equality: (c,a,b) are forced to these three cases.
+    k5111_cases = [
+        (c, a, b)
+        for a in range(14)
+        for b in range(14)
+        for c in range(11)
+        if a + b + c == 13 and a + 2 * b <= 4
+    ]
+    assert k5111_cases == [(10, 2, 1), (10, 3, 0), (9, 4, 0)]
+    assert all(2 * c + a - 10 in (12, 13) for c, a, _ in k5111_cases)
+    assert min(k * (6 - k) for k in range(1, 6)) == 5
+
+    # K3311 twofold and K31111 fourfold equalities both force at most two
+    # cross edges, after which K5,5 or K4,4 resilience supplies a matching.
+    assert all(
+        a <= 2
+        for a in range(10)
+        for b in range(10)
+        if a + 2 * b <= 2
+    )
+    assert min(k * (5 - k) for k in range(1, 5)) == 4
+
     profiles = {
         0: ((4, 3, 0), 31),
         1: ((4, 2, 1), 32),
@@ -135,6 +157,7 @@ def main() -> None:
     print("PASS reuse ceilings follow from d_H(v)=12-d_F(v)")
     print("PASS r=0 complement-degree ceilings are 2, 1, 0, 4, 2, 4, 6")
     print("PASS total-obstruction equality sharpens K6 reuse from six to five")
+    print("PASS total-obstruction ceilings sharpen to 2, 1, 0, 3, 1, 3, 5")
     print("PASS target seven-prefix edge totals are 31, 32, 33, 33, 33, 34")
     print("SCOPE: exact obstruction reduction; eighth-colour packing remains open")
 
