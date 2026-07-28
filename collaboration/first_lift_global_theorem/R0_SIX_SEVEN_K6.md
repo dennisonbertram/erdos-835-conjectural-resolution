@@ -1,12 +1,12 @@
-# Six or seven distinct \(K_6\) obstruction cores
+# Six or seven cores with at most one non-\(K_6\) core
 
 Date: 2026-07-28.
 
 ## Result and scope
 
-In the exceptional \(r=0\) profile, neither six nor seven distinct
-\(K_6\) cores can collectively account for all seven blocked size-ten
-supports.
+In the exceptional \(r=0\) profile, neither six nor seven distinct cores
+can collectively account for all seven blocked size-ten supports when all
+but at most one core are \(K_6\)'s.
 
 For six distinct cores the only positive multiplicity shape is
 \[
@@ -15,27 +15,44 @@ For six distinct cores the only positive multiplicity shape is
 and for seven it is \(1+1+1+1+1+1+1\).  In either case the total
 multiplicity is seven.
 
-This result treats only the pure-\(K_6\) type branches.  Mixed six- and
-seven-core families remain open.
+The possible exceptional core may have any of the other three surviving
+types:
+\[
+ K_{5,1,1,1},\qquad K_{3,3,1,1},\qquad K_{3,1,1,1,1}.
+\]
+Families with at least two non-\(K_6\) cores remain open.
 
 ## Exact union classification
 
-Fix one canonical \(K_6\) under \(S_{13}\).  Among the other 1,715
-\(K_6\)'s, exactly 364 pass the necessary two-core conditions
+Fix a canonical core \(X\) under \(S_{13}\), where
+\[
+ X\in\{A,B,C,D\}
+ =\{K_{5,1,1,1},K_{3,3,1,1},K_{3,1,1,1,1},K_6\}.
+\]
+Enumerate the \(K_6\)'s that pass the necessary two-core conditions
 \[
  |E(J)|\le31,\qquad \Delta(J)\le7.
 \]
-Select five or six of those candidates and let \(W\) be the union of all
-core supports.  An exact finite optimization gives
+The pool sizes for \(X=A,B,C,D\) are respectively
 \[
-\begin{array}{c|cc}
- &|W|=7&|W|=8\\ \hline
-6\text{ cores: minimum }|E(J)|&21&26\\
-7\text{ cores: minimum }|E(J)|&21&26
-\end{array} \tag{1}
+ 28,\qquad28,\qquad133,\qquad364. \tag{1}
 \]
-and proves that no such family with \(9\le|W|\le13\) satisfies the
-31-edge and maximum-degree bounds.
+Select five or six \(K_6\)'s as appropriate, and let \(W\) be the union of
+all core supports.  Exact finite optimization gives the complete list of
+feasible union orders and minimum edge counts:
+\[
+\begin{array}{c|c|c}
+X&|W|&\min |E(J)|\\ \hline
+A&8&24\\
+B&8&26\\
+C&7&21\\
+C&8&25\\
+D&7&21\\
+D&8&26
+\end{array} \tag{2}
+\]
+The table is the same for six and seven total cores.  Every unlisted union
+order is infeasible under the 31-edge and maximum-degree bounds.
 
 ## Full row-rank contradiction
 
@@ -49,30 +66,36 @@ is
 The three complement five-sets contribute at most fifteen occurrences in
 \(W\).
 
-A complement triple assigned to a \(K_6\) core lies outside that core.
-Since the core support is a six-set contained in \(W\), such a triple
+A complement triple assigned to a core with support \(C_i\subseteq W\)
 contains at most
 \[
- |W|-6
+ \min\{3,|W|-|C_i|\}
 \]
-vertices of \(W\).  The assigned multiplicities sum to seven, so all seven
-triples contribute at most \(7(|W|-6)\) occurrences in \(W\).  Therefore
-a total obstruction would require
+vertices of \(W\).  Sum this bound with the assigned multiplicities.  In
+the six-core case, check both possible doubled-core choices, except that
+the \(B\)-core has reuse ceiling one and cannot be doubled.
+
+For every row of (2), even the larger of the possible triple-incidence
+bounds is strictly below the lower bound in (2):
 \[
- 2|E(J)|-2|W|
- \le 15+7(|W|-6). \tag{3}
+\begin{array}{c|c|c|c}
+X&|W|&2|E(J)|-2|W|&
+15+\max\text{ triple incidences}\\ \hline
+A&8&32&27\\
+B&8&36&27\\
+C&7&28&21\\
+C&8&34&28\\
+D&7&28&22\\
+D&8&36&29
+\end{array} \tag{3}
 \]
+The same upper bounds cover the seven-core all-singleton assignment.
 
-For \(|W|=7\), (1) makes the left side at least \(28\), while the right
-side is \(22\).  For \(|W|=8\), the two sides are at least \(36\) and
-at most \(29\), respectively.  Both are contradictions, and larger
-support unions do not pass the exact graph screen.
-
-Thus neither six nor seven distinct \(K_6\) cores can cover the seven
-blocked supports.
+Thus no six- or seven-core branch with at most one non-\(K_6\) core can
+cover the seven blocked supports.
 
 ## Reproduction
 
-`verify_r0_six_seven_k6.py` independently rebuilds the 364-candidate pool,
-solves every fixed-\(|W|\) finite optimization, checks the exact table
-(1), and checks the two strict row-rank inequalities.
+`verify_r0_six_seven_k6.py` independently rebuilds all four candidate
+pools, solves every fixed-\(|W|\) finite optimization, checks the exact
+table (2), and checks every strict row-rank inequality in (3).
