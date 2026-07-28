@@ -1197,8 +1197,34 @@ routes, but not the asymmetric case.
   \((7,10,0)\) seven-prefix of type \(8^4\,10^3\) extends to an eighth
   matching.  Its dependency ledger gives the exact commits and replay
   artifacts for all one-through-seven-core branches.  The theorem is
-  strictly \(r=0\): other eighth-matching profiles and the final nine
-  colours remain open.
+  strictly \(r=0\): coordinated nonzero-profile extension and the final
+  nine colours remain open.
+- [`collaboration/first_lift_global_theorem/R1_DEAD_SEVEN_PREFIX.md`](collaboration/first_lift_global_theorem/R1_DEAD_SEVEN_PREFIX.md):
+  an exact \(r=1\) class-B seven-prefix that blocks all ten remaining
+  supports even though the same support matrix has a separate full
+  seventeen-matching completion.  Thus arbitrary-prefix extension is
+  false and coordinated switching is genuinely necessary.
+- [`collaboration/first_lift_global_theorem/R1_MINIMUM_LAYER_REPAIR.md`](collaboration/first_lift_global_theorem/R1_MINIMUM_LAYER_REPAIR.md)
+  and [`R1_MINIMUM_FULL_REPAIR.md`](collaboration/first_lift_global_theorem/R1_MINIMUM_FULL_REPAIR.md):
+  exact repair distances for that \(r=1\) certificate.  One changed layer
+  admits an eighth matching, while a full completion needs exactly three;
+  the latter lower bound is a solver-free \(6:7\) crossing-cut argument.
+- [`collaboration/first_lift_global_theorem/R3_DEAD_SEVEN_PREFIXES.md`](collaboration/first_lift_global_theorem/R3_DEAD_SEVEN_PREFIXES.md):
+  two exact \(r=3\) dead seven-prefixes, with nested \(C\subset G\) and
+  \(D\subset G\) obstruction cores.  Both block all ten remaining supports
+  but their support matrices have explicit full completions.
+- [`collaboration/first_lift_global_theorem/R3_MINIMUM_LAYER_REPAIR.md`](collaboration/first_lift_global_theorem/R3_MINIMUM_LAYER_REPAIR.md):
+  exact repair distances for the two \(r=3\) certificates: one changed
+  layer admits an eighth matching, while full completion requires four
+  changes in the \(C\subset G\) case and three in the \(D\subset G\) case.
+- [`collaboration/first_lift_global_theorem/CUT_CAPACITY_FULL_REPAIR_BOUNDS.md`](collaboration/first_lift_global_theorem/CUT_CAPACITY_FULL_REPAIR_BOUNDS.md):
+  a general crossing-cut lower bound for the number of prefix layers any
+  full repair must change, with exhaustive all-cut audits recovering the
+  exact \(r=1\) and both \(r=3\) distances above.
+- [`collaboration/first_lift_global_theorem/R5_LARGE_SUPPORT_PAIR_COUNTEREXAMPLE.md`](collaboration/first_lift_global_theorem/R5_LARGE_SUPPORT_PAIR_COUNTEREXAMPLE.md):
+  an \(r=5\) certificate blocking both remaining size-twelve supports while
+  every remaining size-eight support still extends.  It refutes only the
+  large-support-first route, not arbitrary-prefix extension itself.
 - [`collaboration/first_lift_global_theorem/TWELVE_SUPPORT_SWITCHING_NOTE.md`](collaboration/first_lift_global_theorem/TWELVE_SUPPORT_SWITCHING_NOTE.md):
   a two-edge switching-resilience theorem on twelve vertices.  After any
   six matching layers, a residual perfect matching can avoid any prescribed
