@@ -20,7 +20,6 @@ proves the exceptional r=0 eighth-matching lemma.
 from __future__ import annotations
 
 import argparse
-from itertools import combinations
 from pathlib import Path
 
 import write_r0_compact_full_cnf as compact
