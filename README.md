@@ -1115,6 +1115,11 @@ routes, but not the asymmetric case.
   first-lift palette has a simultaneously matchable five-colour prefix and
   that every profile containing a support-twelve colour has a six-colour
   prefix.  Global compatibility across all seventeen colours remains open.
+- [`collaboration/first_lift_global_theorem/NOTE.md`](collaboration/first_lift_global_theorem/NOTE.md):
+  an exact target-order class-B′ example showing that an arbitrary valid
+  dense five-colour prefix need not extend even to the sixth colour.  The
+  same instance has an explicit different full completion, so this rules
+  out the greedy-prefix proof strategy rather than the first-lift theorem.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
@@ -1468,6 +1473,12 @@ python3 -B \
   collaboration/opus5/first_lift_k13_hole/verify_first_lift_obstruction.py
 python3 -B \
   collaboration/first_lift_partial_factorization_audit/verify_boundary.py
+python3 -B \
+  collaboration/first_lift_dense_support_prefix/verify_prefix_criteria.py
+python3 -B \
+  collaboration/first_lift_global_theorem/verify_dead_prefix.py
+python3 -B \
+  collaboration/first_lift_aggregate_graphicity/verify_aggregate_graphicity.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
 python3 -B \
   collaboration/opus5/unrestricted_ls3420_attack_2/verify_solution.py \
