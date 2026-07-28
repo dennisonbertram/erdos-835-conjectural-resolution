@@ -1222,6 +1222,21 @@ routes, but not the asymmetric case.
   nine-packings for the class-B profiles \(r=3,4,5\).  Profiles
   \(r=0,1,2\), colours ten through seventeen, the later fan-compatibility
   layers, and Problem #835 remain open.
+- [`collaboration/r0_complement_cover_six/NOTE.md`](collaboration/r0_complement_cover_six/NOTE.md):
+  a solver-free \(r=0\) complement-covering six-prefix theorem.  An exact
+  expectation argument selects three size-eight and three size-ten supports,
+  while a new dense-ambient lemma packs arbitrary three prescribed
+  ten-supports in every thirteen-vertex graph of minimum degree at least nine.
+  A distinct-triple example also refutes the tempting universal \(4+2\)
+  complement cover.  Three further matchings in the residual
+  minimum-degree-seven graph are still required for coordinated nine.
+- [`collaboration/coordinated_nine_r2_obstruction/NOTE.md`](collaboration/coordinated_nine_r2_obstruction/NOTE.md):
+  an exact \(r=2\) delimiter.  A legitimate \(8^4\,10^2\)
+  complement-cover prefix can block every remaining size-ten support, so the
+  fixed “append one ten and both twelves” route is false.  The same prefix has
+  an explicit verified \(8+12+12\) extension to nine, showing that the
+  obstruction is to that route rather than to coordinated nine.  A universal
+  \(r=2\) switching theorem remains open.
 - [`collaboration/k7_terminal_switching/NOTE.md`](collaboration/k7_terminal_switching/NOTE.md):
   a self-contained independent proof and \(6^7\)-case arithmetic audit of
   the last separator-five \(K_7\) switch.  It tracks the exact Hall
