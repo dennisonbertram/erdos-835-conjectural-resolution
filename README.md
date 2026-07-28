@@ -18,6 +18,13 @@ unresolved case is \(k=16\).
 
 New exact results in the note include:
 
+- a solver-free \(r=0\) cut-feasible repair-selection theorem: after at
+  most one support-preserving two-edge switch, some three of the seven
+  remaining size-ten rows satisfy every internal-edge capacity cut.  The
+  proof combines Opus 5's dense-cut coexistence ledger with the certified
+  incompatibility graph and closes the \(|A|=7\), \(|A|=6\), and
+  \(|A|\le5\) branches.  This is not yet coordinated nine: sufficiency of
+  those cuts for three simultaneous perfect matchings remains open;
 - coordinated-nine theorems for the class-B \(r=1,2\) profiles: in
   \(r=1\), a complement-cover prefix of type \(8^4\,10^2\) can be
   switched on the same supports and extended; in \(r=2\), every legal
@@ -1336,7 +1343,29 @@ routes, but not the asymmetric case.
   When one dense six-set has all seven triple rows on its far side, one legal
   cross-switch makes every row triple pass every cut; all 20 binding
   \((p,q)\) types are independently checked.  The response's claimed next
-  branch relies on unproved overlap inequalities and is not accepted.
+  branch relied on overlap inequalities that were unproved in that response;
+  the subsequent theorem below supplies the missing derivations.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_theorem.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_theorem.md):
+  the complete solver-free cut-feasible repair-selection theorem.  A
+  degree-cap ledger proves that dense six-cuts are disjoint, binding
+  seven-cuts are unique, and a tight eight-cut is unique; the certified
+  \(K_t\dot\cup(7-t)K_1\) incompatibility classification then guarantees a
+  compatible triple outside every obstruction family.  The proof audits
+  the one-switch budget in both the saturated-\(K_6\) preprocessing and
+  six-fold equality branches.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_cover_followup_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_cover_followup_audit.md):
+  the independent audit of the final Opus 5 obstruction-covering run.  It
+  reconstructs the edge and degree ledgers, verifies the complete
+  coexistence table and the sharp residual cover bound of eleven, and
+  supplies the certified pair-compatibility dependency that the raw
+  tool-free response correctly left conditional.
+- [`collaboration/r0_three_family_helly_gate/2026-07-28_cut_cover_independent_theorem.md`](collaboration/r0_three_family_helly_gate/2026-07-28_cut_cover_independent_theorem.md):
+  a second, independent proof of the same cut-selection result that does
+  not use individual matchability, the pair gate, or the incompatibility
+  graph.  It classifies all capacity failures directly, proves that a
+  non-all-cover family of critical cuts misses at least one of the 35 row
+  triples, and removes the three all-cover cases with the audited
+  \(K_6\), \(K_6-e\), and rigid \(K_6-2K_2\) switches.
 - [`collaboration/coordinated_nine_r0_repair_cegis/NOTE.md`](collaboration/coordinated_nine_r0_repair_cegis/NOTE.md):
   an exact semantic-witness CEGIS for one-layer support-preserving repair and
   a three-colour continuation.  Strict canonical replay has been audited; a
@@ -1349,6 +1378,14 @@ routes, but not the asymmetric case.
   narrower cut-selection lemma, with independent raw counterexample replay,
   strict semantic-witness logging, canonical replay, and automatic final-CNF
   export if the accumulated model reaches UNSAT.
+- [`collaboration/r0_three_family_helly_gate/freeze_full_row_cut_sufficiency.py`](collaboration/r0_three_family_helly_gate/freeze_full_row_cut_sufficiency.py):
+  the certificate-oriented decision driver for the remaining local theorem.
+  It reconstructs the exact 16 three-row Venn orbits by integer-cell
+  enumeration, installs every binding cut statically, and freezes the final
+  DIMACS formula and hash on incremental UNSAT.  The fast orbit enumerator
+  reproduces the original orbit list while reducing its discovery time from
+  about 40.3 seconds to 0.04 seconds.  Any UNSAT output still requires
+  independent CNF reconstruction and CaDiCaL/DRAT-trim replay.
 - [`collaboration/coordinated_nine_r1_reduction/NOTE.md`](collaboration/coordinated_nine_r1_reduction/NOTE.md):
   the exact \(r=1\) one- and two-step Tutte catalogues, core-reuse ceilings,
   and three literal class-B pair obstructions with triple intersections

@@ -95,6 +95,11 @@ def validate_cut_witness(witness: CutWitness) -> None:
         raise AssertionError("invalid repair layer")
     if len(witness.replacement) != PREFIX_SIZES[witness.repair_layer]:
         raise AssertionError("replacement has the wrong size")
+    if (
+        tuple(sorted(witness.replacement)) != witness.replacement
+        or len(set(witness.replacement)) != len(witness.replacement)
+    ):
+        raise AssertionError("replacement is not canonical")
     support = frozenset(endpoints(witness.replacement))
     if not is_matching_on(witness.replacement, support):
         raise AssertionError("replacement is not a perfect matching")
@@ -108,7 +113,7 @@ def validate_cut_witness(witness: CutWitness) -> None:
         raise AssertionError("replacement edges are not certified free")
     if tuple(sorted(witness.colours)) != witness.colours:
         raise AssertionError("selected colours are not canonical")
-    if len(set(witness.colours)) != 3 or any(
+    if len(witness.colours) != 3 or len(set(witness.colours)) != 3 or any(
         colour not in TRIPLE_COLOURS for colour in witness.colours
     ):
         raise AssertionError("selected colours are not three triple rows")
@@ -137,6 +142,11 @@ def validate_exact_union_witness(witness: ExactUnionCutWitness) -> None:
         raise AssertionError("invalid repair layer")
     if len(witness.replacement) != PREFIX_SIZES[witness.repair_layer]:
         raise AssertionError("replacement has the wrong size")
+    if (
+        tuple(sorted(witness.replacement)) != witness.replacement
+        or len(set(witness.replacement)) != len(witness.replacement)
+    ):
+        raise AssertionError("replacement is not canonical")
     support = frozenset(endpoints(witness.replacement))
     if not is_matching_on(witness.replacement, support):
         raise AssertionError("replacement is not a perfect matching")
@@ -146,7 +156,7 @@ def validate_exact_union_witness(witness: ExactUnionCutWitness) -> None:
         raise AssertionError("replacement meets another prefix layer")
     if tuple(sorted(witness.colours)) != witness.colours:
         raise AssertionError("selected colours are not canonical")
-    if len(set(witness.colours)) != 3 or any(
+    if len(witness.colours) != 3 or len(set(witness.colours)) != 3 or any(
         colour not in TRIPLE_COLOURS for colour in witness.colours
     ):
         raise AssertionError("selected colours are not three triple rows")
@@ -481,7 +491,7 @@ def solve(
     cuts_per_model: int,
     time_limit_seconds: float,
     witness_log: Path | None,
-    replay_witness_log: Path | None,
+    replay_witness_logs: tuple[Path, ...],
     unsat_cnf_dir: Path | None,
 ) -> dict[str, object]:
     start = time.monotonic()
@@ -491,7 +501,7 @@ def solve(
     witness_hasher = hashlib.sha256()
     replay_hasher = hashlib.sha256()
     replayed_cuts = 0
-    if replay_witness_log:
+    for replay_witness_log in replay_witness_logs:
         for _, record in replay_witnesses(cnf, replay_witness_log):
             encoded = record.encode("utf-8") + b"\n"
             replay_hasher.update(encoded)
@@ -593,7 +603,13 @@ def main() -> None:
     parser.add_argument("--cuts-per-model", type=int, default=990)
     parser.add_argument("--time-limit-seconds", type=float, default=600.0)
     parser.add_argument("--witness-log", type=Path)
-    parser.add_argument("--replay-witness-log", type=Path)
+    parser.add_argument(
+        "--replay-witness-log",
+        type=Path,
+        action="append",
+        default=[],
+        help="canonical witness stream to replay; repeat to chain search waves",
+    )
     parser.add_argument("--unsat-cnf-dir", type=Path)
     args = parser.parse_args()
     if args.max_rounds < 0:
@@ -602,13 +618,13 @@ def main() -> None:
         parser.error("--cuts-per-model must be positive")
     if args.time_limit_seconds <= 0:
         parser.error("--time-limit-seconds must be positive")
-    if (
-        args.replay_witness_log
-        and args.witness_log
-        and args.replay_witness_log.resolve() == args.witness_log.resolve()
-    ):
+    replay_witness_logs = tuple(args.replay_witness_log)
+    resolved_replay_logs = tuple(path.resolve() for path in replay_witness_logs)
+    if len(set(resolved_replay_logs)) != len(resolved_replay_logs):
+        parser.error("--replay-witness-log paths must be distinct")
+    if args.witness_log and args.witness_log.resolve() in resolved_replay_logs:
         parser.error(
-            "--witness-log must differ from --replay-witness-log "
+            "--witness-log must differ from every --replay-witness-log "
             "to protect the replay input"
         )
     result = solve(
@@ -616,7 +632,7 @@ def main() -> None:
         cuts_per_model=args.cuts_per_model,
         time_limit_seconds=args.time_limit_seconds,
         witness_log=args.witness_log,
-        replay_witness_log=args.replay_witness_log,
+        replay_witness_logs=replay_witness_logs,
         unsat_cnf_dir=args.unsat_cnf_dir,
     )
     print(json.dumps(result, sort_keys=True))

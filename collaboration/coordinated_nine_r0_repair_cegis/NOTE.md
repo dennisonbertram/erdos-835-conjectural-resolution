@@ -175,6 +175,11 @@ matchings or complements, invalid edge-disjointness, noncanonical byte
 serialization, and a mismatch between the recorded and reconstructed clause
 hash.  The replay input cannot also be the output path.
 
+The option is repeatable. Multiple streams are replayed in command-line
+order, allowing later campaigns to inherit every earlier semantic clause
+without mechanically concatenating the evidence files. Duplicate replay
+paths are rejected, and the output path must differ from every input path.
+
 A deterministic audit generated four cuts, replayed all four, and added four
 new cuts.  The replay hash was
 
@@ -303,3 +308,59 @@ minimal gzip:     96faa70cce1e9d59ecb57907799c4ea9341966ba36acdaf33843ef1d98edf7
 The current replayer accepts both the legacy exact-union schema and the
 stronger free-edge schema, reconstructs each semantic clause, and checks its
 record hash and canonical JSON.
+
+A fourth, fifteen-minute campaign replayed the 16,590 inclusion-minimal
+wave-one clauses and learned 83,370 new clauses in 398 rounds. It ended at
+the time limit with 99,960 total cuts and 144,437 final clauses, finding
+neither a counterexample nor UNSAT. The terminal combined witness hash was
+
+```text
+2c9c04247cb3dc478900639ee7b474b0706950796360037b368f44e98fd7354f
+```
+
+and the new wave-two stream hash was
+
+```text
+25fc157ab609cc391cd6f3329915775a9b33af829da5ed3c89dac68fa1543e63
+```
+
+The complete 83,370-record stream is published as
+[`erdos835-cut-minimal-wave2-20260728.jsonl.gz`](https://github.com/dennisonbertram/erdos-835-conjectural-resolution/releases/download/r0-cegis-evidence-2026-07-28/erdos835-cut-minimal-wave2-20260728.jsonl.gz).
+The deterministic `gzip -9 -n` archive has size 4,299,623 bytes and
+SHA-256
+
+```text
+2c624d2bdddb4b710e14c572c94aa3c9c242a88f86614edd6afee8c314f23e2e
+```
+
+The independent audit in
+`2026-07-28_wave2_independent_audit.md` replayed all 83,370 records,
+found no duplicate record or clause hash within or across the two streams,
+and reproduced the terminal combined hash. This campaign is superseded as
+a proof route by the solver-free cut-selection theorem, but remains
+independent computational evidence and a test of the certificate pipeline.
+
+A final chained wave replayed both preceding minimal streams in command-line
+order, verifying all 99,960 inherited records, and learned 77,280 new
+clauses in 369 rounds. It ended at its fifteen-minute time limit with
+177,240 total cuts and 221,717 final clauses, again with neither a
+counterexample nor UNSAT. The terminal replay and combined hashes were
+
+```text
+replay:   2c9c04247cb3dc478900639ee7b474b0706950796360037b368f44e98fd7354f
+combined: 6f3d94806988fde14055ad520bf107034db6bb456fe76ea870784bce99394b23
+```
+
+The 77,280-record raw stream has SHA-256
+
+```text
+063e738e63ccf2ae77735297c9742dda054a4b38a3afc4c8ab9baf1ccf20ff87
+```
+
+and is published as
+[`erdos835-cut-minimal-wave3-20260728.jsonl.gz`](https://github.com/dennisonbertram/erdos-835-conjectural-resolution/releases/download/r0-cegis-evidence-2026-07-28/erdos835-cut-minimal-wave3-20260728.jsonl.gz).
+The deterministic archive has size 3,975,919 bytes and SHA-256
+
+```text
+33d597af048f5c6fa3ddc5b13a7ade5c847807a34d37f888b4d5264eb5f83579
+```
