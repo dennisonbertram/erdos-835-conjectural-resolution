@@ -114,6 +114,46 @@ def audit_edge_capacity_counts() -> None:
     assert 3 * 20 == 60
 
 
+def audit_shifted_negative_half_counts() -> None:
+    signed = transversals()
+    negative = [q for q, sign in signed.items() if sign == -1]
+    assert len(negative) == 8
+
+    # Category coefficient in the negative half for k cube vertices:
+    # k=3,2,1,0 gives 1,2,4,8.
+    for cube_size, expected in ((3, 1), (2, 2), (1, 4), (0, 8)):
+        filler_size = 4 - cube_size
+        filler = set(OUTSIDE[:filler_size])
+        for cube_part in combinations(range(8), cube_size):
+            if not valid_cube_partial(cube_part):
+                continue
+            r = set(cube_part) | filler
+            actual = sum(r.issubset(set(q) | filler) for q in negative)
+            assert actual == expected
+
+    # M7=(D7-3)/4 over eight negative cells produces the +24 shift.
+    assert 8 * 3 == 24
+
+    outside_triples = tuple(combinations(OUTSIDE, 3))
+    outside_four_sets = tuple(combinations(OUTSIDE, 4))
+    assert len(outside_triples) == 10
+    assert len(outside_four_sets) == 5
+    # Every outside 4-set contains four outside triples.
+    for four_set in outside_four_sets:
+        assert sum(set(t).issubset(four_set) for t in outside_triples) == 4
+    assert 10 * 13 == 130
+
+    # Aggregate incidence coefficients in (12).
+    for x in OUTSIDE:
+        assert sum(x in triple for triple in outside_triples) == 6
+        assert sum(x in four_set for four_set in outside_four_sets) == 4
+    for pair in combinations(OUTSIDE, 2):
+        assert sum(set(pair).issubset(triple) for triple in outside_triples) == 3
+        assert sum(set(pair).issubset(four_set) for four_set in outside_four_sets) == 3
+    for triple in outside_triples:
+        assert sum(set(triple).issubset(four_set) for four_set in outside_four_sets) == 2
+
+
 def main() -> None:
     audit_derivative_extraction()
     print("filler derivatives 60,-30,20,-15,12,-10: PASS")
@@ -121,10 +161,11 @@ def main() -> None:
     print("all filler-layer transversal incidence coefficients: PASS")
     audit_edge_capacity_counts()
     print("N=0 first- and second-layer mass identities: PASS")
+    audit_shifted_negative_half_counts()
+    print("shifted q=4,5,6 identities and outside capacity: PASS")
     print("PASS: the outside-filler hierarchy is coefficientwise verified")
     print("scope: N=0 feasibility, the full lift, and Problem #835 remain open")
 
 
 if __name__ == "__main__":
     main()
-

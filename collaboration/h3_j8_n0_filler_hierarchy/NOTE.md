@@ -139,10 +139,77 @@ Combining this with (6) yields the exact identity
 \tag{7}
 \]
 
+## Shifted identities through the remaining fillers
+
+For an outside triple \(F=\{x,y,z\}\), let \(U_F\) be the total mass on
+the eight blocks consisting of one cube vertex and \(F\).  For an outside
+four-set \(H\), write \(V_H=d_H\).  The shifts
+\[
+M_7=48-N_7=(D_7-3)/4,\qquad
+M_8=N_8-65=D_8/5,\qquad
+M_9=117-N_9=D_9/6
+\]
+are nonnegative integers, with cube derivatives \(15,12,10\).
+
+Let \(B_{3,F}\) be the sum of \(M_7(Q\cup F)\) over the eight negative cube
+cells.  In the negative half, a first-layer block has one transversal
+extension, a second-layer block has two, and a \(U_F\) block has four.
+The cube-cell contribution is zero because \(N=0\).  Therefore
+\[
+\boxed{\ 4B_{3,xyz}+24
+=Z_x+Z_y+Z_z+2(W_{xy}+W_{xz}+W_{yz})+4U_{xyz}.\ }
+\tag{8}
+\]
+The \(24\) is the shift \(8\cdot3\).
+
+For a four-set \(F\subset X\), let \(B_{4,F}\) be the negative-half sum of
+\(M_8\).  A four-outside block \(V_F\) belongs to all eight negative
+transversal extensions, giving
+\[
+\boxed{\ 5B_{4,F}
+=\sum_{x\in F}Z_x
++2\sum_{\{x,y\}\in\binom F2}W_{xy}
++4\sum_{H\in\binom F3}U_H
++8V_F.\ }
+\tag{9}
+\]
+
+Finally, for the unique five-point filler \(X\), let \(B_5\) be the
+negative-half sum of \(M_9\).  Then
+\[
+\boxed{\ 6B_5
+=\sum_{x\in X}Z_x
++2\sum_{\{x,y\}\in\binom X2}W_{xy}
++4\sum_{H\in\binom X3}U_H
++8\sum_{J\in\binom X4}V_J.\ }
+\tag{10}
+\]
+
+The ten all-outside triple capacities give one further exact global bound:
+each \(U_H\) occurs once, while every \(V_J\) contains four outside
+triples.  Hence
+\[
+\boxed{\ \sum_{H\in\binom X3}U_H
++4\sum_{J\in\binom X4}V_J\le10\cdot13=130.\ }
+\tag{11}
+\]
+
+Summing (8) over the ten outside triples and (9) over the five outside
+four-sets gives the useful aggregate forms
+\[
+\begin{aligned}
+4\sum B_{3,F}+240&=6Z+6W+4U,\\
+5\sum B_{4,F}&=4Z+6W+8U+8V,\\
+6B_5&=Z+2W+4U+8V,
+\end{aligned}
+\tag{12}
+\]
+where undecorated letters denote totals over their respective outside
+subsets.
+
 ## Remaining gap
 
-Equations (5) and (7) are the first two coupling layers between the torsion
-cube and its five outside vertices.  A contradiction still requires a
-sharp upper bound on the left of (5), or a lower bound on \(C\), obtained
-from the remaining filler levels or the \(q=7,8\) congruences.
-
+Equations (5), (7), and (8)--(12) give the full filler hierarchy between the
+torsion cube and its five outside vertices.  A contradiction still requires
+a sharp upper bound on the left of (5), or a lower bound on \(C\), obtained
+by combining these identities with the \(q=7,8\) congruences.

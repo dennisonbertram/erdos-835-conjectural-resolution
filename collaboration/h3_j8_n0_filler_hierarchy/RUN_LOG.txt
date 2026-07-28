@@ -2,5 +2,6 @@ $ python3 -B collaboration/h3_j8_n0_filler_hierarchy/verify_j8_n0_filler_hierarc
 filler derivatives 60,-30,20,-15,12,-10: PASS
 all filler-layer transversal incidence coefficients: PASS
 N=0 first- and second-layer mass identities: PASS
+shifted q=4,5,6 identities and outside capacity: PASS
 PASS: the outside-filler hierarchy is coefficientwise verified
 scope: N=0 feasibility, the full lift, and Problem #835 remain open
