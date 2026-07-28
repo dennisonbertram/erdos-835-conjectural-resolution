@@ -1184,6 +1184,11 @@ routes, but not the asymmetric case.
   cores; a blocked size-twelve support forces \(K_7\) or
   \(K_8-E(K_3)\).  Row-sum reuse ceilings isolate the finite switching
   configurations still needed for an eighth-colour theorem.
+- [`collaboration/first_lift_global_theorem/TWELVE_SUPPORT_SWITCHING_NOTE.md`](collaboration/first_lift_global_theorem/TWELVE_SUPPORT_SWITCHING_NOTE.md):
+  a two-edge switching-resilience theorem on twelve vertices.  After any
+  six matching layers, a residual perfect matching can avoid any prescribed
+  one or two disjoint available edges; every seventh-layer obstruction must
+  contribute a critical matching pattern of size at least three.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
@@ -1551,6 +1556,8 @@ python3 -B \
   collaboration/first_lift_global_theorem/verify_propagation_counterexample.py
 python3 -B \
   collaboration/first_lift_global_theorem/verify_eighth_matching_core_catalogue.py
+python3 -B \
+  collaboration/first_lift_global_theorem/verify_twelve_support_switching.py
 python3 -B \
   collaboration/first_lift_aggregate_graphicity/verify_aggregate_graphicity.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
