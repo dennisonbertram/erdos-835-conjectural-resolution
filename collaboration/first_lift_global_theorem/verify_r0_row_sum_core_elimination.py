@@ -46,11 +46,11 @@ def sharp_reuse_ceiling(order: int, edges: int) -> int:
 
 
 def passes_prefix_screens(edges: int) -> bool:
-    edge_count = edges.bit_count()
+    edge_count = pairs.popcount(edges)
     if edge_count > 31:
         return False
     degrees = [
-        (edges & pairs.INCIDENT[vertex]).bit_count()
+        pairs.popcount(edges & pairs.INCIDENT[vertex])
         for vertex in pairs.VERTICES
     ]
     if max(degrees) > 7:
@@ -59,7 +59,7 @@ def passes_prefix_screens(edges: int) -> bool:
     if edge_count + (deficit + 1) // 2 > 31:
         return False
     if edge_count >= 29 and any(
-        (edges & clique).bit_count() > 28
+        pairs.popcount(edges & clique) > 28
         for clique in pairs.NINE_CLIQUES
     ):
         return False
@@ -69,7 +69,7 @@ def passes_prefix_screens(edges: int) -> bool:
 def verify_55_elimination(cores: dict[str, list[int]]) -> None:
     fixed = cores["55"][0]
     outside = ALL_VERTICES ^ core_vertices(fixed)
-    assert outside.bit_count() == 3
+    assert pairs.popcount(outside) == 3
     survivors = []
     for second in cores["5111"]:
         union = fixed | second
@@ -77,9 +77,9 @@ def verify_55_elimination(cores: dict[str, list[int]]) -> None:
             survivors.append(union)
     assert len(survivors) == 20
     for union in survivors:
-        assert union.bit_count() == 28
+        assert pairs.popcount(union) == 28
         outside_degrees = [
-            (union & pairs.INCIDENT[vertex]).bit_count()
+            pairs.popcount(union & pairs.INCIDENT[vertex])
             for vertex in pairs.VERTICES
             if outside >> vertex & 1
         ]
@@ -89,7 +89,7 @@ def verify_55_elimination(cores: dict[str, list[int]]) -> None:
         # on all three vertices.  The remaining three F edges provide at
         # most six of the nine required degree endpoints.
         required_endpoints = sum(3 - degree for degree in outside_degrees)
-        available_endpoints = 2 * (31 - union.bit_count())
+        available_endpoints = 2 * (31 - pairs.popcount(union))
         assert required_endpoints == 9 > available_endpoints == 6
 
 
@@ -138,7 +138,7 @@ def verify_37_elimination(cores: dict[str, list[int]]) -> None:
             four_core_families.append((fixed,) + chosen)
     assert len(four_core_families) == 3
     assert all(
-        (first | second | third | fourth).bit_count() == 28
+        pairs.popcount(first | second | third | fourth) == 28
         for first, second, third, fourth in four_core_families
     )
     assert not any(
@@ -165,7 +165,7 @@ def verify_37_elimination(cores: dict[str, list[int]]) -> None:
             for index in additions:
                 graph |= 1 << index
             degrees = [
-                (graph & pairs.INCIDENT[vertex]).bit_count()
+                pairs.popcount(graph & pairs.INCIDENT[vertex])
                 for vertex in pairs.VERTICES
             ]
             if min(degrees) < 2 or max(degrees) > 7:
@@ -175,7 +175,7 @@ def verify_37_elimination(cores: dict[str, list[int]]) -> None:
             outside_triples = [
                 ALL_VERTICES ^ core_vertices(core) for core in family
             ]
-            assert all(mask.bit_count() == 3 for mask in outside_triples)
+            assert all(pairs.popcount(mask) == 3 for mask in outside_triples)
             for reused_once in range(4):
                 multiplicities = [2, 2, 2, 2]
                 multiplicities[reused_once] = 1
