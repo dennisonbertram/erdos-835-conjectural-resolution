@@ -79,6 +79,41 @@ remaining size-ten supports.  Thus a hypothetical total obstruction needs
 at least two distinct cores, and (4) is now the complete pair-type search
 space for the next overlap or switching argument.
 
+## The \(K_{5,5}\) branch is impossible
+
+The exact complement-degree argument in
+`EIGHTH_MATCHING_CORE_CATALOGUE.md` shows that a fixed \(K_{5,5}\) can
+obstruct at most one of the seven size-ten supports in a hypothetical total
+obstruction.  If a \(K_{5,5}\) were actually used, some distinct core would
+therefore also be needed.  Table (4) says that the only possible partner
+type is \(K_{5,1,1,1}\).
+
+The exhaustive pair calculation gives a stronger structural fact.  Fix the
+\(K_{5,5}\) on sides \(A,B\), and let \(O\) be the three outside vertices.
+All twenty surviving partner embeddings have the same form up to the
+stabilizer of the first core:
+\[
+ J_1\cup J_2=K_{5,5}[A,B]\ \cup\ K_3[T],
+ \qquad T\in\binom A3\ \text{or}\ T\in\binom B3. \tag{5}
+\]
+Thus their union has twenty-eight edges, all on \(A\cup B\), and no edge
+incident with \(O\).
+
+Only three further edges remain in the 31-edge graph \(F\), so
+\[
+ \sum_{v\in O}d_F(v)\le6. \tag{6}
+\]
+But a size-ten support blocked by the \(K_{5,5}\) is exactly \(A\cup B\);
+its complement triple is \(O\).  By the exact complement identity, every
+\(v\in O\) then has \(d_F(v)-2\ge1\), or \(d_F(v)\ge3\).  This gives
+\[
+ \sum_{v\in O}d_F(v)\ge9,
+\]
+contradicting (6).
+
+Therefore a \(K_{5,5}\) cannot be an obstruction core used by any of the
+seven blocked supports in a total-obstruction argument.
+
 ## Exhaustiveness
 
 The verifier fixes a canonical first core and generates every distinct
@@ -91,6 +126,8 @@ labelled second core on thirteen vertices.  The exact embedding counts are
 \end{array}
 \]
 It then checks the 31-edge budget, maximum degree seven, (3), and every
-nine-vertex induced capacity before recording the minimum in (4).
+nine-vertex induced capacity before recording the minimum in (4).  It also
+checks all twenty surviving \(K_{5,5}+K_{5,1,1,1}\) embeddings and verifies
+the structural form (5).
 
 `verify_r0_core_pairs.py` reproduces the complete table deterministically.
