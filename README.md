@@ -57,8 +57,16 @@ New exact results in the note include:
   formulas are UNSAT; the independent semantic verifier reconstructs all
   514,080 labelled pairs and checks all 1,653,956 learned clauses.  All 51
   packaged CNF/log/DRAT artifacts pass both hash layers, and all seventeen
-  DRAT traces replay as `VERIFIED`.  Thus orbits zero through five are
-  closed and the other ten Venn types remain open;
+  DRAT traces replay as `VERIFIED`;
+- a [certified closure of orbit six](collaboration/opus5_r0_orbit_repair/2026-07-28_orbit6_cut_sufficiency.md).
+  Its selected supports intersect in nine vertices, and all 570,780
+  labelled compatible pairs reduce to twenty-three exact stabilizer
+  orbits.  Every frozen support-relaxation formula is UNSAT; the independent
+  semantic verifier reconstructs all cuts and checks all 2,604,987 learned
+  clauses.  All 115 packaged CNF/learned/log/DRAT artifacts pass both hash
+  layers, and all twenty-three DRAT traces replay as `VERIFIED`.  Thus
+  orbits zero through six are closed and the other nine Venn types remain
+  open;
 - an exact generic compatible-pair classifier covering orbits four through
   fifteen.  A complete alternating path/cycle word
   invariant, checked independently against the full stabilizer action

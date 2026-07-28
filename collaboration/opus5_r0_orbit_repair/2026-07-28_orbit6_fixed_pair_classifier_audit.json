@@ -1,0 +1,14 @@
+{
+  "action_generators": 7,
+  "all_intersections": [2, 2, 1],
+  "canonical_pair_orbits": 23,
+  "disjoint_matching_pairs": 570780,
+  "generator_orbits": 23,
+  "orbit": 6,
+  "pair": [0, 1],
+  "pair_intersection": 2,
+  "row_symmetries": 1,
+  "rows": [[0, 1, 2], [0, 2, 3], [1, 2, 4]],
+  "signature": [0, 1, 1, 1, 1, 0, 1],
+  "status": "independent-classifier-action-audit-pass"
+}

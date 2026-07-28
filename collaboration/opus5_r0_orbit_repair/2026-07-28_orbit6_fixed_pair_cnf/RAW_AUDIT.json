@@ -1,0 +1,38 @@
+{
+  "artifact_census": {
+    "cnf_files": 23,
+    "learned_files": 23,
+    "raw_directory_size": "377M"
+  },
+  "campaign": {
+    "cases": 23,
+    "case_indices": [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+      12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22
+    ],
+    "relaxed_counterexamples": 0,
+    "semantic_mismatches": 0,
+    "status": "all-cases-solver-unsat",
+    "total_case_elapsed_seconds": 374.492,
+    "total_learned_unions": 2604987,
+    "total_rounds": 2122,
+    "unsat": 23
+  },
+  "classifier": {
+    "action_generators": 7,
+    "canonical_pair_orbits": 23,
+    "disjoint_matching_pairs": 570780,
+    "generator_orbits": 23,
+    "status": "pass"
+  },
+  "raw_validation": {
+    "cnf_headers_checked": 23,
+    "cnf_sha256_checked": 23,
+    "learned_record_shape": "three matching indices plus 15 sorted distinct edge indices",
+    "learned_records_checked": 2604987,
+    "learned_sha256_checked": 23,
+    "status": "pass"
+  },
+  "results_jsonl_sha256": "64f19a3ebcf5876078ebb29380dcd4dc5a410c625acd12a7c8c958c0ef4080ef",
+  "scope": "Raw CNF and learned-clause preservation only; no DRAT generation or packaging was started."
+}
