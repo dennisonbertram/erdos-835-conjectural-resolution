@@ -160,6 +160,15 @@ clauses=126246
 sha256=c30f1251b91c9bc2430155e52c87424611427cbadfbaae08645bb80599e62165
 ```
 
+With `--require-four-cores`, each row's descriptor consists of the one-hot
+surviving barrier type and its canonically sorted odd-block membership
+vectors. Separator choices are omitted because they do not change the
+forced core. The verifier exhausts all \(494{,}208\) labelled surviving
+cores and checks that two descriptors are equal exactly when their forced
+edge masks are equal. The sixteen-family capacity replay remains a
+separate, explicitly documented prerequisite in
+`R0_THREE_CORE_CAPACITY.md`.
+
 The subset-capacity theorem at commit `bbf8aff` further proves that at
 least four distinct surviving cores are required. Commit `f1d277c`
 classifies all \(7{,}971{,}964\) fixed-first four-\(K_6\) families and uses
@@ -179,6 +188,26 @@ It has:
 variables=23020
 clauses=147807
 sha256=fcc51f4fb81f27435c67891c0f34b42d5e277f3f1e38a65aff7c57b0a7afdd6e
+```
+
+Commit `e09e4c3` eliminates every four-core cover containing a
+\(K_{3,3,1,1}\) core. The corresponding conditional cut says that if any
+row uses this type, at least five distinct core descriptors are required:
+
+```bash
+/opt/homebrew/bin/python3 -B \
+  collaboration/first_lift_global_theorem/write_r0_tutte_full_cnf.py \
+  --surviving-only --require-four-cores --exclude-all-k6 \
+  --b-needs-five-cores \
+  /private/tmp/erdos835-r0-tutte-strong-b.cnf
+```
+
+This current strongest combined target has:
+
+```text
+variables=23126
+clauses=148270
+sha256=1f215ddc83032a975705f08dae5c20d1e714e86e61b9c9e3ce7e91db3ea977ee
 ```
 
 ## Current status

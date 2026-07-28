@@ -42,7 +42,7 @@ BARRIERS = (
 def require_four_distinct_cores(
     writer: compact.Writer,
     descriptors: list[list[int]],
-) -> None:
+) -> dict[tuple[int, int], int]:
     """Forbid seven rows from using at most three distinct sorted cores."""
     different: dict[tuple[int, int], int] = {}
     for left, right in combinations(range(7), 2):
@@ -75,6 +75,32 @@ def require_four_distinct_cores(
                 pair = tuple(sorted((row, representative)))
                 writer.add([-witness, different[pair]])
         writer.add(witnesses)
+    return different
+
+
+def require_five_cores_if_barrier_b(
+    writer: compact.Writer,
+    barrier_choices_by_row: list[list[int]],
+    different: dict[tuple[int, int], int],
+) -> None:
+    """If any row has a 3311 core, require at least five core classes."""
+    b_choices = [choices[1] for choices in barrier_choices_by_row]
+    has_b = writer.variable()
+    for choice in b_choices:
+        writer.add([-choice, has_b])
+    writer.add([-has_b, *b_choices])
+
+    for representatives in combinations(range(7), 4):
+        witnesses = []
+        for row in range(7):
+            if row in representatives:
+                continue
+            witness = writer.variable()
+            witnesses.append(witness)
+            for representative in representatives:
+                pair = tuple(sorted((row, representative)))
+                writer.add([-witness, different[pair]])
+        writer.add([-has_b, *witnesses])
 
 
 def build(
@@ -82,12 +108,17 @@ def build(
     surviving_only: bool = False,
     require_four_cores: bool = False,
     exclude_all_k6: bool = False,
+    b_needs_five_cores: bool = False,
     type_counts: tuple[int, ...] | None = None,
 ) -> None:
     if require_four_cores and not surviving_only:
         raise ValueError("--require-four-cores requires --surviving-only")
     if exclude_all_k6 and not surviving_only:
         raise ValueError("--exclude-all-k6 requires --surviving-only")
+    if b_needs_five_cores and not require_four_cores:
+        raise ValueError(
+            "--b-needs-five-cores requires --require-four-cores"
+        )
     writer = compact.Writer(path)
     barriers = BARRIERS[3:] if surviving_only else BARRIERS
     if type_counts is not None:
@@ -234,7 +265,13 @@ def build(
         )
 
     if require_four_cores:
-        require_four_distinct_cores(writer, core_descriptors)
+        different = require_four_distinct_cores(
+            writer, core_descriptors
+        )
+        if b_needs_five_cores:
+            require_five_cores_if_barrier_b(
+                writer, barrier_choices_by_row, different
+            )
 
     writer.finish()
     print(
@@ -243,6 +280,7 @@ def build(
         f"barriers={'surviving' if surviving_only else 'all'} "
         f"four_cores={require_four_cores} "
         f"exclude_all_k6={exclude_all_k6} "
+        f"b_needs_five_cores={b_needs_five_cores} "
         f"type_counts={type_counts}",
         flush=True,
     )
@@ -282,6 +320,14 @@ def main() -> None:
             "seven K6 obstruction rows"
         ),
     )
+    parser.add_argument(
+        "--b-needs-five-cores",
+        action="store_true",
+        help=(
+            "Use the prior four-core capacity theorem: if any row uses "
+            "K3311, at least five distinct cores are required"
+        ),
+    )
     args = parser.parse_args()
     type_counts = (
         tuple(map(int, args.type_counts.split(",")))
@@ -293,6 +339,7 @@ def main() -> None:
         surviving_only=args.surviving_only,
         require_four_cores=args.require_four_cores,
         exclude_all_k6=args.exclude_all_k6,
+        b_needs_five_cores=args.b_needs_five_cores,
         type_counts=type_counts,
     )
 
