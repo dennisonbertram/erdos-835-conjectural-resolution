@@ -1530,6 +1530,10 @@ python3 -B \
 python3 -B \
   collaboration/h3_j8_n0_outside_s4_boundary/verify_model.py
 python3 -B \
+  collaboration/h3_j8_n0_outside_s4_boundary/search_cp_sat_reduced.py \
+  --seconds 60 --workers 1 --reference-positive 13 \
+  --reference-weight-two 10
+python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support8.py
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support10_compact.py

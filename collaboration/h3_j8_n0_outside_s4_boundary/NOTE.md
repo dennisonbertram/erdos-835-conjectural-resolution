@@ -122,6 +122,14 @@ python3 -B search_cp_sat.py --seconds 60 --workers 1 \
   --reference-positive 13 --reference-weight-two 10
 ```
 
+For hard branches, the independently audited exact row reduction is also
+available to CP-SAT:
+
+```text
+python3 -B search_cp_sat_reduced.py --seconds 1800 --workers 8 \
+  --reference-positive 8 --reference-weight-two 8
+```
+
 Replay it with the independently implemented rank-reduced Gurobi model:
 
 ```text
