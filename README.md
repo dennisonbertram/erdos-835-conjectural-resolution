@@ -1332,7 +1332,10 @@ routes, but not the asymmetric case.
   coverage evidence, not a theorem; the two compressed witness logs are
   published in the
   [`r0-cegis-evidence-2026-07-28`](https://github.com/dennisonbertram/erdos-835-conjectural-resolution/releases/tag/r0-cegis-evidence-2026-07-28)
-  release.
+  release.  Its companion `search_cut_feasible_repair.py` isolates the
+  narrower cut-selection lemma, with independent raw counterexample replay,
+  strict semantic-witness logging, canonical replay, and automatic final-CNF
+  export if the accumulated model reaches UNSAT.
 - [`collaboration/coordinated_nine_r1_reduction/NOTE.md`](collaboration/coordinated_nine_r1_reduction/NOTE.md):
   the exact \(r=1\) one- and two-step Tutte catalogues, core-reuse ceilings,
   and three literal class-B pair obstructions with triple intersections

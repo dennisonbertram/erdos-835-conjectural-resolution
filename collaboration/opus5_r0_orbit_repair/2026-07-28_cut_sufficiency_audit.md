@@ -121,3 +121,45 @@ parts:
    colours.
 
 Neither part is promoted to a theorem here.
+
+## A single-cut selection reduction
+
+There is one additional solver-free reduction for the repair-selection
+problem.  It does **not** say that size-seven and size-eight cuts cannot
+obstruct a particular pairwise-compatible triple.  It says that no single
+such cut can obstruct all \(\binom73\) choices of three triple rows.
+
+Let \(c=e_D(U,V\setminus U)\), let \(T\) be the total incidence of the seven
+triple rows on \(U\), and use the fact that the four five-set rows contribute
+at most 20 incidences.
+
+For \(|U|=7\) and \(e(G[U])=4\), one has \(e(D[U])=17\), hence
+\[
+T\ge (34+c-7)-20=7+c.
+\]
+A triple row meeting \(U\) in \(j\) vertices contributes cut deficit
+\(\max(0,2-j)\).  If every choice of three rows had total deficit at least
+five, there could be no row with deficit zero and at most one row with
+deficit one.  This would give \(T\le1\), a contradiction.
+
+For \(|U|=7\) and \(e(G[U])=5\), similarly
+\[
+T\ge (32+c-7)-20=5+c.
+\]
+The only violating triple has three rows disjoint from \(U\).  Since some
+row meets \(U\), a nonviolating choice exists.
+
+For \(|U|=8\) and \(e(G[U])=8\), the internal deleted-degree sum is 40, so
+all eight vertices have deleted degree five and \(c=0\).  Thus
+\[
+T\ge(40-8)-20=12.
+\]
+Again some row meets \(U\), whereas a violation requires all three selected
+rows to be disjoint from \(U\).
+
+The only single cuts that can themselves eliminate every row triple are
+therefore dense six-sets.  If \(g=e(G[U])\in\{0,1,2\}\), a selected triple
+must contain at least \(3-g\) rows meeting \(U\).  This does not yet prove
+that one triple works for all cuts simultaneously, nor that one repair
+simultaneously relaxes every dense six-set.  Those are the exact remaining
+selection obligations tested by `search_cut_feasible_repair.py`.

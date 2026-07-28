@@ -25,6 +25,22 @@ unsatisfiable in the search solver.  It must still be frozen, regenerated
 independently, proved by CaDiCaL, and replayed with DRAT-trim before the C1
 repair statement may be cited as proved.
 
+The companion `search_cut_feasible_repair.py` tests the narrower intermediate
+claim needed by the current cut route:
+
+> after repacking at most one prefix layer on the same support, some three of
+> the seven remaining size-ten rows satisfy every internal-edge capacity cut.
+
+For a decoded prefix it enumerates every legal replacement matching and all
+\(\binom73\) selected row triples, checking only the provably relevant
+six-, seven-, and eight-vertex cuts.  A semantic witness clause conditions on
+the repaired layer's support, the exact union of the other five layers, and
+the three selected row occurrences.  The exact other-layer union is necessary
+because cut feasibility depends on all residual internal-edge counts.  A
+second raw pass re-enumerates every repair and route before a counterexample
+can be reported.  This script is likewise discovery evidence until an UNSAT
+CNF and proof are independently frozen and replayed.
+
 No \(K_6\), \(K_6-e\), \(K_6-2K_2\), forced-edge, or Tutte-core
 classification is assumed.  In particular, the search does not rely on the
 false claim that every obstruction has the \(K_6-2K_2\) form.
