@@ -88,3 +88,26 @@ Expected output:
 Exit code: 0.
 
 The paper proof is in SIX_PACKING_NOTE.md.  No random search is used.
+
+
+Seven-colour theorem for nonzero n12
+====================================
+
+Command:
+
+  /opt/homebrew/bin/python3 -B \
+    collaboration/first_lift_global_theorem/verify_seven_packing_boundary.py
+
+Expected output:
+
+  PASS K12 deletion has only the impossible seven-singleton barrier
+  PASS every r=1..5 choice leaves a size-12 support
+  PASS r=0 Tutte arithmetic leaves three capacity-clean shapes
+  PASS class-B row sums eliminate the 5+5 shape
+  SCOPE: seven-pack proved for r>=1; r=0 has two open equality cases.
+
+Exit code: 0.
+
+The universal paper argument for r>=1 and the exact r=0 boundary are in
+SEVEN_PACKING_NONZERO_R_NOTE.md.  The remaining r=0 equality cases are not
+claimed to be counterexamples.
