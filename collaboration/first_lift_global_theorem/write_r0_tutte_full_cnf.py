@@ -37,8 +37,9 @@ BARRIERS = (
 )
 
 
-def build(path: Path) -> None:
+def build(path: Path, surviving_only: bool = False) -> None:
     writer = compact.Writer(path)
+    barriers = BARRIERS[3:] if surviving_only else BARRIERS
 
     f = writer.variables_block(len(compact.EDGES))
     x = [writer.variables_block(len(compact.EDGES)) for _ in range(7)]
@@ -99,11 +100,11 @@ def build(path: Path) -> None:
 
     # Every remaining size-ten support chooses a coarsened Tutte barrier.
     for row in range(7):
-        choices = writer.variables_block(len(BARRIERS))
+        choices = writer.variables_block(len(barriers))
         writer.exactly_one(choices)
 
         for choice, (_, separator_size, block_sizes) in zip(
-            choices, BARRIERS
+            choices, barriers
         ):
             # Group zero is the separator; the rest are the odd blocks.
             group_sizes = (separator_size, *block_sizes)
@@ -153,7 +154,8 @@ def build(path: Path) -> None:
     writer.finish()
     print(
         f"WROTE {path} variables={writer.variables} "
-        f"clauses={writer.clauses}",
+        f"clauses={writer.clauses} "
+        f"barriers={'surviving' if surviving_only else 'all'}",
         flush=True,
     )
 
@@ -161,8 +163,16 @@ def build(path: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("output", type=Path)
+    parser.add_argument(
+        "--surviving-only",
+        action="store_true",
+        help=(
+            "Use the prior row-sum theorem eliminating 37, 55, and 333 "
+            "from a total obstruction"
+        ),
+    )
     args = parser.parse_args()
-    build(args.output)
+    build(args.output, surviving_only=args.surviving_only)
 
 
 if __name__ == "__main__":
