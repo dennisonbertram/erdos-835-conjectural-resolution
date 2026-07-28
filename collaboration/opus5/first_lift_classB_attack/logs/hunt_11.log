@@ -1,0 +1,1 @@
+hunt N=11 seed=111 count=200000 SAT=200000 UNSAT=0 BCcleanUNSAT=0 BUDGET=0
