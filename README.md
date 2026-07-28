@@ -5,7 +5,7 @@ rigorous reductions, exact structural theorems, and reproducible evidence.
 
 ## Status
 
-The full problem remains open as of 27 July 2026. This repository does
+The full problem remains open as of 28 July 2026. This repository does
 **not** claim a complete proof. It advances and precisely formulates the
 negative conjecture
 
@@ -1211,8 +1211,27 @@ routes, but not the asymmetric case.
   lemma produces six matchings whose union has maximum degree at most five;
   Ore/Dirac Hamiltonicity then supplies two further size-twelve matchings.
   Together with the \(r=0\) and \(r=1\) theorems, this closes the coordinated
-  eighth frontier for all six class-B profiles.  Packing colours nine
-  through seventeen remains open.
+  eighth frontier for all six class-B profiles.
+- [`collaboration/coordinated_nine_structural/NOTE.md`](collaboration/coordinated_nine_structural/NOTE.md):
+  a solver-free prescribed three-near-factor theorem: every graph on
+  thirteen vertices with minimum degree at least seven contains three
+  pairwise edge-disjoint near-perfect matchings with arbitrary prescribed
+  omissions, including repetitions.  Exact Tutte catalogues reduce the
+  proof to three terminal cores, and explicit switches eliminate all three.
+  Applied to the complement-cover six-prefix, this proves coordinated
+  nine-packings for the class-B profiles \(r=3,4,5\).  Profiles
+  \(r=0,1,2\), colours ten through seventeen, the later fan-compatibility
+  layers, and Problem #835 remain open.
+- [`collaboration/k7_terminal_switching/NOTE.md`](collaboration/k7_terminal_switching/NOTE.md):
+  a self-contained independent proof and \(6^7\)-case arithmetic audit of
+  the last separator-five \(K_7\) switch.  It tracks the exact Hall
+  missing-label mutation that invalidates a naive three-edge switch and
+  supplies the corrected size-six and exceptional-type repairs.
+- [`collaboration/coordinated_nine_search/NOTE.md`](collaboration/coordinated_nine_search/NOTE.md):
+  exact optimization evidence on \(3{,}726\) fixed class-B instances.
+  Every tested instance had packing number seventeen, including
+  switch-walk, duplicate-heavy, and dead-prefix cases.  This motivates the
+  full class-B completion conjecture but is not an exhaustive theorem.
 - [`collaboration/first_lift_global_theorem/R1_DEAD_SEVEN_PREFIX.md`](collaboration/first_lift_global_theorem/R1_DEAD_SEVEN_PREFIX.md):
   an exact \(r=1\) class-B seven-prefix that blocks all ten remaining
   supports even though the same support matrix has a separate full

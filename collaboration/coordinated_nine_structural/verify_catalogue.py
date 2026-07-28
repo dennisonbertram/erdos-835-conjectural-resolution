@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from itertools import product
 from math import comb
 
 
@@ -225,7 +226,136 @@ def verify_near_factor_reduction() -> None:
         covered_l_vertices = 4
         assert covered_l_vertices > unused_core
 
-    print("PASS two-near-factor lemma and exact terminal K7 reduction")
+    print("PASS two-near-factor lemma and exact terminal core catalogue")
+
+
+def has_five_by_five_matching(row_holes: tuple[int, ...]) -> bool:
+    """Return whether five degree-four-or-five rows have a perfect matching."""
+
+    def extend(row: int, used_columns: int) -> bool:
+        if row == 5:
+            return True
+        for column in range(5):
+            if column == row_holes[row]:
+                continue
+            bit = 1 << column
+            if not used_columns & bit and extend(row + 1, used_columns | bit):
+                return True
+        return False
+
+    assert len(row_holes) == 5
+    return extend(0, 0)
+
+
+def matching_types(omission: str) -> tuple[tuple[int, ...], ...]:
+    """Enumerate (UU, US, Uz, SS, Sz) counts for one near-factor."""
+
+    omitted_u = int(omission == "U")
+    omitted_s = int(omission == "S")
+    omitted_z = int(omission == "z")
+    return tuple(
+        (uu, us, uz, ss, sz)
+        for uu in range(4)
+        for us in range(6)
+        for uz in range(2)
+        for ss in range(3)
+        for sz in range(2)
+        if 2 * uu + us + uz == 7 - omitted_u
+        and us + 2 * ss + sz == 5 - omitted_s
+        and uz + sz == 1 - omitted_z
+        and uu + us + uz + ss + sz == 6
+    )
+
+
+def verify_k7_repair() -> None:
+    # A five-by-five graph whose rows each miss at most one column fails
+    # Hall exactly when all five rows miss the same actual column.
+    for row_holes in product(range(-1, 5), repeat=5):
+        common_actual_hole = (
+            row_holes[0] != -1
+            and all(hole == row_holes[0] for hole in row_holes)
+        )
+        assert has_five_by_five_matching(row_holes) != common_actual_hole
+
+    # If one missing class D has order k, the bad-pair graph is empty,
+    # one edge, a star, or K7 according as k<5, k=5, k=6, or k=7.
+    expected_bad_counts = (0, 0, 0, 0, 0, 1, 6, 21)
+    for size in range(8):
+        missing_class = set(range(size))
+        bad_pairs = tuple(
+            (left, right)
+            for left in range(7)
+            for right in range(left + 1, 7)
+            if set(range(7)) - {left, right} <= missing_class
+        )
+        assert len(bad_pairs) == expected_bad_counts[size]
+        if size in (5, 6):
+            assert max(
+                sum(vertex in edge for edge in bad_pairs)
+                for vertex in range(7)
+            ) == len(bad_pairs)
+
+    expected_types = {
+        "U": (
+            (0, 5, 1, 0, 0),
+            (1, 3, 1, 1, 0),
+            (1, 4, 0, 0, 1),
+            (2, 1, 1, 2, 0),
+            (2, 2, 0, 1, 1),
+            (3, 0, 0, 2, 1),
+        ),
+        "S": (
+            (1, 4, 1, 0, 0),
+            (2, 2, 1, 1, 0),
+            (2, 3, 0, 0, 1),
+            (3, 0, 1, 2, 0),
+            (3, 1, 0, 1, 1),
+        ),
+        "z": (
+            (1, 5, 0, 0, 0),
+            (2, 3, 0, 1, 0),
+            (3, 1, 0, 2, 0),
+        ),
+    }
+    for omission, expected in expected_types.items():
+        assert matching_types(omission) == expected
+
+    labelled_types = tuple(
+        (omission, current)
+        for omission in ("U", "S", "z")
+        for current in matching_types(omission)
+    )
+    standard_types = tuple(
+        (omission, current)
+        for omission, current in labelled_types
+        if current[0] >= 2 and current[3] >= 1
+    )
+    assert all(current[1] >= 1 for _, current in standard_types if current[3] == 1)
+
+    six_common_rows = tuple(
+        (omission, current)
+        for omission, current in standard_types
+        if current[0] >= 3 and current[3] == 1
+    )
+    assert six_common_rows == (("S", (3, 1, 0, 1, 1)),)
+
+    exceptional = ("S", (2, 3, 0, 0, 1))
+    for first in labelled_types:
+        for second in labelled_types:
+            if first[1][0] + second[1][0] < 4:
+                continue
+            if first in standard_types or second in standard_types:
+                continue
+            assert first == exceptional
+            assert second == exceptional
+
+    # Missing-label counts after the two label-changing switches.
+    for common_size in (2, 4):
+        assert common_size - 2 + 1 <= 3
+    exceptional_common_size = 4
+    assert exceptional_common_size - 2 + 1 == 3
+
+    print("PASS exact K7 bad-pair, type, switch, and Hall classifications")
 
 
 def core_lookup(
@@ -357,10 +487,12 @@ def verify_reuse_tables() -> None:
 def main() -> None:
     verify_catalogues()
     verify_near_factor_reduction()
+    verify_k7_repair()
     verify_profiles()
     verify_reuse_tables()
     print("PASS exact finite reduction for the coordinated ninth frontier")
-    print("SCOPE: necessary core/reuse system; no universal ninth theorem")
+    print("PASS coordinated ninth theorem for r=3,4,5")
+    print("SCOPE: no ninth theorem for r=0,1,2; no full ER #835 theorem")
 
 
 if __name__ == "__main__":

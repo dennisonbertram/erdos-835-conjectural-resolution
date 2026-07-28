@@ -287,18 +287,21 @@ coordinated complement-cover six-prefix and let \(D\) be its union.  Then
 \[
  G=K_{13}-D\qquad\text{satisfies}\qquad\delta(G)\ge7. \tag{23}
 \]
-In each of these three profiles, exactly three unused size-twelve
-supports remain.  If their omitted vertices are \(x,y,z\), a packing of
-three edge-disjoint near-perfect matchings of \(G\), missing respectively
-\(x,y,z\), would immediately give a coordinated ninth matching.
+In each of these three profiles, at least three unused size-twelve
+supports remain: exactly three for \(r=3,5\), and four for \(r=4\).
+Choose any three.  If their omitted vertices are \(x,y,z\), a packing
+of three edge-disjoint near-perfect matchings of \(G\), missing
+respectively \(x,y,z\), would immediately give a coordinated ninth
+matching.
 
-The full assertion
+We prove the following assertion.
 
 > every graph on thirteen vertices of minimum degree at least seven
 > contains three edge-disjoint prescribed near-perfect matchings, with
 > repeated prescribed omissions allowed,
 
-is not proved here.  The following solver-free results reduce it sharply.
+The proof is solver-free and proceeds through the three exact terminal
+Tutte types below.
 
 ### Two prescribed near-perfect matchings always exist
 
@@ -441,14 +444,195 @@ internal \(W\)-edges together with
 residual before the switch, so the three matchings are edge-disjoint and
 have the required omissions.
 
-Consequently, any genuine counterexample to the three-near-factor
-assertion must survive all choices of the first two matchings and must
-end in only the separator-five core
+It remains to eliminate the separator-five core in (24).  Let \(S\) be
+the separator, \(|S|=5\), and let \(U\) be the seven singleton
+components of \(R-S\).  Put
 \[
- K_7. \tag{28}
+ B=R[U,S].
 \]
-No proof eliminating (28), and no counterexample realizing it against
-every possible first-two-matching choice, is presently claimed.
+Then \(R[U]\) is empty and every row of \(B\) has degree at least four.
+For \(s\in S\), define its missing-row class
+\[
+ D_s=\{u\in U:us\notin E(B)\}. \tag{28}
+\]
+The sets \(D_s\) are pairwise disjoint, because a row of \(B\) misses at
+most one of its five possible edges.
+
+Call a pair \(uv\in\binom U2\) **bad** if
+\(B[U-\{u,v\},S]\) has no perfect matching.  A five-by-five subgraph of
+\(B\) can fail Hall only on its entire five-vertex left side: every
+smaller nonempty left set has at least four neighbours.  Consequently,
+\[
+ uv\text{ is bad}
+ \quad\Longleftrightarrow\quad
+ U-\{u,v\}\subseteq D_s
+ \text{ for some }s\in S. \tag{29}
+\]
+There is at most one \(D_s\) of order at least five.  If its order is
+five, six, or seven, the bad-pair graph is respectively one edge, a
+six-edge star, or \(K_7\).
+
+Every vertex \(u\in U\) has a \(G\)-neighbour in \(U\), since it has
+only six vertices outside \(U\) and \(d_G(u)\ge7\).  All such edges
+belong to \(M_x\cup M_y\).  Hence
+\[
+ \delta((M_x\cup M_y)[U])\ge1. \tag{30}
+\]
+In particular, outside the \(K_7\) bad-pair case, some selected
+\(U\)-edge is good.
+
+We first dispose of the \(K_7\) bad-pair case.  Here
+\(D_{s_0}=U\) for some \(s_0\), so \(B=K_{7,4}\) with right side
+\(S-\{s_0\}\).  For every \(u\in U\), its four \(B\)-edges, its two
+selected incidences, and \(uz\) are the only possible seven distinct
+incidences.  Thus \(uz\) is present and unused, and each selected
+matching pairs \(U\) as
+\[
+ 3\,UU+1\,U s_0. \tag{31}
+\]
+The other two matching edges lie on
+\[
+ L'=(S-\{s_0\})\cup\{z\},
+\]
+apart from the matching's prescribed omission in \(L'\).
+
+In one selected matching choose a \(UU\)-edge \(uv\), its edge
+\(as_0\), and its two edges covering the four non-omitted vertices of
+\(L'\).  Delete these four edges.  Pair \(s_0\) to one of the at least
+three exposed vertices of \(S-\{s_0\}\), and pair \(u,v,a\)
+bijectively to the other three exposed vertices of \(L'\).  All these
+edges are available: the \(U\)-to-\(S-\{s_0\}\) edges are in \(B\),
+the \(U\)-to-\(z\) edges were forced above, and
+\(s_0\) sees all of \(S-\{s_0\}\) in \(R\) because \(d_R(s_0)\ge4\).
+The third matching uses the freed edges \(uv,as_0\) and a perfect
+matching between
+\[
+ U-\{u,v,a\}\quad\text{and}\quad S-\{s_0\}.
+\]
+This repairs the common-missing-column case.
+
+For the remaining cases, record the exact type of one selected matching
+by
+\[
+ (a,b,c,d,e)=
+ (\#UU,\#US,\#Uz,\#SS,\#Sz).
+\]
+Counting its covered vertices gives the following exhaustive table:
+\[
+\begin{array}{c|l}
+\text{omission}&(a,b,c,d,e)\\ \hline
+U&(0,5,1,0,0),(1,3,1,1,0),(1,4,0,0,1),\\
+ &(2,1,1,2,0),(2,2,0,1,1),(3,0,0,2,1)\\
+S&(1,4,1,0,0),(2,2,1,1,0),(2,3,0,0,1),\\
+ &(3,0,1,2,0),(3,1,0,1,1)\\
+z&(1,5,0,0,0),(2,3,0,1,0),(3,1,0,2,0).
+\end{array} \tag{32}
+\]
+
+Suppose a selected matching \(P\) has \(a\ge2\) and \(d\ge1\).
+Its \(UU\)-edges form a matching of order at least two, while the bad
+graph outside the case already handled has matching number at most one.
+Thus \(P\) has a good edge \(uv\).
+
+If \(P\) has an \(SS\)-edge \(st\) such that
+\(\{u,v\}\not\subseteq D_s,D_t\), the bipartite graph between
+\(\{u,v\}\) and \(\{s,t\}\) has a perfect matching.  Replace
+\(uv,st\) by that perfect matching.  This frees \(uv\), and a perfect
+matching of \(B[U-\{u,v\},S]\) completes the third matching.
+
+Otherwise \(u,v\) share a missing label, say
+\(\{u,v\}\subseteq D_s\), where \(s\) is an endpoint of every
+\(SS\)-edge of \(P\).  Since the \(SS\)-edges are disjoint, this forces
+\(d=1\); write the unique edge as \(st\).  The table (32) shows that
+every type with \(a\ge2,d=1\) has a \(US\)-edge, say \(aq\), where
+\(q\notin\{s,t\}\).
+
+The degree condition gives an important label check.  For
+\(w\in D_s\), \(d_B(w)=4\).  Degree seven therefore forces \(w\) not
+to be either prescribed omission, forces \(wz\) to be present and
+unused, and forces both selected matchings to cover \(w\) with distinct
+edges other than \(wz\).  In \(P\), the vertex \(s\) is already used by
+\(st\), while every other \(S\)-neighbour of \(w\) is a residual
+\(B\)-edge.  Thus \(P(w)\in U\).  Consequently \(P\) pairs \(D_s\)
+internally and \(|D_s|\) is even.  If \(|D_s|\le4\), switch
+\[
+ uv,\ st,\ aq
+ \quad\text{to}\quad
+ a s,\ u t,\ v q. \tag{33}
+\]
+The three new edges lie in \(B\): \(u,v\) miss only \(s\), while
+the selected edge \(aq\) makes \(q\) the unique missing label of \(a\).
+On \(U-\{u,v\}\), the switch changes only the missing label of \(a\)
+from \(q\) to \(s\).  The new \(D_s\) has order at most three, and
+every other missing class still has order at most four: otherwise such
+a class of order at least five would contain
+\(U-\{u,v\}\), contradicting that \(uv\) is good.  Hall therefore still
+supplies the five cross edges for the third matching.
+
+If instead \(|D_s|=6\), the six vertices of \(D_s\) force
+\(a=3,d=1\).  The table leaves only
+\[
+ (a,b,c,d,e)=(3,1,0,1,1)
+\]
+with its omission in \(S\).  Let its \(Sz\)-edge be \(rz\);
+necessarily \(r\ne s\).  Replace
+\[
+ uv,\ rz\quad\text{by}\quad ur,\ vz. \tag{34}
+\]
+Here \(ur\in B\), because \(u\) misses only \(s\), and \(vz\) is forced
+present and unused by the degree-seven equality at the labelled vertex
+\(v\).  Both new edges are incident to the deleted pair
+\(\{u,v\}\), so the original perfect matching of
+\(B[U-\{u,v\},S]\) remains available for the third matching.
+
+It remains only to consider the situation in which neither selected
+matching has \(a\ge2,d\ge1\).  Equation (30) gives
+\[
+ a_x+a_y\ge4.
+\]
+Inspection of (32) then forces both selected matchings to have type
+\[
+ (2,3,0,0,1), \tag{35}
+\]
+and both prescribed omissions lie in \(S\).
+
+Fix one of these matchings.  Write its \(Sz\)-edge as \(s_0z\), and
+its three \(US\)-edges as \(a_i s_i\), \(i=1,2,3\).  Its two
+\(UU\)-edges are disjoint, so at least one, say \(uv\), is good.
+If \(\{u,v\}\not\subseteq D_{s_0}\), then for some \(i\) it is also
+not contained in \(D_{s_i}\), since the missing classes are disjoint.
+Orient the two available cross edges and switch
+\[
+ uv,\ a_i s_i,\ s_0z
+ \quad\text{to}\quad
+ u s_i,\ v s_0,\ a_i z. \tag{36}
+\]
+The edge \(a_i z\) is forced present and unused: the selected
+\(a_i s_i\) leaves exactly four \(B\)-edges at \(a_i\), so degree seven
+requires the other selected incidence and a distinct edge to \(z\).
+The two new \(B\)-edges are incident to \(u,v\), which are absent from
+the third matching's Hall problem.
+
+Finally, if \(\{u,v\}\subseteq D_{s_0}\), use
+\[
+ uv,\ a_i s_i,\ s_0z
+ \quad\text{to}\quad
+ u s_i,\ v z,\ a_i s_0. \tag{37}
+\]
+The three \(US\)-endpoints \(a_i\) have missing labels \(s_i\), so
+\(D_{s_0}\) is contained in the four \(UU\)-endpoints.  After deleting
+\(u,v\) and changing \(a_i\)'s missing label from \(s_i\) to \(s_0\),
+the new \(D_{s_0}\) has order at most three; all other classes have
+order at most four because \(uv\) was good.  Thus Hall again supplies
+the third matching.  The edges \(us_i,a_is_0\) lie in \(B\), and
+\(vz\) is forced present and unused exactly as above.
+
+This eliminates the last type in (24), proving:
+
+> **Three-near-factor theorem.**  Every graph on thirteen vertices with
+> minimum degree at least seven contains three pairwise edge-disjoint
+> near-perfect matchings missing any three prescribed vertices, with
+> repetitions allowed.
 
 ## Finite ninth-matching frontier
 
@@ -465,15 +649,16 @@ reductions.
 * For \(r=0,1,2,3\), the displayed vectors identify exactly which single
   core types can saturate an entire remaining support-size family and
   which branches necessarily require distinct cores.
-* For \(r=3,4,5\), the six-prefix route (23)--(28) says that a ninth
-  matching follows unless every admissible choice of two of the three
-  size-twelve matchings leaves a separator-five \(K_7\) obstruction for
-  the third.
+* For \(r=3,4,5\), the six-prefix route and the three-near-factor theorem
+  prove a coordinated ninth matching: append three chosen unused
+  size-twelve support matchings directly to the complement-cover
+  six-prefix.
 
-Thus the ninth step is reduced to coexistence and switching among finitely
-many labelled core embeddings inside graphs with 36, 37, 38, or 40 edges
-satisfying (1)--(4).  The reuse identities alone do not rule out every
-multi-core configuration, so no universal ninth matching is claimed.
+Thus the coordinated ninth step is proved for \(r=3,4,5\).  For
+\(r=0,1,2\), it remains reduced to coexistence and switching among
+finitely many labelled core embeddings inside graphs with 36, 37, or 38
+edges satisfying (1)--(4).  No ninth theorem for those three profiles,
+and no complete solution of Erdős--Rosenfeld Problem #835, is claimed.
 
 ## Verification
 
@@ -486,5 +671,7 @@ python3 collaboration/coordinated_nine_structural/verify_catalogue.py
 The standard-library verifier exhausts all odd block partitions, checks
 every edge count, maximum degree, degree-three completion bound, selected
 profile, remaining inventory, correction term, every entry of
-(19)--(22), and the minimum-degree-five and minimum-degree-four
-catalogues used in the near-factor reduction.  No optimizer is used.
+(19)--(22), the minimum-degree-five and minimum-degree-four catalogues,
+the exact bad-pair classification, the matching-type table, and the
+integer reductions used in the three-near-factor theorem.  No optimizer
+is used.
