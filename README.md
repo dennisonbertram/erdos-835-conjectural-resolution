@@ -23,7 +23,7 @@ New exact results in the note include:
   remaining size-ten rows satisfy every internal-edge capacity cut.  A
   complete Tutte--Lovász audit now proves that those cuts and the full
   eleven-row ledger always supply the required simple \(b\)-factor.  The
-  prescribed three-edge-colouring of that factor remains open in twelve
+  prescribed three-edge-colouring of that factor remains open in eleven
   of the sixteen selected-support Venn types, so this is not yet
   coordinated nine;
 - a computer-assisted closure of the identical-support Venn type
@@ -45,13 +45,19 @@ New exact results in the note include:
   catalogue reduces every compatible pair to sixteen marked
   path-and-cycle types.  All sixteen frozen formulas are UNSAT; an
   independent semantic verifier checks every one of the 2,352,609 learned
-  clauses, and all sixteen DRAT traces replay as `VERIFIED`.  The other
-  twelve Venn types remain open;
-- an exact generic compatible-pair classifier for those twelve remaining
-  Venn types.  A complete alternating path/cycle word invariant, checked
-  independently against the full stabilizer action graph, reduces
-  7,077,840 labelled matching pairs to 1,126 canonical cases.  This is a
-  finite reduction, not yet cut sufficiency for those orbits;
+  clauses, and all sixteen DRAT traces replay as `VERIFIED`;
+- a [certified closure of orbit four](collaboration/opus5_r0_orbit_repair/2026-07-28_orbit4_cut_sufficiency.md).
+  The two identical selected supports reduce every compatible pair to
+  eleven marked-cycle types.  All eleven frozen support-relaxation formulas
+  are UNSAT; the semantic verifier checks all 1,396,986 learned clauses,
+  and every packaged DRAT trace replays as `VERIFIED`.  Thus orbits zero
+  through four are closed and the other eleven Venn types remain open;
+- an exact generic compatible-pair classifier covering orbit four and the
+  eleven remaining Venn types.  A complete alternating path/cycle word
+  invariant, checked independently against the full stabilizer action
+  graph, reduces 7,077,840 labelled matching pairs to 1,126 canonical
+  cases.  This is a finite reduction, not yet cut sufficiency for the
+  eleven unresolved orbits;
 - an exact boundary-flow formulation of the remaining colouring problem.
   For a fixed \(b\)-factor it is a nowhere-zero
   \(\mathbb F_2^2\) flow with prescribed boundary.  Explicit audited

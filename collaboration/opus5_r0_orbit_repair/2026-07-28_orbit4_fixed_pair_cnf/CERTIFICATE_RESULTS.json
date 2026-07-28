@@ -1,0 +1,121 @@
+{
+  "status": "pass",
+  "support_orbit": 4,
+  "canonical_pair_types": 11,
+  "positive_capacity_cuts": 3844,
+  "encoded_nonautomatic_cuts": 457,
+  "automatic_cuts": 3387,
+  "learned_triple_clauses": 1396986,
+  "semantic_clause_audit": "pass",
+  "cadical": {
+    "version": "3.0.1",
+    "internal_checkproof": "pass",
+    "proofs": 11
+  },
+  "drat_trim": {
+    "commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+    "verified": 11,
+    "failures": 0
+  },
+  "cases": [
+    {
+      "case": "orbit4_pair_00",
+      "clauses": 390778,
+      "learned": 134694,
+      "cnf_raw_sha256": "abbb288aa7db59bda5577bada38bafe20277744d701a4365db489120e295ff07",
+      "learned_raw_sha256": "cdff7256958f4f944c2eb2ad0e4a9705f8d24a44dec9dd018b4b5080a541ed11",
+      "drat_raw_sha256": "743a8bae34a7e49275c50c80c85329e42dcd69e62481e6b70ff43b91ed7225fe",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_01",
+      "clauses": 386894,
+      "learned": 130764,
+      "cnf_raw_sha256": "d864d5c7dec39c48161f6e8648dd790c535e462ff3d7d404e05183d8904ce3fe",
+      "learned_raw_sha256": "141efde33eb1d1ddc16bd051458bacb4995e6ee6817862b0df94fd22a8430395",
+      "drat_raw_sha256": "a40196079bb27f534c31758003b95bf6143b6202379838da040995aeb865213d",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_02",
+      "clauses": 426611,
+      "learned": 170476,
+      "cnf_raw_sha256": "0c454653e5d8f6a8a008ef7d3653fd33ac207232365ce2c43c8943e0bd235277",
+      "learned_raw_sha256": "00528e47e772c1b042c5de67d8bad6f4e46baeddc17b160c7324a2b567f365c0",
+      "drat_raw_sha256": "322961338136f942a04c49c618a3f915dff6510fc8a7c60cb824a91848b23cef",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_03",
+      "clauses": 301240,
+      "learned": 45159,
+      "cnf_raw_sha256": "d763c999a37adca23d47b4e41f8fe2952edfd2e5a3d858ad7ddb827fd8d91792",
+      "learned_raw_sha256": "c50fbed5499551d7f75aff39a17e0713ca4e1a6f1b6276eef6dcb3b1f261aba5",
+      "drat_raw_sha256": "2be479e5d3734a92cca69bf817c3778093c69ebc22246719a5c7e12e4687191f",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_04",
+      "clauses": 410418,
+      "learned": 154297,
+      "cnf_raw_sha256": "0c6c12944d2f8d1365acd5221ea3be3abe22dace89edf7a99dae7ffa0ac995da",
+      "learned_raw_sha256": "022c2f9124077e2c423bef291533f31b47665dfc1787d7bacd224855f1442979",
+      "drat_raw_sha256": "02b2469e64b0d75e627ce8e608bca37a62100157c3a369958bcaa6a9dd6019e0",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_05",
+      "clauses": 311619,
+      "learned": 55536,
+      "cnf_raw_sha256": "d166745cfaba1d736ba6ac40e1bb899d3d8a523cb1d09e338a277bb00e7069e3",
+      "learned_raw_sha256": "aee4e24f9003f125eadab6822bd9509e7b990d578df0c6f66cab8a85c635d1cd",
+      "drat_raw_sha256": "bd12e8306c6f4ac56f8bdd651b07e3c82d8b3c3bc341930bb6ea19aec7670faa",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_06",
+      "clauses": 345338,
+      "learned": 89208,
+      "cnf_raw_sha256": "632378aae0eb199f9003cc6e68ba118756ff3f43d6b747b53a6472bcf4ddd492",
+      "learned_raw_sha256": "bce23b9e88fee25abed6927107c32e840403ffa8472ab5a09854781ab69bd627",
+      "drat_raw_sha256": "afde7e27bda69806e3e545aa2a95bba37c0560c1ac27a9ac815c222fe037636d",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_07",
+      "clauses": 388717,
+      "learned": 132580,
+      "cnf_raw_sha256": "2548e8cce03142aa29b01575434be8d603a181d9e1ba1176c6b0afc79df84679",
+      "learned_raw_sha256": "c6caced267485ffe0ccc4358301a0c30d339e8f22f49078d025eeacf7728ef39",
+      "drat_raw_sha256": "4a05799c0b33f18c9806315fa1177619f154b03a566ed17a39ab2044f99bd767",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_08",
+      "clauses": 384155,
+      "learned": 128016,
+      "cnf_raw_sha256": "6cdee2e7e91b832704d724d8f33e37ce9e69d7d71a93a28e466c1d716b97d6d9",
+      "learned_raw_sha256": "269865fa146462ee86dbd94ef186df235d507766c41e55aa7bc652a66b27a503",
+      "drat_raw_sha256": "2a158a9a5410364392577cb822fbf69ce887ec392438f45c981710cbd7a4c30c",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_09",
+      "clauses": 379608,
+      "learned": 123469,
+      "cnf_raw_sha256": "c82f799e26950a0eaa4da0cc87950585bea1bdf8e4c42819da3b5159809ddd69",
+      "learned_raw_sha256": "54292b7d2a8a1ffb5060dc9c2874ee6fae104b39b902ab535f0d72442af50678",
+      "drat_raw_sha256": "52a0ad8d4486bda3e8e303e7207f7bb735ce0a09afbfd29e23fb7d4e3a0af782",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit4_pair_10",
+      "clauses": 488927,
+      "learned": 232787,
+      "cnf_raw_sha256": "d37e21d6ff81e1720a8b19bbc31bbb2b7ce6bed3a6bd64bd5b88fdb885f2efbc",
+      "learned_raw_sha256": "3d0c9f1284adbc88d93429833b154451b0b9c26a4f67d769c9e4c3d584b3905e",
+      "drat_raw_sha256": "276a879c736747c002684545872ad5affed328d40ef76a004cf73a122914159a",
+      "replay": "VERIFIED"
+    }
+  ]
+}
