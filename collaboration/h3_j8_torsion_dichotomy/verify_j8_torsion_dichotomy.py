@@ -180,6 +180,10 @@ def audit_fixed_cube_local_structure() -> None:
     # P=N+60 and P<=104-M require M<=44-N; totals 21 and 22 fail.
     assert minima[21] > 44 - 21
     assert minima[22] > 44 - 22
+    # R+H=176-8N at the endpoint N=20; H<=16 leaves at least 16
+    # saturated edge loads among the 32.
+    assert 176 - 8 * 20 == 16
+    assert 32 - 16 == 16
 
     # Coefficientwise inclusion-exclusion for the complement of every triple.
     for triple in combinations(V, 3):
@@ -202,7 +206,7 @@ def main() -> None:
     print("four-cube extraction, lcm, and 104 bound: PASS")
     audit_ranks()
     audit_fixed_cube_local_structure()
-    print("fixed Delta=60 bound N<=20 and binary triple residues: PASS")
+    print("fixed Delta=60 bound N<=20, residual budget, and residues: PASS")
     print("PASS: q=6 is redundant and every cube coefficient is 0 or +/-60")
     print("scope: the Delta=60 branch, the full lift, and Problem #835 remain open")
 

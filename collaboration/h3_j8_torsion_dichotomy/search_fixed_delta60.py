@@ -65,6 +65,12 @@ def build_model() -> tuple[
             sum(e[q] for q in FOUR_SETS if set(triple).issubset(q)) <= 3
         )
 
+    # Recurrence nonnegativity at size 5:
+    # 2*N_S + sum_{Q subset S} d_Q = 13, with d=e+1.
+    # The parity constraints alone are not sufficient.
+    for s in itertools.combinations(V, 5):
+        model.Add(sum(e[q] for q in itertools.combinations(s, 4)) <= 8)
+
     constraint_sets: list[tuple[tuple[int, ...], int]] = []
     for size, prime in ((5, 2), (6, 3), (8, 5), (10, 7)):
         basis = independent_original_sets(size, prime)
@@ -95,6 +101,22 @@ def build_model() -> tuple[
     model.Add(
         sum(e[q] for q in positive) - sum(e[q] for q in negative) == 60
     )
+    # Solver-free Q4 neighborhood argument from NOTE.md.
+    model.Add(sum(e[q] + 1 for q in negative) <= 20)
+
+    # The sign-preserving cube group is transitive on positive cells.
+    reference_positive = (0, 2, 4, 6)
+    for q in positive:
+        model.Add(e[reference_positive] >= e[q])
+    # Its stabilizer permutes the four coordinate directions.
+    adjacent_negative = [
+        (1, 2, 4, 6),
+        (0, 3, 4, 6),
+        (0, 2, 5, 6),
+        (0, 2, 4, 7),
+    ]
+    for first, second in zip(adjacent_negative, adjacent_negative[1:]):
+        model.Add(e[first] >= e[second])
 
     # The exterior S5 action permits this ordering without loss.
     for first, second in zip(range(8, 12), range(9, 13)):

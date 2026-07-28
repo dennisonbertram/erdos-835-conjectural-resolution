@@ -1,0 +1,10 @@
+$ python3 -B collaboration/h3_j8_torsion_dichotomy/verify_internal_cube_positive_control.py
+70 coordinates and 56 internal triple capacities: PASS
+all internal size-5 sums modulo 2: PASS
+all internal size-6 sums modulo 3: PASS
+all internal size-7 sums modulo 4: PASS
+all internal size-8 sums modulo 5: PASS
+all internal size-5 recurrence sums are at most 13: PASS
+oriented cube totals P=60, N=0, Delta=60: PASS
+PASS: the internal 8-vertex necessary-condition projection is feasible
+scope: no 13-vertex extension, tower, colouring, or #835 conclusion

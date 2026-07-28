@@ -138,6 +138,25 @@ But \(P=N+60\) and (6) require
 \tag{8}
 \]
 
+For later coupling to the five outside vertices, each of the 32 cube edges
+has an edge-triple load \(L_T\).  Define its residual and deficiency totals
+\[
+R=\sum_{\text{edges }T}\bigl(L_T-d_{Q_+(T)}-d_{Q_-(T)}\bigr),
+\qquad
+H=\sum_{\text{edges }T}(13-L_T).
+\]
+Both are nonnegative.  Since every cube cell lies on four edges,
+\[
+R+H
+=32\cdot13-4(P+N)
+=176-8N.
+\tag{9}
+\]
+In particular, the endpoint case \(N=20\) has \(R+H=16\).  At most 16
+edge triples can then be unsaturated, so at least 16 of their loads equal
+13.  The binary residue description below makes each such load the upper
+choice \(6+7\).
+
 There is also an exact binary description of every triple load.  Write
 \(L_U=\sum_{Q\supseteq U}d_Q\), including \(L_\varnothing=\sum_Qd_Q\).
 For a triple \(T\), the \(q=7\) congruence on \(A\setminus T\), together
@@ -147,13 +166,13 @@ with \(\binom{10}{4}=210\equiv0\pmod7\), gives
 L_\varnothing-\sum_{a\in T}L_a
 +\sum_{\{a,b\}\in\binom T2}L_{ab}-L_T
 \pmod7.
-\tag{9}
+\tag{10}
 \]
-If \(r_T\in\{0,\ldots,6\}\) is the residue on the right of (9) before
+If \(r_T\in\{0,\ldots,6\}\) is the residue on the right of (10) before
 subtracting \(L_T\), then the capacity range \(0\le L_T\le13\) implies
 \[
 L_T=r_T+7b_T,\qquad b_T\in\{0,1\}.
-\tag{10}
+\tag{11}
 \]
 Thus a fixed torsion cube has only one binary \(7\)-adic choice per triple,
 although coupling those 286 choices remains unresolved.
@@ -190,6 +209,31 @@ The field ranks in (3) do not replace the genuinely 2-adic congruences
 modulo \(4\) and modulo \(8\); those must be retained in an exact reduced
 model.
 
+## Recurrence nonnegativity
+
+Congruence is not the whole recurrence condition.  At the first derived
+level, every 5-set satisfies
+\[
+2N_S+\sum_{Q\in\binom S4}d_Q=13.
+\]
+Thus an exact necessary-condition model must impose both odd parity and
+\[
+\sum_{Q\in\binom S4}d_Q\le13
+\qquad\left(S\in\binom A5\right).
+\tag{12}
+\]
+The analogous raw \(d\)-sum upper bounds at sizes \(7,9,11\) are
+\(195,702,858\).  They are already implied by the triple capacities:
+\[
+4\sum_{Q\in\binom S4}d_Q
+=\sum_{T\in\binom S3}L_T
+\le13\binom{|S|}{3}.
+\]
+All other upper and lower recurrence bounds are automatic from
+\(0\le d_Q\le13\) and the triple capacities.  The search model below
+includes every inequality (12); earlier congruence-only experiments were
+incomplete and carry no verdict.
+
 ## Remaining gap
 
 The unresolved local arithmetic branch has a four-cube with
@@ -202,9 +246,18 @@ finite solver silence decides whether that branch is feasible.
 [`search_fixed_delta60.py`](search_fixed_delta60.py) encodes the complete
 fixed-cube necessary-condition model.  It uses independent original rows
 for the prime-field reductions in (3), retains every modulo-4 and modulo-8
-row, and adds only a harmless ordering of the five points outside the
-normalized cube.  A run returning `UNKNOWN` is not evidence of feasibility
-or infeasibility.
+row, imposes all 1,287 size-5 recurrence inequalities (12), and adds only a
+harmless ordering of the five points outside the normalized cube.  A run
+returning `UNKNOWN` is not evidence of feasibility or infeasibility.
+
+The smaller 70-coordinate projection to the cube's eight vertices is
+feasible.  [`internal_cube_positive_control.json`](internal_cube_positive_control.json)
+records all \(d_Q\) in lexicographic four-set order, and
+[`verify_internal_cube_positive_control.py`](verify_internal_cube_positive_control.py)
+checks every internal triple capacity, every internal \(q=2,3,4,5\)
+congruence, and \((P,N,\Delta)=(60,0,60)\).  This positive control proves
+that the eight-vertex constraints alone cannot eliminate torsion.  It does
+not assert that the assignment extends to the five outside vertices.
 
 Example:
 
