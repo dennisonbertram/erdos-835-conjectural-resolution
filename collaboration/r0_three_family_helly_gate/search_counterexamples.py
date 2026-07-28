@@ -298,6 +298,44 @@ def matching_masks(
     )
 
 
+def cut_requirements(
+    omitted_triples: tuple[tuple[int, ...], ...],
+) -> tuple[tuple[tuple[int, ...], tuple[int, ...], int], ...]:
+    """Return every nontrivial internal-edge capacity cut."""
+    supports = tuple(
+        frozenset(VERTICES) - frozenset(triple) for triple in omitted_triples
+    )
+    requirements = []
+    for size in range(len(VERTICES) + 1):
+        for vertices in combinations(VERTICES, size):
+            vertex_set = frozenset(vertices)
+            required = sum(
+                max(0, len(support & vertex_set) - len(support) // 2)
+                for support in supports
+            )
+            if not required:
+                continue
+            internal_edges = tuple(
+                edge_index
+                for edge_index, edge in enumerate(EDGES)
+                if edge[0] in vertex_set and edge[1] in vertex_set
+            )
+            requirements.append((vertices, internal_edges, required))
+    return tuple(requirements)
+
+
+def violated_cut(
+    requirements: tuple[tuple[tuple[int, ...], tuple[int, ...], int], ...],
+    deleted_mask: int,
+) -> tuple[tuple[int, ...], tuple[int, ...], int] | None:
+    """Return one failed capacity cut, or ``None`` if every cut passes."""
+    for vertices, internal_edges, required in requirements:
+        available = sum(not deleted_mask & (1 << edge) for edge in internal_edges)
+        if available < required:
+            return vertices, internal_edges, required
+    return None
+
+
 def available_indices(
     masks: tuple[tuple[int, ...], ...], deleted_mask: int
 ) -> tuple[tuple[int, ...], ...]:
@@ -336,6 +374,7 @@ def solve_orbit(
     cut_batch: int,
     full_rows: bool,
     max_rounds: int,
+    require_cut_feasible: bool = False,
 ) -> dict[str, object]:
     start = time.monotonic()
     cnf, families = build_instance(omitted_triples, full_rows=full_rows)
@@ -343,7 +382,10 @@ def solve_orbit(
     initial_clauses = len(cnf.clauses)
     solver = Cadical195(bootstrap_with=cnf.clauses)
     cuts = 0
+    capacity_cuts = 0
     rounds = 0
+    requirements = cut_requirements(omitted_triples)
+    enforced_vertex_sets: set[tuple[int, ...]] = set()
     result: dict[str, object]
     try:
         while max_rounds == 0 or rounds < max_rounds:
@@ -366,6 +408,29 @@ def solve_orbit(
             available = available_indices(masks, deleted_mask)
             violating = tuple(disjoint_triples(masks, available, cut_batch))
             if not violating:
+                failed_cut = (
+                    violated_cut(requirements, deleted_mask)
+                    if require_cut_feasible
+                    else None
+                )
+                if failed_cut is not None:
+                    vertices, internal_edges, required = failed_cut
+                    if vertices in enforced_vertex_sets:
+                        raise AssertionError("an enforced capacity cut was violated")
+                    enforced_vertex_sets.add(vertices)
+                    old_clause_count = len(cnf.clauses)
+                    cnf.cardinality(
+                        ("cut_feasible", vertices),
+                        [
+                            -cnf.variable(("deleted_edge", edge_index))
+                            for edge_index in internal_edges
+                        ],
+                        lower=required,
+                    )
+                    for clause in cnf.clauses[old_clause_count:]:
+                        solver.add_clause(clause)
+                    capacity_cuts += 1
+                    continue
                 selected_by_colour = []
                 for colour in range(len(PREFIX_SIZES)):
                     selected_by_colour.append(
@@ -381,6 +446,7 @@ def solve_orbit(
                     "cuts": cuts,
                     "available_counts": [len(indices) for indices in available],
                     "prefix": selected_by_colour,
+                    "cut_feasible": require_cut_feasible,
                 }
                 if full_rows:
                     result["remaining_complements"] = [
@@ -420,6 +486,8 @@ def solve_orbit(
             "final_clauses": len(cnf.clauses),
             "elapsed_seconds": round(time.monotonic() - start, 3),
             "full_rows": full_rows,
+            "require_cut_feasible": require_cut_feasible,
+            "capacity_cuts": capacity_cuts,
         }
     )
     return result
@@ -450,6 +518,14 @@ def main() -> None:
         help="zero means no round limit",
     )
     parser.add_argument("--jsonl", type=Path)
+    parser.add_argument(
+        "--require-cut-feasible",
+        action="store_true",
+        help=(
+            "search only for bad triples satisfying every internal-edge "
+            "capacity cut"
+        ),
+    )
     args = parser.parse_args()
 
     orbits = support_orbits()
@@ -466,6 +542,7 @@ def main() -> None:
                 cut_batch=args.cut_batch,
                 full_rows=not args.relaxed_prefix_only,
                 max_rounds=args.max_rounds,
+                require_cut_feasible=args.require_cut_feasible,
             )
             line = json.dumps(result, sort_keys=True)
             print(line, flush=True)

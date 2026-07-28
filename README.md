@@ -766,6 +766,10 @@ routes, but not the asymmetric case.
   a fresh, explicitly limited seven-day X claim search, including resolution
   of two third-party “erdős 835” links to a small-cases/primality-sieve note.
   It found no full-solution claim; this is not evidence of priority or absence.
+- [`collaboration/recent_solution_check_2026-07-28.md`](collaboration/recent_solution_check_2026-07-28.md):
+  the latest official-page, public-index, and seven-day X refresh.  No checked
+  source claimed a full solution; the result cannot exclude unpublished or
+  unindexed work.
 - [`evidence/large_set_literature_attack_2026-07-25.md`](evidence/large_set_literature_attack_2026-07-25.md):
   a primary-literature audit of the exact
   \(LS(15,16,32)\)/\(O_{16}\) frontier and the nearby theorems that do not
@@ -1301,6 +1305,23 @@ routes, but not the asymmetric case.
   Nevertheless 34 of the certificate's 35 seven-family colour triples do
   pack, isolating the correct remaining target as a global seven-family
   selection theorem.
+- [`collaboration/r0_three_family_helly_gate/GLOBAL_ALL_35_OBSTRUCTION.md`](collaboration/r0_three_family_helly_gate/GLOBAL_ALL_35_OBSTRUCTION.md):
+  a stronger full-row \(r=0\) prefix on which all 35 triples of remaining
+  size-ten occurrences fail.  Every pair still coordinates, all 84
+  \(10+10+8\) routes pack, and one support-preserving two-edge switch repairs
+  all 35 size-ten routes.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_opus5_note.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_opus5_note.md):
+  an independently audited cut invariant for simultaneous remaining
+  matchings.  A complete \(2^{13}\)-cut check corrects the first orbit-4
+  interpretation: every regenerated targeted bad-prefix orbit \(2,\ldots,10\)
+  violates the simple internal-edge capacity inequality.  This is evidence
+  for, not a proof of, cut sufficiency.
+- [`collaboration/coordinated_nine_r0_repair_cegis/NOTE.md`](collaboration/coordinated_nine_r0_repair_cegis/NOTE.md):
+  an exact semantic-witness CEGIS for one-layer support-preserving repair and
+  a three-colour continuation.  Strict canonical replay has been audited; a
+  replayed ten-minute campaign accumulated 2,190,962 valid repair cuts
+  without finding either a counterexample or UNSAT.  The bounded run is
+  coverage evidence, not a theorem.
 - [`collaboration/coordinated_nine_r1_reduction/NOTE.md`](collaboration/coordinated_nine_r1_reduction/NOTE.md):
   the exact \(r=1\) one- and two-step Tutte catalogues, core-reuse ceilings,
   and three literal class-B pair obstructions with triple intersections
@@ -1862,6 +1883,13 @@ python3 -B \
 python3 -B \
   collaboration/first_lift_global_theorem/verify_r0_row_sum_core_elimination.py
 python3 -B \
+  collaboration/r0_three_family_helly_gate/verify_global_counterexample.py
+python3 -B \
+  collaboration/opus5_r0_orbit_repair/check_crossing_hall.py
+python3 -B \
+  collaboration/coordinated_nine_r0_repair_cegis/search_one_layer_repair.py \
+  --max-rounds 2 --cuts-per-model 2
+python3 -B \
   collaboration/first_lift_aggregate_graphicity/verify_aggregate_graphicity.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
 python3 -B \
@@ -1890,6 +1918,7 @@ Expected decisive outputs:
 ## Primary references
 
 - [Erdős Problem #835](https://www.erdosproblems.com/835)
+- [Latest official/X status audit, 28 July 2026](collaboration/recent_solution_check_2026-07-28.md)
 - [Recent official/X status audit, 27 July 2026](evidence/recent_status_audit_2026-07-27.md)
 - J. Ma and Q. Tang,
   [A Note on Erdős Problem #835](https://github.com/QuanyuTang/erdos-problem-835/blob/main/On_Problem_835.pdf)
