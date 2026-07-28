@@ -130,6 +130,15 @@ python3 -B search_cp_sat_reduced.py --seconds 1800 --workers 8 \
   --reference-positive 8 --reference-weight-two 8
 ```
 
+The \(m=8,w=8\) branch has only 71 symmetry-normalized assignments of its
+eight positive cube values.  They may instead be checked one at a time, with
+`--seconds` interpreted as the limit for each assignment:
+
+```text
+python3 -B search_cp_sat_reduced.py --seconds 300 --workers 8 \
+  --enumerate-m8-cube-cases
+```
+
 Replay it with the independently implemented rank-reduced Gurobi model:
 
 ```text

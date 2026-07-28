@@ -325,6 +325,14 @@ def audit_cube_symmetry_and_partition():
         13: (6, 7, 8, 9, 10, 11, 12, 13),
     }
 
+    m8_cases = tuple(
+        deficits
+        for deficits in itertools.product(range(5), repeat=6)
+        if sum(deficits) == 4
+        and deficits[0] <= min(deficits[1:4])
+    )
+    assert len(m8_cases) == 71
+
 
 def audit_reduced_model_totals():
     count_variables = 163 + 135 + 456 + 126 + 84 + 46
@@ -349,7 +357,7 @@ def main():
     audit_rank_reductions(key_index)
     print("F2/F3/F5/F7 ranks and size-9 redundancy: PASS")
     audit_cube_symmetry_and_partition()
-    print("cube breakers and complete (m,w) branch partition: PASS")
+    print("cube breakers, (m,w) partition, and 71 m=8 cases: PASS")
     audit_reduced_model_totals()
     print("reduced model totals (1,266 variables; 1,360 base rows): PASS")
     print("scope: model semantics only; no infeasibility is certified here")
