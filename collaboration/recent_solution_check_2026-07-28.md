@@ -4,6 +4,8 @@ Checked: 2026-07-28 (America/New_York).
 
 This is provenance evidence, not proof that no unpublished solution exists.
 
+Refreshed at 13:39 EDT after the latest local certificate and Opus runs.
+
 ## Erdős Problems status
 
 The current indexed page for
@@ -37,11 +39,30 @@ A second recent query,
 
 returned zero posts.
 
+The refresh also queried the following exact seven-day searches:
+
+```text
+"Erdos Problem 835" OR "Erdős Problem 835"
+"Erdos-Rosenfeld" OR "Erdős-Rosenfeld"
+"J(32,16)" OR "LS(15,16,32)" OR "LS(14,15,31)"
+(erdosproblems OR "Erdős Problems") 835
+("Problem #835" OR "problem 835") (Johnson OR Rosenfeld)
+("Johnson graph" OR "Odd graph")
+  ("perfect code" OR "17-coloring" OR "17 colouring")
+```
+
+The only returned material was the project owner's 24 July post and one
+retweet of it. The other five queries returned zero posts. Neither returned
+post claims a solution of #835.
+
 ## Other current signals
 
 - The July 2026 fidelity page for formal conjecture `Erdos835.erdos_835`
   reports no hosted machine-audited proof and no signed statement-fidelity
   verdict.
+- The current indexed forum front page reports seven posts in the #835
+  thread, most recently about a month ago, and #835 is absent from its
+  “Solution Claims” list.
 - The community AI-contributions wiki records an AlphaProof item as
   "likely folklore" partial/literature-linked activity, not a full resolution.
 - A separate public computational project reports exclusions only through
