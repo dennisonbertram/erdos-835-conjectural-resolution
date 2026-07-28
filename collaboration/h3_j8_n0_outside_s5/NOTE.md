@@ -88,3 +88,11 @@ solver implementations, but the repository does not yet contain a
 proof-checker-consumable UNSAT certificate.  The defensible claim is therefore
 an independently replayed exact finite elimination with a separately audited
 model, not a stand-alone formal proof.
+
+For diagnosis, Gurobi also wrote
+[`exterior_s5_nonminimal_iis.ilp`](exterior_s5_nonminimal_iis.ilp).  Its
+non-minimal inconsistent subsystem still contains 1,069 constraints and 1,314
+variable bounds.  The root linear relaxation is feasible, so there is no
+linear Farkas certificate; integrality is essential.  The IIS is far too large
+to present as a human derivation and is included only to make the solver
+diagnostic reproducible.
