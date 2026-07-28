@@ -72,12 +72,12 @@ edge counts are
 \begin{array}{c|c|c|c|c|c}
 s&\text{odd blocks}&\text{core}&|E(\text{core})|
    &\text{pointwise ceiling}&r=0\text{ ceiling}\\ \hline
-0&3+7&K_{3,7}&21&5&5\\
-0&5+5&K_{5,5}&25&7&5\\
-1&3+3+3&K_{3,3,3}&27&6&4\\
+0&3+7&K_{3,7}&21&5&4\\
+0&5+5&K_{5,5}&25&7&2\\
+1&3+3+3&K_{3,3,3}&27&6&0\\
 2&5+1+1+1&K_{5,1,1,1}&18&5&5\\
-2&3+3+1+1&K_{3,3,1,1}&22&5&5\\
-3&3+1+1+1+1&K_{3,1,1,1,1}&18&6&6\\
+2&3+3+1+1&K_{3,3,1,1}&22&5&2\\
+3&3+1+1+1+1&K_{3,1,1,1,1}&18&6&4\\
 4&1+1+1+1+1+1&K_6&15&7&6.
 \end{array} \tag{5}
 \]
@@ -121,32 +121,47 @@ a fixed \(K_{3,3,3}\) at most six, and a fixed \(K_6\) at most seven.  A
 switching proof can therefore focus on how distinct cores overlap inside a
 31-to-34-edge graph satisfying (1)--(3).
 
-## Sharper reuse in the exceptional profile
+## Exact complement-degree reuse in the exceptional profile
 
 For \(r=0\), seven size-ten and three size-eight supports remain.  Suppose a
 fixed core \(J\), on a vertex set \(C\), is contained in \(t\) of the seven
-size-ten supports.  Each of the three size-eight supports contains at least
-\[
- 8-(13-|C|)=|C|-5
-\]
-vertices of \(C\), so together they require at least
-\[
- 3|C|-15 \tag{8}
-\]
-small-support incidences inside \(C\).
+size-ten supports.
 
-On the other hand, a vertex \(v\in C\) belongs to at most
-\(12-d_F(v)\le12-d_J(v)\) remaining supports.  The \(t\) size-ten supports
-already consume \(t\) of those incidences.  Hence a necessary condition is
+Take complements inside the thirteen-vertex set.  The seven size-ten
+supports give seven triples, and the three size-eight supports give three
+five-sets.  A vertex \(v\) is omitted by exactly five of all seventeen
+colours.  It is omitted by \(7-d_F(v)\) selected colours, so among these ten
+remaining complement sets it occurs exactly
 \[
- \sum_{v\in C}\max\{0,12-d_J(v)-t\}\ \ge\ 3|C|-15. \tag{9}
+ 5-(7-d_F(v))=d_F(v)-2 \tag{8}
 \]
-Intersecting (9) with the pointwise ceiling gives the final column of (5).
-In particular, no fixed core can obstruct all seven remaining size-ten
-supports: the largest \(r=0\) reuse ceiling is six.  Therefore, if all seven
-large supports were blocked after a seven-prefix, \(F\) would have to
-contain at least two distinct obstruction cores.  This reduces the
-exceptional profile to an overlap-or-switching problem.
+times.
+
+Every size-ten support containing \(C\) has its complement triple wholly in
+\(O=V(K_{13})\setminus C\).  Thus the \(t\) blocked supports consume \(3t\)
+complement incidences in \(O\).  Since \(\sum_vd_F(v)=62\) and
+\(\sum_{v\in C}d_F(v)\ge2|E(J)|\),
+\[
+\begin{aligned}
+3t
+ &\le \sum_{v\in O}(d_F(v)-2)\\
+ &\le 62-2|E(J)|-2(13-|C|)\\
+ &=36+2|C|-2|E(J)|. \tag{9}
+\end{aligned}
+\]
+The final column of (5) is
+\[
+ \left\lfloor\frac{36+2|C|-2|E(J)|}{3}\right\rfloor,
+ \tag{10}
+\]
+intersected with the pointwise ceiling.
+
+In particular, a \(K_{3,3,3}\) core cannot obstruct even one actual
+remaining support; a fixed \(K_{5,5}\) or \(K_{3,3,1,1}\) obstructs at most
+two; and no fixed core obstructs all seven.  Therefore, if all seven large
+supports were blocked after a seven-prefix, \(F\) would have to contain at
+least two distinct obstruction cores.  This reduces the exceptional profile
+to an overlap-or-switching problem.
 
 ## Remaining frontier
 
