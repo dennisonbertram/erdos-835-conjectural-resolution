@@ -434,8 +434,12 @@ complete \(W\)-to-\(S\) residual graph and the forced \(W\)-to-\(z\)
 edges, and none is used by \(M_y\).  For the third matching, use the two
 freed \(W\)-edges and match the other four vertices of \(W\)
 bijectively to \(S\).  The new first-matching edges and the third
-matching use disjoint sets of \(W\)-endpoints, so the three matchings are
-edge-disjoint and have the required omissions.
+matching can share \(W\)-endpoints, but not edges: the former are
+\(W_{\rm exposed}\)-to-\(L\) edges, while the latter are the freed
+internal \(W\)-edges together with
+\(W_{\rm remaining}\)-to-\(S\) edges.  All of the cross edges were
+residual before the switch, so the three matchings are edge-disjoint and
+have the required omissions.
 
 Consequently, any genuine counterexample to the three-near-factor
 assertion must survive all choices of the first two matchings and must
