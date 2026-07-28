@@ -1,4 +1,4 @@
-# Five-core families with at least two \(K_{3,3,1,1}\) cores
+# Five-core families containing \(K_{3,3,1,1}\)
 
 Date: 2026-07-27.
 
@@ -9,12 +9,12 @@ Use
  A=K_{5,1,1,1},\quad B=K_{3,3,1,1},\quad
  C=K_{3,1,1,1,1},\quad D=K_6.
 \]
-No family of exactly five distinct cores containing at least two
-\(B\)-cores can collectively account for all seven blocked size-ten
-supports in the exceptional \(r=0\) profile.
+No family of exactly five distinct cores containing a \(B\)-core can
+collectively account for all seven blocked size-ten supports in the
+exceptional \(r=0\) profile.
 
-There are exactly nineteen capacity-sufficient type multisets in this
-scope.  The nine rows with at least three \(B\)-cores are
+There are exactly 34 capacity-sufficient type multisets in this scope.  The
+nine rows with at least three \(B\)-cores are
 \[
  AB^4,\ CB^4,\ DB^4,\quad
  A^2B^3,\ ACB^3,\ ADB^3,\ C^2B^3,\ CDB^3,\ D^2B^3. \tag{1}
@@ -26,12 +26,20 @@ A^3B^2,\ A^2CB^2,\ A^2DB^2,\ AC^2B^2,\ ACDB^2,\\
 AD^2B^2,\ C^3B^2,\ C^2DB^2,\ CD^2B^2,\ D^3B^2.
 \end{gathered} \tag{2}
 \]
+The fifteen rows with exactly one \(B\)-core are
+\[
+\begin{gathered}
+A^4B,\ A^3CB,\ A^3DB,\ A^2C^2B,\ A^2CDB,\ A^2D^2B,\\
+AC^3B,\ AC^2DB,\ ACD^2B,\ AD^3B,\ C^4B,\ C^3DB,\\
+C^2D^2B,\ CD^3B,\ D^4B.
+\end{gathered} \tag{3}
+\]
 The all-\(B\) multiset has total individual reuse capacity five and needs
 no enumeration.
 
 This is a cover impossibility result, not a non-coexistence result.  It
-does not address five-core families containing at most one \(B\)-core or
-families of six or more distinct cores.
+does not address five-core families using only \(A,C,D\), or families of
+six or more distinct cores.
 
 ## Exact subset-capacity screen
 
@@ -48,7 +56,7 @@ possible positive multiplicity shapes,
  3+1+1+1+1\quad\text{or}\quad2+2+1+1+1,
 \]
 and impose the complement-capacity inequality on all 31 nonempty
-subfamilies.  Every row in (1) and (2) has zero surviving multiplicity
+subfamilies.  Every row in (1)--(3) has zero surviving multiplicity
 assignments.
 
 For the rows in (1), the exact numbers of families reaching the final
@@ -58,6 +66,17 @@ multiplicity test are
 AB^4&7{,}620&CB^4&48{,}180&DB^4&8{,}964\\
 A^2B^3&6{,}210&ACB^3&118{,}584&ADB^3&20{,}808\\
 C^2B^3&330{,}552&CDB^3&116{,}856&D^2B^3&8{,}550
+\end{array}
+\]
+
+For the rows in (3), they are
+\[
+\begin{array}{c|r@{\qquad}c|r@{\qquad}c|r}
+A^4B&429&A^3CB&27{,}120&A^3DB&4{,}464\\
+A^2C^2B&306{,}810&A^2CDB&101{,}520&A^2D^2B&7{,}344\\
+AC^3B&1{,}170{,}180&AC^2DB&591{,}048&ACD^2B&85{,}668\\
+AD^3B&3{,}464&C^4B&1{,}404{,}765&C^3DB&965{,}640\\
+C^2D^2B&213{,}024&CD^3B&17{,}440&D^4B&429
 \end{array}
 \]
 
@@ -82,5 +101,6 @@ python3 -B verify_r0_four_core_capacity.py \
   3311 3311 3311 31111 31111
 ```
 
-Thus an exactly-five-core total obstruction can contain at most one
-\(K_{3,3,1,1}\) core.  All other five-core type multisets remain open.
+Thus an exactly-five-core total obstruction contains no
+\(K_{3,3,1,1}\) core.  The 21 five-core type multisets using only \(A,C,D\)
+remain open.
