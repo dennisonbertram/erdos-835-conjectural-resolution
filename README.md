@@ -1331,6 +1331,12 @@ routes, but not the asymmetric case.
   verifies a full-row instance that fails exactly one six-set cut by one edge.
   It rejects the run's false independence-number lemma and does not promote
   the incomplete Tutte--Lovász case analysis to a theorem.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_selection_audit.md):
+  a solver-free rigid-branch theorem from the concise Opus selection attack.
+  When one dense six-set has all seven triple rows on its far side, one legal
+  cross-switch makes every row triple pass every cut; all 20 binding
+  \((p,q)\) types are independently checked.  The response's claimed next
+  branch relies on unproved overlap inequalities and is not accepted.
 - [`collaboration/coordinated_nine_r0_repair_cegis/NOTE.md`](collaboration/coordinated_nine_r0_repair_cegis/NOTE.md):
   an exact semantic-witness CEGIS for one-layer support-preserving repair and
   a three-colour continuation.  Strict canonical replay has been audited; a

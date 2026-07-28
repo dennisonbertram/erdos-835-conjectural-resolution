@@ -270,3 +270,36 @@ The program prints one JSON result.  Status values are:
 
 Only a separately regenerated and independently replayed DRAT certificate
 could upgrade the last status into a theorem.
+
+## Cut-selection campaign results
+
+Three ten-minute discovery waves of `search_cut_feasible_repair.py` ended at
+the time limit without finding either a validated counterexample or UNSAT:
+
+| semantic clause | rounds | new cuts | final clauses | result |
+|---|---:|---:|---:|---|
+| exact union of the other five layers | 1,090 | 228,690 | 273,167 | time limit |
+| explicit free-edge cut certificate | 90 | 18,900 | 63,377 | time limit |
+| inclusion-minimal free-edge certificate | 80 | 16,590 | 61,067 | time limit |
+
+The latter clauses are stronger: they preserve only enough named free edges
+to witness every capacity inequality, rather than fixing all other occupied
+edges.  The lower cut count therefore does not mean less semantic coverage.
+All three runs are evidence only.
+
+Their canonical witness streams are published in the
+[`r0-cegis-evidence-2026-07-28`](https://github.com/dennisonbertram/erdos-835-conjectural-resolution/releases/tag/r0-cegis-evidence-2026-07-28)
+release.  Raw and gzip SHA-256 values are:
+
+```text
+exact-union raw:  9e6046dd271e23f27ab1769e6a886435766173d3c2501f68f2a0b71372ef40a0
+exact-union gzip: b1ed8d368247172c5bb9e1d7137ce96f44a00f85633da1830b07200970c68341
+free-edge raw:    e0ddd95964130b6b303e4490849bfb6be61d781d3cfebf2eb9984f375b8236a8
+free-edge gzip:   8163e45170e2ca1075e56b0be6712f174a6c05c1de997b398b1807a943cea7c4
+minimal raw:      13a708a59b184027ec63db8402a7a88cb8f4b913b45646437e044a4a9a6e5046
+minimal gzip:     96faa70cce1e9d59ecb57907799c4ea9341966ba36acdaf33843ef1d98edf7b4
+```
+
+The current replayer accepts both the legacy exact-union schema and the
+stronger free-edge schema, reconstructs each semantic clause, and checks its
+record hash and canonical JSON.

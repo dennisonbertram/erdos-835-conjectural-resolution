@@ -13,6 +13,7 @@ import hashlib
 import json
 import time
 from dataclasses import dataclass
+from functools import lru_cache
 from itertools import combinations
 from pathlib import Path
 from typing import Iterable
@@ -65,6 +66,30 @@ class CutWitness:
         }
 
 
+@dataclass(frozen=True)
+class ExactUnionCutWitness:
+    """Legacy witness fixing the exact union of the other five layers."""
+
+    repair_layer: int
+    replacement: tuple[int, ...]
+    other_mask: int
+    colours: tuple[int, int, int]
+    complements: tuple[tuple[int, ...], ...]
+
+    def record(self) -> dict[str, object]:
+        return {
+            "repair_layer": self.repair_layer,
+            "replacement": list(self.replacement),
+            "other_edges": [
+                edge_index
+                for edge_index in range(len(EDGES))
+                if self.other_mask & (1 << edge_index)
+            ],
+            "colours": list(self.colours),
+            "complements": [list(row) for row in self.complements],
+        }
+
+
 def validate_cut_witness(witness: CutWitness) -> None:
     if not 0 <= witness.repair_layer < 6:
         raise AssertionError("invalid repair layer")
@@ -107,6 +132,41 @@ def validate_cut_witness(witness: CutWitness) -> None:
             raise AssertionError("free edges do not certify every capacity cut")
 
 
+def validate_exact_union_witness(witness: ExactUnionCutWitness) -> None:
+    if not 0 <= witness.repair_layer < 6:
+        raise AssertionError("invalid repair layer")
+    if len(witness.replacement) != PREFIX_SIZES[witness.repair_layer]:
+        raise AssertionError("replacement has the wrong size")
+    support = frozenset(endpoints(witness.replacement))
+    if not is_matching_on(witness.replacement, support):
+        raise AssertionError("replacement is not a perfect matching")
+    if witness.other_mask < 0 or witness.other_mask >> len(EDGES):
+        raise AssertionError("other-layer mask has an invalid edge bit")
+    if edge_mask(witness.replacement) & witness.other_mask:
+        raise AssertionError("replacement meets another prefix layer")
+    if tuple(sorted(witness.colours)) != witness.colours:
+        raise AssertionError("selected colours are not canonical")
+    if len(set(witness.colours)) != 3 or any(
+        colour not in TRIPLE_COLOURS for colour in witness.colours
+    ):
+        raise AssertionError("selected colours are not three triple rows")
+    if len(witness.complements) != 3:
+        raise AssertionError("wrong complement count")
+    for complement in witness.complements:
+        if (
+            len(complement) != 3
+            or tuple(sorted(complement)) != complement
+            or len(set(complement)) != 3
+            or any(vertex not in VERTEX_SET for vertex in complement)
+        ):
+            raise AssertionError("invalid triple complement")
+    requirements = cut_requirements(witness.complements)
+    deleted_mask = witness.other_mask | edge_mask(witness.replacement)
+    if not cuts_hold(requirements, deleted_mask):
+        raise AssertionError("exact other-layer union is not cut-feasible")
+
+
+@lru_cache(maxsize=None)
 def cut_requirements(
     complements: tuple[tuple[int, ...], ...],
 ) -> tuple[tuple[int, int], ...]:
@@ -179,23 +239,38 @@ def cut_certificate(
     return tuple(sorted(selected))
 
 
-def witness_clause(cnf: Cnf, witness: CutWitness) -> tuple[int, ...]:
+def witness_clause(
+    cnf: Cnf,
+    witness: CutWitness | ExactUnionCutWitness,
+) -> tuple[int, ...]:
     """Negate the exact semantic conditions under which the witness works."""
-    validate_cut_witness(witness)
+    if isinstance(witness, CutWitness):
+        validate_cut_witness(witness)
+    else:
+        validate_exact_union_witness(witness)
     support = frozenset(endpoints(witness.replacement))
     literals: list[int] = []
     for vertex in VERTICES:
         literal = support_vertex(cnf, witness.repair_layer, vertex)
         literals.append(-literal if vertex in support else literal)
 
-    # The replacement edges and the selected residual certificate edges need
-    # only remain unused by the other five layers.  Those residual edges
-    # supply the required internal capacity for every cut, so no occupied
-    # edge elsewhere needs to be fixed.
-    literals.extend(
-        other_occupied(cnf, witness.repair_layer, edge_index)
-        for edge_index in witness.free_edges
-    )
+    if isinstance(witness, CutWitness):
+        # The replacement edges and the selected residual certificate edges
+        # need only remain unused by the other five layers.
+        literals.extend(
+            other_occupied(cnf, witness.repair_layer, edge_index)
+            for edge_index in witness.free_edges
+        )
+    else:
+        # Legacy proof streams fixed the exact other-layer union.  Preserve
+        # that clause semantics so old records remain replayable.
+        for edge_index in range(len(EDGES)):
+            literal = other_occupied(cnf, witness.repair_layer, edge_index)
+            literals.append(
+                -literal
+                if witness.other_mask & (1 << edge_index)
+                else literal
+            )
 
     for colour, complement in zip(witness.colours, witness.complements):
         complement_set = frozenset(complement)
@@ -205,7 +280,10 @@ def witness_clause(cnf: Cnf, witness: CutWitness) -> tuple[int, ...]:
     return tuple(dict.fromkeys(literals))
 
 
-def canonical_record(witness: CutWitness, clause: tuple[int, ...]) -> str:
+def canonical_record(
+    witness: CutWitness | ExactUnionCutWitness,
+    clause: tuple[int, ...],
+) -> str:
     record = witness.record()
     record["clause_sha256"] = hashlib.sha256(
         " ".join(map(str, clause)).encode("ascii")
@@ -213,18 +291,21 @@ def canonical_record(witness: CutWitness, clause: tuple[int, ...]) -> str:
     return json.dumps(record, sort_keys=True, separators=(",", ":"))
 
 
-def decode_witness_record(value: object) -> tuple[CutWitness, str]:
+def decode_witness_record(
+    value: object,
+) -> tuple[CutWitness | ExactUnionCutWitness, str]:
     if not isinstance(value, dict):
         raise ValueError("witness record must be a JSON object")
-    expected = {
+    expected_common = {
         "repair_layer",
         "replacement",
-        "free_edges",
         "colours",
         "complements",
         "clause_sha256",
     }
-    if set(value) != expected:
+    free_schema = expected_common | {"free_edges"}
+    exact_schema = expected_common | {"other_edges"}
+    if set(value) not in (free_schema, exact_schema):
         raise ValueError("witness record keys do not match the canonical schema")
     repair_layer = value["repair_layer"]
     if type(repair_layer) is not int:
@@ -236,24 +317,47 @@ def decode_witness_record(value: object) -> tuple[CutWitness, str]:
         or any(character not in "0123456789abcdef" for character in clause_sha256)
     ):
         raise ValueError("clause_sha256 must be 64 lowercase hexadecimal digits")
-    witness = CutWitness(
-        repair_layer=repair_layer,
-        replacement=integer_list(value["replacement"], field="replacement"),
-        free_edges=integer_list(value["free_edges"], field="free_edges"),
-        colours=integer_list(value["colours"], field="colours"),
-        complements=nested_integer_lists(
-            value["complements"],
-            field="complements",
-        ),
+    replacement = integer_list(value["replacement"], field="replacement")
+    colours = integer_list(value["colours"], field="colours")
+    complements = nested_integer_lists(
+        value["complements"],
+        field="complements",
     )
-    validate_cut_witness(witness)
+    if set(value) == free_schema:
+        witness: CutWitness | ExactUnionCutWitness = CutWitness(
+            repair_layer=repair_layer,
+            replacement=replacement,
+            free_edges=integer_list(value["free_edges"], field="free_edges"),
+            colours=colours,
+            complements=complements,
+        )
+        validate_cut_witness(witness)
+    else:
+        other_edges = integer_list(value["other_edges"], field="other_edges")
+        if (
+            tuple(sorted(other_edges)) != other_edges
+            or len(set(other_edges)) != len(other_edges)
+            or any(
+                not 0 <= edge_index < len(EDGES)
+                for edge_index in other_edges
+            )
+        ):
+            raise ValueError("other_edges must be distinct canonical edge indices")
+        witness = ExactUnionCutWitness(
+            repair_layer=repair_layer,
+            replacement=replacement,
+            other_mask=edge_mask(other_edges),
+            colours=colours,
+            complements=complements,
+        )
+        validate_exact_union_witness(witness)
     return witness, clause_sha256
 
 
 def replay_witnesses(
     cnf: Cnf,
     path: Path,
-) -> Iterable[tuple[CutWitness, str]]:
+) -> Iterable[tuple[CutWitness | ExactUnionCutWitness, str]]:
     with path.open(encoding="utf-8") as stream:
         for line_number, line in enumerate(stream, start=1):
             raw = line.rstrip("\r\n")
