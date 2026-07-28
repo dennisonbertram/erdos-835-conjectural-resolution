@@ -1195,6 +1195,12 @@ routes, but not the asymmetric case.
   rules out every coexistence involving \(K_{3,3,3}\), restricts
   \(K_{5,5}\) to one partner type, and leaves a finite sparse-core overlap
   frontier for the eighth matching.
+- [`collaboration/first_lift_global_theorem/R0_ROW_SUM_CORE_ELIMINATION.md`](collaboration/first_lift_global_theorem/R0_ROW_SUM_CORE_ELIMINATION.md):
+  combines the pair catalogue with exact complement row sums to eliminate
+  \(K_{3,3,3}\), \(K_{5,5}\), and \(K_{3,7}\) from any obstruction of all
+  seven remaining size-ten supports.  The exhaustive \(K_{3,7}\) branch
+  checks 147 degree-valid prefix graphs and 588 reuse cases; four sparse
+  core types remain unresolved.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
@@ -1566,6 +1572,8 @@ python3 -B \
   collaboration/first_lift_global_theorem/verify_twelve_support_switching.py
 python3 -B \
   collaboration/first_lift_global_theorem/verify_r0_core_pairs.py
+python3 -B \
+  collaboration/first_lift_global_theorem/verify_r0_row_sum_core_elimination.py
 python3 -B \
   collaboration/first_lift_aggregate_graphicity/verify_aggregate_graphicity.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
