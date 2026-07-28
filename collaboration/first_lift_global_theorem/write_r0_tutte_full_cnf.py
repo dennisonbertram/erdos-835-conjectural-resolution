@@ -81,10 +81,13 @@ def build(
     path: Path,
     surviving_only: bool = False,
     require_four_cores: bool = False,
+    exclude_all_k6: bool = False,
     type_counts: tuple[int, ...] | None = None,
 ) -> None:
     if require_four_cores and not surviving_only:
         raise ValueError("--require-four-cores requires --surviving-only")
+    if exclude_all_k6 and not surviving_only:
+        raise ValueError("--exclude-all-k6 requires --surviving-only")
     writer = compact.Writer(path)
     barriers = BARRIERS[3:] if surviving_only else BARRIERS
     if type_counts is not None:
@@ -219,6 +222,17 @@ def build(
                 count,
             )
 
+    if exclude_all_k6:
+        # The verified D^4 shape theorem plus the complement row identity
+        # eliminate the type multiset (0,0,0,7).
+        writer.add(
+            [
+                barrier_choices_by_row[row][barrier]
+                for row in range(7)
+                for barrier in range(len(barriers) - 1)
+            ]
+        )
+
     if require_four_cores:
         require_four_distinct_cores(writer, core_descriptors)
 
@@ -228,6 +242,7 @@ def build(
         f"clauses={writer.clauses} "
         f"barriers={'surviving' if surviving_only else 'all'} "
         f"four_cores={require_four_cores} "
+        f"exclude_all_k6={exclude_all_k6} "
         f"type_counts={type_counts}",
         flush=True,
     )
@@ -259,6 +274,14 @@ def main() -> None:
             "--surviving-only the order is 5111,3311,31111,6"
         ),
     )
+    parser.add_argument(
+        "--exclude-all-k6",
+        action="store_true",
+        help=(
+            "Use the prior D^4 shape and row-identity theorem excluding "
+            "seven K6 obstruction rows"
+        ),
+    )
     args = parser.parse_args()
     type_counts = (
         tuple(map(int, args.type_counts.split(",")))
@@ -269,6 +292,7 @@ def main() -> None:
         args.output,
         surviving_only=args.surviving_only,
         require_four_cores=args.require_four_cores,
+        exclude_all_k6=args.exclude_all_k6,
         type_counts=type_counts,
     )
 

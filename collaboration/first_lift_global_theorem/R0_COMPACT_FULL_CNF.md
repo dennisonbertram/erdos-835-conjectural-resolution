@@ -160,7 +160,34 @@ clauses=126246
 sha256=c30f1251b91c9bc2430155e52c87424611427cbadfbaae08645bb80599e62165
 ```
 
+The subset-capacity theorem at commit `bbf8aff` further proves that at
+least four distinct surviving cores are required. Commit `f1d277c`
+classifies all \(7{,}971{,}964\) fixed-first four-\(K_6\) families and uses
+the complement row identity to exclude the all-\(K_6\) branch. The strongest
+combined target is:
+
+```bash
+/opt/homebrew/bin/python3 -B \
+  collaboration/first_lift_global_theorem/write_r0_tutte_full_cnf.py \
+  --surviving-only --require-four-cores --exclude-all-k6 \
+  /private/tmp/erdos835-r0-tutte-strong.cnf
+```
+
+It has:
+
+```text
+variables=23020
+clauses=147807
+sha256=fcc51f4fb81f27435c67891c0f34b42d5e277f3f1e38a65aff7c57b0a7afdd6e
+```
+
 ## Current status
 
 Both exact encodings and their local projection tests are verified. A
 terminal SAT witness or independently replayed UNSAT proof is still required.
+
+The core-independent instance ran CaDiCaL 3.0.1 for its full 1,800-second
+real-time cap and returned `UNKNOWN` after 542.62 CPU seconds and
+1,420,140 conflicts, with 2,637 variables remaining. Its partial DRAT trace
+is nonterminal and is not a certificate. This is bounded search telemetry
+only.
