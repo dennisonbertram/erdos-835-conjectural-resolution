@@ -6,20 +6,21 @@ the exceptional r=0 equality cases explicit.
 """
 
 
-def odd_partitions(total, minimum=1):
+def partitions(total, minimum=1):
     if total == 0:
         yield ()
         return
-    for first in range(minimum, total + 1, 2):
-        for rest in odd_partitions(total - first, first):
+    for first in range(minimum, total + 1):
+        for rest in partitions(total - first, first):
             yield (first,) + rest
 
 
 def barriers(order, deletion_degree):
     out = []
     for size_s in range(order):
-        for parts in odd_partitions(order - size_s):
-            if len(parts) <= size_s or (len(parts) - size_s) % 2:
+        for parts in partitions(order - size_s):
+            odd_components = sum(part % 2 for part in parts)
+            if odd_components <= size_s:
                 continue
             if max(order - size_s - part for part in parts) > deletion_degree:
                 continue
@@ -54,18 +55,15 @@ def verify_five_plus_five_row_argument():
     required = 25
     assert sum(capacities) - required == 1
 
-    # If an 8-support is deficient, five other supports avoid all 3 outside
-    # vertices.  Its forced outside attendance leaves only 5 vertices in V,
-    # while three crossing edges need 6.
-    assert 8 - 3 == 5
-    assert 2 * (4 - 1) == 6
-    assert 5 < 6
-
-    # If a 10-support is deficient, the same argument leaves 7 vertices in V,
-    # while four crossing edges need 8.
-    assert 10 - 3 == 7
-    assert 2 * (5 - 1) == 8
-    assert 7 < 8
+    # Every nondeficient matching uses all support vertices inside V:
+    # 4 crossing edges use all 8 vertices, and 5 use all 10.  The five
+    # nondeficient prior colours plus the target colour are then all
+    # forbidden at each vertex outside V, exceeding the row sum five.
+    assert 2 * capacities[0] == 8
+    assert 2 * capacities[-1] == 10
+    nondeficient_prior_colours = len(capacities) - 1
+    target_colour = 1
+    assert nondeficient_prior_colours + target_colour == 6 > 5
 
 
 def main():
@@ -83,11 +81,13 @@ def main():
         (0, (5, 5), 25),
         (1, (3, 3, 3), 27),
         (3, (1, 1, 1, 1, 1, 1, 1), 21),
+        (3, (1, 1, 1, 1, 1, 2), 20),
         (3, (1, 1, 1, 1, 3), 18),
         (4, (1, 1, 1, 1, 1, 1), 15),
     ]
     assert ten == expected
     assert 6 * 4 < 27
+    assert 6 * 3 < 20
     assert 6 * 3 < 21
     print("PASS r=0 Tutte arithmetic leaves three capacity-clean shapes")
 

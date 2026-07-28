@@ -69,12 +69,16 @@ its residual graph has no perfect matching.
 
 Apply Tutte to \(K[V]\) after deleting the six existing matchings.  The
 deleted graph has maximum degree at most six.  The same component-size
-calculation leaves five numerical shapes.  Two are impossible by edge
-capacity:
+calculation leaves six numerical shapes, including the possibility of an
+even component alongside the odd components counted by Tutte.  Three are
+impossible by edge capacity:
 
 * \(S\) of size one with three components of order three requires all
   \(27\) intercomponent edges, but six matchings on nine vertices cover at
   most \(6\cdot4=24\);
+* \(S\) of size three with five singleton odd components and one component
+  of order two requires all \(20\) intercomponent edges, but six matchings
+  on seven vertices cover at most \(6\cdot3=18\);
 * \(S\) of size three with seven singleton components requires \(K_7\),
   whose \(21\) edges exceed \(6\cdot3=18\).
 
@@ -95,18 +99,14 @@ have five each, for a total crossing capacity
 \]
 To cover the \(25\) distinct edges of \(K_{5,5}\), exactly one of the six
 matchings has crossing deficit one and all others attain their maximum.
+Attaining four crossing edges on a size-eight support, or five on a
+size-ten support, uses every support vertex inside \(V\).  Hence the five
+nondeficient prior supports all lie in \(V\).
 
-If the deficient matching has size eight, the other three size-eight
-supports and both size-ten supports lie entirely in \(V\).  Every one of
-the three vertices outside \(V\) already forbids those five colours, so it
-must belong to the deficient support.  That support then has only five
-vertices in \(V\), too few to supply its required three crossing edges.
-
-If the deficient matching has size ten, all four size-eight supports and
-the other size-ten support lie in \(V\).  Again the five-forbidden-colours
-condition forces all three outside vertices into the deficient support.
-It then has only seven vertices in \(V\), too few to supply four crossing
-edges.  Thus the \(5+5\) barrier is impossible.
+Each of the three vertices outside \(V\) therefore forbids those five prior
+colours.  It also forbids the target colour, whose support is \(V\), giving
+six forbidden colours at a vertex whose row has exactly five.  This
+contradiction eliminates the \(5+5\) barrier.
 
 Consequently a failure of the seventh matching in the exceptional profile
 must have one of exactly two forms:

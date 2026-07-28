@@ -1148,6 +1148,11 @@ routes, but not the asymmetric case.
   profile.  A Tutte-extremal switching argument handles the unique
   non-greedy profile, proving that some dense five-colour prefix always
   extends to a sixth matching; the remaining eleven colours are unresolved.
+- [`collaboration/first_lift_global_theorem/SEVEN_PACKING_NONZERO_R_NOTE.md`](collaboration/first_lift_global_theorem/SEVEN_PACKING_NONZERO_R_NOTE.md):
+  a seven-colour packing theorem for every target profile containing a
+  size-twelve support.  A six-matching resilience lemma on twelve vertices
+  proves the extension; the exceptional profile \((7,10,0)\) is reduced to
+  two explicit residual equality barriers, \(K_7-E(K_3)\) and \(K_6\).
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
