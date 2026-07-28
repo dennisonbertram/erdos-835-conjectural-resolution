@@ -226,7 +226,7 @@ The analogous raw \(d\)-sum upper bounds at sizes \(7,9,11\) are
 \(195,702,858\).  They are already implied by the triple capacities:
 \[
 4\sum_{Q\in\binom S4}d_Q
-=\sum_{T\in\binom S3}L_T
+\le\sum_{T\in\binom S3}L_T
 \le13\binom{|S|}{3}.
 \]
 All other upper and lower recurrence bounds are automatic from
