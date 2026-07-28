@@ -1088,6 +1088,11 @@ routes, but not the asymmetric case.
   \(j=8\).  Complementary nine-set sums and the mod-\(6\) recurrence force
   every integral \(3\)-trade coefficient to vanish; the general
   triple-degree-at-most-three case remains open.
+- [`collaboration/h3_j8_torsion_dichotomy/NOTE.md`](collaboration/h3_j8_torsion_dichotomy/NOTE.md):
+  an exact reduction of every \(j=8\) four-cube coefficient to
+  \(0,\pm60\), together with prime-field rank calculations proving that the
+  nine-set mod-\(6\) rows add nothing beyond the five-set mod-\(2\) and
+  six-set mod-\(3\) rows.  The normalized \(\Delta=60\) branch remains open.
 - [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
   the exact separation between support-admissible,
   partial-factorization-realizable, and fan-realizable first-lift
@@ -1125,6 +1130,10 @@ routes, but not the asymmetric case.
   dense five-colour prefix need not extend even to the sixth colour.  The
   same instance has an explicit different full completion, so this rules
   out the greedy-prefix proof strategy rather than the first-lift theorem.
+- [`collaboration/first_lift_global_theorem/SEARCH_README.md`](collaboration/first_lift_global_theorem/SEARCH_README.md):
+  reproducible negative evidence from all \(1{,}344\) cases in a fixed
+  finite three-cell weighted relaxation.  Its best obstruction margin is
+  zero; this is a scoped search record, not a completion theorem.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
