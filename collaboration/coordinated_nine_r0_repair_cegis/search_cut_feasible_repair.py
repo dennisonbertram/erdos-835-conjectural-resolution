@@ -47,11 +47,11 @@ TRIPLE_COLOURS = tuple(range(7))
 
 @dataclass(frozen=True)
 class CutWitness:
-    """A repair and selected triple valid for one exact other-layer union."""
+    """A repair, selected rows, and residual-edge capacity certificate."""
 
     repair_layer: int
     replacement: tuple[int, ...]
-    other_mask: int
+    free_edges: tuple[int, ...]
     colours: tuple[int, int, int]
     complements: tuple[tuple[int, ...], ...]
 
@@ -59,11 +59,7 @@ class CutWitness:
         return {
             "repair_layer": self.repair_layer,
             "replacement": list(self.replacement),
-            "other_edges": [
-                edge_index
-                for edge_index in range(len(EDGES))
-                if self.other_mask & (1 << edge_index)
-            ],
+            "free_edges": list(self.free_edges),
             "colours": list(self.colours),
             "complements": [list(row) for row in self.complements],
         }
@@ -77,10 +73,14 @@ def validate_cut_witness(witness: CutWitness) -> None:
     support = frozenset(endpoints(witness.replacement))
     if not is_matching_on(witness.replacement, support):
         raise AssertionError("replacement is not a perfect matching")
-    if edge_mask(witness.replacement) & witness.other_mask:
-        raise AssertionError("replacement meets another prefix layer")
-    if witness.other_mask < 0 or witness.other_mask >> len(EDGES):
-        raise AssertionError("other-layer mask has an invalid edge bit")
+    if (
+        tuple(sorted(witness.free_edges)) != witness.free_edges
+        or len(set(witness.free_edges)) != len(witness.free_edges)
+        or any(not 0 <= edge_index < len(EDGES) for edge_index in witness.free_edges)
+    ):
+        raise AssertionError("free-edge certificate is not canonical")
+    if not set(witness.replacement) <= set(witness.free_edges):
+        raise AssertionError("replacement edges are not certified free")
     if tuple(sorted(witness.colours)) != witness.colours:
         raise AssertionError("selected colours are not canonical")
     if len(set(witness.colours)) != 3 or any(
@@ -97,6 +97,14 @@ def validate_cut_witness(witness: CutWitness) -> None:
             or any(vertex not in VERTEX_SET for vertex in complement)
         ):
             raise AssertionError("invalid triple complement")
+    certificate_mask = edge_mask(
+        edge_index
+        for edge_index in witness.free_edges
+        if edge_index not in witness.replacement
+    )
+    for internal_mask, required in cut_requirements(witness.complements):
+        if bin(internal_mask & certificate_mask).count("1") < required:
+            raise AssertionError("free edges do not certify every capacity cut")
 
 
 def cut_requirements(
@@ -130,6 +138,25 @@ def cuts_hold(requirements: tuple[tuple[int, int], ...], deleted_mask: int) -> b
     )
 
 
+def cut_certificate(
+    requirements: tuple[tuple[int, int], ...],
+    deleted_mask: int,
+) -> tuple[int, ...] | None:
+    """Choose explicit residual edges witnessing every capacity inequality."""
+    selected: set[int] = set()
+    for internal_mask, required in requirements:
+        available = internal_mask & ~deleted_mask
+        available_edges = tuple(
+            edge_index
+            for edge_index in range(len(EDGES))
+            if available & (1 << edge_index)
+        )
+        if len(available_edges) < required:
+            return None
+        selected.update(available_edges[:required])
+    return tuple(sorted(selected))
+
+
 def witness_clause(cnf: Cnf, witness: CutWitness) -> tuple[int, ...]:
     """Negate the exact semantic conditions under which the witness works."""
     validate_cut_witness(witness)
@@ -139,14 +166,14 @@ def witness_clause(cnf: Cnf, witness: CutWitness) -> tuple[int, ...]:
         literal = support_vertex(cnf, witness.repair_layer, vertex)
         literals.append(-literal if vertex in support else literal)
 
-    # Cut feasibility depends on every edge used by the other five layers,
-    # not merely on the replacement edges.  Condition the cut on their exact
-    # union to keep the learned clause sound.
-    for edge_index in range(len(EDGES)):
-        literal = other_occupied(cnf, witness.repair_layer, edge_index)
-        literals.append(
-            -literal if witness.other_mask & (1 << edge_index) else literal
-        )
+    # The replacement edges and the selected residual certificate edges need
+    # only remain unused by the other five layers.  Those residual edges
+    # supply the required internal capacity for every cut, so no occupied
+    # edge elsewhere needs to be fixed.
+    literals.extend(
+        other_occupied(cnf, witness.repair_layer, edge_index)
+        for edge_index in witness.free_edges
+    )
 
     for colour, complement in zip(witness.colours, witness.complements):
         complement_set = frozenset(complement)
@@ -170,7 +197,7 @@ def decode_witness_record(value: object) -> tuple[CutWitness, str]:
     expected = {
         "repair_layer",
         "replacement",
-        "other_edges",
+        "free_edges",
         "colours",
         "complements",
         "clause_sha256",
@@ -180,13 +207,6 @@ def decode_witness_record(value: object) -> tuple[CutWitness, str]:
     repair_layer = value["repair_layer"]
     if type(repair_layer) is not int:
         raise ValueError("repair_layer must be an integer")
-    other_edges = integer_list(value["other_edges"], field="other_edges")
-    if (
-        tuple(sorted(other_edges)) != other_edges
-        or len(set(other_edges)) != len(other_edges)
-        or any(not 0 <= edge_index < len(EDGES) for edge_index in other_edges)
-    ):
-        raise ValueError("other_edges must be distinct canonical edge indices")
     clause_sha256 = value["clause_sha256"]
     if (
         not isinstance(clause_sha256, str)
@@ -197,7 +217,7 @@ def decode_witness_record(value: object) -> tuple[CutWitness, str]:
     witness = CutWitness(
         repair_layer=repair_layer,
         replacement=integer_list(value["replacement"], field="replacement"),
-        other_mask=edge_mask(other_edges),
+        free_edges=integer_list(value["free_edges"], field="free_edges"),
         colours=integer_list(value["colours"], field="colours"),
         complements=nested_integer_lists(
             value["complements"],
@@ -280,12 +300,13 @@ def find_cut_witnesses(
                 signature = (repair_layer, *colours)
                 if signature in represented:
                     continue
-                if not cuts_hold(requirements, deleted_mask):
+                certificate = cut_certificate(requirements, deleted_mask)
+                if certificate is None:
                     continue
                 witness = CutWitness(
                     repair_layer=repair_layer,
                     replacement=replacement,
-                    other_mask=other_mask,
+                    free_edges=tuple(sorted(set(replacement) | set(certificate))),
                     colours=colours,
                     complements=complements,
                 )

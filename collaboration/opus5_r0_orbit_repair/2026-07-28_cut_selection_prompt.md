@@ -2,7 +2,9 @@
 
 Work tool-free and independently.  Give a complete proof, a concrete
 counterexample, or the earliest exact gap.  Do not assume a plausible switch
-works globally without checking every cut it can damage.
+works globally without checking every cut it can damage.  Return at most
+20,000 tokens and prioritize a checkable proof or counterexample over
+exploratory narration.
 
 ## Exact setting
 

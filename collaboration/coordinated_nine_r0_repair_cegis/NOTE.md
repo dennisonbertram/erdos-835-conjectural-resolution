@@ -34,10 +34,11 @@ claim needed by the current cut route:
 For a decoded prefix it enumerates every legal replacement matching and all
 \(\binom73\) selected row triples, checking only the provably relevant
 six-, seven-, and eight-vertex cuts.  A semantic witness clause conditions on
-the repaired layer's support, the exact union of the other five layers, and
-the three selected row occurrences.  The exact other-layer union is necessary
-because cut feasibility depends on all residual internal-edge counts.  A
-second raw pass re-enumerates every repair and route before a counterexample
+the repaired layer's support, the three selected row occurrences, and an
+explicit set of residual edges certifying the required capacity of every
+binding cut.  It does not freeze the other five layers: any later model that
+leaves those certificate edges free inherits the same cut-feasible repair.
+A second raw pass re-enumerates every repair and route before a counterexample
 can be reported.  This script is likewise discovery evidence until an UNSAT
 CNF and proof are independently frozen and replayed.
 
