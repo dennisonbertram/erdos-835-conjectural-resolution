@@ -20,3 +20,26 @@ Expected output:
          no counterexample to class-B, class-B-prime, or fan completion.
 
 Exit code: 0.
+
+
+Finite three-cell weighted search
+=================================
+
+Command:
+
+  /opt/homebrew/bin/python3 -B \
+    collaboration/first_lift_global_theorem/search_three_cell_obstruction.py \
+    --samples 10 --seed 835 --max-weight 6
+
+Exact output:
+
+  checked=1344 best=(0, (1, 1, 11), (7, 10, 0), (1, 0, 0, 0, 0, 0))
+  finite weighted three-cell search only; no universal conclusion
+
+Exit code: 0.
+
+Scope: this was a fixed-seed finite search over three-cell weights in a
+cell-aggregate relaxation.  It found no positive margin.  It is negative
+computational evidence only, not a universal theorem and not a completion
+or noncompletion result for class B, class B-prime, or fan-realizable
+instances.  See SEARCH_README.md for the exact search space.
