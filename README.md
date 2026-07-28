@@ -1208,6 +1208,17 @@ routes, but not the asymmetric case.
   seven remaining size-ten supports.  The exhaustive \(K_{3,7}\) branch
   checks 147 degree-valid prefix graphs and 588 reuse cases; four sparse
   core types remain unresolved.
+- [`collaboration/first_lift_global_theorem/r0_two_core_refutations/README.md`](collaboration/first_lift_global_theorem/r0_two_core_refutations/README.md):
+  independently replayed DRAT certificates for all twenty-two two-core
+  branches that have enough reuse capacity to block all seven remaining
+  size-ten supports.  Together with the analytic disjoint-\(K_6\) case,
+  this proves that any total obstruction must use at least three distinct
+  surviving cores; the three-or-more-core frontier remains open.
+- [`collaboration/first_lift_global_theorem/write_r0_full_blocking_cnf.py`](collaboration/first_lift_global_theorem/write_r0_full_blocking_cnf.py):
+  a core-independent exact CNF for the complete exceptional-profile
+  eighth-matching obstruction, including all perfect matchings of every
+  chosen ten-support.  It is reproducible search tooling, not a terminal
+  SAT or UNSAT result.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
