@@ -174,6 +174,26 @@ python3 -B verify_r0_three_core_capacity.py 5111 5111 5111
 python3 -B verify_r0_three_core_capacity.py 3311 31111 6
 ```
 
+Replay all sixteen capacity-sufficient type multisets separately from the
+fast Tutte-CNF verifier with:
+
+```bash
+printf '%s\n' \
+  '5111 5111 5111' '5111 5111 3311' \
+  '5111 5111 31111' '5111 5111 6' \
+  '5111 3311 31111' '5111 3311 6' \
+  '5111 31111 31111' '5111 31111 6' '5111 6 6' \
+  '3311 31111 31111' '3311 31111 6' '3311 6 6' \
+  '31111 31111 31111' '31111 31111 6' \
+  '31111 6 6' '6 6 6' |
+xargs -P 4 -n 3 /opt/homebrew/bin/python3 -B \
+  collaboration/first_lift_global_theorem/verify_r0_three_core_capacity.py
+```
+
+Every invocation must report `covering_families=0` and a final `PASS`.
+This slower sixteen-family replay is deliberately not duplicated inside
+`verify_r0_tutte_full_cnf.py`.
+
 The optional `--stop-at-seven` flag stops only if it finds an assignment
 that satisfies every subset inequality.  No capacity-sufficient
 three-core pattern does.
