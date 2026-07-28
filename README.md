@@ -1262,6 +1262,15 @@ routes, but not the asymmetric case.
   same prefix has an explicit mixed \(10+10+8\) extension, so the
   \(r=0\) proof must use a size-eight colour, change more than two prefix
   edges, or choose a different complement-cover prefix.
+- [`collaboration/r0_three_ten_obstruction/K6_FREE_MIXED_DEAD_PREFIX.md`](collaboration/r0_three_ten_obstruction/K6_FREE_MIXED_DEAD_PREFIX.md):
+  a sharper equality certificate in which the prefix is \(K_6\)-free,
+  all four remaining size-eight colours are blocked, all seven size-ten
+  colours are live, and none of the \(165\) remaining-colour triples packs.
+  One additional support-preserving two-edge trade explicitly repairs it.
+  Exact row arithmetic reduces this six-fold forced-edge boundary to
+  \((a,r)=(0,2),(0,3),(1,3)\), and a solver-free equality-core lemma proves
+  that a core-breaking trade always exists.  The surviving \(r=0\) target is
+  to coordinate two repaired families with the seventh size-ten support.
 - [`collaboration/coordinated_nine_r1_reduction/NOTE.md`](collaboration/coordinated_nine_r1_reduction/NOTE.md):
   the exact \(r=1\) one- and two-step Tutte catalogues, core-reuse ceilings,
   and three literal class-B pair obstructions with triple intersections
@@ -1269,6 +1278,15 @@ routes, but not the asymmetric case.
   size-ten supports need not admit disjoint choices, so the remaining
   theorem must use all six triples simultaneously and coordinate the
   size-twelve layer.
+- [`collaboration/coordinated_nine_r1_gate_sat/NOTE.md`](collaboration/coordinated_nine_r1_gate_sat/NOTE.md):
+  a certificate-complete proof of the \(r=1\) cross-family gate.  Six
+  symmetry-orbit CNFs prove that two individually matchable size-ten
+  supports either admit disjoint perfect matchings or share a common forced
+  edge.  The included compressed CNFs and DRAT proofs are hash-checked,
+  semantically reconstructed by an independent standard-library auditor,
+  and all six replay with DRAT-trim.  This closes pair selection.  Exact
+  class-B bookkeeping also eliminates the \(K_{5,7}\) size-twelve
+  terminal; the \(K_{3,1^5}\) and \(K_7\) pair-reselection branches remain.
 - [`collaboration/coordinated_nine_r2_obstruction/NOTE.md`](collaboration/coordinated_nine_r2_obstruction/NOTE.md):
   an exact \(r=2\) delimiter.  A legitimate \(8^4\,10^2\)
   complement-cover prefix can block every remaining size-ten support, so the
@@ -1307,6 +1325,23 @@ routes, but not the asymmetric case.
   \(120^2\) cross-pairs share one forced edge.  Together with the size-eight
   delimiter, this proves that the initial-support dichotomy must be
   strengthened to a globally coordinated choice.
+- [`collaboration/r2_cross_route_reduction/NOTE.md`](collaboration/r2_cross_route_reduction/NOTE.md):
+  a solver-free bridge between the two \(r=2\) routes.  It closes the
+  all-four and, more generally, every at-least-three rigid size-ten branch;
+  proves that a seventeen-edge terminal core excludes every initially
+  blocked size-ten support; and combines the generalized \(P_4\),
+  all-bad-column, and remaining ordinary-row switches into a five-size-eight
+  theorem.  A counterexample must now coordinate an initially blocked
+  size-eight core with at most two rigid size-ten rows and the remaining
+  five-saturated or ordinary size-ten terminal routes.
+- [`collaboration/opus5/coordinated_nine_and_global_bridge/NOTE.md`](collaboration/opus5/coordinated_nine_and_global_bridge/NOTE.md):
+  Opus 5's max-effort audit.  It supplies an independent exact \(r=0\)
+  dead-prefix certificate, a solver-free saturated-core switch covering
+  both \(K_6\) and \(K_{5,5}\), and a global theorem identifying the next
+  tower coupling as six simultaneous same-colour matchings across six
+  class-B instances.  Its proposed three-size-ten conjecture was refuted by
+  the parallel \(K_6-e\) equality certificate; a post-run audit in the note
+  records that correction explicitly.
 - [`collaboration/k7_terminal_switching/NOTE.md`](collaboration/k7_terminal_switching/NOTE.md):
   a self-contained independent proof and \(6^7\)-case arithmetic audit of
   the last separator-five \(K_7\) switch.  It tracks the exact Hall

@@ -161,6 +161,15 @@ def verify_six_prefix_reduction() -> None:
         for cross in range(4)
         if (3 - cross) % 2 == 0
     ) == (1, 3)
+
+    # After two size-ten matchings, F has 36 edges.  The remaining-row
+    # identity rho_8=d_F-3 gives d_F(z)>=3 at the vertex omitted from the
+    # size-twelve support X, hence F[X] has at most 33 edges.  This rules
+    # out the 35-edge K5,7 terminal core.
+    selected_after_two_tens = 4 * 4 + 2 * 5 + 2 * 5
+    assert selected_after_two_tens == 36
+    minimum_selected_degree = 3
+    assert selected_after_two_tens - minimum_selected_degree == 33 < 5 * 7
     print("PASS K55 capacity, unique-K6, reuse, and rigid-type arithmetic")
 
 

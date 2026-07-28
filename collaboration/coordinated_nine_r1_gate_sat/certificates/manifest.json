@@ -1,0 +1,62 @@
+{
+  "o0_x0": {
+    "overlap": 0,
+    "aa_edges": 0,
+    "fixed_matching": [[0, 7], [1, 8], [2, 9], [3, 4], [5, 6]],
+    "variables": 8257,
+    "clauses": 719561,
+    "disjoint_pairs": 684180,
+    "cnf_sha256": "7aaed85fb66a32fbf9d68dda6bf792d343009b8aec6e9e351c9e246d8e4c9ae2",
+    "drat_sha256": "7cf82f906db62a4d47e49caa318ac4e5bc4cb2e334ef951c96f2d0e6a2419027"
+  },
+  "o0_x1": {
+    "overlap": 0,
+    "aa_edges": 1,
+    "fixed_matching": [[0, 9], [1, 2], [3, 4], [5, 6], [7, 8]],
+    "variables": 8257,
+    "clauses": 719561,
+    "disjoint_pairs": 684180,
+    "cnf_sha256": "330373a210d07218ed8239640df66fcc8b595ec6db2f231709d370af2f0a6493",
+    "drat_sha256": "6cd4d6cb80abc23b0eb4f44ae5f1d73fcbc505f6f41f97dbb6f8628ef5de991a"
+  },
+  "o1_x0": {
+    "overlap": 1,
+    "aa_edges": 0,
+    "fixed_matching": [[0, 7], [1, 8], [2, 3], [4, 5], [6, 9]],
+    "variables": 8257,
+    "clauses": 663288,
+    "disjoint_pairs": 627900,
+    "cnf_sha256": "6dd6d690cb04dec0dc53deb8308098e0adbfcff802a2c4f911881529ed21b21b",
+    "drat_sha256": "8c2370a0359a3bce93dd344f8c8ca2854f13254640e0c3f8b9352bbdc175426f"
+  },
+  "o1_x1": {
+    "overlap": 1,
+    "aa_edges": 1,
+    "fixed_matching": [[0, 1], [2, 3], [4, 5], [6, 9], [7, 8]],
+    "variables": 8257,
+    "clauses": 663288,
+    "disjoint_pairs": 627900,
+    "cnf_sha256": "bfbd7000cb6cb0cbd475608fdcb2c9f2d7f7b49637c06f57266f72db0d1fa10c",
+    "drat_sha256": "196f6b38b9a8fb6a5639761fe0e06d7919b2fb85e61aad712d4a9b9b0b136893"
+  },
+  "o2_x0": {
+    "overlap": 2,
+    "aa_edges": 0,
+    "fixed_matching": [[0, 7], [1, 2], [3, 4], [5, 6], [8, 9]],
+    "variables": 8257,
+    "clauses": 606176,
+    "disjoint_pairs": 570780,
+    "cnf_sha256": "d7a7f7a04225b8b89eb0ba29838e92824f1a6acf271e41e2faf399d9bb30c44b",
+    "drat_sha256": "071a98b5c548ea96415f4f720abb16ade6fed9876842b56ae650eb8efd43f661"
+  },
+  "o3_x0": {
+    "overlap": 3,
+    "aa_edges": 0,
+    "fixed_matching": [[0, 1], [2, 3], [4, 5], [6, 7], [8, 9]],
+    "variables": 8257,
+    "clauses": 549485,
+    "disjoint_pairs": 514080,
+    "cnf_sha256": "b70bc29dccb5e98de9a3e59fbd17b195c9b3266ec49efc24bb1637bd7e369eb4",
+    "drat_sha256": "e9151456f504dd58a1326053c50acbb95db5ff524f457a72b88c2b12acb447cc"
+  }
+}

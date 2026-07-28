@@ -210,15 +210,20 @@ whose total capacity is \(21\).
 
 This leaves a sharply isolated selectable-pair gate:
 
-> **Cross-family gate.** If two individually matchable size-ten support
-> graphs admit no edge-disjoint pair of perfect matchings, must they share
-> an edge forced in both graphs?
+> **Certified cross-family gate.** If two individually matchable size-ten
+> support graphs admit no edge-disjoint pair of perfect matchings, then
+> they share an edge forced in both graphs.
 
-The three literal obstructions below all have precisely this form, but a
-proof of the gate is not supplied here.  If the gate holds, switch (7a)
-and the \(22>21\) count immediately prove that some two of the six
-size-ten supports pack: at least one support has no forced edge, so it is
-compatible with every other support.
+The proof is the exhaustive six-case SAT/DRAT certificate in
+`../coordinated_nine_r1_gate_sat/NOTE.md`.  Its CNFs assume only the exact
+six-prefix constraints in (1), enumerate all support-overlap and
+fixed-matching orbits, and are independently checked by DRAT-trim.
+
+Therefore switch (7a) and the \(22>21\) count prove that some two of the
+six size-ten supports pack: at least one support has no forced edge, so
+it is compatible with every other support.  The size-twelve terminal
+frontier (11) remains; the certificate closes the pair gate, not the full
+coordinated-nine theorem.
 
 ## First order: two size-ten matchings before the size-twelve matching
 
@@ -264,11 +269,29 @@ an equality branch and can block at most one remaining support.
 This does not finish the first order in (2).  Even after two size-ten
 matchings are coordinated, the unique size-twelve graph starts with
 minimum degree at least six and then loses the union of two matchings.
-Its possible Tutte barriers coarsen to
+Its initial possible Tutte barriers coarsen to
 \[
 K_{5,7},\qquad K_{3,1,1,1,1,1},\qquad K_7, \tag{11}
 \]
-and support-preserving switches are still required.
+but the first row is impossible by the exact class-B bookkeeping.  Put
+\[
+F=D\cup M_0\cup M_1,
+\]
+where \(M_0,M_1\) are the coordinated size-ten matchings.  Then
+\[
+|E(F)|=26+5+5=36,\qquad \rho_8(v)=d_F(v)-3\ge0. \tag{11a}
+\]
+If \(X=V\setminus\{z\}\) is the size-twelve support, then
+\[
+|E(F[X])|=36-d_F(z)\le33. \tag{11b}
+\]
+A \(K_{5,7}\) deletion core would require 35 edges of \(F[X]\), a
+contradiction.  Thus the exact unresolved terminal list is
+\[
+\boxed{K_{3,1,1,1,1,1},\quad K_7.} \tag{11c}
+\]
+Support-preserving or coordinated pair switches are still required for
+these two rows.
 
 ### The separator-three equality branch
 

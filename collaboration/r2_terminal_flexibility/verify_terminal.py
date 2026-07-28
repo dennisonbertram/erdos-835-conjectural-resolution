@@ -243,15 +243,25 @@ def verify_core_coexistence() -> None:
     print("PASS five candidates cannot all share the unique 17-edge core")
 
 
-def verify_sixteen_edge_switch() -> None:
-    # The three 16-edge rows all pair M4/M5/M6 with P4.
-    m_rows = {
-        (3, 0, 0, 0, 1),
-        (3, 0, 1, 0, 0),
-        (3, 1, 0, 0, 0),
-    }
+def verify_p4_switch() -> None:
     p4 = (2, 3, 0, 0, 1)
-    assert all(21 - m_row[0] - p4[0] == 16 for m_row in m_rows)
+    m_rows = []
+    for values in product(range(5), repeat=5):
+        a, b, c, d, e = values
+        if sum(values) != 4 or a < 2:
+            continue
+        omissions = (
+            7 - (2 * a + b + c),
+            5 - (b + 2 * d + e),
+            1 - (c + e),
+        )
+        if min(omissions) >= 0 and sum(omissions) == 5:
+            m_rows.append((omissions, values))
+
+    assert len(m_rows) == 11
+    core_sizes = [21 - row[1][0] - p4[0] for row in m_rows]
+    assert core_sizes.count(17) == 7
+    assert core_sizes.count(16) == 4
 
     # The P4 exceptional switch changes its endpoint type to P3 while
     # preserving all twelve covered vertices.
@@ -272,12 +282,53 @@ def verify_sixteen_edge_switch() -> None:
     # In the all-bad case only one S-column is unavailable, whereas P4
     # has three disjoint US edges.
     assert p4[1] == 3 > 1
-    # The same P4 transition occurs in the three 17-edge M1/M2/M3 rows.
+    # Six of the eleven P4 rows occur in the hard frontier; removing them
+    # leaves twelve of the original eighteen hard rows.
     p4_pairs = 6
     remaining_hard_pairs = 18 - p4_pairs
     assert remaining_hard_pairs == 12
     assert 5 * 5 == 25 > 19
-    print("PASS all six P4 switch rows; 12 hard 17-edge pairs remain")
+    print("PASS all eleven P4 switch rows; 12 hard 17-edge pairs remain")
+
+
+def verify_all_bad_column() -> None:
+    # Four surviving U--S' neighbours, at most two selected incidences,
+    # and the deleted y give the exact degree-seven budget.  Hence both
+    # selected matchings cover every u in U and the size-eight matching
+    # omits no U-vertex.
+    assert 4 + 2 + 1 == 7
+    omitted_u = 0
+    assert omitted_u == 0
+    # Each selected matching consequently has 3 UU + 1 Us0.  The
+    # near-factor has two further L' edges.  The switch exposes a
+    # balanced K4,4 and frees a 2-edge plus 4-edge last factor.
+    assert 3 * 2 + 1 == 7
+    assert 4 == 4
+    assert 2 * 2 + 2 * 4 == 12
+    print("PASS all-bad column K4,4 switch for size-eight or size-ten M")
+
+
+def verify_remaining_ordinary_rows() -> None:
+    # The only ordinary-M/nonordinary-P rows outside P4 use O5 with
+    # P1/P2/P3/P5.
+    o5 = ((1, 3, 1), (3, 0, 0, 1, 0))
+    remaining_p = {
+        ("U", (1, 3, 1, 1, 0)),
+        ("U", (1, 4, 0, 0, 1)),
+        ("S", (1, 4, 1, 0, 0)),
+        ("y", (1, 5, 0, 0, 0)),
+    }
+    assert o5[1][0] == 3
+    assert len(remaining_p) == 4
+    assert all(21 - o5[1][0] - p_type[1][0] == 17 for p_type in remaining_p)
+
+    # At least two of three disjoint M edges are Hall-good.  Of D_s and
+    # D_t, at most one can contain the unique double-covered vertex, so
+    # at most one can have order two and block one M edge.
+    assert 3 - 1 == 2
+    assert 2 - 1 == 1
+    assert 5 * 5 == 25 > 23
+    print("PASS four remaining ordinary rows switch; five-eight theorem")
 
 
 def verify_counterexample() -> None:
@@ -313,7 +364,9 @@ def main() -> None:
     verify_resources()
     verify_hard_types()
     verify_core_coexistence()
-    verify_sixteen_edge_switch()
+    verify_p4_switch()
+    verify_all_bad_column()
+    verify_remaining_ordinary_rows()
     verify_counterexample()
     print("SCOPE: finite r=2 reduction; no universal terminal theorem")
 

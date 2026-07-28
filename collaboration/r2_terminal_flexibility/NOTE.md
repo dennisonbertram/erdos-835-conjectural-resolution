@@ -333,7 +333,7 @@ one of the three 16-edge rows
 M_4P_4,\qquad M_5P_4,\qquad M_6P_4. \tag{23}
 \]
 
-### All six \(P_4\) rows are switchable
+### All eleven \(P_4\) rows are switchable
 
 Let
 \[
@@ -350,8 +350,15 @@ U\setminus\{u,v\}\subseteq D_s
 Outside the case \(D_s=U\), the bad-pair graph has matching number at
 most one.
 
-In each of the six rows \(M_iP_4\), \(1\le i\le6\), write the \(P_4\)
-matching as
+The switch below applies more broadly than the eighteen hard rows in
+(16).  Solving the size-eight endpoint equations with \(a_M\ge2\)
+gives exactly eleven \(M\)-rows compatible with \(P_4\): seven have
+\(a_M=2\) and a seventeen-edge \(D[U]\)-core, while four have
+\(a_M=3\) and a sixteen-edge core.  These include the six \(P_4\)
+pairs in (16) and five rows previously removed by the ordinary
+\(a_M\ge2,d_M\ge1\) filter.
+
+In any of these eleven rows, write the \(P_4\) matching as
 \[
 uv,\quad wz,\quad
 a_1s_1,\ a_2s_2,\ a_3s_3,\quad s_0y, \tag{25}
@@ -415,8 +422,9 @@ missing label from \(s_i\) to \(s_0\) therefore leaves the new
 at most four because \(uv\) was Hall-good.  Hall's theorem still gives
 the five cross-edges for the second near-factor.
 
-This proves that all six \(P_4\) rows are locally switchable.  The hard
-endpoint frontier (16) is reduced to the twelve pairs
+This proves that all eleven \(P_4\) rows are locally switchable.  Within
+the hard endpoint frontier (16), the six \(P_4\) pairs are removed and
+the frontier is reduced to the twelve pairs
 \[
 \{M_iP_j:i\in\{4,5,6\},\ j\in\{1,2,3,5\}\}. \tag{28}
 \]
@@ -425,17 +433,148 @@ Every row in (28) has the unique 17-edge core, and
 from the common saturated six-set \(Z\).  Five such rows would require
 twenty-five exclusions, while (22) allows at most nineteen.
 
-This still does not prove coordinated nine for \(r=2\): a global failure
-may mix the first two terminal types in (4), ordinary labelled \(K_7\)
-rows whose switches require a separate audit, and fewer than five of the
-twelve rows in (28).
+### The all-bad column is switchable
 
-Thus a full switch proof need not treat arbitrary endpoint patterns.
-After the ordinary branch is audited, its genuinely hard local work is
-the eighteen labelled rows in (16), together with the all-bad-column
-case in the Hall graph \(R[U,S]\).  Enumeration (14)--(16) is only a
-finite reduction; it does not itself assert that the omitted ordinary
-rows are switchable.
+There is one further useful exact fact about the Hall graph.  Suppose
+\[
+D_{s_0}=U
+\]
+for some \(s_0\in S\).  Then
+\[
+B=K_{U,S\setminus\{s_0\}}.
+\]
+No selected edge can join \(U\) to \(S\setminus\{s_0\}\), because all
+those edges survive in \(B\).  Every \(G\)-edge from \(U\) to \(s_0\)
+must be selected, because otherwise it too would survive in the
+terminal residual graph.
+
+Fix \(u\in U\).  It has the four displayed neighbours in
+\(S\setminus\{s_0\}\), at most one neighbour \(y\), and at most two
+further neighbours supplied by its incident edges in the two selected
+matchings.  The degree-seven hypothesis forces equality throughout.
+In particular, both selected matchings cover \(u\), neither uses
+\(uy\), and both selected incidences lie in \(U\cup\{s_0\}\).
+This holds for every \(u\in U\).  The size-eight matching therefore
+covers all seven vertices of \(U\), so
+\[
+\boxed{A\cap U=\varnothing.} \tag{29}
+\]
+Consequently, any candidate with \(A\cap U\ne\varnothing\) automatically
+lies outside the all-bad-column exception.
+
+More strongly, the configuration can always be repaired.  Put
+\[
+L'=(S\setminus\{s_0\})\cup\{y\}.
+\]
+Each selected matching has exactly three \(UU\)-edges and one
+\(Us_0\)-edge.  The size-eight matching ends there; the near-factor
+\(P\) additionally has two edges on \(L'\), leaving its prescribed
+hole \(x\in L'\).
+
+The vertex \(s_0\) has the two selected neighbours in \(U\), one from
+each matching.  Its only other five possible neighbours are the
+vertices of \(L'\), so degree seven forces it to be complete to \(L'\).
+Those five edges are unused.  The same degree equality above forces
+every edge \(uy\), \(u\in U\), to be present and unused.
+
+Choose a \(UU\)-edge \(uv\) and the \(Us_0\)-edge \(ws_0\) of \(P\).
+Delete those two edges and the two \(P\)-edges on \(L'\).  The exposed
+left vertices
+\[
+\{u,v,w,s_0\}
+\]
+and the four exposed, non-omitted vertices of \(L'\) span an unused
+\(K_{4,4}\): the \(U\)-to-\(S\setminus\{s_0\}\) edges survive in \(B\),
+the \(U\)-to-\(y\) edges were forced above, and \(s_0\) is complete to
+\(L'\).  Rematch these eight vertices through that \(K_{4,4}\).
+
+For the second near-factor, use the freed edges \(uv,ws_0\), then match
+the four remaining vertices of \(U\) bijectively to
+\(S\setminus\{s_0\}\).  The new \(P\)-edges touch only \(u,v,w,s_0\),
+whereas the last four edges use the other four vertices of \(U\).
+Thus the matchings are edge-disjoint and the terminal obstruction is
+repaired.
+
+The same proof applies when the first selected matching has size ten:
+it merely has one additional edge inside \(L'\), which is disjoint from
+the cross edges used in the switch.
+
+### The remaining ordinary size-eight rows are switchable
+
+Outside the all-bad column, the only ordinary-\(M\), nonordinary-\(P\)
+rows not covered by the eleven-row \(P_4\) switch have
+\[
+(r_U,r_S,r_y)_M=(1,3,1),\qquad
+(a,b,c,d,e)_M=(3,0,0,1,0), \tag{30}
+\]
+with \(P\in\{P_1,P_2,P_3,P_5\}\).  Thus \(M\) consists of three
+\(UU\)-edges and one \(SS\)-edge \(st\).
+
+The three \(UU\)-edges form a matching, while the bad-pair graph has
+matching number at most one.  Hence at least two of them are Hall-good.
+Fix a good edge \(uv\).  The two-edge switch on \(uv,st\) fails exactly
+when
+\[
+\{u,v\}\subseteq D_s
+\quad\text{or}\quad
+\{u,v\}\subseteq D_t. \tag{31}
+\]
+
+Here \(|E(D[U])|=17\).  The six internal \(M\)-endpoints and two
+internal \(P\)-endpoints cover \(U\), with one double-covered vertex.
+The double-covered vertex has internal \(D\)-degree four; the other six
+vertices are saturated.
+
+For any separator label \(q\), its missing class \(D_q\) contains:
+
+* at most the one double-covered vertex; and
+* at most one saturated \(M\)-only vertex, namely the endpoint of a
+  possible selected \(P\)-edge to \(q\).
+
+The saturated \(P\)-only vertex is omitted by \(M\) and internally
+covered by \(P\), so its edge to \(q\) survives in \(B\).  Also the
+double-covered vertex belongs to at most one missing class.  Therefore,
+for the two distinct labels \(s,t\), at most one of \(D_s,D_t\) can
+contain two vertices.  At most one \(UU\)-edge can satisfy (31).
+
+Since at least two \(UU\)-edges are Hall-good, choose one for which
+(31) fails.  The bipartite graph
+\[
+B[\{u,v\},\{s,t\}]
+\]
+has a perfect matching.  Replace \(uv,st\) by those two cross edges.
+They touch only \(u,v\), so the perfect matching of
+\(B[U\setminus\{u,v\},S]\), together with the freed edge \(uv\), is the
+required second near-factor.  This closes all ordinary size-eight
+terminal rows.
+
+### Consequence when all five size-eight supports are matchable
+
+Suppose every one of the five remaining size-eight supports has an
+initial perfect matching.  If a candidate cannot be extended through
+the two prescribed near-factors, its terminal obstruction is either:
+
+* \(K_{5,7}\) or \(K_{3,1^5}\), consuming five saturated exclusions
+  \(W\setminus A_i\); or
+* one of the twelve rigid rows in (28), likewise consuming at least
+  five saturated exclusions.
+
+All other \(K_7\) rows have now been switched.  Five failed candidates
+would therefore require twenty-five saturated row-exclusions, while
+(8) supplies at most twenty-three.  Hence:
+
+> **Five-eight theorem.** If all five remaining size-eight supports are
+> initially matchable after the complement-cover six-prefix, then the
+> prefix has a coordinated nine-extension.
+
+This still does not prove coordinated nine for \(r=2\): a global failure
+must have at least one initially blocked size-eight support.  The
+remaining work is therefore global: coordinate the blocked initial
+cores \(K_{3,5}\), \(K_{3,1,1,1}\), or \(K_5\) with the four size-ten
+routes.  Locally, every ordinary and all-bad \(K_7\) row is now
+switchable; the twelve rows in (28) are the only rigid size-eight
+\(K_7\) terminals, and each carries the five-exclusion charge used
+above.
 
 ## Why a fixed candidate matching is not enough
 
@@ -447,20 +586,20 @@ Let \(D\) have edges
 &02,03,04,05,06,\quad12,13,14,15,16,\\
 &24,25,26,\quad34,35,36,\quad46,\quad57,\\
 &78,79,7\,10,7\,11,\quad89,8\,10,8\,11,\quad11\,12.
-\end{split} \tag{29}
+\end{split} \tag{32}
 \]
 Then \(|E(D)|=26\) and \(\Delta(D)=5\).  In \(G=K_{13}-D\), take
 \[
 Y=\{0,\ldots,7\},\qquad
-M=\{01,23,45,67\},\qquad x=8,\ y=9. \tag{30}
+M=\{01,23,45,67\},\qquad x=8,\ y=9. \tag{33}
 \]
-Put \(Q=G-M\) and \(U=\{0,\ldots,6\}\).  Directly from (29)--(30),
+Put \(Q=G-M\) and \(U=\{0,\ldots,6\}\).  Directly from (32)--(33),
 \[
-E(Q[U])=\{56\}. \tag{31}
+E(Q[U])=\{56\}. \tag{34}
 \]
 After deleting either \(8\) or \(9\), only five vertices remain outside
 the seven-set \(U\).  Every perfect matching must therefore use an edge
-inside \(U\), and (19) says that edge must be \(56\).  Thus every
+inside \(U\), and (34) says that edge must be \(56\).  Thus every
 near-perfect matching missing \(8\), and every one missing \(9\), uses
 the same edge \(56\); no two can be edge-disjoint.
 
@@ -479,6 +618,6 @@ python3 collaboration/r2_terminal_flexibility/verify_terminal.py
 
 The standard-library verifier exhausts the Tutte arithmetic in (4),
 checks the row-resource bounds (8)--(11), enumerates the hard endpoint
-types (14)--(28), reconstructs the counterexample (29)--(31), and
+types (14)--(31), reconstructs the counterexample (32)--(34), and
 independently enumerates its two families of near-perfect matchings to
 confirm that no edge-disjoint pair exists.
