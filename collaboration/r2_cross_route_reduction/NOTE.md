@@ -13,7 +13,9 @@ Write \(A_1,\ldots,A_5\) for the five remaining size-five complements,
 \(T_1,\ldots,T_4\) for the four remaining triples, and \(x,y\) for the
 two singleton complements.
 
-This note proves the following conditional reduction.
+This note records the cross-route reductions culminating in the
+coordinated \(r=2\) theorem.  The first theorem below was the key
+intermediate branch closure.
 
 > **Cross-route theorem.** Suppose that, for every \(j=1,\ldots,4\), a
 > perfect matching on the size-ten support \(V\setminus T_j\), followed
@@ -31,15 +33,11 @@ This note proves the following conditional reduction.
 
 Thus a counterexample cannot put all four size-ten routes and all
 available size-eight routes into the same dense terminal obstruction.
-The remaining mixed cases must coordinate an initially blocked
-size-eight core \(K_{3,5}\), \(K_{3,1^3}\), or \(K_5\) with at most two
-rigid size-ten rows and the remaining five-saturated or ordinary
-size-ten terminal routes.
-
-This is a conditional branch theorem, not a universal coordinated-nine
-theorem: it closes the case in which all four size-ten choices reach
-hard seventeen-edge cores.  Other mixtures of size-ten terminal types
-remain open, so \(r=2\) is not resolved.
+The later seventeen-core gate removes the all-four hypothesis, and
+the switches in the companion terminal-flexibility note close the two
+remaining terminal types.  Their combination below proves the
+unconditional coordinated \(r=2\) theorem.  It still does not solve the
+unrestricted Erdős--Rosenfeld problem.
 
 To prove item 5, first observe that every size-eight \(K_7\) terminal
 branch with \(|A_i\cap U|\ge3\) is switchable.  If the first
@@ -166,6 +164,230 @@ seventeen edges disjoint from the fifteen clique edges, exceeding
 
 > The presence of one rigid hard size-ten row implies that all four
 > remaining size-ten supports are initially matchable.
+
+In fact the same core excludes every initially blocked size-eight
+support.  Write \(U=Z\cup\{q\}\), where \(Z\) is the saturated six-set.
+There is no \(D\)-edge from \(Z\) to \(V\setminus U\), and \(q\) already
+has four internal \(D\)-edges.  Hence
+\[
+|E_D(U,V\setminus U)|\le1,\qquad
+|E(D[V\setminus U])|\le26-17=9. \tag{16}
+\]
+Also
+\[
+G[U]\cong P_3\mathbin{\dot\cup}K_2\mathbin{\dot\cup}K_2. \tag{17}
+\]
+
+An initially blocked size-eight support has one of the three connected
+cores
+\[
+K_{3,5},\qquad K_{3,1,1,1},\qquad K_5. \tag{18}
+\]
+Every nontrivial cut in these graphs has respectively at least
+\(3,3,4\) edges, so (16) prevents a core from spanning the
+\(U{:}(V\setminus U)\) cut.  None can lie wholly outside \(U\):
+\(K_{3,5}\) has too many vertices, while the other two have twelve and
+ten edges, both exceeding nine.
+
+Nor can a core lie wholly in \(U\).  The \(K_{3,5}\) again has too many
+vertices.  A \(K_5\) in \(D[U]\) would be an independent five-set in
+(17), but
+\[
+\alpha(P_3\mathbin{\dot\cup}2K_2)=2+1+1=4.
+\]
+Finally, a \(K_{3,1,1,1}\) on six vertices would require all edges of
+(17) induced on those six vertices to lie inside its three-vertex
+part.  Deleting a vertex from \(P_3\dot\cup2K_2\) always leaves edges
+whose endpoints use at least four vertices, so this is impossible.
+
+Thus one seventeen-edge terminal core makes all five size-eight
+supports initially matchable.  The five-eight theorem in the companion
+note then gives:
+
+> **Seventeen-core gate theorem.** The presence of any seventeen-edge
+> terminal \(K_7\) core after a size-eight or size-ten candidate
+> guarantees a coordinated nine-extension of the fixed six-prefix.
+
+Consequently no counterexample to coordinated \(r=2\) can contain a
+rigid seventeen-edge terminal row at all.
+
+## The zero-rigid reduction
+
+The endpoint catalogues now give a complete global description of every
+terminal \(K_7\) branch, for either a size-eight or size-ten first
+matching.
+
+* If the first near-factor has \(a_P\ge2,d_P\ge1\), its ordinary switch
+  applies outside the all-bad column.
+* The all-bad column has the \(K_{4,4}\) switch.
+* If \(P=P_4\), the support-preserving \(P_4\) switch applies (to all
+  eleven compatible size-eight rows and all fourteen compatible
+  size-ten rows).
+* In every remaining compatible endpoint pair,
+  \[
+  a_M+a_P=4,
+  \]
+  so \(|E(D[U])|=17\), and the seventeen-core gate theorem supplies a
+  different candidate extension.
+
+This is an exact exhaustion, checked independently for both first
+support sizes by the verifier.  Therefore:
+
+> **Five-saturated reduction.** In a global counterexample to the fixed
+> \(r=2\) six-prefix, every remaining support is either initially
+> blocked or, after an initial perfect matching, fails only through the
+> \(K_{5,7}\) or \(K_{3,1^5}\) terminal type.  Every candidate of the
+> latter kind consumes at least five saturated exclusions from its
+> complement row.
+
+For size-ten supports, an initial block is necessarily the unique
+saturated \(K_6\) type; the \(K_{5,5}\) type violates the degree sum.
+For size-eight supports, the initial cores are exactly
+\(K_{3,5}\), \(K_{3,1,1,1}\), and \(K_5\).  The first two contain three
+saturated vertices outside the corresponding five-set complement; the
+\(K_5\) type is the only initial obstruction without an automatic
+three-saturated charge.
+
+This isolates the remaining \(r=2\) theorem as a global
+initial-core/row-incidence problem.  No terminal \(K_7\) switching case
+remains.
+
+### At most one blocked size-eight support is impossible
+
+Let \(W=\{v:d_D(v)=5\}\), \(w=|W|\le9\).  The exact exclusion budgets
+are
+\[
+\sum_{i=1}^5|W\setminus A_i|=w+t(W)+h(W)\le w+14, \tag{19}
+\]
+and, over all five \(A_i\) and four \(T_j\),
+\[
+\sum_i|W\setminus A_i|+\sum_j|W\setminus T_j|
+=5w+h(W)\le5w+2. \tag{20}
+\]
+
+If no size-eight support is initially blocked, the five-eight theorem
+already gives an extension.  Suppose exactly one is blocked.
+
+If its core is \(K_{3,5}\) or \(K_{3,1,1,1}\), its complement excludes
+three saturated vertices.  The other four failed size-eight candidates
+exclude five each.  For \(w\le8\), the required \(3+4\cdot5=23\)
+exclusions exceed (19).  For \(w=9\), every five-set automatically
+excludes at least four vertices of \(W\), so the requirement is at
+least \(4+4\cdot5=24>23\).
+
+It remains to consider one blocked \(K_5\) row.  The other four
+size-eight candidates and all four size-ten candidates each consume at
+least five saturated exclusions: a matchable candidate does so by the
+five-saturated reduction, while a blocked size-ten candidate contains
+a saturated \(K_6\).  Thus (20) must supply at least forty exclusions.
+This is impossible for \(w\le7\).
+
+For \(w=8\), each of the four matchable \(A_i\) contains at most three
+saturated vertices, so
+\[
+a(W)\le5+4\cdot3=17.
+\]
+But the row identity and \(t(W)+h(W)\le14\) give
+\[
+a(W)=4w-t(W)-h(W)\ge32-14=18.
+\]
+For \(w=9\), the four non-saturated vertices have total \(D\)-degree
+seven.  At most one vertex of the blocking \(K_5\) can be
+non-saturated, so at least four clique vertices lie in \(W\).  The
+blocking complement avoids that clique and therefore contains at most
+five saturated vertices.  The other four \(A_i\) contain at most four
+each, giving
+\[
+a(W)\le5+4\cdot4=21<36-14=22.
+\]
+This proves:
+
+> **Two-block threshold.** Every global counterexample to the fixed
+> \(r=2\) six-prefix must have at least two initially blocked
+> size-eight supports.
+
+The cases with two or more blocked size-eight supports, especially
+multiple \(K_5\) cores, are the remaining zero-rigid frontier.
+
+### A saturated \(K_6\) always supplies an escape route
+
+Suppose one of the four size-ten supports is initially blocked.  Its
+only possible core is a saturated \(K_6\), say on \(B\); every blocked
+size-ten support has the same core.  Put \(R=V\setminus B\).  Then
+\[
+D=K_6[B]\mathbin{\dot\cup}J[R],\qquad |E(J)|=11, \tag{21}
+\]
+so every \(B{:}R\) edge belongs to \(G\), and \(G[R]\) has ten edges.
+
+First suppose some remaining triple \(T\) meets \(B\).  Put
+\(b=|T\cap B|\ge1\).  Its size-ten support contains \(6-b\) vertices
+of \(B\) and \(4+b\) vertices of \(R\).  Choose \(b-1\) disjoint edges
+in \(G[R]\), then match the remaining \(6-b\) vertices on each side
+across the complete cut.  This gives the candidate matching.  The only
+nontrivial case is \(b=3\), requiring a two-edge matching in \(G[R]\);
+a seven-vertex graph with ten edges has matching number at least two.
+
+For a near-factor missing a vertex of \(R\), all six covered vertices
+of \(B\) can be matched across to the six covered vertices of \(R\).
+For a near-factor missing a vertex of \(B\), choose one unused edge in
+\(G[R]\), then match the other five \(R\)-vertices across to the five
+covered \(B\)-vertices.  There are always unused internal edges:
+the candidate used at most two, and the two near-factors use at most
+one each.
+
+Choose the cross matchings sequentially.  For the first near-factor,
+the balanced cross graph has order five or six and has lost at most one
+edge at each vertex.  For the second, it has lost at most two.  Thus its
+minimum degree is at least \(m-2\ge m/2\), where \(m\in\{5,6\}\), and
+Hall's theorem gives the required cross matching.
+
+It remains to suppose all four triples avoid \(B\), so all four
+size-ten supports are blocked.  The initial-support dichotomy gives a
+matchable size-eight support \(V\setminus A\).  Let
+\(k=|A\cap B|\).  Any perfect matching on this support uses all
+\(6-k\) covered vertices of \(B\) across the cut and uses \(k-2\)
+internal edges of \(G[R]\).  Fix such a matching.  It uses at most
+three internal \(R\)-edges, leaving enough for the two near-factors.
+The identical sequential cross-matching argument completes both of
+them.
+
+Therefore:
+
+> **Saturated-\(K_6\) escape theorem.** If any remaining size-ten
+> support is initially blocked, the fixed six-prefix has a coordinated
+> nine-extension.
+
+Every global counterexample must consequently have all four size-ten
+supports initially matchable.  By the five-saturated reduction, each
+of their failures consumes five saturated exclusions.
+
+## Coordinated nine for the \(r=2\) profile
+
+The companion terminal-flexibility note now switches both
+five-saturated terminal types as well.  Combine the results:
+
+1. the initial-support dichotomy guarantees an initial perfect matching
+   on at least one of the five size-eight or four size-ten supports;
+2. after that matching, the first prescribed near-factor always exists;
+3. the two five-saturated terminal types are switchable;
+4. every terminal \(K_7\) row is ordinary-\(P\), \(P_4\), all-bad, or
+   has a seventeen-edge core;
+5. the first three \(K_7\) cases are switchable, and the
+   seventeen-core gate theorem supplies an extension through another
+   support.
+
+Therefore:
+
+> **Coordinated \(r=2\) theorem.** Every target class-B \(r=2\)
+> instance, after any legal complement-cover six-prefix of type
+> \(8^4\,10^2\), has three further pairwise edge-disjoint
+> support-respecting perfect matchings.  Equivalently, the prefix
+> extends to a coordinated nine-packing.
+
+This closes the \(r=2\) coordinated-nine profile.  It does not complete
+the remaining eight colours, prove fan-realizability, or resolve
+Erdős--Rosenfeld Problem #835.  The coordinated-nine profiles \(r=0\)
+and \(r=1\) also remain open.
 
 ## The class-B rows force mass onto \(Z\)
 
@@ -305,10 +527,10 @@ the exact endpoint catalogue with \(r_U\ge4\) otherwise leaves only a
 \(P_4\) row.  Thus five failures would again have to be the two
 five-saturated terminal types, contradicting \(25>23\).
 
-This leaves only global mixtures with at most two rigid size-ten rows
-and ordinary or five-saturated size-ten terminal routes.
-Initially blocked size-ten supports can occur only in the zero-rigid
-branch.
+The stronger seventeen-core gate theorem supersedes this delimiter:
+no rigid size-ten row can occur in a counterexample.  By the
+five-saturated reduction, the remaining global work lies entirely in
+initially blocked supports and the two five-saturated terminal types.
 
 ## Verification
 

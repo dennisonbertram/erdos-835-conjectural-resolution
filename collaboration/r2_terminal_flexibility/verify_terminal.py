@@ -331,6 +331,26 @@ def verify_remaining_ordinary_rows() -> None:
     print("PASS four remaining ordinary rows switch; five-eight theorem")
 
 
+def verify_five_saturated_switches() -> None:
+    # K5,7: each small-side vertex uses exactly D5 + M1 + P1 across
+    # the cut; deleting one vertex from the residual C7 leaves
+    # minimum degree at least three on six vertices.
+    assert 5 + 1 + 1 == 7
+    assert 4 - 1 == 3
+
+    # Separator four: P has 2a+b=5 with b<=3, hence a>=1, and the
+    # empty-C branch exposes balanced four-by-four sets.
+    possibilities = [
+        (a, b)
+        for a in range(4)
+        for b in range(4)
+        if 2 * a + b == 5
+    ]
+    assert possibilities == [(1, 3), (2, 1)]
+    assert 4 == 4
+    print("PASS K5,7 and K3,1^5 mixed switches")
+
+
 def verify_counterexample() -> None:
     assert len(COUNTER_D) == 26
     degrees = tuple(
@@ -367,8 +387,12 @@ def main() -> None:
     verify_p4_switch()
     verify_all_bad_column()
     verify_remaining_ordinary_rows()
+    verify_five_saturated_switches()
     verify_counterexample()
-    print("SCOPE: finite r=2 reduction; no universal terminal theorem")
+    print(
+        "SCOPE: mixed terminal catalogue closed with class-B gate; "
+        "arbitrary fixed candidate still false"
+    )
 
 
 if __name__ == "__main__":

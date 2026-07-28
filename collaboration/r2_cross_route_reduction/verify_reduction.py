@@ -142,6 +142,63 @@ def size_eight_hard_bound() -> None:
             assert p_ordinary or p_type == p4
     print("PASS r_U >= 3 leaves ordinary P or the P4 switch")
 
+    # Globally, every compatible pair not covered by the ordinary-P or
+    # P4 switches has a 17-edge core and is closed by the gate theorem.
+    for _, m_type in m_types:
+        for _, p_type in p_types:
+            if m_type[0] + p_type[0] < 4:
+                continue
+            p_ordinary = p_type[0] >= 2 and p_type[3] >= 1
+            if p_ordinary or p_type == p4:
+                continue
+            assert 21 - m_type[0] - p_type[0] == 17
+    print("PASS size-eight K7 pairs: ordinary P, P4, or 17-core")
+
+
+def size_ten_global_k7_exhaustion() -> None:
+    m_types = []
+    for values in product(range(6), repeat=5):
+        a, b, c, d, e = values
+        if sum(values) != 5:
+            continue
+        omissions = (
+            7 - (2 * a + b + c),
+            5 - (b + 2 * d + e),
+            1 - (c + e),
+        )
+        if min(omissions) >= 0 and sum(omissions) == 3:
+            m_types.append((omissions, values))
+
+    p_types = []
+    endpoint_targets = {
+        (6, 5, 1): "U",
+        (7, 4, 1): "S",
+        (7, 5, 0): "y",
+    }
+    for values in product(range(7), repeat=5):
+        a, b, c, d, e = values
+        if sum(values) != 6:
+            continue
+        endpoints = (2 * a + b + c, b + 2 * d + e, c + e)
+        if endpoints in endpoint_targets:
+            p_types.append((endpoint_targets[endpoints], values))
+
+    p4 = (2, 3, 0, 0, 1)
+    compatible = 0
+    gated = 0
+    for _, m_type in m_types:
+        for _, p_type in p_types:
+            if m_type[0] + p_type[0] < 4:
+                continue
+            compatible += 1
+            p_ordinary = p_type[0] >= 2 and p_type[3] >= 1
+            if p_ordinary or p_type == p4:
+                continue
+            assert 21 - m_type[0] - p_type[0] == 17
+            gated += 1
+    assert compatible > gated > 0
+    print("PASS size-ten K7 pairs: ordinary P, P4, or 17-core")
+
 
 def dense_core_arithmetic() -> None:
     assert 17 + 17 - 26 == 8
@@ -171,6 +228,94 @@ def dense_core_arithmetic() -> None:
     assert 15 + 17 == 32 > 26
     print("PASS uniqueness and 9-edge outside-block arithmetic")
     print("PASS a 17-edge terminal core excludes every blocked K6 support")
+
+
+def seventeen_core_gate() -> None:
+    u = frozenset(range(7))
+    g_u = frozenset({(0, 1), (1, 2), (3, 4), (5, 6)})
+    d_u = frozenset(combinations(u, 2)) - g_u
+    assert len(d_u) == 17
+
+    # D[U] has neither K5 nor K_{3,1,1,1}.
+    assert not any(
+        frozenset(combinations(vertices, 2)) <= d_u
+        for vertices in combinations(u, 5)
+    )
+    has_k3111 = False
+    for support in combinations(u, 6):
+        support_set = frozenset(support)
+        for large_part in combinations(support, 3):
+            large = frozenset(large_part)
+            required = frozenset(
+                edge
+                for edge in combinations(support_set, 2)
+                if not frozenset(edge) <= large
+            )
+            if required <= d_u:
+                has_k3111 = True
+    assert not has_k3111
+
+    # Exact minimum nontrivial cut sizes of the three obstruction cores.
+    cores = {}
+    cores["K35"] = frozenset(
+        (left, right)
+        for left in range(3)
+        for right in range(3, 8)
+    )
+    big = frozenset(range(3))
+    cores["K3111"] = frozenset(
+        edge
+        for edge in combinations(range(6), 2)
+        if not frozenset(edge) <= big
+    )
+    cores["K5"] = frozenset(combinations(range(5), 2))
+
+    minimum_cuts = {}
+    for name, edges in cores.items():
+        vertices = frozenset(v for edge in edges for v in edge)
+        minimum_cuts[name] = min(
+            sum(
+                (left in side) != (right in side)
+                for left, right in edges
+            )
+            for size in range(1, len(vertices))
+            for side in map(frozenset, combinations(vertices, size))
+        )
+    assert minimum_cuts == {"K35": 3, "K3111": 3, "K5": 4}
+    assert len(cores["K3111"]) == 12
+    assert len(cores["K5"]) == 10
+    assert 12 > 9 and 10 > 9
+    print("PASS 17-core gate excludes K35, K3111, and K5 initial blocks")
+
+
+def saturated_k6_escape() -> None:
+    # G[R] has 21-11=10 edges.  Matching number at most one on seven
+    # vertices permits at most a six-edge star.
+    assert 21 - 11 == 10
+    assert 10 > 6
+
+    # Size-ten candidates with b triple vertices in B use b-1 internal
+    # R-edges and 6-b cross edges.
+    for b in range(1, 4):
+        assert (b - 1) * 2 + (6 - b) == 4 + b
+        assert b - 1 <= 2
+
+    # A size-eight candidate with k complement vertices in B uses k-2
+    # internal R-edges and 6-k cross edges.
+    for k in range(2, 6):
+        assert (k - 2) * 2 + (6 - k) == 2 + k
+        assert k - 2 <= 3
+
+    # After one or two earlier cross matchings, the balanced near-factor
+    # problem has minimum degree at least half its order.
+    for order in (5, 6):
+        assert order - 1 >= order / 2
+        assert order - 2 >= order / 2
+
+    # Ten internal R-edges leave enough after the candidate and first
+    # near-factor choices.
+    assert 10 - 3 - 1 >= 1
+    print("PASS saturated-K6 escape arithmetic and Hall thresholds")
 
 
 def row_mass() -> None:
@@ -219,6 +364,16 @@ def row_mass() -> None:
     )
     print("PASS three-rigid branch forces a size-five row or five size-four rows")
 
+    # Zero-rigid exclusion budgets.
+    assert 3 + 4 * 5 == 23
+    assert 8 + 14 == 22 < 23
+    assert 4 + 4 * 5 == 24 > 9 + 14
+    assert 8 * 5 == 40
+    assert 5 * 7 + 2 == 37 < 40
+    assert 5 + 4 * 3 == 17 < 4 * 8 - 14
+    assert 5 + 4 * 4 == 21 < 4 * 9 - 14
+    print("PASS zero-rigid charge bounds force at least two blocked A rows")
+
 
 def matching_number(vertices: int, edges: frozenset[tuple[int, int]]) -> int:
     best = 0
@@ -262,11 +417,17 @@ def cross_cut_arithmetic() -> None:
 def main() -> None:
     endpoint_types()
     size_eight_hard_bound()
+    size_ten_global_k7_exhaustion()
     dense_core_arithmetic()
+    seventeen_core_gate()
+    saturated_k6_escape()
     row_mass()
     extremal_matching_bounds()
     cross_cut_arithmetic()
-    print("SCOPE: dense-size-ten branch closed; general r=2 remains open")
+    print(
+        "SCOPE: coordinated r=2 fixed-prefix theorem closed; "
+        "full completion and Problem #835 remain open"
+    )
 
 
 if __name__ == "__main__":

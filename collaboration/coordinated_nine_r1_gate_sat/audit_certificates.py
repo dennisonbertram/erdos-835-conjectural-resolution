@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Dependency-free independent audit of the six r=1 SAT certificates.
+"""Dependency-free independent audit of the six pair-gate certificates.
 
 This script does not import the generator.  It independently enumerates the
 support matchings, reconstructs every semantic and unary-counter clause, checks
 the DIMACS byte content through its parsed clauses, checks the recorded hashes,
-and optionally invokes an external DRAT-trim binary.
+and optionally invokes an external DRAT-trim binary.  Its default prefix shape
+and certificate directory reproduce the r=1 theorem.
 """
 
 from __future__ import annotations
@@ -24,6 +25,7 @@ ALL_EDGES = tuple(combinations(POINTS, 2))
 FIRST_TRIPLE = frozenset((10, 11, 12))
 FIRST_SUPPORT = frozenset(POINTS) - FIRST_TRIPLE
 ORBIT_CASES = ((0, 0), (0, 1), (1, 0), (1, 1), (2, 0), (3, 0))
+R1_PREFIX_SIZES = (4, 4, 4, 4, 5, 5)
 
 
 def enumerate_one_factors(vertices):
@@ -117,9 +119,15 @@ class IndependentEncoding:
             self._clause(-prefix_count(length, maximum + 1))
 
 
-def reconstruct(intersection, internal_pairs):
+def reconstruct(
+    intersection,
+    internal_pairs,
+    prefix_sizes=R1_PREFIX_SIZES,
+):
     if (intersection, internal_pairs) not in ORBIT_CASES:
         raise AssertionError("unexpected case")
+    if len(prefix_sizes) != 6 or any(size not in (4, 5) for size in prefix_sizes):
+        raise AssertionError("invalid six-prefix shape")
     support0 = FIRST_SUPPORT
     support1 = second_support(intersection)
     factors = (
@@ -139,7 +147,7 @@ def reconstruct(intersection, internal_pairs):
     def survives(side, number):
         return model._id(("survives", side, number))
 
-    for colour, required in enumerate((4, 4, 4, 4, 5, 5)):
+    for colour, required in enumerate(prefix_sizes):
         variables = [colour_edge(colour, edge) for edge in ALL_EDGES]
         model._bounded_sum(
             ("colour_total", colour),
@@ -266,8 +274,17 @@ def main():
         type=Path,
         default=Path(__file__).with_name("certificates"),
     )
+    parser.add_argument(
+        "--prefix-sizes",
+        type=int,
+        nargs=6,
+        default=R1_PREFIX_SIZES,
+        metavar=("S0", "S1", "S2", "S3", "S4", "S5"),
+    )
+    parser.add_argument("--label", default="r=1")
     parser.add_argument("--drat-trim", type=Path)
     args = parser.parse_args()
+    prefix_sizes = tuple(args.prefix_sizes)
 
     manifest = json.loads(
         (args.certificate_dir / "manifest.json").read_text(encoding="utf-8")
@@ -284,7 +301,11 @@ def main():
             (args.certificate_dir / f"{stem}.drat.gz").read_bytes()
         )
         _, header, clauses = read_dimacs(cnf_payload)
-        expected, facts = reconstruct(intersection, internal_pairs)
+        expected, facts = reconstruct(
+            intersection,
+            internal_pairs,
+            prefix_sizes,
+        )
         if header != (facts["variables"], facts["clauses"]):
             raise AssertionError((stem, "header", header, facts))
         if clauses != expected.rows:
@@ -296,9 +317,13 @@ def main():
         for key in ("variables", "clauses", "disjoint_pairs", "fixed_matching"):
             if facts[key] != record[key]:
                 raise AssertionError((stem, key, facts[key], record[key]))
+        if "prefix_sizes" in record and record["prefix_sizes"] != list(prefix_sizes):
+            raise AssertionError(
+                (stem, "prefix_sizes", prefix_sizes, record["prefix_sizes"])
+            )
 
         if args.drat_trim:
-            with tempfile.TemporaryDirectory(prefix="r1-gate-audit-") as temp:
+            with tempfile.TemporaryDirectory(prefix="pair-gate-audit-") as temp:
                 cnf_path = Path(temp) / f"{stem}.cnf"
                 proof_path = Path(temp) / f"{stem}.drat"
                 cnf_path.write_bytes(cnf_payload)
@@ -319,7 +344,7 @@ def main():
             + (" DRAT" if args.drat_trim else "")
         )
 
-    print("PASS all six exact r=1 cross-family certificates")
+    print(f"PASS all six exact {args.label} cross-family certificates")
 
 
 if __name__ == "__main__":

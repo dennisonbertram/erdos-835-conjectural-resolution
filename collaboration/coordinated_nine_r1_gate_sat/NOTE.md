@@ -154,6 +154,7 @@ K_{5,7},\qquad K_{3,1,1,1,1,1},\qquad K_7.
 The exact row identity eliminates \(K_{5,7}\): the eight selected
 matchings have 36 edges, the omitted vertex \(z\) has selected degree at
 least three, and therefore their union has at most 33 edges inside the
-size-twelve support, fewer than the 35 core edges.  Eliminating
-\(K_{3,1,1,1,1,1}\) and \(K_7\), possibly by coordinated prefix/pair
-switches, is the remaining \(r=1\) task.
+size-twelve support, fewer than the 35 core edges.  The augmenting-path
+repair in `../coordinated_nine_r1_terminal_k311111/NOTE.md` eliminates
+\(K_{3,1,1,1,1,1}\).  The sole remaining \(r=1\) terminal family is
+\(K_7\).

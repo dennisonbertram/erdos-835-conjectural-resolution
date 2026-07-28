@@ -290,8 +290,15 @@ contradiction.  Thus the exact unresolved terminal list is
 \[
 \boxed{K_{3,1,1,1,1,1},\quad K_7.} \tag{11c}
 \]
-Support-preserving or coordinated pair switches are still required for
-these two rows.
+The separator-four repair in
+`../coordinated_nine_r1_terminal_k311111/NOTE.md` eliminates the first
+of these two rows by reselecting one size-ten matching along an
+augmenting path.  The replacement-triple lemma in
+`../coordinated_nine_r1_terminal_k7/NOTE.md` then eliminates the
+no-\(WW\) equality branch of the \(K_7\) terminal.  Thus the sole
+unresolved \(r=1\) terminal is the \(K_7\) subbranch in which at least
+one of the two selected size-ten matchings has an edge entirely outside
+the seven-vertex core.
 
 ### The separator-three equality branch
 

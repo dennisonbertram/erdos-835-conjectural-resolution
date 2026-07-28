@@ -16,22 +16,23 @@ Then
 Write \(A_1,\ldots,A_5\) for the five remaining size-five complements,
 and \(x,y\) for the two remaining singleton complements.
 
-This note proves:
+This note proves the terminal part of the coordinated \(r=2\) theorem:
 
-1. after any perfect matching on a candidate size-eight support, the
-   first prescribed near-perfect matching always exists;
+1. after any perfect matching on a remaining size-eight or size-ten
+   support, the first prescribed near-perfect matching always exists;
 2. failure of the second near-perfect matching has exactly three
    coarsened Tutte types;
-3. two types each consume five saturated row-exclusions, so the exact
-   class-B row identity prevents those two types from blocking all five
-   candidate supports;
-4. therefore an all-five failure must contain at least one \(K_7\)
-   terminal branch.
+3. the \(K_{5,7}\) and \(K_{3,1^5}\) types are locally switchable;
+4. every \(K_7\) type is locally switchable except a rigid
+   seventeen-edge core, and the companion seventeen-core gate excludes
+   that core globally by supplying another support.
 
-This is a solver-free finite reduction, not a coordinated-nine theorem
-for \(r=2\).  The remaining problem is to switch a candidate
-size-eight matching or the first near-factor through the forced \(K_7\)
-branch while preserving its support.
+Together with the initial-support dichotomy in the companion note,
+these statements prove that every target class-B \(r=2\) instance
+extends the complement-cover six-prefix to a coordinated nine-packing.
+This is only the coordinated-nine \(r=2\) subproblem: it does not pack
+the remaining eight colours, address fan realizability, or solve
+Erdős--Rosenfeld Problem #835.
 
 ## Exact row identity
 
@@ -73,6 +74,11 @@ every vertex.  Thus \(M[U]\) would be 1-regular on seven vertices, an
 impossibility.  Hence \(Q-x\) has a perfect matching \(P\), missing the
 prescribed vertex \(x\).
 
+Nothing in this argument uses that \(M\) has four rather than five
+edges: it uses only that \(M\) is a matching.  The same conclusion
+therefore holds when \(M\) is a perfect matching on a remaining
+size-ten support.
+
 ## Complete terminal Tutte catalogue
 
 Delete \(P\) and the second prescribed omission:
@@ -93,7 +99,13 @@ s&\text{odd component orders}&
 5&1+1+1+1+1+1+1&K_7.
 \end{array} \tag{4}
 \]
-Thus (4) is the complete coarsened terminal catalogue.
+For \(s=4\), there are two literal component partitions:
+\(3+1^5\) and \(1^8\).  The row in (4) coarsens both: in the second
+case, group any three singleton components into the displayed
+three-vertex block.  Thus the block \(C\) used below is connected, and
+so \(R[C]\ne\varnothing\), in the literal \(3+1^5\) case; the branch
+\(R[C]=\varnothing\) is exactly the coarsened \(1^8\) case.  With this
+convention, (4) is the complete coarsened terminal catalogue.
 
 ## Row resources consumed by the first two types
 
@@ -185,9 +197,9 @@ Thus every \(K_7\) branch consumes both:
 * an internal edge of the candidate matching \(M[U]\); and
 * at least one saturated row-exclusion \(u\in W\setminus A\).
 
-The unresolved step is to use this internal-edge resource to perform a
-support-preserving switch that frees a Hall-good pair in \(U\), uniformly
-over all five choices of \(A_i\).
+The next sections use this internal-edge resource to perform
+support-preserving switches.  The sole rigid residue is the
+seventeen-edge core, handled globally by the companion gate theorem.
 
 ### Exact hard endpoint types
 
@@ -239,6 +251,15 @@ The compatibility list has only eighteen pairs:
 \ \cup\
 \{M_iP_j: i\in\{4,5,6\},\ 1\le j\le5\}. \tag{16}
 \]
+
+The ordinary-\(P\) switch used here is the one proved in
+`collaboration/k7_terminal_switching/NOTE.md`, equations (9)--(14).
+Only \(P\) is switched.  That local proof uses the other selected
+matching solely through the facts that it is edge-disjoint from \(P\),
+has at most one incidence at each vertex, and, together with \(P\),
+covers \(U\) internally as forced by (9).  It therefore applies
+unchanged when the other matching \(M\) is perfect on a size-eight or
+size-ten support.
 
 There is an additional exact edge invariant in these rows.  Since
 \(R[U]\) is empty,
@@ -567,14 +588,92 @@ would therefore require twenty-five saturated row-exclusions, while
 > initially matchable after the complement-cover six-prefix, then the
 > prefix has a coordinated nine-extension.
 
-This still does not prove coordinated nine for \(r=2\): a global failure
-must have at least one initially blocked size-eight support.  The
-remaining work is therefore global: coordinate the blocked initial
-cores \(K_{3,5}\), \(K_{3,1,1,1}\), or \(K_5\) with the four size-ten
-routes.  Locally, every ordinary and all-bad \(K_7\) row is now
-switchable; the twelve rows in (28) are the only rigid size-eight
-\(K_7\) terminals, and each carries the five-exclusion charge used
-above.
+### The two five-saturated terminal types are switchable
+
+The preceding exclusion charges can be sharpened to local repairs.  The
+switch is always performed in the near-factor \(P\), so it works when
+the first selected matching has either size eight or size ten.
+
+For the \(K_{5,7}\) type, let the two residual components be
+\(C_5,C_7\).  Every vertex of \(C_5\) has at least two \(G\)-edges to
+\(C_7\).  All such edges lie in \(D\cup M\cup P\); the five \(D\)-edges
+and one edge from each selected matching are forced at every vertex.
+Thus \(P\) has five cross edges saturating \(C_5\), the residual graph
+on \(C_5\) is \(K_5\), and the residual graph on \(C_7\) has minimum
+degree four.
+
+Among the five \(P\)-endpoints in \(C_7\), choose adjacent vertices
+\(b_1,b_2\), with partners \(a_1,a_2\in C_5\).  Replace
+\[
+a_1b_1,\ a_2b_2
+\quad\longrightarrow\quad
+a_1a_2,\ b_1b_2. \tag{32}
+\]
+For the second near-factor use the freed edge \(a_1b_1\), a perfect
+matching of \(C_5-a_1\cong K_4\), and a perfect matching of
+\(C_7-b_1\).  The last graph has order six and minimum degree at least
+three, so Dirac's theorem applies.
+
+For the \(K_{3,1^5}\) coarsened type, let \(S\) be the four-vertex
+separator, let \(T\) be five singleton components, and let \(C\) be
+the remaining three-vertex block.  As explained after (4), \(C\) is
+either a genuine connected component or a group of three further
+singleton components.  Put \(L=S\cup\{y\}\).  Every vertex of \(T\) is
+adjacent residually to all four vertices of \(S\).  Degree seven then
+forces its other three distinct neighbours to be its unused edge to
+\(y\) and its two selected incidences, one in \(M\) and one in \(P\),
+both going into \(T\cup C\).  In particular, both selected matchings
+cover all five vertices of \(T\).
+
+The near-factor \(P\) has a \(TT\)-edge and an \(LL\)-edge.  Indeed, if
+\(a,b\) count its \(TT,TC\) edges, then
+\[
+2a+b=5,\qquad b\le3,
+\]
+so \(a\ge1\); after covering \(T\), too few vertices of \(C\) remain to
+pair all non-omitted vertices of \(L\).
+
+In the literal \(3+1^5\) case, connectedness of \(C\) guarantees the
+following first branch.  If the residual graph on \(C\) contains an
+edge \(c_1c_2\), write
+\(C=\{c_1,c_2,c_3\}\), choose \(t_1t_2\in E(P[T])\) and
+\(uv\in E(P[L])\), and switch
+\[
+t_1t_2,\ uv
+\quad\longrightarrow\quad
+t_1u,\ t_2v. \tag{33}
+\]
+The new edges are available because \(T\) is complete residually to
+\(S\) and every \(ty\) is forced unused.  For the second near-factor
+use the freed \(t_1t_2\), the edge \(c_1c_2\), an edge \(c_3s_0\) with
+\(s_0\in S\), and match the other three vertices of \(T\) bijectively
+to \(S\setminus\{s_0\}\).
+
+In the literal \(1^8\) case, the coarsened block \(C\) has empty
+residual graph.  Degree four then makes every edge from
+\(W=T\cup C\) to \(S\) residual.  The same degree-seven equality
+forces every \(wy\), \(w\in W\), to be present and unused, and forces
+both selected matchings to pair all eight vertices of \(W\) internally.
+The near-factor \(P\) therefore has four \(W\)-edges and two \(L\)-edges.
+Delete two of each.  The four exposed \(W\)-vertices and four exposed,
+non-omitted \(L\)-vertices span an unused \(K_{4,4}\); rematch \(P\)
+through it.  The second near-factor uses the two freed \(W\)-edges and
+matches the other four vertices of \(W\) bijectively to \(S\).
+
+These switches preserve the prescribed hole of \(P\) and do not alter
+the first selected matching.  Together with the \(K_7\) analysis:
+
+> **Mixed terminal theorem.** In a target class-B \(r=2\) instance,
+> after any initial perfect matching on a remaining size-eight or
+> size-ten support, the two prescribed near-factors can be packed,
+> unless a seventeen-edge \(K_7\) core is reached.  In that last case
+> the companion seventeen-core gate theorem gives a coordinated
+> nine-extension through another support.
+
+Combined with the initial-support dichotomy in the companion note, this
+proves the coordinated \(r=2\) theorem stated there.  The result is
+global over the nine remaining support choices; it does not assert that
+an arbitrary fixed candidate matching must extend.
 
 ## Why a fixed candidate matching is not enough
 
@@ -586,16 +685,16 @@ Let \(D\) have edges
 &02,03,04,05,06,\quad12,13,14,15,16,\\
 &24,25,26,\quad34,35,36,\quad46,\quad57,\\
 &78,79,7\,10,7\,11,\quad89,8\,10,8\,11,\quad11\,12.
-\end{split} \tag{32}
+\end{split} \tag{34}
 \]
 Then \(|E(D)|=26\) and \(\Delta(D)=5\).  In \(G=K_{13}-D\), take
 \[
 Y=\{0,\ldots,7\},\qquad
-M=\{01,23,45,67\},\qquad x=8,\ y=9. \tag{33}
+M=\{01,23,45,67\},\qquad x=8,\ y=9. \tag{35}
 \]
 Put \(Q=G-M\) and \(U=\{0,\ldots,6\}\).  Directly from (32)--(33),
 \[
-E(Q[U])=\{56\}. \tag{34}
+E(Q[U])=\{56\}. \tag{36}
 \]
 After deleting either \(8\) or \(9\), only five vertices remain outside
 the seven-set \(U\).  Every perfect matching must therefore use an edge
@@ -618,6 +717,7 @@ python3 collaboration/r2_terminal_flexibility/verify_terminal.py
 
 The standard-library verifier exhausts the Tutte arithmetic in (4),
 checks the row-resource bounds (8)--(11), enumerates the hard endpoint
-types (14)--(31), reconstructs the counterexample (32)--(34), and
+types (14)--(31), audits the switches (32)--(33), reconstructs the
+counterexample (34)--(36), and
 independently enumerates its two families of near-perfect matchings to
 confirm that no edge-disjoint pair exists.

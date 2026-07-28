@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Generate the six symmetry-reduced CNFs for the r=1 pair gate.
+"""Generate the six symmetry-reduced CNFs for a prescribed pair gate.
 
 The generator is dependency-free.  Its only output is ordinary DIMACS CNF;
 CaDiCaL and DRAT-trim are used separately to solve and certify the instances.
+The default prefix shape is the r=1 profile used by this directory's
+committed certificates.
 """
 
 from __future__ import annotations
@@ -17,6 +19,7 @@ EDGES = tuple(combinations(VERTICES, 2))
 T0 = frozenset((10, 11, 12))
 Y0 = frozenset(VERTICES) - T0
 CASES = ((0, 0), (0, 1), (1, 0), (1, 1), (2, 0), (3, 0))
+R1_PREFIX_SIZES = (4, 4, 4, 4, 5, 5)
 
 
 def perfect_matchings(vertices: tuple[int, ...]) -> tuple[frozenset, ...]:
@@ -132,9 +135,15 @@ class Cnf:
                 stream.write(" 0\n")
 
 
-def build_case(overlap: int, aa_edges: int) -> tuple[Cnf, dict[str, object]]:
+def build_case(
+    overlap: int,
+    aa_edges: int,
+    prefix_sizes: tuple[int, ...] = R1_PREFIX_SIZES,
+) -> tuple[Cnf, dict[str, object]]:
     if (overlap, aa_edges) not in CASES:
         raise ValueError(f"not one of the six orbit cases: {(overlap, aa_edges)}")
+    if len(prefix_sizes) != 6 or any(size not in (4, 5) for size in prefix_sizes):
+        raise ValueError("prefix_sizes must contain six entries, each 4 or 5")
 
     y0, y1 = support_pair(overlap)
     families = (
@@ -154,8 +163,8 @@ def build_case(overlap: int, aa_edges: int) -> tuple[Cnf, dict[str, object]]:
     def available(side: int, index: int) -> int:
         return cnf.variable(("available_matching", side, index))
 
-    # D is the edge-disjoint union of four 4-matchings and two 5-matchings.
-    for colour, size in enumerate((4, 4, 4, 4, 5, 5)):
+    # D is the edge-disjoint union of the six prescribed prefix matchings.
+    for colour, size in enumerate(prefix_sizes):
         colour_edges = [x(colour, edge) for edge in EDGES]
         cnf.cardinality(
             ("colour_size", colour),
@@ -229,6 +238,7 @@ def build_case(overlap: int, aa_edges: int) -> tuple[Cnf, dict[str, object]]:
     metadata = {
         "overlap": overlap,
         "aa_edges": aa_edges,
+        "prefix_sizes": prefix_sizes,
         "fixed_matching": sorted(fixed),
         "variables": cnf.top,
         "clauses": len(cnf.clauses),
@@ -242,14 +252,28 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--overlap", type=int, choices=range(4), required=True)
     parser.add_argument("--aa-edges", type=int, required=True)
+    parser.add_argument(
+        "--prefix-sizes",
+        type=int,
+        nargs=6,
+        default=R1_PREFIX_SIZES,
+        metavar=("S0", "S1", "S2", "S3", "S4", "S5"),
+        help="six prefix matching sizes (default: r=1 profile 4 4 4 4 5 5)",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
-    cnf, metadata = build_case(args.overlap, args.aa_edges)
+    prefix_sizes = tuple(args.prefix_sizes)
+    cnf, metadata = build_case(args.overlap, args.aa_edges, prefix_sizes)
+    profile_label = (
+        "r=1"
+        if prefix_sizes == R1_PREFIX_SIZES
+        else f"experimental sizes={prefix_sizes}"
+    )
     cnf.write(
         args.output,
         [
-            "r=1 cross-family gate, negated",
+            f"{profile_label} cross-family gate, negated",
             f"overlap={args.overlap} aa_edges={args.aa_edges}",
             f"fixed_matching={metadata['fixed_matching']}",
         ],

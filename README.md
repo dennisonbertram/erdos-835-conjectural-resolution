@@ -18,6 +18,11 @@ unresolved case is \(k=16\).
 
 New exact results in the note include:
 
+- a coordinated-nine theorem for the class-B \(r=2\) profile: every legal
+  complement-cover prefix of type \(8^4\,10^2\) extends by three further
+  support-respecting matchings.  Together with the earlier \(r=3,4,5\)
+  theorem, this leaves only the \(r=0,1\) coordinated-nine profiles before
+  the later first-lift and fan-realizability layers;
 - the Odd-graph covering equivalence and a reversible one- and two-point
   lift between the three neighboring Johnson graphs;
 - uniformity of every ordered complementary colour-pair cell;
@@ -1219,8 +1224,9 @@ routes, but not the asymmetric case.
   omissions, including repetitions.  Exact Tutte catalogues reduce the
   proof to three terminal cores, and explicit switches eliminate all three.
   Applied to the complement-cover six-prefix, this proves coordinated
-  nine-packings for the class-B profiles \(r=3,4,5\).  Profiles
-  \(r=0,1,2\), colours ten through seventeen, the later fan-compatibility
+  nine-packings directly for the class-B profiles \(r=3,4,5\); the
+  \(r=2\) profile is now closed by the mixed-support theorem below.  Profiles
+  \(r=0,1\), colours ten through seventeen, the later fan-compatibility
   layers, and Problem #835 remain open.
 - [`collaboration/r0_complement_cover_six/NOTE.md`](collaboration/r0_complement_cover_six/NOTE.md):
   a solver-free \(r=0\) complement-covering six-prefix theorem.  An exact
@@ -1269,8 +1275,30 @@ routes, but not the asymmetric case.
   One additional support-preserving two-edge trade explicitly repairs it.
   Exact row arithmetic reduces this six-fold forced-edge boundary to
   \((a,r)=(0,2),(0,3),(1,3)\), and a solver-free equality-core lemma proves
-  that a core-breaking trade always exists.  The surviving \(r=0\) target is
-  to coordinate two repaired families with the seventh size-ten support.
+  that a core-breaking trade always exists.
+- [`collaboration/coordinated_nine_r0_pair_gate_sat/NOTE.md`](collaboration/coordinated_nine_r0_pair_gate_sat/NOTE.md):
+  six exact SAT/DRAT orbit certificates proving the \(r=0\) pair gate:
+  two live size-ten families either admit edge-disjoint perfect matchings or
+  share a common forced edge.  The semantic auditor reconstructs every CNF,
+  checks its manifest and hash, and replays all six DRAT proofs.
+- [`collaboration/r0_three_ten_obstruction/R0_EQUALITY_COORDINATION.md`](collaboration/r0_three_ten_obstruction/R0_EQUALITY_COORDINATION.md):
+  a solver-free trade theorem coordinating any two of the six forced
+  size-ten families with the seventh family throughout all three equality
+  cases, including repeated complements.
+- [`collaboration/r0_three_ten_obstruction/R0_INCOMPATIBILITY_GRAPH.md`](collaboration/r0_three_ten_obstruction/R0_INCOMPATIBILITY_GRAPH.md):
+  an exact classification of the seven-family incompatibility graph as
+  \(K_t\dot\cup(7-t)K_1\), \(t\le6\).  The no-independent-triple case is
+  precisely the equality boundary already repaired above.  The remaining
+  \(r=0\) gate must use the full complement-row inventory to coordinate an
+  independent triple; pairwise compatibility alone is not sufficient.
+- [`collaboration/r0_three_family_helly_gate/NOTE.md`](collaboration/r0_three_family_helly_gate/NOTE.md):
+  an exact full-row counterexample to the tempting three-family Helly step.
+  Three repeated live supports have 42 perfect matchings, every pair of
+  colour occurrences coordinates, yet no three matchings are mutually
+  edge-disjoint.  A compact 190-pair certificate proves the failure.
+  Nevertheless 34 of the certificate's 35 seven-family colour triples do
+  pack, isolating the correct remaining target as a global seven-family
+  selection theorem.
 - [`collaboration/coordinated_nine_r1_reduction/NOTE.md`](collaboration/coordinated_nine_r1_reduction/NOTE.md):
   the exact \(r=1\) one- and two-step Tutte catalogues, core-reuse ceilings,
   and three literal class-B pair obstructions with triple intersections
@@ -1286,25 +1314,33 @@ routes, but not the asymmetric case.
   semantically reconstructed by an independent standard-library auditor,
   and all six replay with DRAT-trim.  This closes pair selection.  Exact
   class-B bookkeeping also eliminates the \(K_{5,7}\) size-twelve
-  terminal; the \(K_{3,1^5}\) and \(K_7\) pair-reselection branches remain.
+  terminal.
+- [`collaboration/coordinated_nine_r1_terminal_k311111/NOTE.md`](collaboration/coordinated_nine_r1_terminal_k311111/NOTE.md):
+  a solver-free re-selection theorem for the separator-four
+  \(K_{3,1^5}\) terminal, including the unique no-outside-edge pattern and
+  its length-five augmenting repair.
+- [`collaboration/coordinated_nine_r1_terminal_k7/NOTE.md`](collaboration/coordinated_nine_r1_terminal_k7/NOTE.md):
+  the exact equality reduction and replacement-support theorem for the
+  \(K_7\) terminal when neither selected size-ten matching has an edge
+  wholly outside the seven-core.  Class-B incidence forces an unused triple
+  to meet the core at least twice; \(91{,}140\) exhaustive cross-matching
+  checks coordinate that replacement with the retained ten-support and the
+  size-twelve support.  The \(K_7\) branch with an old outside-outside edge
+  is the sole remaining coordinated-nine obstruction for \(r=1\).
 - [`collaboration/coordinated_nine_r2_obstruction/NOTE.md`](collaboration/coordinated_nine_r2_obstruction/NOTE.md):
   an exact \(r=2\) delimiter.  A legitimate \(8^4\,10^2\)
   complement-cover prefix can block every remaining size-ten support, so the
   fixed “append one ten and both twelves” route is false.  The same prefix has
   an explicit verified \(8+12+12\) extension to nine, showing that the
-  obstruction is to that route rather than to coordinated nine.  A universal
-  \(r=2\) switching theorem remains open.
+  obstruction is to that route rather than to coordinated nine.  The mixed
+  theorem below now closes the universal \(r=2\) choice.
 - [`collaboration/r2_terminal_flexibility/NOTE.md`](collaboration/r2_terminal_flexibility/NOTE.md):
-  a solver-free reduction of that \(r=2\) switching frontier.  After any
-  candidate size-eight matching the first prescribed near-factor exists;
-  failure of the second has exactly three Tutte types.  Class-B row resources
-  prevent the \(K_{5,7}\) and \(K_{3,1^5}\) types from blocking all five
-  candidate supports, so every all-five failure reaches a terminal \(K_7\).
-  Exact endpoint arithmetic reduces its genuinely hard local configurations
-  to eighteen type pairs, closes all six exceptional \(P_4\) rows by
-  support-preserving switches, and proves uniqueness/resource bounds for the
-  remaining dense cores.  The other labelled \(K_7\) rows and the global
-  mixture of terminal types remain open.
+  the complete terminal theorem for the \(r=2\) switching frontier.  After a
+  size-eight or size-ten candidate, the first prescribed near-factor always
+  exists.  The \(K_{5,7}\) and coarsened \(K_{3,1^5}\) terminals have explicit
+  local switches; the ordinary, \(P_4\), and all-bad \(K_7\) rows switch as
+  well.  The only rigid residue is a seventeen-edge \(K_7\) core, eliminated
+  globally by the companion cross-route gate.
 - [`collaboration/r2_size8_gate_obstruction/NOTE.md`](collaboration/r2_size8_gate_obstruction/NOTE.md):
   a literal class-B \(r=2\) six-prefix for which all five remaining
   size-eight supports are blocked by two disjoint \(K_5\) cores.  This
@@ -1316,8 +1352,8 @@ routes, but not the asymmetric case.
   six-prefix, at least one of the five remaining size-eight supports or four
   remaining size-ten supports has a residual perfect matching.  Common
   saturated \(K_6\) and \(K_5\) obstruction cores would require respectively
-  \(22>21\) and \(15>14\) row incidences.  Packing the two prescribed
-  size-twelve near-factors after that guaranteed first matching remains open.
+  \(22>21\) and \(15>14\) row incidences.  This is the initial-choice input to
+  the completed terminal and cross-route theorem.
 - [`collaboration/r2_size10_terminal_obstruction/NOTE.md`](collaboration/r2_size10_terminal_obstruction/NOTE.md):
   a literal class-B certificate showing that an arbitrary perfect matching
   on a live size-ten support need not extend with the two prescribed
@@ -1326,14 +1362,13 @@ routes, but not the asymmetric case.
   delimiter, this proves that the initial-support dichotomy must be
   strengthened to a globally coordinated choice.
 - [`collaboration/r2_cross_route_reduction/NOTE.md`](collaboration/r2_cross_route_reduction/NOTE.md):
-  a solver-free bridge between the two \(r=2\) routes.  It closes the
-  all-four and, more generally, every at-least-three rigid size-ten branch;
-  proves that a seventeen-edge terminal core excludes every initially
-  blocked size-ten support; and combines the generalized \(P_4\),
-  all-bad-column, and remaining ordinary-row switches into a five-size-eight
-  theorem.  A counterexample must now coordinate an initially blocked
-  size-eight core with at most two rigid size-ten rows and the remaining
-  five-saturated or ordinary size-ten terminal routes.
+  the solver-free global bridge completing coordinated nine for \(r=2\).
+  A seventeen-edge terminal core excludes every initially blocked size-eight
+  or size-ten support and forces an alternative route; a saturated \(K_6\)
+  supplies a direct complete-cut construction.  Combined with the exhaustive
+  terminal switches and initial-support dichotomy, every legal
+  \(8^4\,10^2\) six-prefix extends to nine.  The final eight colours and the
+  later fan-realizability layers remain open.
 - [`collaboration/opus5/coordinated_nine_and_global_bridge/NOTE.md`](collaboration/opus5/coordinated_nine_and_global_bridge/NOTE.md):
   Opus 5's max-effort audit.  It supplies an independent exact \(r=0\)
   dead-prefix certificate, a solver-free saturated-core switch covering
