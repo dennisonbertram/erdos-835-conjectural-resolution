@@ -1123,6 +1123,14 @@ routes, but not the asymmetric case.
   cut-clean non-completable instance, so the inequalities are not sufficient
   in general.  All \(42{,}300\) sampled \(k=16\) instances completed, but
   universal completion remains open.
+- [`collaboration/opus5/first_lift_classB_attack/NOTE.md`](collaboration/opus5/first_lift_classB_attack/NOTE.md):
+  Opus 5's stronger class-B follow-up.  It proves the two-sided bipartite
+  capacity condition (BC), its parity refinement (BP), exact threshold
+  theorems showing neither can obstruct the \(n=13,r=5\) target, and complete
+  enumerations of three nearby parameter pairs.  It also gives explicit
+  counterexamples proving that these conditions and the tested fractional
+  relaxation are not sufficient in general.  The target class-B completion
+  theorem, and hence the first lift, remain open.
 - [`collaboration/first_lift_partial_factorization_audit/NOTE.md`](collaboration/first_lift_partial_factorization_audit/NOTE.md):
   an independent audit of the exact class-B′/partial-factorization
   equivalence and the nearby literature.  It gives a solver-free
@@ -1170,6 +1178,12 @@ routes, but not the asymmetric case.
   explicit locally maximal fifteen-matching prefix leaves
   \(C_3\mathbin{\dot\cup}C_5\) on two identical supports; this rules out
   the invariant-only induction, not a different global completion.
+- [`collaboration/first_lift_global_theorem/EIGHTH_MATCHING_CORE_CATALOGUE.md`](collaboration/first_lift_global_theorem/EIGHTH_MATCHING_CORE_CATALOGUE.md):
+  the exact large-support obstruction catalogue after seven matchings.
+  A blocked size-ten support forces one of seven complete multipartite
+  cores; a blocked size-twelve support forces \(K_7\) or
+  \(K_8-E(K_3)\).  Row-sum reuse ceilings isolate the finite switching
+  configurations still needed for an eighth-colour theorem.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
@@ -1526,6 +1540,8 @@ python3 -B \
 python3 -B \
   collaboration/opus5/first_lift_k13_hole/verify_first_lift_obstruction.py
 python3 -B \
+  collaboration/opus5/first_lift_classB_attack/verify_classB.py
+python3 -B \
   collaboration/first_lift_partial_factorization_audit/verify_boundary.py
 python3 -B \
   collaboration/first_lift_dense_support_prefix/verify_prefix_criteria.py
@@ -1533,6 +1549,8 @@ python3 -B \
   collaboration/first_lift_global_theorem/verify_dead_prefix.py
 python3 -B \
   collaboration/first_lift_global_theorem/verify_propagation_counterexample.py
+python3 -B \
+  collaboration/first_lift_global_theorem/verify_eighth_matching_core_catalogue.py
 python3 -B \
   collaboration/first_lift_aggregate_graphicity/verify_aggregate_graphicity.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
