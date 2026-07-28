@@ -65,6 +65,9 @@ Their total-obstruction reuse ceilings are, respectively,
 \[
 3,\quad1,\quad3,\quad4. \tag{4}
 \]
+The \(D=K_6\) ceiling four is the strengthened total-obstruction bound in
+`R0_CORE_PAIR_CATALOGUE.md`; the coarser core catalogue alone gives only
+the preliminary ceiling five.
 
 Let \(k\) be the number of distinct certifying cores used by the seven
 assignments.  Every core is used positively, so \(1\le k\le7\).
@@ -118,7 +121,12 @@ established or independently hardened.
      `verify_eighth_matching_core_catalogue.py`;
    - commit `2b83717`,
      `R0_ROW_SUM_CORE_ELIMINATION.md`,
-     `verify_r0_row_sum_core_elimination.py`.
+     `verify_r0_row_sum_core_elimination.py`;
+   - commit `916a8a3`,
+     `R0_CORE_PAIR_CATALOGUE.md`, section “A \(K_6\) cannot be reused
+     five times”, and `verify_r0_core_pairs.py`, establishing the
+     strengthened \(K_6\) total-obstruction reuse ceiling four used in
+     (4).
 
 2. One or two distinct certifying cores:
 
