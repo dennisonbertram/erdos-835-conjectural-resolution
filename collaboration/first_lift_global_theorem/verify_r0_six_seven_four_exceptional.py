@@ -31,6 +31,7 @@ def minimum_edges(
         ]
     ],
     d_pool: list[tuple[frozenset[int], frozenset[int]]],
+    exceptional_count: int = 4,
 ) -> tuple[str, int | None]:
     model = cp_model.CpModel()
     selections = []
@@ -48,7 +49,7 @@ def minimum_edges(
         model.new_bool_var(f"d_{index}")
         for index in range(len(d_pool))
     ]
-    model.add(sum(d_selected) == core_count - 4)
+    model.add(sum(d_selected) == core_count - exceptional_count)
     selections.extend(
         (d_selected[index], *data)
         for index, data in enumerate(d_pool)
