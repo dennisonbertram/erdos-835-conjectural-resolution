@@ -1158,6 +1158,12 @@ routes, but not the asymmetric case.
   cores cannot coexist and using the class-B row sums to escape the unique
   surviving core.  Together the two notes give a universal seven-colour
   prefix; completion of the remaining ten colours is still open.
+- [`collaboration/first_lift_global_theorem/PROPAGATION_COUNTEREXAMPLE.md`](collaboration/first_lift_global_theorem/PROPAGATION_COUNTEREXAMPLE.md):
+  a minimal two-colour residual certificate showing that the exact
+  residual-degree identity cannot propagate an arbitrary prefix.  An
+  explicit locally maximal fifteen-matching prefix leaves
+  \(C_3\mathbin{\dot\cup}C_5\) on two identical supports; this rules out
+  the invariant-only induction, not a different global completion.
 - [`collaboration/first_lift_aggregate_graphicity/NOTE.md`](collaboration/first_lift_aggregate_graphicity/NOTE.md):
   an exhaustive relaxation theorem proving that the aggregate degree
   sequence of every colour subfamily is graphic.  All \(18{,}032\) relaxed
@@ -1517,6 +1523,8 @@ python3 -B \
   collaboration/first_lift_dense_support_prefix/verify_prefix_criteria.py
 python3 -B \
   collaboration/first_lift_global_theorem/verify_dead_prefix.py
+python3 -B \
+  collaboration/first_lift_global_theorem/verify_propagation_counterexample.py
 python3 -B \
   collaboration/first_lift_aggregate_graphicity/verify_aggregate_graphicity.py
 python3 -B collaboration/opus5/unrestricted_ls3420_attack_2/second_star_split.py
