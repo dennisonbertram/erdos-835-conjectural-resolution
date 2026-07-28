@@ -77,5 +77,27 @@ twelve-support perfect matching contains a critical matching pattern of
 size at least three.  A full two-matching switching theorem must hit all
 such patterns simultaneously or prove that their overlaps admit a trade.
 
+## Sharpness
+
+The bound two cannot be increased to three.  On vertices
+\(\{0,\ldots,7\}\), take the round-robin one-factor
+\[
+ P_0=\{(0,7),(1,6),(2,5),(3,4)\}
+\]
+of \(K_8\), and let \(D=K_8-P_0\).  The graph \(D\) is the union of the
+other six factors in a one-factorization of \(K_8\), viewed as six matchings
+in \(K_{12}\).  Now delete the three-edge matching
+\[
+ P=\{(1,6),(2,5),(3,4)\}.
+\]
+The graph \(D\cup P\) contains every edge of the \(K_7\) on
+\(\{1,\ldots,7\}\).  Hence those seven vertices are independent in
+\(K_{12}-(D\cup P)\).  Only five other vertices remain, so no perfect
+matching exists.
+
+Thus a critical pattern of size three genuinely can stop extension.  Any
+stronger switching theorem must use the freedom to alter the earlier whole
+matching, not merely a better one-support resilience bound.
+
 `verify_twelve_support_switching.py` checks the finite Tutte patterns and
-all three lower bounds.
+all three lower bounds, and constructs the sharp three-edge certificate.

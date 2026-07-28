@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Verify the arithmetic behind twelve-support two-edge resilience."""
 
+from itertools import combinations
+
 
 def main() -> None:
     # (block sizes, core edges, six-layer capacity, extra edges needed)
@@ -34,11 +36,33 @@ def main() -> None:
 
     assert all(required >= 3 for _, _, _, required in rows)
 
+    # Sharpness: the seven round-robin factors partition K8.  Delete six as
+    # D and three edges of the omitted factor as P; D union P contains K7.
+    factors = []
+    for residue in range(7):
+        factor = {(residue, 7)}
+        for offset in range(1, 4):
+            factor.add(
+                tuple(sorted(((residue + offset) % 7, (residue - offset) % 7)))
+            )
+        factors.append(factor)
+    assert len({frozenset(factor) for factor in factors}) == 7
+    assert set().union(*factors) == set(combinations(range(8), 2))
+    assert sum(len(factor) for factor in factors) == 28
+
+    omitted = factors[0]
+    deletion_six = set().union(*factors[1:])
+    deletion_three = {edge for edge in omitted if 0 not in edge}
+    clique_seven = set(combinations(range(1, 8), 2))
+    assert len(deletion_three) == 3
+    assert clique_seven <= deletion_six | deletion_three
+
     print("PASS all size-12 seven-layer Tutte cores audited")
     print("PASS K5,7 needs at least five further matching edges")
     print("PASS K8-E(K3) and K7 each need at least three")
     print("PASS deleting any available matching of size at most two is safe")
-    print("SCOPE: two-edge resilience; two whole matchings are not yet coordinated")
+    print("PASS sharpness: three edges can complete a blocking K7")
+    print("SCOPE: sharp two-edge resilience; whole matchings are not yet coordinated")
 
 
 if __name__ == "__main__":
