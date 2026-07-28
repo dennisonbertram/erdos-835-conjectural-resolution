@@ -1587,7 +1587,7 @@ Expected decisive outputs:
 ## Primary references
 
 - [Erdős Problem #835](https://www.erdosproblems.com/835)
-- [Recent official/X status audit, 26 July 2026](evidence/recent_status_audit_2026-07-26.md)
+- [Recent official/X status audit, 27 July 2026](evidence/recent_status_audit_2026-07-27.md)
 - J. Ma and Q. Tang,
   [A Note on Erdős Problem #835](https://github.com/QuanyuTang/erdos-problem-835/blob/main/On_Problem_835.pdf)
 - P. Hammond and D. H. Smith,
