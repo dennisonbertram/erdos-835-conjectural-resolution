@@ -1083,6 +1083,11 @@ routes, but not the asymmetric case.
 - [`collaboration/j9_integer_weight_lemma/NOTE.md`](collaboration/j9_integer_weight_lemma/NOTE.md):
   an independent proof and standard-library arithmetic audit of the final
   \(K_{13}\) integer edge-weight lemma used in the \(j=9\) theorem.
+- [`collaboration/h3_j8_exact_trade_elimination/NOTE.md`](collaboration/h3_j8_exact_trade_elimination/NOTE.md):
+  a solver-free elimination of the exact triple-degree-zero branch at
+  \(j=8\).  Complementary nine-set sums and the mod-\(6\) recurrence force
+  every integral \(3\)-trade coefficient to vanish; the general
+  triple-degree-at-most-three case remains open.
 - [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
   the exact separation between support-admissible,
   partial-factorization-realizable, and fan-realizable first-lift
@@ -1424,6 +1429,8 @@ python3 -B \
   collaboration/h3_j9_top_properness_audit/verify_j9_top_properness.py
 python3 -B \
   collaboration/j9_integer_weight_lemma/verify_arithmetic.py
+python3 -B \
+  collaboration/h3_j8_exact_trade_elimination/verify_j8_exact_trade_elimination.py
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support8.py
 python3 -B \
