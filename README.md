@@ -1105,9 +1105,9 @@ routes, but not the asymmetric case.
 - [`collaboration/h3_j8_n0_outside_s4_boundary/NOTE.md`](collaboration/h3_j8_n0_outside_s4_boundary/NOTE.md):
   a boundary attack fixing one exterior point and imposing \(S_4\) symmetry
   on the other four.  Independent full-equation CP-SAT and rank-reduced
-  Gurobi searches exactly eliminate six \((m,w)\) subcases, with a
+  Gurobi searches exactly eliminate seven \((m,w)\) subcases, with a
   dependency-free audit of all orbit counts, row reductions, and cube
-  symmetry breakers.  Thirteen branches and the unrestricted \(N=0\)
+  symmetry breakers.  Twelve branches and the unrestricted \(N=0\)
   problem remain open.
 - [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
   the exact separation between support-admissible,

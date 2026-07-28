@@ -68,6 +68,14 @@ returned UNKNOWN in the rank-reduced CP-SAT casewise driver after
 300.190845 seconds and 197,078 branches.  The driver therefore returned the
 aggregate status UNKNOWN and made no claim about the other 70 cases.
 
+After the eight-worker full-equation CP-SAT run independently confirmed the
+terminal Gurobi result for m=8,w=8, its two redundant monolithic replays were
+interrupted:
+
+  formulation       status   workers  branches  wall_seconds
+  full equations    UNKNOWN        2    81,473   1462.453184
+  exact row-reduced UNKNOWN        8   869,772    966.932313
+
 STRICT INTERPRETATION
 
 This telemetry is retained for reproducibility and search planning only.  It

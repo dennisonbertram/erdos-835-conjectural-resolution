@@ -5,12 +5,13 @@
 Normalize a \(\Delta=60\) four-cube on vertices \(0,\ldots,7\).  Fix exterior
 vertex \(8\), and require invariance under every permutation of exterior
 vertices \(9,\ldots,12\).  In the \(N=0\) branch, exact integer searches
-independently replayed by CP-SAT and Gurobi eliminate these six subcases:
+independently replayed by CP-SAT and Gurobi eliminate these seven subcases:
 
 \[
 \begin{array}{c|c}
 \text{maximum positive cube value }m&
 \text{maximum weight-two positive value }w\\ \hline
+8&8\\
 9&9\\
 10&\text{unrestricted}\\
 11&10\\
@@ -21,10 +22,9 @@ independently replayed by CP-SAT and Gurobi eliminate these six subcases:
 \]
 
 These are exact finite subcase eliminations, not a complete elimination of
-the exterior-\(S_4\) model.  Thirteen branches remain unresolved:
+the exterior-\(S_4\) model.  Twelve branches remain unresolved:
 \[
 \begin{split}
-&(8,8);\\
 &(9,7),(9,8);\\
 &(11,7),(11,8),(11,9),(11,11);\\
 &(13,6),(13,7),(13,8),(13,9),(13,11),(13,13).
