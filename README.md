@@ -23,7 +23,7 @@ New exact results in the note include:
   remaining size-ten rows satisfy every internal-edge capacity cut.  A
   complete Tutte--Lovász audit now proves that those cuts and the full
   eleven-row ledger always supply the required simple \(b\)-factor.  The
-  prescribed three-edge-colouring of that factor remains open in thirteen
+  prescribed three-edge-colouring of that factor remains open in twelve
   of the sixteen selected-support Venn types, so this is not yet
   coordinated nine;
 - a computer-assisted closure of the identical-support Venn type
@@ -36,12 +36,17 @@ New exact results in the note include:
   path-and-cycle types.  All five frozen CNFs are UNSAT, with CaDiCaL
   internal checking, independent Glucose 4 solves, and independent
   `drat-trim` verification of the committed proof traces;
+- a certified closure of orbit two.  Its two identical supports reduce a
+  compatible pair to three marked even-cycle types.  All three relaxed
+  support-level formulas are UNSAT; the semantic verifier exhausts all
+  514,080 compatible pairs and checks all 513,114 learned clauses, and
+  every DRAT trace replays as `VERIFIED`;
 - a certified closure of orbit three.  An explicit support-stabilizer
   catalogue reduces every compatible pair to sixteen marked
   path-and-cycle types.  All sixteen frozen formulas are UNSAT; an
   independent semantic verifier checks every one of the 2,352,609 learned
   clauses, and all sixteen DRAT traces replay as `VERIFIED`.  The other
-  thirteen Venn types remain open;
+  twelve Venn types remain open;
 - an exact boundary-flow formulation of the remaining colouring problem.
   For a fixed \(b\)-factor it is a nowhere-zero
   \(\mathbb F_2^2\) flow with prescribed boundary.  Explicit audited
@@ -1390,6 +1395,10 @@ routes, but not the asymmetric case.
   path-and-cycle catalogue gives five canonical compatible-pair types.
   Every frozen CNF is UNSAT, independently solved with Glucose 4, and
   accompanied by a compressed DRAT trace that replays as `VERIFIED`.
+- [`collaboration/r0_three_family_helly_gate/2026-07-28_orbit2_cut_sufficiency.md`](collaboration/r0_three_family_helly_gate/2026-07-28_orbit2_cut_sufficiency.md):
+  the certified repeated-support orbit theorem.  Three marked alternating
+  two-factor types reduce to independently audited UNSAT formulas, and
+  their compressed DRAT traces all replay as `VERIFIED`.
 - [`collaboration/opus5_r0_orbit_repair/2026-07-28_orbit3_cut_sufficiency.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_orbit3_cut_sufficiency.md):
   the certified orbit-three theorem.  Sixteen support-stabilizer pair
   types reduce to frozen UNSAT CNFs; a separate verifier reconstructs the
