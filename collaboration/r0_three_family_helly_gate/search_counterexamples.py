@@ -16,6 +16,7 @@ used as a proof.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import time
 from itertools import combinations, permutations
@@ -253,6 +254,47 @@ def build_instance(
             upper=5,
         )
 
+    # Vertices with the same membership vector in the three fixed omitted
+    # triples are interchangeable.  In every orbit choose a labelling whose
+    # deleted-edge vector is lexicographically least.  Such a representative
+    # is no larger than its image under every adjacent transposition inside a
+    # membership cell, so the following generator constraints are
+    # orbit-complete.  They do not assume that the remaining rows are
+    # distinct.
+    triple_sets = tuple(frozenset(triple) for triple in omitted_triples)
+    membership_cells: dict[tuple[bool, ...], list[int]] = {}
+    for vertex in VERTICES:
+        pattern = tuple(vertex in triple for triple in triple_sets)
+        membership_cells.setdefault(pattern, []).append(vertex)
+    deleted_vector = [deleted(edge_index) for edge_index in range(len(EDGES))]
+    for cell_index, cell in enumerate(
+        sorted(membership_cells.values(), key=lambda vertices: tuple(vertices))
+    ):
+        for swap_index, (left_vertex, right_vertex) in enumerate(
+            zip(cell, cell[1:])
+        ):
+            def swapped(vertex: int) -> int:
+                if vertex == left_vertex:
+                    return right_vertex
+                if vertex == right_vertex:
+                    return left_vertex
+                return vertex
+
+            swapped_vector = [
+                deleted(
+                    EDGE_INDEX[
+                        tuple(sorted((swapped(edge[0]), swapped(edge[1]))))
+                    ]
+                )
+                for edge in EDGES
+            ]
+            lexicographic_leq(
+                cnf,
+                ("deleted_vertex_swap", cell_index, swap_index),
+                deleted_vector,
+                swapped_vector,
+            )
+
     if full_rows:
         # The eleven remaining complements are seven triples followed by four
         # five-sets.  The first three triples are the three support complements
@@ -273,6 +315,27 @@ def build_instance(
             for vertex in VERTICES:
                 literal = remaining_row(row, vertex)
                 cnf.add(literal if vertex in triple_set else -literal)
+
+        # Rows 3..6 are the four unspecified triple occurrences, and rows
+        # 7..10 are the four unspecified five-set occurrences.  Within each
+        # group the row labels have no mathematical meaning: the only later
+        # constraints use their column sums.  Sorting each group therefore
+        # selects an orbit-complete representative and removes a 4! x 4!
+        # permutation symmetry without identifying repeated occurrences.
+        for left, right in (
+            (3, 4),
+            (4, 5),
+            (5, 6),
+            (7, 8),
+            (8, 9),
+            (9, 10),
+        ):
+            lexicographic_leq(
+                cnf,
+                ("remaining_row", left, right),
+                [remaining_row(left, vertex) for vertex in VERTICES],
+                [remaining_row(right, vertex) for vertex in VERTICES],
+            )
 
         # d_D(v) + (11-rho(v)) = 12 is rho(v)=d_D(v)-1.  Together
         # with the row sizes, this is the exact remaining class-B inventory.
@@ -373,6 +436,21 @@ def violated_cut(
     return None
 
 
+def write_dimacs(path: Path, cnf: Cnf) -> str:
+    """Write the exact accumulated CNF and return its SHA-256 digest."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    digest = hashlib.sha256()
+    with path.open("w", encoding="ascii", newline="\n") as output:
+        header = f"p cnf {cnf.top} {len(cnf.clauses)}\n"
+        output.write(header)
+        digest.update(header.encode("ascii"))
+        for clause in cnf.clauses:
+            line = " ".join(map(str, (*clause, 0))) + "\n"
+            output.write(line)
+            digest.update(line.encode("ascii"))
+    return digest.hexdigest()
+
+
 def available_indices(
     masks: tuple[tuple[int, ...], ...], deleted_mask: int
 ) -> tuple[tuple[int, ...], ...]:
@@ -412,17 +490,44 @@ def solve_orbit(
     full_rows: bool,
     max_rounds: int,
     require_cut_feasible: bool = False,
+    static_cut_feasible: bool = False,
+    unsat_cnf_dir: Path | None = None,
 ) -> dict[str, object]:
     start = time.monotonic()
     cnf, families = build_instance(omitted_triples, full_rows=full_rows)
     masks = matching_masks(families)
-    initial_clauses = len(cnf.clauses)
-    solver = Cadical195(bootstrap_with=cnf.clauses)
     cuts = 0
     capacity_cuts = 0
     rounds = 0
     requirements = cut_requirements(omitted_triples)
     enforced_vertex_sets: set[tuple[int, ...]] = set()
+    if static_cut_feasible:
+        if not require_cut_feasible:
+            raise ValueError("static cut feasibility requires cut feasibility")
+        for vertices, internal_edges, required in requirements:
+            # From d_D(v)<=5 and |D|=27, at most the displayed number of
+            # edges can be deleted inside U.  Skip capacity inequalities that
+            # are already automatic from these base constraints.
+            maximum_deleted = min(
+                len(internal_edges),
+                5 * len(vertices) // 2,
+                sum(PREFIX_SIZES),
+            )
+            minimum_available = len(internal_edges) - maximum_deleted
+            if required <= minimum_available:
+                continue
+            cnf.cardinality(
+                ("cut_feasible", vertices),
+                [
+                    -cnf.variable(("deleted_edge", edge_index))
+                    for edge_index in internal_edges
+                ],
+                lower=required,
+            )
+            enforced_vertex_sets.add(vertices)
+            capacity_cuts += 1
+    initial_clauses = len(cnf.clauses)
+    solver = Cadical195(bootstrap_with=cnf.clauses)
     result: dict[str, object]
     try:
         while max_rounds == 0 or rounds < max_rounds:
@@ -513,6 +618,11 @@ def solve_orbit(
     finally:
         solver.delete()
 
+    if result["status"] == "unsat" and unsat_cnf_dir is not None:
+        cnf_path = unsat_cnf_dir / f"orbit_{orbit_index}.cnf"
+        result["cnf_sha256"] = write_dimacs(cnf_path, cnf)
+        result["cnf_path"] = str(cnf_path)
+
     result.update(
         {
             "orbit": orbit_index,
@@ -524,6 +634,7 @@ def solve_orbit(
             "elapsed_seconds": round(time.monotonic() - start, 3),
             "full_rows": full_rows,
             "require_cut_feasible": require_cut_feasible,
+            "static_cut_feasible": static_cut_feasible,
             "capacity_cuts": capacity_cuts,
         }
     )
@@ -556,6 +667,11 @@ def main() -> None:
     )
     parser.add_argument("--jsonl", type=Path)
     parser.add_argument(
+        "--unsat-cnf-dir",
+        type=Path,
+        help="freeze the exact accumulated DIMACS CNF for every UNSAT orbit",
+    )
+    parser.add_argument(
         "--require-cut-feasible",
         action="store_true",
         help=(
@@ -563,7 +679,17 @@ def main() -> None:
             "capacity cut"
         ),
     )
+    parser.add_argument(
+        "--static-cut-feasible",
+        action="store_true",
+        help=(
+            "install every potentially binding capacity cut before solving; "
+            "requires --require-cut-feasible"
+        ),
+    )
     args = parser.parse_args()
+    if args.static_cut_feasible and not args.require_cut_feasible:
+        parser.error("--static-cut-feasible requires --require-cut-feasible")
 
     orbits = support_orbits()
     print(f"support_orbits={len(orbits)}", flush=True)
@@ -580,6 +706,8 @@ def main() -> None:
                 full_rows=not args.relaxed_prefix_only,
                 max_rounds=args.max_rounds,
                 require_cut_feasible=args.require_cut_feasible,
+                static_cut_feasible=args.static_cut_feasible,
+                unsat_cnf_dir=args.unsat_cnf_dir,
             )
             line = json.dumps(result, sort_keys=True)
             print(line, flush=True)

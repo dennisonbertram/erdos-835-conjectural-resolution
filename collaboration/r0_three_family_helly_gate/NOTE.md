@@ -123,6 +123,44 @@ clauses excluding each discovered simultaneous matching triple.  Search
 output is evidence only; `verify_counterexample.py` checks the displayed
 certificate without a SAT dependency.
 
+### Cut-feasible target mode
+
+The option
+
+```sh
+python3 collaboration/r0_three_family_helly_gate/search_counterexamples.py \
+  --orbits 4 \
+  --cut-batch 100000 \
+  --require-cut-feasible \
+  --static-cut-feasible \
+  --unsat-cnf-dir /tmp/r0-cut-cnf
+```
+
+searches specifically for a nonpackable triple that satisfies every
+internal-edge capacity cut.  The static option installs every potentially
+binding cut before the first SAT call; without it, the same constraints are
+added lazily whenever a nonpackable model violates one.  A counterexample
+would refute cut sufficiency under the full row equations.  An independently
+certified UNSAT result is required before the opposite conclusion can be
+cited as a theorem.  When an orbit reaches UNSAT, `--unsat-cnf-dir` freezes
+the exact accumulated DIMACS instance and records its SHA-256 digest in the
+JSON result so that an external CaDiCaL/DRAT replay can be performed.
+
+The exact model now uses two additional orbit-complete symmetry reductions:
+
+1. the four unspecified remaining triple occurrences and the four five-set
+   occurrences are lexicographically sorted within their equal-size groups;
+2. vertices with the same membership vector in the three fixed selected rows
+   are interchangeable, so the deleted-edge vector is constrained to be no
+   larger than its image under adjacent swaps within each membership cell.
+
+For the second item, take a globally lexicographically least deleted-edge
+vector in the finite stabilizer orbit of the selected rows.  It satisfies
+every displayed adjacent-swap inequality.  Relabeling the prefix layers and
+then sorting the unspecified remaining rows restores all other static
+symmetries.  Hence neither reduction discards an isomorphism class, including
+classes with repeated rows.
+
 ## Global seven-family campaign
 
 The separate global CEGIS model asks whether all 35 choices of three among

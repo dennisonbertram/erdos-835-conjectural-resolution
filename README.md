@@ -1316,6 +1316,14 @@ routes, but not the asymmetric case.
   interpretation: every regenerated targeted bad-prefix orbit \(2,\ldots,10\)
   violates the simple internal-edge capacity inequality.  This is evidence
   for, not a proof of, cut sufficiency.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_sufficiency_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_sufficiency_audit.md):
+  the independently corrected audit of a second Opus 5 attack.  It verifies
+  an explicit weaker-ambient example in which all \(2^{13}\) capacity cuts
+  pass although even one selected perfect matching is impossible, and proves
+  that the full class-B row inventory excludes that example.  It retains the
+  valid small-cut and single-row reductions while rejecting an erroneous
+  directed-cut bound and an unproved edge-colouring jump.  Cut sufficiency
+  under the full eleven-row equations remains open.
 - [`collaboration/coordinated_nine_r0_repair_cegis/NOTE.md`](collaboration/coordinated_nine_r0_repair_cegis/NOTE.md):
   an exact semantic-witness CEGIS for one-layer support-preserving repair and
   a three-colour continuation.  Strict canonical replay has been audited; a
