@@ -78,4 +78,7 @@ Thus neither shape can be a total obstruction, and four distinct
 `verify_r0_four_k6.py` reproduces the complete classification
 deterministically and checks the common-intersection degree contradiction.
 
-Mixed families of four or more distinct cores remain open.
+Mixed families of four distinct cores are now excluded in
+`R0_FOUR_CORE_WITH_3311.md` and `R0_ALL_FOUR_CORE_FAMILIES.md`.
+Therefore a hypothetical total obstruction needs at least five distinct
+cores.  Families of five or more distinct cores remain open.

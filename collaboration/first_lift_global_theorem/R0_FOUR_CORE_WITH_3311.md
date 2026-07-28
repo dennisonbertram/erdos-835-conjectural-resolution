@@ -82,14 +82,14 @@ python3 -B verify_r0_four_core_capacity.py 3311 31111 31111 31111
 ```
 
 The all-\(D\) row is independently excluded in
-`R0_FOUR_K6_CLASSIFICATION.md`.  Therefore a hypothetical four-core total
-obstruction must use only \(A,C,D\), must contain at least one \(A\) or
-\(C\), and has one of the fourteen still-open type multisets
+`R0_FOUR_K6_CLASSIFICATION.md`.  The fourteen complementary \(A,C,D\)
+type multisets
 \[
 \begin{gathered}
 AAAA,\ AAAC,\ AAAD,\ AACC,\ AACD,\ AADD,\ ACCC,\\
 ACCD,\ ACDD,\ ADDD,\ CCCC,\ CCCD,\ CCDD,\ CDDD.
 \end{gathered} \tag{5}
 \]
-
-Families of five or more distinct cores also remain open.
+are now excluded in `R0_ALL_FOUR_CORE_FAMILIES.md`.  Thus a hypothetical
+total obstruction must use at least five distinct cores.  Families of five
+or more distinct cores remain open.

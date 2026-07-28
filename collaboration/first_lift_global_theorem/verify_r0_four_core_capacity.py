@@ -6,9 +6,8 @@ from __future__ import annotations
 import argparse
 import math
 from collections import Counter
-from itertools import combinations
 
-from verify_r0_core_pairs import embeddings, popcount
+from verify_r0_core_pairs import INCIDENT, VERTICES, embeddings, popcount
 from verify_r0_three_core_capacity import (
     BASE_CAPACITY,
     KINDS,
@@ -68,7 +67,10 @@ def main() -> None:
     tested = 0
     screened = 0
     covering = 0
+    row_identity_excluded = 0
+    unresolved = 0
     covering_example = None
+    unresolved_example = None
     union_edges = Counter()
 
     def search(
@@ -76,7 +78,9 @@ def main() -> None:
         chosen: tuple[tuple[str, int], ...],
         union: int,
     ) -> bool:
-        nonlocal tested, screened, covering, covering_example
+        nonlocal tested, screened, covering
+        nonlocal row_identity_excluded, unresolved
+        nonlocal covering_example, unresolved_example
         if group_index == len(groups):
             tested += 1
             screened += 1
@@ -88,21 +92,61 @@ def main() -> None:
             union_edges[popcount(union)] += 1
             if covering_example is None:
                 covering_example = (popcount(union), splits[0])
+            intersection = (1 << len(VERTICES)) - 1
+            for _kind, core in family:
+                intersection &= supports[core]
+            intersection_degrees = [
+                popcount(union & INCIDENT[vertex])
+                for vertex in VERTICES
+                if intersection >> vertex & 1
+            ]
+            if intersection_degrees and max(intersection_degrees) >= 6:
+                row_identity_excluded += 1
+                return False
+            unresolved += 1
+            if unresolved_example is None:
+                unresolved_example = (
+                    popcount(union),
+                    splits[0],
+                    tuple(intersection_degrees),
+                )
             return args.stop_cover
 
         kind, count = groups[group_index]
-        for selection in combinations(
-            pools[kind],
-            count,
-        ):
-            next_union = union
-            for core in selection:
-                next_union |= core
-            if not passes_prefix_screens(next_union):
-                continue
-            next_chosen = chosen + tuple((kind, core) for core in selection)
-            if search(group_index + 1, next_chosen, next_union):
-                return True
+        pool = pools[kind]
+
+        def choose_group(
+            start: int,
+            needed: int,
+            selection: tuple[int, ...],
+            partial_union: int,
+        ) -> bool:
+            if needed == 0:
+                next_chosen = chosen + tuple(
+                    (kind, core) for core in selection
+                )
+                return search(
+                    group_index + 1,
+                    next_chosen,
+                    partial_union,
+                )
+            last_start = len(pool) - needed
+            for index in range(start, last_start + 1):
+                core = pool[index]
+                next_union = partial_union | core
+                if not passes_prefix_screens(next_union):
+                    continue
+                if choose_group(
+                    index + 1,
+                    needed - 1,
+                    (*selection, core),
+                    next_union,
+                ):
+                    return True
+            return False
+
+        if choose_group(0, count, (), union):
+            return True
         return False
 
     search(0, (), first)
@@ -115,11 +159,17 @@ def main() -> None:
         f"screened_leaves={screened} covering_families={covering} "
         f"example={covering_example}"
     )
+    print(
+        f"row_identity_excluded={row_identity_excluded} "
+        f"unresolved={unresolved} unresolved_example={unresolved_example}"
+    )
     print(f"covering_union_edge_counts={dict(sorted(union_edges.items()))}")
-    if covering:
-        print("OPEN: subset-capacity inequalities admit a four-core cover")
-    else:
+    if covering == 0:
         print("PASS: four-core type multiset cannot cover seven supports")
+    elif unresolved == 0:
+        print("PASS: complement-row identity excludes every capacity cover")
+    else:
+        print("OPEN: subset capacity and common-row identity leave a cover")
 
 
 if __name__ == "__main__":
