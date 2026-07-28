@@ -18,6 +18,11 @@ In fact, every one of the seven selected colour layers has at least one
 valid one-layer replacement.  A smallest concrete repair changes only two
 edges within the unique selected size-twelve layer.
 
+Here "repair" means only that an eighth prescribed support becomes
+matchable.  It does not mean that the resulting eight-prefix extends through
+all seventeen colours.  The distinct full-completion repair distance is
+proved to be three in `R1_MINIMUM_FULL_REPAIR.md`.
+
 This is a coordinated-prefix result for one explicit class-B instance.  It
 does not prove a universal one-layer switching theorem, class-B-prime or
 fan realizability, full completion by switching, or Problem #835.
