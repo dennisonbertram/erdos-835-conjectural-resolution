@@ -2,7 +2,8 @@
 
 Work tool-free and independently.  We need a rigorous proof, a concrete
 counterexample, or the earliest exact gap.  Do not report a plausible sketch
-as a theorem.
+as a theorem.  Return at most 20,000 tokens: prioritize a checkable proof or
+counterexample over exploratory narration.
 
 ## Setting
 
