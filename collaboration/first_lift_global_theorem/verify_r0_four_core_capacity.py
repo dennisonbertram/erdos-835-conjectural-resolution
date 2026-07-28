@@ -18,6 +18,45 @@ from verify_r0_three_core_capacity import (
 )
 
 
+def row_rank_violation(
+    family: tuple[tuple[str, int], ...],
+    union: int,
+    supports: dict[int, int],
+    split: tuple[int, ...],
+) -> tuple[tuple[int, ...], int, int] | None:
+    """Return a vertex-set violation of the exact complement-row rank bound."""
+    degrees = [popcount(union & INCIDENT[vertex]) for vertex in VERTICES]
+    # A violating set never needs a vertex of J-degree at most two:
+    # deleting one weakly raises the lower bound and lowers the capacity.
+    relevant = tuple(vertex for vertex in VERTICES if degrees[vertex] >= 3)
+    for subset_bits in range(1, 1 << len(relevant)):
+        subset = tuple(
+            relevant[index]
+            for index in range(len(relevant))
+            if subset_bits >> index & 1
+        )
+        required_triple_incidences = sum(
+            degrees[vertex] - 2 for vertex in subset
+        ) - 3 * min(5, len(subset))
+        if required_triple_incidences <= 0:
+            continue
+
+        available_triple_incidences = 0
+        for multiplicity, (_kind, core) in zip(split, family):
+            outside_count = sum(not (supports[core] >> vertex & 1) for vertex in subset)
+            available_triple_incidences += multiplicity * min(
+                3,
+                outside_count,
+            )
+        if required_triple_incidences > available_triple_incidences:
+            return (
+                subset,
+                required_triple_incidences,
+                available_triple_incidences,
+            )
+    return None
+
+
 def anchor_cost(
     anchor: str,
     pattern: tuple[str, ...],
@@ -62,16 +101,16 @@ def main() -> None:
         assert len(pools[kind]) == PAIR_COUNTS[anchor_kind, kind]
 
     supports = {
-        core: support_mask(core)
-        for values in cores.values()
-        for core in values
+        core: support_mask(core) for values in cores.values() for core in values
     }
     tested = 0
     screened = 0
     covering = 0
     row_identity_excluded = 0
+    row_rank_excluded = 0
     unresolved = 0
     covering_example = None
+    row_rank_example = None
     unresolved_example = None
     union_edges = Counter()
 
@@ -81,8 +120,8 @@ def main() -> None:
         union: int,
     ) -> bool:
         nonlocal tested, screened, covering
-        nonlocal row_identity_excluded, unresolved
-        nonlocal covering_example, unresolved_example
+        nonlocal row_identity_excluded, row_rank_excluded, unresolved
+        nonlocal covering_example, row_rank_example, unresolved_example
         if group_index == len(groups):
             tested += 1
             screened += 1
@@ -105,11 +144,36 @@ def main() -> None:
             if intersection_degrees and max(intersection_degrees) >= 6:
                 row_identity_excluded += 1
                 return False
+
+            rank_checks = [
+                (
+                    split,
+                    row_rank_violation(
+                        family,
+                        union,
+                        supports,
+                        split,
+                    ),
+                )
+                for split in splits
+            ]
+            if all(violation is not None for _split, violation in rank_checks):
+                row_rank_excluded += 1
+                if row_rank_example is None:
+                    row_rank_example = (
+                        popcount(union),
+                        rank_checks[0],
+                    )
+                return False
+
             unresolved += 1
             if unresolved_example is None:
+                surviving_split = next(
+                    split for split, violation in rank_checks if violation is None
+                )
                 unresolved_example = (
                     popcount(union),
-                    splits[0],
+                    surviving_split,
                     tuple(intersection_degrees),
                 )
             return args.stop_cover
@@ -124,9 +188,7 @@ def main() -> None:
             partial_union: int,
         ) -> bool:
             if needed == 0:
-                next_chosen = chosen + tuple(
-                    (kind, core) for core in selection
-                )
+                next_chosen = chosen + tuple((kind, core) for core in selection)
                 return search(
                     group_index + 1,
                     next_chosen,
@@ -153,24 +215,20 @@ def main() -> None:
 
     search(0, (), first)
     print(f"pattern={pattern} anchor={anchor_kind}")
-    print(
-        "pool_sizes="
-        + repr({kind: len(pool) for kind, pool in pools.items()})
-    )
+    print("pool_sizes=" + repr({kind: len(pool) for kind, pool in pools.items()}))
     print(
         f"screened_leaves={screened} covering_families={covering} "
         f"example={covering_example}"
     )
     print(
         f"row_identity_excluded={row_identity_excluded} "
+        f"row_rank_excluded={row_rank_excluded} "
+        f"row_rank_example={row_rank_example} "
         f"unresolved={unresolved} unresolved_example={unresolved_example}"
     )
     print(f"covering_union_edge_counts={dict(sorted(union_edges.items()))}")
     if covering == 0:
-        print(
-            f"PASS: {len(pattern)}-core type multiset cannot cover "
-            "seven supports"
-        )
+        print(f"PASS: {len(pattern)}-core type multiset cannot cover seven supports")
     elif unresolved == 0:
         print("PASS: complement-row identity excludes every capacity cover")
     else:

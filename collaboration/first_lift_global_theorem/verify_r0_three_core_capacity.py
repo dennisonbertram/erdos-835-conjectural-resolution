@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 from functools import lru_cache
-from itertools import combinations, permutations, product
+from itertools import permutations, product
 
 from verify_r0_core_pairs import (
     CLIQUE,
@@ -74,18 +74,13 @@ def capacity(
 ) -> int:
     outside = ALL_VERTICES ^ core_support
     core_degree_sum = sum(
-        popcount(union & INCIDENT[v])
-        for v in VERTICES
-        if core_support >> v & 1
+        popcount(union & INCIDENT[v]) for v in VERTICES if core_support >> v & 1
     )
     remaining_edges = 31 - popcount(union)
     free_outside_edges = popcount(CLIQUE[outside] & ~union)
     forced_touch = max(0, remaining_edges - free_outside_edges)
     incidence_bound = (
-        36
-        + 2 * popcount(core_support)
-        - core_degree_sum
-        - forced_touch
+        36 + 2 * popcount(core_support) - core_degree_sum - forced_touch
     ) // 3
     return max(0, min(BASE_CAPACITY[kind], incidence_bound))
 
@@ -96,8 +91,7 @@ def best_order(
 ) -> tuple[str, str, str]:
     return min(
         set(permutations(pattern)),
-        key=lambda order: PAIR_COUNTS[order[0], order[1]]
-        * len(cores[order[2]]),
+        key=lambda order: PAIR_COUNTS[order[0], order[1]] * len(cores[order[2]]),
     )
 
 
@@ -114,11 +108,46 @@ def subset_capacity(
         36
         + 2 * popcount(common_support)
         - sum(
-            popcount(union & INCIDENT[v])
-            for v in VERTICES
-            if common_support >> v & 1
+            popcount(union & INCIDENT[v]) for v in VERTICES if common_support >> v & 1
         )
         - forced_touch,
+    )
+
+
+@lru_cache(maxsize=None)
+def split_demands(
+    capacities: tuple[int, ...],
+) -> tuple[tuple[tuple[int, ...], tuple[int, ...]], ...]:
+    """Return each positive seven-split and its demands by subset bitmask."""
+    demands = []
+    for split in product(*(range(1, cap + 1) for cap in capacities)):
+        if sum(split) != 7:
+            continue
+        demands.append(
+            (
+                split,
+                tuple(
+                    3
+                    * sum(
+                        split[index]
+                        for index in range(len(split))
+                        if subset >> index & 1
+                    )
+                    for subset in range(1, 1 << len(split))
+                ),
+            )
+        )
+    return tuple(demands)
+
+
+@lru_cache(maxsize=None)
+def subset_order(size: int) -> tuple[int, ...]:
+    """Put cheap singleton constraints before larger common-support bounds."""
+    return tuple(
+        sorted(
+            range(1, 1 << size),
+            key=lambda subset: (popcount(subset), subset),
+        )
     )
 
 
@@ -127,31 +156,23 @@ def covering_splits(
     union: int,
     support_masks: dict[int, int],
 ) -> list[tuple[int, ...]]:
-    splits = []
-    ranges = [
-        range(1, BASE_CAPACITY[kind] + 1)
-        for kind, _core in family
-    ]
-    for split in product(*ranges):
-        if sum(split) != 7:
-            continue
-        possible = True
-        for size in range(1, len(family) + 1):
-            for indices in combinations(range(len(family)), size):
-                common_support = ALL_VERTICES
-                for index in indices:
-                    common_support &= support_masks[family[index][1]]
-                if (
-                    3 * sum(split[index] for index in indices)
-                    > subset_capacity(union, common_support)
-                ):
-                    possible = False
-                    break
-            if not possible:
-                break
-        if possible:
-            splits.append(split)
-    return splits
+    supports = tuple(support_masks[core] for _kind, core in family)
+    common_supports = [ALL_VERTICES] * (1 << len(family))
+    capacities = tuple(BASE_CAPACITY[kind] for kind, _core in family)
+    survivors = split_demands(capacities)
+    for subset in subset_order(len(family)):
+        lowest = subset & -subset
+        index = lowest.bit_length() - 1
+        common_supports[subset] = common_supports[subset ^ lowest] & supports[index]
+        bound = subset_capacity(union, common_supports[subset])
+        survivors = tuple(
+            (split, demands)
+            for split, demands in survivors
+            if demands[subset - 1] <= bound
+        )
+        if not survivors:
+            return []
+    return [split for split, _demands in survivors]
 
 
 def main() -> None:
@@ -173,9 +194,7 @@ def main() -> None:
     first = cores[first_kind][0]
     first_support = support_mask(first)
     support_masks = {
-        core: support_mask(core)
-        for values in cores.values()
-        for core in values
+        core: support_mask(core) for values in cores.values() for core in values
     }
 
     seconds = [
@@ -261,18 +280,13 @@ def main() -> None:
                         )
                     )
                     shared_a_bounds.add(common_bound)
-            if (
-                args.stop_at_seven
-                and splits
-            ):
+            if args.stop_at_seven and splits:
                 print(f"pattern={pattern} order={order}")
                 print(
                     "OPEN SUBSET-CAPACITY WITNESS: "
                     f"edges={popcount(union)} split={splits[0]}"
                 )
-                print(
-                    "SCOPE: necessary union screens and summed capacity only"
-                )
+                print("SCOPE: necessary union screens and summed capacity only")
                 return
 
     histogram = Counter(
@@ -280,24 +294,15 @@ def main() -> None:
         for union, capacities in unions.items()
     )
     print(f"pattern={pattern} order={order}")
-    print(
-        f"ordered_families={ordered_families} "
-        f"distinct_unions={len(unions)}"
-    )
+    print(f"ordered_families={ordered_families} distinct_unions={len(unions)}")
     print(f"maximum_summed_capacity={maximum} best={best}")
-    print(
-        f"covering_families={covering_families} "
-        f"covering_example={covering_example}"
-    )
+    print(f"covering_families={covering_families} covering_example={covering_example}")
     print(f"union_histogram={dict(sorted(histogram.items()))}")
     if pattern in SHARED_A_PATTERNS:
         assert high_capacity_families > 0
         assert shared_a_failures == 0
         assert max(shared_a_bounds) < 12
-        print(
-            "PASS: every capacity-seven family has two A cores on one "
-            "support"
-        )
+        print("PASS: every capacity-seven family has two A cores on one support")
         print(
             "PASS: their common outside capacity is below the twelve "
             "incidences required by four triples"

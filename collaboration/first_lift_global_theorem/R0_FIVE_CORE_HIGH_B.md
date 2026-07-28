@@ -102,5 +102,6 @@ python3 -B verify_r0_four_core_capacity.py \
 ```
 
 Thus an exactly-five-core total obstruction contains no
-\(K_{3,3,1,1}\) core.  The 21 five-core type multisets using only \(A,C,D\)
-remain open.
+\(K_{3,3,1,1}\) core.  The companion theorem
+`R0_FIVE_CORE_ZERO_B.md` excludes all 21 type multisets using only
+\(A,C,D\).  Hence every exactly-five-core total obstruction is excluded.
