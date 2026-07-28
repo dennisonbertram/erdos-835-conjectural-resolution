@@ -373,7 +373,7 @@ def main() -> None:
     verify_forced_edge_frontier()
     verify_pair_certificates()
     print("PASS coordinated-nine r=1 reduction")
-    print("SCOPE: finite reduction and pair counterexample; no ninth theorem")
+    print("SCOPE: reduction plus companion certified terminal repairs proves r=1")
 
 
 if __name__ == "__main__":

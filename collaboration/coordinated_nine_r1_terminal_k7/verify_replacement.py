@@ -22,6 +22,19 @@ CROSS_INDEX = {
 }
 
 
+def perfect_matchings(vertices):
+    vertices = tuple(sorted(vertices))
+    if not vertices:
+        yield frozenset()
+        return
+    first = vertices[0]
+    for index, second in enumerate(vertices[1:], start=1):
+        rest = vertices[1:index] + vertices[index + 1 :]
+        edge = tuple(sorted((first, second)))
+        for tail in perfect_matchings(rest):
+            yield frozenset((edge, *tail))
+
+
 def cross_mask(edges):
     mask = 0
     for edge in edges:
@@ -117,6 +130,40 @@ def verify_terminal_equalities():
     print("PASS no-WW equality structure and replacement incidence")
 
 
+def verify_all_bad_k8():
+    core8 = tuple(range(8))
+    factors = tuple(perfect_matchings(core8))
+    pairs = 0
+    for first in factors:
+        for second in factors:
+            if first & second:
+                continue
+            choices = [
+                (edge0, edge1)
+                for edge0 in first
+                for edge1 in second
+                if set(edge0).isdisjoint(edge1)
+            ]
+            assert choices
+            pairs += 1
+
+    # Audit one literal instance of the two switches and final matching.
+    edge0 = (0, 1)
+    edge1 = (2, 3)
+    outside0 = (8, 9)
+    outside1 = (8, 10)
+    repaired0 = {(0, 8), (1, 9)}
+    repaired1 = {(2, 8), (3, 10)}
+    final = {edge0, edge1, (4, 8), (5, 9), (6, 10), (7, 11)}
+    assert not (repaired0 & repaired1)
+    assert not (repaired0 & final)
+    assert not (repaired1 & final)
+    assert len({vertex for edge in final for vertex in edge}) == 12
+    assert len({vertex for edge in repaired0 for vertex in edge}) == 4
+    assert len({vertex for edge in repaired1 for vertex in edge}) == 4
+    print("PASS all-bad K8 factor switches", pairs, "factor pairs")
+
+
 def verify_r2():
     checked = 0
     for triple0 in combinations(W, 3):
@@ -184,6 +231,7 @@ def verify_r3():
 
 if __name__ == "__main__":
     verify_terminal_equalities()
+    verify_all_bad_k8()
     verify_r2()
     verify_r3()
     print("PASS r=1 K7 no-WW replacement-triple repair")

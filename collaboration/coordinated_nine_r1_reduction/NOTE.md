@@ -35,9 +35,13 @@ This note proves three reductions.
    matchable size-ten supports need not admit edge-disjoint matchings,
    even when (1) holds.
 
-Thus an arbitrary mixed-support theorem is false.  A proof of a coordinated
-ninth matching must choose the two triples, or switch the six-prefix, using
-the full six-triple inventory.  No ninth-matching theorem is claimed here.
+Thus an arbitrary mixed-support theorem is false: a coordinated proof
+must choose the two triples, or switch the six-prefix, using the full
+six-triple inventory.  The certified pair gate and the two terminal
+repair notes cited below carry this coordination through.  Together
+they prove that the six prefix supports can be switched or reselected
+and extended by two of the six size-ten supports and the unique
+size-twelve support.
 
 ## Complement-row identities
 
@@ -221,9 +225,9 @@ fixed-matching orbits, and are independently checked by DRAT-trim.
 
 Therefore switch (7a) and the \(22>21\) count prove that some two of the
 six size-ten supports pack: at least one support has no forced edge, so
-it is compatible with every other support.  The size-twelve terminal
-frontier (11) remains; the certificate closes the pair gate, not the full
-coordinated-nine theorem.
+it is compatible with every other support.  The certificate closes the
+pair gate.  The size-twelve terminal frontier (11) is handled by the
+companion terminal notes cited below.
 
 ## First order: two size-ten matchings before the size-twelve matching
 
@@ -293,12 +297,13 @@ contradiction.  Thus the exact unresolved terminal list is
 The separator-four repair in
 `../coordinated_nine_r1_terminal_k311111/NOTE.md` eliminates the first
 of these two rows by reselecting one size-ten matching along an
-augmenting path.  The replacement-triple lemma in
-`../coordinated_nine_r1_terminal_k7/NOTE.md` then eliminates the
-no-\(WW\) equality branch of the \(K_7\) terminal.  Thus the sole
-unresolved \(r=1\) terminal is the \(K_7\) subbranch in which at least
-one of the two selected size-ten matchings has an edge entirely outside
-the seven-vertex core.
+augmenting path.  The replacement-triple lemma and all-bad construction
+in `../coordinated_nine_r1_terminal_k7/NOTE.md`, together with the
+certified local two-switch lemma in
+`../coordinated_nine_r1_terminal_k7_ww_sat/NOTE.md`, eliminate every
+\(K_7\) subbranch.  Therefore all terminal rows in (11) are eliminated:
+the six prefix supports can be reselected and extended to two
+coordinated size-ten matchings and the unique size-twelve matching.
 
 ### The separator-three equality branch
 

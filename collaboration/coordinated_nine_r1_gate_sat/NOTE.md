@@ -145,9 +145,8 @@ other support in at least one pairwise choice.  Hence two size-ten
 matchings can be selected disjointly from each other and from the
 six-prefix.
 
-This closes the pair-selection gate, not the full coordinated-nine
-theorem.  After the two size-ten matchings, the remaining size-twelve
-support initially has the terminal Tutte list
+This closes the pair-selection gate.  After the two size-ten matchings,
+the remaining size-twelve support initially has the terminal Tutte list
 \[
 K_{5,7},\qquad K_{3,1,1,1,1,1},\qquad K_7.
 \]
@@ -156,5 +155,8 @@ matchings have 36 edges, the omitted vertex \(z\) has selected degree at
 least three, and therefore their union has at most 33 edges inside the
 size-twelve support, fewer than the 35 core edges.  The augmenting-path
 repair in `../coordinated_nine_r1_terminal_k311111/NOTE.md` eliminates
-\(K_{3,1,1,1,1,1}\).  The sole remaining \(r=1\) terminal family is
-\(K_7\).
+\(K_{3,1,1,1,1,1}\).  The replacement and two-switch repairs in
+`../coordinated_nine_r1_terminal_k7/NOTE.md` and
+`../coordinated_nine_r1_terminal_k7_ww_sat/NOTE.md` eliminate \(K_7\).
+Thus the pair gate and terminal repairs together prove the coordinated
+ninth extension for this \(r=1\) profile.

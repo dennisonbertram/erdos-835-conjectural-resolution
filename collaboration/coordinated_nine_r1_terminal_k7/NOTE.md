@@ -35,9 +35,12 @@ This note proves:
 
 The last finite coordination in the proof is exhaustively checked by the
 dependency-free verifier in this directory.  The lemma closes the
-no-\(WW\) equality branch of the \(K_7\) terminal.  It does not by itself
-close the branch in which an old matching has a \(WW\)-edge, so no full
-\(r=1\) theorem is claimed here.
+no-\(WW\) equality branch of the \(K_7\) terminal.  The certified
+two-switch lemma in
+`../coordinated_nine_r1_terminal_k7_ww_sat/NOTE.md`, together with the
+all-bad construction below, closes the complementary branch in which an
+old matching has a \(WW\)-edge.  Thus the three pieces close the full
+\(K_7\) terminal.
 
 ## The no-\(WW\) equality structure
 
@@ -213,4 +216,85 @@ python3 collaboration/coordinated_nine_r1_terminal_k7/verify_replacement.py
 
 The verifier uses only Python's standard library.  Besides the finite
 coordination, it audits the equality arithmetic, the unique coloured
-core orbit, and the incidence lower bound which produces \(T'\).
+core orbit, the incidence lower bound which produces \(T'\), and every
+ordered pair of edge-disjoint one-factors used by the all-bad
+\(K_8\) construction.
+
+## Completing the \(K_7\) terminal
+
+It remains to record how the replacement lemma fits with the
+\(WW\)-switch certificate, including the equality excluded from that
+certificate.
+
+For \(s\in S\), define
+\[
+A_s=\{u\in U:us\in D\cup M_0\cup M_1\}. \tag{13}
+\]
+Every \(u\in U\) already has six selected core edges.  Since
+\(d_D(u)\le5\) and each old matching contributes at most one edge at
+\(u\), it has at most one selected neighbour in \(W\).  Hence the five
+sets in (13) are pairwise disjoint.
+
+If \(|A_s|\le6\) for every \(s\), the certified local lemma in
+`../coordinated_nine_r1_terminal_k7_ww_sat/NOTE.md` applies whenever an
+old matching has a \(WW\)-edge.  It finds a core edge \(e\) which is
+simultaneously Hall-good for the size-twelve matching and admits a
+two-switch against a \(WW\)-edge of its owner.  This gives the required
+three-match extension.
+
+Suppose finally that
+\[
+A_s=U \tag{14}
+\]
+for some \(s\in S\).  Put \(A=U\cup\{s\}\) and
+\(B=V-A=W-\{s\}\).  All 28 edges of \(K_A\) belong to
+\(F=D\cup M_0\cup M_1\).  At each vertex of \(A\), the degree bound on
+\(D\) and the matching bounds force equality:
+\[
+d_D(a)=5,\qquad d_{M_0}(a)=d_{M_1}(a)=1. \tag{15}
+\]
+Thus
+\[
+P_i=M_i[A]
+\]
+is a perfect matching of \(K_A\), the two \(P_i\) are edge-disjoint, and
+\[
+D[A]=K_A-(P_0\cup P_1). \tag{16}
+\]
+Each \(M_i\) has one further edge \(q_i\) entirely in \(B\).  Equation
+(15) also shows that no edge from \(A\) to \(B\) belongs to \(D\).
+
+Choose vertex-disjoint edges
+\[
+e_0\in P_0,\qquad e_1\in P_1. \tag{17}
+\]
+Such a choice always exists: after choosing \(e_0\), at most two edges
+of the perfect matching \(P_1\) meet its endpoints, leaving two choices.
+For each \(i\), replace
+\[
+e_i,\ q_i
+\]
+in \(M_i\) by the two cross edges which match the endpoints of \(e_i\)
+to the endpoints of \(q_i\).  All four new edges avoid \(D\), and the
+two repaired colours are edge-disjoint because the \(A\)-endpoints in
+(17) are disjoint.
+
+Now take
+\[
+N=\{e_0,e_1\}\cup Q, \tag{18}
+\]
+where \(Q\) is any perfect matching from the four vertices of
+\(A-V(e_0)-V(e_1)\) to \(S-\{s\}\).  All these cross edges avoid \(D\).
+They also avoid the two repaired colours: their \(A\)-endpoints are
+disjoint from the endpoints used in the two switches.  Hence (18) and
+the two repaired size-ten matchings are mutually edge-disjoint.
+
+The alternatives are now exhaustive:
+
+* if neither old matching has a \(WW\)-edge, use the replacement-triple
+  lemma proved above;
+* if an old matching has a \(WW\)-edge and every \(|A_s|\le6\), use the
+  certified two-switch lemma; and
+* if some \(|A_s|=7\), use (14)--(18).
+
+Therefore the \(K_7\) terminal is eliminated.

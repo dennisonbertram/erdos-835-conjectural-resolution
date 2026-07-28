@@ -18,11 +18,13 @@ unresolved case is \(k=16\).
 
 New exact results in the note include:
 
-- a coordinated-nine theorem for the class-B \(r=2\) profile: every legal
-  complement-cover prefix of type \(8^4\,10^2\) extends by three further
-  support-respecting matchings.  Together with the earlier \(r=3,4,5\)
-  theorem, this leaves only the \(r=0,1\) coordinated-nine profiles before
-  the later first-lift and fan-realizability layers;
+- coordinated-nine theorems for the class-B \(r=1,2\) profiles: in
+  \(r=1\), a complement-cover prefix of type \(8^4\,10^2\) can be
+  switched on the same supports and extended; in \(r=2\), every legal
+  such prefix extends by three further support-respecting matchings.
+  Together with the earlier \(r=3,4,5\) theorem, this leaves only the
+  \(r=0\) coordinated-nine profile before the later first-lift and
+  fan-realizability layers;
 - the Odd-graph covering equivalence and a reversible one- and two-point
   lift between the three neighboring Johnson graphs;
 - uniformity of every ordered complementary colour-pair cell;
@@ -1225,9 +1227,9 @@ routes, but not the asymmetric case.
   proof to three terminal cores, and explicit switches eliminate all three.
   Applied to the complement-cover six-prefix, this proves coordinated
   nine-packings directly for the class-B profiles \(r=3,4,5\); the
-  \(r=2\) profile is now closed by the mixed-support theorem below.  Profiles
-  \(r=0,1\), colours ten through seventeen, the later fan-compatibility
-  layers, and Problem #835 remain open.
+  \(r=1,2\) profiles are now closed by the mixed-support theorems below.
+  Profile \(r=0\), colours ten through seventeen, the later
+  fan-compatibility layers, and Problem #835 remain open.
 - [`collaboration/r0_complement_cover_six/NOTE.md`](collaboration/r0_complement_cover_six/NOTE.md):
   a solver-free \(r=0\) complement-covering six-prefix theorem.  An exact
   expectation argument selects three size-eight and three size-ten supports,
@@ -1303,9 +1305,9 @@ routes, but not the asymmetric case.
   the exact \(r=1\) one- and two-step Tutte catalogues, core-reuse ceilings,
   and three literal class-B pair obstructions with triple intersections
   zero, one, and two.  These prove that even individually matchable
-  size-ten supports need not admit disjoint choices, so the remaining
-  theorem must use all six triples simultaneously and coordinate the
-  size-twelve layer.
+  size-ten supports need not admit arbitrary disjoint choices.  The
+  companion pair gate uses all six triples simultaneously, and the
+  terminal notes coordinate the size-twelve layer.
 - [`collaboration/coordinated_nine_r1_gate_sat/NOTE.md`](collaboration/coordinated_nine_r1_gate_sat/NOTE.md):
   a certificate-complete proof of the \(r=1\) cross-family gate.  Six
   symmetry-orbit CNFs prove that two individually matchable size-ten
@@ -1325,8 +1327,15 @@ routes, but not the asymmetric case.
   wholly outside the seven-core.  Class-B incidence forces an unused triple
   to meet the core at least twice; \(91{,}140\) exhaustive cross-matching
   checks coordinate that replacement with the retained ten-support and the
-  size-twelve support.  The \(K_7\) branch with an old outside-outside edge
-  is the sole remaining coordinated-nine obstruction for \(r=1\).
+  size-twelve support.  Its all-bad \(K_8\) construction also closes the
+  equality case for an old outside-outside edge.
+- [`collaboration/coordinated_nine_r1_terminal_k7_ww_sat/NOTE.md`](collaboration/coordinated_nine_r1_terminal_k7_ww_sat/NOTE.md):
+  a certificate-complete proof of the remaining \(K_7\) two-switch gate.
+  A stronger local CNF uses only the prefix degree bound, two five-edge
+  matchings, core saturation, and the proper Hall-star condition.  CaDiCaL
+  proves it unsatisfiable, and the committed DRAT proof independently
+  replays with DRAT-trim.  Together with the two terminal notes and the
+  pair gate, this proves the coordinated ninth extension for \(r=1\).
 - [`collaboration/coordinated_nine_r2_obstruction/NOTE.md`](collaboration/coordinated_nine_r2_obstruction/NOTE.md):
   an exact \(r=2\) delimiter.  A legitimate \(8^4\,10^2\)
   complement-cover prefix can block every remaining size-ten support, so the
