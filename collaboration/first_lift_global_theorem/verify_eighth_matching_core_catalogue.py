@@ -126,6 +126,20 @@ def main() -> None:
     )
     assert min(k * (5 - k) for k in range(1, 5)) == 4
 
+    # K37 twice-reused normal forms and the four alpha matching bounds.
+    k37_cases = [
+        (c, a, b)
+        for a in range(11)
+        for b in range(11)
+        for c in range(4)
+        if a + b + c == 10 and 2 * c + a >= 12
+    ]
+    assert k37_cases == [(3, 6, 1), (3, 7, 0), (2, 8, 0)]
+    assert min(21 - a for _, a, _ in k37_cases) == 13
+    assert min(18 - a for _, a, _ in k37_cases) == 10
+    assert min(15 - a for _, a, _ in k37_cases) == 7
+    assert 13 > max(9, 6)
+
     profiles = {
         0: ((4, 3, 0), 31),
         1: ((4, 2, 1), 32),
@@ -158,6 +172,7 @@ def main() -> None:
     print("PASS r=0 complement-degree ceilings are 2, 1, 0, 4, 2, 4, 6")
     print("PASS total-obstruction equality sharpens K6 reuse from six to five")
     print("PASS total-obstruction ceilings sharpen to 2, 1, 0, 3, 1, 3, 5")
+    print("PASS K3,7 parity matching sharpens its total-obstruction ceiling to one")
     print("PASS target seven-prefix edge totals are 31, 32, 33, 33, 33, 34")
     print("SCOPE: exact obstruction reduction; eighth-colour packing remains open")
 

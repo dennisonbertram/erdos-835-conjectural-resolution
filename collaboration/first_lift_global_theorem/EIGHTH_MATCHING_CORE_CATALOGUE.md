@@ -295,6 +295,63 @@ ceilings for a hypothetical obstruction of all seven size-ten supports are
 \]
 for the core types in the order displayed in (5).
 
+### The \(K_{3,7}\) ceiling is one
+
+It remains to exclude equality in the first entry of (15).  Write a
+\(K_{3,7}\) core as \(K_{A,B}\), where \((|A|,|B|)=(3,7)\), and let \(O\)
+be the three outside vertices.  The vertices of \(A\) already have degree
+seven in the core.  For the ten noncore edges of \(F\), put
+\[
+ a=|E_F(B,O)|,\qquad b=|E_F(B)|,\qquad c=|E_F(O)|.
+\]
+If the core were reused twice, its two complement triples would both equal
+\(O\).  Hence
+\[
+ a+b+c=10,\qquad c\le3,\qquad 2c+a-6\ge6.
+\]
+The only possibilities are
+\[
+ (c,a,b)=(3,7,0),\quad(2,8,0),\quad(3,6,1). \tag{16}
+\]
+The two triples consume six of at most seven complement incidences in
+\(O\), so at least four of the other five large complement triples lie
+wholly in \(A\cup B\).
+
+Fix any such triple \(T\), put
+\[
+ R=(A\cup B)\setminus T,\qquad
+ \alpha=|R\cap A|,\quad \beta=|R\cap B|=7-\alpha.
+\]
+The residual graph has every \(O\)-to-\(A\) edge, and its graph on
+\(R\cap B\) is a clique minus at most the one edge counted by \(b\).
+It is enough to find a matching of size \(3-\alpha\) from \(O\) into
+\(R\cap B\): match the other \(\alpha\) vertices of \(O\) to \(R\cap A\).
+Exactly four vertices of \(R\cap B\) remain, and their \(K_4\) minus at most
+one edge has a perfect matching.
+
+The required cross matching always exists:
+
+* If \(\alpha=0\), the bipartite graph from \(O\) to \(B\) has at least
+  \(21-a\ge13\) edges.  Every vertex of \(O\) has a residual neighbour:
+  (16) and \(\Delta(F)\le7\) allow at most six deleted \(O\)-to-\(B\)
+  edges at any one vertex.  If its maximum matching had size at most two,
+  König's theorem would give a vertex cover of size two.  Two \(O\)-vertices
+  cannot cover because the third has a neighbour; one vertex from each side
+  covers at most nine edges; and two \(B\)-vertices cover at most six.
+* If \(\alpha=1\), the \(3\)-by-\(6\) graph has at least
+  \(18-a\ge10\) edges.  A bipartite graph with matching number at most one
+  has a one-vertex cover and therefore at most six edges.
+* If \(\alpha=2\), the \(3\)-by-\(5\) graph has at least
+  \(15-a\ge7\) edges, so it has the required one edge.
+* If \(\alpha=3\), no edge into \(B\) is required.
+
+Thus every one of those at least four supports has a perfect matching,
+contradicting total blockage.  A fixed \(K_{3,7}\) can be reused at most
+once, and the total-obstruction ceiling vector improves to
+\[
+ (1,1,0,3,1,3,5). \tag{17}
+\]
+
 ## Remaining frontier
 
 To prove an eighth-colour theorem it now suffices to show that the cores
