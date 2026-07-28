@@ -72,10 +72,10 @@ edge counts are
 \begin{array}{c|c|c|c|c|c}
 s&\text{odd blocks}&\text{core}&|E(\text{core})|
    &\text{pointwise ceiling}&r=0\text{ ceiling}\\ \hline
-0&3+7&K_{3,7}&21&5&4\\
-0&5+5&K_{5,5}&25&7&2\\
+0&3+7&K_{3,7}&21&5&2\\
+0&5+5&K_{5,5}&25&7&1\\
 1&3+3+3&K_{3,3,3}&27&6&0\\
-2&5+1+1+1&K_{5,1,1,1}&18&5&5\\
+2&5+1+1+1&K_{5,1,1,1}&18&5&4\\
 2&3+3+1+1&K_{3,3,1,1}&22&5&2\\
 3&3+1+1+1+1&K_{3,1,1,1,1}&18&6&4\\
 4&1+1+1+1+1+1&K_6&15&7&6.
@@ -149,16 +149,31 @@ complement incidences in \(O\).  Since \(\sum_vd_F(v)=62\) and
  &=36+2|C|-2|E(J)|. \tag{9}
 \end{aligned}
 \]
+There is a further simple-graph correction.  Of the
+\(31-|E(J)|\) edges of \(F\) outside \(J\), at most
+\(\binom{13-|C|}{2}\) lie wholly outside \(C\).  Therefore at least
+\[
+ r_J=\max\left\{0,\,
+ 31-|E(J)|-\binom{13-|C|}{2}\right\} \tag{10}
+\]
+touch \(C\) and contribute at least \(r_J\) more to
+\(\sum_{v\in C}d_F(v)\).  Thus (9) sharpens to
+\[
+ 3t\le36+2|C|-2|E(J)|-r_J. \tag{11}
+\]
 The final column of (5) is
 \[
- \left\lfloor\frac{36+2|C|-2|E(J)|}{3}\right\rfloor,
- \tag{10}
+ \left\lfloor
+ \frac{36+2|C|-2|E(J)|-r_J}{3}
+ \right\rfloor,
+ \tag{12}
 \]
 intersected with the pointwise ceiling.
 
 In particular, a \(K_{3,3,3}\) core cannot obstruct even one actual
-remaining support; a fixed \(K_{5,5}\) or \(K_{3,3,1,1}\) obstructs at most
-two; and no fixed core obstructs all seven.  Therefore, if all seven large
+remaining support; a fixed \(K_{5,5}\) obstructs at most one; a fixed
+\(K_{3,7}\) or \(K_{3,3,1,1}\) obstructs at most two; and no fixed core
+obstructs all seven.  Therefore, if all seven large
 supports were blocked after a seven-prefix, \(F\) would have to contain at
 least two distinct obstruction cores.  This reduces the exceptional profile
 to an overlap-or-switching problem.
@@ -168,7 +183,7 @@ to an overlap-or-switching problem.
 In a hypothetical obstruction of all seven size-ten supports, the \(K_6\)
 ceiling in (5) improves from six to five.  Suppose a \(K_6\) on \(C\) were
 reused six times, and put \(O=V(K_{13})\setminus C\).  Then equality holds
-throughout (9):
+throughout the uncorrected bound (9):
 \[
  3\cdot6=18=36+2\cdot6-2\cdot15.
 \]
