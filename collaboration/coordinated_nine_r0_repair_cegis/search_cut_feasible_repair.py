@@ -154,6 +154,28 @@ def cut_certificate(
         if len(available_edges) < required:
             return None
         selected.update(available_edges[:required])
+
+    # Make the certificate inclusion-minimal.  Removing a residual edge is
+    # safe exactly when every cut containing it still has more selected
+    # witnesses than its lower bound.
+    selected_counts = [
+        sum(bool(internal_mask & (1 << edge_index)) for edge_index in selected)
+        for internal_mask, _ in requirements
+    ]
+    for edge_index in sorted(selected, reverse=True):
+        affected = [
+            index
+            for index, (internal_mask, _) in enumerate(requirements)
+            if internal_mask & (1 << edge_index)
+        ]
+        if any(
+            selected_counts[index] <= requirements[index][1]
+            for index in affected
+        ):
+            continue
+        selected.remove(edge_index)
+        for index in affected:
+            selected_counts[index] -= 1
     return tuple(sorted(selected))
 
 

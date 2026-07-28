@@ -38,6 +38,9 @@ the repaired layer's support, the three selected row occurrences, and an
 explicit set of residual edges certifying the required capacity of every
 binding cut.  It does not freeze the other five layers: any later model that
 leaves those certificate edges free inherits the same cut-feasible repair.
+The selected residual set is made inclusion-minimal by deleting every edge
+whose removal preserves all cut lower bounds; this strengthens coverage
+without changing the witness semantics.
 A second raw pass re-enumerates every repair and route before a counterexample
 can be reported.  This script is likewise discovery evidence until an UNSAT
 CNF and proof are independently frozen and replayed.

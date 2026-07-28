@@ -1324,6 +1324,13 @@ routes, but not the asymmetric case.
   valid small-cut and single-row reductions while rejecting an erroneous
   directed-cut bound and an unproved edge-colouring jump.  Cut sufficiency
   under the full eleven-row equations remains open.
+- [`collaboration/opus5_r0_orbit_repair/2026-07-28_cut_factor_followup_audit.md`](collaboration/opus5_r0_orbit_repair/2026-07-28_cut_factor_followup_audit.md):
+  the corrected audit of the follow-up factor/colouring attack.  It identifies
+  (C) with the elementary \(b\)-Hall slice when all three terms are positive,
+  proves the component-parity and bridge-colour necessities, and independently
+  verifies a full-row instance that fails exactly one six-set cut by one edge.
+  It rejects the run's false independence-number lemma and does not promote
+  the incomplete Tutte--Lovász case analysis to a theorem.
 - [`collaboration/coordinated_nine_r0_repair_cegis/NOTE.md`](collaboration/coordinated_nine_r0_repair_cegis/NOTE.md):
   an exact semantic-witness CEGIS for one-layer support-preserving repair and
   a three-colour continuation.  Strict canonical replay has been audited; a
