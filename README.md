@@ -65,6 +65,13 @@ New exact results in the note include:
   semantic verifier reconstructs all cuts and checks all 2,604,987 learned
   clauses.  All 115 packaged CNF/learned/log/DRAT artifacts pass both hash
   layers, and all twenty-three DRAT traces replay as `VERIFIED`;
+- a [certified closure of orbit seven](collaboration/opus5_r0_orbit_repair/2026-07-28_orbit7_cut_sufficiency.md).
+  Its selected supports reduce all 570,780 labelled compatible pairs to
+  seventy-six exact stabilizer orbits.  Every frozen support-relaxation
+  formula is UNSAT; the independent semantic verifier reconstructs all
+  4,215 positive capacity cuts and checks all 9,386,110 learned clauses.
+  All 380 packaged CNF/learned/log/DRAT artifacts pass both hash layers,
+  and all seventy-six DRAT traces replay as `VERIFIED`;
 - a [certified closure of orbit eight](collaboration/opus5_r0_orbit_repair/2026-07-28_orbit8_cut_sufficiency.md).
   Its three selected-row intersections all have size two, and all 570,780
   labelled compatible pairs reduce to sixteen exact stabilizer orbits.
@@ -72,8 +79,8 @@ New exact results in the note include:
   verifier reconstructs all 3,872 positive capacity cuts and checks all
   1,502,474 learned clauses.  All eighty packaged
   CNF/learned/log/DRAT artifacts pass both hash layers, and all sixteen DRAT
-  traces replay as `VERIFIED`.  Thus orbits zero through six and orbit eight
-  are closed; orbit seven and orbits nine through fifteen remain open;
+  traces replay as `VERIFIED`.  Thus orbits zero through eight are closed;
+  orbits nine through fifteen remain open;
 - an [exact post-\(r=0\) bridge audit](collaboration/opus5/post_r0_global_bridge/INDEPENDENT_AUDIT.md).
   For a fixed six-set, the tower data through level two are identified with
   a partial proper colouring of \(J(19,3)\); the six first-lift instances

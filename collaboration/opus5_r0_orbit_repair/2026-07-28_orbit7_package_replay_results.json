@@ -1,0 +1,26 @@
+{
+  "package": {
+    "compressed_artifacts": 380,
+    "exact_bytes": 570514010,
+    "files": 399,
+    "largest_member_bytes": 6189121,
+    "manifest_entries": 398,
+    "manifest_sha256": "d1266fe1dd2c73bd5444b3fe0e85b7b819ba338a04e92b93240d6455400bd816",
+    "raw_manifest_entries": 380,
+    "raw_manifest_sha256": "2afefebda4d0b966f40234986dcdd88898c16bd8ea6caa9e0e31e2bf54b9590d"
+  },
+  "replay": {
+    "cadical_internal_check_logs": 76,
+    "compressed_hashes": 398,
+    "deterministic_worker_merge": "pass",
+    "drat_trim_fresh_replays": 76,
+    "drat_trim_replay_failures": 0,
+    "gzip_integrity_checks": 380,
+    "learned_clause_semantic_checks": 9386110,
+    "raw_hashes": 380,
+    "static_formula_reconstructions": 76,
+    "status": "pass"
+  },
+  "replay_command": "DRAT_TRIM=/private/tmp/drat-trim-erdos835/drat-trim sh 2026-07-28_orbit7_fixed_pair_cnf/verify_certificates.sh",
+  "status": "compressed-package-full-replay-pass"
+}
