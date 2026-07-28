@@ -31,6 +31,25 @@ def core_edges(blocks: tuple[int, ...]) -> int:
     return (total * total - sum(block * block for block in blocks)) // 2
 
 
+def r0_reuse_ceiling(blocks: tuple[int, ...]) -> int:
+    """Maximum t allowed by pointwise incidence and three size-8 supports."""
+    order = sum(blocks)
+    degrees = [
+        order - block
+        for block in blocks
+        for _ in range(block)
+    ]
+    pointwise = 12 - max(degrees)
+    required_small = 3 * order - 15
+    feasible = [
+        t
+        for t in range(8)
+        if t <= pointwise
+        and sum(max(0, 12 - degree - t) for degree in degrees) >= required_small
+    ]
+    return max(feasible)
+
+
 def catalogue(order: int) -> list[tuple[int, tuple[int, ...], int, int]]:
     rows = []
     for separator_size in range(order // 2):
@@ -69,6 +88,15 @@ def main() -> None:
 
     assert catalogue(10) == expected_ten
     assert catalogue(12) == expected_twelve
+    assert [r0_reuse_ceiling(blocks) for _, blocks, _, _ in expected_ten] == [
+        5,
+        5,
+        4,
+        5,
+        5,
+        6,
+        6,
+    ]
 
     profiles = {
         0: ((4, 3, 0), 31),
@@ -99,6 +127,7 @@ def main() -> None:
     print("PASS size-10 catalogue: seven coarsened Tutte cores")
     print("PASS size-12 catalogue: three cores, with K5,7 over global budget")
     print("PASS reuse ceilings follow from d_H(v)=12-d_F(v)")
+    print("PASS r=0 sharpening: every fixed core obstructs at most six size-10 supports")
     print("PASS target seven-prefix edge totals are 31, 32, 33, 33, 33, 34")
     print("SCOPE: exact obstruction reduction; eighth-colour packing remains open")
 

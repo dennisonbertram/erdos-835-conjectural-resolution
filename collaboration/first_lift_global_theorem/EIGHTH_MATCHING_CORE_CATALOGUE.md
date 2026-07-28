@@ -69,16 +69,16 @@ The odd integer partitions satisfying (4) give the complete list below.
 For \(n=10\), the seven possible block-size patterns and their forced core
 edge counts are
 \[
-\begin{array}{c|c|c|c|c}
+\begin{array}{c|c|c|c|c|c}
 s&\text{odd blocks}&\text{core}&|E(\text{core})|
-   &\text{reuse ceiling}\\ \hline
-0&3+7&K_{3,7}&21&5\\
-0&5+5&K_{5,5}&25&7\\
-1&3+3+3&K_{3,3,3}&27&6\\
-2&5+1+1+1&K_{5,1,1,1}&18&5\\
-2&3+3+1+1&K_{3,3,1,1}&22&5\\
-3&3+1+1+1+1&K_{3,1,1,1,1}&18&6\\
-4&1+1+1+1+1+1&K_6&15&7.
+   &\text{pointwise ceiling}&r=0\text{ ceiling}\\ \hline
+0&3+7&K_{3,7}&21&5&5\\
+0&5+5&K_{5,5}&25&7&5\\
+1&3+3+3&K_{3,3,3}&27&6&4\\
+2&5+1+1+1&K_{5,1,1,1}&18&5&5\\
+2&3+3+1+1&K_{3,3,1,1}&22&5&5\\
+3&3+1+1+1+1&K_{3,1,1,1,1}&18&6&6\\
+4&1+1+1+1+1+1&K_6&15&7&6.
 \end{array} \tag{5}
 \]
 Here \(K_{a_1,\ldots,a_k}\) denotes the complete multipartite graph with
@@ -120,6 +120,33 @@ example, a fixed \(K_{3,7}\) can obstruct at most five remaining supports,
 a fixed \(K_{3,3,3}\) at most six, and a fixed \(K_6\) at most seven.  A
 switching proof can therefore focus on how distinct cores overlap inside a
 31-to-34-edge graph satisfying (1)--(3).
+
+## Sharper reuse in the exceptional profile
+
+For \(r=0\), seven size-ten and three size-eight supports remain.  Suppose a
+fixed core \(J\), on a vertex set \(C\), is contained in \(t\) of the seven
+size-ten supports.  Each of the three size-eight supports contains at least
+\[
+ 8-(13-|C|)=|C|-5
+\]
+vertices of \(C\), so together they require at least
+\[
+ 3|C|-15 \tag{8}
+\]
+small-support incidences inside \(C\).
+
+On the other hand, a vertex \(v\in C\) belongs to at most
+\(12-d_F(v)\le12-d_J(v)\) remaining supports.  The \(t\) size-ten supports
+already consume \(t\) of those incidences.  Hence a necessary condition is
+\[
+ \sum_{v\in C}\max\{0,12-d_J(v)-t\}\ \ge\ 3|C|-15. \tag{9}
+\]
+Intersecting (9) with the pointwise ceiling gives the final column of (5).
+In particular, no fixed core can obstruct all seven remaining size-ten
+supports: the largest \(r=0\) reuse ceiling is six.  Therefore, if all seven
+large supports were blocked after a seven-prefix, \(F\) would have to
+contain at least two distinct obstruction cores.  This reduces the
+exceptional profile to an overlap-or-switching problem.
 
 ## Remaining frontier
 
