@@ -107,15 +107,59 @@ def audit_ranks() -> None:
     print("rank M10 over F7: 208")
 
 
+def audit_fixed_cube_local_structure() -> None:
+    pairs = ((0, 1), (2, 3), (4, 5), (6, 7))
+    signs: dict[tuple[int, ...], int] = {}
+    for bits in product((0, 1), repeat=4):
+        q = tuple(sorted(pairs[i][bit] for i, bit in enumerate(bits)))
+        signs[q] = (-1) ** sum(bits)
+
+    edges: set[tuple[tuple[int, ...], tuple[int, ...]]] = set()
+    degrees = {q: 0 for q in signs}
+    for q, sign in signs.items():
+        q_set = set(q)
+        for other, other_sign in signs.items():
+            if sign == 1 and other_sign == -1 and len(q_set & set(other)) == 3:
+                edge = (q, other)
+                edges.add(edge)
+                degrees[q] += 1
+                degrees[other] += 1
+
+    assert len(edges) == 32
+    assert set(degrees.values()) == {4}
+    # From P-N=60 and P+N<=104, with N>=0.
+    possible_n = [
+        n
+        for n in range(8 * 13 + 1)
+        if 2 * n + 60 <= 104
+    ]
+    assert possible_n == list(range(23))
+
+    # Coefficientwise inclusion-exclusion for the complement of every triple.
+    for triple in combinations(V, 3):
+        for q in FOUR_SETS:
+            coefficient = 0
+            for size in range(4):
+                coefficient += (-1) ** size * sum(
+                    set(u).issubset(q) for u in combinations(triple, size)
+                )
+            assert coefficient == int(set(q).isdisjoint(triple))
+
+    for residue in range(7):
+        allowed = [value for value in range(14) if value % 7 == residue]
+        assert allowed == [residue, residue + 7]
+
+
 def main() -> None:
     assert len(FOUR_SETS) == 715
     audit_four_cube_extraction()
     print("four-cube extraction, lcm, and 104 bound: PASS")
     audit_ranks()
+    audit_fixed_cube_local_structure()
+    print("fixed Delta=60 edge bound and binary triple residues: PASS")
     print("PASS: q=6 is redundant and every cube coefficient is 0 or +/-60")
     print("scope: the Delta=60 branch, the full lift, and Problem #835 remain open")
 
 
 if __name__ == "__main__":
     main()
-
