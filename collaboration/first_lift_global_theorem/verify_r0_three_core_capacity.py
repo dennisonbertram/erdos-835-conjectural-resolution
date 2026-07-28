@@ -40,6 +40,10 @@ PAIR_COUNTS = {
     ("6", "6"): 364,
 }
 ALL_VERTICES = (1 << N) - 1
+SHARED_A_PATTERNS = {
+    ("5111", "5111", "31111"),
+    ("5111", "5111", "6"),
+}
 
 
 @lru_cache(maxsize=None)
@@ -132,6 +136,9 @@ def main() -> None:
     best = None
     ordered_families = 0
     unions: dict[int, tuple[int, int, int]] = {}
+    high_capacity_families = 0
+    shared_a_failures = 0
+    shared_a_bounds = set()
     for second in seconds:
         pair = first | second
         for third in cores[third_kind]:
@@ -165,7 +172,34 @@ def main() -> None:
                 capacities,
                 key=lambda item: (sum(item), item),
             )
-            if args.stop_at_seven and total >= 7:
+            if total >= 7 and pattern in SHARED_A_PATTERNS:
+                high_capacity_families += 1
+                family = (
+                    (first_kind, first),
+                    (second_kind, second),
+                    (third_kind, third),
+                )
+                a_cores = [core for kind, core in family if kind == "5111"]
+                a_supports = {support_masks[core] for core in a_cores}
+                if len(a_supports) != 1:
+                    shared_a_failures += 1
+                else:
+                    common_support = next(iter(a_supports))
+                    common_bound = (
+                        36
+                        + 2 * popcount(common_support)
+                        - sum(
+                            popcount(union & INCIDENT[v])
+                            for v in VERTICES
+                            if common_support >> v & 1
+                        )
+                    )
+                    shared_a_bounds.add(common_bound)
+            if (
+                args.stop_at_seven
+                and total >= 7
+                and pattern not in SHARED_A_PATTERNS
+            ):
                 print(f"pattern={pattern} order={order}")
                 print(
                     "OPEN WITNESS: "
@@ -187,11 +221,22 @@ def main() -> None:
     )
     print(f"maximum_summed_capacity={maximum} best={best}")
     print(f"union_histogram={dict(sorted(histogram.items()))}")
-    print(
-        "PASS: pattern cannot cover seven supports"
-        if maximum < 7
-        else "OPEN: union-capacity bound alone does not eliminate pattern"
-    )
+    if pattern in SHARED_A_PATTERNS:
+        assert high_capacity_families > 0
+        assert shared_a_failures == 0
+        assert max(shared_a_bounds) < 12
+        print(
+            "PASS: every capacity-seven family has two A cores on one "
+            "support"
+        )
+        print(
+            "PASS: their common outside capacity is below the twelve "
+            "incidences required by four triples"
+        )
+    elif maximum < 7:
+        print("PASS: pattern cannot cover seven supports")
+    else:
+        print("OPEN: union-capacity bound alone does not eliminate pattern")
 
 
 if __name__ == "__main__":

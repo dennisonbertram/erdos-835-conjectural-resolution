@@ -21,14 +21,14 @@ argument are respectively
  3,\quad1,\quad3,\quad4. \tag{1}
 \]
 
-The exact three-core enumeration below proves that seven of the sixteen
+The exact three-core enumeration below proves that nine of the sixteen
 three-core type multisets whose ceilings in (1) sum to at least seven
 nevertheless **cannot collectively account for all seven blocked
 supports**:
 \[
- A^3,\ A^2B,\ ABC,\ ABD,\ BC^2,\ BCD,\ BD^2. \tag{2}
+ A^3,\ A^2B,\ A^2C,\ A^2D,\ ABC,\ ABD,\ BC^2,\ BCD,\ BD^2. \tag{2}
 \]
-The other nine patterns remain open under this screen.
+The other seven patterns remain open under this screen.
 
 This does not say that the three cores in (2) cannot coexist.  It says that
 whenever they coexist inside a graph passing the necessary prefix
@@ -106,7 +106,7 @@ unions.
 \text{types}&\max\sum u_J&\text{status}&
 \text{types}&\max\sum u_J&\text{status}\\ \hline
 A^3   &6&\text{excluded}&A^2B&0&\text{excluded}\\
-A^2C  &7&\text{open}&A^2D&7&\text{open}\\
+A^2C  &7&\text{excluded}^{*}&A^2D&7&\text{excluded}^{*}\\
 ABC   &4&\text{excluded}&ABD&3&\text{excluded}\\
 AC^2  &8&\text{open}&ACD&8&\text{open}\\
 AD^2  &8&\text{open}&BC^2&5&\text{excluded}\\
@@ -115,6 +115,17 @@ C^3   &9&\text{open}&C^2D&10&\text{open}\\
 CD^2  &11&\text{open}&D^3&12&\text{open}
 \end{array} \tag{8}
 \]
+
+The two starred rows need one final shared-capacity observation.  Every
+retained \(A^2C\) or \(A^2D\) family attaining summed capacity seven has
+individual capacity vector \((2,2,3)\), and the two \(A\)-cores have the
+same eight-vertex support.  To cover seven supports, both \(A\)-cores
+would therefore have to attain capacity two, requiring four complement
+triples, or twelve incidences, in their common five-vertex outside set.
+But (3), applied once to that common set, bounds its total capacity by
+eight incidences in the \(A^2C\) row and six in the \(A^2D\) row.  Thus
+the apparent seven in the table double-counts common capacity, and both
+rows are excluded.
 
 For example, the \(A^3\) scan has 630 admissible ordered families and only
 fifteen distinct union graphs after fixing the first core.  Five unions
@@ -142,7 +153,6 @@ witness only proves that (6) alone does not eliminate the row.
 
 The remaining three-core frontier is therefore
 \[
- A^2C,\ A^2D,\ AC^2,\ ACD,\ AD^2,\
- C^3,\ C^2D,\ CD^2,\ D^3. \tag{9}
+ AC^2,\ ACD,\ AD^2,\ C^3,\ C^2D,\ CD^2,\ D^3. \tag{9}
 \]
 Families of four or more distinct cores also remain to be reduced.
