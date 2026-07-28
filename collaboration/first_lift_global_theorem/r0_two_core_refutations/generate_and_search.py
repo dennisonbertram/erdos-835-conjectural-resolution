@@ -10,7 +10,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 GLOBAL = HERE.parent
 sys.path.insert(0, str(GLOBAL))
-import verify_r0_core_pairs as core
+import verify_r0_core_pairs as core  # noqa: E402
 
 CADICAL = "/opt/homebrew/bin/cadical"
 TMP = Path("/private/tmp")
@@ -72,11 +72,13 @@ def pair_orbits(kind):
         if kind == "6" and second == first:
             continue
         union = first | second
-        degrees = [(union & core.INCIDENT[v]).bit_count() for v in core.VERTICES]
-        if union.bit_count() > 31 or max(degrees) > 7:
+        degrees = [
+            core.popcount(union & core.INCIDENT[v]) for v in core.VERTICES
+        ]
+        if core.popcount(union) > 31 or max(degrees) > 7:
             continue
         deficit = sum(max(0, 2 - value) for value in degrees)
-        if union.bit_count() + (deficit + 1) // 2 > 31:
+        if core.popcount(union) + (deficit + 1) // 2 > 31:
             continue
         out.append((counts, first, second))
     return out
@@ -193,7 +195,6 @@ def run_case(kind, orbit_index, counts, first, second, reuse_first, seconds):
     assert [len(values) for values in complements] == [3] * 7 + [5] * 3
     degrees = [sum(v in edge for edge in used_edges) for v in range(13)]
     assert all(sum(v in values for values in complements) == degrees[v] - 2 for v in range(13))
-    outside_first = set(range(13)) - {v for edge in required_edges if edge in {e for e,i in core.EDGE_ID.items() if first>>i&1} for v in edge}
     # Direct core containment checks are simpler and independent of Tutte:
     first_vertices = {v for edge,i in core.EDGE_ID.items() if first>>i&1 for v in edge}
     second_vertices = {v for edge,i in core.EDGE_ID.items() if second>>i&1 for v in edge}
