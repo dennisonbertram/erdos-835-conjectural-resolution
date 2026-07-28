@@ -1238,6 +1238,29 @@ routes, but not the asymmetric case.
   refutes an ambient forced-edge strengthening of the three-near-factor
   theorem.  A successful proof must switch the prefix or use a remaining
   size-eight support.
+- [`collaboration/r0_three_ten_obstruction/DEAD_SIX_PREFIX.md`](collaboration/r0_three_ten_obstruction/DEAD_SIX_PREFIX.md):
+  a stronger exact dead-prefix certificate attaining the same lower bound
+  while blocking all four remaining size-eight supports as well.  Precisely
+  two of its eleven remaining colours are individually matchable, so no
+  three-colour continuation of that six-prefix exists.  This forces an
+  \(r=0\) coordinated-nine proof to backtrack or switch the six-prefix
+  itself.  A separate exact witness fully decomposes the same support
+  instance into all seventeen matchings, proving that the obstruction is
+  purely prefix-dependent.
+- [`collaboration/r0_three_ten_obstruction/K6_PREFIX_SWITCH.md`](collaboration/r0_three_ten_obstruction/K6_PREFIX_SWITCH.md):
+  a solver-free support-preserving switch theorem for \(r=0,1,2\).
+  After any complement-cover six-prefix, a blocked size-ten support can
+  arise only from a unique saturated \(K_6\); one two-edge switch destroys
+  that component without creating another.  Consequently every remaining
+  size-ten support is individually matchable.  Simultaneous selection of
+  three such matchings is still open.
+- [`collaboration/coordinated_nine_r1_reduction/NOTE.md`](collaboration/coordinated_nine_r1_reduction/NOTE.md):
+  the exact \(r=1\) one- and two-step Tutte catalogues, core-reuse ceilings,
+  and three literal class-B pair obstructions with triple intersections
+  zero, one, and two.  These prove that even individually matchable
+  size-ten supports need not admit disjoint choices, so the remaining
+  theorem must use all six triples simultaneously and coordinate the
+  size-twelve layer.
 - [`collaboration/coordinated_nine_r2_obstruction/NOTE.md`](collaboration/coordinated_nine_r2_obstruction/NOTE.md):
   an exact \(r=2\) delimiter.  A legitimate \(8^4\,10^2\)
   complement-cover prefix can block every remaining size-ten support, so the
@@ -1245,6 +1268,30 @@ routes, but not the asymmetric case.
   an explicit verified \(8+12+12\) extension to nine, showing that the
   obstruction is to that route rather than to coordinated nine.  A universal
   \(r=2\) switching theorem remains open.
+- [`collaboration/r2_terminal_flexibility/NOTE.md`](collaboration/r2_terminal_flexibility/NOTE.md):
+  a solver-free reduction of that \(r=2\) switching frontier.  After any
+  candidate size-eight matching the first prescribed near-factor exists;
+  failure of the second has exactly three Tutte types.  Class-B row resources
+  prevent the \(K_{5,7}\) and \(K_{3,1^5}\) types from blocking all five
+  candidate supports, so every all-five failure reaches a terminal \(K_7\).
+  Exact endpoint arithmetic reduces its genuinely hard local configurations
+  to eighteen type pairs, closes all six exceptional \(P_4\) rows by
+  support-preserving switches, and proves uniqueness/resource bounds for the
+  remaining dense cores.  The other labelled \(K_7\) rows and the global
+  mixture of terminal types remain open.
+- [`collaboration/r2_size8_gate_obstruction/NOTE.md`](collaboration/r2_size8_gate_obstruction/NOTE.md):
+  a literal class-B \(r=2\) six-prefix for which all five remaining
+  size-eight supports are blocked by two disjoint \(K_5\) cores.  This
+  refutes the universal \(8+12+12\) terminal route.  The same prefix has an
+  explicit \(10+12+12\) extension to nine, isolating a size-eight/size-ten
+  switching dichotomy rather than an obstruction to coordinated nine.
+- [`collaboration/r2_initial_support_dichotomy/NOTE.md`](collaboration/r2_initial_support_dichotomy/NOTE.md):
+  a solver-free theorem that after every \(r=2\) complement-cover
+  six-prefix, at least one of the five remaining size-eight supports or four
+  remaining size-ten supports has a residual perfect matching.  Common
+  saturated \(K_6\) and \(K_5\) obstruction cores would require respectively
+  \(22>21\) and \(15>14\) row incidences.  Packing the two prescribed
+  size-twelve near-factors after that guaranteed first matching remains open.
 - [`collaboration/k7_terminal_switching/NOTE.md`](collaboration/k7_terminal_switching/NOTE.md):
   a self-contained independent proof and \(6^7\)-case arithmetic audit of
   the last separator-five \(K_7\) switch.  It tracks the exact Hall
