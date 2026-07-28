@@ -6,7 +6,7 @@ from __future__ import annotations
 import argparse
 from collections import Counter
 from functools import lru_cache
-from itertools import permutations
+from itertools import combinations, permutations, product
 
 from verify_r0_core_pairs import (
     CLIQUE,
@@ -101,6 +101,59 @@ def best_order(
     )
 
 
+def subset_capacity(
+    union: int,
+    common_support: int,
+) -> int:
+    outside = ALL_VERTICES ^ common_support
+    remaining_edges = 31 - popcount(union)
+    free_outside_edges = popcount(CLIQUE[outside] & ~union)
+    forced_touch = max(0, remaining_edges - free_outside_edges)
+    return max(
+        0,
+        36
+        + 2 * popcount(common_support)
+        - sum(
+            popcount(union & INCIDENT[v])
+            for v in VERTICES
+            if common_support >> v & 1
+        )
+        - forced_touch,
+    )
+
+
+def covering_splits(
+    family: tuple[tuple[str, int], ...],
+    union: int,
+    support_masks: dict[int, int],
+) -> list[tuple[int, ...]]:
+    splits = []
+    ranges = [
+        range(1, BASE_CAPACITY[kind] + 1)
+        for kind, _core in family
+    ]
+    for split in product(*ranges):
+        if sum(split) != 7:
+            continue
+        possible = True
+        for size in range(1, len(family) + 1):
+            for indices in combinations(range(len(family)), size):
+                common_support = ALL_VERTICES
+                for index in indices:
+                    common_support &= support_masks[family[index][1]]
+                if (
+                    3 * sum(split[index] for index in indices)
+                    > subset_capacity(union, common_support)
+                ):
+                    possible = False
+                    break
+            if not possible:
+                break
+        if possible:
+            splits.append(split)
+    return splits
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("kinds", nargs=3, choices=KINDS)
@@ -131,6 +184,12 @@ def main() -> None:
         if core != first and passes_prefix_screens(first | core)
     ]
     assert len(seconds) == PAIR_COUNTS[first_kind, second_kind]
+    thirds = [
+        core
+        for core in cores[third_kind]
+        if core != first and passes_prefix_screens(first | core)
+    ]
+    assert len(thirds) == PAIR_COUNTS[first_kind, third_kind]
 
     maximum = -1
     best = None
@@ -139,9 +198,11 @@ def main() -> None:
     high_capacity_families = 0
     shared_a_failures = 0
     shared_a_bounds = set()
+    covering_families = 0
+    covering_example = None
     for second in seconds:
         pair = first | second
-        for third in cores[third_kind]:
+        for third in thirds:
             if third == first or third == second:
                 continue
             union = pair | third
@@ -163,6 +224,16 @@ def main() -> None:
                     support_masks[third],
                 ),
             )
+            family = (
+                (first_kind, first),
+                (second_kind, second),
+                (third_kind, third),
+            )
+            splits = covering_splits(family, union, support_masks)
+            if splits:
+                covering_families += 1
+                if covering_example is None:
+                    covering_example = (popcount(union), splits[0])
             total = sum(capacities)
             if total > maximum:
                 maximum = total
@@ -174,11 +245,6 @@ def main() -> None:
             )
             if total >= 7 and pattern in SHARED_A_PATTERNS:
                 high_capacity_families += 1
-                family = (
-                    (first_kind, first),
-                    (second_kind, second),
-                    (third_kind, third),
-                )
                 a_cores = [core for kind, core in family if kind == "5111"]
                 a_supports = {support_masks[core] for core in a_cores}
                 if len(a_supports) != 1:
@@ -197,13 +263,12 @@ def main() -> None:
                     shared_a_bounds.add(common_bound)
             if (
                 args.stop_at_seven
-                and total >= 7
-                and pattern not in SHARED_A_PATTERNS
+                and splits
             ):
                 print(f"pattern={pattern} order={order}")
                 print(
-                    "OPEN WITNESS: "
-                    f"edges={popcount(union)} capacities={capacities}"
+                    "OPEN SUBSET-CAPACITY WITNESS: "
+                    f"edges={popcount(union)} split={splits[0]}"
                 )
                 print(
                     "SCOPE: necessary union screens and summed capacity only"
@@ -220,6 +285,10 @@ def main() -> None:
         f"distinct_unions={len(unions)}"
     )
     print(f"maximum_summed_capacity={maximum} best={best}")
+    print(
+        f"covering_families={covering_families} "
+        f"covering_example={covering_example}"
+    )
     print(f"union_histogram={dict(sorted(histogram.items()))}")
     if pattern in SHARED_A_PATTERNS:
         assert high_capacity_families > 0
@@ -233,10 +302,11 @@ def main() -> None:
             "PASS: their common outside capacity is below the twelve "
             "incidences required by four triples"
         )
-    elif maximum < 7:
-        print("PASS: pattern cannot cover seven supports")
+        assert covering_families == 0
+    elif covering_families == 0:
+        print("PASS: subset capacities cannot cover seven supports")
     else:
-        print("OPEN: union-capacity bound alone does not eliminate pattern")
+        print("OPEN: subset-capacity bounds alone do not eliminate pattern")
 
 
 if __name__ == "__main__":
