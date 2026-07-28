@@ -1,0 +1,19 @@
+Command:
+  python3 -B search_cp_sat.py --seconds 120 --workers 16
+
+Independent precursor replay (same 163 orbit variables, 93 triple-capacity
+rows, 1,223 recurrence rows, and two cube-mass rows):
+
+status: INFEASIBLE
+wall_seconds: 3.1579260000000002
+branches: 302
+scope: UNSAT excludes only exterior-S5 symmetry; UNKNOWN proves nothing
+
+Packaged exact-equation replay:
+
+status: INFEASIBLE
+wall_seconds: 2.721444
+branches: 461
+scope: UNSAT excludes only exterior-S5 symmetry; UNKNOWN proves nothing
+
+Date: 2026-07-27

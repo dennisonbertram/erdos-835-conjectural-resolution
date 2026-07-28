@@ -1,0 +1,31 @@
+Command:
+  python3 -B search_gurobi.py --seconds 600 --threads 16
+
+Exact precursor model:
+
+Optimize a model with 1318 rows, 1386 columns and 26995 nonzeros
+Variable types: 0 continuous, 1386 integer
+Status: INFEASIBLE
+Runtime: 36.64 seconds
+Solution count: 0
+
+Independent repeat:
+
+Status: INFEASIBLE
+Runtime: 31.85 seconds
+Solution count: 0
+
+Packaged exact-equation replay:
+
+Optimize a model with 1318 rows, 1386 columns and 26995 nonzeros
+Model fingerprint: 0x4ceb5f8e
+Variable types: 0 continuous, 1386 integer
+Explored 12160 nodes (643000 simplex iterations)
+Status: INFEASIBLE
+Runtime: 18.217890977859497 seconds
+Solution count: 0
+
+Scope: infeasibility excludes only exterior-S5 symmetry.  It does not
+eliminate the general N=0 branch.
+
+Date: 2026-07-27

@@ -231,8 +231,9 @@ The analogous raw \(d\)-sum upper bounds at sizes \(7,9,11\) are
 \]
 All other upper and lower recurrence bounds are automatic from
 \(0\le d_Q\le13\) and the triple capacities.  The search model below
-includes every inequality (12); earlier congruence-only experiments were
-incomplete and carry no verdict.
+encodes the full displayed size-5 recurrence equation for every \(S\), and
+therefore includes both parity and every inequality (12).  Earlier
+congruence-only experiments were incomplete and carry no verdict.
 
 ## Remaining gap
 
@@ -246,8 +247,8 @@ finite solver silence decides whether that branch is feasible.
 [`search_fixed_delta60.py`](search_fixed_delta60.py) encodes the complete
 fixed-cube necessary-condition model.  It uses independent original rows
 for the prime-field reductions in (3), retains every modulo-4 and modulo-8
-row, imposes all 1,287 size-5 recurrence inequalities (12), and adds only a
-harmless ordering of the five points outside the normalized cube.  A run
+row, imposes all 1,287 exact size-5 recurrence equations behind (12), and
+adds only harmless orderings from the normalized cube's stabilizer.  A run
 returning `UNKNOWN` is not evidence of feasibility or infeasibility.
 
 The smaller 70-coordinate projection to the cube's eight vertices is

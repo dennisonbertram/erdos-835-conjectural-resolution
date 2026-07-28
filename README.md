@@ -1096,6 +1096,12 @@ routes, but not the asymmetric case.
   negative-cell load is at most \(20\), the positive-cell load at most
   \(80\), and every triple load has one binary mod-\(7\) choice.  That
   branch remains open.
+- [`collaboration/h3_j8_n0_outside_s5/NOTE.md`](collaboration/h3_j8_n0_outside_s5/NOTE.md):
+  an independently replayed exact finite elimination of the \(N=0\)
+  torsion subclass invariant under all permutations of the five vertices
+  outside the cube.  A dependency-free audit checks the complete
+  1,386-variable, 1,318-constraint orbit model.  The exterior symmetry is
+  an extra ansatz, so the unrestricted \(N=0\) branch remains open.
 - [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
   the exact separation between support-admissible,
   partial-factorization-realizable, and fan-realizable first-lift
@@ -1470,6 +1476,8 @@ python3 -B \
   collaboration/j9_integer_weight_lemma/verify_arithmetic.py
 python3 -B \
   collaboration/h3_j8_exact_trade_elimination/verify_j8_exact_trade_elimination.py
+python3 -B \
+  collaboration/h3_j8_n0_outside_s5/verify_model.py
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support8.py
 python3 -B \

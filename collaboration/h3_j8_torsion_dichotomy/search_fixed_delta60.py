@@ -65,14 +65,18 @@ def build_model() -> tuple[
             sum(e[q] for q in FOUR_SETS if set(triple).issubset(q)) <= 3
         )
 
-    # Recurrence nonnegativity at size 5:
-    # 2*N_S + sum_{Q subset S} d_Q = 13, with d=e+1.
-    # The parity constraints alone are not sufficient.
+    # Full recurrence at size 5:
+    # 2*N_S + sum_{Q subset S} d_Q = 13, with d=e+1, hence
+    # 2*N_S + sum e_Q = 8.  Encoding the local count is equivalent to
+    # parity plus the upper bound, but propagates much more directly.
     for s in itertools.combinations(V, 5):
-        model.Add(sum(e[q] for q in itertools.combinations(s, 4)) <= 8)
+        count = model.NewIntVar(0, 6, f"N5_{'_'.join(map(str, s))}")
+        model.Add(
+            2 * count + sum(e[q] for q in itertools.combinations(s, 4)) == 8
+        )
 
     constraint_sets: list[tuple[tuple[int, ...], int]] = []
-    for size, prime in ((5, 2), (6, 3), (8, 5), (10, 7)):
+    for size, prime in ((6, 3), (8, 5), (10, 7)):
         basis = independent_original_sets(size, prime)
         constraint_sets.extend((s, prime) for s in basis)
 
