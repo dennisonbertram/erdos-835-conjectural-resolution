@@ -1102,6 +1102,13 @@ routes, but not the asymmetric case.
   outside the cube.  A dependency-free audit checks the complete
   1,386-variable, 1,318-constraint orbit model.  The exterior symmetry is
   an extra ansatz, so the unrestricted \(N=0\) branch remains open.
+- [`collaboration/h3_j8_n0_outside_s4_boundary/NOTE.md`](collaboration/h3_j8_n0_outside_s4_boundary/NOTE.md):
+  a boundary attack fixing one exterior point and imposing \(S_4\) symmetry
+  on the other four.  Independent full-equation CP-SAT and rank-reduced
+  Gurobi searches exactly eliminate five \((m,w)\) subcases, with a
+  dependency-free audit of all orbit counts, row reductions, and cube
+  symmetry breakers.  Fourteen branches and the unrestricted \(N=0\)
+  problem remain open.
 - [`collaboration/first_lift_support_completion/NOTE.md`](collaboration/first_lift_support_completion/NOTE.md):
   the exact separation between support-admissible,
   partial-factorization-realizable, and fan-realizable first-lift
@@ -1509,6 +1516,8 @@ python3 -B \
   collaboration/h3_j8_exact_trade_elimination/verify_j8_exact_trade_elimination.py
 python3 -B \
   collaboration/h3_j8_n0_outside_s5/verify_model.py
+python3 -B \
+  collaboration/h3_j8_n0_outside_s4_boundary/verify_model.py
 python3 -B \
   collaboration/fan_gadget_generalization/verify_cyclic_support8.py
 python3 -B \
