@@ -81,11 +81,15 @@ def build(
     path: Path,
     surviving_only: bool = False,
     require_four_cores: bool = False,
+    type_counts: tuple[int, ...] | None = None,
 ) -> None:
     if require_four_cores and not surviving_only:
         raise ValueError("--require-four-cores requires --surviving-only")
     writer = compact.Writer(path)
     barriers = BARRIERS[3:] if surviving_only else BARRIERS
+    if type_counts is not None:
+        if len(type_counts) != len(barriers) or sum(type_counts) != 7:
+            raise ValueError("type counts must match the barriers and sum to 7")
 
     f = writer.variables_block(len(compact.EDGES))
     x = [writer.variables_block(len(compact.EDGES)) for _ in range(7)]
@@ -146,8 +150,10 @@ def build(
 
     # Every remaining size-ten support chooses a coarsened Tutte barrier.
     core_descriptors = []
+    barrier_choices_by_row = []
     for row in range(7):
         choices = writer.variables_block(len(barriers))
+        barrier_choices_by_row.append(choices)
         writer.exactly_one(choices)
         descriptor = list(choices)
 
@@ -203,6 +209,16 @@ def build(
                         )
         core_descriptors.append(descriptor)
 
+    if type_counts is not None:
+        for barrier, count in enumerate(type_counts):
+            writer.exactly(
+                [
+                    barrier_choices_by_row[row][barrier]
+                    for row in range(7)
+                ],
+                count,
+            )
+
     if require_four_cores:
         require_four_distinct_cores(writer, core_descriptors)
 
@@ -211,7 +227,8 @@ def build(
         f"WROTE {path} variables={writer.variables} "
         f"clauses={writer.clauses} "
         f"barriers={'surviving' if surviving_only else 'all'} "
-        f"four_cores={require_four_cores}",
+        f"four_cores={require_four_cores} "
+        f"type_counts={type_counts}",
         flush=True,
     )
 
@@ -235,11 +252,24 @@ def main() -> None:
             "obstruction needs at least four distinct surviving cores"
         ),
     )
+    parser.add_argument(
+        "--type-counts",
+        help=(
+            "Comma-separated row counts in barrier order; with "
+            "--surviving-only the order is 5111,3311,31111,6"
+        ),
+    )
     args = parser.parse_args()
+    type_counts = (
+        tuple(map(int, args.type_counts.split(",")))
+        if args.type_counts
+        else None
+    )
     build(
         args.output,
         surviving_only=args.surviving_only,
         require_four_cores=args.require_four_cores,
+        type_counts=type_counts,
     )
 
 
