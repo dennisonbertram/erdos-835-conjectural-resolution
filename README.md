@@ -86,8 +86,17 @@ New exact results in the note include:
   verifier reconstructs all 3,872 positive capacity cuts and checks all
   1,502,474 learned clauses.  All eighty packaged
   CNF/learned/log/DRAT artifacts pass both hash layers, and all sixteen DRAT
-  traces replay as `VERIFIED`.  Thus orbits zero through eight are closed;
-  orbits nine through fifteen remain open;
+  traces replay as `VERIFIED`;
+- a [certified closure of orbit nine](collaboration/opus5_r0_orbit_repair/2026-07-28_orbit9_cut_sufficiency.md).
+  Its three selected-row omissions are \(012,135,245\), and all 627,900
+  labelled compatible pairs reduce to 87 exact stabilizer orbits.  Every
+  frozen support-relaxation formula is UNSAT; the independent semantic
+  verifier checks all 4,250 positive capacity cuts and all 13,734,283 learned
+  clauses.  The deterministic 455-file package passes both hash layers, all
+  435 gzip checks, and a fresh independent replay of all 87 DRAT traces.
+  The separate [root replay audit](collaboration/opus5_r0_orbit_repair/2026-07-29_orbit9_root_replay_audit.md)
+  records the exact command and scope.  Thus orbits zero through nine are
+  closed; orbits ten through fifteen remain open;
 - an [exact post-\(r=0\) bridge audit](collaboration/opus5/post_r0_global_bridge/INDEPENDENT_AUDIT.md).
   For a fixed six-set, the tower data through level two are identified with
   a partial proper colouring of \(J(19,3)\); the six first-lift instances
@@ -102,7 +111,7 @@ New exact results in the note include:
   fifteen.  A complete alternating path/cycle word
   invariant, checked independently against the full stabilizer action
   graph, reduces 7,077,840 labelled matching pairs to 1,126 canonical
-  cases.  This is a finite reduction, not yet cut sufficiency for the ten
+  cases.  This is a finite reduction, not yet cut sufficiency for the six
   unresolved orbits;
 - an exact boundary-flow formulation of the remaining colouring problem.
   For a fixed \(b\)-factor it is a nowhere-zero
