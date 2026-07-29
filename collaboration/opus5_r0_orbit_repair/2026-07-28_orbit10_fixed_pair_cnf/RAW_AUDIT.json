@@ -1,0 +1,577 @@
+{
+  "canonical_pair_types": 47,
+  "cases": [
+    {
+      "base_clauses": 274776,
+      "case": "orbit10_pair_000",
+      "cnf_sha256": "87c3c7106d9ce7ae72c7b64f9b35c671a1034cf7543b53f08f7a1f097d05118b",
+      "fixed_pair_third_extensions": 406,
+      "learned_clauses": 72883,
+      "learned_sha256": "1f10f1398817d0b28c206eb5410376eceab5beccf929b36ac8fda009dc270367",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274823,
+      "case": "orbit10_pair_001",
+      "cnf_sha256": "9cb9e85ab39d5591a7a4018a7256fd60f0f4033612d732a5acd7ac2fb9585c81",
+      "fixed_pair_third_extensions": 453,
+      "learned_clauses": 118699,
+      "learned_sha256": "6f5b26f55874bf2b129494c9513a57a4c9241e0c39a05b98c03addb07a3210cf",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274782,
+      "case": "orbit10_pair_002",
+      "cnf_sha256": "d5f4af555a2e1374a08d1b0f8ea8c548807645a9bc15fd7b5e3e7d640b5d2288",
+      "fixed_pair_third_extensions": 412,
+      "learned_clauses": 86874,
+      "learned_sha256": "58a7b0e759defffdd5120a839ee9d1a2697bb4697ef1da039a9a2dde72ede48e",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274782,
+      "case": "orbit10_pair_003",
+      "cnf_sha256": "1d8af955afe4a982e54c430c2a59ade1f8f1b0aeb46878d1f8521ee4d7f709fb",
+      "fixed_pair_third_extensions": 412,
+      "learned_clauses": 80486,
+      "learned_sha256": "cf90e864755ca1b8e2d09966859a3cf554a6a61b0e41bd355848004b7026347b",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274823,
+      "case": "orbit10_pair_004",
+      "cnf_sha256": "45659de9a97480168614978e2df38416cb6dfb3d5b0013545f75d8903967e918",
+      "fixed_pair_third_extensions": 453,
+      "learned_clauses": 164216,
+      "learned_sha256": "23bc2b049d98d3445877bde545f2320aaea94a436401650a5ed16281ed36b6dc",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274830,
+      "case": "orbit10_pair_005",
+      "cnf_sha256": "f693609078e95587de56814a1f4ba04159e666e3367124d46e279cce4a5a6ac9",
+      "fixed_pair_third_extensions": 460,
+      "learned_clauses": 114105,
+      "learned_sha256": "a6eb5be637655e5fdd84c1c8120c3db3b4a78b1e835d5a6a23522ae014413815",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274830,
+      "case": "orbit10_pair_006",
+      "cnf_sha256": "e4b8861410fcd664cfd84ea29e680d30343287df0893ed3b86c5a2c4c46ded33",
+      "fixed_pair_third_extensions": 460,
+      "learned_clauses": 171045,
+      "learned_sha256": "37dc4fb6064d889e62134611c352ba0a741e1b4011fd95ae2428e24122d0d7b5",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274783,
+      "case": "orbit10_pair_007",
+      "cnf_sha256": "f4e6ee5cf287cb15e9afef4952ca0c86774d877c4f9c436598c1c9612342d27a",
+      "fixed_pair_third_extensions": 413,
+      "learned_clauses": 75871,
+      "learned_sha256": "26dafb07e882c98bb3e819ceffdb63c92284760edeea1244cacfc2e7a700a817",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274832,
+      "case": "orbit10_pair_008",
+      "cnf_sha256": "08ee68f713ee66c4007258caccc3afb275f709615d67067dcaeaaa6f3c912cdb",
+      "fixed_pair_third_extensions": 462,
+      "learned_clauses": 99037,
+      "learned_sha256": "985f7ded54278956dbff84789b2434bdbf24f75680cbde591166df35929006d2",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274838,
+      "case": "orbit10_pair_009",
+      "cnf_sha256": "259ebebdae3487e30a75e755feab45f16880896acc83a692a9d360e17c4fc635",
+      "fixed_pair_third_extensions": 468,
+      "learned_clauses": 186519,
+      "learned_sha256": "627c38ba4426a2115b237a4078e0c3c192f82ad448019eae1e2718bdbb22230a",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274832,
+      "case": "orbit10_pair_010",
+      "cnf_sha256": "0771201c3c3cfad25e8b1e66541ba6b81889678ead650526f22c314b7ab4d94d",
+      "fixed_pair_third_extensions": 462,
+      "learned_clauses": 191469,
+      "learned_sha256": "7bcec0c4457aefb436227843b5874e26801479ff55e5d78d084819d873016115",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274832,
+      "case": "orbit10_pair_011",
+      "cnf_sha256": "95f6248ad9474bca042df870cfe8adee2fac833144c6e9249069c439e5d0e943",
+      "fixed_pair_third_extensions": 462,
+      "learned_clauses": 129829,
+      "learned_sha256": "18c4bc0818a325aa4988d6026db5f0f30e309beff3017f37d1a83fa293472ec1",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274784,
+      "case": "orbit10_pair_012",
+      "cnf_sha256": "1c44e1b4f47d6f934e5d1fb435b6a9d26911f53af8667c59ba211857af8e25d7",
+      "fixed_pair_third_extensions": 414,
+      "learned_clauses": 86571,
+      "learned_sha256": "6b76ad1347d15b6f6296f04c685145f6d09a900ddbcf19d42c1ce184d7a73926",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274784,
+      "case": "orbit10_pair_013",
+      "cnf_sha256": "2de24852eb25fe7fe56c34315de2c5500253cb8401c77572cf15c52ed5ca8a5e",
+      "fixed_pair_third_extensions": 414,
+      "learned_clauses": 95650,
+      "learned_sha256": "073dac9f5078cda47602a7c0cb328725cf7f9160c87c75ef0a6375ed959ea344",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274832,
+      "case": "orbit10_pair_014",
+      "cnf_sha256": "7906036bfc40f2aa2209c2da5c6063787a38b22d79cddaf4150a3dca467e4a1b",
+      "fixed_pair_third_extensions": 462,
+      "learned_clauses": 143240,
+      "learned_sha256": "c0f126c691b180a9a25e18b5cbed7ded44dd2e8070449ffacd83714565e5bb8e",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274838,
+      "case": "orbit10_pair_015",
+      "cnf_sha256": "c80dd30823fac847f27693222ef647a54ce643fe1575ce4497e1c12d43675b10",
+      "fixed_pair_third_extensions": 468,
+      "learned_clauses": 172389,
+      "learned_sha256": "bd720016891e02dea62590a5fa9dcae97b3009e3d67f67a291131e15360835ee",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274833,
+      "case": "orbit10_pair_016",
+      "cnf_sha256": "aa25a7bbe7e59486805e7d8788d4e091bef459b3784ba194cc8d129bafeb496e",
+      "fixed_pair_third_extensions": 463,
+      "learned_clauses": 127131,
+      "learned_sha256": "eaaada095e02d5d162653bdbd186960bd4918fd513031ce8f9e802f3ae2f625e",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274840,
+      "case": "orbit10_pair_017",
+      "cnf_sha256": "02a6f7b3cd443c33415bf645503f53876cd209f19c162f57a6d45ed84b5e2bc0",
+      "fixed_pair_third_extensions": 470,
+      "learned_clauses": 143878,
+      "learned_sha256": "e81955ecfa89c8a8a9676ae4abee0e2fa04548380ef3fcb11b2c34ffb8b5f496",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274840,
+      "case": "orbit10_pair_018",
+      "cnf_sha256": "2290acfc886a67921ff4d5cb0d396db581a15ea994b124911ce1b323d95833e3",
+      "fixed_pair_third_extensions": 470,
+      "learned_clauses": 184582,
+      "learned_sha256": "4ea3f67b5741de2bb9d405fd35c03f45e102ebe58061559271f53ec215cf068b",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274840,
+      "case": "orbit10_pair_019",
+      "cnf_sha256": "e0c73ee93f7c5528a33238582f5887c6a4a259573c09ec0ac713f86e41d82a1d",
+      "fixed_pair_third_extensions": 470,
+      "learned_clauses": 149105,
+      "learned_sha256": "fc6f5dbe6060bc94ae59f5660c4ad14184de927849b745aa27f46d0b3f3ff402",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274833,
+      "case": "orbit10_pair_020",
+      "cnf_sha256": "8d81a501713b4fc733e038f461e4e3fbc93daf3ee703bdb23b453ac321a00f5d",
+      "fixed_pair_third_extensions": 463,
+      "learned_clauses": 138548,
+      "learned_sha256": "762c96b94a8a21e66cf02cf37d3844d6cf33d877cb997d6bae47d45b21f85644",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274777,
+      "case": "orbit10_pair_021",
+      "cnf_sha256": "88a3c20a69b1cf551cb33dca9eed117bca2e7174058947bb4007998fcbf983ce",
+      "fixed_pair_third_extensions": 407,
+      "learned_clauses": 75300,
+      "learned_sha256": "cf1105fb278aa9e22b63548b809c37a0f5528e8b1f845875930be62f16db0134",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274832,
+      "case": "orbit10_pair_022",
+      "cnf_sha256": "e310a6a783e39c711e32e4518e4720152bdda65d09d4396b5b6b772dc76cb82c",
+      "fixed_pair_third_extensions": 462,
+      "learned_clauses": 112744,
+      "learned_sha256": "3abe7b456d619f1396fbe4aabf783ac30db97f55f3a96426f3d712695dbd088c",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274840,
+      "case": "orbit10_pair_023",
+      "cnf_sha256": "6795cb6efeb729cc5aac67388c0f134ca314e657813b12d7474db714293ea9e3",
+      "fixed_pair_third_extensions": 470,
+      "learned_clauses": 157602,
+      "learned_sha256": "2e852b0c3f72e9b6316c72074e0bf127dc4676f42114c98e9f59984f34580194",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274841,
+      "case": "orbit10_pair_024",
+      "cnf_sha256": "73c0416415c0f42e4739a7ae73a5d901fd9e19462a19195d21b473d74ad01148",
+      "fixed_pair_third_extensions": 471,
+      "learned_clauses": 138969,
+      "learned_sha256": "eb2975aa6113c56e7fd7a71a837dabf276fdcca48e24255cfb25e82217198012",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274841,
+      "case": "orbit10_pair_025",
+      "cnf_sha256": "ebe25ea21c5da8e8d4d88b1d9180cf5a850ee72fd1ef8f742af1e06a2c6d55ff",
+      "fixed_pair_third_extensions": 471,
+      "learned_clauses": 127683,
+      "learned_sha256": "76ed22ab764b4912701951e4a16f4745ae113a3a9158b42a160a3d8e737622eb",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274823,
+      "case": "orbit10_pair_026",
+      "cnf_sha256": "9fbf05eda14e8d32c395f31d461709fb8ea42040398cb54b7022339f48e990c4",
+      "fixed_pair_third_extensions": 453,
+      "learned_clauses": 100794,
+      "learned_sha256": "40441f11e2863e438cf3371656fa53e757d79ff1ad2d94bd2a7b8d8ff9924603",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274832,
+      "case": "orbit10_pair_027",
+      "cnf_sha256": "f83b60a7654cb3d2d153a77b4070f6ce10358a8008c0bf3846326f5184fd39ae",
+      "fixed_pair_third_extensions": 462,
+      "learned_clauses": 164651,
+      "learned_sha256": "ddd453afab9f7802c0268642fc8ce26801d9ec056f8d67ff772ca5182beba04d",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274782,
+      "case": "orbit10_pair_028",
+      "cnf_sha256": "14676da9a2855a1f1d0435f1361e2e4e28a4fe80d73a2ccab23c6d02f3107048",
+      "fixed_pair_third_extensions": 412,
+      "learned_clauses": 83282,
+      "learned_sha256": "8363b22901e0c2f8d2ec140e5fce898cdaeeadfd132c7cca1a874979d9e96d1f",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274782,
+      "case": "orbit10_pair_029",
+      "cnf_sha256": "ce18c9d9f2d523de79a3609ffa664d3ed6d9b53019e1fc33018a1253d6799bdc",
+      "fixed_pair_third_extensions": 412,
+      "learned_clauses": 86698,
+      "learned_sha256": "766761ef49c9fd123b3914cbd1d40345710ab0ed8d3eb363d9dd34ec4ad66e2b",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274823,
+      "case": "orbit10_pair_030",
+      "cnf_sha256": "748bce20a6f1c645031d6cc5824826ad12d868b5e8d3ff2de7051a1edd0da8e8",
+      "fixed_pair_third_extensions": 453,
+      "learned_clauses": 173506,
+      "learned_sha256": "c0b8b5ec20259ae13186f2821e3e2f042f60acee7f0018317b5b8abd69d501fc",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274783,
+      "case": "orbit10_pair_031",
+      "cnf_sha256": "a4d74b931f9343e526970ab93dd99c5ea3225167370b587bfd6c2b7062f4d761",
+      "fixed_pair_third_extensions": 413,
+      "learned_clauses": 103876,
+      "learned_sha256": "9221795b3bea2741b5d6fec8fc5cd2ac9a9abb23f015c69d939811f656a694d1",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274832,
+      "case": "orbit10_pair_032",
+      "cnf_sha256": "4e745f1686139df619f54f54e23021aae9319dfb8b5ce240585dd0f3b39a8981",
+      "fixed_pair_third_extensions": 462,
+      "learned_clauses": 160717,
+      "learned_sha256": "f2d6b0d57c448ff2920fc330ffa4d843177afabb18d8c2789806479651495382",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274840,
+      "case": "orbit10_pair_033",
+      "cnf_sha256": "0ac86e0effbbbacaeaee85e587549f289a91478f92e65965df56f302bbf4ac67",
+      "fixed_pair_third_extensions": 470,
+      "learned_clauses": 174739,
+      "learned_sha256": "ffbecf994fbe950445e41cb9a6c2cdc817562f46486c586c1fdadc044e47f1be",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274841,
+      "case": "orbit10_pair_034",
+      "cnf_sha256": "aebede9be1a3ea8c36205e24b73228a66cedeb3b2e9fc9d7a08e72f9ef56069e",
+      "fixed_pair_third_extensions": 471,
+      "learned_clauses": 167414,
+      "learned_sha256": "d7a1262963c673ec57be817076e9bac75d96089aa4991e97512a9136809c99de",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274841,
+      "case": "orbit10_pair_035",
+      "cnf_sha256": "4f87da8580e34e4d3a56290f0b8157905f4f84b9de07fdce2094e76aa3b22e8d",
+      "fixed_pair_third_extensions": 471,
+      "learned_clauses": 150426,
+      "learned_sha256": "a6529ba646cb869f9ac361454806f48400a36f424d1f6f1260d5c4e1303be00f",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274830,
+      "case": "orbit10_pair_036",
+      "cnf_sha256": "2bf9dd25b01470040bd9fddadec4903411c02a3b510d89bc74eccbaca69f5b6d",
+      "fixed_pair_third_extensions": 460,
+      "learned_clauses": 102609,
+      "learned_sha256": "4f4c0d46ed736d516414be5bd1f1a3af2cc1461df9db960944ec3ef17141bc2f",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274838,
+      "case": "orbit10_pair_037",
+      "cnf_sha256": "7bab0b7b2df88601eb835d5b5307dd4c903685912a5a7da9470b9e754af3e477",
+      "fixed_pair_third_extensions": 468,
+      "learned_clauses": 148593,
+      "learned_sha256": "33bab81be9380412e66292f6d3a7c690e9b52b021fcf59d720878446289ba828",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274828,
+      "case": "orbit10_pair_038",
+      "cnf_sha256": "449c8edc86484f0f7c140381de38c3ef9bcaaec6f996c184ba06998b8ca609f9",
+      "fixed_pair_third_extensions": 458,
+      "learned_clauses": 122713,
+      "learned_sha256": "67a04bb6ab056c82c6b870db0176758a1817192d25e84d316487d1128e95d44e",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274838,
+      "case": "orbit10_pair_039",
+      "cnf_sha256": "0ac23f6ecf271dd1db89c7349e236d1899caa692e377e550dc925edfea92a176",
+      "fixed_pair_third_extensions": 468,
+      "learned_clauses": 171214,
+      "learned_sha256": "e929aa90e374e9e3ed3bcf96326cc3cda4ec8731fbd48aff573a4aeb6ccf366b",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274828,
+      "case": "orbit10_pair_040",
+      "cnf_sha256": "7973186e589ed136f5774a7d90c60d216bf8fbc80d9c2465f267cc02257635ec",
+      "fixed_pair_third_extensions": 458,
+      "learned_clauses": 172320,
+      "learned_sha256": "0d05cf2b4f88e7e2e1b0fccc36c7c1bdedec425be142342e8b7ba5e844e08a7d",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274774,
+      "case": "orbit10_pair_041",
+      "cnf_sha256": "fa25d269ce466e6c4a0e50a465fd41903266c25babe4da059ea9ee4d52c6d343",
+      "fixed_pair_third_extensions": 404,
+      "learned_clauses": 64016,
+      "learned_sha256": "e5a84c8cc50c62598e675551dca292d97352a6161239e1f9e922b916fd85c02f",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274823,
+      "case": "orbit10_pair_042",
+      "cnf_sha256": "9ccf94ed573f92e4ad6e5d7ee53713054d9ebee587c33d03aa5990df58ac6c59",
+      "fixed_pair_third_extensions": 453,
+      "learned_clauses": 106211,
+      "learned_sha256": "ae153739653618901a3ba253f16f6f27b5156674fb2607e210c877b6c131bb44",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274823,
+      "case": "orbit10_pair_043",
+      "cnf_sha256": "1ee2af276dfda77f158ca3c58bfc0f8388ec9df2246a6a6791be470b6222a073",
+      "fixed_pair_third_extensions": 453,
+      "learned_clauses": 94725,
+      "learned_sha256": "aa21beae1870ecd08e85fd4c8c3c22ee721ef4d54bf3483b16e41f64daa1b760",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274814,
+      "case": "orbit10_pair_044",
+      "cnf_sha256": "abf52438e0e35d34d319d78f2bb9448d5eae309b31534a32759f2d6808d33480",
+      "fixed_pair_third_extensions": 444,
+      "learned_clauses": 146278,
+      "learned_sha256": "b17de99e96e1de6857074b6f3a66c97fc20a2a3d2eef2a47fd75f3e5981594d1",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274823,
+      "case": "orbit10_pair_045",
+      "cnf_sha256": "352865a8e00b096ee53978bd2995b93d78c6eb40da27a852cd206f0b29ea878b",
+      "fixed_pair_third_extensions": 453,
+      "learned_clauses": 135377,
+      "learned_sha256": "311efa507f35713d16c172b37cb9bc31f3967c1a43e4c6235258727efa3a1262",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    },
+    {
+      "base_clauses": 274823,
+      "case": "orbit10_pair_046",
+      "cnf_sha256": "3b96cd980d9606626c2bba81b625271a64043eba3ae0c98fbb85bafd84bd6adf",
+      "fixed_pair_third_extensions": 453,
+      "learned_clauses": 99382,
+      "learned_sha256": "fe5315e0cc122fdc7822ed48de2f87b89ab5c22c7ead089c8f8bd6b5d693c435",
+      "no_post_fixed_pair_symmetry": true,
+      "semantic_clause_audit": "pass"
+    }
+  ],
+  "classifier_action_audit": {
+    "action_generators": 8,
+    "all_intersections": [
+      2,
+      1,
+      1
+    ],
+    "canonical_pair_orbits": 47,
+    "disjoint_matching_pairs": 570780,
+    "generator_orbits": 47,
+    "orbit": 10,
+    "pair": [
+      0,
+      1
+    ],
+    "pair_intersection": 2,
+    "row_symmetries": 2,
+    "rows": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        2,
+        3
+      ],
+      [
+        2,
+        4,
+        5
+      ]
+    ],
+    "signature": [
+      1,
+      1,
+      1,
+      2,
+      0,
+      0,
+      1
+    ]
+  },
+  "compatible_labelled_pairs": 570780,
+  "learned_clauses": 6073966,
+  "no_post_fixed_pair_symmetry": true,
+  "status": "pass",
+  "support_and_cuts": {
+    "automatic_cuts": 3598,
+    "degree_lower": [
+      2,
+      3,
+      4,
+      2,
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "encoded_cut_sizes": {
+      "6": 497,
+      "7": 29
+    },
+    "encoded_nonautomatic_cuts": 526,
+    "positive_cuts": 4124,
+    "rows": [
+      [
+        0,
+        1,
+        2
+      ],
+      [
+        1,
+        2,
+        3
+      ],
+      [
+        2,
+        4,
+        5
+      ]
+    ],
+    "selected_pair": [
+      0,
+      1
+    ],
+    "signature": [
+      1,
+      1,
+      1,
+      2,
+      0,
+      0,
+      1
+    ]
+  }
+}

@@ -96,7 +96,16 @@ New exact results in the note include:
   435 gzip checks, and a fresh independent replay of all 87 DRAT traces.
   The separate [root replay audit](collaboration/opus5_r0_orbit_repair/2026-07-29_orbit9_root_replay_audit.md)
   records the exact command and scope.  Thus orbits zero through nine are
-  closed; orbits ten through fifteen remain open;
+  closed;
+- a [certified closure of orbit ten](collaboration/opus5_r0_orbit_repair/2026-07-28_orbit10_cut_sufficiency.md).
+  Its three selected-row omissions are \(012,123,245\), and all 570,780
+  labelled compatible pairs reduce to 47 exact stabilizer orbits.  The
+  independent semantic verifier checks all 4,124 positive capacity cuts and
+  all 6,073,966 learned clauses.  Its 250-file deterministic package passes
+  both hash layers and a fresh independent replay of all 47 DRAT traces; the
+  separate [root replay audit](collaboration/opus5_r0_orbit_repair/2026-07-29_orbit10_root_replay_audit.md)
+  records the exact command and scope.  Thus orbits zero through ten are
+  closed; orbits eleven through fifteen remain open;
 - an [exact post-\(r=0\) bridge audit](collaboration/opus5/post_r0_global_bridge/INDEPENDENT_AUDIT.md).
   For a fixed six-set, the tower data through level two are identified with
   a partial proper colouring of \(J(19,3)\); the six first-lift instances
@@ -111,7 +120,7 @@ New exact results in the note include:
   fifteen.  A complete alternating path/cycle word
   invariant, checked independently against the full stabilizer action
   graph, reduces 7,077,840 labelled matching pairs to 1,126 canonical
-  cases.  This is a finite reduction, not yet cut sufficiency for the six
+  cases.  This is a finite reduction, not yet cut sufficiency for the five
   unresolved orbits;
 - an exact boundary-flow formulation of the remaining colouring problem.
   For a fixed \(b\)-factor it is a nowhere-zero
