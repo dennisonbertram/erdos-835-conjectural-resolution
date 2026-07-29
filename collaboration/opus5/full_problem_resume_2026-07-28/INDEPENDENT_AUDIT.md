@@ -63,6 +63,14 @@ noncanonical triangles. The corrected verifier was then rerun and ended with
    The proof and status files have been narrowed accordingly.
 7. The Latin-rectangle equivalence in Theorem 6 follows directly from the
    rainbow up-stars and is sound.
+8. The original status text misread the repository's statement that no
+   unconditional **nonexistence theorem** for `t>=6` had been found as saying
+   that no such Steiner system was known to exist. Keevash's existence theorem
+   proves designs for all sufficiently large admissible orders at fixed
+   parameters. In particular, `S(6,7,p+6)` exists for every sufficiently
+   large prime `p`: for `m=1,...,7`, `binom(p+m-1,m)` is divisible by `p`, so
+   the design divisibility conditions hold. This constituent existence does
+   not provide the required large set or a lift to the top rung.
 
 ## Remaining mathematical gap
 
@@ -70,3 +78,6 @@ Neither the audited identities nor the exact conflict-graph reformulation
 provides an unrestricted construction or obstruction. A complete solution
 still requires either an actual `LS(k-1,k,2k)` for some `k>2`, or a uniform
 nonexistence argument covering every admissible `k`.
+
+Primary source for item 8: Peter Keevash,
+["The existence of designs"](https://arxiv.org/abs/1401.3665).

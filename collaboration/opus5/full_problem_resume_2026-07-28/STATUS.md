@@ -190,12 +190,13 @@ Both print `ALL CHECKS PASS` or explicit `FAIL` lines.
   needs, for every prime \(p\ge17\), a proof that some rung \(t\le p-2\) has no
   \(LS(t,t+1,t+p)\).  Theorem 3 shows that proof cannot come from the
   single-base-block same-class and cross-class shell inequalities computed
-  here.  To settle it positively one still needs an actual large set, whose
-  existence at rung \(t=6\) would
-  entail an \(S(6,7,p+6)\) — and the repository's own literature note records
-  that no Steiner system with \(t\ge6\) is known to exist
-  (`evidence/large_set_literature_2026-07-26.md:145-150`, "not found — do not
-  assume … any unconditional nonexistence theorem for \(t\ge6\)").
+  here.  To settle it positively one still needs an actual large set.  The
+  rung \(t=6\) constituent existence condition is **not** itself an
+  obstruction: Keevash's design-existence theorem implies that
+  \(S(6,7,p+6)\) exists for every sufficiently large prime \(p\), since these
+  parameters satisfy the standard divisibility conditions.  What is missing
+  is the large set and its coherent lift through the rest of the tower, not
+  one isolated constituent design.
 * *What would close the gap.*  Theorem 5 says the whole question reduces to:
   do \(q-2\) pairwise disjoint systems exist whose leftover conflict graph is
   bipartite?  An odd-cycle invariant for that graph, at rung \(3\) or \(4\)
