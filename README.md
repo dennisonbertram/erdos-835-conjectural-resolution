@@ -115,6 +115,34 @@ New exact results in the note include:
   separate [root replay audit](collaboration/opus5_r0_orbit_repair/2026-07-29_orbit11_root_replay_audit.md)
   records the exact command and scope.  Thus orbits zero through eleven are
   closed; orbits twelve through fifteen remain open;
+- an [exact conflict-cohomology reformulation](collaboration/independent/conflict_cohomology_2026-07-29/PROOF.md),
+  with a separate [independent audit](collaboration/independent/conflict_cohomology_2026-07-29/INDEPENDENT_AUDIT.md).
+  Residual bipartiteness is equivalent to deleted-block all-one row-space
+  membership.  At the top rung this becomes a common odd-transversal problem
+  for \(k-1\) complemented Steiner partitions.  The exact rank records only
+  the number of residual components, and all immediate parity tests are
+  vacuous.  A unitrade-gap theorem and the classified equality case further
+  prove that every nonzero deleted-support kernel vector has at least
+  \(2k+1\) blocks (at least 33 for \(k=16\)); the common-transversal theorem
+  itself remains open.  An [exhaustive \(k=4\) control](collaboration/independent/top_rung_k4_control_2026-07-29/NOTE.md)
+  finds all 30 labelled \(S(3,4,8)\)'s and confirms that no three-system
+  top partial exists, so the smallest nine-block product unitrade cannot
+  serve as a lower-case model of that theorem;
+- an [independently corrected common-transversal attack](collaboration/opus5/common_odd_transversal_2026-07-29/INDEPENDENT_AUDIT.md).
+  Link cycles embed length-preservingly in the residual conflict graph, so
+  an odd cycle in any one-factor-deficiency link is a compact
+  non-extension certificate.  At the top rung, an odd walk from a residual
+  block to its complement is another valid certificate.  The stronger claim
+  that link cycles span the whole cycle space fails on both exact controls,
+  and the Local Link Sufficiency converse remains open;
+- a [complete Bailey--Cameron--Zhou specialization](collaboration/opus5/bcz_odd_graph_attack_2026-07-29/PROOF.md),
+  with a [primary-source independent audit](collaboration/opus5/bcz_odd_graph_attack_2026-07-29/INDEPENDENT_AUDIT.md).
+  The full two-equitable-partition system on the Odd graph is exactly a
+  projection of the original design-quadrature equations, and the singleton
+  partition recovers those equations without loss.  Stabilizer divisibility,
+  distance-partition, Gram, and scalar two-colour transport tests are proved
+  feasible for every admissible parameter.  This closes those projected
+  routes but yields neither an obstruction nor a construction;
 - an [exact post-\(r=0\) bridge audit](collaboration/opus5/post_r0_global_bridge/INDEPENDENT_AUDIT.md).
   For a fixed six-set, the tower data through level two are identified with
   a partial proper colouring of \(J(19,3)\); the six first-lift instances
