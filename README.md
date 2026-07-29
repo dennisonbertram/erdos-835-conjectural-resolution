@@ -105,7 +105,16 @@ New exact results in the note include:
   both hash layers and a fresh independent replay of all 47 DRAT traces; the
   separate [root replay audit](collaboration/opus5_r0_orbit_repair/2026-07-29_orbit10_root_replay_audit.md)
   records the exact command and scope.  Thus orbits zero through ten are
-  closed; orbits eleven through fifteen remain open;
+  closed;
+- a [certified closure of orbit eleven](collaboration/opus5_r0_orbit_repair/2026-07-28_orbit11_cut_sufficiency.md).
+  Its three selected-row omissions are \(012,123,456\), and all 570,780
+  labelled compatible pairs reduce to 93 exact stabilizer orbits.  The
+  independent semantic verifier checks all 4,325 positive capacity cuts and
+  all 11,441,006 learned clauses.  Its 484-file deterministic package passes
+  both hash layers and a fresh independent replay of all 93 DRAT traces; the
+  separate [root replay audit](collaboration/opus5_r0_orbit_repair/2026-07-29_orbit11_root_replay_audit.md)
+  records the exact command and scope.  Thus orbits zero through eleven are
+  closed; orbits twelve through fifteen remain open;
 - an [exact post-\(r=0\) bridge audit](collaboration/opus5/post_r0_global_bridge/INDEPENDENT_AUDIT.md).
   For a fixed six-set, the tower data through level two are identified with
   a partial proper colouring of \(J(19,3)\); the six first-lift instances
