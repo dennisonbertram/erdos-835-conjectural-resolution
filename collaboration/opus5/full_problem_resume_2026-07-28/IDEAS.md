@@ -122,7 +122,7 @@ has a repeated value.
 
 ## B.  Unproved ideas that survived the session
 
-### B.1  Odd-cycle invariant for the leftover conflict graph — **the live one**
+### B.1  Odd-cycle invariant for the leftover conflict graph — **live only at a growing rung**
 
 *Status: unproved; this is the concrete next attack.*
 
@@ -134,11 +134,13 @@ conflict graph \(G_{\mathcal E}\).  \(G_{\mathcal E}\) is \((t+1)\)-regular with
 
 The question is whether the cycle space of \(G_{\mathcal E}\) carries an
 \(\mathbb F_2\)-invariant forced by the parameters.  Corollary 5.3 kills the
-order-parity version.  **Unknown:** whether a finer invariant (e.g. a forced
-odd closed walk built from the design structure, or an \(\mathbb F_2\)
-cohomology class of the "leftover" cocycle) exists.  If one does and is uniform
-in \(p\), it resolves #835 negatively.  I could not test any candidate without
-an interpreter.
+order-parity version.  A later literature correction (`FIXED_RUNG_EXISTENCE.md`)
+also kills any proposed uniform obstruction at a **fixed** rung: for every
+fixed \(t\), Keevash's large-set theorem gives \(LS(t,t+1,t+p)\) for every
+sufficiently large prime \(p\).  Thus a finer invariant can resolve #835
+negatively only if it applies at a rung \(t=t(p)\to\infty\), or directly at
+the top rung.  Whether such a growing-rung cohomology or forced odd walk
+exists remains unknown.
 
 ### B.2  The half-size folded reformulation — **proved but of unclear value**
 
@@ -164,14 +166,15 @@ variable count and it composes with Theorem G1 of
 missing-colour rule; **what is not shown** is that it helps any search or
 proof.  Not pursued.
 
-### B.3  \(\tau(p)\) as the right invariant — **framing, not a theorem**
+### B.3  \(\tau(p)\) as the right invariant — **absolute-bound conjecture refuted**
 
 Define \(\tau(p)=\max\{t:LS(t,t+1,t+p)\ \text{exists}\}\).  Then #835 asks
-whether \(\tau(p)=p-2\) ever.  Known: \(\tau(5)=1\), \(\tau(7)=2\),
-\(\tau(11)\le2\), \(\tau(13)\le2\) (all from the repository's exclusion table,
-reproduced in `STATUS.md`).  **Unproved and worth attacking:** whether
-\(\tau(p)\) is bounded by an absolute constant.  A theorem
-"\(\tau(p)\le3\) for all \(p\)" would resolve #835.  I have no approach to it.
+whether \(\tau(p)=p-2\) ever.  The small-prime values and bounds in `STATUS.md`
+remain correct.  However, the proposed absolute upper bound is false:
+`FIXED_RUNG_EXISTENCE.md` proves from Keevash's Theorem 1.2 that, for every
+fixed \(T\), \(\tau(p)\ge T\) for all sufficiently large primes.  Hence
+\(\tau(p)\to\infty\).  The meaningful asymptotic question is how fast it can
+grow relative to \(p\), not whether it is bounded.
 
 ### B.4  Group-invariant search targets — **not attempted (no interpreter)**
 

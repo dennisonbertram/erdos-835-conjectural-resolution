@@ -111,6 +111,13 @@ any prime \(p\ge17\)**, and this note does not supply one.  Theorem 3 shows
 that the single-base-block shell inequalities computed here will not supply
 one either.
 
+A later independent literature correction gives a complementary lower bound:
+for every fixed \(T\), \(\tau(p)\ge T\) for all sufficiently large primes
+\(p\).  This follows from Keevash's large-set existence theorem and the
+automatic divisibility of \(LS(T,T+1,T+p)\); see
+`FIXED_RUNG_EXISTENCE.md`.  Thus \(\tau(p)\to\infty\), and any negative proof
+must force a failing rung whose index grows with \(p\).
+
 For \(k=16\) specifically the first two open rungs are \(LS(3,4,20)\) and
 \(LS(4,5,21)\), and the repository records both as open, with the sharper fact
 that **no nontrivial large set of Steiner quadruple systems has ever been
@@ -199,20 +206,22 @@ Both print `ALL CHECKS PASS` or explicit `FAIL` lines.
   one isolated constituent design.
 * *What would close the gap.*  Theorem 5 says the whole question reduces to:
   do \(q-2\) pairwise disjoint systems exist whose leftover conflict graph is
-  bipartite?  An odd-cycle invariant for that graph, at rung \(3\) or \(4\)
-  and uniform in \(p\), would resolve #835 negatively.  Corollary 5.3 shows
-  the naive counting version of that invariant is vacuous; a finer one is not
-  ruled out and is the concrete next attack.
+  bipartite?  Keevash's large-set theorem rules out a uniform contradiction at
+  any fixed rung, including rung \(3\) or \(4\), for all large \(p\).  A
+  negative resolution therefore needs an odd-cycle or other invariant at a
+  rung \(t=t(p)\to\infty\), or directly at the top rung.  Corollary 5.3 shows
+  the naive counting version is vacuous; a finer growing-rung invariant is not
+  ruled out.
 
 ## Next executable attack
 
 1. Run the two verifier scripts when an interpreter is available.  They are
    the only unrun claims associated with this directory, and every theorem is
    already proved without them.
-2. Attack the conflict-graph odd-cycle question of Theorem 5 at rung \(3\)
-   (\(LS(3,4,p+3)\)) and rung \(4\) (\(LS(4,5,p+4)\)), looking for a cycle-space
-   invariant that is uniform in \(p\).  This is the only route identified in
-   this session that Theorem 3 does not already close.
+2. For the first open case \(p=17\), attack the conflict-graph odd-cycle
+   question at rungs \(3\) and \(4\).  For the infinite family, work at a
+   growing rung \(t=t(p)\); a fixed-rung uniform obstruction is impossible by
+   `FIXED_RUNG_EXISTENCE.md`.
 3. Independently: settle the literature status of \(S(4,5,21)\) and
    \(LS(3,4,20)\) with a real search (both were unavailable this session).  If
    \(S(4,5,21)\) does not exist, \(k=16\) dies at rung \(4\) immediately.

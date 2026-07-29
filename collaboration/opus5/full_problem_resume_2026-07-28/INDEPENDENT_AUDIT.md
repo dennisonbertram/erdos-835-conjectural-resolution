@@ -71,6 +71,13 @@ noncanonical triangles. The corrected verifier was then rerun and ended with
    large prime `p`: for `m=1,...,7`, `binom(p+m-1,m)` is divisible by `p`, so
    the design divisibility conditions hold. This constituent existence does
    not provide the required large set or a lift to the top rung.
+9. A second literature correction is stronger: Theorem 1.2 of Keevash's
+   *The existence of designs II* proves the **large set itself** at every fixed
+   rung for all sufficiently large admissible orders.  For fixed `t` and
+   prime `p>t+1`, the divisibility conditions for
+   `LS(t,t+1,t+p)` hold automatically.  Hence `tau(p)` tends to infinity and
+   the proposed absolute-bound/fixed-rung obstruction route is impossible.
+   The proof and its exact scope are in `FIXED_RUNG_EXISTENCE.md`.
 
 ## Remaining mathematical gap
 
@@ -81,3 +88,7 @@ nonexistence argument covering every admissible `k`.
 
 Primary source for item 8: Peter Keevash,
 ["The existence of designs"](https://arxiv.org/abs/1401.3665).
+
+Primary source for item 9: Peter Keevash,
+["The existence of designs II"](https://arxiv.org/abs/1802.05900), Theorem
+1.2.

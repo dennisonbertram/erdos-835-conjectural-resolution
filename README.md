@@ -5,7 +5,7 @@ rigorous reductions, exact structural theorems, and reproducible evidence.
 
 ## Status
 
-The full problem remains open as of 28 July 2026. This repository does
+The full problem remains open as of 29 July 2026. This repository does
 **not** claim a complete proof. It advances and precisely formulates the
 negative conjecture
 
@@ -18,6 +18,13 @@ unresolved case is \(k=16\).
 
 New exact results in the note include:
 
+- a [fixed-rung asymptotic existence boundary](collaboration/opus5/full_problem_resume_2026-07-28/FIXED_RUNG_EXISTENCE.md).
+  Keevash's large-set theorem implies that, for every fixed \(t\),
+  \(LS(t,t+1,t+p)\) exists for every sufficiently large prime \(p\): the
+  required divisibility conditions are automatic.  Consequently
+  \(\tau(p)\to\infty\), refuting the proposed absolute-bound strategy.  Any
+  negative solution of #835 must force failure at a rung \(t=t(p)\) growing
+  with \(p\), or work directly at the top rung;
 - a solver-free \(r=0\) cut-feasible repair-selection theorem: after at
   most one support-preserving two-edge switch, some three of the seven
   remaining size-ten rows satisfy every internal-edge capacity cut.  A

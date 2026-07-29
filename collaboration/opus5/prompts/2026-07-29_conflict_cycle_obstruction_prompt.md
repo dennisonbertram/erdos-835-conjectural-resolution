@@ -25,6 +25,17 @@ extending through the tower could support a positive construction.
 
 Do the heavy mathematical lifting on that exact question.
 
+### Updated literature boundary
+
+Keevash, *The existence of designs II*, Theorem 1.2
+(https://arxiv.org/abs/1802.05900), implies that for every **fixed** \(t\),
+\(LS(t,t+1,t+p)\) exists for every sufficiently large prime \(p\): the
+divisibility conditions are automatic when \(p>t+1\).  Therefore a uniform
+non-bipartiteness theorem at fixed rung \(t=3\), \(t=4\), or any constant
+\(t\) is false.  Use those rungs only for the finite first case \(p=17\).
+For a full negative resolution, seek an obstruction at a growing rung
+\(t=t(p)\to\infty\), or at the top rung.
+
 ## Required first move: derive the affine obstruction exactly
 
 Let \(H_{\mathcal E}\) be the incidence matrix over \(\mathbb F_2\) whose rows
