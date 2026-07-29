@@ -1,0 +1,29 @@
+{
+  "schema": "erdos835-c17-fixed-link-prefix-refutation-v1",
+  "scope": "This refutes one explicit 88-row prefix inside one fixed-link C17-equivariant LS(3,4,20) completion ansatz. It does not refute the full C17 ansatz, LS(3,4,20), a simultaneous 13-fan, or Erdős-Rosenfeld Problem #835.",
+  "mixed_branch_index": 0,
+  "mixed_rows": [
+    1926, 3017, 3532, 3726, 3822, 3842, 3844, 3874
+  ],
+  "left_rows": [
+    238, 471, 682, 891, 1075, 1249, 1405, 1523, 1630, 1709,
+    1774, 1833, 1854, 1900, 2096, 2274, 2416, 2551, 2679, 2763,
+    2826, 2887, 2914, 2953, 2991, 3120, 3227, 3305, 3357, 3399,
+    3434, 3454, 3490, 3565, 3600, 3635, 3662, 3699, 3750, 3780
+  ],
+  "infinity_rows": [
+    254, 486, 698, 904, 1096, 1269, 1428, 1532, 1645, 1724,
+    1799, 1842, 1879, 1916, 2114, 2279, 2438, 2582, 2699, 2782,
+    2849, 2907, 2927, 2963, 3004, 3133, 3231, 3324, 3370, 3407,
+    3442, 3474, 3505, 3574, 3612, 3654, 3686, 3717, 3762, 3800
+  ],
+  "finite_completion": {
+    "target_columns": 700,
+    "candidate_rows": 1016,
+    "cnf_variables": 1016,
+    "cnf_clauses": 17046,
+    "cnf_sha256": "916e7fdd733ffaef8693a051e5f33e6fc29e796d00328316c2fa941e619c869c",
+    "drat_sha256": "001ead71074f17db7de9663631ea324f1e8f324baff954e2b8a667618adebafa",
+    "drat_gzip_sha256": "3a24dd68bc476f5edde49573d7a75f4ebe5428f41d918dfac6a9ccdf1a61d3a0"
+  }
+}

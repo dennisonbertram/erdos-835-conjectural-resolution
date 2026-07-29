@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.ruff_cache/
+
+# Raw frontier-model streams contain machine-local metadata and signed
+# reasoning payloads.  Publish the sanitized provenance and audited
+# mathematical artifacts instead.
+collaboration/opus5/*.stream.jsonl
+collaboration/opus5/*.stderr.log

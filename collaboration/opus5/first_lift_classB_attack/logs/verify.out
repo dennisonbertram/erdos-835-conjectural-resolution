@@ -1,0 +1,87 @@
+Verifier for results/first_lift_classB_attack/NOTE.md
+====================================================
+python-sat available: True
+
+1. class-B arithmetic at n = 13 (and the general n)
+---------------------------------------------------
+  PASS  six m-profiles at n=13; |V_c| in {8,10,12}; sum |V_c| = 156; sum |V_c|/2 = 78 = C(13,2)
+  PASS  general n: 2n5 + n3 = 2n-2 and n1 = n5 - n + 6
+
+2. (BC) contains the two Lemma-1 cuts and vertex Hall
+-----------------------------------------------------
+  PASS  28800 random (instance, X, W) checks: (BC) with W = A\X is exactly the forced-inside cut, and (BC) with |X| = 1 is exactly the Hall count
+
+3. (BC) is necessary: no completable instance violates it
+---------------------------------------------------------
+      (5, 'SAT', 'BC-clean')       156
+      (5, 'UNSAT', 'BC-violated')  244
+      (7, 'SAT', 'BC-clean')       353
+      (7, 'UNSAT', 'BC-clean')     5
+      (7, 'UNSAT', 'BC-violated')  42
+      (9, 'SAT', 'BC-clean')       400
+  PASS  1200 instances at n=5,7,9: SAT never violates (BC); the (UNSAT, BC-clean) cells are non-empty, so (BC) is not sufficient
+
+4. THEOREM: (BC) cannot fire at n = 13 (exact DP)
+-------------------------------------------------
+      n= 3 (k= 6): worst (BC) margin +0 at |X|=1 |W|=1 profile (0, 4, 3)
+      n= 5 (k= 8): worst (BC) margin +4 at |X|=2 |W|=3 profile (0, 8, 1)
+      n= 7 (k=10): worst (BC) margin +6 at |X|=2 |W|=5 profile (4, 4, 3)
+      n= 9 (k=12): worst (BC) margin +8 at |X|=4 |W|=5 profile (5, 6, 2)
+      n=11 (k=14): worst (BC) margin +4 at |X|=5 |W|=6 profile (6, 8, 1)
+      n=13 (k=16): worst (BC) margin +0 at |X|=1 |W|=12 profile (7, 10, 0)
+      n=15 (k=18): worst (BC) margin +0 at |X|=1 |W|=14 profile (9, 10, 0)
+      n=17 (k=20): worst (BC) margin +0 at |X|=1 |W|=16 profile (11, 10, 0)
+  PASS  a (BC) condition can be violated for n in {5,7,9,11} (k in {8,10,12,14}) and for NO n in {3,13,15,17}
+  PASS  at n = 13 the worst margin is exactly 0, attained at |X|=1 (an identity, not a violation): (BC) holds for every class-B instance
+
+5. Lemma: vertex Hall holds whenever n >= 2r+1 (here r = 5)
+-----------------------------------------------------------
+      the relaxation admits a Hall violation only for n in [3, 5, 7, 9]
+  PASS  no vertex-Hall violation is possible for n >= 2r+1 = 11
+  PASS  600 random instances at n = 11, 13: no vertex-Hall violation (control)
+
+6. re-verification of the four stored counterexamples (k = 8,10,12,14)
+----------------------------------------------------------------------
+      counterexample_n05   n= 5 k= 8 supports [(0, 1), (2, 6), (4, 2)]
+        exhaustive search UNSAT (python DFS, 1 nodes) (CDCL SAT solver agrees); violates (BC) at X=(1,) W=(3,) (0 < 1)
+      counterexample_n07   n= 7 k=10 supports [(2, 4), (4, 4), (6, 3)]
+        exhaustive search UNSAT (python DFS, 1 nodes) (CDCL SAT solver agrees); violates (BC) at X=(0,) W=(2, 3, 4, 5, 6) (4 < 5)
+      counterexample_n09   n= 9 k=12 supports [(4, 5), (6, 6), (8, 2)]
+        exhaustive search UNSAT (python DFS, 10 nodes) (CDCL SAT solver agrees); violates (BC) at X=(0,) W=(4, 5, 6, 7, 8) (3 < 5)
+      counterexample_n11   n=11 k=14 supports [(6, 10), (10, 5)]
+        exhaustive search UNSAT (C DFS, UNSAT in 15432645 nodes) (CDCL SAT solver agrees); violates (BC) at X=(0, 1, 2, 3, 4, 5) W=(6, 7, 8, 9, 10) (26 < 30)
+  PASS  all four are class-B, are witnessed as class-B' by an explicit proper colouring of K_{n+5} - E(K_n) saturating the 5 outside vertices, have no completion, and every one of them violates (BC)
+
+7. new certificates: (BC) is not sufficient, and neither is the LP
+------------------------------------------------------------------
+      n07_BCclean_LPinfeasible.json    n= 7 supports [(2, 3), (4, 6), (6, 2)]
+        (BC)-clean, exhaustive UNSAT in 1 nodes, fractional relaxation infeasible (exact Farkas re-checked)
+      n07_BCclean_LPfeasible.json      n= 7 supports [(2, 1), (4, 10)]
+        (BC)-clean, exhaustive UNSAT in 3 nodes, and the fractional relaxation IS feasible (exact rational point re-checked)
+      n09_BCclean.json                 n= 9 supports [(4, 5), (6, 6), (8, 2)]
+        (BC)-clean, exhaustive UNSAT in 271 nodes, fractional relaxation infeasible (exact Farkas re-checked)
+  PASS  (BC) is not sufficient at n = 7 or n = 9, and at n = 7 there is an instance whose obstruction is invisible even to the fractional relaxation
+
+8. solver cross-validation
+--------------------------
+  PASS  500 instances at n=7: DFS, an independent fixed-order brute force, and a CDCL SAT solver all agree (443 SAT, 57 UNSAT); every SAT witness re-checked
+
+9. the twin5 enumeration scheme is complete (unit test)
+-------------------------------------------------------
+  PASS  on the 4x5 analogue: 0 labelled matrices fall into 0 orbits, and the generator produces a representative of every one of them
+  PASS  on the 5x6 analogue: 0 labelled matrices, 0 orbits, all generated
+
+10. twin5 exhaustive family: deterministic re-check of a slice
+--------------------------------------------------------------
+      (twin5_slice.json absent; skipping)
+
+scope
+-----
+Proved here: (BC) is necessary; (BC) contains both Lemma-1 cuts and
+vertex Hall; (BC) can fire exactly for k in {8,10,12,14} and never
+at k = 16; vertex Hall never fires for n >= 11; (BC) is NOT
+sufficient at n = 7 or 9, and the fractional relaxation is not
+sufficient at n = 7.  NOT proved here: that every class-B or
+class-B' instance completes at n = 13, that a simultaneous fan or an
+LS(3,4,20) exists, or anything about Erdos-Rosenfeld Problem #835,
+which remains open.

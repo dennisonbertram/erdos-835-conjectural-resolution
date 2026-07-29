@@ -1,0 +1,68 @@
+{
+  "o0_x0": {
+    "overlap": 0,
+    "aa_edges": 0,
+    "prefix_sizes": [4, 4, 4, 5, 5, 5],
+    "fixed_matching": [[0, 7], [1, 8], [2, 9], [3, 4], [5, 6]],
+    "variables": 8330,
+    "clauses": 719853,
+    "disjoint_pairs": 684180,
+    "cnf_sha256": "6bda25a7806a32f3ea0dd7bdb0ee132c9025ff466cc41d877168f68cdda80c26",
+    "drat_sha256": "975d87df6f0a5a4bba4ed25b1b5199e30ab11a5e80167e01b5a2fcc4c35498c6"
+  },
+  "o0_x1": {
+    "overlap": 0,
+    "aa_edges": 1,
+    "prefix_sizes": [4, 4, 4, 5, 5, 5],
+    "fixed_matching": [[0, 9], [1, 2], [3, 4], [5, 6], [7, 8]],
+    "variables": 8330,
+    "clauses": 719853,
+    "disjoint_pairs": 684180,
+    "cnf_sha256": "8adf42fa1da228a4900304eb460f6753902cab4daee94e0b318ccd4b0b860c79",
+    "drat_sha256": "98982f736c6c7d36a0987661a592770a59f6735e8fadac40c53df757be87af3b"
+  },
+  "o1_x0": {
+    "overlap": 1,
+    "aa_edges": 0,
+    "prefix_sizes": [4, 4, 4, 5, 5, 5],
+    "fixed_matching": [[0, 7], [1, 8], [2, 3], [4, 5], [6, 9]],
+    "variables": 8330,
+    "clauses": 663580,
+    "disjoint_pairs": 627900,
+    "cnf_sha256": "35e659ebe4aeee7fd6943698b32a9d2bdaff5cad081982267213768771ad2c67",
+    "drat_sha256": "ec08e9e88bb261acfb7a3ca5af8b5df64557de32f636264304e5c4107182d909"
+  },
+  "o1_x1": {
+    "overlap": 1,
+    "aa_edges": 1,
+    "prefix_sizes": [4, 4, 4, 5, 5, 5],
+    "fixed_matching": [[0, 1], [2, 3], [4, 5], [6, 9], [7, 8]],
+    "variables": 8330,
+    "clauses": 663580,
+    "disjoint_pairs": 627900,
+    "cnf_sha256": "00e93ade3b94d5e9abacc0ab2e7922d265af2bf4bb41f142d7c366c7c964b79a",
+    "drat_sha256": "eea8743a75d8a4cf63d54a75b9afe1c2153cacb6f63e123794bd6687fcaae753"
+  },
+  "o2_x0": {
+    "overlap": 2,
+    "aa_edges": 0,
+    "prefix_sizes": [4, 4, 4, 5, 5, 5],
+    "fixed_matching": [[0, 7], [1, 2], [3, 4], [5, 6], [8, 9]],
+    "variables": 8330,
+    "clauses": 606468,
+    "disjoint_pairs": 570780,
+    "cnf_sha256": "440d5b50dfbf81f9592f03c9fdd4c1717f1e6d72eec2343996d04da2a19f9401",
+    "drat_sha256": "09e8cdf50597721c68e62a2a40723c5d46b21ab9c6023d607d7b2b91630c3118"
+  },
+  "o3_x0": {
+    "overlap": 3,
+    "aa_edges": 0,
+    "prefix_sizes": [4, 4, 4, 5, 5, 5],
+    "fixed_matching": [[0, 1], [2, 3], [4, 5], [6, 7], [8, 9]],
+    "variables": 8330,
+    "clauses": 549777,
+    "disjoint_pairs": 514080,
+    "cnf_sha256": "40a7cbd0e03fba263ad921a84e536b4143b5546753031ad41a1da5c0088685ae",
+    "drat_sha256": "34bc1b9a66e6bd585c8661177e2cc1a896fb4d569fe84907aea17a6ce22ce2ba"
+  }
+}

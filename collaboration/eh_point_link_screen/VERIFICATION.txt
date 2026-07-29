@@ -1,0 +1,210 @@
+EH point-link evidence verification
+===================================
+
+Final verification date: 2026-07-26
+
+Exact theorem
+=============
+
+Every twelve-system subfamily of the authenticated Etzion--Hartman 15-core is
+excluded. Therefore any LS(3,4,20), if one exists, shares at most eleven of
+these fifteen systems.
+
+Coverage partition:
+
+  30  exact ten-point DSATUR exclusions
+   2  legacy point-0 DRAT exclusions
+ 423  batch point-0 DRAT exclusions
+ ---
+ 455  all C(15,3) drop-three cases
+
+This is not a proof that LS(3,4,20) is nonexistent and is not a resolution of
+Erdos--Rosenfeld Problem #835.
+
+Authenticated source
+====================
+
+  evidence/ls_3_4_20_eh15_seed.txt
+
+  SHA-256:
+  b1ea090d3e3b88366c87e95660c1c82a406d2c3b100cc1d39bcc2c7e8fde47f9
+
+Tools
+=====
+
+  Python 3.14.6
+  CaDiCaL 3.0.1
+  drat-trim upstream commit:
+  2e3b2dc0ecf938addbd779d42877b6ed69d9a985
+
+The aggregate verifier requires Python 3.10+ because the existing exact
+ten-point verifier uses int.bit_count().
+
+Aggregate theorem gate
+======================
+
+Command:
+
+  /opt/homebrew/bin/python3 -u -B \
+    collaboration/eh_point_link_screen/verify_all_455_coverage.py \
+    --batch-recon \
+      collaboration/eh_point_link_screen/remaining_423_point0_recon.jsonl \
+    --batch-manifest \
+      collaboration/eh_point_link_screen/remaining_423_point0_certificate_manifest.jsonl \
+    --batch-base-dir collaboration/eh_point_link_screen \
+    --drat-trim /private/tmp/drat-trim-src/drat-trim \
+    --receipt \
+      collaboration/eh_point_link_screen/all_455_point0_theorem_receipt.json
+
+Final output:
+
+  [ok] verified 423/423 manifest rows
+  [ok] every checked CNF was independently reconstructed byte-for-byte
+  [exact] recon census: {'UNSAT_RECONNAISSANCE': 423}
+  [exact] manifest rows: 423
+  [exact] checked rows: 423
+  [exact] compressed proof bytes checked: 608518572
+  [exact] certificate bundle digest:
+  1698fc1e5e14814ac37b5a6a9d8a8375420fdb8f304eb1e237040ce9a2d48c67
+  [exact] manifest SHA-256:
+  0ae9a6a7b840cd2927e1b150d9a5ff5cd89d7b0c50d4b0b77b543c42d5c2d4f9
+  [ok] every UNSAT reconnaissance row has a certificate
+  status: PASS
+  [ok] all 455 point-0 leaves contain the three discarded STS(19)s
+  [exact] canonical three-pack digest:
+  c27934a1d370abad000b1bc83bcd5a83e479603e25545416e49e394133dee9e7
+  status: PASS
+  [theorem] every twelve-system subfamily of the EH 15-core is excluded
+  [theorem] any LS(3,4,20) shares at most 11 of the EH 15-core
+  [theorem] the 425 point-link-certified leaves have STS(19) packing number exactly 3
+  [scope] The separate ten-point theorem does not determine the point-0 packing number in its other 30 cases.
+  [scope] This does not decide LS(3,4,20) or #835.
+  [exact] aggregate receipt SHA-256:
+  312096aa9e489156778094e7ab7dc4fd3e3fe34c11d9a2d82531489684c4b085
+  status: PASS
+
+The gate also returned PASS from:
+
+  collaboration/eh_core_symmetry_orbits/verify_eh_core_symmetry_orbits.py
+  collaboration/eh_point_link_screen/verify_point_link_certificate.py
+  collaboration/eh_point_link_screen/verify_certificate_manifest.py
+  collaboration/eh_point_link_screen/verify_three_pack_lower_bound.py
+
+Both legacy binary proofs replayed with s VERIFIED. All 423 batch trimmed
+binary proofs replayed with s VERIFIED.
+
+Batch evidence
+==============
+
+Reconnaissance:
+
+  rows:                       423
+  census:                     423 UNSAT_RECONNAISSANCE
+  total solver seconds:       928.751818
+  minimum solver seconds:     0.652791
+  maximum solver seconds:     7.108775
+  JSONL SHA-256:
+  cf3d33428cfdb62781afa2ef0015bd1b1da76a9898523e0e921f0009e82503a9
+  receipt SHA-256:
+  563a52d46c4f242e0ba0856e09b0940e05bcd4bfaa1f3caa58a9363c9ce599d2
+
+Certificates:
+
+  manifest rows:              423
+  proof files:                423
+  compressed proof bytes:     608518572
+  largest compressed proof:   3618195
+  manifest SHA-256:
+  0ae9a6a7b840cd2927e1b150d9a5ff5cd89d7b0c50d4b0b77b543c42d5c2d4f9
+  bundle digest:
+  1698fc1e5e14814ac37b5a6a9d8a8375420fdb8f304eb1e237040ce9a2d48c67
+
+The manifest's raw-proof and first-check fields are generation provenance.
+The raw proofs were deliberately not committed. Portable verification checks
+the committed deterministic gzip streams, their trimmed-proof hashes, exact
+independent CNF serialization, and fresh drat-trim replay.
+
+Legacy evidence
+===============
+
+drop (0,1,5), point 0:
+
+  CNF SHA-256:
+  ac8e2176860e5f2d002a29e2592c4dc009d0262e7674fb35c47d11c9467f3e6f
+  gzip proof SHA-256:
+  648c029837933e1d4896b3342e6fc057c48540c2a7259e1a0c53e897745d9f51
+  uncompressed proof bytes: 2380258
+  uncompressed proof SHA-256:
+  06112a768e0892980bd02ffd21e2abca56324ee35c1c3d76be0ef828a12f63b9
+  checker result: s VERIFIED
+
+drop (0,5,10), point 0:
+
+  CNF SHA-256:
+  b0e0ebe97c289a9c44ff6ac48efbfecbf238d1b7f0dbfae2e934a9d6f1444654
+  gzip proof SHA-256:
+  195887f5ecebc335ecd80fae826d176b10c97f3122a38be1b896469666ad6f6b
+  uncompressed proof bytes: 5902433
+  uncompressed proof SHA-256:
+  9831caf77ec2588cbcbb695837d82201a037f06e5d9fbd90883c8595a60528a7
+  checker result: s VERIFIED
+
+Packing statement
+=================
+
+All 455 point-0 leaves contain the canonical three discarded STS(19)s.
+
+In a five-fold leave, four disjoint STS(19)s use four of the five available
+triples on every pair. The unused triples therefore form a forced fifth
+STS(19). UNSAT of the five-colouring CNF is consequently an upper bound of
+three on the point-link STS packing number.
+
+Thus the packing number is exactly three in the 425 DRAT-certified cases.
+The separate ten-point theorem does not supply that upper bound for its 30
+cases.
+
+Retain-eleven/drop-four bounded frontier
+========================================
+
+Command:
+
+  /opt/homebrew/bin/python3 -u -B \
+    collaboration/eh_point_link_screen/screen_drop_four_samples.py \
+    --cadical cadical \
+    --seconds 30 \
+    --results \
+      collaboration/eh_point_link_screen/drop_four_point0_sample_recon.jsonl \
+    --receipt \
+      collaboration/eh_point_link_screen/drop_four_point0_sample_receipt.json
+
+Recorded result:
+
+  cases:                      9
+  structural cells:           9
+  census:                     9 UNKNOWN
+  total solver seconds:       270.321988
+  minimum solver seconds:     30.017756
+  maximum solver seconds:     30.068175
+  results SHA-256:
+  e29ba7363bc1ad67d30586161a089d1c4e82eb33c198ceece5bb3055d093a3b7
+
+Audit command:
+
+  /opt/homebrew/bin/python3 -B \
+    collaboration/eh_point_link_screen/verify_drop_four_sample.py \
+    --results \
+      collaboration/eh_point_link_screen/drop_four_point0_sample_recon.jsonl \
+    --receipt \
+      collaboration/eh_point_link_screen/drop_four_point0_sample_receipt.json
+
+Audit output:
+
+  [ok] audited 9 intended point-0 drop-four sample cases
+  [ok] structural cells: 9
+  [exact] status census: {'UNKNOWN': 9}
+  [exact] results SHA-256:
+  e29ba7363bc1ad67d30586161a089d1c4e82eb33c198ceece5bb3055d093a3b7
+  [scope] UNKNOWN rows carry no satisfiability conclusion
+  status: PASS
+
+No SAT or UNSAT theorem is claimed for the retain-eleven sample.

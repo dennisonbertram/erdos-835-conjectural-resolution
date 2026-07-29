@@ -1,0 +1,13 @@
+{
+ "n_sils7": 6240,
+ "n_families": 1680,
+ "n_charts": 11760,
+ "distribution": {
+  "(1, -1, -1)": 6720,
+  "(1, 1, 1)": 5040
+ },
+ "neg_pair_distribution": {
+  "60": 11760
+ },
+ "per_uv_feasible_charts": 0
+}

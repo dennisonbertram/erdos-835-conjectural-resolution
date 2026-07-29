@@ -1,0 +1,9 @@
+# Platform-specific build products and interrupted solver scratch files.
+anneal_ls
+tabucol_johnson
+runs/j15_branches/tmp*.cnf
+runs/j15_branches/branch*.model
+runs/j19_sat.log
+__pycache__/
+*.py[cod]
+.ruff_cache/

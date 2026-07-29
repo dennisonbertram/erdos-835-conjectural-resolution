@@ -1,0 +1,6 @@
+$ python3 -B collaboration/h3_j8_exact_trade_elimination/verify_j8_exact_trade_elimination.py
+extension multiplicities 4, 3, 2: PASS
+complement inclusion-exclusion on all 715^2 pairs: PASS
+q=6 residue and coefficient-range step: PASS
+PASS: the exact triple-degree-zero branch contains only e=0
+scope: the general D_T <= 3 lift and Problem #835 remain open

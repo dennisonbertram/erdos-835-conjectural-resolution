@@ -1,0 +1,50 @@
+High-lift top-properness
+========================
+
+All runs executed 2026-07-27 from the repository root.
+
+1. j=12 -> j=13 sanity control
+
+Command:
+  python3 -B \
+    collaboration/high_lift_top_properness/verify_j12_top_properness.py
+
+Expected output:
+  cyclic K17 control:
+    136 edges, 17 matching classes of size 8,
+    one distinct missing colour per vertex: PASS
+  scope: sanity control for the proved j=12 implication only;
+    no lower-level or #835 conclusion
+
+2. j=11 -> j=12 recurrence audit and weakened-slice countercontrol
+
+Command:
+  python3 -B \
+    collaboration/high_lift_top_properness/verify_j11_top_properness.py
+
+Expected output:
+  full j=11 recurrence arithmetic:
+    alpha_2..alpha_12 integral, lcm(2..12)=27720,
+    multiplicity forced to 0 or 1: PASS
+  weakened m=3, |P|=6 boundary certificate:
+    immediate lambda/phi constraints hold with a column repeat: PASS
+  delimiter:
+    this certificate omits the other lower-tower faces and does not
+    refute full-tower automaticity
+  scope:
+    the full recurrence proves j=11 -> j=12 top-properness;
+    it does not construct a 17-colouring or solve #835
+
+2026-07-27 automatic j=10 -> j=11 proof audit
+
+Command:
+
+  python3 -B \
+    collaboration/high_lift_top_properness/verify_j10_top_properness.py
+
+Output:
+
+  j=10 recurrence: edge coefficients verified for s=3..11; lcm(2..10)=2520>30: PASS
+  potential classification: only all-one K13 and one deleted-star K13 survive: PASS
+  global color count: 13 uniquely centered deleted stars and 4 full colors: PASS
+  scope: j=10 -> j=11 top-properness is audited conditionally; the lower tower and #835 are not constructed

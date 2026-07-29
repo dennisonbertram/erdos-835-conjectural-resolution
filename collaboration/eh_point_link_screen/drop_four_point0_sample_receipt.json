@@ -1,0 +1,84 @@
+{
+  "cadical_version": "3.0.1",
+  "cases": 9,
+  "census": {
+    "UNKNOWN": 9
+  },
+  "maximum_solver_seconds": 30.068175,
+  "minimum_solver_seconds": 30.017756,
+  "point": 0,
+  "results_path": "drop_four_point0_sample_recon.jsonl",
+  "results_sha256": "e29ba7363bc1ad67d30586161a089d1c4e82eb33c198ceece5bb3055d093a3b7",
+  "row_schema": "eh-point-link-drop4-sample-v1",
+  "schema": "eh-point-link-drop4-sample-receipt-v1",
+  "seconds_per_case": 30,
+  "structural_cells": [
+    {
+      "construction_pack_multiplicity": [
+        2,
+        1,
+        1
+      ],
+      "full_top_count": 4
+    },
+    {
+      "construction_pack_multiplicity": [
+        2,
+        1,
+        1
+      ],
+      "full_top_count": 29
+    },
+    {
+      "construction_pack_multiplicity": [
+        2,
+        1,
+        1
+      ],
+      "full_top_count": 54
+    },
+    {
+      "construction_pack_multiplicity": [
+        2,
+        1,
+        1
+      ],
+      "full_top_count": 104
+    },
+    {
+      "construction_pack_multiplicity": [
+        2,
+        2
+      ],
+      "full_top_count": 4
+    },
+    {
+      "construction_pack_multiplicity": [
+        2,
+        2
+      ],
+      "full_top_count": 16
+    },
+    {
+      "construction_pack_multiplicity": [
+        2,
+        2
+      ],
+      "full_top_count": 17
+    },
+    {
+      "construction_pack_multiplicity": [
+        3,
+        1
+      ],
+      "full_top_count": 24
+    },
+    {
+      "construction_pack_multiplicity": [
+        4
+      ],
+      "full_top_count": 144
+    }
+  ],
+  "total_solver_seconds": 270.321988
+}

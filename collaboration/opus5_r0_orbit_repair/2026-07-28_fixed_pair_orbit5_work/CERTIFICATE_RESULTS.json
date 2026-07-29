@@ -1,0 +1,175 @@
+{
+  "status": "pass",
+  "support_orbit": 5,
+  "canonical_pair_types": 17,
+  "positive_capacity_cuts": 4040,
+  "encoded_nonautomatic_cuts": 435,
+  "automatic_cuts": 3605,
+  "learned_triple_clauses": 1653956,
+  "semantic_clause_audit": "pass",
+  "cadical": {
+    "version": "3.0.1",
+    "internal_checkproof": "pass",
+    "proofs": 17
+  },
+  "drat_trim": {
+    "commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+    "verified": 17,
+    "failures": 0
+  },
+  "cases": [
+    {
+      "case": "orbit5_pair_000",
+      "clauses": 314457,
+      "learned": 86569,
+      "cnf_raw_sha256": "93454785d3235b072eaa84c278c8aa168acefec7c39da865b9cfc5f13f0975eb",
+      "learned_raw_sha256": "0e984cebe515cf94e9d1dced1ab2744b3155664b29f723045475a947faa0c065",
+      "drat_raw_sha256": "d6af05123f598b9aef9635968643d8318d25fe8d0be248ad235720cf0d9e58df",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_001",
+      "clauses": 309886,
+      "learned": 81947,
+      "cnf_raw_sha256": "dcde867d7da51ff1e77b360262a90d65b24debd95164cdca1e266aa258e45587",
+      "learned_raw_sha256": "02f4bbfa7767d831ea5dfb9ec5a1ff045aa60bffbe32544c1da834ba9cea62a8",
+      "drat_raw_sha256": "4ddab8adfdd5fd404542ec38d87254d1f563c8d168fc9899fb7f46cd8af4102e",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_002",
+      "clauses": 320708,
+      "learned": 92718,
+      "cnf_raw_sha256": "f59aec509b24752196a2de2208e8f96cafd3abf6c3b8ac3d937f54516c1f533a",
+      "learned_raw_sha256": "2f4c3844715acb0cb0f1ede88e610803ebebb9f97139ee84f8819dfbe6f42e28",
+      "drat_raw_sha256": "77ada06d7f1de0413d243dc051071c671a0a51cfd9c7cf0dd5b671556c49ee27",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_003",
+      "clauses": 316057,
+      "learned": 88178,
+      "cnf_raw_sha256": "7ff8e3c96b291a5f1addf4b38185e146ad2f718cf91e72074f0c43eacca979e8",
+      "learned_raw_sha256": "a1b417c830aa71831954a8716c5118c12783a727ca40fba782627e2b9e22988f",
+      "drat_raw_sha256": "fbd099a9faf955b3c67d316a75bfa95131014499bf84d78f53f712dd346b3451",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_004",
+      "clauses": 310300,
+      "learned": 82412,
+      "cnf_raw_sha256": "3f21f91cb8b335efa246fcfb980acf646a6a35b574322fa2f5f769146f079984",
+      "learned_raw_sha256": "4fa4adf28c338660c682598f48741acb727507c29c436e7bf544ffa38149451e",
+      "drat_raw_sha256": "1740b68edc51a3845f4615b9bec5762b192859cfac77029b13ee30be758042c9",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_005",
+      "clauses": 286546,
+      "learned": 58604,
+      "cnf_raw_sha256": "d9b3d22ce5c219410d324a9c1964dba6eca0af91e594aa821f35844549aa9896",
+      "learned_raw_sha256": "290d57407d75274722a4d5ea566419e1f912142c0991ec325392cefbf43ca939",
+      "drat_raw_sha256": "f89e5b2a5572736a51e4daee0d18e628f151280adddc9fdd866ca4d7e4979265",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_006",
+      "clauses": 318798,
+      "learned": 90847,
+      "cnf_raw_sha256": "4ba46703aaf540c8754761b59d0ef9f1938f1f876211ad73fbd1b99e2f184e52",
+      "learned_raw_sha256": "d1a2e8cbf25210cb3c3c1ba42ddbb0f6d002c685c37fcb81ab33a3b9711b1cd6",
+      "drat_raw_sha256": "522fdca8510fb95145617e3f8525204e7267a391a32e173b173744cd716c7760",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_007",
+      "clauses": 312093,
+      "learned": 84088,
+      "cnf_raw_sha256": "8b5f59417de506f9728ed70f4f5183c159dedc3471ad2f4e9e511bfdcea664e4",
+      "learned_raw_sha256": "9da8cfdf85751935ab3be07313715d0b809d3483483e9a0a5c7088489763f222",
+      "drat_raw_sha256": "9ef6d377c571fc107f238fa4a947a044836231298cfe9a2e7b663e288e7967e6",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_008",
+      "clauses": 302333,
+      "learned": 74382,
+      "cnf_raw_sha256": "ca036758988da083513ec430ea95e6356694255823a6d37906999a6eef610f67",
+      "learned_raw_sha256": "49146a6f5f19f79d9a99cc95da7f127fc4e1ca125b6dab791cf11c481b544a33",
+      "drat_raw_sha256": "466c18672fe4f18a5e735f34ac42833d5bb800766f67d28126cee36e9ed49e4e",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_009",
+      "clauses": 343411,
+      "learned": 115406,
+      "cnf_raw_sha256": "7a94526d3c49d8d3f026fb7e96c0d8315ad646a66fc71e95553b3857f4ad1865",
+      "learned_raw_sha256": "49e10f2c4cf5e4a38dbac5ea229eb8df29f3d6c6968d6f027ac0ebc0196209e4",
+      "drat_raw_sha256": "955117103e036babbe0c44cce63c506aa2bed3570a22ccf515c46ae906761fa5",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_010",
+      "clauses": 313778,
+      "learned": 85824,
+      "cnf_raw_sha256": "1d56cd36e6c11d050371573afe7ccd536bbde0da534829a5005b796ba9036399",
+      "learned_raw_sha256": "50ee5b86d08f732086932ab1b0f33afb1352b8572fd5ebdbd17d5a0b35e7e901",
+      "drat_raw_sha256": "8b57951f7a8395ef0aa3ab69ff8edd459659acb594bf0d735de02c4cae1e2468",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_011",
+      "clauses": 352135,
+      "learned": 124118,
+      "cnf_raw_sha256": "9aa5f6b85cbf698b93d4d09bde30ad21be1f238537417a763934003f95133c33",
+      "learned_raw_sha256": "106e754e9db1fd4bd56258f0cf98f7942e402c7d7822236677f23016b717db9c",
+      "drat_raw_sha256": "35d0b9ee9a0e7af82a5b60f8131fcd3ccb62f744f25481b712c542b923b9c78a",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_012",
+      "clauses": 307195,
+      "learned": 79241,
+      "cnf_raw_sha256": "e669b04ce1fd27be269fe23b7d55a5e11365d1c9f8db87538112d6240819c7b1",
+      "learned_raw_sha256": "b0e6c97ce7c05c412656b7d6ac423e4239ab976d16114f71ca27a6895fafd68a",
+      "drat_raw_sha256": "98e465081740df62339df9291d2421688ae67fc81cce20f41ed717ec8ec2dbb5",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_013",
+      "clauses": 373957,
+      "learned": 145937,
+      "cnf_raw_sha256": "c3c0afe4c02cdd34b62c2b8a0843a127fa19fa839756ae2f9b92e05c03ff9a1b",
+      "learned_raw_sha256": "ca86197412982f0089881d800c65533894c5e30b4977d6ba98764d59837be249",
+      "drat_raw_sha256": "be2b28992dc2ed14222cf547c1e50243b960f3282149f06b492b284b93e1554e",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_014",
+      "clauses": 332988,
+      "learned": 104959,
+      "cnf_raw_sha256": "60f99c409b04332515b68085c4ef9b99dbd892f5d4f2b13dcdb8dabe32ca8d02",
+      "learned_raw_sha256": "ccdebaa2b4d846c1dd9e578a204f4e5203186e348d8e120289546d15cb8708c2",
+      "drat_raw_sha256": "cb2fa6f709593f3eae15b2d510e14fa0004ce24c3369f6f769a19ed6e4bab4e8",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_015",
+      "clauses": 361408,
+      "learned": 133388,
+      "cnf_raw_sha256": "e1c662e48efb19363252730b526ffdd95fa7d83edc6b94f4eb38dc659eacad92",
+      "learned_raw_sha256": "3069fe1223b4aa279d3c92a816c468188929f0e4956bf4ab4ccac7802308c407",
+      "drat_raw_sha256": "e2541428aa2e967228ce13cc2d84431852f871df2d2b8b24be971fb5ecb0e3eb",
+      "replay": "VERIFIED"
+    },
+    {
+      "case": "orbit5_pair_016",
+      "clauses": 353367,
+      "learned": 125338,
+      "cnf_raw_sha256": "c406eb1c3c474b717d264abb6f30f86c01cfd2866fb221d7370b02c32c2a2a6e",
+      "learned_raw_sha256": "80686185a1fd92aa30a6c76e65ecd2d4ccc7e4ad75968af01a7d47c224292f77",
+      "drat_raw_sha256": "bface8e86ccca989d72b4d1e631ff64360df26d64d6bbe6c0f12f810b772f2e2",
+      "replay": "VERIFIED"
+    }
+  ]
+}

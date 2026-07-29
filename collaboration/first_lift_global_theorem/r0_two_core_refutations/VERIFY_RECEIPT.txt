@@ -1,0 +1,22 @@
+Exact r=0 two-core refutation replay
+====================================
+
+Generator: generate_and_search.py
+Manifest schema: r0-two-core-refutations-v1
+Cases: 22
+CNF variables per case: 845
+Proof format: text DRAT, distributed as deterministic gzip streams
+Independent checker: official drat-trim
+
+Command:
+  /opt/homebrew/bin/python3 -B \
+    verify_two_core_refutations.py \
+    --drat-trim /private/tmp/drat-trim-erdos835/drat-trim
+
+Output:
+  PASS reconstructed 22 exact two-core CNFs and SHA-256 digests
+  PASS checked 22 compressed and raw DRAT proof digests
+  PASS official drat-trim replayed all 22 proofs: VERIFIED
+  PASS disjoint K6+K6 orbit excluded by minimum degree
+  PROVED any total r=0 obstruction needs at least three cores
+  SCOPE: seven-prefix frontier only; eighth colour remains open

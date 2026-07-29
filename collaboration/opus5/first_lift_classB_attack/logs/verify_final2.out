@@ -1,0 +1,114 @@
+Verifier for results/first_lift_classB_attack/NOTE.md
+====================================================
+python-sat available: True
+
+1. class-B arithmetic at n = 13 (and the general n)
+---------------------------------------------------
+  PASS  six m-profiles at n=13; |V_c| in {8,10,12}; sum |V_c| = 156; sum |V_c|/2 = 78 = C(13,2)
+  PASS  general n: 2n5 + n3 = 2n-2 and n1 = n5 - n + 6
+
+2. (BC) contains the two Lemma-1 cuts and vertex Hall
+-----------------------------------------------------
+  PASS  28800 random (instance, X, W) checks: (BC) with W = A\X is exactly the forced-inside cut, and (BC) with |X| = 1 is exactly the Hall count
+
+3. (BC) is necessary: no completable instance violates it
+---------------------------------------------------------
+      (5, 'SAT', 'BC-clean')       156
+      (5, 'UNSAT', 'BC-violated')  244
+      (7, 'SAT', 'BC-clean')       353
+      (7, 'UNSAT', 'BC-clean')     5
+      (7, 'UNSAT', 'BC-violated')  42
+      (9, 'SAT', 'BC-clean')       400
+  PASS  1200 instances at n=5,7,9: SAT never violates (BC); the (UNSAT, BC-clean) cells are non-empty, so (BC) is not sufficient
+
+4. THEOREM: (BC) cannot fire at n = 13 (exact DP)
+-------------------------------------------------
+      n= 3 (k= 6): worst (BC) margin +0 at |X|=1 |W|=1 profile (0, 4, 3)
+      n= 5 (k= 8): worst (BC) margin +4 at |X|=2 |W|=3 profile (0, 8, 1)
+      n= 7 (k=10): worst (BC) margin +6 at |X|=2 |W|=5 profile (4, 4, 3)
+      n= 9 (k=12): worst (BC) margin +8 at |X|=4 |W|=5 profile (5, 6, 2)
+      n=11 (k=14): worst (BC) margin +4 at |X|=5 |W|=6 profile (6, 8, 1)
+      n=13 (k=16): worst (BC) margin +0 at |X|=1 |W|=12 profile (7, 10, 0)
+      n=15 (k=18): worst (BC) margin +0 at |X|=1 |W|=14 profile (9, 10, 0)
+      n=17 (k=20): worst (BC) margin +0 at |X|=1 |W|=16 profile (11, 10, 0)
+  PASS  a (BC) condition can be violated for n in {5,7,9,11} (k in {8,10,12,14}) and for NO n in {3,13,15,17}
+  PASS  480 (instance, X, W) controls at n=13: the DP optimum really is a lower bound for the actual sum of rho^max, and (BC) holds in every case
+  PASS  at n = 13 the worst margin is exactly 0, attained at |X|=1 (an identity, not a violation): (BC) holds for every class-B instance
+
+5. Lemma: vertex Hall holds whenever n >= 2r+1 (here r = 5)
+-----------------------------------------------------------
+      the relaxation admits a Hall violation only for n in [3, 5, 7, 9]
+  PASS  no vertex-Hall violation is possible for n >= 2r+1 = 11
+  PASS  600 random instances at n = 11, 13: no vertex-Hall violation (control)
+
+6. re-verification of the four stored counterexamples (k = 8,10,12,14)
+----------------------------------------------------------------------
+      counterexample_n05   n= 5 k= 8 supports [(0, 1), (2, 6), (4, 2)]
+        exhaustive search UNSAT (python DFS, 1 nodes) (CDCL SAT solver agrees); violates (BC) at X=(1,) W=(3,) (0 < 1)
+      counterexample_n07   n= 7 k=10 supports [(2, 4), (4, 4), (6, 3)]
+        exhaustive search UNSAT (python DFS, 1 nodes) (CDCL SAT solver agrees); violates (BC) at X=(0,) W=(2, 3, 4, 5, 6) (4 < 5)
+      counterexample_n09   n= 9 k=12 supports [(4, 5), (6, 6), (8, 2)]
+        exhaustive search UNSAT (python DFS, 10 nodes) (CDCL SAT solver agrees); violates (BC) at X=(0,) W=(4, 5, 6, 7, 8) (3 < 5)
+      counterexample_n11   n=11 k=14 supports [(6, 10), (10, 5)]
+        exhaustive search UNSAT (C DFS, UNSAT in 15432645 nodes) (CDCL SAT solver agrees); violates (BC) at X=(0, 1, 2, 3, 4, 5) W=(6, 7, 8, 9, 10) (26 < 30)
+  PASS  all four are class-B, are witnessed as class-B' by an explicit proper colouring of K_{n+5} - E(K_n) saturating the 5 outside vertices, have no completion, and every one of them violates (BC)
+
+7. new certificates: (BC) is not sufficient, and neither is the LP
+------------------------------------------------------------------
+      n07_BCclean_LPinfeasible.json    n= 7 supports [(2, 3), (4, 6), (6, 2)]
+        (BC)-clean, exhaustive UNSAT in 1 nodes, fractional relaxation infeasible (exact Farkas re-checked)
+      n07_BCclean_LPfeasible.json      n= 7 supports [(2, 1), (4, 10)]
+        (BC)-clean, exhaustive UNSAT in 3 nodes, and the fractional relaxation IS feasible (exact rational point re-checked)
+      n09_BCclean.json                 n= 9 supports [(4, 5), (6, 6), (8, 2)]
+        (BC)-clean, exhaustive UNSAT in 271 nodes, fractional relaxation infeasible (exact Farkas re-checked)
+  PASS  (BC) is not sufficient at n = 7 or n = 9, and at n = 7 there is an instance whose obstruction is invisible even to the fractional relaxation
+
+8. solver cross-validation
+--------------------------
+  PASS  500 instances at n=7: DFS, an independent fixed-order brute force, and a CDCL SAT solver all agree (443 SAT, 57 UNSAT); every SAT witness re-checked
+
+9. the twin5 enumeration scheme is complete (unit test)
+-------------------------------------------------------
+  PASS  on the 4x6 analogue: 5120 labelled matrices fall into 3 orbits, and the generator produces a representative of every one of them
+  PASS  on the 5x5 analogue: 2040 labelled matrices, 2 orbits, all generated
+
+9b. the python and C enumerators agree (exhaustive small pairs)
+---------------------------------------------------------------
+      Pi(5,5): 248 representatives, 185 with no completion (matches exh.c exactly)
+      Pi(7,3): 1535 representatives, 2 with no completion (matches exh.c exactly)
+  PASS  the independent python implementation of the Lemma-G scheme reproduces the C enumerator's counts and verdicts on two complete parameter pairs
+
+10. twin5 exhaustive family: deterministic re-check of a slice
+--------------------------------------------------------------
+  PASS  200 stored twin5 instances re-decided in Python and every completion re-checked from the definition
+
+11. Lemma BP (the parity refinement) and the (9,4) counterexample
+-----------------------------------------------------------------
+  PASS  q <= 3r is equivalent to n <= 2r+1, so for n >= 2r+2 fewer than q colours can be parity-constrained (Lemma BP)
+  PASS  9418500 (X,W) pairs on 6 random n=13 instances: every one has a colour of unconstrained parity, so the parity refinement never applies
+      Pi(9,4): |X||W| = 9 is odd while every colour forces an even contribution (total parity 0)
+      exhaustive UNSAT in 185 nodes; CDCL agrees; and the fractional relaxation is feasible with an exact rational point
+  PASS  a class-B-type instance with NO completion whose obstruction is pure parity and is invisible to every linear relaxation
+      s= 3: Pi(9,4), q=12, mu = n-r = 5, parity violated
+      s= 7: Pi(21,10), q=30, mu = n-r = 11, parity violated
+      s=11: Pi(33,16), q=48, mu = n-r = 17, parity violated
+  PASS  the family Pi(3s, (3s-1)/2) with s = 3 (mod 4) has no completion for every such s, and its minimum support n-r = (3s+1)/2 is unbounded: the minimum support size does NOT govern the phenomenon
+
+12. the amalgamation condition (PART)
+-------------------------------------
+  PASS  (PART) with the three groups already refutes the Pi(9,4) instance
+  PASS  16 (instance, 3-partition) pairs at n = 13: (PART) is satisfied by every completable instance, as it must be
+  PASS  157 3-partitions at n = 13: the three targets always agree mod 2 and at least one colour has a free parity class, so the mod-2 layer of (PART) never fires (Theorem BP3)
+  PASS  (PART) is NOT sufficient: all 714 partitions into 2,3,4 parts of the purely-integral n=7 certificate are satisfiable, yet it has no completion; the LP-infeasible n=7 certificate does violate (PART) at k=3 (1 partitions)
+
+scope
+-----
+Proved here: (BC) and (BP) are necessary; (BC) contains both Lemma-1
+cuts and vertex Hall; (BC) can fire exactly for k in {8,10,12,14} and
+never at k = 16; vertex Hall never fires for n >= 2r+1; (BP) never
+fires for n >= 2r+2, in particular never at (13,5); an infinite
+family of instances with unbounded minimum support has no completion;
+(BC), (BP), (PART) and the fractional relaxation are each NOT
+sufficient.  NOT proved here: that every class-B or class-B' instance
+completes at n = 13, that a simultaneous fan or an LS(3,4,20) exists,
+or anything about Erdos-Rosenfeld Problem #835, which remains open.

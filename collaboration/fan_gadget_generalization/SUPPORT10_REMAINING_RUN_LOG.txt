@@ -1,0 +1,52 @@
+2026-07-27 deterministic verification
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining.py
+
+expected output:
+  Q range 0:57: NONE; configurations=1956240; lookups=220203366
+  Q range 57:114: NONE; configurations=1956240; lookups=213540502
+  Q range 114:171: NONE; configurations=1956240; lookups=214422052
+  Q range 171:228: NONE; configurations=1956240; lookups=182612718
+  aggregate configurations: 7824960
+  aggregate exact residual lookups: 830778638
+  case 3+1+1: NONE
+  cyclic quotient support-ten remaining audit: PASS
+  remaining partitions: 2+2+1, 2+1+1+1, 1+1+1+1+1
+  scope: support ten is not fully excluded
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_221_coeff2.py
+
+expected output:
+  NONE coeff2_double_swaps 33642 candidate_double_checks 234386020 exact_single_lookups 104226058
+  case 2+2+1 coefficient-two stratum: PASS
+  consequence: both double-swap vectors in any candidate are unit-valued
+  scope: the all-unit 2+2+1 stratum remains open
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_221_unit.py
+
+expected final output:
+  aggregate counters: (2328439580, 2614558, 2329004, 247260)
+  case 2+2+1 all-unit stratum: PASS
+  consequence: case 2+2+1 is fully excluded
+  remaining partitions: 2+1+1+1, 1+1+1+1+1
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_2111.py
+
+expected final output:
+  aggregate counters: (978120, 138197446, 18498153804, 39181742, 0, 0)
+  case 2+1+1+1: NONE
+  cyclic quotient support-ten 2+1+1+1 audit: PASS
+  remaining partition: 1+1+1+1+1
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_remaining_11111.py
+
+expected final output:
+  aggregate counters: (2150540, 184640524, 17360802928, 36769906, 0, 0)
+  case 1+1+1+1+1: NONE
+  cyclic quotient support-ten 1^5 audit: PASS
+  theorem: every nonzero squarefree quotient trade has support at least 12

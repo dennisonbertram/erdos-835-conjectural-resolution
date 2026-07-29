@@ -1,0 +1,55 @@
+# Full finite-window run log — verify_s141531_higher_xor_2adic_closure.py --window
+# Date: 2026-07-26.  The executed file was subsequently promoted from its
+# `_draft` filename without changing the arithmetic.
+# Current command: python3 -B verify_s141531_higher_xor_2adic_closure.py --window
+# Exact runtime: 566.22s user, 13.67s system, 15:52.50 wall (60% cpu)
+# Verdict: PASS (0 violations, all layers, j <= 570344; threshold 570315)
+# Provenance note: after this run, the verifier was hardened to print full
+# hashes, include all per-layer counts in its certificate, and assert on FAIL.
+# Those changes affect failure signaling and output only, not the arithmetic
+# path that produced this log.  A separate C++/CRT implementation independently
+# reproduced the zero-violation verdict; see
+# s141531_higher_xor_window_cpp_run_log.txt.
+
+[ok] Delta-lemma: min v2 = 15 (sharp, 64 hits <= 1200); j=3 split 145938438 reproduced
+[ok] r=9 end-to-end control: 8550 on-parity conditions, 0 violations; off-parity clean; 3830 automatic-tail pairs
+window: j <= 570344, threshold 570315 = 570315
+distinct nontrivial arguments: 17; distinct |F| convolutions: 9
+  layer d= 0: on-parity violations 0, off-parity 0
+  layer d= 1: on-parity violations 0, off-parity 0
+  layer d= 2: on-parity violations 0, off-parity 0
+  layer d= 3: on-parity violations 0, off-parity 0
+  layer d= 4: on-parity violations 0, off-parity 0
+  layer d= 5: on-parity violations 0, off-parity 0
+  layer d= 6: on-parity violations 0, off-parity 0
+  layer d= 7: on-parity violations 0, off-parity 0
+  layer d= 8: on-parity violations 0, off-parity 0
+  layer d= 9: on-parity violations 0, off-parity 0
+  layer d=10: on-parity violations 0, off-parity 0
+  layer d=11: on-parity violations 0, off-parity 0
+  layer d=12: on-parity violations 0, off-parity 0
+  layer d=13: on-parity violations 0, off-parity 0
+  layer d=14: on-parity violations 0, off-parity 0
+  layer d=15: on-parity violations 0, off-parity 0
+  layer d=16: on-parity violations 0, off-parity 0
+  layer d=17: on-parity violations 0, off-parity 0
+  layer d=18: on-parity violations 0, off-parity 0
+  layer d=19: on-parity violations 0, off-parity 0
+  layer d=20: on-parity violations 0, off-parity 0
+  layer d=21: on-parity violations 0, off-parity 0
+  layer d=22: on-parity violations 0, off-parity 0
+  layer d=23: on-parity violations 0, off-parity 0
+  layer d=24: on-parity violations 0, off-parity 0
+  layer d=25: on-parity violations 0, off-parity 0
+  layer d=26: on-parity violations 0, off-parity 0
+  layer d=27: on-parity violations 0, off-parity 0
+  layer d=28: on-parity violations 0, off-parity 0
+  layer d=29: on-parity violations 0, off-parity 0
+  layer d=30: on-parity violations 0, off-parity 0
+  layer d=31: on-parity violations 0, off-parity 0
+U_F sha256/16: [(429, '47876b233f02eb57'), (627, 'cf8f96eec81ef7fc'), (1197, 'f63561cc14ac561a'), (1549, '43fb522544df1f0a'), (3059, '14a2781ffd8d5b18'), (10925, 'feafdb23d214e851'), (31219, 'c736a1906cb8b013'), (58995, '37f3e24c1c54160a'), (570285, 'f74a55021576cc21')]
+WINDOW VERDICT: PASS; certificate df20f9f13ea50d2f0a9a9e6efc577686935f6c91fd11d936caf7f5ab0170dcc9
+[ok] cross-check 1: all 9 U_F (and negatives) match exact bigint cofactor coefficients for j <= 400
+[ok] cross-check 2: S-series matches exact 2*(1+z)^(M+A)(1-z)^(-A) mod 2^31 for j <= 400
+[ok] cross-check 3: exact bigint conditions integral, j <= 400
+python3 -B verify_s141531_higher_xor_delta_lemma_draft.py --window  566.22s user 13.67s system 60% cpu 15:52.50 total

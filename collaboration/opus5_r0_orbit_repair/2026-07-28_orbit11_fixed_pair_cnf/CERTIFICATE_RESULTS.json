@@ -1,0 +1,28 @@
+{
+  "cadical": {
+    "internal_checkproof": "pass",
+    "proofs": 93,
+    "version": "3.0.1"
+  },
+  "canonical_pair_types": 93,
+  "compatible_labelled_pairs": 570780,
+  "drat_trim": {
+    "commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+    "failures": 0,
+    "verified": 93
+  },
+  "encoded_nonautomatic_cuts": 538,
+  "learned_triple_clauses": 11441006,
+  "positive_capacity_cuts": 4325,
+  "semantic_audit": {
+    "catalogue_action_graph": "pass",
+    "learned_clause_records": 11441006,
+    "static_formulas": 93,
+    "status": "pass"
+  },
+  "solver_results": {
+    "unsat": 93
+  },
+  "status": "raw-certificates-verified",
+  "support_orbit": 11
+}

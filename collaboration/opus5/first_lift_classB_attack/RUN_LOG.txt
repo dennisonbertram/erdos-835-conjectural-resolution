@@ -1,0 +1,231 @@
+RUN LOG -- results/first_lift_classB_attack
+Date: 2026-07-27.  Machine: darwin/arm64, 16 cores, python 3.9.6, cc = Apple clang 17.
+All exact-arithmetic checks are standard-library only; scipy 1.13.1 (HiGHS) and
+python-sat (Cadical153) are used only as additional independent cross-checks.
+
+Every "UNSAT" recorded below is a completed exhaustive search, confirmed by at
+least two independent complete solvers.  Node budgets are used only to steer
+searches and never as evidence of infeasibility.
+
+--------------------------------------------------------------------------
+0. BUILD
+--------------------------------------------------------------------------
+$ cc -O2 -o cbsearch cbsearch.c -lm
+$ for pair in 13:17 5:9 7:11 9:13 11:15; do n=${pair%%:*}; q=${pair##*:};
+      cc -O2 -DN=$n -DQ=$q -o cbsearch$n cbsearch.c -lm; done
+$ for pair in 13:5 9:3 11:3 13:3 9:4 10:4 12:5 15:6 15:7 11:7 13:7 9:5 11:5;
+      do n=..., r=...; cc -O2 -DN=$n -DR=$r -o g_${n}_${r} grid.c -lm; done
+$ cc -O3 -o twin5 twin5.c
+$ for pair in 5:5 7:3 7:5 9:3 9:4 11:3 13:3; do cc -O3 -DN=$n -DR=$r -o exh_${n}_${r} exh.c; done
+
+--------------------------------------------------------------------------
+1. THE C ENGINE REPRODUCES THE FOUR STORED COUNTEREXAMPLES
+--------------------------------------------------------------------------
+$ ./cbsearch5  check 1 1 <counterexample_n05.forb>   -> verdict UNSAT nsol 0 nodes 1
+$ ./cbsearch7  check 1 1 <counterexample_n07.forb>   -> verdict UNSAT nsol 0 nodes 1
+$ ./cbsearch7  check 1 1 <cut_insufficient_n07.forb> -> verdict UNSAT nsol 0 nodes 1
+$ ./cbsearch9  check 1 1 <counterexample_n09.forb>   -> verdict UNSAT nsol 0 nodes 10
+$ ./cbsearch11 check 1 1 <counterexample_n11.forb>   -> verdict UNSAT nsol 0 nodes 15432645
+(The n=11 instance was not run to completion by the earlier note; it is here.)
+
+--------------------------------------------------------------------------
+2. THE (BC) DYNAMIC PROGRAM  (Theorem BC2)
+--------------------------------------------------------------------------
+$ python3 -c "from conditions import bc_margin; ..."
+n= 5 (k= 8): worst (BC) margin +4 at x=2 w=3 prof=(0, 8, 1)
+n= 7 (k=10): worst (BC) margin +6 at x=2 w=5 prof=(4, 4, 3)
+n= 9 (k=12): worst (BC) margin +8 at x=4 w=5 prof=(5, 6, 2)
+n=11 (k=14): worst (BC) margin +4 at x=5 w=6 prof=(6, 8, 1)
+n=13 (k=16): worst (BC) margin +0 at x=1 w=12 prof=(7, 10, 0)
+n= 3 : +0 ;  n=15 : +0 ;  n=17 : +0        (full table in the verifier output)
+
+$ python3 general.py          # two-parameter table, both (BC) bounds
+  n   r  mu    q |    upper    lower
+  5   3   2    7 |       +2       +1
+  7   3   4    9 |       +2       +0
+  9   3   6   11 |       +0       +0
+ 11   3   8   13 |       +0       +0
+ 13   3  10   15 |       +0       +0
+ 15   3  12   17 |       +0       +0
+  6   4   2    9 |       +4       +2
+  7   4   3   10 |       +4       +1
+  8   4   4   11 |       +4       +1
+  9   4   5   12 |       +0       +0
+ 10   4   6   13 |       +0       +0
+ 12   4   8   15 |       +0       +0
+  7   5   2   11 |       +6       +3
+  8   5   3   12 |       +8       +2
+  9   5   4   13 |       +8       +2
+ 10   5   5   14 |       +4       +0
+ 11   5   6   15 |       +4       +0
+ 12   5   7   16 |       +0       +0
+ 13   5   8   17 |       +0       +0
+ 14   5   9   18 |       +0       +0
+ 15   5  10   19 |       +0       +0
+  8   6   2   13 |      +12       +4
+ 11   6   5   16 |       +8       +1
+ 12   6   6   17 |       +8       +1
+ 13   6   7   18 |       +2       +0
+ 14   6   8   19 |       +2       +0
+ 15   6   9   20 |       +0       +0
+ 16   6  10   21 |       +0       +0
+  9   7   2   15 |      +12       +5
+ 11   7   4   17 |      +16       +4
+ 13   7   6   19 |      +12       +2
+ 15   7   8   21 |       +6       +0
+ 10   8   2   17 |      +20       +6
+ 14   8   6   21 |      +18       +3
+(The final, recomputed table -- after m_c = 0 was admitted as a legitimate
+column sum for even n -- is in logs/general_table.out.  Every odd-n row is
+unchanged by that fix, because for odd n the admissible column sums are odd
+and the list already stopped at 1; some even-n rows changed, e.g. (6,4) from
++4 to +6.  All rows used in NOTE.md were re-derived from the corrected code:
+(9,3), (11,3), (9,4), (10,4), (12,5), (13,5) all have margins +0/+0.)
+
+--------------------------------------------------------------------------
+3. EXHAUSTIVE ENUMERATION OF WHOLE PARAMETER PAIRS  (exh.c, Lemma G scheme)
+--------------------------------------------------------------------------
+$ ./exh_5_5 solve
+exh N=5 R=5 part 0/1: enumerated 248  SAT 63  UNSAT 185  (solve=1)
+$ ./exh_7_3 solve
+exh N=7 R=3 part 0/1: enumerated 1535  SAT 1533  UNSAT 2  (solve=1)
+$ ./exh_7_5 solve
+exh N=7 R=5 part 0/1: enumerated 2531207  SAT 2077059  UNSAT 454148  (solve=1)
+$ ./exh_9_3 solve
+exh N=9 R=3 part 0/1: enumerated 103830  SAT 103830  UNSAT 0  (solve=1)
+$ ./exh_9_4 solve
+exh N=9 R=4 part 0/1: enumerated 2448157  SAT 2448156  UNSAT 1  (solve=1)
+EXH_UNSAT N=9 R=4 [15,15,15,240,240,240,3840,3840,3840]
+$ ./exh_11_3 solve
+exh N=11 R=3 part 0/1: enumerated 10212660  SAT 10212660  UNSAT 0  (solve=1)
+$ for p in 0 1 2; do ./exh_13_3 solve $p 3; done          [NOT FINISHED]
+   >= 42,000,000 representatives decided, SAT every time, 0 UNSAT so far.
+
+  Reading: (9,3) and (11,3) are parameter pairs where (BC) provably cannot
+  fire, and every instance completes.  (9,4) is a pair where (BC) provably
+  cannot fire and EXACTLY ONE instance up to relabelling fails -- by the
+  parity condition (BP).  That single instance is stored as
+  certificates/n09r04_parity.json.
+
+--------------------------------------------------------------------------
+4. RANDOM AND ANNEALED SEARCH AT (n,r) = (13,5)
+--------------------------------------------------------------------------
+$ ./cbsearch random 11 3000000   (and seeds 12,13,14,15,16)
+random seed=11 count=3000000 SAT=3000000 UNSAT=0 BUDGET=0
+random seed=12 count=3000000 SAT=3000000 UNSAT=0 BUDGET=0
+random seed=13 count=3000000 SAT=3000000 UNSAT=0 BUDGET=0
+random seed=14 count=3000000 SAT=3000000 UNSAT=0 BUDGET=0
+random seed=15 count=3000000 SAT=3000000 UNSAT=0 BUDGET=0
+random seed=16 count=3000000 SAT=3000000 UNSAT=0 BUDGET=0
+   total 18,000,000 class-B instances at n=13, every one completed.
+
+$ ./cbsearch hunt 7 60000 and the analogous g_<n>_<r> hunts (60000 each):
+mu=4  hunt N=7  R=3 : SAT=59995 UNSAT=5
+mu=4  hunt N=9  R=5 : SAT=60000 UNSAT=0
+mu=4  hunt N=11 R=7 : SAT=60000 UNSAT=0
+mu=4  hunt N=13 R=9 : SAT=60000 UNSAT=0
+mu=6  hunt N=9  R=3 / N=11 R=5 / N=13 R=7 / N=15 R=9 : all SAT=60000 UNSAT=0
+mu=8  hunt N=11 R=3 / N=13 R=5 / N=15 R=7 / N=17 R=9 : all SAT=60000 UNSAT=0
+mu=10 hunt N=13 R=3 / N=15 R=5                       : all SAT=60000 UNSAT=0
+   Reading: uniform sampling is far too weak at these sizes; it finds nothing
+   even where counterexamples provably exist.
+
+$ ./cbsearch5/7/9/11 hunt (2,000,000 random instances each at r=5)
+hunt N=5  count=2000000 SAT=825637  UNSAT=1174363 BCcleanUNSAT=0
+hunt N=7  count=2000000 SAT=1762418 UNSAT=237582  BCcleanUNSAT=8057
+hunt N=9  count=2000000 SAT=1999899 UNSAT=101     BCcleanUNSAT=0
+hunt N=11 count=200000  SAT=200000  UNSAT=0       BCcleanUNSAT=0
+
+$ ./cbsearch9 bchunt 501 40 40000     ((BC)-restricted annealing)
+   17774 (BC)-clean UNSAT candidates emitted, 2113 distinct as bit patterns;
+   400 of them re-verified in python (class-B, no cut / no vertex-Hall /
+   no (BC) violation, exhaustive UNSAT by the python DFS and by Cadical);
+   all 400 had an infeasible fractional relaxation.
+$ ./cbsearch11 bchunt / anneal2  (several seeds)      -> 0 candidates
+$ ./cbsearch anneal / anneal2 at n=13 (several seeds) -> 0 candidates
+
+--------------------------------------------------------------------------
+5. LP-MARGIN ANNEALING  (lpmargin.py / lphunt.py)
+--------------------------------------------------------------------------
+$ python3 lpmargin.py 9 921 8 6000
+LP-INFEASIBLE CANDIDATE phi*=-0.333333 [4135, 2960, 2698, 692, 1321, 6320, 2708, 2609, 4426]
+$ python3 lpmargin.py 11 931 20 8000
+   10 distinct LP-infeasible instances found at n=11, phi* = -1/15.
+   => the LP-margin objective IS calibrated at n = 11.
+$ python3 lpmargin.py 13 901..906 / 941..946   (8x5000 and 4x40000 steps)
+   no LP-infeasible instance; best phi* reached 0.0724638
+   (random class-B instances at n=13 have phi* in [0.0909, 0.1000]).
+$ python3 lphunt.py 12 5 / 9 3 / 11 3 / 9 4 / 10 4 (pairs where (BC) cannot fire)
+   no LP-infeasible instance found.
+
+--------------------------------------------------------------------------
+6. THE AMALGAMATION CONDITION (PART) AT n = 13
+--------------------------------------------------------------------------
+$ python3 partsweep.py 1 40 15  (seeds 1,2,3) and 4 60 20 (seeds 4,5,6,7)
+seed=1: 592 (instance, 3-partition) pairs tested, no (PART) violation
+seed=2: 590 (instance, 3-partition) pairs tested, no (PART) violation
+seed=3: 593 (instance, 3-partition) pairs tested, no (PART) violation
+seed=4: 1183 ; seed=5: 1180 ; seed=6: 1185 ; seed=7: 1186 -- none violated
+  total 6509 (instance, 3-partition) pairs at n = 13, no (PART) violation.
+
+--------------------------------------------------------------------------
+6b. THE PARITY OBSTRUCTION (BP) AND THE Pi(9,4) COUNTEREXAMPLE
+--------------------------------------------------------------------------
+The single non-completable instance of Pi(9,4) found by ./exh_9_4 solve:
+
+  forb = [15,15,15,240,240,240,3840,3840,3840]
+  i.e. A = X1+X2+X3 with |Xi| = 3, twelve colours in three blocks of four,
+  V_c = Xi u Xj for the block Gamma_ij.
+
+  $ python3 -c "...":
+    m_c = 3 for all twelve colours; |V_c| = 6.
+    python DFS: UNSAT in 185 nodes ; CDCL SAT solver: UNSAT
+    X = {0,1,2}, W = {3,4,5}:  no colour has an unconstrained parity;
+      sum of s^X_c over the z_c = 0 colours = 12 (even) while |X||W| = 9 (odd)
+      -> PARITY VIOLATION
+    exact rational LP: FEASIBLE, phi* = 1/8  (a strict interior point)
+    (PART) with parts {0,1,2},{3,4,5},{6,7,8}: infeasible
+
+The infinite family Pi(3s,(3s-1)/2), s = 3 (mod 4):
+  s= 3: Pi(9,4),  q=12, mu=5,  parity violated
+  s= 7: Pi(21,10), q=30, mu=11, parity violated
+  s=11: Pi(33,16), q=48, mu=17, parity violated
+
+Exhaustive (PART) scan over ALL set partitions of the stored certificates:
+  n07_BCclean_LPfeasible    k=2: 0 violations  k=3: 0  k=4: 0
+  n07_BCclean_LPinfeasible  k=2: 0 violations  k=3: 1 (e.g. {0,2},{1,4},{3,5,6})
+                                               k=4: 5
+  n09_BCclean               k=2: 0 violations  k=3: 0
+  => (PART) strictly refines (BC)+(BP) but is still not sufficient.
+
+--------------------------------------------------------------------------
+7. THE SIZE-FIVE TWIN FAMILY AT n = 13  (twin5.c, Theorem T)
+--------------------------------------------------------------------------
+$ for p in 0 1 2 3 4 5; do ./twin5 solve $p 6; done       [NOT FINISHED]
+   >= 45,000,000 representatives decided, SAT every time, 0 UNSAT so far.
+   (A count-only pass to establish the total size of the family was started
+   and also did not finish; the family is larger than 45 million orbit
+   representatives under the Lemma-G scheme.)
+
+--------------------------------------------------------------------------
+8. VERIFIER
+--------------------------------------------------------------------------
+$ python3 -B verify_classB.py
+(full output in logs/verify.out; every section PASSes)
+
+--------------------------------------------------------------------------
+9. NOTE ON THE STORED LOGS
+--------------------------------------------------------------------------
+The raw search logs under logs/ are drivers' output, not evidence.  Six of
+them (the n <= 11 annealing and hunt logs, and the (7,5) exhaustive log) each
+contained hundreds of thousands of candidate lines and were truncated to the
+first 200 and last 20 lines with an explicit marker giving the original line
+count; nothing that any claim in NOTE.md depends on was removed.  Everything
+NOTE.md asserts is re-derived by verify_classB.py from the certificates and
+the definitions, not read from these logs.
+
+At the time of writing, two enumerations were still running:
+  * twin5.c on the size-five twin family at n = 13   (>= 45,000,000 decided)
+  * exh.c on Pi(13,3)                                (>= 42,000,000 decided)
+Neither had produced an instance without a completion.  Their partial state is
+recorded as partial in NOTE.md; no claim depends on their completion.

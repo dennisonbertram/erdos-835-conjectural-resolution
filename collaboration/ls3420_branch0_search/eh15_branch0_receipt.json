@@ -1,0 +1,86 @@
+{
+  "assigned": 4773,
+  "blocks": 4845,
+  "branch_manifest": "evidence/ls_3_4_20_second_star_branches/manifest.json",
+  "branch_manifest_sha256": "775eb65445ffe0c5010450d7b3356fd03f4ce1b1cd88522f88a771ece21c7159",
+  "colour_map_old_to_new": [
+    11,
+    14,
+    12,
+    2,
+    1,
+    4,
+    6,
+    7,
+    16,
+    9,
+    3,
+    5,
+    8,
+    15,
+    10,
+    13,
+    0
+  ],
+  "holes": 72,
+  "inverse_round_trip": "PASS",
+  "output_sha256": "06ad9c5d8377183aa13e7acb070a0b9b9efbd3f528989701f5688d9b72ff1d78",
+  "partial_semantics": "PASS",
+  "point_map_old_to_new": [
+    0,
+    4,
+    6,
+    7,
+    2,
+    1,
+    8,
+    10,
+    5,
+    3,
+    11,
+    12,
+    14,
+    16,
+    18,
+    9,
+    17,
+    15,
+    13,
+    19
+  ],
+  "schema": "ls-3-4-20-eh15-branch0-hint-v1",
+  "scope": "search hint only; no completion and no SAT/UNSAT result is claimed",
+  "source": "evidence/ls_3_4_20_eh15_partial.txt",
+  "source_flag": {
+    "B": [
+      0,
+      4,
+      5,
+      9
+    ],
+    "T": [
+      0,
+      4,
+      5
+    ],
+    "e": [
+      0,
+      5
+    ],
+    "q": 9,
+    "r": 4
+  },
+  "source_sha256": "bca36685508a4cf396cec015c2cfe06239f018b1dba32cff41ea11ee6c601f33",
+  "status": "PASS",
+  "target_branch_id": 0,
+  "target_cycle_type": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ]
+}

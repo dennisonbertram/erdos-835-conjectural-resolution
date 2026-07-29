@@ -1,0 +1,3 @@
+N=7 R=5 Q=11 column sizes: 5 3 1  (63 masks)
+  ... 1000000 enumerated (SAT 814375 UNSAT 185625)
+  ... 2000000 enumerated (SAT 1650568 UNSAT 349432)

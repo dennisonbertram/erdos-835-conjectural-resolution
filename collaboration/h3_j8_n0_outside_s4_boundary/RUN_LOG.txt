@@ -1,0 +1,82 @@
+One-fixed-exterior / remaining-S4-symmetric N=0, Delta=60
+Run date: 2026-07-27
+
+TERMINAL EXACT SUBCASES
+
+1. reference_positive=10, reference_weight_two unrestricted
+   Gurobi: INFEASIBLE; runtime_seconds=0.003688
+   CP-SAT: INFEASIBLE; wall_seconds=0.139465; branches=0
+
+2. reference_positive=12, reference_weight_two unrestricted
+   Gurobi: INFEASIBLE; runtime_seconds=0.003098
+   CP-SAT: INFEASIBLE; wall_seconds=0.018083; branches=0
+
+3. reference_positive=13, reference_weight_two=10
+   Gurobi: INFEASIBLE; runtime_seconds=0.003925
+   CP-SAT: INFEASIBLE; wall_seconds=0.026798; branches=0
+
+4. reference_positive=13, reference_weight_two=12
+   Gurobi: INFEASIBLE; runtime_seconds=0.003461
+   CP-SAT: INFEASIBLE; wall_seconds=0.122775; branches=0
+
+5. reference_positive=11, reference_weight_two=10
+   Gurobi: INFEASIBLE; runtime_seconds=0.029271
+   CP-SAT: INFEASIBLE; wall_seconds=0.026756; branches=0
+
+6. reference_positive=9, reference_weight_two=9
+   Gurobi: INFEASIBLE; runtime_seconds=637.376907; nodes=56,184
+   CP-SAT: INFEASIBLE; wall_seconds=1139.812661; branches=96,338
+
+7. reference_positive=8, reference_weight_two=8
+   Gurobi: INFEASIBLE; runtime_seconds=1291.882080; nodes=87,392
+   CP-SAT: INFEASIBLE; wall_seconds=954.410378; branches=63,652
+
+PACKAGED-SCRIPT REPLAY
+
+After copying the implementations into this directory, all five CP-SAT
+branches were replayed from search_cp_sat.py:
+
+  m=10:      INFEASIBLE; wall_seconds=0.153465; branches=0
+  m=12:      INFEASIBLE; wall_seconds=0.110476; branches=0
+  m=13,w=10: INFEASIBLE; wall_seconds=0.099647; branches=0
+  m=13,w=12: INFEASIBLE; wall_seconds=0.093686; branches=0
+  m=11,w=10: INFEASIBLE; wall_seconds=0.098309; branches=0
+
+The packaged search_gurobi.py was also replayed at m=13,w=10:
+
+  status=INFEASIBLE
+  runtime_seconds=0.003276
+  nodes=0
+  rows=1,377
+  columns=1,266
+  model_fingerprint=0x2c3a7b6f
+  Gurobi version=12.0.3
+
+MODEL FINGERPRINT
+
+Full CP-SAT equations:
+  d orbits: 256
+  triple-load orbits: 130
+  recurrence-row orbits at sizes 5..11:
+    381, 456, 456, 381, 256, 130, 46
+
+Exact rank-reduced Gurobi model:
+  d variables: 256
+  F2/F3/F5/F7 ranks: 163, 135, 126, 84
+  integer variables: 1,266
+  rows before cube breakers: 1,360
+  rows with positive maximum fixed: 1,376
+  rows with positive and weight-two maxima fixed: 1,377
+
+NONTERMINAL CONTROL
+
+The full-equation CP-SAT branch
+  reference_positive=13, reference_weight_two=13
+returned UNKNOWN after 458.308496 seconds and 41,298 branches.
+UNKNOWN proves neither feasibility nor infeasibility.
+
+STRICT SCOPE
+
+The exterior S4 symmetry is an extra ansatz.  The seven terminal results do
+not eliminate the complete exterior-S4 model, unrestricted N=0, the j=8
+lift, or Erdős-Rosenfeld Problem #835.

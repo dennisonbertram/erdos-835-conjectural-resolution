@@ -1,0 +1,31 @@
+{
+  "date": "2026-07-26",
+  "solver": {
+    "name": "CaDiCaL",
+    "version": "3.0.1",
+    "wall_clock_limit_seconds": 10
+  },
+  "branch_id": 54,
+  "cycle_type": [
+    16
+  ],
+  "encodings": [
+    {
+      "name": "plain",
+      "variables": 159885,
+      "clauses": 251973,
+      "bytes": 6168479,
+      "sha256": "851f56c6852d8c2c9774dd6414120d70e26f313a275674519f50c8efd77f03d2",
+      "solver_status": "UNKNOWN"
+    },
+    {
+      "name": "star-pairwise-amo",
+      "variables": 159885,
+      "clauses": 2887653,
+      "bytes": 47628576,
+      "sha256": "fa5e0ef484abd2262517a60c36bf42f399ed264068d9b83e8e6bc7a88c23eef8",
+      "solver_status": "UNKNOWN"
+    }
+  ],
+  "claim": "Encoding smoke only; neither SAT nor UNSAT is claimed."
+}

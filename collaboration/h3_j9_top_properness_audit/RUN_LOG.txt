@@ -1,0 +1,36 @@
+Automatic j=9 -> j=10 top-properness audit
+================================================
+
+Date: 2026-07-27
+
+Command:
+
+  /opt/homebrew/bin/python3 -B \
+    collaboration/h3_j9_top_properness_audit/verify_j9_top_properness.py
+
+Output:
+
+  recurrence: sizes 4..10 and lcm bound: PASS
+  octahedral kernel: 25,740 relations, ranks W=78 and O=208 over two primes: PASS
+  fractional parts: common residue theta=1/3 forced: PASS
+  integer-weight lemma: all numerical thresholds: PASS
+  PASS: automatic j=9 -> j=10 top-properness arithmetic and rank audit
+  scope: conditional high-lift theorem only; lower tower and #835 remain open
+
+Additional checks:
+
+  /opt/homebrew/bin/python3 -B -m py_compile \
+    collaboration/h3_j9_top_properness_audit/verify_j9_top_properness.py
+
+  ruff check \
+    collaboration/h3_j9_top_properness_audit/verify_j9_top_properness.py
+
+Result:
+
+  All checks passed.
+
+Scope delimiter:
+
+  The package proves only the conditional high-lift implication.  It does
+  not construct the lower tower and does not claim a resolution of
+  Erdos-Rosenfeld Problem #835.

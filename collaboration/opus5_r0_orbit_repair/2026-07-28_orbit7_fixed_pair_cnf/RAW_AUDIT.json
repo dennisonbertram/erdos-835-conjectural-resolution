@@ -1,0 +1,49 @@
+{
+  "artifact_census": {
+    "cnf_files": 76,
+    "learned_files": 76,
+    "raw_bytes": 1327579412
+  },
+  "campaign": {
+    "cases": 76,
+    "case_indices": [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+      12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+      24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+      36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,
+      48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+      60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71,
+      72, 73, 74, 75
+    ],
+    "status": "all-cases-solver-unsat",
+    "total_case_elapsed_seconds": 829.086,
+    "total_learned_unions": 9386110,
+    "total_rounds": 2325,
+    "unsat": 76
+  },
+  "classifier": {
+    "action_generators": 7,
+    "canonical_pair_orbits": 76,
+    "disjoint_matching_pairs": 570780,
+    "generator_orbits": 76,
+    "status": "pass"
+  },
+  "cut_audit": {
+    "automatic_capacity_cuts": 3675,
+    "encoded_capacity_cuts": 540,
+    "encoded_cut_size_inventory": {"6": 518, "7": 22},
+    "positive_capacity_cuts": 4215,
+    "status": "pass"
+  },
+  "raw_validation": {
+    "cnf_headers_checked": 76,
+    "cnf_sha256_checked": 76,
+    "learned_record_shape": "three matching indices plus 15 sorted distinct edge indices",
+    "learned_records_checked": 9386110,
+    "learned_sha256_checked": 76,
+    "static_formulas_reconstructed": 76,
+    "status": "pass"
+  },
+  "results_jsonl_sha256": "c58ba333d61e01dd667fb2a5c975cd744715418e09ef240e35a7e97aee4458cc",
+  "scope": "Frozen solver output and semantic reconstruction; DRAT evidence is recorded separately."
+}

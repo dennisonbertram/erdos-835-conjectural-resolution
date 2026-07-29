@@ -1,0 +1,2 @@
+anneal2 N=9 seed=813 restarts=40 steps=40000 bestscore=16.0000 tested=0 SAT=0 UNSAT=0 BUDGET=0
+CANDIDATE hardest [140,656,1568,1184,1296,772,28,266,97]

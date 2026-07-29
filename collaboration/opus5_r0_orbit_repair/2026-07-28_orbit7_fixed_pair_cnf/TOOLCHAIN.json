@@ -1,0 +1,31 @@
+{
+  "cadical": {
+    "binary_sha256": "52daad7dcbb97d3d68a7494fb415ba54a509c49d30f5dfcd157e1bcbe138e6ee",
+    "command": "cadical --checkproof=1 CASE.cnf CASE.drat",
+    "internal_check_cases": 76,
+    "internal_check_failures": 0,
+    "proof_format": "binary DRAT",
+    "version": "3.0.1"
+  },
+  "drat_trim": {
+    "binary_sha256": "42a69f9a17bcd58001676abf02d58992bd0ede58410a467dda07a350fec498c9",
+    "command": "drat-trim CASE.cnf CASE.drat",
+    "commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+    "external_replay_failures": 0,
+    "external_replay_verified": 76,
+    "makefile_sha256": "1f3c7128b1dd739723257edd95cc28a2ee747779ca01ae80ed9252f02ec5149d",
+    "source_commit_files_verified_against_upstream": true,
+    "source_sha256": "d834b649f437e091597f5347f259b9f681087f89ca0844d0cee250a1a1a0c2ee"
+  },
+  "packaging": {
+    "command": "gzip -9 -n -c RAW > RAW.gz",
+    "gzip_binary_sha256": "9d9ea8f05c84ad28dc2007701c0cc4d8bb4465c57219afe21fc446859c99b0c9",
+    "raw_hash_command": "shasum -a 256"
+  },
+  "proof_generation_script": "2026-07-28_orbit7_generate_proofs.sh",
+  "python": {
+    "binary_sha256": "7f30f076d0e9c38f772a76449fca9da8cf97f6a3d43b94c90a00e4f9ce7ad39e",
+    "version": "3.9.6"
+  },
+  "raw_replay_script": "2026-07-28_orbit7_replay_raw.sh"
+}

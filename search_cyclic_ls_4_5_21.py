@@ -15,7 +15,11 @@ Requires OR-Tools (`python3 -m pip install ortools`).
 from __future__ import annotations
 
 import argparse
+import json
+import os
+from datetime import datetime, timezone
 from itertools import combinations
+from pathlib import Path
 
 from ortools.sat.python import cp_model
 
@@ -138,10 +142,56 @@ def verify_solution(
         assert set(colours) == set(range(MODULUS))
 
 
+def witness_payload(
+    representatives: tuple[tuple[int, ...], ...],
+    phase_values: dict[tuple[int, ...], int],
+) -> dict[str, object]:
+    """A stable, verifier-friendly encoding of a fully checked witness."""
+    return {
+        "model": "Z_17-equivariant LS(4,5,21)",
+        "modulus": MODULUS,
+        "representatives": [list(block) for block in representatives],
+        "phases": [phase_values[block] for block in representatives],
+    }
+
+
+def write_json(path: str, payload: dict[str, object]) -> None:
+    """Atomically write a final-run checkpoint or a verified witness."""
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temporary = target.with_name(target.name + ".tmp")
+    temporary.write_text(json.dumps(payload, sort_keys=True, indent=2) + "\n")
+    os.replace(temporary, target)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--seconds", type=float, default=300.0)
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=0,
+        help="CP-SAT random seed; use one worker for a reproducible branch trace",
+    )
+    parser.add_argument(
+        "--randomized",
+        action="store_true",
+        help="enable CP-SAT randomized search (otherwise the seed is only recorded)",
+    )
+    parser.add_argument(
+        "--output",
+        help="write a verified phase witness as JSON when a solution is found",
+    )
+    parser.add_argument(
+        "--checkpoint",
+        help="write final status/metrics, plus a witness if found; this is not a resumable solver state",
+    )
+    parser.add_argument(
+        "--print-phases",
+        action="store_true",
+        help="also print all 1,197 phase values to stdout after verification",
+    )
     parser.add_argument("--log", action="store_true")
     parser.add_argument(
         "--reflection",
@@ -155,6 +205,8 @@ def main() -> None:
     solver.parameters.max_time_in_seconds = args.seconds
     solver.parameters.num_search_workers = args.workers
     solver.parameters.log_search_progress = args.log
+    solver.parameters.random_seed = args.seed
+    solver.parameters.randomize_search = args.randomized
 
     status = solver.solve(model)
     status_name = solver.status_name(status)
@@ -162,11 +214,14 @@ def main() -> None:
     print("five-set choices: 20349")
     print("four-set exact-cover constraints: 5985")
     print(f"reflection required: {args.reflection}")
+    print(f"seed: {args.seed}")
+    print(f"randomized search: {args.randomized}")
     print(f"status: {status_name}")
     print(f"wall time: {solver.wall_time:.3f} seconds")
     print(f"branches: {solver.num_branches}")
     print(f"conflicts: {solver.num_conflicts}")
 
+    verified_witness: dict[str, object] | None = None
     if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
         selected_blocks = tuple(
             block
@@ -183,11 +238,38 @@ def main() -> None:
 
         verify_solution(representatives, phase_values)
         print("verified: cyclic LS(4,5,21) found")
-        for representative in representatives:
-            print(
-                " ".join(map(str, representative)),
-                phase_values[representative],
-            )
+        verified_witness = witness_payload(representatives, phase_values)
+        if args.output:
+            write_json(args.output, verified_witness)
+            print(f"verified witness written: {args.output}")
+        if args.print_phases:
+            for representative in representatives:
+                print(
+                    " ".join(map(str, representative)),
+                    phase_values[representative],
+                )
+
+    if args.checkpoint:
+        checkpoint: dict[str, object] = {
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+            "configuration": {
+                "seconds": args.seconds,
+                "workers": args.workers,
+                "seed": args.seed,
+                "randomized": args.randomized,
+                "reflection": args.reflection,
+            },
+            "result": {
+                "status": status_name,
+                "wall_time_seconds": solver.wall_time,
+                "branches": solver.num_branches,
+                "conflicts": solver.num_conflicts,
+            },
+        }
+        if verified_witness is not None:
+            checkpoint["verified_witness"] = verified_witness
+        write_json(args.checkpoint, checkpoint)
+        print(f"final-run checkpoint written: {args.checkpoint}")
 
 
 if __name__ == "__main__":

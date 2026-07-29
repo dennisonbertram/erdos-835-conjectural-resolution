@@ -1,0 +1,25 @@
+Command:
+/opt/homebrew/bin/python3 collaboration/fan_13adic_screen/verify_fan_13adic_screen.py
+
+Output:
+cells=2964
+groups=1140
+row_weight=13
+column_degree=5
+rank_mod_13=1083
+exact_integral_row_dependencies=57
+rank_over_Q=1083
+13_primary_nonunit_invariant_factors=0
+B0_times_all_ones=13_times_all_ones
+row_dependencies_sha256=a28b18429d322bdd2b6e124479aa1623082bf3c4ee7a242a28bc5780f6e44c5d
+solution_mod_13^1_sha256=ed7c4e4cf42ecef6ae9c4302facee1a74f0424e2ea6276f4ff63bce165f52905
+solution_mod_13^2_sha256=9300e0ea2317fe727467ea519525a9d7817457c1aab895b55bb5406a282d7202
+solution_mod_13^3_sha256=209fd0ef0a2a12a7193339b04afef9bbc4750c8eaa0e098417da2d27e89cd6f8
+solution_mod_13^4_sha256=513839560c5f49bbdfff4bb8e12a7177f21b906943b8a56cec01e355929a6733
+solution_mod_13^5_sha256=6536a9b2751e347856db7667f401e72c2aa89fd7d3895a78aed46b5846f5c81a
+solution_mod_13^6_sha256=0d296a4c8c08a7b0ae67482cc04a9d2d7607ddb7d83ca119239a064850a1b281
+max_residue_mod_13^6=4826808
+PASS: B0*x=1 is solvable modulo 13^e for e=1,...,6
+PASS: all 1,083 nonzero Smith factors are 13-adic units
+THEOREM: B0*x=1 has a signed integral solution over Z
+SCOPE: signed linear solutions only; no 0/1 matching or fan is claimed

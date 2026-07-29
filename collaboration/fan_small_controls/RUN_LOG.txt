@@ -1,0 +1,55 @@
+Universal all-link theorem verification
+=======================================
+
+$ /opt/homebrew/bin/python3 -B collaboration/fan_small_controls/verify_all_k6_links.py
+LS(2,3,9) classification: PASS
+labelled STS(9)s: 840
+large sets on the fixed labelled point set: 15360
+type A: aut=42, orbit=8640, obstruction_nodes=31
+type B: aut=54, orbit=6720, obstruction_nodes=29
+certified theorem: no LS(2,3,9) admits a simultaneous 3-fan
+scope: this proves the k=6 shadow obstruction, not k=16 or #835
+
+Portable standard-library verification
+======================================
+
+$ /opt/homebrew/bin/python3 collaboration/fan_small_controls/verify_k6_fan_certificate.py
+k=6 fan structure: PASS
+cells: 378
+groups: 630
+variables: 1134
+clauses: 3405
+cnf_sha256: 693e66c10202be59ab8eba2af350b6d9d2ca0d8a438a4c98c5929804e4112a6b
+proof_sha256: 45c46fa6da412ff716bf8825e5e2daa125c9dfbf927affd377157d3b4807ffb9
+RUP additions: 131
+deletions: 10
+empty-clause derivation: PASS
+certified result: this fixed LS(2,3,9) admits no simultaneous 3-fan
+scope: this is a small control, not a result for k=16 or #835
+
+Independent DRAT-trim verification
+==================================
+
+$ drat-trim erdos835-k6-fan.cnf collaboration/fan_small_controls/k6_fan.drat -L erdos835-k6-fan.lrat
+c parsing input formula with 1134 variables and 3405 clauses
+c WARNING: backward mode ignores deletion of (pseudo) unit clause [0] 9 0
+c finished parsing
+c detected empty clause; start verification via backward checking
+c 208 of 3405 clauses in core
+c 92 of 132 lemmas in core using 1414 resolution steps
+c 0 RAT lemmas in core; 0 redundant literals in core lemmas
+s VERIFIED
+c verification time: 0.046 seconds
+
+Independent LRAT verification
+=============================
+
+$ lrat-check erdos835-k6-fan.cnf erdos835-k6-fan.lrat
+c parsed a formula with 1134 variables and 3405 clauses
+c VERIFIED
+c allocated 1024 22983 11340
+c Added clauses = 3497.  Deleted clauses = 3487.  Max live clauses = 3405
+c verification time = 0.00 secs
+
+$ shasum -a 256 erdos835-k6-fan.lrat
+b29543c393b2fd0d29d43b88f2be14effb21ba1e049799b6fdd57fee0023ab9c  erdos835-k6-fan.lrat

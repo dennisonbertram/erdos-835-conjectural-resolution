@@ -1,0 +1,36 @@
+Finite-first packing package run log
+====================================
+
+Exact witness verification
+--------------------------
+Command:
+  /opt/homebrew/bin/python3 verify_finite_packing_132.py
+
+Result:
+  alpha_finite >= 132: PROVED
+  140 omit-one CNF hashes reconstructed: PASS
+  omit-one bounded status census UNKNOWN=140: PASS
+  scope: alpha_finite >= 132 only; upper bound remains the trivial 140
+
+Exact local-neighborhood verification
+-------------------------------------
+Command:
+  /opt/homebrew/bin/python3 verify_neighborhood_302743.py
+
+Result:
+  starting assignment score=10, conflict edges=10: PASS
+  bad rows=18, good rows=122: PASS
+  minimum vertex-cover size=8, covers=64: PASS
+  minimum-cover completions found=0: PASS
+  extra-good subset counts 122 + 7,381 + 295,240: PASS
+  defined neighborhoods tested=302,743: PASS
+  neighborhood completions found=0: PASS
+  scope: exact local-neighborhood exhaustion only; no global upper bound below 140
+
+Scope delimiter
+---------------
+The neighborhood search changes only the 18 conflicting rows of the recorded
+score-10 assignment plus one, two, or three of its 122 conflict-free rows.
+Rows outside that precisely defined neighborhood are not searched. This run
+does not prove alpha_finite < 140, does not exclude the C17 ansatz, and does
+not solve Erdos-Rosenfeld problem 835.

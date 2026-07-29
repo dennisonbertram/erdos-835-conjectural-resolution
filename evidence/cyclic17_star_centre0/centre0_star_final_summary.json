@@ -1,0 +1,396 @@
+{
+ "collision_0_1_x_0_2": {
+  "family_a": "sols_0_1.bin",
+  "family_b": "sols_0_2.bin",
+  "histogram": {
+   "0": 15296,
+   "1": 37647,
+   "10": 282,
+   "11": 122,
+   "12": 30,
+   "13": 11,
+   "14": 3,
+   "15": 2,
+   "2": 48480,
+   "3": 43806,
+   "4": 30808,
+   "5": 18321,
+   "6": 9590,
+   "7": 4461,
+   "8": 1836,
+   "9": 784
+  },
+  "mean_collisions": 2.81876687519801,
+  "mode": "exact",
+  "pairs": 211479,
+  "size_a": 471,
+  "size_b": 449,
+  "zero_collision_fraction": 0.07232869457487505,
+  "zero_collision_pairs": 15296
+ },
+ "completeness_all_match": true,
+ "completeness_double_check": {
+  "0,1": {
+   "alt_count": 471,
+   "alt_nodes": 1453023818,
+   "alt_seconds": 2786.281,
+   "alt_sha256": "efd15011726434874a2939ddba741d40aba43879d41a71000fdbc7be7f0d0295",
+   "count": 471,
+   "match": true,
+   "sha256": "efd15011726434874a2939ddba741d40aba43879d41a71000fdbc7be7f0d0295"
+  },
+  "0,10": {
+   "alt_count": 477,
+   "alt_nodes": 1566781539,
+   "alt_seconds": 3016.257,
+   "alt_sha256": "0b14c7ad6cb1c15dcb45dda82dd60334e72b8a86792d02c20898ea8e33e42f73",
+   "count": 477,
+   "match": true,
+   "sha256": "0b14c7ad6cb1c15dcb45dda82dd60334e72b8a86792d02c20898ea8e33e42f73"
+  },
+  "0,11": {
+   "alt_count": 523,
+   "alt_nodes": 1647834843,
+   "alt_seconds": 3138.735,
+   "alt_sha256": "5de7e015ee6f2518b3c8ca120cedbf7375be9ca5185b536b474ac5f635328f31",
+   "count": 523,
+   "match": true,
+   "sha256": "5de7e015ee6f2518b3c8ca120cedbf7375be9ca5185b536b474ac5f635328f31"
+  },
+  "0,12": {
+   "alt_count": 476,
+   "alt_nodes": 1580983836,
+   "alt_seconds": 3044.908,
+   "alt_sha256": "78679945089a2ed9d55856efe3979359dd8addb6fb754d76eee90925cf11011f",
+   "count": 476,
+   "match": true,
+   "sha256": "78679945089a2ed9d55856efe3979359dd8addb6fb754d76eee90925cf11011f"
+  },
+  "0,13": {
+   "alt_count": 488,
+   "alt_nodes": 1485489436,
+   "alt_seconds": 2863.813,
+   "alt_sha256": "b90146867bbd0aa96266e10e30a5926082e9fdb0e47a4a02217d2f9346a66713",
+   "count": 488,
+   "match": true,
+   "sha256": "b90146867bbd0aa96266e10e30a5926082e9fdb0e47a4a02217d2f9346a66713"
+  },
+  "0,14": {
+   "alt_count": 516,
+   "alt_nodes": 1594037985,
+   "alt_seconds": 3063.818,
+   "alt_sha256": "e4b79e2d74517f9644fed43c586170eec9ef8f83344eaf090be2239633d53c67",
+   "count": 516,
+   "match": true,
+   "sha256": "e4b79e2d74517f9644fed43c586170eec9ef8f83344eaf090be2239633d53c67"
+  },
+  "0,2": {
+   "alt_count": 449,
+   "alt_nodes": 1513094942,
+   "alt_seconds": 2905.646,
+   "alt_sha256": "f50acb9a7dc3addf6a31467890669eff1c8b3cbb2644237575982f1062c894d4",
+   "count": 449,
+   "match": true,
+   "sha256": "f50acb9a7dc3addf6a31467890669eff1c8b3cbb2644237575982f1062c894d4"
+  },
+  "0,3": {
+   "alt_count": 462,
+   "alt_nodes": 1492826513,
+   "alt_seconds": 2896.333,
+   "alt_sha256": "8d6fe8175996b999abbe7f7b67eb4f5c03b90b384b85596431268ec8b56a394a",
+   "count": 462,
+   "match": true,
+   "sha256": "8d6fe8175996b999abbe7f7b67eb4f5c03b90b384b85596431268ec8b56a394a"
+  },
+  "0,4": {
+   "alt_count": 499,
+   "alt_nodes": 1611106312,
+   "alt_seconds": 3102.322,
+   "alt_sha256": "a7a5eedc57acfcbfcf4e1dd1dab0b83787eda4f1ed4e8ee6da70829063667f37",
+   "count": 499,
+   "match": true,
+   "sha256": "a7a5eedc57acfcbfcf4e1dd1dab0b83787eda4f1ed4e8ee6da70829063667f37"
+  },
+  "0,5": {
+   "alt_count": 475,
+   "alt_nodes": 1663762637,
+   "alt_seconds": 3172.229,
+   "alt_sha256": "d1de2787d8a8983a8cee8657f0709f68396ca274cd21415d796d9c28f59240d0",
+   "count": 475,
+   "match": true,
+   "sha256": "d1de2787d8a8983a8cee8657f0709f68396ca274cd21415d796d9c28f59240d0"
+  },
+  "0,6": {
+   "alt_count": 526,
+   "alt_nodes": 1634811085,
+   "alt_seconds": 3118.757,
+   "alt_sha256": "db3a29412e46115b14fe73367f98389f50075375837073359955bd162453d002",
+   "count": 526,
+   "match": true,
+   "sha256": "db3a29412e46115b14fe73367f98389f50075375837073359955bd162453d002"
+  },
+  "0,7": {
+   "alt_count": 488,
+   "alt_nodes": 1592418647,
+   "alt_seconds": 3044.602,
+   "alt_sha256": "a1644e13fa6dadd1f4f97cbd6f6bc995d2560597984bfe5a2da706679ef6e7c8",
+   "count": 488,
+   "match": true,
+   "sha256": "a1644e13fa6dadd1f4f97cbd6f6bc995d2560597984bfe5a2da706679ef6e7c8"
+  },
+  "0,8": {
+   "alt_count": 456,
+   "alt_nodes": 1560091677,
+   "alt_seconds": 2980.352,
+   "alt_sha256": "ae3f7d9422db9bd08ee40786a2f8c269deffe595f1865dd529a21542f0e243af",
+   "count": 456,
+   "match": true,
+   "sha256": "ae3f7d9422db9bd08ee40786a2f8c269deffe595f1865dd529a21542f0e243af"
+  },
+  "0,9": {
+   "alt_count": 479,
+   "alt_nodes": 1589608008,
+   "alt_seconds": 3056.215,
+   "alt_sha256": "38f357de753bf2fff16e8d543ad8cfcdaa3eede2e516eefc4a6e710e9cf3cb31",
+   "count": 479,
+   "match": true,
+   "sha256": "38f357de753bf2fff16e8d543ad8cfcdaa3eede2e516eefc4a6e710e9cf3cb31"
+  }
+ },
+ "instance_source": "FIRST_HALF table in evidence/odd_graph_local_ball/search_radius5_golf_cyclic_slice_exact_cover.cpp == FIRST_HALF_COLUMNS in evidence/global_latin_audit.py (checked)",
+ "per_slice": {
+  "0,10": {
+   "capped": false,
+   "count": 477,
+   "nodes": 1566781539,
+   "pair": [
+    0,
+    10
+   ],
+   "rows": 456,
+   "seconds": 2428.829,
+   "store_complete": true,
+   "stored": 477
+  },
+  "0,11": {
+   "capped": false,
+   "count": 523,
+   "nodes": 1647834843,
+   "pair": [
+    0,
+    11
+   ],
+   "rows": 456,
+   "seconds": 2488.541,
+   "store_complete": true,
+   "stored": 523
+  },
+  "0,12": {
+   "capped": false,
+   "count": 476,
+   "nodes": 1580983836,
+   "pair": [
+    0,
+    12
+   ],
+   "rows": 456,
+   "seconds": 2442.689,
+   "store_complete": true,
+   "stored": 476
+  },
+  "0,13": {
+   "capped": false,
+   "count": 488,
+   "nodes": 1485489436,
+   "pair": [
+    0,
+    13
+   ],
+   "rows": 456,
+   "seconds": 2347.018,
+   "store_complete": true,
+   "stored": 488
+  },
+  "0,14": {
+   "capped": false,
+   "count": 516,
+   "nodes": 1594037985,
+   "pair": [
+    0,
+    14
+   ],
+   "rows": 456,
+   "seconds": 2455.527,
+   "store_complete": true,
+   "stored": 516
+  },
+  "0,2": {
+   "capped": false,
+   "count": 449,
+   "nodes": 1513094942,
+   "pair": [
+    0,
+    2
+   ],
+   "rows": 456,
+   "seconds": 2365.809,
+   "store_complete": true,
+   "stored": 449
+  },
+  "0,3": {
+   "capped": false,
+   "count": 462,
+   "nodes": 1492826513,
+   "pair": [
+    0,
+    3
+   ],
+   "rows": 456,
+   "seconds": 2361.38,
+   "store_complete": true,
+   "stored": 462
+  },
+  "0,4": {
+   "capped": false,
+   "count": 499,
+   "nodes": 1611106312,
+   "pair": [
+    0,
+    4
+   ],
+   "rows": 456,
+   "seconds": 2471.883,
+   "store_complete": true,
+   "stored": 499
+  },
+  "0,5": {
+   "capped": false,
+   "count": 475,
+   "nodes": 1663762637,
+   "pair": [
+    0,
+    5
+   ],
+   "rows": 456,
+   "seconds": 2503.748,
+   "store_complete": true,
+   "stored": 475
+  },
+  "0,6": {
+   "capped": false,
+   "count": 526,
+   "nodes": 1634811085,
+   "pair": [
+    0,
+    6
+   ],
+   "rows": 456,
+   "seconds": 2479.181,
+   "store_complete": true,
+   "stored": 526
+  },
+  "0,7": {
+   "capped": false,
+   "count": 488,
+   "nodes": 1592418647,
+   "pair": [
+    0,
+    7
+   ],
+   "rows": 456,
+   "seconds": 2448.363,
+   "store_complete": true,
+   "stored": 488
+  },
+  "0,8": {
+   "capped": false,
+   "count": 456,
+   "nodes": 1560091677,
+   "pair": [
+    0,
+    8
+   ],
+   "rows": 456,
+   "seconds": 2408.834,
+   "store_complete": true,
+   "stored": 456
+  },
+  "0,9": {
+   "capped": false,
+   "count": 479,
+   "nodes": 1589608008,
+   "pair": [
+    0,
+    9
+   ],
+   "rows": 456,
+   "seconds": 2450.11,
+   "store_complete": true,
+   "stored": 479
+  },
+  "1,2": {
+   "capped": false,
+   "count": 475,
+   "nodes": 1468584630,
+   "pair": [
+    1,
+    2
+   ],
+   "rows": 456,
+   "seconds": 2309.864,
+   "store_complete": true,
+   "stored": 475
+  },
+  "13,14": {
+   "capped": false,
+   "count": 441,
+   "nodes": 1435199063,
+   "pair": [
+    13,
+    14
+   ],
+   "rows": 456,
+   "seconds": 2263.956,
+   "store_complete": true,
+   "stored": 441
+  },
+  "7,8": {
+   "capped": false,
+   "count": 446,
+   "nodes": 1439876712,
+   "pair": [
+    7,
+    8
+   ],
+   "rows": 456,
+   "seconds": 2283.69,
+   "store_complete": true,
+   "stored": 446
+  }
+ },
+ "slot_profile_file": "/private/tmp/claude-501/-Users-dennison-Documents-Math-Problem/f557e925-53a6-414e-8e26-7bd15df92f86/scratchpad/slice_enum/slot_profile.json",
+ "star_master": {
+  "capped": false,
+  "family_sizes": [
+   471,
+   449,
+   462,
+   499,
+   475,
+   526,
+   488,
+   456,
+   479,
+   477,
+   523,
+   476,
+   488,
+   516
+  ],
+  "nodes": 15190,
+  "seconds": 0.027,
+  "star_solutions": 0,
+  "stored": 0
+ },
+ "verdict": "centre-0 star INFEASIBLE by complete enumeration: no choice of one exact slice per {0,j} (j=1..14) gives pairwise-distinct phases on all 40 orbits; conditional only on family-enumeration completeness, double-checked by alternate-heuristic recounts (counts and canonical SHA-256 identical)"
+}

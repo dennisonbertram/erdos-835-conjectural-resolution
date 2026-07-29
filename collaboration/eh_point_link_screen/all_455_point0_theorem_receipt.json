@@ -1,0 +1,44 @@
+{
+  "all_independent_gates_passed": true,
+  "batch_certificate_bundle_digest": "1698fc1e5e14814ac37b5a6a9d8a8375420fdb8f304eb1e237040ce9a2d48c67",
+  "batch_certificate_count": 423,
+  "batch_compressed_proof_bytes": 608518572,
+  "batch_largest_compressed_proof_bytes": 3618195,
+  "batch_manifest_sha256": "0ae9a6a7b840cd2927e1b150d9a5ff5cd89d7b0c50d4b0b77b543c42d5c2d4f9",
+  "batch_recon_receipt_sha256": "563a52d46c4f242e0ba0856e09b0940e05bcd4bfaa1f3caa58a9363c9ce599d2",
+  "batch_recon_sha256": "cf3d33428cfdb62781afa2ef0015bd1b1da76a9898523e0e921f0009e82503a9",
+  "batch_recon_summary": {
+    "census": {
+      "UNSAT_RECONNAISSANCE": 423
+    },
+    "maximum_solver_seconds": 7.108775,
+    "minimum_solver_seconds": 0.652791,
+    "total_solver_seconds": 928.751818
+  },
+  "canonical_three_pack_cases": 455,
+  "canonical_three_pack_digest": "c27934a1d370abad000b1bc83bcd5a83e479603e25545416e49e394133dee9e7",
+  "checker_ids": [
+    "drat-trim@2e3b2dc0ecf938addbd779d42877b6ed69d9a985"
+  ],
+  "coverage": {
+    "batch_drat": 423,
+    "legacy_drat": 2,
+    "ten_point": 30
+  },
+  "coverage_digest": "5970e1d00c00d65a618a9b1ad10e5e3d2e88b47ec8e24531a03f30996c252733",
+  "coverage_total": 455,
+  "legacy_evidence_sha256": {
+    "drop_0_1_5_point_0.cnf": "ac8e2176860e5f2d002a29e2592c4dc009d0262e7674fb35c47d11c9467f3e6f",
+    "drop_0_1_5_point_0.drat.gz": "648c029837933e1d4896b3342e6fc057c48540c2a7259e1a0c53e897745d9f51",
+    "drop_0_5_10_point_0.cnf": "b0e0ebe97c289a9c44ff6ac48efbfecbf238d1b7f0dbfae2e934a9d6f1444654",
+    "drop_0_5_10_point_0.drat.gz": "195887f5ecebc335ecd80fae826d176b10c97f3122a38be1b896469666ad6f6b"
+  },
+  "point_link_packing_number_exactly_three_cases": 425,
+  "schema": "eh-point-link-all-455-gate-v2",
+  "scope": "This is a theorem about overlap with the fixed EH core, not nonexistence of LS(3,4,20) and not a resolution of #835.",
+  "solver_versions": [
+    "3.0.1"
+  ],
+  "source_sha256": "b1ea090d3e3b88366c87e95660c1c82a406d2c3b100cc1d39bcc2c7e8fde47f9",
+  "theorem": "Every twelve-system subfamily of the EH 15-core is excluded; therefore any LS(3,4,20) shares at most eleven EH systems."
+}

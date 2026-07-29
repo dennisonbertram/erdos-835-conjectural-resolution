@@ -1,0 +1,2 @@
+n=11 r=3 mu=8 seed=1001 restarts=4 steps=20000 best phi* = 0.1
+best instance: [448, 262, 14, 1104, 784, 2178, 1104, 2060, 3584, 4256, 521]

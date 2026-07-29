@@ -1,0 +1,12 @@
+2026-07-28
+
+Command:
+  env -u ANTHROPIC_API_KEY claude -p --model fable --effort xhigh \
+    --permission-mode acceptEdits --output-format text \
+    < collaboration/fable_post_r0_bridge_review/2026-07-28_prompt.md
+
+Outcome:
+  The invocation exited before mathematical work because the Claude account
+  had reached its monthly Fable spend limit.  No Fable judgment, proof,
+  counterexample, or generated source file was produced.  The independent
+  Opus-5 max-effort run continued separately.

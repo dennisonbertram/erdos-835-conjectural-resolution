@@ -1,0 +1,2 @@
+EXH_UNSAT N=9 R=4 [15,15,15,240,240,240,3840,3840,3840]
+exh N=9 R=4 part 0/1: enumerated 2448157  SAT 2448156  UNSAT 1  (solve=1)

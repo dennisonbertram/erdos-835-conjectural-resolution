@@ -1,0 +1,543 @@
+{
+  "analytic_disjoint_k6_case": {
+    "orbit_counts": [
+      0,
+      0,
+      6
+    ],
+    "reason": "Two disjoint K6 cores use 30 edges. The one remaining F edge cannot raise the thirteenth vertex from degree 0 to the required minimum degree 2."
+  },
+  "cases": [
+    {
+      "clauses": 47762,
+      "cnf_sha256": "539fa8e553664e3356f87d5f7dd91852215ab2ea67a898aaf64201205e6a1717",
+      "id": "r0_5111_6_o0_t2",
+      "kind_pair": [
+        "5111",
+        "6"
+      ],
+      "orbit_counts": [
+        3,
+        3,
+        0
+      ],
+      "orbit_index": 0,
+      "proof_drat_bytes": 875658,
+      "proof_drat_sha256": "cf5cf3de6b2449f7a077041542103363df0eacf351bc0ebf77ee227280690932",
+      "proof_gzip_sha256": "90e2a0552782050a1d4bd997b7a2408e4852991eceabee2f55dea9dbb39890ba",
+      "reuse_counts": [
+        2,
+        5
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47723,
+      "cnf_sha256": "5cb750c4522be125eaa16dd4c054676c06621eb729f53362b31214a0a8de4d35",
+      "id": "r0_5111_6_o0_t3",
+      "kind_pair": [
+        "5111",
+        "6"
+      ],
+      "orbit_counts": [
+        3,
+        3,
+        0
+      ],
+      "orbit_index": 0,
+      "proof_drat_bytes": 895902,
+      "proof_drat_sha256": "8040166464087789390a5063f35add8da1fcc5244789c09b481901b9ebc0dde5",
+      "proof_gzip_sha256": "f580209085749bfd6cdb62f32597db6049098a5aa04b81f7da093cec1952389e",
+      "reuse_counts": [
+        3,
+        4
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47765,
+      "cnf_sha256": "198421dee5ffc44765faa20fd67e9d7fe5da926576b6d3d7746b1eb0321af374",
+      "id": "r0_5111_6_o1_t2",
+      "kind_pair": [
+        "5111",
+        "6"
+      ],
+      "orbit_counts": [
+        4,
+        2,
+        0
+      ],
+      "orbit_index": 1,
+      "proof_drat_bytes": 782986,
+      "proof_drat_sha256": "4127fd40d686028daf79989d10402cdcb8be85c39c7e19cee736f2f9f0747bb6",
+      "proof_gzip_sha256": "1ea58df3518bb68acf979aaffefa1e63e804ecc25fc0adcb2bfb37c54f037747",
+      "reuse_counts": [
+        2,
+        5
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47726,
+      "cnf_sha256": "88947a88bad4f84f597810fd1763a9eb40bba117963465a6e6b49f2fbea6d6ef",
+      "id": "r0_5111_6_o1_t3",
+      "kind_pair": [
+        "5111",
+        "6"
+      ],
+      "orbit_counts": [
+        4,
+        2,
+        0
+      ],
+      "orbit_index": 1,
+      "proof_drat_bytes": 780414,
+      "proof_drat_sha256": "916feb3d0ebda84b37a0025481f62a6d58edb664102aa5524f8e89eaf6a5c580",
+      "proof_gzip_sha256": "d6f9ae2d6f6fa0cc9442ae14c8b01970ee048b04b1f31debde6e7595b39f7902",
+      "reuse_counts": [
+        3,
+        4
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47792,
+      "cnf_sha256": "2cd425fe04ba647114b0a665a1631998ae8c24d2976e3f66c85361be7cad36c5",
+      "id": "r0_31111_6_o0_t2",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        1,
+        4,
+        1
+      ],
+      "orbit_index": 0,
+      "proof_drat_bytes": 928032,
+      "proof_drat_sha256": "f0afa540d3a1afe3cad996a2ded1b7468cb16ad54d8bb192ebcbded8ef878aad",
+      "proof_gzip_sha256": "440cc6b70436158fb9881dd03acc3591ea7d18ca89eccf1b0e0b785649ef5efc",
+      "reuse_counts": [
+        2,
+        5
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47767,
+      "cnf_sha256": "55b08eee8e6846e88eab6bbe4962b84880e7ac050b67e6d2621161953b1f1c13",
+      "id": "r0_31111_6_o0_t3",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        1,
+        4,
+        1
+      ],
+      "orbit_index": 0,
+      "proof_drat_bytes": 913722,
+      "proof_drat_sha256": "20d4c624b84f6019b2236efc36750c9fdf531c4ff4a9daf5116ac1b156db46a3",
+      "proof_gzip_sha256": "91a66ceb32d73c719991d0efcd7a5de8911f0761be88f9b85482b955cdba8406",
+      "reuse_counts": [
+        3,
+        4
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47793,
+      "cnf_sha256": "0a9b76589d5345adf15810e5d7c62f237c31ad52de9bfff0db02e49b4cbbc3b8",
+      "id": "r0_31111_6_o1_t2",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        2,
+        3,
+        1
+      ],
+      "orbit_index": 1,
+      "proof_drat_bytes": 774637,
+      "proof_drat_sha256": "ca7e8c793559e41599fa8b83c867a016095feaf0689c8895e7fb2ee5153d71cf",
+      "proof_gzip_sha256": "60bfa15f0dda145547845ddf367a08adde99581eb5d6e9bcc0d0738806d28a55",
+      "reuse_counts": [
+        2,
+        5
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47768,
+      "cnf_sha256": "4be03f0fe7f71f1a6b53fb62685bf389d12fa3a4f85b0c6dd546018eb759c44f",
+      "id": "r0_31111_6_o1_t3",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        2,
+        3,
+        1
+      ],
+      "orbit_index": 1,
+      "proof_drat_bytes": 865832,
+      "proof_drat_sha256": "6924c9c918a9ffe96f0b9f9902d5aed6b97260c22f836b848555025e3c8d89e0",
+      "proof_gzip_sha256": "f56082c49329448f1e6d052fce35b56523c9f1a6f6b5623136e27c09807b8a72",
+      "reuse_counts": [
+        3,
+        4
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47788,
+      "cnf_sha256": "6e4314ab2b700486ee4d6242cb80740ea69d1b6a7fac6b8c6635683c9c9f8383",
+      "id": "r0_31111_6_o2_t2",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        2,
+        4,
+        0
+      ],
+      "orbit_index": 2,
+      "proof_drat_bytes": 1113788,
+      "proof_drat_sha256": "88fcdf80122badba53dc7e6753ed439abcb01af2e34b23c45a9bf4c7bf50210a",
+      "proof_gzip_sha256": "2e81d4ed5fd3d2aa140cd5bb947b7914818279af334cfcc95da28600ee033c4e",
+      "reuse_counts": [
+        2,
+        5
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47763,
+      "cnf_sha256": "dfdd9a725334b5de54b100495aab1347dd376b69aebc85480d14c7bd3436093f",
+      "id": "r0_31111_6_o2_t3",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        2,
+        4,
+        0
+      ],
+      "orbit_index": 2,
+      "proof_drat_bytes": 830446,
+      "proof_drat_sha256": "7a19ad3c2382f9a1ccad38a77c2fc8225567c96dbc6c027f6b61069aaf89af16",
+      "proof_gzip_sha256": "4df80df520873e892693a77de52e59d553e139b22ce32eac255c649571092ebc",
+      "reuse_counts": [
+        3,
+        4
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47795,
+      "cnf_sha256": "65e9be13f92b5df89912e96041cb67a8d703e436f80592a9e1022859d248b1d1",
+      "id": "r0_31111_6_o3_t2",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        3,
+        2,
+        1
+      ],
+      "orbit_index": 3,
+      "proof_drat_bytes": 815851,
+      "proof_drat_sha256": "729adf91d3501f088a04d954928f57cd00bc9ce6abd60db2bd133e3f90df0f28",
+      "proof_gzip_sha256": "1a06ebda23efcd2aa86d593a960ddd856b586a2d1eb6ddb82acd8acb9acf9771",
+      "reuse_counts": [
+        2,
+        5
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47770,
+      "cnf_sha256": "a044922fa6e9429b611ebca1b7ea08e006ef333df167d9dec63753074ef7481f",
+      "id": "r0_31111_6_o3_t3",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        3,
+        2,
+        1
+      ],
+      "orbit_index": 3,
+      "proof_drat_bytes": 856481,
+      "proof_drat_sha256": "f8e4619b79ff6e9a22e40cb9fc2d24cb9efc669de72b7caab60bc6382f3bcaeb",
+      "proof_gzip_sha256": "61fd6af261e544f46dee01cf9c79537cec0c20574b614c635dc97c52e5dacc09",
+      "reuse_counts": [
+        3,
+        4
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47790,
+      "cnf_sha256": "24bf4d73f0ad25b0f3a37e5f79678960dedcd89b05d95aa8e05818246be86df2",
+      "id": "r0_31111_6_o4_t2",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        3,
+        3,
+        0
+      ],
+      "orbit_index": 4,
+      "proof_drat_bytes": 811729,
+      "proof_drat_sha256": "66e517f9ef9f8013f1143d20f34e39e316d9d09779b8dfbcfd744b4ba47a2150",
+      "proof_gzip_sha256": "3464daf5196c8af02c6585069e3d5e852d61ad62d2c27cf175caee3394d32bb5",
+      "reuse_counts": [
+        2,
+        5
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47765,
+      "cnf_sha256": "7f4249877202798547cdfcef453db50a8ac3f0edd1c7ff2ef966dd35931c627f",
+      "id": "r0_31111_6_o4_t3",
+      "kind_pair": [
+        "31111",
+        "6"
+      ],
+      "orbit_counts": [
+        3,
+        3,
+        0
+      ],
+      "orbit_index": 4,
+      "proof_drat_bytes": 749831,
+      "proof_drat_sha256": "3320be5f74807c3437872cdf617666f03d9229661259c47dad669e2bdbd48de1",
+      "proof_gzip_sha256": "6a7e2274538ca631a19af36d67cb33bfbafca5622b532549dfe1dc8f2c7c26cf",
+      "reuse_counts": [
+        3,
+        4
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47843,
+      "cnf_sha256": "c41f39acf3a7c530c51ca421a43230810ad6c50798f7c1643eb2159f9a0bd1d3",
+      "id": "r0_6_6_o1_t2",
+      "kind_pair": [
+        "6",
+        "6"
+      ],
+      "orbit_counts": [
+        4,
+        0,
+        2
+      ],
+      "orbit_index": 1,
+      "proof_drat_bytes": 869727,
+      "proof_drat_sha256": "8ebe2e76aedd009ab41758da4e9bb4d0b4e1b2a9d467ba7a978e68ede360799f",
+      "proof_gzip_sha256": "811aaa75be90bd5140a3946b60bc7cd7c978f419d1d3a88b7668fb681f39adab",
+      "reuse_counts": [
+        2,
+        5
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47843,
+      "cnf_sha256": "dd803f59b20e6dc93598a51ba4c24b4c7138b18234091d4dc7b37c018b797fdf",
+      "id": "r0_6_6_o1_t3",
+      "kind_pair": [
+        "6",
+        "6"
+      ],
+      "orbit_counts": [
+        4,
+        0,
+        2
+      ],
+      "orbit_index": 1,
+      "proof_drat_bytes": 860354,
+      "proof_drat_sha256": "bf7ac0dfda5bfb19471aeb6b6b9c813697d61d8fb6e3cec3c4a3c272bcfbed43",
+      "proof_gzip_sha256": "12a9b0093007d8041ed5e90d5350f7fcd08ba1fff9f02ba30f317371c15b7ccf",
+      "reuse_counts": [
+        3,
+        4
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47843,
+      "cnf_sha256": "676f5bc5552cea436ba569f94352e180375717d5820e7bab380e2c8d487481a7",
+      "id": "r0_6_6_o1_t4",
+      "kind_pair": [
+        "6",
+        "6"
+      ],
+      "orbit_counts": [
+        4,
+        0,
+        2
+      ],
+      "orbit_index": 1,
+      "proof_drat_bytes": 860354,
+      "proof_drat_sha256": "ba06686a5c6ab6ffa4a92369405e438a3c9135fa8a053d188111354334160c4e",
+      "proof_gzip_sha256": "07eb445b8307880860b4c9c09d03d68a240c9f695882b09a0b3d6606a161d68b",
+      "reuse_counts": [
+        4,
+        3
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47843,
+      "cnf_sha256": "0e00462b57b949c5c449ddb8dec12e0185a27f0e8f582297dbe5b99cac94435e",
+      "id": "r0_6_6_o1_t5",
+      "kind_pair": [
+        "6",
+        "6"
+      ],
+      "orbit_counts": [
+        4,
+        0,
+        2
+      ],
+      "orbit_index": 1,
+      "proof_drat_bytes": 869713,
+      "proof_drat_sha256": "5ecf43e49697ca7762bbc97031e16321858378f809c42955ccc86200d625adc6",
+      "proof_gzip_sha256": "a333736b3144a2dff99cb2f306e03753219dcdd8b9d50dc8fd6c6e1604844bee",
+      "reuse_counts": [
+        5,
+        2
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47839,
+      "cnf_sha256": "8e1e9a9138ff5bbc6a8be2304df66c9fc74e62f560fdba9538fb14d6f152b82b",
+      "id": "r0_6_6_o2_t2",
+      "kind_pair": [
+        "6",
+        "6"
+      ],
+      "orbit_counts": [
+        5,
+        0,
+        1
+      ],
+      "orbit_index": 2,
+      "proof_drat_bytes": 785620,
+      "proof_drat_sha256": "dae04d4c5cdeecf20fce5c07f20a7b3ed9978a4d4bc06dff4eff8fbda8a5e0c1",
+      "proof_gzip_sha256": "7d5c9cd6ffae8cf14bb5cacd77b11ccc36dfc725494bf82188b85800f59b1998",
+      "reuse_counts": [
+        2,
+        5
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47839,
+      "cnf_sha256": "37a405677978ed119fff98fe7cad1eb7c9bd326e882a7d340be13ecdb6fb853f",
+      "id": "r0_6_6_o2_t3",
+      "kind_pair": [
+        "6",
+        "6"
+      ],
+      "orbit_counts": [
+        5,
+        0,
+        1
+      ],
+      "orbit_index": 2,
+      "proof_drat_bytes": 790311,
+      "proof_drat_sha256": "98377a43968efb993e784d923290fa3f264aaa5d0b570a411c91bc9eedde10ea",
+      "proof_gzip_sha256": "e7f9fb4df494c380c177da4a111e7b6941f6ae835f6cd6e756c6b63945b6689d",
+      "reuse_counts": [
+        3,
+        4
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47839,
+      "cnf_sha256": "2f399796401f448c1ee5961963703665e33ebd008e5ac64add580c3638f8bf2e",
+      "id": "r0_6_6_o2_t4",
+      "kind_pair": [
+        "6",
+        "6"
+      ],
+      "orbit_counts": [
+        5,
+        0,
+        1
+      ],
+      "orbit_index": 2,
+      "proof_drat_bytes": 790311,
+      "proof_drat_sha256": "c94c34eb7c376a34fe9e7ed849dccdf4847d70a393c52bffd0f8411792c85fef",
+      "proof_gzip_sha256": "28b2515d8b5d7f163892ea4d09c2a0774329d573455c1d9463170827c59154c0",
+      "reuse_counts": [
+        4,
+        3
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    },
+    {
+      "clauses": 47839,
+      "cnf_sha256": "54ee2c303415812f8190c8606ad8c1189a44ad9e64283d270b17303bf5c85377",
+      "id": "r0_6_6_o2_t5",
+      "kind_pair": [
+        "6",
+        "6"
+      ],
+      "orbit_counts": [
+        5,
+        0,
+        1
+      ],
+      "orbit_index": 2,
+      "proof_drat_bytes": 785620,
+      "proof_drat_sha256": "cb745a5b3b063b22dc2e0387a96cd9a517771da169c8832cc011fa8b36a9977d",
+      "proof_gzip_sha256": "3c2c07d01ebac24332b9487a82701d7a476c3eed34e1697998bb72a7fe1903e1",
+      "reuse_counts": [
+        5,
+        2
+      ],
+      "status": "UNSAT_VERIFIED",
+      "variables": 845
+    }
+  ],
+  "conclusion": "An all-seven r0 obstruction using only two distinct surviving cores is impossible. Any remaining obstruction needs at least three distinct cores.",
+  "schema": "r0-two-core-refutations-v1",
+  "scope": "Seven-prefix obstruction frontier only; not an eighth-colour theorem and not a full first-lift result."
+}

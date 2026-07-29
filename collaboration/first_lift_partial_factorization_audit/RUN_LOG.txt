@@ -1,0 +1,24 @@
+Five-saturated partial one-factorization audit
+==============================================
+
+All runs executed 2026-07-27 from the repository root.
+
+1. Genuine order-12 boundary counterexample
+
+Command:
+  /opt/homebrew/bin/python3 -B \
+    collaboration/first_lift_partial_factorization_audit/verify_boundary.py
+
+Expected output:
+  partial K12-E(K7) colouring:
+    proper with all five P-vertices saturated: PASS
+  5x12 Latin rectangle:
+    Latin, symmetric on its principal 5x5 block, unipotent: PASS
+  nonextension certificate:
+    colours 3 and 5 are both forced onto hole edge 0-1: PASS
+  delimiter:
+    order 12 refutes an unrestricted five-row theorem;
+    it is not an order-18 counterexample
+  scope:
+    genuine class-B-prime boundary certificate only;
+    target order-18 completion remains open

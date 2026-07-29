@@ -1,0 +1,17 @@
+{
+  "cases": 423,
+  "census": {
+    "UNSAT_RECONNAISSANCE": 423
+  },
+  "expected_drop_cases": 423,
+  "jobs": 1,
+  "jsonl_path": "remaining_423_point0_recon.jsonl",
+  "jsonl_sha256": "cf3d33428cfdb62781afa2ef0015bd1b1da76a9898523e0e921f0009e82503a9",
+  "maximum_solver_seconds": 7.108775,
+  "minimum_solver_seconds": 0.652791,
+  "point": 0,
+  "row_schema": "eh-point-link-recon-v1",
+  "schema": "eh-point-link-recon-receipt-v1",
+  "seconds_per_case": 10,
+  "total_solver_seconds": 928.751818
+}

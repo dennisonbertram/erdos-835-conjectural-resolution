@@ -1,0 +1,82 @@
+Exact-search attack on the coordinated ninth frontier
+Date: 2026-07-28
+
+Environment used for the committed verifier smoke:
+  Python 3.9.6
+  OR-Tools 9.15.6755
+  CP-SAT workers: 1
+
+Expanded deterministic two-switch campaign
+  command:
+    python3 -B /private/tmp/sample_coordinated_nine.py \
+      --samples 500 --switches 1000 --seconds 10 --seed 9361
+
+  r=0  tested=500  OPTIMAL 17=500  max_solver_wall=0.042 s
+  r=1  tested=500  OPTIMAL 17=500  max_solver_wall=0.023 s
+  r=2  tested=500  OPTIMAL 17=500  max_solver_wall=0.025 s
+  r=3  tested=500  OPTIMAL 17=500  max_solver_wall=0.026 s
+  r=4  tested=500  OPTIMAL 17=500  max_solver_wall=0.026 s
+  r=5  tested=500  OPTIMAL 17=500  max_solver_wall=0.027 s
+
+  global_counts={17: 3000}
+  elapsed=81.600 s
+
+Pilot deterministic two-switch campaign
+  100 instances/profile, 500 switches/sample, seed 8359
+  global_counts={17: 600}
+  no UNKNOWN/FEASIBLE/non-OPTIMAL solver result
+
+Duplicate-column adversarial campaign
+  committed reproduction command:
+    python3 -B \
+      collaboration/coordinated_nine_search/search_exact_packing_survey.py \
+      --campaign duplicates --duplicates-limit 20 --seconds 10
+
+  r=0  tested=20  OPTIMAL 17=20  minimum generating groups=7
+  r=1  tested=20  OPTIMAL 17=20  minimum generating groups=7
+  r=2  tested=20  OPTIMAL 17=20  minimum generating groups=6
+  r=3  tested=20  OPTIMAL 17=20  minimum generating groups=6
+  r=4  tested=20  OPTIMAL 17=20  minimum generating groups=7
+  r=5  tested=20  OPTIMAL 17=20  minimum generating groups=7
+
+  tested=120
+  statuses={"OPTIMAL": 120}
+  optima={"17": 120}
+  maximum duplicate columns=11
+  maximum complement pair overlap=5
+  minimum distinct vertex-incidence rows=5
+  maximum solver wall in committed rerun=0.050019 s
+
+Committed dead-prefix certificate campaign
+  committed reproduction command:
+    python3 -B \
+      collaboration/coordinated_nine_search/search_exact_packing_survey.py \
+      --campaign certificates --seconds 10
+
+  tested=6
+  statuses={"OPTIMAL": 6}
+  optima={"17": 6}
+  maximum solver wall in committed rerun=0.020365 s
+
+Committed random smoke
+  committed reproduction command:
+    python3 -B \
+      collaboration/coordinated_nine_search/search_exact_packing_survey.py \
+      --campaign random --samples 3 --switches 50 --seconds 10 --seed 9361
+
+  tested=18
+  statuses={"OPTIMAL": 18}
+  optima={"17": 18}
+
+Combined research campaign (excluding the later 18-instance code smoke):
+  tested fixed instances=3000+600+120+6=3726
+  exact packing number 17=3726
+  exact packing number 8=0
+  exact packing number 9 through 16=0
+  non-OPTIMAL solver results=0
+
+Scope:
+  Exact for every fixed tested instance.  Random samples are neither proved
+  independent nor uniform.  The duplicate campaign tests one CP realization
+  for each selected multiplicity shape.  This is evidence for the class-B
+  completion conjecture, not a universal ninth-matching theorem.

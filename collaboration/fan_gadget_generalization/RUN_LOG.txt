@@ -1,0 +1,102 @@
+2026-07-27 deterministic verification
+
+1. k=6 nonlinear/linear delimiter
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_k6_linear_obstruction.py
+
+output:
+  type A: gadget rank=11 and consistent; full rank before contradiction=229; certificate support=92; anchor maxima=(1, 2)
+  type B: gadget rank=11 and consistent; full rank before contradiction=228; certificate support=86; anchor maxima=(1, 2)
+  k=6 characteristic-3 audit: PASS
+  scope: the small 18-cell gadgets need nonlinear rainbow information; the full k=6 fan systems also have linear obstructions
+
+2. cyclic-link linear and palette delimiter
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_linear_delimiter.py
+
+output:
+  cyclic C17 orbit quotient: PASS
+  full incidence: 19,380 groups by 50,388 cells
+  orbit incidence: 1,140 equations by 2,964 variables
+  rank over F_13: 1083
+  independent integral row dependencies: 57
+  rank over Q: 1083
+  row-dependency sha256: a28b18429d322bdd2b6e124479aa1623082bf3c4ee7a242a28bc5780f6e44c5d
+  quotient nullity: 1881
+  outside-cell neighbours in one constraint clique: Q max=1, TC max=2
+  consequence: clique number is exactly 13
+  result: Bx=1 is CONSISTENT over F_13
+  orbit solution sha256: d68e33b42c10d4c745ae767bf26d929de17423ca0209fce5f31cf72f0a349928
+  Smith consequence: Bx=1 has a signed integral solution over Z
+  scope: no integral or modular linear certificate can exclude a fan for this cyclic link
+  scope: no 13-fan was constructed; k=16 and #835 remain open
+
+3. static lint
+
+command:
+  ruff check collaboration/fan_gadget_generalization
+
+output:
+  All checks passed!
+
+4. cyclic quotient squarefree-trade audit
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_small_trades.py
+
+output:
+  cyclic quotient small-trade audit: PASS
+  squarefree trade support 2: none
+  squarefree trade support 4: none
+  oriented within-Q swaps: 35568
+  algebraic zero-sum pair-completion hits: 391248
+  squarefree trade support 6: 0
+  theorem: every nonzero squarefree trade has support at least 8
+  scope: this does not construct or exclude an exact cover or fan
+
+5. cyclic quotient support-eight exhaustive audit
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support8.py
+
+output:
+  case 4: NONE
+  four-subsets: 163020
+  same-signature collisions: 0
+  case 3+1: NONE
+  triple-pair configurations: 7824960
+  case 2+2: NONE
+  double-pair configurations: 978120
+  case 2+1+1: NONE
+  double-swap configurations: 978120
+  exact residual lookups: 118592198
+  case 1+1+1+1: NONE
+  second-move hits: 1204296
+  third-move hits: 101780540
+  exact residual lookups: 92958652
+  cyclic quotient support-eight audit: PASS
+  theorem: every nonzero squarefree quotient trade has support at least 10
+  corollary: distinct binary exact covers have Hamming distance at least 10
+  scope: this does not construct or exclude an exact cover or fan
+
+6. cyclic quotient compact support-ten audit
+
+command:
+  python3 -B collaboration/fan_gadget_generalization/verify_cyclic_support10_compact.py
+
+output:
+  case 5: NONE
+  five-subsets: 293436
+  same-signature collisions: 0
+  case 4+1: NONE
+  four-pair configurations: 20540520
+  unit-bounded four-pair vectors: 18091188
+  case 3+2: NONE
+  triple-pair configurations: 7824960
+  double-bounded triple-pair vectors: 7824960
+  consequence: any support-10 trade spans at least three Q-groups
+  cyclic quotient compact support-ten audit: PASS
+  remaining partitions: 3+1+1, 2+2+1, 2+1+1+1, 1+1+1+1+1
+  scope: support ten is not fully excluded

@@ -1,0 +1,5 @@
+LS(2,3,13): 286 blocks, 78 stars, 11 colours, 26 blocks/class
+  best cost 13 (iters 34866578, 2.6s)
+  best cost 10 (iters 109371561, 8.1s)
+  best cost 9 (iters 170211935, 12.8s)
+RESULT v=13 t=2 best_cost=9 iters=1610612736 secs=120.1
